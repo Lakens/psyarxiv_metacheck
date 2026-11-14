@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Selection by Consequences and Psychological
+Measurement: A Behavioral Account of Rating-Scales</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Selection by Consequences and Psychological Measurement: A Behavioral
+Account of Rating-Scales
+</p>
+<p class="meta">
+2026-11-14 · Metacheck 0.4.4.1
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>1</b><span>to fix</span></a><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>14</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Ethics
+Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to involve live data collection and lacked an
+ethics approval statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, but it was not present:</p>
+<blockquote>
+<p>We know from research on equivalence learning that such emergent
+properties do exist in humans for “same/different” relations (i.e.,
+human subjects are able to form equivalence classes of neutral stimuli
+and generalize the relational structure to untrained relational
+cues).</p>
+</blockquote>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 1 reference with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(14)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 39 references with DOIs. You cited 1 reference with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Witzel, C., &amp; Gegenfurtner, K. R. (2018). Color Perception: Objects,
+Constancy, and Categories. Annual Review of Vision Science, 4(1),
+475-499. <a href="https://doi.org/10.1146/annurev-vision-091517-" class="uri">https://doi.org/10.1146/annurev-vision-091517-</a>
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/C8F9212F44B4FDFC2F8CD65C5C43B3" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 39 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 39 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold” or “legend”). Notes in other
+forms, such as a marker after the p-value (“p &lt; .05 (*)“), are still
+flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 225 papers containing 405 instances of
+non-exact p-values, the module correctly detected 269 cases (true
+positives) and incorrectly identified 78 (false positives). It missed
+136 instances of imprecisely reported p-values (false negatives) and
+correctly identified 4557 cases of precisely reported p-values (true
+negative). Additionally, 78% of positive detections were correct
+(positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 194 papers with 1602 instances of
+non-significant p-values, this module correctly detected 1486 of them,
+and incorrectly identified 153. Additionally, 91% of detections were
+true instances (positive predictive value). That is, when this module
+flags non-significant p-values in a paper, it correctly identifies an
+issue 91% of the time.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>We present a theory-based approach to psychometric rating-scales based on the hypothesis that their putative measurands are internal discriminative stimuli that are shaped by operant selection of relational responding. According to the formal requirements of representational measurement theory, we argue that a measurable internal discriminative stimulus emerges, if and only if relational responses are selected such that the resulting structure is homomorphic to a numerical structure such as the real numbers. We further embed the concept of internal discriminative stimuli in the theory of operant selection, where selection is understood as a multilevel process that shapes behavior with regard to its expected fitness consequences. The theory has wide implications for the interpretation of psychometric rating-scales, as well as for the experimental study of measurement in psychology.</p>
+<h3>1 Introduction</h3>
+<p>Numeric ratings on predefined scales (&quot;rating-scales&quot; hereafter) play an important role in modern society, starting with the ubiquitous five-star online reviews, over clinical assessments of symptom severity, to the usage of rating-scales for virtually any imaginable construct in psychological research and diagnostics. Rating-scales are also quite common in behavioral studies involving human subjects, where the ratings are treated as verbal reports that indicate certain behavioral tendencies.</p>
+<p>Despite the wide use of rating-scales, the mechanisms generating numeric verbal responses are still poorly understood. The traditional psychometric approach to rating-scales builds on the idea that they are some kind of measurement instrument. Psychometricians often try to establish an analogy with physical measurement, which is construed as the assignment of numerals to physical objects (Stevens, 1946). In much the same way, psychological measurement is claimed to involve the assignment of numerals to psychological (or mental) objects, such as sensations, beliefs, attitudes, agreement and others. Despite considerable controversy about the methodological, epistemological, and ontological status of psychological measurement (see Borsboom, 2005 for a conceptual overview and Michell, 1999 for a historical perspective), psychometrics has produced a well-established modus operandi that is hardly ever questioned within mainstream psychology, such as the calculation of reliability and validity estimates based on classical test theory (Lord &amp; Novick, 1968), the construction of probabilistic response models in item response theory (e.g., Rasch, 1960), or the statistical modeling of latent variables based on structural equations (cf. Hoyle, 2012).</p>
+<p>Here, we propose a radically different approach to rating-scales by treating them as a special class of verbal behavior that has been shaped by environmental contingencies at different levels of selection.</p>
+<p>The result is an explicit theoretical link between what is traditionally called psychological measurement and the principle of selection by consequences (cf. Skinner, 1981). The core claim of our approach is that rating-scales may in fact be genuine measurement devices -but their putative measurands are not mental objects, but discriminative stimuli in the context of relational response behavior. The theory is laid out in an informal manner to make it accessible to a wide audience.</p>
+<p>However, we also present a formalized version of its core claims in Appendix A2.</p>
+<p>The remaining sections are structured as follows. In section 2, we lay out the conceptual foundation for our approach by integrating the representational theory of measurement (Krantz et al., 1971) with the semantic view of scientific theories (Borgstede &amp; Eggert, 2023a , 2023b). The main result from section 2 is that measurement requires an empirical relational structure that can, a) be formally represented by a numerical structure, and b) follows from a substantive formal theory about the phenomena underlying the empirical structure. In section 3, we apply this conceptual framework to psychological measurement, leading us to the study of relational response behavior (Marsh, 1967), which is understood as a special class of operant behavior that is shaped via selection by consequences (cf. Baum, 2017; Borgstede &amp; Eggert, 2021). The main result from section 3 is that, if there are any measurable attributes in psychology, they must be discriminative stimuli generated by an individual in the context of relational responding. This theoretical embedding of relational responding in an overarching theory of operant behavior is then applied to psychometric ratingscales. Finally, the theoretical and practical implications of our approach are evaluated and discussed in section 4.</p>
+<p>2 Theory and Measurement</p>
+<h3>2.1 The Representational Theory of Measurement</h3>
+<p>The representational theory of measurement was developed as an axiomatic framework for the empirical (re-)construction of measurement scales at an abstract level, such that it equally applies to measurement across all scientific disciplines. The central idea of representational measurement is that a scale measures something, if and only if it constitutes a mapping from an empirical structure (e.g., comparisons of objects with a beam balance) to a numerical structure (e.g., the real numbers), such that each level of the attribute is assigned exactly one number and at least some empirical relations (e.g., &quot;heavier than&quot;) are preserved in the corresponding numerical structure (mathematically speaking, the mapping needs to be a homomorphism).</p>
+<p>In classical physics, a paradigmatic example for representational measurement is the application of a beam balance to measure an object&#x27;s mass. The empirical relational system (ERS) under study is construed by of a set of physical objects that can be put into the pans of a beam balance (e.g., a collection of uncalibrated weights) and the mechanical characteristics of the scale (e.g., two pans that are mounted to a symmetric lever). Suppose that arbitrary subsets of the weights can be put into each of the pans, which will result in the beam balance being either at equilibrium or tipping towards one of the two sides. The empirical relational system thus consists of a set 𝐴𝐴 of weights, a dominance relation ≼ (&quot;not tipping to the left&quot;) on the cross-product of 𝐴𝐴 × 𝐴𝐴, and a concatenation operation ⨁ (&quot;adding a weight to a pan&quot;) that maps the cross-product of 𝐴𝐴 × 𝐴𝐴 back onto the set of weights (i.e., ⨁: 𝐴𝐴 × 𝐴𝐴 ↦ 𝐴𝐴). The totality of all possible comparisons of subsets of weights by means of the beam balance yields a set of inequalities (such as 𝑎𝑎⨁𝑏𝑏 ≼ 𝑐𝑐 for 𝑎𝑎, 𝑏𝑏, 𝑐𝑐 ∈ 𝐴𝐴). These inequalities can be solved by assigning exactly one real number to each weight (thereby fixing one of the weights as a unit), because the ERS imposed by the beam balance follows a specific type of structure, which is known as an extensive measurement structure (see Figure 1).</p>
+<p>Figure 1: Representational measurement as a homomorphism from an empirical relational system (ERS) to a numerical relational system (NRS). The homomorphism implies that all empirical objects (such as weights u, v and w) are assigned to exactly one numerical object each (such as the numbers 1,2,3), such that the empirically observed relations and operations performed on these objects (such as ≼,⊕, representing the manipulation of a beam balance) correspond to mathematical relations and operations (such as ≤, +).</p>
+<p>The representational theory of measurement specifies exactly which kinds of empirical structures can be mapped onto which kinds of numerical structures (Krantz et al., 1971). It does so by stating the structural requirements for the construction of different types of measurement scales. For example, extensive measurement is possible if and only if the relation ≼ forms a weak order and the operation ⨁ is commutative, distributive and continuous. Depending on the type of ERS, different mappings onto numerical systems are possible (commonly known as levels of measurement). For example, empirical equivalence classes can be mapped onto a nominal scale, and empirical comparisons that form a weak order can be mapped onto an ordinal scale. There are also various types of ERS that allow for a metric embedding, such as additive conjoint structures (Suppes, 1951), difference structures (Suppes &amp; Winet, 1955), or bisection structures (Pfanzagl, 1959). Furthermore, if the ERS is stochastic in nature, it may even be possible to construct metric scales from simple pair comparisons (Bradley &amp; Terry, 1952) or binary test responses (Rasch, 1960). The theory of representational measurement is neither restricted to specific types of empirical systems (such as classical physics), nor to a particular numerical system (such as the real numbers). It provides a general framework for the construction of measurement scales for arbitrary domains, relations and operations.</p>
+<p>For some physical attributes (such as mass or length) the structural requirements for extensive measurement may appear trivial. However, even a system as simple as a set of sticks that are put next to each other (dominance relation) or end to end to combine the length of two or more sticks (concatenation operation) requires a very restrictive geometry to enable extensive measurement (cf. Holzhauser &amp; Eggert, 2019). For example, if the sticks are compared by placing them on a curved surface, the ERS will no longer be extensive and the intended mapping onto the real numbers will not be successful. In other words, the choice of the objects and the definition of the relations and operations that are believed to constitute a measurable ERS are crucial for the construction of measurement scales.</p>
+<h3>2.2 Theory-based Measurement</h3>
+<p>The representational theory of measurement gives an explicit definition of what measurement is and specifies how one can, in principle, find out whether a certain experimental procedure allows for the construction of a measurement scale. In other words, the representational theory of measurement provides a meta-theoretical background for answering whether psychometric rating-scales measure something or not. However, it does not tell us anything about the nature of the measurand. In the representational view, the measurand is completely determined by the ERS that is being used to construct the scale (Buntins et al., 2017). Consequently, if we find out that a certain ERS allows for the construction of, say, a ratio scale, all we know is that this particular empirical system has a quantitative 1 structure. We do not know, however, why the system has a quantitative structure or how the structure originated. For example, if the measurement of mass was solely defined in the context of weights that can be put in the pans of a beam balance, we would not have the faintest idea what we are measuring. The fact that we can construct a quantitative scale merely tells us that there might be something quantitative inherent to the ERS, but not, what this something might possibly be. Moreover, we would have no justification for the assignment of mass-values to any object that cannot be put into the pan of a beam balance, such as a subatomic particle or a planet.</p>
+<p>To justify the introduction of a theoretical concept like &quot;mass&quot; we need to embed the ERS under study into an overarching formal theory that links the behavior of different ERSs to that concept.</p>
+<p>Given such a theory, the characteristic properties of the different ERSs can be used to test the theory and may be used to measure the theoretical concept by means of different ERSs thus leading to different operationalizations. In other words, we need a theory about the generative processes behind the ERSs under study. For the case of mass, classical mechanics provides such a theory. In classical mechanics, mass is defined by Newton&#x27;s second law of motion, which states that the force (𝐹𝐹) acting on an object equals exactly the product of its mass (𝑚𝑚) and its current acceleration (𝑎𝑎): 𝐹𝐹 = 𝑚𝑚𝑎𝑎. The theoretical framework of classical mechanics can be applied to arbitrary macroscopic physical systems, including beam balances. In both cases, the theory predicts exactly the behavior that gives rise to the construction of the respective measurement scales. For the beam balance, classical mechanics predicts that the beam balance is at equilibrium if and only if the sum of masses in both pans are equal, and that any deviation from equality will result in the beam balance tilting towards the side with the higher mass. In other words, the behavior of the empirical system under study can be explained by the objects&#x27; masses as formally defined in classical mechanics, we can be certain that any quantitative representation of the structure (if such a representation exists), is a quantitative representation (i.e., a measure) of the objects&#x27;s masses 𝑚𝑚, with all its theoretical implications within the framework of classical mechanics (see Figure 2). Furthermore, if we are confident that our theory is empirically adequate (which we may well be in the case of classical mechanics when applied to macroscopic objects with comparably low masses and low velocities), we may even identify the results of completely different procedures (such as solving Newton&#x27;s equations of motion for two celestial bodies) as measurements of mass 𝑚𝑚. Therefore, we may ascribe mass to a planet without ever putting it in the pan of a beam balance, because the theoretical meaning of &quot;mass&quot; is not intrinsic to the measurement procedure, but stems from a formalized theory about the generative processes underlying the measurement procedure.</p>
+<p>At a more general level, the example of physical mass illustrates how measurable quantities can be given theoretical meaning. Whereas representational measurement tells us how to find out whether we measure something, the question what we measure can only be answered by substantive formal theory. Substantive formal theory fixes the meaning of an abstract concept (e.g., &quot;mass&quot;) by providing a very strict grammar for the theoretical terms used in the theory. The application of such a theory to an empirical system implies a formal model of the system, whose parameters correspond to the theoretical terms used in the theory (see Figure 2). From this theory-based perspective, measurement means to apply a substantive formal theory to an empirical system in such a way that parameters of hitherto unknown value can be inferred from the behavior of the system (Borgstede &amp; Eggert, 2023b).</p>
+<p>Figure 1: Theory-based measurement of mass by means of a beam balance; The structural requirements for representational measurement are implied by substantive formal theory, which, in turn, predicts the structure of the empirical relational systems and its representation by a numerical relational system by means of the objects&#x27; masses. Hence, the representation can be interpreted as a measure of the theoretical quantity &quot;mass.&quot;</p>
+<p>3 A Selectionist Theory of Psychometric Rating-Scales Following the representational theory of measurement, measurement scales are mathematical models for certain classes of empirical structures. These structures are composed of empirical relations and operations that act on certain classes of objects. According to theory-based measurement, the meaning of the measurand further requires a general theory about the generative processes behind the empirical relational structure that is being represented.</p>
+<p>If we apply this measurement theoretic background to the responses of an individual to a ratingscale, the first question to answer is which empirical relational structures might underly the observed rating-scale behavior. The second question concerns the mechanisms generating these putative relational structures. What then are the empirical relational structures underlying rating-scale behavior? For example, if we ask a person to indicate how much they like certain commodities using a numeric rating-scale, we implicitly ask which of the commodities the individual would prefer when given a choice (i.e., if the person rates option A higher than option B, we would expect them to choose A over B). Similarly, if we instruct a person to rate how attractive they find another person, we implicitly ask which of the presented individuals they would rather approach in a potential mating context. And if we instruct a person to indicate their agreement to a collection of statements, we implicitly ask them to state which of the statements they are more likely to support in a conversation.</p>
+<p>In general, we may thus say that the class of empirical relational structures underlying rating-scales is given by relational behavior such as choice, preference or avoidance, among others. The empirical relational structures underlying rating-scale behavior are hence nothing but behavioral responses that relate certain stimuli to each other. Therefore, the key to understanding how rating-scales work naturally leads to the study of relational responding, understood as a special class of operant behavior. In the following, we hypothesize that the structure of relational responses is shaped by the environment in which they have evolved, and that this selection process necessarily leads to the emergence of internal discriminative stimuli that act as context-dependent predictors of evolutionary fitness changes (Borgstede &amp; Eggert, 2021).</p>
+<h3>3.1 Relational Responding</h3>
+<p>Relational responding has been characterized as a special kind of operant behavior where the discriminative stimulus is based on at least two individual cues (e.g., two or more lights) and a response is selected (e.g., by contingent food delivery) based on a certain relation between the cues.</p>
+<p>For example, given two keys that are illuminated at different levels of luminescence, an individual may be selected to choose the key that appears brighter than the other one. In contrast to operant behavior that has been established using a singular cue, relational responding does not depend on the absolute value of the relevant stimulus characteristics (e.g., a certain luminescence), but on its relative values (e.g., luminescence relative to a reference light). For example, an individual that has been trained to choose the key that is illuminated with the highest brightness using luminescence A, B and C (following the order A &lt; B &lt; C) will choose a novel stimulus D over all other three stimuli if it is brighter than the three training stimuli -although, in contrast to the training stimuli, it has never been selected by positive consequences (such as food delivery). In other words, responding generalizes to novel stimuli according to the selected relation between cues, and not according to their absolute characteristics (Köhler, 1938; Marsh, 1967). Furthermore, it is possible to establish distinct prompts for different relations between the same objects. For example, an individual may choose the brightest out of two stimuli when prompted by a tone of a certain pitch, and to choose the largest when prompted with another tone, even if these two characteristics do not align (Cook et al., 1997).</p>
+<p>Arguably the most prominent kind of relational behavior refers to structures that fulfil the requirements of an equivalence relation (Sidman, 1994 (Sidman, , 1997)). Equivalence relations are characterized by three structural properties. First, they need to be symmetric (i.e., if 𝑎𝑎~𝑏𝑏, then 𝑏𝑏~𝑎𝑎 for all elements 𝑎𝑎 and 𝑏𝑏), second, they need to be reflexive (i.e., 𝑎𝑎~𝑎𝑎 for all elements 𝑎𝑎), and third, they need to be transitive (i.e., if 𝑎𝑎~𝑏𝑏 and 𝑏𝑏~𝑐𝑐 then 𝑎𝑎~𝑐𝑐 for all elements 𝑎𝑎, 𝑏𝑏, 𝑐𝑐). If these three conditions hold with regard to an individual&#x27;s relational behavior, the stimulus domain underlying the structure can be represented by a set of nonoverlapping classes (i.e., equivalence classes). Following the representational theory of measurement, such equivalence classes can be represented by a nominal scale and hence form a measurable attribute. Relational responding that forms an equivalence structure is a fundamental feature of behavior in that it allows the organism to treat different stimuli as if they were one and the same because both have the same consequences (cf. Sidman, 1994). Therefore, the behavior of the organism is not under the direct control of external events, but of equivalence classes that align with anticipated consequences. In other words, equivalence classes can be understood as discriminative stimuli for operant behavior. In the following, we argue that this holds for all structures of relational response behavior, including those that are based on rank orders and, potentially, quantitative relational response structures (cf. Hayes et al., 2001).</p>
+<h3>3.2 Selection of Relational Responding</h3>
+<p>An important characteristic of relational responding is that it is not necessarily contingent on physical relations (such as brightness or pitch) because -being the result of selection -relational responding is shaped by environmental consequences, which need not align with the values of physical quantities. For example, color perception (understood as relational responding that has been selected at an evolutionary time scale) does depend on the wavelength of light (which is a physical quantity). However, when prompted to choose the color that most closely matches violet, humans consistently choose red over green, although the difference in wavelength between violet and green is much smaller than that between violet and red (cf. Robertson, 1992). Similarly, it is not guaranteed that physical quantities map onto psychological quantities, as routinely assumed in most psychophysical studies (cf. Krantz, 1972). For example, although differences in pitch physically depend on the wavelength of sound waves (which are physical quantities), it is by no means guaranteed that an individuals&#x27; relational responding to different pitches also has a quantitative structure. In fact, depending on their specific learning histories, some individuals may be selected to respond to different pitches according to consistent quantitative intervals (e.g., a child that is raised in a family of musicians), while others merely distinguish between lower and higher pitch (e.g., a child that has had musical education). Finally, quantitative and qualitative aspects of relational responding to a set of stimuli may be effective simultaneously and produce quite complex relational behavior. For example, responding to color cues has proven to be highly context dependent and involve complex interactions among contrast, brightness, and other contextual cues (Beau Lotto &amp; Purves, 2002; Witzel &amp; Gegenfurtner, 2018) and even includes culturally and individually different distinctions between various hues (Özgen, 2004). 2 The case to be made here is that relational responding is not &quot;just there,&quot; but in fact shaped by its environmental consequences due to selection at both, the individual level (i.e., learning), the population level (i.e., socialization), and the species level (i.e., evolution) (cf. Maule et al., 2023). Consequently, being the result of selection on relational responding, the putative measurands of rating-scales are not representations of the world as it is (i.e., of external objects), but of the expected consequences of behavior. In other words, they are internal stimuli that are generated by the individual. This is necessarily the case because, by definition of relational responding, there simply are no external cues corresponding to the selected relational structures. The structure of relational responding lies in its consequences, not in the physical world. Therefore, individuals can only respond according to a selected relational structure if they produce the corresponding discriminative stimulus themselves. We propose that these internally generated discriminative stimuli are the putative measurands of psychometric rating-scales and in this way constitute what some might call &quot;psychological attributes.&quot;</p>
+<p>The main theoretical claim of this paper is thus that the putative measurands of psychometric ratingscales are the result of selection by consequences acting on relational responding and that they are measurable if and only if the behavior of interest and the observed test behavior was selected such that its structure corresponds to the intended numerical mapping (e.g., a ratio scale). We further argue that, since relational responses are shaped by their consequences (and not determined by external cues), the organism has to produce corresponding discriminative stimuli internally -it is these internal discriminative stimuli that constitute psychological attributes. Consequently, if ratingscales measure anything, they measure discriminative stimuli that are produced by the individual such that they align with the consequences of the underlying relational response behavior.</p>
+<h3>3.3 Relational Responding and Fitness Prediction</h3>
+<p>If relational responses are selected by consequences, their structure is determined by the specific selection contingencies that gave rise to them. In other words, the structure of relational responding is a mirror of an individual&#x27;s (phylogenetic and ontogenetic) selection history. There is, however, no obvious reason to believe that relational responses are selected such that they allow for a quantitative representation (e.g., the mapping onto a numeric scale). As argued above, the mere existence of quantitative physical properties (such as wavelength of light) does not imply that an organism is selected to distinguish between these physical properties in a quantitative fashion.</p>
+<p>Selection is not determined by antecedents, but by consequences. Therefore, structures that emerge from selection on relational responding can only be understood if the structure of their consequences is known.</p>
+<p>Notably, the theory of multilevel behavioral selection provides a strong a-priori argument for the existence of quantitative structure of behavioral consequences. As demonstrated by Price (1970), selection only acts on attributes that covary with evolutionary fitness (or a statistical predictor thereof). This is most obvious in the context of natural selection, where evolution is driven by average fitness consequences, but likewise holds for selection on individual behavior (Borgstede, 2024; Borgstede &amp; Eggert, 2021). Evolutionary fitness, defined as the long-term contribution of an individual&#x27;s genes to the future population, is a genuine quantity with a natural point of zero (zero fitness means an individual contributes nothing to the future population). Hence, consequences at an evolutionary level always involve quantitative information in the sense that an attribute may result in higher or lower fitness, and that the amount of expected fitness change can be expressed as a real number (McGraw &amp; Caswell, 1996). For example, a physical threat, such as the presence of a predator, directly changes the probability of survival, and thus implies a reduction in evolutionary fitness. Depending on the average probability of death in the presence of the predator, the expected change in fitness may be stronger or weaker -giving rise to potential selection for a quantitative response structure when relational responding to different threats is selected for. In other words, given a relational response structure such as avoidance behavior in the presence of physical threat, the fact that different threats quantitatively vary in their expected effects on evolutionary fitness constitutes a selection pressure for a quantitative response structure and, hence the necessity to generate an internal quantitative discriminative stimulus (we may call it &quot;fear&quot;). The same holds for events that yield an expected gain in evolutionary fitness, such as the relative benefit of different food items (we may call it &quot;food preference&quot;). Depending on the different combinations of contexts and selected behaviors, such quantities should further be expected to be qualitatively distinct. For example, despite them both being quantitative predictors of expected evolutionary fitness, &quot;fear&quot; and &quot;food preference&quot; are qualitatively distinct because they depend on different contexts (i.e., physical threats vs. food items) and different selected behaviors (i.e., flight behavior vs. foraging).</p>
+<p>Their quantitative character is determined by their predictive value for changes in evolutionary fitness. Their qualitative character is determined by the unique combination of context, action, and consequences.</p>
+<p>Furthermore, internally generated discriminative stimuli may be effective even if there are no physical (i.e., environmental) cues present. They may thus bridge temporal gaps between environmental fitness predictors and an individual&#x27;s behavior. For example, the sudden loss of a spouse is a strong environmental cue for drastically changing contingency structures with regard to evolutionary fitness. Virtually all fitness predictors that were related to the spouse cease to be effective. If at least some of these fitness predictors were effective in the absence of the spouse (such as a certain time of the day that used to predict the spouse&#x27;s availability for a phone call), an internal stimulus that signals the absence of the spouse (we may call it &quot;grief&quot;) will prevent the individual from showing the behavior that used to be effective (such as dialing the spouse&#x27;s phone number) and thus foster the exploration of new (more adaptive) behavior. Similarly, when meeting a new potential mate, an internal stimulus that signals the availability of a potential mating opportunity -even if the person of interest is not present -(we may call it &quot;desire&quot;) will motivate the individual to engage in otherwise costly courtship behavior that may ultimately increase evolutionary fitness.</p>
+<p>The context dependence of selection on relational responding further implies that their structure may differ between individuals. At the level of species wide adaptations (i.e., regarding the effects of natural selection), the dependence of relational responding on environmental context is highly relevant for comparative psychology. Moreover, behavior is also selected at the level of populations (cultural selection) and at the level of the individual (operant selection). Therefore, we should expect relational response structures to differ between individuals depending on their cultural background and their individual learning histories. Importantly, these differences should not only manifest in quantitative variation, but also in qualitatively different discriminative stimuli, depending on the specific environmental consequences.</p>
+<h3>3.4 Behavioral Psychometrics</h3>
+<p>Having provided the necessary conceptual and theoretical background to clarify what the putative measurands of psychometric rating-scales might be and how they are shaped by environmental consequences, we can now give a full behavioral account of rating-scales.</p>
+<p>The most important insight from our theoretical investigation is arguably that the administration of a rating-scale alone does not guarantee that the resulting numeric responses are genuine instances of measurement. If the putative measurands of rating-scales are in fact internal discriminative stimuli that are shaped by selection on relational responding, some of them might be quantitative, whereas others are not. For internal discriminative stimuli without quantitative structure, any attempt to &quot;measure&quot; them on a numeric scale is futile. On the other hand, the mere existence of quantitatively structured relational responses does not guarantee that the underlying psychological attribute can be assessed by means of a rating-scale. For example, a common way of pain assessment in humans is to present a ten-point scale (either on paper, on a screen, or verbally) and prompt the individual to indicate their current pain on this scale in relation to the worst pain they can imagine (which is anchored at the maximum value of the scale). Such pain ratings are routinely treated as if they corresponded to the actual ratio between the currently experienced pain and the maximum possible amount of pain (which would imply a ratio scale). Applying the theoretical framework outlined above, a rating-scale may be established as a genuine instance of measurement if and only if, a) the structure of a person&#x27;s response behavior (e.g., their responses to numeric scales) and of their relational responding to the target stimuli (e.g., actual pain stimuli) are both homomorphic to the structure of the intended numerical representation (e.g., the positive real numbers with multiplication), and b) the two relational structures are themselves related by a one-to-one mapping.</p>
+<p>Each of these two conditions may or may not hold for a specific combination of target stimuli and rating behavior within a particular individual as well as across individuals. For example, a person may well differentiate between various pain stimuli in a manner that is structurally equivalent to the positive real numbers (i.e., their pain related behavior may indeed be quantitative) but fail to map this quantitative structure to a numeric scale (i.e., condition b does not hold). Another possibility would be that an individual does consistently map their pain related behavior to the numeric scale (i.e., condition b holds), but neither of the underlying empirical structures are isomorphic to the positive real numbers (this may be the case if a person can only perform an ordering of pain stimuli and, at the same time, responds to the numeric scale in accordance with the cardinal numbers, rather than the positive reals). Both the internal structure of relational response behavior to numeric scales, as well as the mapping between an arbitrary quantitative structure and a numeric scale must be demonstrated empirically prior to any claims that the rating produces genuine measurements. In other words, we need to establish a theoretically sound and empirically adequate link between a measurable attribute (such as an internal discriminative stimulus with a quantitative structure) and an individual&#x27;s numeric ratings of that attribute (cf. Hasselman, 2023; Uher, 2018).</p>
+<p>Although theoretically straightforward, empirical tests of such links may actually be hard to conduct, especially if the relational structure underlying an internal discriminative stimulus is not known because we have limited access to an individual&#x27;s history of operant selection. Nevertheless, the question of how people establish mappings between different relational response structures (such as pain related behavior and numeric rating behavior) might be investigated at a more general level using well-established experimental methods. Specifically, one may conduct operant experiments where a certain (predefined) relational response structure is shaped by providing corresponding feedback to a subject&#x27;s relational behavior. In other words, instead of speculating about the existence of quantitative mental objects (as implied by the traditional psychometric approach), one might just as well construct specifically designed internal discriminative stimuli as an experimental model for further investigation. For example, one could program the corresponding schedules of reinforcement such that they establish one response structure that is quantitative and one that is not quantitative, and then explore what happens if the subject is instructed to map the two onto a common numeric scale. Such an experimental procedure would answer the question whether the ordering and additivity of quantitative response structures are preserved in such mappings.</p>
+<p>Moreover, it would reveal how subjects deal with lacking information about differences on the rating scale when one of the established response structures has merely ordinal structure.</p>
+<p>Finally, our framework may be used to investigate variability in relational responding within and between subjects. For example, numeric ratings on a pain scale might be consistent mappings from one quantitative response structure (the one that gives rise to pain related behavior, such as avoidance or escape) to another (the one used in the assessment procedure, namely a numeric rating-scale) for one subject but not for another. Moreover, an individual might be able to map some relational response structures onto numeric scales but not others. Our framework suggests putting these questions to empirical test by comparing different mappings between experimentally established relational structures. Specifically, one could select an individual&#x27;s relational responses such that two separate quantitative response structures emerge by using two different stimulus sets with different spacings between the training stimuli. Subjects could then be instructed to map a preexisting internal discriminative stimulus (i.e., one that has not been established in the experiment) onto the two experimentally established quantitative structures, independently. If these two mappings yield the same spacings of judgements on both stimulus sets, there is good reason to believe that the ratings were actually based on a consistent mapping based on a quantitative relational response structure (i.e., that they are genuine measurements). If, however, subjects produce different spacings on the two pre-trained quantitative structures, we would conclude that the internal discriminative stimulus under consideration is not measurable on a quantitative scale.</p>
+<p>These examples show that the theoretical account proposed here is empirically very rich in that it implies several novel hypotheses about the basic processes underlying the data generated by psychometric rating-scales. Moreover, the fact that relational behavior can be shaped by behavioral selection at the individual level (i.e., operant selection) allows for the construction of specific experiments to test these hypotheses, some of which are outlined in more detail in Appendix A1.</p>
+<h3>4 Discussion</h3>
+<p>We have presented a behavioral account of the putative measurands of rating-scales that integrates the representational theory of measurement with theory-based semantics, building on the wellestablished principles of operant behavior. The fundamental claim of our theory is that the measurands of rating-scales are internal discriminative stimuli that underly relational response behavior. Whereas their qualitative mode is determined by the context and the type of action, their quantitative structure is shaped by selection such that it allows for the prediction of gradual changes in evolutionary fitness.</p>
+<p>For behavioral domains that are directly linked to changes in evolutionary fitness (e.g., foraging, escape, and avoidance behavior), it appears at least plausible that quantitative relational response structures should emerge. In other contexts, especially in those where the environmental feedback is mediated by complex interaction between individuals (such as those involved in person judgements), there is less reason to expect a quantitative response structure. Furthermore, if our theory is correct, we should expect variation between individuals, cultures, social groups etc., unless the structure of the environmental feedback is identical. Moreover, the same behavioral domain may have qualitatively different structures between individuals.</p>
+<p>Of course, a psychometric rating-scale may still yield useful results even if it does not provide genuine measurement of internal discriminative stimuli. As a social practice, the use of rating-scales may still be meaningful, irrespective of their scientific scope (cf. Buntins, 2014; Buntins et al., 2016 Buntins et al., , 2017)). For example, the use of a numeric pain scale may be a useful communicative tool between a physician and a patient even if pain ratings do not actually correspond to a quantitative relational structure of pain related behavior. Similarly, some psychometric rating-scales may serve as evaluative indices (rather than measurements) that help to justify certain decisions or social selection processes (e.g., in the context of personnel selection). Nevertheless, one should not confuse psychometrics as a social practice with genuine measurement and be careful to differentiate between social utility and scientific validity.</p>
+<p>An open question raised by our theory is how relational response structures relate to subjective experience. Although the theory itself is formulated in purely behavioral terms, the main implications of our theory on relational responding appear to be in good accordance with subjective experiences.</p>
+<p>For example, the different regulatory functions of avoidance behavior in various contexts (e.g., going to the dentist or awaiting an exam) does not only give rise to qualitatively different relational structures at a behavioral level, but seems to be in line with qualitatively different experiences of &quot;fear.&quot; Such resemblances point towards the possibility that relational responding might play a pivotal role in explaining the nature of subjective experiences. If selection on relational response behavior consistently aligns with verbal reports of subjective experiences, this would open a whole new field of research for behavior analysis, including phenomena commonly thought to be &quot;private&quot; (i.e., only accessible to the individual under study), such as sensation and emotions. Moreover, we would expect the structure of relational responding to vary with an organism&#x27;s capability of relational learning, which might explain why humans -being the only known species capable of arbitrary relational learning (cf. Hayes et al., 2001) -have such a variable and complex range of subjective experiences.</p>
+<p>5 Funding This research did not receive specific funding.</p>
+<h3>6 Competing Interests</h3>
+<p>The authors declare no competing interests.</p>
+<p>the individual generalizes the relational response to the stimulus combination a-c (such an untrained relational response is sometimes called an &quot;emergent response&quot;).</p>
+<p>The match-to-sample procedure has been extensively applied to study the formation of nonquantitative relational response structures, such as equivalence classes and ordinal structures (cf.</p>
+<p>Dymond &amp; Roche, 2013). To the knowledge of the authors, there are no studies that extend the procedure to richer relational structures, such as additive (i.e., quantitative) relations or more complex qualitative structures (such as lattices or network structures). We propose that extending the relational match-to-sample paradigm to richer relational structures provides an excellent tool to test many of our theoretical claims, such as the emergent nature of internal discriminative stimuli, the conditions under which such internal stimuli may obtain a quantitative structure, the role of contextual factors with regard to their qualitative aspects, as well as applied questions, such as whether quantitative structures may be consistently mapped onto each other according to verbal instructions or how to detect whether a psychometric rating-scale actually measures something.</p>
+<p>The main advantage of such an experimental approach over traditional psychometric methods is that, given the individual is capable of relational learning, the experimenter has full control over the relational response structures under study. It is thus possible to generate model structures with known relational properties and then investigate whether (and if so, how) these structures are mapped onto other response structures -such as numeric rating-scales. Consequently, if our main theoretical claim is correct (i.e., if internal discriminative stimuli actually emerge from relational responding), we may establish specific internal discriminative stimuli as independent variables in a controlled experiment.</p>
+<p>The general procedure for the proposed experimental tests is thus: a) choose a set of neutral stimuli (such as geometric patterns or pseudo-words), b) specify a relational structure on the stimulus set, c) perform operant training using a match-to-sample paradigm, using the pre-defined structure as the criterion of selection, d) test whether the individual has acquired the relational structure by means of test trials with untrained stimulus combinations. The independent variables that can be manipulated in this procedure include the type of the relational structure for the training (equivalence, order, similarity, specific operations…), as well as the consistency of the scheduled feedback.</p>
+<h3>A 1.2 Empirical Predictions</h3>
+<p>In the following, we will use the relational match-to-sample (RMTS) procedure to derive a collection of critical hypotheses and some open questions from our theory. The list of empirical hypotheses is not meant to be exhaustive, but rather to cover a wide range of potential applications of the theory and address some of the fundamental theoretical claims.</p>
+<p>The first critical hypothesis to be tested builds on the claim that internal discriminative stimuli are emergent properties of relational response behavior. This claim can be tested empirically using the RMTS procedure by means of a simple manipulation check after the training session. Specifically, if the structure of relational response behavior emerges from selection by consequences, individuals should generalize the trained relations and operations to stimulus combinations that have not been part of the training set. We know from research on equivalence learning that such emergent properties do exist in humans for &quot;same/different&quot; relations (i.e., human subjects are able to form equivalence classes of neutral stimuli and generalize the relational structure to untrained relational cues). However, it remains open to empirical test whether the same is true for more complex relational structures, and particularly quantitative structures.</p>
+<p>The second prediction in the context of emergent variables concern generalization of a learned relational structure to operations that are implied by the structure but have never been specifically selected. For example, a continuously ordered structure with an additive operation (such as concatenation of object stimuli) implies that the mid-point between any two stimuli is well-defined.</p>
+<p>Therefore, an individual that has been trained to relate stimuli such that the properties of additivity are fulfilled, should also be able to find the mid-point between two stimuli. We therefore hypothesize that individuals who have been trained on two disjunct sets of stimuli according to the same type of relational structure (e.g., a quantitative structure), but using different operations during training (e.g., addition vs. averaging) with different cues, should consistently apply these operations in both sets when the corresponding cue is present, even if they have never been selected to do so.</p>
+<p>Moreover, if internal discriminative stimuli are generalized to other contexts, it should be expected that one quantitative structure can be consistently mapped onto another quantitative structure. We therefore hypothesize that individuals who have been trained on two disjunct sets of stimuli according to the same type of relational structure (e.g., a quantitative structure), but using different operations during training (e.g., addition vs. averaging) with different cues, should consistently map the objects of the two stimulus sets onto each other, such that the relational structure is preserved.</p>
+<p>The theory furthermore suggests that internal discriminative stimuli -understood as emergent properties of relational responding -might evoke verbal responses that have been acquired as cues in the context of structurally similar relational domains. For example, during stimulus equivalence trainings, subjects sometimes say that certain pairs of stimuli are &quot;the same,&quot; even though this verbal response has been acquired in a completely different context. Analogously, when a quantitative relational structure has been established in an RMTS experiment, individuals might utter verbal responses that have been acquired in other contexts that bear a similar relational structure, such as &quot;more,&quot; &quot;difference,&quot; or &quot;half as much.&quot; We therefore hypothesize that, once a quantitative structure has been acquired by means of a RMTS procedure, when prompted to describe their experiences during the test session, subjects will provide verbal reports about quantitative judgements, including, but not limited to, the use of numerals or other mathematical concepts.</p>
+<p>Another central claim of the theory is that internal discriminative stimuli should have different qualities when they involve different behavioral domains. Therefore, depending on the mode of responding established in the RMTS training, we would expect functionally different response structures that should be qualitatively distinct to the subject. Following the same rationale as before, we thus hypothesize that, if two different quantitative structures have been trained using the same stimulus set, but different behavioral domains (e.g., approaching vs. avoiding the target stimulus) that are signaled with two different cues, when prompted to describe their experiences during the test session, subjects will provide verbal reports about qualitative differences regarding the cues used to distinguish between the two structures during training.</p>
+<p>The next two predictions are derived from the claim that internal discriminative stimuli will only have a quantitative structure if they provide consistent information about the amount of expected change in evolutionary fitness. Suppose that a quantitative relational structure is trained using a RMTS procedure, but the contingent feedback is only provided with a certain probability smaller than 1 (i.e., the selection procedure involves, to a certain degree, unreliable feedback). This will decrease the available information about the quantitative structure, such that the individual cannot properly acquire the relational response structure that is being selected. Since order is more robust with regard to random noise than additivity, we hypothesize that when a quantitative structure is being trained using a RMTS procedure with added random noise, there will be a critical value of acceptable error above which the individual will only acquire an ordinal relational response structure instead of a quantitative relational structure.</p>
+<p>If, however, the amount of noise is itself predictive of the expected value of change in evolutionary fitness, the lack of information about the additive structure may be compensated to a certain degree.</p>
+<p>Particularly, if the probability of erroneous feedback during the training of a quantitative response structure is a monotone decreasing function of the pre-defined differences of the training stimuli, we hypothesize that the individual should be expected to respond according to a probabilistic quantitative structure.</p>
+<p>A 2 Formalization of the Theory: Operant Selection of Relational</p>
+<h3>Responding</h3>
+<p>In this section, we provide a formalized version of the theory developed in the main article. The formalization builds on George Price&#x27;s formulation of selection in terms of covariance (Price, 1970 (Price, , 1972) ) and its generalization to individual-level changes (i.e., operant behavior) by Baum (2017) and Borgstede and Eggert (2021).</p>
+<h3>A 2.1 Selection Theory</h3>
+<p>The theory of selection builds on a fundamental partitioning of average change in trait value into one selection part and one non-selection part. Formally, we take an arbitrary quantity 𝑧𝑧 (e.g., the population frequency of a certain trait value), and define 𝑝𝑝 𝑖𝑖 as the frequency of the character value 𝑧𝑧 𝑖𝑖 in a population 𝐴𝐴. We further consider a right-total mapping from 𝐴𝐴 to an offspring population 𝐴𝐴′, and define 𝑧𝑧 𝑖𝑖 ′ as the average trait values of elements in 𝐴𝐴′ that descend from elements with trait value 𝑧𝑧 𝑖𝑖 , with 𝑝𝑝 𝑖𝑖 ′ being the corresponding relative frequencies.</p>
+<p>Given this notation, fitness 𝑤𝑤 𝑖𝑖 is defined as 𝑝𝑝 𝑖𝑖 ′ /𝑝𝑝 𝑖𝑖 , i.e., the contribution of elements with trait value 𝑧𝑧 𝑖𝑖 to the distribution of 𝑧𝑧 in 𝐴𝐴. Furthermore, let Δ𝑧𝑧 𝑖𝑖 be equal to 𝑧𝑧 𝑖𝑖 ′ -𝑧𝑧 𝑖𝑖 and designate population averages of character value and fitness as 𝑧𝑧̅ and 𝑤𝑤 �, respectively. We can thus express the total change in average population trait value by the so-called Price equation (cf. Gardner, 2020):</p>
+<p>The covariance term is commonly understood as the part of change in 𝑧𝑧̅ that can be attributed to selection, whereas the expectation term captures all changes apart from selection and may be interpreted as a residual term. It has been shown that Eq.1 is valid for arbitrary selection processes (of which natural selection, is only the best known one), as long as there is a right-total mapping between the two sets (for extensions to more general set-mappings see, e.g., Aguilar &amp; Akçay, 2018; Borgstede, 2023; El Mouden et al., 2014). Moreover, the equation holds for any linear predictor of 𝑤𝑤, which is why it can be readily extended to individual-level behavior and its consequences, as demonstrated by Borgstede and Eggert (2021). Eq.1 can further be generalized to account for an arbitrary class-structure within populations (e.g., different environmental contexts) by partitioning the total change in 𝑧𝑧̅ into several selection terms (one for each class 𝑥𝑥) that are then aggregated by means of a weighted sum, where the corresponding weighting factors 𝑣𝑣 𝑥𝑥 are the class reproductive values (i.e., they express the long-term contribution of class 𝑥𝑥 to the future population). The residual term is decomposed into a weighted sum over classes, correspondingly. Thus, the Price equation for structured populations is:</p>
+<p>Note that the fitness values in Eq.2 differ slightly from the definition used in Eq.1. Instead of the total number of offspring, 𝑤𝑤 𝑖𝑖 is now defined as a weighted sum over the number of offspring 𝑝𝑝 𝑦𝑦 in each class 𝑦𝑦 multiplied by the corresponding offspring reproductive values 𝑣𝑣 𝑦𝑦 : 𝑤𝑤 𝑖𝑖 = � 𝑣𝑣 𝑦𝑦 𝑝𝑝 𝑖𝑖𝑦𝑦 𝑦𝑦</p>
+<p>Like the simple Price equation, Eq.2 also holds for changes in individual behavior frequencies, if individuals are formally treated as their own offspring (Borgstede, 2024). Moreover, Eq.2 remains valid if the fitness values are replaced by fitness predictors (or proxies), such as food intake.</p>
+<p>However, to keep the notation as simple and general as possible, we present all mathematical proofs with respect to 𝑤𝑤 only. Nevertheless, all claims equally hold for cases where 𝑤𝑤 is replaced by a corresponding fitness predictor.</p>
+<h3>A 2.2 Relational Responding</h3>
+<p>Relational responding is conceptualized as a class of operant behavior, which is defined by a) a discriminative stimulus, b) a behavior, and c) the consequences of that behavior (Skinner, 1969).</p>
+<p>According to selection theory, the change in average behavior can be partitioned into a selection term and a residual term (cf. Eq.1), where the selection term is given by the covariance between the behavior and its corresponding fitness. Hence, we conceive behavior as a quantitative character value 𝑧𝑧 (e.g., a frequency, a probability, or an intensity), the discriminative stimulus as a class 𝑥𝑥 and its consequences as the corresponding fitness 𝑤𝑤 (or a linear predictor thereof). The process of behavior change associated with the covariance between behavior (𝑧𝑧) and consequences (𝑤𝑤) in various contexts (𝑥𝑥) is described by Eq.2 and shall be called operant selection here.</p>
+<p>Formally, we introduce a contextual space 𝒞𝒞, which is defined as the cartesian product over a finite set of domains 𝐶𝐶 1 , 𝐶𝐶 2 , … , 𝐶𝐶 𝑛𝑛 (i.e., 𝒞𝒞 = 𝐶𝐶 1 × 𝐶𝐶 2 … × 𝐶𝐶 𝑛𝑛 ). The elements of 𝒞𝒞 are ordered n-tuples and will be referred to as configurations hereafter. Analogously, behavioral space ℬ is conceptualized as the cartesian product over a finite set of behavioral domains 𝐵𝐵 1 , 𝐵𝐵 2 , … , 𝐵𝐵 𝑚𝑚 (i.e., ℬ = 𝐵𝐵 1 × 𝐵𝐵 2 … × 𝐵𝐵 𝑚𝑚 ). The elements of ℬ are ordered m-tuples, and will be called responses in the following. We further designate the frequency that response 𝑖𝑖 occurs in configuration 𝑗𝑗 as 𝑧𝑧 𝑖𝑖𝑖𝑖 , and model the consequences of a response 𝑖𝑖 occuring in configuration 𝑗𝑗 by means of a fitness function 𝑤𝑤(𝑧𝑧 𝑖𝑖𝑖𝑖 ). We have thus specified the structure of behavior and its context-dependent consequences.</p>
+<p>However, we still need a formal representation of the class structure (i.e., the discriminative stimuli).</p>
+<p>Note that, formally, the class structure in Eq. 2 is completely</p>
+<h3>Appendix A 1. Empirical Predictions and Possible Experiments</h3>
+<p>In this section, we propose an experimental paradigm (the relational match-to-sample task) that may be exploited to test various specific predictions from the theory. We further provide a list of empirical hypotheses and open questions that we derive from our theory. We hope that this list inspires experimental psychologists to investigate the generative processes involved in the formation of relational response structures, as well as scholars working in the field of psychometrics and psychological diagnostics to check whether psychometric rating-scales actually measure something and, if so, what they measure.</p>
+<h3>A 1.1 The Relational Match-to-Sample Paradigm (RMTS)</h3>
+<p>Relational learning has been well-studied in human and non-human individuals, mostly in the context of equivalence class formation (Sidman, 1994). Equivalence learning experiments usually employ a match-to-sample task, where individuals have to choose one of several stimuli (the response options) such that it matches a certain target stimulus (Premack, 1983). To avoid confounding factors that might affect the response, the stimulus sets are usually chosen such that they bear no intrinsic information about the relational structure one wishes to establish. Stimulus material often includes abstract geometric shapes or pseudo-words -the rationale being that the stimuli should be as neutral as possible to the individuals. Before the training begins, a relational structure needs to be defined on the stimulus set that determines which responses are counted as &quot;correct&quot; and which as &quot;incorrect&quot;. The result is a contingency structure that specifically selects those responses that are consistent with the pre-defined relational structure. The training is usually followed by a test trial where hitherto untrained combinations of stimuli are presented as targets and response options. For example, if the aim is to establish a relational structure where the stimuli a, b, and c are part of one equivalence class, the training trials may include the stimulus combinations a-b and b-c (but not a-c).</p>
+<p>A test trial may now reveal whether the training actually produced an equivalence class by checking if Formally, we define the space of discriminative stimuli 𝒳𝒳 as the cartesian product over a finite set of stimulus domains 𝑋𝑋 1 , 𝑋𝑋 2 , … , 𝑋𝑋 𝑛𝑛 (i.e., 𝒳𝒳 = 𝑋𝑋 1 × 𝑋𝑋 2 … × 𝑋𝑋 𝑛𝑛 ) and a mapping 𝜓𝜓 𝑖𝑖 for each response 𝑖𝑖 from the contextual space to the (internal) space of discriminative stimuli, such that 𝜓𝜓 𝑖𝑖 (𝑗𝑗) = 𝜓𝜓 𝑖𝑖 (𝑘𝑘) if and only if 𝑤𝑤�𝑧𝑧 𝑖𝑖𝑖𝑖 � = 𝑤𝑤(𝑧𝑧 𝑖𝑖𝑖𝑖 ) for all responses 𝑖𝑖 and configurations 𝑗𝑗, 𝑘𝑘. This mapping from configurations to discriminative stimuli guarantees that, if an arbitrary relational structure 𝑅𝑅 ⊆ 𝒳𝒳 is shaped by selection, 𝜓𝜓 𝑖𝑖 (𝑥𝑥) will align with the expected consequences of response 𝑖𝑖 given a discriminative stimulus 𝑥𝑥. Therefore, given the above definitions and proposed mechanisms, internal discriminative stimuli are emergent properties of selection on relational responding that serve as context-dependent fitness predictors.</p>
+<p>arbitrary. In other words, classes might be characterized by external factors (such as spatial position or the presence of a contextual cue), individual traits (such as body weight), individual state variables (such as food deprivation), or any combination thereof. We thus propose that it is not the contextual space 𝒞𝒞 that constitutes the classes in Eq.2, but an integration of 𝒞𝒞 with respect to selection on 𝑧𝑧, such that all configurations with identical covariance partitionings form a single class. In other words, the individual groups the contexts in 𝒞𝒞 with regard to their behavioral consequences in the most parsimonious way. These aggregate classes define the set of discriminative stimuli. Hence, in our view, discriminative stimuli are not what an experimenter views as stimuli signaling different contexts, but what points to equal consequences for the individual.</p>
+<p>By &quot;quantitative&quot; we mean that the structure is ordered, continuous, and additive (cf.Hölder, 1901).</p>
+<p>Anecdotally, one of the authors of this article used to be unable to identify the color turquois as a child -until his environment began to react differently to his clothes being either blue or turquois around the age of 12. Today, the distinction between blue and turquois has become an integral part of his color perception.</p>
+<h3>References</h3>
+<p>Aguilar, E. G., &amp; Akçay, E. (2018). Gene-Culture Coinheritance of a Behavioral Trait. The American Naturalist, 192(3), 311-320. https://doi.org/10.1086/698872</p>
+<p>Baum, W. M. (2017). Selection by consequences, behavioral evolution, and the price equation. Journal of the Experimental Analysis of Behavior, 107(3), 321-342. https://doi.org/10.1002/jeab.256</p>
+<p>Baum, W. M. (2018). Multiscale behavior analysis and molar behaviorism: An overview. Journal of the Experimental Analysis of Behavior, 110(3), 302-322. https://doi.org/10.1002/jeab.476</p>
+<p>Beau Lotto, R., &amp; Purves, D. (2002). The empirical basis of color perception. Consciousness and Cognition, 11(4), 609-629. https://doi.org/10.1016/S1053-8100(02)00014-4</p>
+<p>Borgstede, M. (2023). A generalized Price equation for fuzzy set-mappings (Version 2). arXiv. https://doi.org/10.48550/ARXIV.2312.12916</p>
+<p>Borgstede, M. (2024a). Behavioral selection in structured populations. Theory in Biosciences, 143(2), 97-105. https://doi.org/10.1007/s12064-024-00413-8</p>
+<p>Borgstede, M., &amp; Eggert, F. (2021). The formal foundation of an evolutionary theory of reinforcement. Behavioural Processes, 186, 104370. https://doi.org/10.1016/j.beproc.2021.104370</p>
+<p>Borgstede, M., &amp; Eggert, F. (2023a). Meaningful measurement requires substantive formal theory. Theory &amp; Psychology, 33(1), 153-159. https://doi.org/10.1177/09593543221139811</p>
+<p>Borgstede, M., &amp; Eggert, F. (2023b). Squaring the circle: From latent variables to theory-based measurement. Theory &amp; Psychology, 33(1), 118-137. https://doi.org/10.1177/09593543221127985</p>
+<p>Borsboom, D. (2005). Measuring the mind: Conceptual issues in contemporary psychometrics. Cambridge University Press.</p>
+<p>Bradley, R. A., &amp; Terry, M. E. (1952). Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons. Biometrika, 39(3/4), 324. https://doi.org/10.2307/2334029</p>
+<p>Buntins, M. (2014). Psychologische Tests und mehrwertige Logik: Ein alternativer Ansatz zur Quantifizierung psychologischer Konstrukte. Springer Fachmedien Wiesbaden. https://doi.org/10.1007/978-3-658-05507-3</p>
+<p>Buntins, M., Buntins, K., &amp; Eggert, F. (2016). Psychological tests from a (fuzzy-)logical point of view. Quality &amp; Quantity, 50(6), 2395-2416. https://doi.org/10.1007/s11135-015-0268-z Buntins, M., Buntins, K., &amp; Eggert, F. (2017). Clarifying the concept of validity: From measurement to everyday language. Theory &amp; Psychology, 27(5), 703-710. https://doi.org/10.1177/0959354317702256</p>
+<p>Cook, R. G., Katz, J. S., &amp; Cavoto, B. R. (1997). Pigeon same-different concept learning with multiple stimulus classes. Journal of Experimental Psychology: Animal Behavior Processes, 23(4), 417-433. https://doi.org/10.1037/0097-7403.23.4.417</p>
+<p>Dymond, S., &amp; Roche, S. (Eds. ). (2013). Advances in relational frame theory: Research and application. New Harbinger Publications.</p>
+<p>El Mouden, C., André, J.-B., Morin, O., &amp; Nettle, D. (2014). Cultural transmission and the evolution of human behaviour: A general approach based on the Price equation. Journal of Evolutionary Biology, 27(2), 231-241. https://doi.org/10.1111/jeb.12296</p>
+<p>Gardner, A. (2020). Price&#x27;s equation made clear. Philosophical Transactions of the Royal Society of London.</p>
+<p>Series B, Biological Sciences, 375(1797), 20190361. https://doi.org/10.1098/rstb.2019.0361</p>
+<p>Hasselman, F. (2023). Going &#x27;round in Squares: Theory Based Measurement Requires a Theory of Measurement. Theory &amp; Psychology.</p>
+<p>Hayes, S. C., Barnes-Holmes, D., &amp; Roche, B. (2001). Relational frame theory: A post-Skinnerian account of human language and cognition. Kluwer Academic/Plenum Publishers.</p>
+<p>Hölder, O. (1901). Die Axiome der Quantität und die Lehre vom Mass, Berichte über die Verhandlungen der Königlich Sächsischen Gesellschaft der Wissenschaften zu Leipzig. Mathematisch- Physische Klasse, 53, 1-46.</p>
+<p>Holzhauser, N., &amp; Eggert, F. (2019). The role of measurement in theorising about the world. Social Science Information, 58(2), 301-326. https://doi.org/10.1177/0539018419860082</p>
+<p>Hoyle, R. H. (Ed.). (2012). Handbook of structural equation modeling. The Guilford Press.</p>
+<p>Köhler, W. (1938). Simple structural functions in the chimpanzee and in the chicken. In W. D. Ellis (Ed.), A source book of Gestalt psychology. (pp. 217-227). Kegan Paul, Trench, Trubner &amp; Company. https://doi.org/10.1037/11496-018</p>
+<p>Krantz, D. H. (1972). A theory of magnitude estimation and cross-modality matching. Journal of Mathematical Psychology, 9(2), 168-199. https://doi.org/10.1016/0022-2496(72)90025-9</p>
+<p>Krantz, D. H., Luce, R. D., Suppes, P., &amp; Tversky, A. (1971). Foundations of Measurement Volume I: Additive and Polynomial Representations. Academic Press.</p>
+<p>Lord, F. M., &amp; Novick, M. R. (1968). Statistical theories of mental test scores. Addison-Wesley.</p>
+<p>Maraun, M. D. (2003). Myths and Confusions: Psychometrics and the latent variable model. http://www.sfu.ca/~maraun/myths-and-confusions.html</p>
+<p>Marsh, G. (1967). Relational learning in the pigeon. Journal of Comparative and Physiological Psychology, 64(3), 519-521. https://doi.org/10.1037/h0025210</p>
+<p>Maule, J., Skelton, A. E., &amp; Franklin, A. (2023). The Development of Color Perception and Cognition. Annual Review of Psychology, 74(1), 87-111. https://doi.org/10.1146/annurev-psych-032720-040512</p>
+<p>McDowell, J. J. (2004). A computational model of selection by consequences. Journal of the Experimental Analysis of Behavior, 81(3), 297-317. https://doi.org/10.1901/jeab.2004.81-297</p>
+<p>McGraw, J., &amp; Caswell, H. (1996). Estimation of individual fitness from life-history data. American Naturalist, 147(1), 47-64. https://doi.org/10.1086/285839</p>
+<p>Michell, J. (1997). Quantitative science and the definition of measurement in psychology. British Journal of Psychology, 88(3), 355-383. https://doi.org/10.1111/j.2044-8295.1997.tb02641.x</p>
+<p>Michell, J. (1999). Measurement in psychology: Critical history of a methodological concept (1. publ). Cambridge Univ. Press.</p>
+<p>Özgen, E. (2004). Language, Learning, and Color Perception. Current Directions in Psychological Science, 13(3), 95-98. https://doi.org/10.1111/j.0963-7214.2004.00282.x</p>
+<p>Palmer, D. C., &amp; Donahoe, J. W. (1992). Essentialism and selectionism in cognitive science and behavior analysis. The American Psychologist, 47(11), 1344-1358. https://doi.org/10.1037/0003- 066X.47.11.1344</p>
+<p>Pfanzagl, J. (1959). A general theory of measurement applications to utility. Naval Research Logistics Quarterly, 6(4), 283-294. https://doi.org/10.1002/nav.3800060404</p>
+<p>Premack, D. (1983). Animal Cognition. Annual Review of Psychology, 34(1), 351-362. https://doi.org/10.1146/annurev.ps.34.020183.002031</p>
+<p>Price, G. R. (1970). Selection and Covariance. Nature, 227(5257), 520-521. https://doi.org/10.1038/227520a0</p>
+<p>Price, G. R. (1972). Extension of covariance selection mathematics. Annals of Human Genetics, 35(4), 485-490. https://doi.org/10.1111/j.1469-1809.1957.tb01874.x</p>
+<p>Rasch, G. (1960). Probabilistic models for some intelligence and achievement tests. Kopenhagen: Danish Institute for Educational Research (Expanded edition, 1980. Chicago: University of Chicago Press).</p>
+<p>Robertson, A. R. (1992). Color Perception. Physics Today, 45(12), 24-29. https://doi.org/10.1063/1.881324</p>
+<p>Sidman, M. (1994). Equivalence relations and behavior: A research story. Authors Cooperative.</p>
+<p>Sidman, M. (1997). Equivalence relations. Journal of the Experimental Analysis of Behavior, 68(2), 258-266. https://doi.org/10.1901/jeab.1997.68-258</p>
+<p>Simon, C., &amp; Hessen, D. O. (2019). Selection as a domain-general evolutionary process. Behavioural Processes, 161, 3-16. https://doi.org/10.1016/j.beproc.2017.12.020</p>
+<p>Skinner, B. F. (1969). Contingencies of reinforcement: A theoretical analysis. Prentice-Hall.</p>
+<p>Skinner, B. F. (1981). Selection by consequences. Science (New York, N.Y.), 213(4507), 501-504.</p>
+<p>Stevens, S. S. (1946). On the theory of scales of measurement. Science, 103, 677-680. https://doi.org/10.1126/science.103.2684.677</p>
+<p>Suppes, P. (1951). A set of independent axioms for extensive quantities. Portuguliae Mathematica, 10, 163-172.</p>
+<p>Suppes, P., &amp; Winet, M. (1955). An Axiomatization of Utility Based on the Notion of Utility Differences. Management Science, 1(3-4), 259-270. https://doi.org/10.1287/mnsc.1.3-4.259</p>
+<p>Uher, J. (2018). Quantitative Data From Rating Scales: An Epistemological and Methodological Enquiry. Frontiers in Psychology, 9, 2599. https://doi.org/10.3389/fpsyg.2018.02599</p>
+<p>Witzel, C., &amp; Gegenfurtner, K. R. (2018). Color Perception: Objects, Constancy, and Categories. Annual Review of Vision Science, 4(1), 475-499. https://doi.org/10.1146/annurev-vision-091517-</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
