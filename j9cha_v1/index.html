@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Toward Evidence-Based Human-Centered AI and
+Human-AI Interaction: A Cross-Domain Systematic Review</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Toward Evidence-Based Human-Centered AI and Human-AI Interaction: A
+Cross-Domain Systematic Review
+</p>
+<p class="meta">
+2026-11-14 · Metacheck 0.4.4.1
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>1</b><span>to fix</span></a><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>15</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Ethics
+Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to involve live data collection and lacked an
+ethics approval statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, but it was not present:</p>
+<blockquote>
+<p>Sánchez Olszewski [55] found that participants were less likely to
+agree with AI when it appeared human-like, compared with robot-like or
+generic AI identities, in a hiring context.</p>
+</blockquote>
+</div>
+</details>
+</div>
+<h2 id="na">Not applicable <span class="n">(15)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 99 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 99 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 99 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold” or “legend”). Notes in other
+forms, such as a marker after the p-value (“p &lt; .05 (*)“), are still
+flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 225 papers containing 405 instances of
+non-exact p-values, the module correctly detected 269 cases (true
+positives) and incorrectly identified 78 (false positives). It missed
+136 instances of imprecisely reported p-values (false negatives) and
+correctly identified 4557 cases of precisely reported p-values (true
+negative). Additionally, 78% of positive detections were correct
+(positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 194 papers with 1602 instances of
+non-significant p-values, this module correctly detected 1486 of them,
+and incorrectly identified 153. Additionally, 91% of detections were
+true instances (positive predictive value). That is, when this module
+flags non-significant p-values in a paper, it correctly identifies an
+issue 91% of the time.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Artificial intelligence (AI) systems are increasingly used to support decision-making, automate tasks, personalize services, and improve system performance across domains such as healthcare, education, transportation, cybersecurity, manufacturing, and workplace productivity. As AI adoption expands, clearer guidance is needed to connect human-centered design principles with measurable human outcomes. This systematic review synthesized 44 empirical studies on human-centered AI (HCAI) and human-AI interaction (HAX) to examine measurement approaches, framework categories, AI roles, and domainspecific findings. The reviewed studies showed that AI support was often associated with improved objective outcomes, including task performance and decision quality. Subjective outcomes, including trust, satisfaction, usability, workload, and perceived control, were more variable and depended on transparency, explanation design, task fit, user expertise, and the level of human control. Across studies, human-led AI support was the most common role, especially in high-stakes domains where humans retained final authority. Collaborative AI appeared in tasks requiring shared activity, feedback, or adaptive support, while AI-led support appeared mainly within mixed-role systems. Domainspecific findings showed that healthcare emphasized accuracy, reliability, and overreliance; education emphasized engagement, scaffolding, and ownership; transportation emphasized safety, timing, modality, and trust calibration; and other domains emphasized fairness, transparency, adoption, and acceptance. This review contributes a cross-domain synthesis that connects HCAI and HAX principles with AI roles, evaluation measures, and human outcomes, supporting future frameworks that are easier to evaluate and apply in real-world settings.</p>
+<h3>[div-01]</h3>
+<p>that use data, rules, or learned patterns to support prediction, recommendation, decision-making, or action. AI systems refer to tools that embed these approaches in tasks where people interact with, rely on, or oversee system behavior. However, the adoption of AI in these domains is advancing faster than the development of clear frameworks to guide its responsible and human-centered use. This gap creates challenges for researchers, designers, and organizations seeking to define appropriate AI support while maintaining meaningful human oversight.</p>
+<p>In response to these challenges, human-centered AI (HCAI) and human-AI interaction (HAX) have emerged as important areas of research and practice, because they help define what AI systems should support and what users experience when working with those systems. HCAI focuses on the design of AI systems that improve human outcomes while supporting human values, control, and well-being [1], [2]. HAX focuses more directly on the quality of interaction between humans and AI systems, including user understanding, interpretation, and collaboration with AI. These two areas inform each other. HCAI provides the guiding values that shape HAX design goals, while HAX findings help refine and validate HCAI principles in real-world use. This relationship makes the two fields inherently interdependent, as reflected in Fig. 1. Even with this close relationship, findings on these shared concerns remain divided across domains. This fragmentation limits the development of shared design guidance and makes it difficult to transfer lessons across domains [3], [4].</p>
+<p>This issue is also reflected in practice. According to the World Health Organization, only 8% of countries in the European Region have a dedicated national AI strategy for health [5]. A survey by Anandarajan [6] of more than 500 data professionals also reported that 41% of companies used agentic AI in daily operations and only 27% of organizations had governance frameworks to manage and monitor these systems. These findings suggest that AI adoption is advancing, while guidance on design, evaluation, and governance remains limited. Without a unified framework, organizations may need to independently determine which decisions should be handled by AI systems and which should remain with human users. This can lead to inconsistent design choices and uneven evaluation practices. These problems become especially concerning in high-stakes domains such as healthcare, transportation, and cybersecurity, where poor design decisions can affect safety and the quality of human judgment.</p>
+<h3>A. Human-Centered AI and Human-AI Interaction</h3>
+<p>To understand the relationship between HCAI and HAX, their roles need to be clearly defined. Drawing on humancentered practices, HCAI can be understood as an approach to designing AI systems that enhance human capabilities while keeping the design process centered on human needs and values, with user control built into the system [7]. HCAI emphasizes systems that protect human well-being and follow ethical design principles. It also focuses on aligning AI behavior with human values, making system actions transparent, and keeping people meaningfully involved in oversight. Because AI systems can process large amounts of data and support adaptive decisionmaking, HCAI also enables personalization and customization, helping AI systems better serve individual and social needs.</p>
+<p>HCAI is also closely connected to the broader tradition of human factors. Concepts such as supervisory control, automation bias, and trust calibration are especially relevant to AI system design. Supervisory control emphasizes the need for humans to monitor and guide automated systems. Automation bias explains why users may over-rely on AI recommendations even when those recommendations are incorrect. Trust calibration focuses on designing systems that support appropriate levels of trust. These concepts show that HCAI extends beyond technical performance and considers the influence of AI systems on human judgment, behavior, and downstream outcomes.</p>
+<p>HAX focuses on the study and design of interactions between humans and AI systems. It examines the user&#x27;s experience with AI systems, including user interpretation of system outputs and collaboration with AI. It also considers the influence of interface features on user behavior. In this context, HAX addresses whether an AI system is usable, whether its outputs are clear, whether its reasoning can be explained, whether users receive helpful feedback, whether people have enough control, and whether human-AI collaboration supports good decisions [3]. In this review, HAX is used to refer to the interaction and experience aspects of human-AI systems. HCAI provides broader design principles, and HAX examines the expression of those principles in real-world interactions and measurable outcomes.</p>
+<h3>B. Literature Landscape</h3>
+<p>The current body of HCAI and HAX research spans several disciplines and application areas. Prior studies have examined these concepts in manufacturing, healthcare, transportation, education, business, and other domains. For instance, Liu et al. [8] examined HCAI as an enabler of the transition from technology-centered to human-centered manufacturing in Industry 5.0. The authors introduced the HER framework, which includes human-centric design, ethical management, and responsible implications, to identify HCAI practices across 4,693 Chinese firms. Their findings showed that HCAI can help firms balance manufacturing efficiency with human and social values.</p>
+<p>Other studies have examined HAX design for improving work outcomes. Krakowski et al. [9] conducted a field experiment at a pharmaceutical firm and found that tailoring HAX to match users&#x27; cognitive preferences was associated with improved sales performance. This finding suggests that AI system design may be more effective when it accounts for differences in people&#x27;s information processing and decisionmaking. Similarly, Passalacqua et al. [10] reviewed HCAI research and found that psychological experiences and human factors remain underrepresented. They also identified a gap between empirical and non-empirical studies, especially in the development and evaluation of theoretical frameworks.</p>
+<p>Transportation research has also shown the importance of human-centered AI design. Kumar et al. [11] examined HCAI in autonomous vehicles and identified several challenges related to AI-driven human-machine interaction, including limited global standardization, trust, and data privacy. These concerns are similar to challenges found in other domains, where AI systems support human understanding, appropriate reliance, and safe decision-making. In addition, Vaccaro et al. [12] reviewed experimental studies on human-AI collaboration and identified factors that contribute to both success and failure in collaborative performance.</p>
+<p>These studies show that HCAI and HAX have been examined across many domains, and the evidence base remains difficult to compare. Studies often use different frameworks, outcome measures, terminology, and assumptions. Some studies focus on ethics and governance, while others focus on usability, trust, transparency, decision-making, or performance. As a result, the field lacks a clear synthesis of which principles are most often used, which outcomes are measured, and which findings can be transferred across domains. This limits the ability to build a shared foundation for human-centered AI design and evaluation.</p>
+<h3>C. Research Objectives</h3>
+<p>Although several HCAI and HAX frameworks have been proposed, many remain difficult to apply in real-world settings. Alelyani [13] reported that existing frameworks, including ISO 21448, Safety of the Intended Functionality (SOTIF), and the NIST AI Risk Management Framework, remain largely theoretical and require more empirical validation in real-world contexts. This makes it difficult to apply these frameworks in dynamic and cross-disciplinary settings. AI systems used in healthcare, transportation, cybersecurity, and education face different risks, user needs, and evaluation requirements. At the same time, these domains also share common design concerns, such as trust, transparency, usability, safety, accountability, and human oversight.</p>
+<p>Therefore, a key gap remains because the field lacks a shared approach for aligning AI design with human values and measurable human outcomes across domains. It remains unclear which HCAI and HAX principles are linked to outcomes such as trust, usability, workload, safety, transparency, decision quality, and user acceptance. It is also unclear which measures are most commonly used to evaluate these outcomes and whether these measures can be compared across application areas. This fragmentation makes it difficult to determine which design principles are supported by empirical evidence and which principles remain mainly conceptual. To address this gap, the present review systematically synthesizes HCAI and HAX research across application domains, with a focus on the definition, evaluation, and translation of human-centered design principles into measurable human outcomes. Specifically, this review organizes existing frameworks, concepts, methodologies, and empirical findings to identify common patterns, shared challenges, and remaining gaps across domains. This review has three main goals. The first goal is to synthesize existing HCAI and HAX frameworks, concepts, and methodologies, with attention to their application and evaluation in empirical studies. The second goal is to compare applications across domains such as healthcare, education, transportation, and cybersecurity, with attention to both shared design concerns and domain-specific constraints. The third goal is to identify directions for future HCAI and HAX frameworks that more clearly connect design principles with measurable outcomes, including trust, usability, safety, transparency, workload, decision quality, and ethical alignment. This review makes several related contributions. It brings HCAI and HAX into a single review structure, allowing the values that guide AI design to be examined alongside the interaction evidence used to evaluate AI use in practice. It also compares findings across application domains to identify where design concerns are shared and where domain-specific needs shape evaluation. In addition, it connects proposed design principles with measurable human outcomes, which helps distinguish principles supported by empirical evidence from those that remain mainly conceptual. This synthesis provides a foundation for future HCAI and HAX frameworks that are easier to evaluate, compare, and apply across real-world settings.</p>
+<p>To conduct this review, we systematically identified and reviewed relevant literature on HCAI and HAX with applications in specific domains. We categorized the literature into distinct application areas, synthesized the major findings, assessed overlap across studies, and identified variations in frameworks, measures, and outcomes. The coded information was then organized into summary tables and visual summaries to support cross-domain comparison. Finally, we provide recommendations for a future HCAI framework and discuss the alignment of these recommendations with existing approaches to responsible and human-centered AI design.</p>
+<h3>II. METHODS</h3>
+<p>This systematic review was conducted using the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) method [14] to identify relevant research articles on human-centered AI and human-AI interaction. A total of eight databases were searched: SCOPUS, Web of Science, Compendex, Inspec, TRID, PsycINFO, ACM Digital Library, and PubMed. Additional grey literature was searched through arXiv. The initial search was conducted in June 2025, and all searches were completed between June and August 2025. The inclusion criteria were articles written in English, articles published or made available online between January 1, 2010, and the final search date, and document types including peerreviewed academic journals, conference proceedings, and grey literature. Because some online-first articles indexed during the search period were assigned a later publisher issue year, articles labeled as 2026 were retained when they were available in the searched databases before the final search date. The syntax used to search the databases was as follows: TITLE-ABS-KEY ((&quot;human-centered AI&quot; OR &quot;user-centered AI&quot; OR &quot;human-AI collaboration&quot; OR &quot;human-AI interaction&quot; OR &quot;human-AI teaming&quot;) AND (&quot;usability&quot; OR &quot;collaboration&quot; OR &quot;trust&quot; OR &quot;teaming&quot; OR &quot;safety&quot; OR &quot;ethic*&quot; OR &quot;interface*&quot;)). In this article, we define AI systems broadly to include machine learning-based systems, natural language processing systems, recommendation engines, autonomous and robotic systems, and decision-support tools, provided that the system involves direct or mediated interaction with a human user.</p>
+<p>Two reviewers searched the databases separately using the same syntax, and the larger set of results was retained to maximize coverage. The initial search identified 9,110 records from databases and 608 additional records from grey literature sources. After duplicate removal, 4,060 records remained for screening. The full search, screening, eligibility, and inclusion process is summarized in Fig. 2. Two reviewers screened each paper independently to reduce reviewer bias. Papers were excluded if they (1) lacked design principles, methodologies, applications, or impacts on human outcomes that are relevant to HCAI or HAX, (2) lacked clearly defined independent and dependent variables (IVs and DVs), (3) were review papers without original empirical data, including literature reviews, scoping reviews, or meta-analyses, (4) only compared the presence of AI with human agents without focusing on interaction or collaboration, or (5) were product overviews or interface introductions. Of the 66 articles selected for fulltext review, 22 were excluded because they did not meet the five criteria stated above. After study selection, the included articles were coded by domain, framework or concept, AI type, interaction modality, AI role, and reported metrics. These codes were used to generate the synthesis structure shown in Table I and the article-level extraction provided in Supplementary Table S1.</p>
+<h3>III. RESULTS</h3>
+<p>The Results section is organized around the analysis structure used to compare the included studies. Table I summarizes the main synthesis areas, including measurement and metrics, framework categories and design principles, AI roles, and domain-specific findings. Full article-level extraction, including each study&#x27;s domain, framework or concept, AI type, interaction modality, and metrics, is provided in Supplementary Table S1. This structure is used below to compare HCAI and HAX concepts, AI roles, evaluation methods, and measurable human outcomes across application areas.</p>
+<h3>A. Overview of Included Studies</h3>
+<p>A total of 44 articles were included in this review. As shown in Fig. 3, healthcare was the most common application domain (n = 12), followed by education (n = 5) and transportation (n = 5). Human resources and technology (HR/Technology) and workplace productivity each included four studies. Cybersecurity, emergency response, manufacturing, media, and retail each included two studies. Mixed reality, infrastructure, gender, and sustainability each included one study. This distribution shows that empirical HCAI and HAX research is concentrated in domains where AI is commonly used to support decisionmaking, learning, safety, or work performance.</p>
+<p>Interaction modality was also unevenly distributed across the included studies. As shown in Fig. 4, visual and textbased interaction was the most common combination of modalities. Visual channels appeared in most studies, and textbased interaction was also common. Auditory, tactile, motionbased, and other interaction channels appeared less often. This pattern suggests that current HCAI and HAX research remains centered on screen-based interaction, even though several application domains, such as transportation, surgery, and emergency response, require multimodal communication.</p>
+<p>Although the search covered studies from 2010 onward, all studies that met the final eligibility criteria were published between 2020 and 2025. As shown in Fig. 5, publication volume increased over time, with the largest number of included studies appearing in 2025 (n = 17). This trend suggests growing empirical attention to HCAI and HAX, especially in recent work on explainability, collaboration, and human-centered evaluation.</p>
+<p>The remaining Results sections follow the synthesis structure shown in Table I. Section III-B summarizes the measures and metrics used to evaluate human-AI interaction. Section III-C organizes the main framework categories and design principles. Section III-D examines AI roles in human-AI interaction, including human-led, collaborative, AI-led, and mixed-role systems. Section III-E compares findings across major application domains. Section III-F synthesizes cross-domain patterns that clarify the contribution of this review.</p>
+<h3>B. Measurement and Metrics</h3>
+<p>The reviewed studies used both objective and subjective metrics to evaluate human-AI interaction. Objective metrics mainly captured task performance, such as accuracy, error reduction, task completion time, and decision quality. Subjective metrics captured users&#x27; experiences and perceptions, including trust, satisfaction, usability, and workload. Table II summarizes the TABLE I SUMMARY OF THE ANALYSIS STRUCTURE USED TO SYNTHESIZE INCLUDED STUDIES. Analysis area Subcategories used in synthesis Purpose in this review Measurement and metrics Objective metrics; subjective metrics To compare what studies measured when evaluating human-AI interaction Framework categories Automation and human control; initiative dynamics; affective and engagement orientation; cognitive support; fairness; trust; personalization and adaptivity; technology adoption and human performance To organize the main HCAI and HAX concepts found across studies AI roles Human-led AI support; human-AI collaborative support; AIled support; mixed-role systems To describe the level of AI involvement in human-AI interaction Domain-specific findings Healthcare; education; transportation; other domains To compare shared patterns and domain-specific constraints main measurement categories and the most common metrics reported across the 44 studies.</p>
+<p>1) Objective Metrics: Across the reviewed studies, objective metrics most often showed that AI support improved task performance compared with baseline human performance or conventional support tools. In Reverberi et al. [15], diagnostic accuracy increased when doctors used AI assistance, with correct diagnoses rising from five out of ten lesions without AI support to seven out of ten lesions with AI support. In Kim et al. [16], participants using LLM-assisted support for brain MRI differential diagnosis achieved higher accuracy than participants using conventional internet search. These findings suggest that AI can improve human performance in complex clinical reasoning tasks when the system provides relevant support for the task.</p>
+<p>Performance benefits were also reported in surgical, classification, and decision-support settings. Gao et al. [17] examined a human-AI collaborative field-of-view adjustment system for robotic-assisted surgery. The system produced stable performance, lower variance, and lower NASA-TLX scores compared with several control conditions, although its task completion time did not significantly differ from manual control. In a crowd-powered source search task, Zhao et al. [18] found that AI support helped participants locate relevant information more accurately and efficiently. In a waste-sorting task, Jacobsen et al. [19] reported that participants correctly sorted more items with AI assistance than without AI assistance. These findings indicate that AI support can improve task performance when it reduces search demands, organizes information, or provides timely recommendations.</p>
+<p>Overall, objective metrics showed that AI systems often improved accuracy, efficiency, consistency, or decision quality. These benefits were strongest when AI support matched the task, reduced unnecessary effort, and preserved meaningful human judgment. Objective metrics also showed that AI assistance does not automatically improve outcomes. Poor task alignment, unclear support, or poorly timed assistance can weaken performance benefits.</p>
+<p>2) Subjective Metrics: Trust was one of the most frequently reported subjective metrics. Across studies, trust changed based on the form of AI support, the clarity of the system output, and the user&#x27;s task demands. Chen et al. [20] found that textual explanations increased trust in human-AI decisionmaking, while visual explanations had a weaker effect on trust calibration. Participants with higher initial trust also tended to reduce their trust after completing tasks, especially under high cognitive load. This pattern suggests that trust is not fixed. It can increase or decrease as users interact with AI systems and compare system support with task demands.</p>
+<p>Several studies showed that transparency and explainability  TABLE II SUMMARY OF MEASUREMENT AND METRIC CATEGORIES REPORTED ACROSS REVIEWED STUDIES. Measurement category and metric Studies in category, n (%) Studies reporting metric, n (%) Objective 27 (61%) Task performance 25 (57%) Task completion time 5 (11%) Subjective 28 (64%) Trust 12 (27%) Satisfaction 8 (18%) Usability 14 (32%) Workload (NASA-TLX) 3 (7%) Note: The &quot;Studies in category&quot; column counts each study once if it reported at least one metric in that category. The &quot;Studies reporting metric&quot; column counts studies separately for each metric. Because one study may report multiple metrics, metric-level counts may exceed category totals. Metrics not listed in this table were coded but reported less frequently or did not fit the main objective/subjective categories.</p>
+<p>can support trust, especially when users need to decide whether to rely on AI outputs. Lu et al. [21] found that transparent systems that showed reasoning or confidence information supported stronger trust and more appropriate reliance. Zhao et al. [18] found that a lack of transparency reduced trust even when the AI was objectively useful. Shulner-Tal et al. [22] also found that trust in algorithmic decision-making systems was closely related to perceived fairness. Smith et al. [23] showed that participants who chose to view optional AI advice aligned more with AI recommendations, although optional access reduced alignment overall compared with mandatory advice, and signal strength or fit had no significant effect. Okamura and Yamada [24] further showed that adaptive cues could reduce overtrust when the AI became unreliable. These findings suggest that trust is strongest when users can understand the AI output, judge its reliability, and retain control over whether to follow it. Satisfaction was also shaped by control, collaboration, and perceived usefulness. Satisfaction tended to decrease when AI systems limited user control or disrupted users&#x27; sense of ownership. For example, Loske and Klumpp [25] found that truck drivers resisted an assistance system when they could not turn it off, which reduced efficiency and increased fuel use. Dhillon et al. [26] found that stronger AI scaffolding in writing could improve performance, yet it could also reduce satisfaction and text ownership. These findings suggest that users may value AI support less when it feels too controlling or when it weakens their sense of authorship.</p>
+<p>Satisfaction tended to increase when AI provided support that users could accept, reject, or adjust. Lai and Rau [27] found that employees reported stronger satisfaction when leadership support reflected human consideration or when AI structure supported task completion without becoming overly dominant. Hemmer et al. [28] found that AI delegation increased task satisfaction and self-efficacy when the delegated tasks matched user capability. Across these studies, satisfaction was linked to users&#x27; sense that AI assistance was helpful, controllable, and aligned with their role in the task.</p>
+<p>Usability was commonly used to evaluate whether AI systems supported effective and efficient task completion. Across studies, usability was closely tied to transparency, controllability, and the clarity of AI support. Cabitza et al. [29] showed that collaboration protocols and explanations can improve decision-making accuracy while also supporting critical engagement with AI outputs. Molina and Sundar [30] found that interactive transparency improved users&#x27; understanding of system decisions and supported stronger trust than static transparency alone. Zhao et al. [18] also found that participants reported greater satisfaction when AI support helped them process information more effectively while preserving human judgment. These findings suggest that usability depends on more than task success. It also depends on whether users can understand the AI output, question it when needed, and apply it without losing control of the task. Workload was most often measured with the NASA Task Load Index (NASA-TLX). Workload findings showed that AI support can reduce mental demand when it helps users focus on relevant information and removes unnecessary effort. Gao et al. [17] found that the HIC-FoV system produced lower NASA-TLX scores during surgical field-of-view adjustment tasks, suggesting reduced mental, physical, and frustration-related demand. Lerch et al. [31] showed that workload depended on the clarity and frequency of AI-generated interface cues. Low-frequency and clearer alerts were associated with lower workload, while constant and repetitive signals increased stress, effort, and sensory overload. Explanation design also shaped workload. Chen et al. [20] found that textual explanations improved trust and perceived reliability but increased cognitive load and performed worse under time pressure. These findings show that AI assistance does not automatically reduce workload. Workload improves when the system provides clear support at the right time, and workload can increase when explanations or cues add information that users need to process during an already demanding task.</p>
+<p>Overall, subjective metrics showed that users&#x27; experiences with AI depend strongly on transparency, control, task fit, and interaction design. Trust, satisfaction, usability, and workload were closely connected rather than independent outcomes. A system that improves performance may still create a poor user experience if it increases mental demand, reduces perceived control, or encourages blind reliance.</p>
+<h3>C. Framework Categories and Design Principles</h3>
+<p>The 44 included studies were organized into eight framework categories based on their main conceptual focus. These categories included automation and human control, initiative dynamics, affective and engagement orientation, cognitive support, fairness, trust, personalization and adaptivity, and technology adoption with human performance. This categorization shows that current HCAI and HAX frameworks focus most strongly on control, collaboration, trust, and explainability, while broader adoption and long-term implementation remain less represented.</p>
+<p>Automation and human control was the most common framework category (n = 10). This emphasis reflects a central concern in HCAI: AI systems should improve performance while preserving meaningful human oversight. For example, Huang et al. [32] proposed a triadic human-AI collaboration framework for autonomous mobility. In this framework, Advisor AI provides context-aware information without taking control, Co-pilot AI shares control with the human user, and Guardian AI acts as a safety override during emergencies. This framework shows a graded view of AI support, with different levels of control depending on task risk and user need.</p>
+<p>Other studies also emphasized the balance between automation and human control. Van der Waa et al. [33] proposed team design patterns for morally complex decision-making, ranging from human decision-making with AI advice to supervised autonomy. Batra et al. [34] applied Shneiderman&#x27;s HCAI framework to examine personal control and automation in AI agents. Hemmer et al. [28] and Gal et al. [35] examined AI delegation and task allocation, where AI systems routed tasks based on confidence or task difficulty. Across these studies, the main design concern was not whether AI should be used, but which task elements should remain with humans and which should be supported or handled by AI.</p>
+<p>Initiative dynamics formed another major framework category (n = 6). These studies examined whether humans or AI systems should act first, respond second, or shift initiative during the task. Initiative shaped task performance, perceived AI competence, responsibility, and trust. For instance, Schecter and Richardson [36] examined generative AI as either a driver or an advisor. When AI acted as the driver, it produced an initial solution that humans refined. When AI acted as the advisor, humans worked first and then received AI critique or suggestions. Cabitza et al. [29] also compared different human-AI collaboration protocols, including AI-first and human-first configurations. These studies show that the order of human and AI input can meaningfully shape performance and user perception, even when the same AI system is used.</p>
+<p>Affective and engagement-oriented frameworks appeared in three studies. These frameworks focused on emotional response, motivation, and user engagement. For example, Gal et al. [35] used motivational messages to support participation in a citizen science workflow. Song et al. [37] used cooperative chatbot interaction to influence engagement and attitudes toward mental illness. These studies suggest that HCAI and HAX frameworks should account for users&#x27; emotional and motivational responses, especially in learning, health communication, and public-facing systems.</p>
+<p>Cognitive support frameworks appeared in two studies. These frameworks focused on helping users evaluate AI outputs more carefully and avoid shallow reliance. For example, Chen et al. [20] examined cognitive framework features such as explanations, confidence information, feedback, AI-driven questions, and performance visualization. These features were intended to slow automatic judgment and encourage more reflective decision-making. Cognitive support is especially important when AI systems provide recommendations in highstakes tasks where users may over-rely on system outputs.</p>
+<p>Fairness frameworks appeared in two studies, both in HR or technology-related contexts. These studies focused on fairness perceptions in AI-assisted hiring and decision-making. For instance, Ling et al. [38] examined AI-led, balanced, and human-led screening structures and found that applicants perceived human-led and balanced structures as fairer than AI-led structures, especially when the outcome was rejection. This finding suggests that perceived fairness depends on both the outcome and the decision process, including the relative weight given to humans and AI.</p>
+<p>Personalization and adaptivity appeared in two studies. These frameworks examined AI systems that adjusted to user behavior, task context, or environmental conditions. For example, Lerch et al. [31] evaluated generated user interfaces in automated vehicles that adapted notifications based on motion-sicknessrelated conditions. Adaptive systems were often perceived as useful when they responded to the user&#x27;s situation, yet they could also increase workload when cues were repetitive or unclear. This pattern suggests that adaptivity needs to be guided by user needs, task timing, and information clarity.</p>
+<p>Trust frameworks appeared in three studies. These studies focused on trust calibration, overtrust, undertrust, and reliance. For example, Okamura and Yamada [24] proposed adaptive trust calibration cues that appeared when user behavior suggested overtrust. The cues helped users adjust their reliance when AI reliability changed. Trust frameworks were closely connected to transparency and control because users needed enough information to judge whether AI support should be accepted.</p>
+<p>Technology adoption and human performance appeared in one study. Loske and Klumpp [25] examined professional truck drivers&#x27; responses to assistance systems with different levels of controllability. Their findings showed that adoption depends on more than perceived usefulness. Users also need meaningful control and the option to override or disengage from automation. The limited number of studies in this category suggests that future HCAI and HAX research should place more attention on adoption, long-term use, and real-world implementation.</p>
+<p>Across the framework categories, automation and human control received the most attention, while adoption and longterm performance received less attention. This imbalance shows that the field has made progress in defining design principles, but less progress in testing whether those principles support sustainable and transferable human outcomes across domains.</p>
+<h3>D. AI Roles in Human-AI Interaction</h3>
+<p>The included studies were also organized by the role AI played in human-AI interaction. Three broad role categories were identified: human-led AI support, human-AI collaborative support, and AI-led support. Human-led support refers to systems that provide information, recommendations, explanations, or decision support while humans retain final authority. Human-AI collaborative support refers to systems that share control, exchange feedback, or coordinate task activity with humans. AI-led support refers to systems that initiate or complete tasks with minimal human input. Several studies included mixed-role systems where AI shifted between these roles depending on context, task demands, or risk level.</p>
+<p>Human-led AI support was the most common role across the reviewed studies. This pattern reflects the strong presence of high-stakes domains such as healthcare, transportation, and HR, where final responsibility often remains with human users. Collaborative support appeared when tasks required ongoing coordination between humans and AI. AI-led support rarely appeared as a stand-alone role. Instead, it most often appeared as part of mixed-role systems in which AI could act autonomously under some conditions and provide support under others.</p>
+<p>1) Human-led AI Support: Human-led AI support appeared most frequently across the included articles. In this role, AI mainly functions as an assistant that provides information or recommendations without directly taking final control. Clinical diagnosis was a common example. In Niraula et al. [39], AI provided treatment suggestions based on cancer progression, while clinicians reviewed the suggestions and decided whether to follow, revise, or reject them. In Reverberi et al. [15], endoscopists integrated their own judgments with AI outputs when diagnosing colonoscopy lesions. In Cabitza et al. [40], AI acted as an additional reader in radiology, and its judgments were combined with radiologists&#x27; judgments under different collaboration protocols.</p>
+<p>Human-led AI support also appeared in patient-facing healthcare. Sayres et al. [41] examined a dermatology application that helped users compare their own skin concerns with visual examples and AI-supported information. In this case, AI supported patients&#x27; understanding and also helped clinicians communicate with patients. This example shows that humanled AI support can assist expert users, lay users, or both groups within the same care process.</p>
+<p>Outside healthcare, advisory AI appeared in decision-making, transportation, and work tasks. Smith et al. [23] examined AI advice in facial recognition decisions, where participants could decide whether to follow or reject the AI recommendation. Lee and Tok [42] examined AI predictions, uncertainty scores, visualizations, and example-based explanations in rehabilitation assessment. Lerch et al. [31] examined an in-vehicle AIgenerated interface that notified users about upcoming curvy roads linked to motion sickness risk. Across these examples, AI supported the user&#x27;s decision rather than replacing it.</p>
+<p>Explainability was a recurring feature of human-led AI support. Because humans retained final control, the AI needed to provide enough information for users to judge the recommendation. Chen et al. [20] examined text explanations, visual explanations, confidence levels, feedback, AI-driven questions, and performance visualizations in diabetes management. Senoner et al. [43] compared a black-box AI system with an explainable AI system that used heatmaps during a visual inspection task. Schmitt et al. [44] examined salient feature explanations and free-text explanations in disinformation detection. These studies show that human-led AI support often depends on explanation quality because users need to understand the AI output before deciding whether to rely on it.</p>
+<p>Overall, human-led AI support was most common when users needed to process complex information, make final judgments, or remain accountable for decisions. This role supports HCAI principles by preserving human authority, while HAX findings show that the quality of explanations, timing, and presentation strongly affects user trust, reliance, and performance.</p>
+<p>2) Human-AI Collaborative Support: Human-AI collaborative support reflects a shift from advice to shared task activity. In this role, AI systems interact with users more actively, respond to context, and share parts of the task. Gao et al. [17], for example, examined a surgical field-of-view adjustment system that interpreted surgical scenes and responded to surgeons&#x27; voice commands. The system helped stabilize the view and reduced workload, while the surgeon remained actively involved in the procedure. This example shows collaborative support in a high-skill setting where AI helps manage task demands without removing the human operator. Collaborative AI also appeared in writing, rehabilitation, ethics, learning, and emergency response. Dhillon et al. [26] examined AI scaffolding in co-writing, where AI provided next-sentence or next-paragraph support. Hemmer et al. [28] examined AI delegation in image classification, where AI routed task instances to humans or handled them automatically. Schwalb et al. [45] examined a drone-based AI system that detected hostages and communicated findings through a visual interface. These systems did more than present advice; they participated in task coordination and shaped the flow of human activity.</p>
+<p>A key feature of collaborative AI was contextual alignment. Effective systems interpreted task conditions, user input, or environmental cues and then provided support that matched the situation. In education, Gyasi et al. [46] examined AI systems that provided feedback, feedforward, and chatbot partnership during collaborative learning. In this case, AI became part of the learning process rather than a separate tool. In Batra et al. [34], AI agents were discussed as systems that could support safety, auditability, fairness, and oversight. These examples show that collaborative AI can support both task activity and broader governance goals.</p>
+<p>Overall, human-AI collaborative support was most useful when the task required ongoing coordination, adaptive feedback, or shared control. This role helps connect HCAI and HAX because it requires both value-based design principles and careful evaluation of interaction quality during use.</p>
+<p>3) AI-Led Support and Mixed-Role Systems: No included study focused only on AI-led support as a stand-alone role. AIled support appeared mainly within mixed-role systems where AI could shift among advisory, collaborative, and automated functions. This pattern is important because it suggests that empirical HCAI and HAX research has not centered on full AI replacement. Instead, most studies examined AI systems that changed their level of involvement based on task context, risk, or user control.</p>
+<p>Several studies combined human-led and collaborative AI roles. For example, Gyasi et al. [46] compared AI feedforward and feedback, AI partnership, and a combined mode in online collaborative learning. Brachman et al. [47] examined conflict resolution in data labeling, where participants could rely on human labeler agreement, AI probability, or both. Cabitza et al. [40] compared workflows in which humans led first, AI led first, or disagreements were resolved through structured protocols. Schecter and Richardson [36] compared AI as a driver and AI as an advisor in generative AI-supported work. These studies show that AI roles can shift during interaction rather than remain fixed.</p>
+<p>Some studies combined collaborative and AI-led roles. Madathil [48] compared human-AI-generated advertisements with fully AI-generated advertisements. Li and Kang [49] compared human-centered AI with machine-centered AI in retail, where AI could personalize services or automate task operations. Loske and Klumpp [25] compared assistance systems that could be controlled by drivers with systems that could not be turned off. Across these studies, users responded more positively when AI support preserved meaningful human involvement.</p>
+<p>A small set of studies included all three roles. In automated driving, advisory AI could inform drivers, collaborative AI could provide stronger adaptive support, and AI-led support could intervene during unsafe conditions [32], [50]. Zhao et al. [18] also showed a workflow in which AI searched autonomously, provided candidate solutions, and handed control to humans when needed. These studies suggest that mixed-role systems may be especially relevant in dynamic environments where risk and task demands change over time.</p>
+<p>Across AI roles, the main pattern was clear: users often accepted AI support when it strengthened decision-making, reduced effort, or improved safety, but they were less accepting when AI removed control or made decisions difficult to question. This finding supports the need for HCAI and HAX frameworks that specify not just what AI can do, but when AI should advise, collaborate, or act. E. Domain-Specific Findings 1) Healthcare: Healthcare was the largest domain in the review, with 12 included studies. The healthcare studies focused mainly on decision support, diagnostic support, surgical assistance, and knowledge adoption. Across these studies, AI was most often used to support human judgment in highstakes tasks where accuracy, reliability, and accountability were important.</p>
+<p>Decision support was a major theme in healthcare. AI systems supported tasks such as diabetes management, rehabilitation assessment, adaptive radiotherapy, dietetics planning, and resource allocation during public health emergencies. Across these studies, explainable AI was commonly used to help users interpret recommendations. Explanations appeared as confidence scores, visual indicators, text explanations, counterfactual explanations, uncertainty information, and contrastive explanations. These explanation formats were intended to help users judge whether AI outputs were reliable and relevant to the task.</p>
+<p>Confidence information was one common form of explainable AI. For instance, Lee and Tok [42] compared numerical confidence scores with distance-based confidence information in rehabilitation assessment. Distance-based confidence information improved accuracy, especially for novices, while numerical confidence scores were often preferred by users. This finding shows that the explanation format users prefer may not always be the format that produces the strongest performance.</p>
+<p>Textual and visual explanations were also common. Chen et al. [20] found that textual explanations improved trust and perceived reliability in high-stakes healthcare decision-making, but they could increase cognitive load and perform less well under time pressure. Visual explanations improved satisfaction and perceived accuracy in some cases, yet they did not consistently improve reliance calibration or performance. Lee and Chew [51] showed that counterfactual explanations helped reduce overreliance on incorrect AI outputs. Van der Waa et al. [33] showed that contrastive explanations could support moral decision-making by explaining why one allocation decision was favored over another. These findings suggest that XAI can support decision-making, but its effects depend on explanation type, task pressure, and user expertise.</p>
+<p>Expertise was an important factor in healthcare decision support. Several studies found that novices and experts both benefited from AI support, but they responded differently to incorrect AI outputs. Novices often showed larger performance gains when AI was correct, yet they were more vulnerable to incorrect AI recommendations. Experts sometimes took longer when working with AI, but they were less affected by erroneous outputs. This pattern suggests that AI explanations should be designed differently for novice and expert users, especially in clinical tasks where overreliance can affect patient outcomes.</p>
+<p>Diagnostic support was another major healthcare application. Studies examined MRI, ECG, X-ray, colonoscopy, and skin condition diagnosis. Across these tasks, human-AI collaboration often improved diagnostic accuracy and was perceived as useful, consistent, or satisfying. Cabitza et al. [29] showed that welldesigned human-AI collaboration protocols could outperform either humans or AI alone. Senoner et al. [43] found that visual heatmap explanations improved performance in medical and manufacturing tasks. Sayres et al. [41] showed that AI support could help patients better understand skin concerns and support communication with clinicians. These findings suggest that diagnostic AI is most useful when it supports interpretation, communication, and final human judgment.</p>
+<p>Surgical support appeared in Gao et al. [17], which examined an AI-powered surgical field-of-view adjustment assistant. The system interpreted the surgical scene and surgeon intent, then adjusted the field of view to support the task. The system reduced workload and supported stable performance, suggesting that collaborative AI can help manage complex perceptual and motor demands in surgical settings.</p>
+<p>One study examined knowledge adoption in chronic disease prevention. Lu and Peng [52] compared factual, interpretive, and exploratory tasks. Participants performed best on interpretive tasks and lowest on factual tasks, suggesting that AIsupported knowledge work may be most useful when users need to interpret and apply information rather than simply recall facts.</p>
+<p>Overall, healthcare studies showed strong potential for HCAI and HAX because AI often improved accuracy, efficiency, and decision support. The same studies also showed clear risks, especially overreliance, explanation burden, and different effects for novice and expert users. Healthcare findings therefore show the need for AI systems that are accurate, explainable, and designed around the user&#x27;s role, expertise, and level of responsibility.</p>
+<p>2) Education: Five studies examined HCAI and HAX in education. A common theme was engagement. Across the education studies, AI systems were more effective when they supported active participation, meaningful interaction, and task-relevant scaffolding [26], [35], [37], [46], [53]. Song et al. [37] examined chatbot interaction in the context of mental illness stigma. Two-way cooperative interaction helped participants view the chatbot as more intelligent and likable, and it supported stronger engagement. The effects were strongest when the chatbot activity was tied directly to mental illness content. When the cooperative task was not connected to the mental illness content, participants did not report a sense of cooperation. This finding suggests that educational AI should support interaction that is meaningful for the learning goal.</p>
+<p>Gyasi et al. [46] further showed the value of active AI support in collaborative learning. The combined AIFFP condition, which included feedforward, feedback, and an AI partner, produced the strongest collaborative knowledge building, cognitive engagement, and socially shared regulation. This condition outperformed AI feedback alone and AI partnership alone. These results suggest that AI support is most useful when it gives learners task-specific guidance and also participates in the learning process. Kim and Lee [53], examined student-AI collaboration in a drawing task. Students who framed the problem first, including goals, constraints, and options, showed larger creativity gains than students who began drawing immediately. The findings also showed that student attitude and skill level shaped the effect of AI support. Students with different skill levels wanted different forms of guidance, suggesting that educational AI should provide adaptive scaffolding rather than a single fixed level of automation. Furthermore, Dhillon et al. [26] examined AI scaffolding in co-writing. Low-level sentence guidance did not significantly improve writing quality or productivity, while higher-level paragraph guidance produced significant improvement, especially for writers without a regular writing habit. The study also showed a moderate decrease in satisfaction and text ownership under scaffolded writing. This finding suggests that educational AI should match the level of scaffolding to the writer and support performance without weakening the user&#x27;s sense of ownership.</p>
+<p>Overall, education studies showed that AI can support engagement, performance, and collaborative learning when it provides task-relevant feedback and adaptive scaffolding. The main risk is that AI can reduce ownership, disrupt learning flow, or create dependence when the level of support is poorly matched to the learner.</p>
+<h3>3) Transportation:</h3>
+<p>Five studies examined HCAI and HAX in transportation. The main themes were adaptive interfaces, interaction modalities, technology adoption, user control, and explainable AI. These studies were often concerned with safety, timing, trust, and the need for fast user response in dynamic environments.</p>
+<p>Adaptive interfaces were a major theme. Bellet et al. [50] examined adaptive human-machine transitions in vehicle automation, where the system monitored driver behavior and situational risk to guide information, warning, or intervention. Lerch et al. [31] examined AI-generated motion sickness notifications in automated vehicles. Kaufman [54] examined AI coaching for autonomous vehicle interaction. Across these studies, adaptive interfaces were useful when they responded to the driving context and provided timely support. Users often rated these systems as helpful, intuitive, and safe when the information was clear and well timed.</p>
+<p>Interaction modality was another important transportation theme. Visual, auditory, tactile, and multimodal cues were used to support driver understanding and response. Huang et al. [32] and Kaufman [54] examined how information format and modality shape user experience in driving contexts. In Huang et al. [32], the Advisor, Co-pilot, and Guardian roles, delivered through visual, auditory, and tactile channels, were rated as equally useful and satisfying. In Kaufman [54], visual-spatial cues combined with auditory reasoning provided the best user experience in a driving coaching context. These findings suggest that transportation AI should match modality and information type to the task demand, urgency, and driver state.</p>
+<p>User control and adoption were also central. Bellet et al. [50] and Loske and Klumpp [25] showed that users were more accepting of assistance systems when they retained meaningful control. Loske and Klumpp [25], in particular, found that drivers resisted systems that could not be turned off, which led to poorer efficiency. This finding suggests that user control is not only a preference. It can affect real performance outcomes such as fuel use and driving efficiency.</p>
+<p>Explainable AI also appeared in transportation. Kaufman [54] showed that AI coaching improved driving performance, confidence, expertise, and trust, and that modality and expla-nation type significantly affected learning effectiveness. This finding is especially important for transportation because trust needs to be calibrated under time pressure and safety risk, and explanation design can shape whether drivers rely on AI support appropriately.</p>
+<p>Overall, transportation studies showed that HCAI and HAX design needs to support timely communication, clear modality selection, calibrated trust, and meaningful human control. These concerns are especially important in automated driving because users need to understand AI support quickly and decide whether to rely on it during changing traffic conditions.</p>
+<h3>4) Other Domains:</h3>
+<p>The remaining studies covered HR/technology, workplace productivity, media and advertising, cybersecurity and digital ethics, retail, emergency response, manufacturing, gender, mixed reality, infrastructure, and sustainability. Although these domains varied widely, several shared patterns emerged. The most consistent pattern was that users preferred AI systems that supported their decisions without dominating them.</p>
+<p>In HR and technology contexts, users responded strongly to the level of AI control. Smith et al. [23] found that participants who chose to view optional AI advice were more likely to align with it, although optional access reduced alignment overall compared with mandatory advice. Signal strength or fit showed no significant effect on convergence, unlike the ability to choose whether to view the AI advice. Ling et al. [38] found that human-led and balanced screening structures were perceived as fairer than AI-led structures, especially when applicants were rejected. These findings show that perceived fairness and acceptance are shaped by control, responsibility, and the user&#x27;s ability to understand the decision process.</p>
+<p>Similar patterns appeared in creative and retail contexts. Madathil [48] found that advertisements created through human-AI collaboration were rated more positively than fully AIgenerated advertisements, with higher perceived creativity, stronger brand morality, and lower AI anxiety. Batra et al. [34] showed that usage intention increased when users perceived both high automation and high personal control. Li and Kang [49] found that human-centered AI in retail could support personalization and trust, although users could also blame AI more strongly when service failures occurred. These findings suggest that users may accept advanced AI capabilities when they feel that human values, control, and accountability remain visible.</p>
+<p>Explainability and transparency were also important across the smaller domains. Shulner-Tal et al. [22] found that fairness perceptions in algorithmic decision-making were shaped by system characteristics, personality characteristics, and demographic characteristics. Certification-based and sensitivity-based explanations improved perceived fairness, while demographicbased explanations reduced fairness perceptions and certification stamps alone had no significant effect. Molina and Sundar [30] found that trust in AI content moderation increased when users had interactive transparency and could provide feedback on system rules. Schmitt et al. [44] found that AI support significantly improved misinformation detection accuracy and increased subjective ratings such as trust and usefulness, while free-text explanations introduced a risk of blind trust. These findings show that explanations can improve user perception, but they need to be evaluated against actual task outcomes.</p>
+<p>The presentation of AI also mattered. Sánchez Olszewski [55] found that participants were less likely to agree with AI when it appeared human-like, compared with robot-like or generic AI identities, in a hiring context. Li and Kang [49], in a retail context, found more positive responses to humancentered AI that appeared personalized and attentive, compared with machine-centered AI that appeared more task-oriented and mechanical. These findings suggest that anthropomorphic or human-like AI design does not have one fixed effect. Its value depends on task context, user expectations, and the risk associated with the decision.</p>
+<p>Overall, the smaller domains supported the same broader pattern found in healthcare, education, and transportation. Users were more likely to trust, accept, and use AI when they retained meaningful control, understood the AI&#x27;s role, and perceived the system as fair and useful. Systems that were overly dominant, unclear, or difficult to challenge were more likely to create resistance, anxiety, or overreliance.</p>
+<h3>F. Cross-Domain Synthesis</h3>
+<p>Across the reviewed studies, HCAI and HAX evaluation depended on both task outcomes and user experience outcomes. Many AI systems improved accuracy, speed, consistency, or decision quality, yet these gains did not always lead to stronger trust, satisfaction, usability, lower workload, or perceived control. This pattern shows that performance outcomes and human experience outcomes need to be evaluated in relation to each other.</p>
+<p>Another cross-domain pattern concerned the role of AI in the interaction. Human-led AI support appeared most often in high-stakes settings where users retained final authority. Collaborative AI appeared in tasks that required shared control, feedback, or adaptation during the interaction. AI-led support appeared mainly as part of mixed-role systems, especially in dynamic settings where risk or task demands changed over time. These findings show that AI role is an important factor for comparing HCAI and HAX studies across domains.</p>
+<p>Domain context also shaped the outcomes that received the most attention. Healthcare studies emphasized accuracy, reliability, expertise, and overreliance. Education studies emphasized engagement, scaffolding, ownership, and learning. Transportation studies emphasized safety, timing, modality, trust calibration, and user control. The remaining domains emphasized fairness, transparency, adoption, creativity, and acceptance. These patterns show that similar HCAI and HAX concerns appear across domains, while evaluation priorities vary based on users, risks, and task demands.</p>
+<p>IV. DISCUSSION This review synthesized 44 empirical studies on HCAI and HAX across multiple application domains and used this evidence to connect design principles, AI roles, measurement choices, and human outcomes within a single synthesis structure. The findings show that HCAI and HAX are closely connected areas of work. HCAI provides the values and design goals that guide AI system design, and HAX provides evidence about user interaction, system use, and measurable outcomes. This structure helps clarify which design concerns appear across domains, which outcomes have empirical support, and where future frameworks need stronger links between human-centered values and measurable interaction outcomes. Across the reviewed studies, HCAI and HAX research has moved beyond broad design principles toward empirical evaluation of human outcomes. The review also shows continued fragmentation across domains, measures, and interaction contexts.</p>
+<h3>A. Measurement and Evaluation Patterns</h3>
+<p>The reviewed studies used both objective and subjective measures to evaluate human-AI interaction. Objective measures most often focus on task performance, including accuracy, error reduction, completion time, and decision quality. Across domains, AI assistance was often associated with improved objective performance, especially in tasks involving diagnosis, classification, detection, information search, and decision support. These findings suggest that AI can support human performance when it helps users process complex information, identify patterns, or focus on task-relevant cues.</p>
+<p>Subjective measures showed more variation. Trust, satisfaction, usability, and workload changed based on the design of the AI system, the clarity of its output, the user&#x27;s level of control, and the task context. This variation is important because a system can improve performance while still creating a poor user experience. AI explanations may increase trust and perceived usefulness, yet they can also increase mental workload when users need to process too much information under time pressure. This pattern suggests that HCAI and HAX evaluations should include both performance outcomes and user experience outcomes. A system should not be considered human-centered only because it improves accuracy or efficiency. It also needs to support appropriate trust, clear understanding, manageable workload, and meaningful user control.</p>
+<p>The workload findings are especially important for future evaluation. AI systems are often designed to reduce cognitive demand, but the reviewed studies show that this benefit is not automatic. Explanations, alerts, and adaptive cues can reduce workload when they are clear and timely. They can increase workload when they are too frequent, too complex, or poorly matched to the user&#x27;s task. Future studies should therefore evaluate workload as a sign of whether AI information is being integrated smoothly into human cognition and action, not just as a general measure of task difficulty.</p>
+<h3>B. Framework Categories and Design Principles</h3>
+<p>The reviewed frameworks were organized into eight categories: automation and human control, initiative dynamics, affective and engagement orientation, cognitive support, fairness, trust, personalization and adaptivity, and technology adoption with human performance. Among these categories, automation and human control appeared most often. This emphasis reflects a central issue in HCAI: AI systems should improve human capability while preserving human oversight and responsibility.</p>
+<p>Initiative dynamics also emerged as a key framework concern. The order of human and AI input can shape performance, trust, and responsibility. When AI acts early in the task, it may increase efficiency by reducing the user&#x27;s initial effort, but it may also shape the user&#x27;s later judgment. When humans act early in the task, they may remain more engaged, but the process may require more time and effort. Future frameworks should treat initiative as a design choice rather than a fixed feature of AI systems. The same AI capability can produce different outcomes depending on whether it advises, critiques, initiates, or responds.</p>
+<p>Affective, engagement, and cognitive categories show that HCAI and HAX are not limited to performance and control. AI systems can influence motivation, emotional response, perceived cooperation, and critical reasoning. Engagementoriented systems may be helpful in education and public-facing contexts, while cognitive support may be especially important in high-stakes decision-making. These benefits still need to be balanced with workload and efficiency. Features that encourage reflection can reduce overreliance, but they may also slow users down or increase mental effort.</p>
+<p>Fairness and trust were also important framework categories. Fairness was especially visible in HR and algorithmic decisionmaking contexts, where AI-supported decisions can affect employment and access to opportunity. Trust appeared across many domains and was closely tied to transparency, reliability, and control. Overtrust can lead users to accept incorrect AI outputs, while undertrust can prevent users from benefiting from helpful AI support. These findings support the need for frameworks that treat trust as an outcome to be calibrated, not simply increased.</p>
+<p>Personalization, adaptivity, and technology adoption were less represented. This gap is important because AI systems are increasingly designed to adapt to users and operate in real-world settings. Future HCAI and HAX frameworks should give more attention to long-term use, user adaptation, and implementation in realistic environments. Without this attention, frameworks may remain difficult to apply outside controlled studies.</p>
+<h3>C. AI Roles and Shared Control</h3>
+<p>The reviewed studies showed that AI roles can be organized into human-led AI support, human-AI collaborative support, AI-led support, and mixed-role systems. Human-led AI support appeared most often. This pattern likely reflects the current use of AI in high-stakes domains, where humans remain responsible for final decisions. In healthcare, for example, AI commonly supported diagnosis, treatment planning, and clinical judgment, while clinicians retained final authority. This structure respects existing accountability and safety expectations while allowing AI to surface patterns that humans may miss.</p>
+<p>Explainability was especially important in human-led AI support. When humans are final decision-makers, they need enough information to judge whether AI recommendations are reliable. However, explainability is not always beneficial by itself. The effects of explanations depend on format, timing, user expertise, task complexity, and workload. Future research should move beyond asking whether explanations help and should examine which explanation formats help which users under which task conditions.</p>
+<p>Human-AI collaborative support appeared when tasks required shared activity, ongoing feedback, or adaptive control. In these systems, AI did more than provide recommendations. It helped coordinate the task, respond to user input, or adjust support based on context. This role is especially relevant for surgery, transportation, emergency response, and collaborative learning, where interaction unfolds over time and conditions can change quickly.</p>
+<p>AI-led support appeared mainly within mixed-role systems rather than as a stand-alone role. This pattern suggests that most empirical HCAI and HAX research is not focused on full replacement of human users. Instead, studies often examine systems where AI shifts between advising, collaborating, and acting based on task demands or risk. This finding is important for future framework development because it shows that AI role should be treated as dynamic. A system may need to advise during routine conditions, collaborate during complex tasks, and intervene during emergencies.</p>
+<h3>D. Domain-Specific Implications</h3>
+<p>Healthcare was the largest domain in the review. The main healthcare applications were decision support, diagnostic support, surgical assistance, and knowledge adoption. AI support often improved accuracy, consistency, and efficiency, especially when paired with explainable AI. Healthcare also showed clear risks related to overreliance, explanation burden, and user expertise. Novices often benefited more from AI support, but they were also more vulnerable to incorrect AI outputs. Experts were sometimes slower when working with AI, but they were less affected by errors. These findings suggest that healthcare AI should be designed around user expertise, clinical responsibility, and safeguards against erroneous recommendations.</p>
+<p>Education studies showed that AI was most useful when it supported active engagement and task-relevant scaffolding. AI systems that provided feedback, feedforward, partnership, or adaptive guidance were more effective than systems that only delivered passive information. At the same time, some forms of scaffolding reduced ownership or created dependence. Future education research should examine whether AI support improves long-term learning and skill development.</p>
+<p>Transportation studies emphasized adaptive interfaces, multimodal communication, user control, trust calibration, and explainable AI. These concerns reflect the time-sensitive and safety-related nature of transportation tasks. Adaptive interfaces can improve safety and comfort when they provide timely and clear support, but they can create frustration when they intervene unexpectedly or reduce user control. Multimodal cues also need to be designed around urgency, driver state, and task demands. Future transportation research should examine shared control and multimodal communication under more realistic edge cases, such as poor weather, sensor failure, construction zones, or unexpected system limitations.</p>
+<p>Other domains, including HR, workplace productivity, media, digital ethics, retail, emergency response, manufacturing, mixed reality, infrastructure, and sustainability, showed a recurring preference for meaningful human control. Users were more willing to accept AI advice when they could choose whether to view it, reject it, or override it. These domains also showed that explainability can improve subjective outcomes, while objective performance gains may vary by explanation type, task context, and the risk of blind trust. This gap between subjective and objective outcomes is important because explanations may make users feel more confident without improving their decision accuracy. Future XAI research should therefore evaluate both perceived usefulness and actual decision quality.</p>
+<p>Across domains, one repeated finding was that humancentered AI depends on fit between the AI role, the task, the user, and the risk level. Healthcare requires reliability and safeguards against overreliance. Education requires engagement and learning support. Transportation requires timing, modality, and trust calibration. HR and other decision contexts require fairness, transparency, and control. These differences show that HCAI principles can transfer across domains, but their implementation and evaluation need to reflect domain-specific risks and user needs.</p>
+<h3>E. Limitations</h3>
+<p>This review has several limitations. The review included only studies with empirical experiments, and thus conceptual papers, perspective papers, and design guidelines without empirical data were not included. This decision helped focus the synthesis on measurable outcomes, but it may have excluded important theoretical contributions. The review also included only articles written in English, which may introduce language bias. In addition, although the search followed a systematic procedure across multiple databases and grey literature sources, some relevant studies may not have been captured. Finally, the included studies varied widely in domain, task, AI type, sample, and evaluation method, which limited direct comparison across studies.</p>
+<h3>V. CONCLUSION</h3>
+<p>This systematic review synthesized empirical evidence on HCAI and HAX across 44 studies and multiple application domains. Its main contribution is the integration of design principles, AI roles, and outcome measures into a cross-domain structure for evaluating HCAI and HAX. The review connected design principles, AI roles, evaluation measures, and human outcomes within one synthesis structure. Across studies, AI support was often associated with improved objective task performance, including accuracy, efficiency, consistency, and decision quality. Subjective outcomes were more variable and depended on transparency, explanation design, user control, workload, and task fit.</p>
+<p>The findings show that HCAI and HAX evaluations should report both objective and subjective outcomes. Performance gains alone are not enough to show that an AI system is humancentered. Human-centered evaluation should also examine whether users understand the system, trust it appropriately, retain meaningful control, manage workload, and remain able to question AI outputs.</p>
+<p>This review also shows that AI roles matter. Human-led AI support was most common, especially in high-stakes domains. Collaborative AI appeared in tasks that required shared activity or adaptive support. AI-led support appeared mainly in mixedrole systems where AI involvement changed with task demands or risk. Future HCAI and HAX frameworks should more clearly describe the role of AI and link each role to measurable human outcomes.</p>
+<p>Future research should validate HCAI and HAX principles in more realistic settings, with diverse users, longer study periods, and higher-fidelity AI systems. Stronger links are needed between human-centered values, interaction design, and measurable outcomes so that future frameworks can guide AI systems that are effective, understandable, trustworthy, and safe in real use.</p>
+<h3>Supplementary table</h3>
+<p>. Article-level extraction of included empirical studies.</p>
+<p>Author(s) Domain Framework or Concept AI Type Interaction Modality Metrics Batra et al. (2025) Cybersecurity/Digital Ethics Human-Centered Artificial Intelligence (HCAI) Framework (Shneiderman, 2020) Agentic AI Visual and Text Usage Intent Bellet et al. (2021) Transportation Human-Machine Transition (HMT) Cycle Decision-Support AI Visual and Auditory Perceived Usability Performance Evaluation Brachman et al. (2022) Workplace Productivity Human-AI Automation in Data Labeling Decision-Support AI Visual and Text Perceived Usability Performance Evaluation Reliability Cabitza et al. (2021) Healthcare Kasparov&#x27;s Law AI Agent Decision-Support AI Visual and Text Perceived Usability Performance Evaluation Trust Cabitza et al. (2023) Healthcare Human-AI Collaboration Protocol (HAI-CP): AI-First (Ram), Human-First (Hound) Explainable AI in Healthcare Decision-Support AI Visual and Text Performance Evaluation Chen et al. (2025) Healthcare XAI (Explainable AI) and CFFs (Cognitive Framework Features): with a balance, context-aware combination Explainable AI (XAI) Visual and Text Satisfaction System Complexity Reliability Trust Perceived Accuracy Confidence Cognitive Load Usefulness Trust Dynamics Dhillon et al. (2024) Education Human-LLM Interaction in Writing Process -Scaffolding Theory: Low-Level Scaffolding &amp; High-Level Scaffolding Large Language Models (LLM) Decision-Support AI Visual and Text Writing Improvement Perceived Satisfaction Gal et al. (2022) Education Human-AI Collaboration in Classification Workflow Explainable AI Decision-Support AI Visual and Text Perceived Usability Performance Evaluation Gao et al. (2025) Healthcare Human-AI Collaborative Framework for Surgical FoV Adjustment (HIC-FoV) Computer Vision (CV) Natural Language Processing (NLP) Collaborative AI in Robotic-Assisted Surgery Auditory and Visual NASA-TLX Score Completion Time Grasper Active Ratio Grasper Path Length Hook Idle Time FoV Adjustment Glienke et al. (2023) Manufacturing Attitudes Towards Human-AI Collaboration Explainable AI Decision-Support AI Visual, Text, and Tactile Performance Evaluation Perceived Usability Gyasi et al. (2025) Education Human-AI Collaboration on Online Collaborative Learning Generative Artificial Intelligence (Gen AI) Visual and Text Collaborative Knowledge Building (CKB) Score Cognitive Engagement Group Performance : Socially Shared Regulation (SSR) Behavioral Patterns Hemmer et al. (2023) Workplace Productivity AI Delegation Behavioral Model Decision-Support AI Human-AI Collaboration Visual and Text Performance Evaluation Perceived Satisfaction Perceived Self-Efficacy Huang et al. (2025) Transportation Triadic Human-AI Collaboration Framework: Advisor, Co-Pilot, and Guardian AI for Automated Driving (SAE Levels 3-5) Visual, Auditory and Tactile Usefulness Satisfaction Jacobsen et al. (2020) Sustainability Perceived and Measured Task Effectiveness in Human-AI Collaboration Decision-Support AI Visual and Tactile Perceived Usability Performance Evaluation Trust Kaufman (2025) Transportation Trust in Automation Model Situational Awareness in Joint Human-AV Action Framework Influential Frameworks of Trust in Automation Human-AV (Human-AI) Collaboration Explainable AI (XAI) Visual and Auditory Lap Time Average Acceleration General Trust in Autonomous Vehicles NASA Task Load Index (NASA-TLX) Kim &amp; Lee (2023) Education Student-AI Collaboration in Learning Task Performance Generative AI Decision-Support AI Visual and Text Performance Evaluation Perceived Satisfaction Perceived Self-Efficacy Kim et al. (2025) Healthcare Human-LLM Collaboration in Diagnostic Reasoning Large Language Model (LLM) Text Accuracy Interpretation Time Confidence Rating Diagnostic Outcome Lai &amp; Rau (2024) Workplace Productivity Human-AI Co-Leadership Initiating Structure and Consideration Theory (Stogdill, 1963) AI Agent Algorithmic Decision-Support AI Human-AI Collaboration Visual and Text Perceived Consideration Job Satisfaction Employee Engagement Trust Self-Efficacy Emotions Task Satisfaction Task Completion Time Task Accuracy Brain Activity via a Change in Oxygenated Hemoglobin Lee &amp; Chew (2023) Healthcare Human-AI Trust and Reliance in Clinical Decision Making Explainable AI in Healthcare Decision-Support AI Visual and Auditory Performance Evaluation Perceived Usability Lee and Tok (2025) Healthcare Human-AI Collaborative Decision-Making Computer Vision (CV) Decision-Support AI Explainable AI (XAI) Uncertainty-Aware AI Visual Accuracy Ratio of Changed Decisions Decision-Making Feedforward Neural Network (FNN) Duration User Preference Lerch et al. (2025) Transportation Generated User Interfaces (GenUIn): Raw, Static, and Adaptive Context-Aware Adaptive UI Generation Visual and Motion NASA-TLX Score Reaction Time Li &amp; Kang (2025) Retail Situational Crisis Communication Theory (SCCT) Process Automation Recommender Systems Natural Language Processing (NLP) Predictive Analytics AI Agents Visual and Text Scale Reliability Mediation Path Coefficients Moderation Indices Revisit Intention Liao et al. (2024) Retail Human-AI Augmentation in Sales AI Augmentation Decision-Support AI Visual and Text Sales Improvement Perceived Helpfulness Ling et al. (2025) HR/Technology Applicant Attribution-Reaction Theory (AART): AI-Led, Balanced and Human-Led Machine Learning Algorithms Decision-Support AI Human-AI Collaboration Visual and Text Perceived Fairness Responsibility Attribution AI Weight Loske et al. (2021) Transportation Unified Theory of Acceptance and Use of Technology (UTAUT) &amp; Data Envelopment Analysis (DEA) Decision-Support AI Visual and Auditory Perceived Usability Perceived Effectiveness Performance Evaluation Lu et al. (2023) Mixed Reality (AR&amp;VR) Human-AI Interaction in Augmented Head-Worn Reality Displays Explainable AI Decision-Support AI Visual and Text Performance Evaluation Perceived Satisfaction Cognitive Ability Personality Traits Perceived Self-Efficacy Perceived Trust Lu et al. (2024) Healthcare Human-AI Interaction in Knowledge Adoption AI for Knowledge Support Visual and Text Knowledge Adoption Perceived Effectiveness Objective Scores in Efficiency and Effectiveness Madathil (2025) Media/Advertisement Elaboration Likelihood Model Generative Artificial Intelligence (Gen AI) Large Language Model (LLM) Visual and Auditory Attitude Towards Ads AI Anxiety Perceived Creativity Perceived Brand Morality Molina &amp; Sundar (2022) Cybersecurity/Digital Ethics HAII-TIME Model of Human-AI Interaction (Sundar, 2020) Explainable AI Visual and Text Perceived Trust Perceived Usability Niraula et al. (2025) Healthcare Human-AI Collaborative Decision-Making Model-Based Deep Reinforcement Learning Agent Graph Neural Network (GNN)-Based Model Decision-Support AI Visual and Text Agreement Decision Confidence Intraclass Correlation Coefficient (ICC) Decision Adjustment Clinical Outcome Estimates Okamura &amp; Yamada (2020) Infrastructure Adaptive Trust Calibration for Human-AI Collaboration Decision-Support AI Visual, Text, and Auditory Perceived Usability Performance Evaluation Trust Reverberi et al. (2022) Healthcare Bayesian-Like Belief Revision Model Decision-Support AI Visual Performance Evaluation Perceived Usability Reliability Accuracy Sánchez Olszewski (2024) HR/Technology Human-AI Collaboration on Hiring: Human-Like, Robot-Like, and Generic Decision-Support AI Human-AI Collaboration Visual and Text Agreement Rate Attention Check Performance AI Identity Sayres et al. (2025) Healthcare Human-AI Collaboration in Healthcare Decision Support Decision-Support AI Image-Based Deep Learning Model Visual and Text Algorithm Accuracy Correct Condition Naming Satisfaction Rating Perceived Helpfulness Ease of Use Result Consistency Conversation Usefulness Comfort Naming a Condition Change in the Level of Concern Change in Planned Next Step Schecter et al. (2025) Workplace Productivity Human-GenAI Augmentation: Driver and Adviser Generative Artificial Intelligence Large Language Model (LLM) Visual and Text Perceived Quality Improvement Relative Effort of AI Creativity Perceived Value (by Others) Schmitt et al. (2024) Media/Advertisement Explainable AI in Human-AI Collaboration: Baseline, Salient Feature, and Free-Text Explanation Explainable AI (XAI) Generative AI Visual and Text Accuracy Number of Explanation Requests Trust Understandability Usefulness Reliability Schwalb et al. (2022) Emergency Response Human-AI Collaboration in Interactive Virtual Environments Decision-Support AI Visual and Auditory Performance Evaluation Perceived Usability Reliability Accuracy Senoner et al. (2024) Healthcare and Manufacturing Explainable AI in Human-AI Collaboration Deep Learning: Convolutional Neural Networks for Computer Visual Accuracy in Task Performance Reliance Vision Explainable AI (XAI) Trust or Algorithm Aversion Shulner-Tal et al. (2023) HR/Technology Predict Perceived Fairness of AI Explanation Explainable AI Visual and Text Trust Perceived Fairness Understandability Smith et al. (2025) HR/Technology Signaling Theory with Self-Determination Theory in Human-AI Teaming Decision-Support AI Computer Vision (CV) Natural Language Processing (NLP) Visual and Text AI Convergence Trust Confidence Song et al. (2025) Education Human-AI Cooperation Framework for Stigma Reduction Chatbot Text Intelligence Likeability Rapport Creativity van der Waa et al. (2021) Healthcare Team Design Patterns (TDPs) Explainable AI Decision-Support AI Visual and Text Perceived Usability Performance Evaluation Zhao et al. (2023) Emergency Response Human-AI Collaborative Framework Explainable AI Decision-Support AI Human-AI Collaboration Visual and Text Performance Evaluation Perceived Satisfaction Perceived Self-Efficacy Perceived Trust Zipperling et al. (2025) Gender Gender Bias Alignment and Distributive Fairness in Human-AI Collaboration Machine Learning (ML)-Based Recommender System Visual and Text Fairness Perception Reliance Distributive Fairness Outcome</p>
+<h3>Fig 1.</h3>
+<p>Fig 1. Conceptual relationship between HCAI and HAX.</p>
+<h3>Fig 2.</h3>
+<p>Fig 2. PRISMA flow diagram summarizing the identification, screening, eligibility assessment, and inclusion of studies in the systematic review.</p>
+<h3>Fig 3.</h3>
+<p>Fig.3. Distribution of reviewed studies by application domain.</p>
+<h3>Fig 4.</h3>
+<p>Fig.4. Co-occurrence of interaction modalities across reviewed studies. Ribbons show studies in which two channels appeared in the same system or condition, and self-loops show single-channel use. Counts may exceed the number of included studies (i.e., 44) when a study included more than one modality combination.</p>
+<h3>Fig 5.</h3>
+<p>Fig 5. Publication-year distribution of included studies.</p>
+<h3>References</h3>
+<p>M. Pacailler, S. Yahoodik, T. Sato, J. G. Ammons, and J. Still, &quot;Human- Centered Artificial Intelligence: Beyond a Two-Dimensional Framework,&quot; in HCI International 2022 -Late Breaking Papers: Interacting with eXtended Reality and Artificial Intelligence, J. Y. C. Chen, G. Fragomeni, H. Degen, and S. Ntoa, Eds. Springer Nature Switzerland, 2022, pp. 471- 482. [Online]. Available: https://doi.org/10.1007/978-3-031-21707-4_33</p>
+<p>B. Shneiderman, &quot;Human-Centered Artificial Intelligence: Three Fresh Ideas,&quot; AIS Transactions on Human-Computer Interaction, vol. 12, no. 3, pp. 109-124, 2020. [Online]. Available: https: //doi.org/10.17705/1thci.00131</p>
+<p>S. Amershi, D. Weld, M. Vorvoreanu, A. Fourney, B. Nushi, P. Collisson, J. Suh, S. Iqbal, P. N. Bennett, K. Inkpen, J. Teevan, R. Kikin-Gil, and E. Horvitz, &quot;Guidelines for Human-AI Interaction,&quot; in Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems, CHI &#x27;19, 2019, pp. 1-13. [Online]. Available: https://doi.org/10.1145/3290605.3300233</p>
+<p>M. Vorvoreanu, &quot;Create Effective and Responsible AI User Experiences with The Human-AI Experience (HAX) Toolkit,&quot; in Extended Abstracts of the 2023 CHI Conference on Human Factors in Computing Systems, CHI EA &#x27;23, 2023, pp. 1-2. [Online]. Available: https://doi.org/10.1145/3544549.3574191</p>
+<p>WHO, &quot;Stronger legal and ethical safeguards needed as AI in health accelerates, warns WHO/Europe,&quot; 2025. [Online]. Available: https: //www.who.int/europe/news/item/19-11-2025-is-your-doctor-s-ai-safe</p>
+<p>M. Anandarajan, &quot;Companies are already using agentic AI to make decisions, but governance is lagging behind,&quot; 2026, january 22. [Online].</p>
+<p>M. Raees, I. Meijerink, I. Lykourentzou, V.-J. Khan, and K. Papangelis, &quot;From explainable to interactive AI: A literature review on current trends in human-AI interaction,&quot; International Journal of Human- Computer Studies, vol. 189, p. 103301, 2024. [Online]. Available: https://doi.org/10.1016/j.ijhcs.2024.103301</p>
+<p>Z. R. Liu, S. K. Dong, W. Zeng, Y. Wang, and D. Niu, &quot;Exploring the impact of human-centred AI on firms&#x27; social and operational performance: A large language model approach,&quot; Transportation Research Part E: Logistics and Transportation Review, vol. 203, p. 104381, 2025. [Online]. Available: https://doi.org/10.1016/j.tre.2025.104381</p>
+<p>S. Krakowski, D. Haftor, J. Luger, N. Pashkevich, and S. Raisch, &quot;Human- Centered Artificial Intelligence: A Field Experiment,&quot; Management Science, vol. 72, no. 1, pp. 57-72, 2026. [Online]. Available: https://doi.org/10.1287/mnsc.2022.03849</p>
+<p>M. Passalacqua, R. Pellerin, F. Magnani, P. Doyon-Poulin, L. Del- Aguila, J. Boasen, and P.-M. Léger, &quot;Human-centred AI in industry 5.0: A systematic review,&quot; International Journal of Production Research, vol. 63, no. 7, pp. 2638-2669, 2025. [Online]. Available: https://doi.org/10.1080/00207543.2024.2406021</p>
+<p>A. Kumar, K. Rana, R. Gupta, D. Gunta, A. Mahida, and Sonia, &quot;Human-Centered AI for Autonomous Vehicles: A Review of Interaction Strategies and Technologies,&quot; in 2024 3rd Edition of IEEE Delhi Section Flagship Conference (DELCON), 2024, pp. 1-6. [Online]. Available: https://doi.org/10.1109/DELCON64804.2024.10866787</p>
+<p>M. Vaccaro, A. Almaatouq, and T. Malone, &quot;When combinations of humans and AI are useful: A systematic review and meta-analysis,&quot; Nature Human Behaviour, vol. 8, no. 12, pp. 2293-2303, 2024. [Online]. Available: https://doi.org/10.1038/s41562-024-02024-1</p>
+<p>T. Alelyani, &quot;A validated framework for responsible AI in healthcare autonomous systems,&quot; Scientific Reports, vol. 15, pp. 1-12, 2025. [Online]. Available: https://www.nature.com/articles/s41598-025-25266-z</p>
+<p>D. Moher, A. Liberati, J. Tetzlaff, D. G. Altman, and PRISMA Group, &quot;Preferred reporting items for systematic reviews and meta-analyses: The PRISMA statement,&quot; PLoS Medicine, vol. 6, no. 7, p. e1000097, 2009. [Online]. Available: https://doi.org/10.1371/journal.pmed.1000097</p>
+<p>C. Reverberi, T. Rigon, A. Solari, C. Hassan, P. Cherubini, and A. Cherubini, &quot;Experimental evidence of effective human-AI collaboration in medical decision-making,&quot; Scientific Reports, vol. 12, no. 1, p. 14952, 2022. [Online]. Available: https://doi.org/10.1038/s41598- 022-18751-2</p>
+<p>S. H. Kim, J. Wihl, S. Schramm, C. Berberich, E. Rosenkranz, L. Schmitzer, K. Serguen, C. Klenk, N. Lenhart, C. Zimmer, B. Wiestler, and D. M. Hedderich, &quot;Human-AI collaboration in large language model-assisted brain MRI differential diagnosis: A usability study,&quot; European Radiology, vol. 35, no. 9, pp. 5252-5263, 2025. [Online]. Available: https://doi.org/10.1007/s00330-025-11484-6</p>
+<p>Y. Gao, Z. Li, J. Zhao, J. Li, and J. Li, &quot;A human-AI collaborative framework for surgical field-of-view adjustment: Design and experimental validation,&quot; Journal of Robotic Surgery, vol. 19, no. 1, p. 259, 2025. [Online]. Available: https://doi.org/10.1007/s11701-025-02421-2</p>
+<p>Y. Zhao, Z. Zhu, B. Chen, and S. Qiu, &quot;Leveraging Human-AI Collaboration in Crowd-Powered Source Search: A Preliminary Study,&quot; Journal of Social Computing, vol. 4, no. 2, pp. 95-111, 2023. [Online]. Available: https://doi.org/10.23919/JSC.2023.0002</p>
+<p>R. M. Jacobsen, L. B. L. Bysted, P. S. Johansen, E. Papachristos, and M. B. Skov, &quot;Perceived and Measured Task Effectiveness in Human-AI Collaboration,&quot; in Extended Abstracts of the 2020 CHI Conference on Human Factors in Computing Systems, CHI EA &#x27;20, 2020, pp. 1-9. [Online]. Available: https://doi.org/10.1145/3334480.3383104</p>
+<p>Z. Chen, Y. Luo, and M. Sra, &quot;Engaging with AI: How Interface Design Shapes Human-AI Collaboration in High-Stakes Decision- Making,&quot; arXiv preprint arXiv:2501.16627, 2025. [Online]. Available: https://doi.org/10.48550/arXiv.2501.16627</p>
+<p>F. Lu, Y. Xu, X. Xu, B. Jones, and L. Malamed, &quot;Exploring the Impact of User and System Factors on Human-AI Interactions in Head-Worn Displays,&quot; in 2023 IEEE International Symposium on Mixed and Augmented Reality (ISMAR), 2023, pp. 109-118. [Online]. Available: https://doi.org/10.1109/ISMAR59233.2023.00025</p>
+<p>A. Shulner-Tal, T. Kuflik, and D. Kliger, &quot;Enhancing Fairness Perception -Towards Human-Centred AI and Personalized Explanations Understanding the Factors Influencing Laypeople&#x27;s Fairness Perceptions of Algorithmic Decisions,&quot; International Journal of Human-Computer Interaction, vol. 39, no. 7, pp. 1455-1482, 2023. [Online]. Available: https://doi.org/10.1080/10447318.2022.2095705</p>
+<p>A. Smith, H. P. van Wagoner, K. Keplinger, and C. Celebi, &quot;Navigating AI Convergence in Human-Artificial Intelligence Teams: A Signaling Theory Approach,&quot; Journal of Organizational Behavior, n/a(n/a), 2025. [Online]. Available: https://doi.org/10.1002/job.2856</p>
+<p>K. Okamura and S. Yamada, &quot;Adaptive trust calibration for human-AI collaboration,&quot; PLOS ONE, vol. 15, no. 2, p. e0229132, 2020. [Online]. Available: https://doi.org/10.1371/journal.pone.0229132</p>
+<p>D. Loske and M. Klumpp, &quot;Intelligent and efficient? An empirical analysis of human-AI collaboration for truck drivers in retail logistics,&quot; The International Journal of Logistics Management, vol. 32, no. 4, pp. 1356-1383, 2021. [Online]. Available: https://doi.org/10.1108/IJLM-03- 2020-0149</p>
+<p>P. S. Dhillon, S. Molaei, J. Li, M. Golub, S. Zheng, and L. P. Robert, &quot;Shaping Human-AI Collaboration: Varied Scaffolding Levels in Co-writing with Language Models,&quot; in Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems, CHI &#x27;24, 2024, pp. 1-18. [Online]. Available: https://doi.org/10.1145/3613904.3642134</p>
+<p>X. Lai and P.-L. P. Rau, &quot;AI as Co-Leader: Effects of Human Consideration and AI Structure Behaviors on Leadership Effectiveness and Neural Activation,&quot; International Journal of Human-Computer Interaction, vol. 41, no. 9, pp. 5694-5712, 2025. [Online]. Available: https://doi.org/10.1080/10447318.2024.2365029</p>
+<p>P. Hemmer, M. Westphal, M. Schemmer, S. Vetter, M. Vössing, and G. Satzger, &quot;Human-AI Collaboration: The Effect of AI Delegation on Human Task Performance and Task Satisfaction,&quot; in Proceedings of the 28th International Conference on Intelligent User Interfaces, 2023, pp. 453-463. [Online]. Available: https://doi.org/10.1145/3581641.3584052</p>
+<p>F. Cabitza, A. Campagner, L. Ronzio, M. Cameli, G. E. Mandoli, M. C. Pastore, L. M. Sconfienza, D. Folgado, M. Barandas, and H. Gamboa, &quot;Rams, hounds and white boxes: Investigating human-AI collaboration protocols in medical diagnosis,&quot; Artificial Intelligence in Medicine, vol. 138, p. 102506, 2023. [Online]. Available: https://doi.org/10.1016/j.artmed.2023.102506</p>
+<p>M. D. Molina and S. S. Sundar, &quot;When AI moderates online content: Effects of human collaboration and interactive transparency on user trust,&quot; Journal of Computer-Mediated Communication, vol. 27, no. 4, p. zmac010, 2022. [Online]. Available: https: //doi.org/10.1093/jcmc/zmac010</p>
+<p>D. J. Lerch, K. Entz, J. Merschroth, and F. Diederichs, &quot;Generated User Interfaces for Human-AI Interaction in Cars: Evaluation of AI-Generated Motion Sickness Notifications in Automated Cars,&quot; in HCI in Mobility, Transport, and Automotive Systems, H. Krömker, Ed. Springer Nature Switzerland, 2025, pp. 89-107. [Online]. Available: https://doi.org/10.1007/978-3-031-92692-1_6</p>
+<p>G. Huang, W. H. Lo, G. Liu, Y. Luo, and Y. Jin, &quot;Toward AI standardization: A triadic human-AI collaboration framework for multi-level autonomous mobility,&quot; in Proceedings of the 2025 IEEE Conference on Artificial Intelligence (CAI). IEEE, 2025, pp. 1568-1577. [Online]. Available: https://doi.org/10.1109/CAI64502.2025.00292</p>
+<p>J. van der Waa, S. Verdult, K. van den Bosch, J. van Diggelen, T. Haije, B. van der Stigchel, and I. Cocu, &quot;Moral Decision Making in Human-Agent Teams: Human Control and the Role of Explanations,&quot; Frontiers in Robotics and AI, vol. 8, p. 640647, 2021. [Online]. Available: https://doi.org/10.3389/frobt.2021.640647</p>
+<p>L. Batra, S. Batra, and V. Kathuria, &quot;Leveraging Human-Centered AI Framework to Mitigate Security, Privacy, and Ethical Risks in AI Agents,&quot; in HCI International 2025 Posters, C. Stephanidis, M. Antona, S. Ntoa, and G. Salvendy, Eds. Springer Nature Switzerland, 2025, pp. 10-17. [Online]. Available: https://doi.org/10.1007/978-3-031-94159-7_2</p>
+<p>Y. Gal, A. Segal, E. Kamar, E. Horvitz, C. Lintott, and M. Walmsley, &quot;A new Workflow for Human-AI Collaboration in Citizen Science,&quot; in Proceedings of the 2022 ACM Conference on Information Technology for Social Good, GoodIT &#x27;22, 2022, pp. 89-95. [Online]. Available: https://doi.org/10.1145/3524458.3547243</p>
+<p>A. Schecter and B. Richardson, &quot;How the Role of Generative AI Shapes Perceptions of Value in Human-AI Collaborative Work,&quot; in Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems, CHI &#x27;25, 2025, pp. 1-15. [Online]. Available: https://doi.org/10.1145/3706598.3713946</p>
+<p>T. Song, J. Jamieson, T. Zhu, N. Yamashita, and Y.-C. Lee, &quot;From Interaction to Attitude: Exploring the Impact of Human-AI Cooperation on Mental Illness Stigma,&quot; arXiv preprint arXiv:2501.01220, 2025. [Online]. Available: https://doi.org/10.48550/arXiv.2501.01220</p>
+<p>B. Ling, B. Dong, and F. Cai, &quot;Applicants&#x27; Fairness Perception of Human and AI Collaboration in Resume Screening,&quot; International Journal of Human-Computer Interaction, vol. 41, no. 17, pp. 10 787-10 798, 2025. [Online]. Available: https://doi.org/10.1080/10447318.2024.2437235</p>
+<p>D. Niraula, K. C. Cuneo, I. D. Dinov, B. D. Gonzalez, J. B. Jamaluddin, J. J. Jin, Y. Luo, M. M. Matuszak, R. K. Ten Haken, A. K. Bryant, T. J. Dilling, M. P. Dykstra, J. M. Frakes, C. L. Liveringhouse, S. R. Miller, M. N. Mills, R. F. Palm, S. N. Regan, A. Rishi et al., &quot;Intricacies of human-AI interaction in dynamic decision-making for precision oncology,&quot; Nature Communications, vol. 16, no. 1, p. 1138, 2025. [Online]. Available: https://doi.org/10.1038/s41467-024-55259-x</p>
+<p>F. Cabitza, A. Campagner, and L. M. Sconfienza, &quot;Studying human-AI collaboration protocols: The case of the Kasparov&#x27;s law in radiological double reading,&quot; Health Information Science and Systems, vol. 9, no. 1, p. 8, 2021. [Online]. Available: https://doi.org/10.1007/s13755-021-00138-8</p>
+<p>R. Sayres, A. Devon-Sand, M. Schaekermann, M. A. Smith, P. Strachan, G. Hong, T. Nguyen, D. Wong, N. Hammel, D. Siegel, K. Ren, C. Belletieri, V. Muralidharan, R. Rikhye, Y. Liu, B. Freeman, M. González, N. Ashcraft, H. Cho et al., &quot;Navigating Skin Concerns with AI: A Human-Centered Investigation of a Dermatology App in a Diverse Community,&quot; in Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems, CHI EA &#x27;25, 2025, pp. 1-16. [Online]. Available: https://doi.org/10.1145/3706599.3720531</p>
+<p>M. H. Lee and M. Z. Y. Tok, &quot;Towards Uncertainty Aware Task Delegation and Human-AI Collaborative Decision-Making,&quot; in Proceedings of the 2025 ACM Conference on Fairness, Accountability, and Transparency, 2025, pp. 2274-2289. [Online]. Available: https: //doi.org/10.1145/3715275.3732155</p>
+<p>J. Senoner, S. Schallmoser, B. Kratzwald, S. Feuerriegel, and T. Netland, &quot;Explainable AI improves task performance in human- AI collaboration,&quot; arXiv preprint arXiv:2406.08271, 2024. [Online]. Available: https://doi.org/10.48550/arXiv.2406.08271</p>
+<p>V. Schmitt, B. P. Csomor, J. Meyer, L.-F. Villa-Areas, C. Jakob, T. Polzehl, and S. Möller, &quot;Evaluating Human-Centered AI Explanations: Introduction of an XAI Evaluation Framework for Fact-Checking,&quot; in Proceedings of the 3rd ACM International Workshop on Multimedia AI against Disinformation, MAD &#x27;24, 2024, pp. 91-100. [Online]. Available: https://doi.org/10.1145/3643491.3660283</p>
+<p>J. Schwalb, V. Menon, N. Tenhundfeld, K. Weger, B. Mesmer, and S. Gholston, &quot;A Study of Drone-based AI for Enhanced Human-AI Trust and Informed Decision Making in Human-AI Interactive Virtual Environments,&quot; in 2022 IEEE 3rd International Conference on Human-Machine Systems (ICHMS), 2022, pp. 1-6. [Online]. Available: https://doi.org/10.1109/ICHMS56717.2022.9980625</p>
+<p>J. F. Gyasi, L. Zheng, S. F. Love, and F. O. Boateng, &quot;The effects of three different approaches to human-AI collaboration on online collaborative learning,&quot; Educational Technology &amp; Society, vol. 28, no. 2, pp. 373-392, 2025. [Online]. Available: https://doi.org/10.30191/ets.202504_28(2).tp07</p>
+<p>M. Brachman, Z. Ashktorab, M. Desmond, E. Duesterwald, C. Dugan, N. N. Joshi, Q. Pan, and A. Sharma, &quot;Reliance and Automation for Human-AI Collaborative Data Labeling Conflict Resolution,&quot; Proceedings of the ACM on Human-Computer Interaction, vol. 6, no. CSCW2, pp. 321:1-321:27, 2022. [Online]. Available: https://doi.org/10.1145/3555212</p>
+<p>J. C. Madathil, &quot;Generative AI advertisements and Human-AI collaboration: The role of humans as gatekeepers of humanity,&quot; Journal of Retailing and Consumer Services, vol. 87, p. 104381, 2025. [Online]. Available: https://doi.org/10.1016/j.jretconser.2025.104381</p>
+<p>J. Li and J. Kang, &quot;Human-centred AI vs machine-centred AI: Navigating AI ethical crises in luxury retail,&quot; International Journal of Retail &amp; Distribution Management, vol. 53, no. 7, pp. 639-653, 2025. [Online]. Available: https://doi.org/10.1108/IJRDM-11-2024-0600</p>
+<p>T. Bellet, A. Banet, M. Petiot, B. Richard, and J. Quick, &quot;Human- Centered AI to Support an Adaptive Management of Human-Machine Transitions with Vehicle Automation,&quot; Information, vol. 12, no. 1, p. 13, 2021. [Online]. Available: https://doi.org/10.3390/info12010013</p>
+<p>M. H. Lee and C. J. Chew, &quot;Understanding the Effect of Counterfactual Explanations on Trust and Reliance on AI for Human-AI Collaborative Clinical Decision Making,&quot; Proc. ACM Hum.-Comput. Interact., vol. 7, no. CSCW2, pp. 369:1-369:22, 2023. [Online]. Available: https://doi.org/10.1145/3610218</p>
+<p>Q. Lu and X. Peng, &quot;Differences in Knowledge Adoption Among Task Types in Human-AI Collaboration Under the Chronic Disease Prevention Scenario,&quot; in Wisdom, Well-Being, Win-Win, I. Sserwanga, H. Joho, J. Ma, P. Hansen, D. Wu, M. Koizumi, and A. J. Gilliland, Eds. Springer Nature Switzerland, 2024, pp. 213-231. [Online]. Available: https://doi.org/10.1007/978-3-031-57867-0_16</p>
+<p>J. Kim and S.-S. Lee, &quot;Are Two Heads Better Than One?: The Effect of Student-AI Collaboration on Students&#x27; Learning Task Performance,&quot; TechTrends: For Leaders in Education &amp; Training, vol. 67, no. 2, pp. 365-375, 2023. [Online]. Available: https://doi.org/10.1007/s11528-022-00788-9</p>
+<p>R. Kaufman, &quot;Improving Human-Autonomous Vehicle Interaction in Complex Systems,&quot; arXiv preprint arXiv:2504.17170, 2025. [Online]. Available: https://doi.org/10.48550/arXiv.2504.17170</p>
+<p>S. A. Sánchez Olszewski, &quot;Designing Human-AI Systems: Anthropomorphism and Framing Bias on Human-AI Collaboration,&quot; arXiv preprint arXiv:2404.00634, 2024. [Online]. Available: https://doi.org/10.48550/arXiv.2404.00634</p>
+<p>M. Glienke, N. Hartwich, and D. Antons, &quot;Working with AI: How Attitudes Shape Human-AI Collaboration,&quot; in ICIS 2023 Proceedings, 2023. [Online]. Available: https://aisel.aisnet.org/icis2023/hti/hti/12</p>
+<p>C. Liao, X. Wen, S. Li, and P. Du, &quot;How effective is AI augmentation in human-AI collaboration? Evidence from a field experiment,&quot; Information Technology &amp; People, vol. 37, no. 7, pp. 2357-2389, 2024. [Online]. Available: https://doi.org/10.1108/ITP-11-2022-0859</p>
+<p>R. E. Ployhart and C. M. Harold, &quot;The Applicant Attribution- Reaction Theory (AART): An Integrative Theory of Applicant Attributional Processing,&quot; International Journal of Selection and Assessment, vol. 12, no. 1-2, pp. 84-98, 2004. [Online]. Available: https://doi.org/10.1111/j.0965-075X.2004.00266.x</p>
+<p>V. Venkatesh, J. Y. L. Thong, and X. Xu, &quot;Consumer Acceptance and Use of Information Technology: Extending the Unified Theory of Acceptance and Use of Technology (SSRN Scholarly Paper No,&quot; 2002388). Social Science Research Network, 2012. [Online]. Available: https://papers.ssrn.com/abstract=2002388</p>
+<p>D.-I. M. Voit, &quot;Generated User Interfaces (GenUIn) | Blog des Fraunhofer IOSB,&quot; 2024. [Online]. Available: https://blog.iosb.fraunhofer. de/generated-user-interfaces-genuin/</p>
+<p>J. Xu, A. Wu, C. Filip, Z. Patel, S. R. Bernstein, R. Tanveer, H. Syed, and T. Kotroczo, &quot;Active recall strategies associated with academic achievement in young adults: A systematic review,&quot; Journal of Affective Disorders, vol. 354, pp. 191-198, 2024. [Online]. Available: https://doi.org/10.1016/j.jad.2024.03.010</p>
+<p>D. Zipperling, L. Deck, J. Lanzl, and N. Kühl, &quot;It&#x27;s only fair when I think it&#x27;s fair: How Gender Bias Alignment Undermines Distributive Fairness in Human-AI Collaboration,&quot; in Proceedings of the 2025 ACM Conference on Fairness, Accountability, and Transparency, FAccT &#x27;25, 2025, pp. 1261-1274. [Online]. Available: https://doi.org/10.1145/3715275.3732084</p>
+<p>Reference (for Supplementary Table S1)</p>
+<p>Batra, L., Batra, S., &amp; Kathuria, V. (2025). Leveraging human-centered AI framework to mitigate security, privacy, and ethical risks in AI agents. In C. Stephanidis, M. Antona, S. Ntoa, &amp; G. Salvendy (Eds.), HCI International 2025 posters (pp. 10-17). Springer. https://doi.org/10.1007/978-3-031- 94159-7_2</p>
+<p>Bellet, T., Banet, A., Petiot, M., Richard, B., &amp; Quick, J. (2021). Human-centered AI to support an adaptive management of human-machine transitions with vehicle automation. Information. https://doi.org/10.3390/info12010013</p>
+<p>Brachman, M., Ashktorab, Z., Desmond, M., Duesterwald, E., Dugan, C., Joshi, N. N., Pan, Q., &amp; Sharma, A. (2022). Reliance and automation for human-AI collaborative data labeling conflict resolution. Proceedings of the ACM on Human-Computer Interaction, 6(CSCW2), Article 321. https://doi.org/10.1145/3555212</p>
+<p>Cabitza, F., Campagner, A., &amp; Sconfienza, L. M. (2021). Studying human-AI collaboration protocols: The case of the Kasparov&#x27;s law in radiological double reading. Health Information Science and Systems, 9(1), Article 8. https://doi.org/10.1007/s13755-021-00138-8</p>
+<p>Cabitza, F., Campagner, A., Ronzio, L., Cameli, M., Mandoli, G. E., Pastore, M. C., Sconfienza, L. M., Folgado, D., Barandas, M., &amp; Gamboa, H. (2023). Rams, hounds and white boxes: Investigating human-AI collaboration protocols in medical diagnosis. Artificial Intelligence in Medicine, 138, Article 102506. https://doi.org/10.1016/j.artmed.2023.102506</p>
+<p>Chen, Z., Luo, Y., &amp; Sra, M. (2025). Engaging with AI: How interface design shapes human-AI collaboration in high-stakes decision-making. arXiv. https://doi.org/10.48550/arXiv.2501.16627</p>
+<p>Dhillon, P. S., Molaei, S., Li, J., Golub, M., Zheng, S., &amp; Robert, L. P. (2024). Shaping human-AI collaboration: Varied scaffolding levels in co-writing with language models. In Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems (Article 1044). ACM. https://doi.org/10.1145/3613904.3642134</p>
+<p>Gal, Y. (K.), Segal, A., Kamar, E., Horvitz, E., Lintott, C., &amp; Walmsley, M. (2022). A new workflow for human-AI collaboration in citizen science. In Proceedings of the 2022 ACM Conference on Information Technology for Social Good (pp. 89-95). ACM. https://doi.org/10.1145/3524458.3547243</p>
+<p>Gao, Y., Li, Z., Zhao, J., Li, J., &amp; Li, J. (2025). A human-AI collaborative framework for surgical field-of-view adjustment: Design and experimental validation. Journal of Robotic Surgery, 19(1), Article 259.</p>
+<p>Glienke, M., Hartwich, N. J., &amp; Antons, D. (2023). Working with AI: How attitudes shape human-AI collaboration. In ICIS 2023 Proceedings (Paper 12). Association for Information Systems. https://aisel.aisnet.org/icis2023/hti/hti/12</p>
+<p>Gyasi, J. F., Zheng, L., Love, S. F., &amp; Boateng, F. O. (2025). The effects of three different approaches to human-AI collaboration on online collaborative learning. Educational Technology &amp; Society, 28(2), 373-392. https://doi.org/10.30191/ETS.202504_28(2).TP07</p>
+<p>Hemmer, P., Westphal, M., Schemmer, M., Vetter, S., Vössing, M., &amp; Satzger, G. (2023). Human-AI collaboration: The effect of AI delegation on human task performance and task satisfaction. In Proceedings of the 28th International Conference on Intelligent User Interfaces (IUI &#x27;23). ACM. https://doi.org/10.1145/3581641.3584052</p>
+<p>Huang, G., Lo, W. H., Liu, G., Luo, Y., &amp; Jin, Y. (2025). Toward AI standardization: A triadic human-AI collaboration framework for multi-level autonomous mobility. In Proceedings of the 2025 IEEE Conference on Artificial Intelligence (CAI) (pp. 1568-1577). IEEE. https://doi.org/10.1109/CAI64502.2025.00292</p>
+<p>Jacobsen, R. M., Bysted, L. B. L., Johansen, P. S., Papachristos, E., &amp; Skov, M. B. (2020). Perceived and measured task effectiveness in human-AI collaboration. In Extended Abstracts of the 2020 CHI Conference on Human Factors in Computing Systems (pp. 1-9). ACM. https://doi.org/10.1145/3334480.3383104</p>
+<p>Kaufman, R. (2025). Improving human-autonomous vehicle interaction in complex systems. arXiv. https://doi.org/10.48550/arXiv.2504.17170</p>
+<p>Kim, J., &amp; Lee, S.-S. (2023). Are two heads better than one?: The effect of student-AI collaboration on students&#x27; learning task performance. TechTrends, 67(2), 365-375. https://doi.org/10.1007/s11528-022-00788-9</p>
+<p>Kim, S. H., Wihl, J., Schramm, S., Berberich, C., Rosenkranz, E., Schmitzer, L., Serguen, K., Klenk, C., Lenhart, N., Zimmer, C., … [remaining authors]. (2025). Human-AI collaboration in large language model-assisted brain MRI differential diagnosis: A usability study. European Radiology, 35(9), 5252-5263. https://doi.org/10.1007/s00330-025-11484-6</p>
+<p>Lai, X., &amp; Rau, P.-L. P. (2025). AI as co-leader: Effects of human consideration and AI structure behaviors on leadership effectiveness and neural activation. International Journal of Human-Computer Interaction, 41(9), 5694-5712. https://doi.org/10.1080/10447318.2024.2365029</p>
+<p>Lee, M. H., &amp; Chew, C. J. (2023). Understanding the effect of counterfactual explanations on trust and reliance on AI for human-AI collaborative clinical decision making. Proceedings of the ACM on Human-Computer Interaction, 7(CSCW2), 1-22.</p>
+<p>Lee, M. H., &amp; Tok, M. Z. Y. (2025). Towards uncertainty aware task delegation and human-AI collaborative decision-making. In Proceedings of the 2025 ACM Conference on Fairness, Accountability, and Transparency (FAccT &#x27;25). ACM. https://doi.org/10.1145/3715275.3732155</p>
+<p>Lerch, D. J., Entz, K., Merschroth, J., &amp; Diederichs, F. (2025). Generated user interfaces for human-AI interaction in cars: Evaluation of AI-generated motion sickness notifications in automated cars. In H. Krömker (Ed.), HCI in mobility, transport, and automotive systems (HCII 2025, LNCS Vol. 15818). Springer. https://doi.org/10.1007/978-3-031-92692-1_6</p>
+<p>Li, J., &amp; Kang, J. (2025). Human-centred AI vs machine-centred AI: Navigating AI ethical crises in luxury retail. International Journal of Retail &amp; Distribution Management, 53(7), 639-653. https://doi.org/10.1108/IJRDM-11-2024-0600</p>
+<p>Liao, C., Wen, X., Li, S., &amp; Du, P. (2024). How effective is AI augmentation in human-AI collaboration? Evidence from a field experiment. Information Technology &amp; People, 37(7), 2357-2389. https://doi.org/10.1108/ITP-11-2022-0859</p>
+<p>Ling, B., Dong, B., &amp; Cai, F. (2025). Applicants&#x27; fairness perception of human and AI collaboration in resume screening. International Journal of Human- Computer Interaction, 41, 10787-10798. https://doi.org/10.1080/10447318.2024.2437235</p>
+<p>Loske, D., &amp; Klumpp, M. (2021). Intelligent and efficient? An empirical analysis of human-AI collaboration for truck drivers in retail logistics. The International Journal of Logistics Management, 32(4), 1356-1383. https://doi.org/10.1108/IJLM-03-2020-0149</p>
+<p>Lu, F., Xu, Y., Xu, X., Jones, B., &amp; Malamed, L. (2023, October). Exploring the impact of user and system factors on human-AI interactions in head-worn displays. In 2023 IEEE International Symposium on Mixed and Augmented Reality (ISMAR) (pp. 109-118). IEEE.</p>
+<p>Lu, Q., &amp; Peng, X. (2024, April). Differences in knowledge adoption among task types in human-AI collaboration under the chronic disease prevention scenario. In International Conference on Information (pp. 213-231). Springer Nature Switzerland.</p>
+<p>Madathil, J. C. (2025). Generative AI advertisements and human-AI collaboration: The role of humans as gatekeepers of humanity. Journal of Retailing and Consumer Services, 87, Article 104381. https://doi.org/10.1016/j.jretconser.2025.104381</p>
+<p>Molina, M. D., &amp; Sundar, S. S. (2022). When AI moderates online content: Effects of human collaboration and interactive transparency on user trust. Journal of Computer-Mediated Communication, 27(4), zmac010.</p>
+<p>Niraula, D., Cuneo, K. C., Dinov, I. D., Gonzalez, B. D., Jamaluddin, J. B., Jin, J. J., ... &amp; El Naqa, I. (2025). Intricacies of human-AI interaction in dynamic decision-making for precision oncology. Nature Communications, 16(1), Article 1138.</p>
+<p>Okamura, K., &amp; Yamada, S. (2020). Adaptive trust calibration for human-AI collaboration. PLOS ONE, 15(2), Article e0229132. https://doi.org/10.1371/journal.pone.0229132</p>
+<p>Reverberi, C., Rigon, T., Solari, A., Hassan, C., Cherubini, P., &amp; Cherubini, A. (2022). Experimental evidence of effective human-AI collaboration in medical decision-making. Scientific Reports, 12(1), Article 14952.</p>
+<p>Sánchez Olszewski, S. A. (2024). Designing human-AI systems: Anthropomorphism and framing bias on human-AI collaboration. arXiv. https://doi.org/10.48550/arXiv.2404.00634</p>
+<p>Sayres, R., Devon-Sand, A., Schaekermann, M., Smith, M. A., Strachan, P., Hong, G., Nguyen, T., Wong, D., Hammel, N., Siegel, D., Ren, K., Belletieri, C., Muralidharan, V., Rikhye, R., Liu, Y., Freeman, B., González, M., Ashcraft, N., Cho, H., … Lin, S. (2025). Navigating skin concerns with AI: A human- centered investigation of a dermatology app in a diverse community. In Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (CHI EA &#x27;25). ACM. https://doi.org/10.1145/3706599.3720531</p>
+<p>Schecter, A., &amp; Richardson, B. (2025). How the role of generative AI shapes perceptions of value in human-AI collaborative work. In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems. ACM. https://doi.org/10.1145/3706598.3713946</p>
+<p>Schmitt, V., Csomor, B. P., Meyer, J., Villa-Arenas, L. F., Jakob, C., Polzehl, T., &amp; Möller, S. (2024). Evaluating human-centered AI explanations: Introduction of an XAI evaluation framework for fact-checking. In Proceedings of the 3rd ACM International Workshop on Multimedia AI against Disinformation (MAD &#x27;24) (pp. 91-100). ACM. https://doi.org/10.1145/3643491.3660283</p>
+<p>Schwalb, J., Menon, V., Tenhundfeld, N., Weger, K., Mesmer, B., &amp; Gholston, S. (2022). A study of drone-based AI for enhanced human-AI trust and informed decision making in human-AI interactive virtual environments. In 2022 IEEE 3rd International Conference on Human-Machine Systems (ICHMS) (pp. 1-6). IEEE. https://doi.org/10.1109/ICHMS56717.2022.9980625</p>
+<p>Senoner, J., Schallmoser, S., Kratzwald, B., Feuerriegel, S., &amp; Netland, T. (2024). Explainable AI improves task performance in human-AI collaboration. Scientific Reports, 14, Article 31150. https://doi.org/10.1038/s41598-024-82501-9</p>
+<p>Shulner-Tal, A., Kuflik, T., &amp; Kliger, D. (2023). Enhancing fairness perception: Towards human-centred AI and personalized explanations understanding the factors influencing laypeople&#x27;s fairness perceptions of algorithmic decisions. International Journal of Human-Computer Interaction, 39(7), 1455-1482. https://doi.org/10.1080/10447318.2022.2095705</p>
+<p>Smith, A., van Wagoner, H. P., Keplinger, K., &amp; Celebi, C. (2025). Navigating AI convergence in human-artificial intelligence teams: A signaling theory approach. Journal of Organizational Behavior. Advance online publication. https://doi.org/10.1002/job.2856</p>
+<p>Song, T., Jamieson, J., Zhu, T., Yamashita, N., &amp; Lee, Y. C. (2025). From interaction to attitude: Exploring the impact of human-AI cooperation on mental illness stigma. Proceedings of the ACM on Human-Computer Interaction, 9(2), 1-31.</p>
+<p>van der Waa, J., Verdult, S., van den Bosch, K., van Diggelen, J., Haije, T., van der Stigchel, B., &amp; Cocu, I. (2021). Moral decision making in human-agent teams: Human control and the role of explanations. Frontiers in Robotics and AI, 8, Article 640647. https://doi.org/10.3389/frobt.2021.640647</p>
+<p>Zhao, Y., Zhu, Z., Chen, B., &amp; Qiu, S. (2023). Leveraging human-AI collaboration in crowd-powered source search: A preliminary study. Journal of Social Computing, 4(2), 95-111. https://doi.org/10.23919/JSC.2023.0002</p>
+<p>Zipperling, D., Deck, L., Lanzl, J., &amp; Kühl, N. (2025). It&#x27;s only fair when I think it&#x27;s fair: How gender bias alignment undermines distributive fairness in human- AI collaboration. In Proceedings of the 2025 ACM Conference on Fairness, Accountability, and Transparency (FAccT &#x27;25). ACM. https://doi.org/10.1145/3715275.3732084</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
