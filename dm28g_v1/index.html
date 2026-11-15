@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: (no title found in the PDF)</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+(no title found in the PDF)
+</p>
+<p class="meta">
+2026-11-15 · Metacheck 0.4.4.1
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>3</b><span>to fix</span></a><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>12</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(3)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Ethics
+Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to involve live data collection and lacked an
+ethics approval statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, but it was not present:</p>
+<blockquote>
+<p>A total of 10,163 students (59% females; age mode: 16) were recruited
+from 109 vocational schools in France that volunteered to participate in
+a nationwide multi-lab longitudinal experiment conducted over three
+years in two cohorts (2017 and 2018) (PROFAN project; see Riant et al.,
+2024; Rudmann et al., 2024).</p>
+</blockquote>
+<blockquote>
+<p>Students were enrolled in three vocational tracks: MELEC
+(electricity, industrial systems and maintenance; N= 2,441, 1.76%
+females), ASSP (nursing and care; N= 3,454, 88.85% females), and
+COMMERCE (sales, promoting and managing retail space; N= 4,268, 49.39 %
+females).</p>
+</blockquote>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Power
+Analysis Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We detected 2 potential power analyses.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We used the LLM model ‘vllm/DeepSeek-V41-Flash-1017-FP8’ to check the
+contents of 2 paragraphs that contained words suggesting they might
+contain power analyses.</p>
+<p>Some essential information could not be detected: statistical_test,
+sample_size, alpha_level, power, effect_size, effect_size_metric,
+software</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:right;">
+power_<wbr>id
+</th>
+<th style="text-align:left;">
+power_<wbr>type
+</th>
+<th style="text-align:left;">
+statistical_<wbr>test
+</th>
+<th style="text-align:right;">
+sample_<wbr>size
+</th>
+<th style="text-align:right;">
+alpha_<wbr>level
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_<wbr>size
+</th>
+<th style="text-align:left;">
+effect_<wbr>size_<wbr>metric
+</th>
+<th style="text-align:left;">
+software
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+sensitivity
+</td>
+<td style="text-align:left;">
+other
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+powRICLPM
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+posthoc
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+9676
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+other
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<p>You reported a power analysis that has been classified as ‘post-hoc’.
+Calculating observed power is <a href="https://lakens.github.io/statistical_inferences/08-samplesizejustification.html#sec-posthocpower">almost
+never useful</a>. If you actually performed a sensitivity power
+analysis, label it as such explicitly.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+power_<wbr>id
+</th>
+<th style="text-align:left;">
+text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+In addition, we conducted a Monte Carlo <strong>sensitivity</strong>
+analysis using the powRICLPM package (Mulder, 2023) to estimate
+<strong>power</strong> at the achieved analytic sample size. Given the
+package’s bivariate scope and the same sample size for pairs withing a
+trivariate model, we ran a three-wave RI-CLPM simulation for the one
+focal pair -achievement goals with error <strong>sensitivity</strong>
+-evaluating the cross-lagged paths in both directions under the
+specified parameter assumptions of Model 2 (since the package cannot
+account for exogenous variables). These pairwise analyses provide
+approximate <strong>sensitivity</strong> estimates and do not represent
+<strong>power</strong> for the full trivariate model.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+At the achieved analytic sample size (N = 9,676), three waves, and α =
+.05, Monte Carlo simulations with 2,000 replications estimated
+<strong>power</strong> to detect a standardized cross-lagged weak effect
+of β = .03. For error <strong>sensitivity</strong> → achievement goals,
+estimated <strong>power</strong> was .858 at ICC = .30 and .782 at ICC =
+.50; for achievement goals → error <strong>sensitivity</strong>,
+<strong>power</strong> was .867 and .789, respectively. When restricting
+to medium effect of β = .07, for error <strong>sensitivity</strong> →
+achievement goals, estimated <strong>power</strong> was .998 at ICC =
+.30 and .985 at ICC = .50; for achievement goals → error
+<strong>sensitivity</strong>, <strong>power</strong> was .999 and .985,
+respectively.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Exact
+P-Values</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 imprecise <em>p</em> value out of 11 detected <em>p</em>
+values.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Reporting <em>p</em> values imprecisely (e.g., <em>p</em> &lt; .05)
+reduces transparency, reproducibility, and re-use (e.g., in <em>p</em>
+value meta-analyses). Best practice is to report exact p-values with
+three decimal places (e.g., <em>p</em> = .032) unless <em>p</em> values
+are smaller than 0.001, in which case you can use <em>p</em> &lt;
+.001.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (e.g., “decreased at the <em>p</em>
+&lt; .05 significance threshold”).</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+P-Value
+</th>
+<th style="text-align:left;">
+Text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p&lt;.05
+</td>
+<td style="text-align:left;">
+Logistic regression analyses showed that Gender, Educational track,
+T1_Math_grade, T1_French grade, and Experimental Condition significantly
+predicted missingness at T2 and T3 (p&lt;.05), and, thus, were included
+in the SEM models (model 3 and model 4) to account for systematic
+missingness.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>The APA manual states: Report exact <em>p</em> values (e.g.,
+<em>p</em> = .031) to two or three decimal places. However, report
+<em>p</em> values less than .001 as <em>p</em> &lt; .001. However, 2
+decimals is too imprecise for many use-cases (e.g., a <em>p</em> value
+meta-analysis), so report <em>p</em> values with three digits.</p>
+<p>American Psychological Association (2020). <em>Publication manual of
+the American Psychological Association</em>, 7 edition. American
+Psychological Association.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 1 reference with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(12)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 108 references with DOIs. You cited 1 reference with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Orth, U., Clark, D. A., Donnellan, M. B., &amp; Robins, R. W. (2021).
+Testing prospective effects in longitudinal research: Comparing seven
+competing cross-lagged models. Journal of Personality and Social
+Psychology, 120(4), 1013-1034. <a href="https://doi.org/10.1037/pspp0000358" class="uri">https://doi.org/10.1037/pspp0000358</a>
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/26F6DEBCAFDCD32CBE44266B553FC7" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 108 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 108 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold” or “legend”). Notes in other
+forms, such as a marker after the p-value (“p &lt; .05 (*)“), are still
+flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 225 papers containing 405 instances of
+non-exact p-values, the module correctly detected 269 cases (true
+positives) and incorrectly identified 78 (false positives). It missed
+136 instances of imprecisely reported p-values (false negatives) and
+correctly identified 4557 cases of precisely reported p-values (true
+negative). Additionally, 78% of positive detections were correct
+(positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 194 papers with 1602 instances of
+non-significant p-values, this module correctly detected 1486 of them,
+and incorrectly identified 153. Additionally, 91% of detections were
+true instances (positive predictive value). That is, when this module
+flags non-significant p-values in a paper, it correctly identifies an
+issue 91% of the time.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>This research was supported by the Ministère de l&#x27;éducation et de la jeunesse/Ministère de l&#x27;enseignement supérieur, de la recherche et de l&#x27;innovation/Mission Monteil pour le numérique éducatif/Programme d&#x27;investissements d&#x27;avenir, expérimentation « ProFAN », and by ProFAN-Transfert-Recherche ANR-23-PFAN-0001. We thank Denis Fedorenko for his advice on Random-Intercept Cross-Lag modelling.</p>
+<h3>Introduction</h3>
+<p>Students&#x27; reactions to errors are increasingly recognized as central to learning processes. A substantial body of research shows that errors can foster learning by highlighting knowledge gaps and triggering deeper cognitive and metacognitive processing (see e.g., Lubin et al., 2015; Metcalfe et al., 2025; Ruthig et al., 2017; Zhang &amp; Fiorella, 2023). However, learners do not benefit from errors automatically, and may rather react to them differently, ranging from seeing them as learning opportunities to perceiving them as threats (Pan et al., 2020; Tulis et al., 2016), with important consequences for achievement (Soncini et al., 2022). To account for these differences in how learners respond to errors, recent research has conceptualized error processing as involving a dynamic interplay of affective, motivational, and self-regulatory processes. Adaptive responses include maintaining motivation, engaging in error analysis, and persisting despite setbacks, whereas maladaptive responses (e.g., in people with high perfectionism) involve avoidance, disengagement, or reduced effort (Tulis et al., 2016). Importantly, experimental evidence shows that these responses can be causally shaped by learners&#x27; beliefs about errors. For example, emphasizing the negative consequences of errors reduces persistence and metacognitive engagement, whereas framing errors as learning opportunities promotes effort investment and adaptive regulation (Soncini et al., 2021; Tulis &amp; Dresel, 2025). Together, these findings indicate that the effects of errors on learning are mediated by learners&#x27; psychological responses rather than by errors per se.</p>
+<p>Despite this growing body of research, the role of individual differences in sensitivity to errors (as a more general and habitual tendency to perceive and react to errors across situations compared to situation-specific reaction to individual errors) in shaping students&#x27; motivation and self-perceived ability remains poorly understood, with sensitivity to errors mostly discussed in the framework of anxiety (see e.g., Likhanov et al., 2026). For example, concerns over one&#x27;s errors and doubts about one&#x27;s actions have been found to be positively linked with mathematics anxiety (r=.38) and negatively associated with self-efficacy in mathematics (r=-.28; McCaughey et al., 2022) -due to increased skipping of complex problems and decreased help-seeking behaviors after error commission (e.g., Wang et al., 2025a). In addition, teacher attitudes toward errors and students&#x27; shared perception of the usefulness of errors for learning have been shown to influence classroom-level motivation, with no effect on achievement (Käfer et al., 2019).</p>
+<p>Error sensitivity overlaps conceptually with perfectionistic concerns, and may be especially relevant to achievement goals because goal adoption reflects both competence-related expectations and fear of failure (Elliot &amp; Church, 1997; Seidah et al., 2002). Studying error sensitivity alongside achievement goals and self-perceived ability can therefore show how students&#x27; concerns about mistakes relate to their perceived competence and the goals they pursue: prior research links positive ability self-concepts and mastery goals to more adaptive responses to errors, and performance-avoidance goals to less adaptive responses (e.g., Steuer et al., 2013).</p>
+<p>Although research has begun to examine the links among error sensitivity, motivation, achievement and self-perceptions about ones&#x27; ability, the literature remains limited, particularly with respect to the directionality of these relationships and the role of individual differences over time. The present study addresses this gap by examining the longitudinal relations between error sensitivity, achievement goals, and self-perceived ability in French and mathematics, with a specific focus on directionality of their associations.</p>
+<h3>Error sensitivity</h3>
+<p>Error sensitivity refers to the extent to which individuals react negatively to errors or failure and has been proposed as a key psychological factor that may profoundly shape academic trajectories (e.g., Pekrun, 2024). Many students show a notable aversion to making errors, seeing them as threats rather than learning opportunities (Pan et al., 2020). Excessive sensitivity to errors, closely related to fear of failure or a high concern over errors and especially in comparison with others, can lead to maladaptive outcomes such as anxiety, avoidance of challenging tasks, or disengagement from learning, which in turn may undermine performance (Giel et al., 2020). For example, Johansson et al. (2024), analyzing data from over 200,000 children, found that sequential errors increased the probability that students would disengage from an online learning task, reflecting a decrease in motivation. Importantly, there were large individual differences in this effect: some students showed only a small drop in persistence after errors, whereas others were highly sensitive and disengaged quickly after making mistakes. These individual differences were stable across tasks, suggesting that error sensitivity may reflect a trait-like characteristic. Yet, as the authors note, &quot;little is known&quot; about why such differences exist or how they develop.</p>
+<p>One possible source of differences in error sensitivity may be teacher-and peer-related supports, such as tolerance, constructive analysis, low ridicule, and encouragement of risk-taking.</p>
+<p>These supports are often conceptualized as a positive error climate (which could contribute to lower error sensitivity at individual level) and have been studied as predictors of achievement-related variables. For example, Steuer et al. (2022) found that perceived positive error climate predicted students&#x27; affective-motivational adaptivity, with strong standardized effects (β ≈ .48-.55 across subjects; N = 937 students; 48 classrooms). Longitudinal evidence further indicates that students&#x27; adaptive reactions to errors tend to decline on average across grades, but that a more positive error climate is associated with a less negative developmental trajectory of error-related adaptivity over time (i.e., lower sensitivity to errors; N = 1,641; 69 classes; five waves; Dresel et al., 2025). At the outcome level, perceived positive error climate has been linked to better mathematics grades indirectly through more adaptive responses to errors (N = 563; 32 math classes), consistent with a pathway from error climate to responses to learning outcomes (Soncini et al., 2022).</p>
+<p>Taken together, these findings suggest that error sensitivity may play a central role in shaping how learners engage with errors and regulate their behavior in response to them. However, despite its potential importance, little is known about how error sensitivity relates to various components of motivation, such as achievement goals, and self-perceived ability, particularly over time and in terms of the directionality of these associations.</p>
+<h3>Achievement goals</h3>
+<p>Achievement goals represent a central framework for understanding students&#x27; motivation and have been extensively studied in educational psychology. A widely used conceptualization is the 2 × 2 achievement goal framework, which distinguishes between mastery and performance goals, each with approach and avoidance components (Elliot &amp; McGregor, 2001). Within this framework, mastery-approach goals reflect a focus on developing competence and mastering tasks, whereas performance-approach goals emphasize demonstrating competence relative to others. In contrast, mastery-avoidance goals involve concerns about failing to fully understand or master a task, and performance-avoidance goals reflect concerns about appearing incompetent compared to others. This framework has been particularly useful for capturing the complexity of students&#x27; motivational orientations and their distinct implications for learning and achievement (Butera et al., 2024).</p>
+<p>A large body of research has shown that these goal orientations are differentially associated with students&#x27; affect, motivation, and academic outcomes. Mastery-approach goals are associated with the use of deeper learning strategies, higher intrinsic motivation, and greater academic effort and perseverance, which in turn support better performance (Guo et al., 2023; Kaplan et al., 2002; Katz-Vago &amp; Benita, 2024). Performance-approach goals may be associated with higher performance in the short term (e.g., (Elliot &amp; McGregor, 2001; Loose et al., 2012; but see Crouzevialle &amp; Butera, 2017), but in the long run they are associated with higher anxiety (Elliot &amp; Murayama, 2008), surface learning strategies (e.g., rote learning), and lower academic self-esteem (Senko et al., 2011 (Senko et al., , 2013;; Shim et al., 2012). In contrast, avoidance-oriented goals are consistently associated with less adaptive outcomes. Both mastery-avoidance and performance-avoidance goals are associated with higher levels of anxiety and disengagement (An et al., 2022; Bruno et al., 2019; C. Darnon et al., 2007; Elliot &amp; McGregor, 2001; but see Senko &amp; Freund, 2015, for positive effect of mastery-avoidance goals).</p>
+<p>Performance-avoidance goals, in particular, have been identified as the least adaptive type, producing maladaptive motivational patterns such as disorganized studying and an increased fear of failure and focus on one&#x27;s errors (see discussion in Elliot &amp; McGregor, 2001; Moller &amp; Elliot, 2006; Świątkowski &amp; Dompnier, 2021). Some evidence suggests that mastery-avoidance goals may share some maladaptive features with performance-avoidance tendencies. For example, metaanalytic results indicate that both performance-avoidance and mastery-avoidance goals are associated with higher negative affect (worry, dissatisfaction) in students (Baranik et al., 2010; Huang, 2011). However, mastery-avoidance goals remain relatively understudied due to the complexity of the construct and concerns regarding its reliability (see Fiévé et al., 2025 for discussion), highlighting the need for further investigation. Another meta-analysis further underscores the asymmetry between approach and avoidance orientations, showing that masteryapproach goals were negatively linked with anxiety (-.10), while performance avoidance demonstrated a stronger positive association (r = .25; Diaconu-Gherasim et al., 2024). Despite this, to our knowledge, there are no studies that directly investigated the link between achievement goals and error sensitivity.</p>
+<p>Taken together, research discussed above suggests that students who are overly worried about errors may also tend to avoid making errors in front of others (performance-avoidance) or avoid failing to achieve full mastery (mastery-avoidance).</p>
+<h3>Self-perceptions of academic achievement</h3>
+<p>Beyond motivational orientations, students&#x27; own perceptions of their academic abilityoften termed academic self-concept or self-perceived achievement -have emerged as powerful predictors of educational success. A growing body of evidence indicates that how students evaluate their competence in academic domains is strongly associated with objective outcomes such as grades (see some discussion in Núñez-Regueiro et al., 2026). For example, Steinmayr and colleagues (2019) found that students&#x27; domain-specific self-concepts in mathematics and language arts were among the strongest predictors of their grades in those subjects, outperforming even their achievement goal orientations in predictive power. Such findings highlight the importance of students&#x27; self-beliefs: when learners feel capable and successful academically, they tend to achieve more.</p>
+<p>Over the past decades, researchers have increasingly emphasized the role of self-related constructs, recognizing that academic self-perceptions can both drive engagement and reflect prior successes in a reciprocal cycle (see reviews, Marsh &amp; Craven, 2006; Marsh &amp; O&#x27;Mara, 2008). For example, several meta-analyses of longitudinal relations found that students who perceive themselves as competent (i.e. higher academic self-concept / self-efficacy) tend to achieve better academic results over time, with almost equal effect in the opposite direction -those with higher achievement demonstrated higher academic self-concept later (Huang, 2011; Wu et al., 2021).</p>
+<p>Although this bidirectional relationship is widely supported, the relative strength and directionality of these effects remain debated (see a recent exchange of commentaries; Núñez-Regueiro et al., 2025; Sorjonen et al., 2025b Sorjonen et al., , 2025a)).</p>
+<p>One recent study investigated 28 anxiety-related variables in a large sample of vocational education students using network analysis (Likhanov, Fillon, et al., 2026). The results revealed a tightly interconnected cluster that included anxiety, error sensitivity, and imposter syndrome. This cluster was negatively connected to self-perceived ability in mathematics and French, and positively associated with achievement goals. Notably, mastery-approach goals were directly linked to error sensitivity and self-perceived ability, suggesting that these constructs may be embedded within a broader motivational system. However, these findings were based on crosssectional data, precluding establishing the directionality of the effects. It thus remains unclear whether the relations between self-perceived ability and motivational constructs are unidirectional (perceiving oneself as capable in mathematics leading to higher endorsement of mastery achievement goals or vice versa) or reciprocal (a cycle of effects that unravel in time). A similar question arises for error sensitivity: whether perceiving oneself as academically capable leads to lower error sensitivity and greater endorsement of approach-oriented goals, or whether lower error sensitivity fosters more positive self-perceptions and adaptive motivational orientations over time.</p>
+<h3>Potential pathways linking error sensitivity with motivation and self-perceived ability</h3>
+<p>Several theoretical pathways may underlie the relations between error sensitivity, achievement goals, and self-perceived ability; and suggest some directionality of effects. A first pathway concerns how errors are appraised and emotionally processed. As suggested by controlvalue theory, competence and value appraisals generate distinct achievement-related emotions, which in turn influence effort, strategy use, and persistence (Pekrun, 2024). In this context, error sensitivity may bias these appraisals, leading students to interpret errors as more threatening and more diagnostic of their ability. Such interpretations are likely to reduce perceived control and increase anxiety/shame, especially in high-value domains, thereby decreasing both motivation (especially approach aspect of Achievement goals) and self-perceived ability.</p>
+<p>A second pathway involves post-error regulation. In educational error-learning models, maladaptive reactions to errors involve drops in motivation and increases in dysfunctional emotions, whereas adaptive reactions maintain motivation and support regulatory behaviors such as analyzing the error and persisting (Dresel et al., 2025). If error sensitivity increases the subjective cost of errors, students may minimize future exposure by avoiding difficult items, reducing helpseeking, or choosing low-risk tasks. These patterns are consistent with avoidance-oriented motivational profiles and may, over time, reduce learning opportunities (see e.g., a vicious cycle in mathematics anxiety; Wang et al., 2025).</p>
+<p>A third pathway concerns contextual amplification or buffering via classroom error climate.</p>
+<p>A positive error climate (teacher tolerance, supportive responses, peer non-ridicule, and constructive analysis) can reframe errors as informative rather than identity-threatening (reducing error sensitivity), increasing risk-taking and sustaining students&#x27; affective-motivational adaptivity (Steuer et al., 2022). This climate pathway is particularly relevant for language learning, where participation and communicative risk-taking are central to progress and errors are socially public (Teimouri et al., 2019). Similarly, higher levels of approached-oriented motivations and selfperceived ability can be protective against errors (e.g., via ego-busting mechanisms, see e.g., research on narcissism being a protective factor against general anxiety; Papageorgiou et al., 2026), and thus result in lower error sensitivity.</p>
+<p>There is also some evidence, coming from electroencephalography (EEG), that provides insights into neuroscientific mechanisms underlying individual differences in error processing and its links with learners&#x27; motivation. Specifically, evidence from studies using event-related potentials (ERPs) suggests that individuals&#x27; level of motivation can systematically shape errormonitoring signals (this brain excitability in relation to errors is conceptually close to error sensitivity), especially the error-related negativity (ERN/Ne), and, in some cases, the later error positivity (Pe). For example, when errors are made more motivationally significant (e.g., via monetary incentives or reward/punishment contexts), ERN amplitudes tend to increase, which is consistent with enhanced performance monitoring when people are trying harder (Maruo et al., 2016; Pailing &amp; Segalowitz, 2004). In addition, when individuals become mentally fatigued or disengage over time, ERN amplitude tends to decrease, suggesting reduced investment in monitoring/cognitive control (Boksem et al., 2006).</p>
+<h3>The current study</h3>
+<p>To sum, the associations among error sensitivity, achievement goals and self-perceived ability and the directionality of these associations remain unclear. This gap is critical, as error sensitivity may represent a key mechanism through which students interpret academic challenges and regulate their engagement, with potential implications for both their motivational orientations and their self-perceptions of competence. The present study addresses this issue by examining for the first time the longitudinal relations among error sensitivity, achievement goals, and selfperceived ability -to assess the directionality of effects. Based on the reviewed literature, the current study examined whether: RQ1: higher error sensitivity leads to decrease in approachoriented motivations and self-perceived ability; RQ2: error sensitivity function as an antecedent of avoidance-oriented motivation; RQ3: higher levels of motivational orientations-particularly those involving social comparison (e.g., aiming to perform better than others, such as performanceapproach) lead to heightened sensitivity to errors; RQ4: higher levels of avoidance motivations (especially performance -due to it social component) lead to higher error sensitivity; RQ5: error sensitivity is more strongly associated with avoidance-oriented goals than with approach-oriented goals; and RQ6: whether higher self-perceived ability is associated with lower error sensitivity over time, consistent with the idea that more positive self-perceptions may buffer the perceived threat of errors.</p>
+<p>The study draws on a large sample of vocational education (VET) students who are often omitted from motivational research (Bardach et al., 2019). VET students constitute a particularly relevant population for examining error sensitivity, as vocational tracks are often perceived as a less prestigious alternative to general education pathways (European Centre for the Development of Vocational Training., 2017; Jonsson &amp; Beach, 2015; Weller et al., 2025). Moreover, up to 60% of VET students did not choose the vocational stream as their first choice. These structural characteristics have been associated with increased risks of school dropout, behavioral difficulties and emotional challenges, including higher anxiety and lower motivation (Arrighi &amp; Gasquet, 2010; Bernard &amp; Troger, 2012; Jellab, 2017; Solberg et al., 2023). In such conditions, students may be particularly vulnerable to errors due to more fragile self-perceptions and prior academic difficulties. As a result, this population provides a particularly informative case for examining how error sensitivity is related to motivational orientations and self-perceived ability over time.</p>
+<h3>Methods</h3>
+<h3>Participants</h3>
+<p>A total of 10,163 students (59% females; age mode: 16) were recruited from 109 vocational schools in France that volunteered to participate in a nationwide multi-lab longitudinal experiment conducted over three years in two cohorts (2017 and 2018) (PROFAN project; see Riant et al., 2024; Rudmann et al., 2024). The project aimed to examine the effects of two cooperative learning approaches (Jigsaw classroom and another form of collaborative learning), compared to standard instructional practices. The data analyzed in the present study were drawn from this larger project and focus on three measurement occasions spanning two academic years.</p>
+<p>Participants&#x27; age at Time 1 ranged from under 15 to over 20 years, with the majority being 16 years old. Students were enrolled in three vocational tracks: MELEC (electricity, industrial systems and maintenance; N= 2,441, 1.76% females), ASSP (nursing and care; N= 3,454, 88.85% females), and COMMERCE (sales, promoting and managing retail space; N= 4,268, 49.39 % females). Given the substantial variation in gender composition across vocational tracks, educational track and gender were accounted for in the analyses.</p>
+<p>Socio-economic status (SES) of participants was assessed using the highest level of parental education, with majority of participants coming from families with secondary education (~62%): &quot;Lower-secondary certificate/completed lower secondary education&quot; (6.4%), &quot;Short vocational upper-secondary qualification&quot; (25.1%), and &quot;Upper-secondary school-leaving qualification&quot; (31.12%). Parents of one third of participants (~30%) had higher education: &quot;Short-cycle tertiary degree/diploma&quot; (19.24%), and &quot;University or other higher-education degree&quot; (11.08%). 7.06% of parents reported that they had &quot;no diploma&quot;.</p>
+<p>The sample size of the current study is comparable (N~10,000) to previous research using the planned Random Intercept Cross-Lag Panel Models analysis (see below) with three-wave designs (Núñez-Regueiro et al., 2026; Speyer et al., 2023). However, these studies used bivariate rather than trivariate models -as in the current study. The studies that utilized trivariate models generally used smaller samples (Kristensen et al., 2023; Marsh et al., 2022; Nobakht et al., 2025).</p>
+<p>Thus, we deemed our sample sufficient to test our hypotheses.</p>
+<h3>Procedure</h3>
+<p>The present study uses data collected at three time points: Time 1 (September-October, beginning of the school year, Grade 11), Time 2 (end of Grade 11), and Time 3 (end of Grade 12). Time 1 data were collected prior to the implementation of the experimental instructional conditions in classrooms. The lag between T1 and T2 (~7.4 months) was comparable to the lag between T2 and T3 (~9.4 months).</p>
+<p>The ProFAN experimentation was commissioned and authorized by the French Ministry of Education under an official ministerial decree (Arrêté du 21 mars 2017). Formal participation agreements were signed between each participating school and the corresponding Academic Directorate (Rectorat). All data were anonymized prior to analysis, and data collection and processing complied with French data-protection regulations, including the General Data Protection Regulation (GDPR).</p>
+<p>Students completed an online survey in school computer rooms, containing multiple scales, a subset of which is analyzed in the current study (see below).</p>
+<h3>Measures</h3>
+<p>The study included measures of achievement goals, error sensitivity, self-perceived ability in French and mathematics, collected over three time points. In addition, students provided selfreported grades in these two subjects at Time 1. All measures were adapted to French, validated and demonstrated sufficient reliability in previous research as well as in the current sample. Table 1 provides an overview of the measures, including the number of items, example items, and reliability coefficients at Time 1.</p>
+<h3>Analytical strategy and data preprocessing</h3>
+<p>To investigate the longitudinal links among achievement goals, error sensitivity, and selfperceived academic ability measured, we estimated classical Cross-Lagged Panel Models (CLPMs) and more advanced Random Intercept Cross-Lagged Panel Models (RI-CLPM) across three time points.</p>
+<p>CLPM allows to test directional (quasi-causal) hypotheses by estimating whether a variable X predicts later changes in Y above and beyond prior levels of Y, while simultaneously testing the reverse path (Lüdtke &amp; Robitzsch, 2022; Selig &amp; Little, 2012). The lagged paths are essential because they impose temporal precedence and control for autoregressive stability, allowing the cross-lagged coefficients to approximate prospective influence rather than mere contemporaneous association.</p>
+<p>Given ongoing methodological discussions regarding limitations of traditional Cross-Lagged Panel Models, including their inability to disentangle stable between-person differences from within-person fluctuations over time (e.g., Hamaker et al., 2015; Orth et al., 2021), we additionally estimated Random Intercept Cross-Lagged Panel Models (RI-CLPMs; Hamaker et al., 2015). RI-CLPMs separate stable between-person variance from within-person deviations around individuals&#x27; expected levels, thereby allowing a more precise examination of temporal withinperson processes. Consequently, the estimated autoregressive and cross-lagged effects reflect whether changes in one variable relative to an individual&#x27;s typical level predict subsequent changes in another variable, rather than conflating these dynamics with stable differences between individuals. The size of lagged effects is typically evaluated using standardized coefficients, confidence intervals, and explained variance, interpreted relative to autoregressive paths and emerging empirical benchmarks (e.g., small ≈ .03, medium ≈ .07, large ≈ .12), alongside robustness checks across alternative models (Orth et al., 2024).</p>
+<p>In order to use CLPMs and RI-CLPMs analyses, we first assessed missing data, ensured measurement invariance across time points and deleted outliers.</p>
+<h3>Missing data</h3>
+<p>Attrition rates ranged from 13.45% to 13.52% between T1 and T2 and from 16.74% to 16.77% between T2 and T3, depending on the variables (see Table S3 in SOM). Little&#x27;s MCAR test with all 3 timepoints suggested data were not missing completely at random (MCAR). Therefore, analyses relied on MAR-robust estimation with auxiliary variables. Logistic regression analyses showed that Gender, Educational track, T1_Math_grade, T1_French grade, and Experimental Condition significantly predicted missingness at T2 and T3 (p&lt;.05), and, thus, were included in the SEM models (model 3 and model 4) to account for systematic missingness. Missing data were handled using full information maximum likelihood (FIML), which treats missing data by fitting the model to all non-missing data for each observation. It yields the least biased and most reliable estimates (Graham et al., 2007; Peugh &amp; Enders, 2004). All statistics reported in this article were estimated using FIML.</p>
+<h3>Measurement invariance</h3>
+<p>Prior to fitting the cross-lag models, longitudinal measurement invariance (MI) was tested for all the measures across time. MI was assessed for the four achievement goals (Mastery Avoidance, Mastery approach, Performance avoidance and Performance Approach), self-perceived ability in Maths and French and Error sensitivity, by using confirmatory factor analysis (CFA), following established procedure (Mõttus et al., 2015). Analyses were conducted on a subsample of 9064 participants with sufficient data across time points. Overall, scalar invariance was supported for the models of Performance Approach, with only partial scalar invariance supported for the remaining constructs (see details in SOM Table S1).</p>
+<h3>Outliers</h3>
+<p>Outliers were deleted using the interquartile range (IQR) criterion: [25 th percentile] -1.5 × IQR and [75 th percentile] + 1.5 × IQR (McGill et al., 1978). The number of outliers was quite significant for some variables (around 10%, see thought a simulation paper that such situation could be normal in applied contexts; Reimann et al., 2005), with the highest for two variables at T2 -Mastery approach (~11%) and Mastery avoidance (~10%). Table S2 in SOM presents exact numbers for each variable. This could be related with the nature of the sample, which comprises vocational students who usually show lower academic motivation and disengagement (see discussion in Likhanov et al., 2025). After outliers&#x27; deletion, all variables met the normality assumption. Skewness and kurtosis were in acceptable range (&lt;2; (George &amp; Mallery, 1998).</p>
+<h3>Definition of Cross-lagged panel models</h3>
+<p>Several RI-CLPMs of increasing complexity and one &quot;baseline&quot; CLPM were fitted using standard maximum likelihood (MR) estimator and accounting for missing data in specific scores with FIML. The specification of these models is summarized in Table 2. 2) Cross-lagged paths and autoregressive paths were fixed to be equal between periods.</p>
+<p>3) Grades in French and maths, as well as gender and major contributed to the study variables at T1 4) Condition was loaded on all variables at T2 and T3.</p>
+<p>Statistics for models with each of these additions included one after one are available in SOM Table S8.</p>
+<p>Model 1 The RI-CLPM included three variables assessed at three waves, with random intercepts capturing stable between- Information Criterion (BIC) is quite similar to AIC but it places a high value on parsimony of model (Kenny, 2015).</p>
+<p>We additionally attempted to estimate RI-CLPMs using individual items rather than scale total scores as observed variables. However, these models failed to converge or yielded inadmissible solutions. This was likely due to the substantially increased number of estimated parameters relative to the available sample size and measurement occasions, resulting in insufficient model stability. Instead, we incorporated the composite reliability (Raykov, 1997) of each measure at each time point into the models (model 1 to model 4) by explicitly accounting for measurement error. Specifically, the error variance of each parcel was fixed to (1 -CR) × Var(parcel), where CR denotes the composite reliability of the corresponding measure at the respective wave (following Kline, 2016). This approach allows observed variables to be corrected for unreliability while retaining a parsimonious model specification (see composite reliability estimations in Table S13).</p>
+<h3>Transparency and openness</h3>
+<p>All analyses were performed in the R statistical software package, version 4.5.0 (R Core Team, 2017). Descriptive statistics, reliabilities and correlations were computed using psych (Revelle, 2013) and PerformanceAnalytics (Peterson, 2020) packages. Little&#x27;s MCAR test was conducted using naniar package (Tierney &amp; Cook, 2023). Structural equation models (Cross-lag and measurement invariance) were assessed using lavaan package (Rosseel, 2012). Composite reliability was assessed using lavaan and semTools (Jorgensen et al., 2018). The R code for the analyses and the study data presented here are publicly accessible via: https://pasa.psycharchives.org/reviewonly/3fa6dfbfa97ceedda809be17c3c2c330dbb877022085479d399b78844450447f . All inquiries regarding the access to the data should be addressed to AUTHORS email. The analyses presented here were not pre-registered.</p>
+<h3>Results</h3>
+<h3>Descriptive statistics and correlations</h3>
+<p>Descriptive statistics for the main study variables are presented in Table 3. French and mathematics self-reported grades were measured at T1 only (M = 2.36, SD = 0.72 and M = 2.37, SD = 0.96, respectively). Overall, mean scores showed relatively modest changes from T1 to T3. Repeated Measures ANOVA indicated that endorsement of achievement goals tended to decline over time, with Masteryapproach and Performance-avoidance goals showing the most substantial changes. Self-perceived ability remained relatively stable, and error sensitivity showed a slight increase at T3, although effect size was small.</p>
+<p>Table 3 Descriptive statistics for study variables T1 T2 T3 RM ANOVA Variable N M (SD) Min-Max N M (SD) Min-Max N M (SD) Min-Max EF b SP_French 9,005 4.26 (1.09) 1.33 -7.00 7,593 4.24 (1.03) 1.83 -6.83 6,186 4.17 (0.92) 2.00 -6.50 0.004*** SP_math 9,064 3.99 (1.58) 1.00 -7,843 3.99 (1.53) 1.00 -7.00 6,523 4.05 (1.49) 1.00 -7.00 0 7.00 SP_ability a 8,920 4.11 (0.96) 1.67 -6.58 7,548 4.11 (0.86) 2.00 -6.25 6,234 4.12 (0.81) 2.17 -6.17 .001** AG_PAp 9,029 3.67 (1.63) 1.00 -7.00 7,445 3.51 (1.38) 1.00 -6.67 6,491 3.74 (1.52) 1.00 -7.00 .004* AG_MAv 9,029 4.09 (1.44) 1.00 -7.00 7,001 4.02 (1.07) 1.33 -6.67 6,491 4.13 (1.35) 1.00 -7.00 .004* AG_MAp 8,796 4.56 (1.33) 1.33 -7.00 6,922 4.23 (1.02) 2.00 -6.67 6,329 4.49 (1.24) 1.33 -7.00 .025*** AG_PAv 8,830 4.82 (1.28) 1.67 -7.00 7,557 4.54 (1.24) 1.33 -7.00 6,177 4.66 (1.18) 2.33 -7.00 .032*** Error_sens 9,015 3.70 (1.44) 1.00 -7.00 7,549 3.65 (1.28) 1.00 -6.57 6,488 3.91 (1.35) 1.00 -7.00 .009*** Note. AG_Map -Mastery Approach Goals; AG_Mav -Mastery Avoidance Goals; AG_Pap -Performance Approach Goals; AG_Pav-Performance Avoidance Goals; SP_ability -Self-perception in Math and French; SP_French -Self-perception in French; SP_math -Self-perception in Math; and Error_sens -Error sensitivity. a averaged self-perceived ability in maths and French b EF -Effect size, was assessed with partial eta squared, *p&lt;.05, **p&lt;.01, *** p&lt;.001.</p>
+<p>Bivariate correlations are reported in Figure S2 in SOM. Overall, the results showed relatively strong correlations both within and across waves. Specifically, the same constructs showed moderate stability over time. For example, error sensitivity at T1 correlated moderately and positively with error sensitivity at T2 and T3 (.45 and .38, respectively). Within each time point, error sensitivity was correlated with all four achievement goals, with r coefficients ranging from .30 to .48 and the strongest association observed for mastery-avoidance goals. These correlations were lower for T2 (.16-.27) and T3 (.17-.23). French and mathematics grades at T1 were moderately correlated with self-perceived ability in the corresponding domains (.40 and .54, respectively), but showed weaker associations with achievement goals (r ranging from .03 to 0.18) and error sensitivity (0.07 and 0.05 with French and Mathematics grade, respectively).</p>
+<h3>Relations among Achievement goals, Self-perceived academic ability, and Error Sensitivity: RI-CLPM results</h3>
+<p>Table 4 presents fit indices (RMSEA, AIC and BIC) for all tested models across the four achievement goals. According to CFI, all models showed acceptable fit (&gt;.90), with only small differences across models. The χ² tests were significant in all cases. Full statistics (χ² tests, DFs and CFI) are reported in Tables S4-S7 in the SOM. Overall, our data showed general improvement in fit indices from model 1 to model 3 (AIC, BIC and RMSEA). Model 4 (multigroup model) showed slightly better fit according to RMSEA, but both AIC and BIC indices, as well as CFI showed drop in performance of the model. Based on the overall pattern of fit indices, Model 3 was retained as the final model, and was significant for all achievement goals: mastery-approach, χ²(45, N = 7794) = 1172.156, p &lt;.001; performanceapproach, χ²(45, N = 7794) = 815.20, p &lt;.001, performance-avoidance, χ²(45, N = 7794) = 1038.55, p &lt;.001, and mastery-avoidance, χ²(45, N = 7794) = 781.21, p &lt;.001. Note. Full statistics (χ² tests, DFs and CFI) for each of the models are reported in Tables S4-S7 in the SOM.</p>
+<p>a did not identified, as the variance-covariance matrix of the estimated parameters (vcov) was not positive definite, with the smallest eigenvalue being smaller than zero.</p>
+<p>Figure 1 presents the standardized path coefficients for model 3. At the between-person level, all four achievement goals were positively and strongly linked with error sensitivity and self-perceived ability (except mastery avoidance that was weakly negatively linked with self-perceived ability). At the within-person level, higher prior levels of error sensitivity and self-perceived academic ability positively predicted three of the four subsequent achievement goals (β coefficients ranging from .04 to .08), with performance-avoidance goals as the only exception. None of these three achievement goals predicted subsequent Error sensitivity and Self-perceived ability.</p>
+<p>Performance-avoidance goals showed a different pattern. Higher scores for prior performance-avoidance goals predicted a subsequent decrease in error sensitivity (-.06), but did not predict self-perceived ability. Conversely, neither error sensitivity nor self-perceived ability predicted subsequent changes in performance avoidance Random Intercept Cross-lagged models linking achievement goals, error sensitivity, and self-perceived ability (model 3) A Mastery-approach goals B Performance-approach goals C Mastery-avoidance goals D Performance-avoidance goals Note. MAp = mastery-approach goals; PAp = performance-approach goals; PAv = performance-avoidance goals; MAv = masteryavoidance goals; SP_Ability = self-perceived ability; Error_sens = error sensitivity. The figure presents standardized coefficients for all paths. Squares represent observed variables measured three times (at T1, T2 and T3), the large circles represent within-person latent components (e.g., p1, q1 and r1), and Kappa, Omega, and Eta represent between-person random intercepts for MAp, ES, and SPA, respectively. Triangles represent constants used to estimate variable intercepts. Values shown are standardized parameter estimates, except for parameters fixed to 1 for model identification. Positive effects are shown in green, negative effects are in red, nonsignificant paths are in blue. Inclusion of control variables (gender, major, SES and grades) in model 3 showed some effects that are presented in SOM Tables S4-S7.</p>
+<p>*p&lt;.05, **p&lt;.01, *** p&lt;.001.</p>
+<h3>Comparison with traditional CLPM model</h3>
+<p>Traditional CLPMs (model 0 in Table 4 above) showed good fit to the data (see Table S8), but slightly worse than one for model 3 (RI-CLPM). Figure S3 presents results of this model (see Tables S9 -S12 for all statistics), which were quite different from those obtained with the RI-CLPMs. The traditional CLPMs consistently indicated reciprocal prospective associations between achievement goals and error sensitivity, with small effects in both directions (β = [0.05-0.14]). The path from error sensitivity to mastery-avoidance (Panel D) was, however, somewhat stronger than for the other goals (β coefficient = 0.14). In contrast, the associations between selfperceived ability and achievement goals were predominantly unidirectional. Self-perceived academic ability positively predicted subsequent mastery-approach (Panel A; β coefficient = .08), performance-approach (Panel B; 0.12), and mastery-avoidance goals (Panel C; 0.06), but not performance-avoidance goals (Panel D). The reverse paths-from achievement goals to subsequent self-perceived ability-are uniformly negligible (β = [0.01-0.02]), with a small negative effect observed only for mastery-avoidance (Panel D; -0.02).</p>
+<p>Finally, associations between error sensitivity and self-perceived ability were generally weak or non-significant across panels, suggesting that their link did not play a substantial role in the longitudinal dynamics observed. Thus, unlike the RI-CLPMs, the traditional CLPMs suggested reciprocal prospective associations between error sensitivity and achievement goals. This discrepancy is considered further in the Discussion.</p>
+<h3>Sensitivity analyses</h3>
+<p>A series of sensitivity analyses was conducted to assess the robustness of the main RI-CLPM findings to experimental condition, cohort, and the exclusion of outliers.</p>
+<h3>Accounting for experimental condition in RI-CLPM</h3>
+<p>RI-CLPM model 4 tested whether accounting for experimental condition through a multigroup specification of the model would improve fit (see e.g., Muthén et al., 2024). The multigroup specification did not improve model fit (showed better RMSEA, but worse CFI compared with model 3), and no meaningful differences in the magnitude of the path coefficients were observed across conditions.</p>
+<p>The overall pattern of associations was therefore considered robust across experimental conditions. Although some paths reached statistical significance in only one or two groups, these variations were not interpreted as evidence of between-group differences because the corresponding coefficients did not differ meaningfully in magnitude. Complete multigroup results are reported in Tables S14-S17 in the SOM.</p>
+<h3>Accounting for Cohort in RI-CLPM</h3>
+<p>Although the cohorts differed in the absolute mean scores of some study variables (e.g., Error sensitivity at T1 and three of the four achievement goals at T3; See Table S18 in SOM), adding Cohort as a clustering variable changed the fit indices (RMSEA increased, CFI decreased in all 4 traits), but the model did not convert properly for neither of 4 Achievement goals (was not identified with the smallest eigenvalue smaller than zero). This may mean that the uncertainty around the estimates cannot be estimated properly by lavaan, usually because some parameters are redundant, highly dependent, at a boundary, or not uniquely identified. This allows the lavaan to calculate path coefficients from the candidate solution, the model discrepancy function and fit indices (e.g., χ², RMSEA, and CFI) but does not allow to obtain a valid information matrix and trustworthy standard errors. Despite that, the path coefficients did not change compared to RI-CLPM model 3 in full sample and did not differ as a function of Cohort. Results on this analysis is available on request.</p>
+<h3>Full sample vs. Outliers deleted sample</h3>
+<p>The main RI-CLPM analyses were conducted after excluding outliers. To address the robustness of the findings, model 3 was reestimated in the full sample, including outliers. The results remained unchanged across all the four achievement goals, indicating that the findings were robust to the inclusions of outliers. Detailed results are available from authors on request.</p>
+<h3>Power simulation</h3>
+<p>In addition, we conducted a Monte Carlo sensitivity analysis using the powRICLPM package (Mulder, 2023) to estimate power at the achieved analytic sample size. Given the package&#x27;s bivariate scope and the same sample size for pairs withing a trivariate model, we ran a three-wave RI-CLPM simulation for the one focal pair -achievement goals with error sensitivity -evaluating the cross-lagged paths in both directions under the specified parameter assumptions of Model 2 (since the package cannot account for exogenous variables). These pairwise analyses provide approximate sensitivity estimates and do not represent power for the full trivariate model.</p>
+<p>At the achieved analytic sample size (N = 9,676), three waves, and α = .05, Monte Carlo simulations with 2,000 replications estimated power to detect a standardized cross-lagged weak effect of β = .03. For error sensitivity → achievement goals, estimated power was .858 at ICC = .30 and .782 at ICC = .50; for achievement goals → error sensitivity, power was .867 and .789, respectively. When restricting to medium effect of β = .07, for error sensitivity → achievement goals, estimated power was .998 at ICC = .30 and .985 at ICC = .50; for achievement goals → error sensitivity, power was .999 and .985, respectively.</p>
+<h3>Discussion</h3>
+<p>The current study examined the directionality of connections among the four achievement goals, self-perceived ability, and error sensitivity in a large sample of vocational education students.</p>
+<h3>RI-CLPM results revealed a clear distinction between between-person associations and prospective</h3>
+<p>within-person variations. At the between-person level, error sensitivity, self-perceived academic ability, and achievement goals were strongly associated. At the within-person level, however, prospective associations were small, mostly unidirectional, and did not support a general reciprocal cycle between error sensitivity and achievement goals. Specifically, positive within-person variations in prior error sensitivity and self-perceived ability predicted modest subsequent increases in mastery-approach, mastery-avoidance, and performance-approach goals. These three goals did not, in turn, predict subsequent changes in error sensitivity or self-perceived academic ability.</p>
+<p>Performance-avoidance goals showed a different pattern: they were predicted by neither prior error sensitivity nor self-perceived ability, but they predicted a small subsequent decrease in error sensitivity.</p>
+<h3>Contrasting conclusions from RI-CLPM and traditional CLPM</h3>
+<p>A noteworthy finding concerns the different conclusions produced by traditional CLPMs and RI-CLPM. Traditional CLPMs showed positive reciprocal links between achievement goals and error sensitivity. However, these reciprocal paths disappeared in the RI-CLPM after stable between-person differences were separated from within-person variations. This discrepancy suggests that the apparent reciprocal links identified by the traditional CLPMs probably reflect differences between students (that were captured by relatively high correlations between random intercepts in RI-CLPM), rather than &quot;true&quot; causal effects from on time point to another (see Hamaker et al., 2015 for discussion of such effects). Importantly, the traditional CLPM results were theoretically plausible and could be interpreted as reflecting a self-reinforcing cycle in which heightened sensitivity to errors strengthens goal striving, which, in turn, amplifies emotional reactions to errors (Daniels et al., 2009). The RI-CLPM results indicated that this theoretically compelling interpretation was not supported at the within-person level. This illustrates the importance of distinguishing between-person differences from within-person variations before drawing conclusions about reciprocal longitudinal associations. For this reason, the following discussion is based on the RI-CLPM results.</p>
+<p>Between-person links between achievement goals, error sensitivity and self-perceived ability</p>
+<p>The strong positive between-person associations between the four achievement goals and error sensitivity are consistent with prior cross-sectional research. Endorsing achievement goals, especially avoidance-oriented goals for which the associations with error sensitivity were stronger (.57-.69 vs. .45-.53 for approach goals -partly supporting prediction of RQ5), may increase the perceived stakes of success and failure, thereby making errors more salient and emotionally charged (e.g., Giel et al., 2020). Conversely, students who are highly sensitive to errors may adopt multiple achievement goals as strategies for coping with the possibility of failure. Self-perceived ability correlated with most goals weakly and positively (.04-.17 -highest correlation with mastery approach), with only exception being mastery avoidance goals for which correlation was negative (-.07); and with error sensitivity negatively and weakly (-.08).</p>
+<p>From a perfectionism perspective, these associations suggest that error sensitivity may be embedded in a broader dispositional system involving chronic self-evaluation, perceived competence, and standards for defining success and failure (see clusters resulted from network analysis in; Likhanov, Fillon, et al., 2026). For example, concern over mistakes has been shown to reflect not only dislike of errors but also a tendency to equate them with personal failure and anticipated negative judgment from others (Smith et al., 2022a). Self-perceived academic ability may constitute another component of this system, as academic self-concept covaries with motivation and performance over time. Thus, at the between-person level, it is theoretically plausible that students who generally feel more competent, but are also more vigilant about mistakes, would report stronger and more differentiated achievement-goal profiles than peers with lower standing on these constructs (e.g., Steinberg et al., 2024). Such a pattern also suggests that concerns over mistakes, academic self-beliefs, and goal orientations may cluster together in meaningful ways. For example, perfectionistic profiles characterized by stronger evaluative concerns, especially when combined with family pressure, have been associated with greater endorsement of performance-avoidance and work-avoidance goals. In contrast, high standards without the same level of external pressure aligned more with mastery-approach goals and stronger academic performance (Fang &amp; Sotardi, 2026). Future research needs to investigate whether distinct profiles combine error sensitivity, approach vs. avoidance motivations, and self-perceived ability, and how these profiles develop over time (see e.g., recent study on AG profiles, Fiévé et al., 2025).</p>
+<h3>Within-person associations between achievement goals, error sensitivity and self-perceived ability</h3>
+<p>Although the within-person effects were much smaller than the between-person associations, they are theoretically quite informative and supplement the results above by suggesting some directionality to the links discussed above. First, higher prior error sensitivity predicted modest subsequent increases in mastery-avoidance, mastery-approach, and performance-approach goals.</p>
+<p>Thus, changes in students&#x27; sensitivity to errors were followed by small changes in their motivation to develop competence, avoid failing to master a task, or demonstrate competence relative to others, suggesting that higher error sensitivity may not be purely debilitating -contradicting our prediction on higher error sensitivity leading to decrease in approach oriented motivations (RQ1); supporting the claim that error sensitivity will contribute to avoidance-oriented motivations (RQ2) and contradicting our prediction of higher levels of motivation (particularly performance-approach) leading to heightened sensitivity to error (RQ3).</p>
+<p>This interpretation, however, fits contemporary perfectionism theory, which distinguishes high standards from maladaptive evaluative concerns while recognizing that the two often co-occur in students (Smith et al., 2022b). When a student becomes temporarily more alert to the consequences of error, that state may activate a wish both to improve the self and to demonstrate competence, especially when this still feels controllable. Recent research similarly indicates that personal standards and perfectionistic concerns can jointly shape mastery-approach, mastery-avoidance, and performance-approach goals through distinct pathways (e.g., Cecalupo et al., 2026). In this sense, heightened error sensitivity may function as a short-term catalyst for intensified striving, even if its long-run costs are substantial.</p>
+<p>It should be noted that the changes in error sensitivity were followed only by modest changes in achievement goals, and the reverse paths were not supported (unlike in regular CLPM). Such small effects are expected in RI-CLPM logic (Hamaker et al., 2015): once stable individual differences are partialled out, the remaining wave-to-wave deviations in motivational states are usually subtle.</p>
+<p>Experience-sampling research also supports these results by showing that achievement goals are indeed dynamically adjustable in the short run, but retain substantial overall stability (Yu et al., 2025). In addition, these effects were almost similar for different goals -precluding discussion of larger susceptibility for change of a particular goal on avoidance vs. approach or mastery vs.</p>
+<p>performance opposition, suggested by RQ4.</p>
+<p>Second, self-perceived academic ability showed a similar asymmetric pattern. Higher prior selfperceived ability predicted subsequent increases in mastery-approach, mastery-avoidance, and performance-approach goals (RQ6), whereas none of the four goals predicted subsequent changes in self-perceived ability. Feeling more competent may therefore increase students&#x27; willingness to invest in achievement and pursue a range of competence-related standards. This finding is broadly consistent with previous research showing that feeling capable promotes stronger endorsement of achievement goals, particularly approach-oriented goals (Ciani et al., 2011; Moller &amp; Elliot, 2006; Seaton et al., 2014). It also aligns well with evidence that academic self-concept plays an important role in the relationship between achievement and goal orientations, even though goal orientations do not consistently mediate reciprocal self-concept-achievement relations (Steinberg et al., 2024).</p>
+<p>The absence of reverse paths may reflect the high temporal stability of perceived competence and its strong dependence on prior achievement and evaluative feedback. Controlling for baseline competence, as in the present study, substantially reduces the variance available for achievement goals to explain subsequent changes in self-perceived ability (Marsh &amp; Craven, 2006; Niepel et al., 2014).</p>
+<p>A distinct pattern for performance-avoidance goals: a defensive mechanism against social comparison and stress in relation to errors?</p>
+<p>Unlike the other three achievement goals, Performance-avoidance goals were predicted by neither prior error sensitivity nor prior self-perceived ability. More strikingly, performanceavoidance was the only achievement goal to predict subsequent error sensitivity (supporting prediction of RQ4): at the within-person level, higher prior performance-avoidance predicted a small decrease in subsequent error sensitivity. At first glance, this negative path seems counterintuitive. Given that performance-avoidance goals are generally associated with greater anxiety and internalizing symptoms, lower intrinsic motivation, and poorer achievement outcomes (Diaconu-Gherasim et al., 2024; Möcklinghoff et al., 2023), one might have expected stronger performance-avoidance to heighten students&#x27; vigilance towards mistakes and thereby increase, rather than decrease, subsequent error sensitivity.</p>
+<p>One possible explanation is that increased performance-avoidance promotes defensive disengagement from error-related information. Because students high in performance-avoidance goals are motivated to avoid appearing incompetent, attending closely to their mistakes may expose them to precisely the evidence of low ability and negative evaluation that they seek to avoid. They may therefore reduce their vigilance towards errors, process them less deeply, or withdraw from evaluative situations in which such errors become salient. This interpretation is supported by several lines of research. For example, one of the classical studies on achievement goals showed that students high in performance-avoidance goals tend to rely more on surface-level and disorganized study strategies, rather than deep processing, which may make errors less likely to be used as informative feedback for learning (Elliot, 1999). Another study showed that fear of failure indirectly predicts procrastination through emotion-regulation difficulties, fitting the idea that avoidance can function as short-term relief from aversive self-evaluative states (Duru et al., 2024).</p>
+<p>Likewise, evaluative-concerns perfectionism is associated with more avoidance and rumination after failure and with less acceptance of failure experiences (Van Der Kaap-Deeder et al., 2016).</p>
+<p>Performance-avoidance goals have also been found to be closely tied to self-handicapping, a defensive strategy that protects self-worth by creating excuses for possible failure (Schwinger &amp; Stiensmeier-Pelster, 2011). Because performance-avoidance goals are organized around avoiding the appearance of incompetence relative to others, such students may also disengage from errors and avoid evaluative situations or unfavorable social comparisons that could expose low ability (Darnon et al., 2007; Elliot &amp; McGregor, 2001). This result is especially important for vocational education students, who often have a history of unfavorable social comparisons and an unsuccessful academic track record (see discussion in Likhanov et al., 2026).</p>
+<h3>Limitations</h3>
+<p>The current study has a number of limitations. First, the data were collected in the context of an educational intervention, which may have affected the variables and their longitudinal associations. However, experimental conditions showed negligible effects in previous studies (e.g., Riant et al., 2024) and were therefore statistically controlled -brining no meaningful differences in lagged paths in the current study. Second, the temporal design warrants consideration. The time intervals between measurement waves were unequal, which could have affected the magnitude of cross-lag effects. To address this, we equalized the cross-lag loadings, which resulted in improved model fit and suggested that the effects were stable across time. In addition, the study included three measurement occasions, the minimum required to estimate an RI-CLPM (Hamaker et al., 2015; Mulder &amp; Hamaker, 2021). Although sufficient for model estimation, three waves provide only a limited representation of within-person dynamics and may not capture more transient or complex patterns of change. Another related issue is that Mathematics and French grades were available only at T1, precluding investigation of their cross-lag effects. Future longitudinal studies including more measurement occasions and repeated measures of achievement would allow a more detailed and stable characterization of these dynamics. Third, mathematics and French selfperceived ability scores were averaged to create a domain-general measure, consistent with the domain-general assessment of achievement goals and error sensitivity. However, this aggregation may have obscured domain-specific effects, which have been documented in prior research (e.g., Fiévé et al., 2025; Susperreguy et al., 2018). This loss of domain specificity might partly explain the absence of reciprocal associations between achievement goals and self-perceived academic ability. Fourth, the RI-CLPM analyses were based on total scale scores rather than item-level latent variables. This may have affected the estimates by ignoring measurement error and potential itemlevel heterogeneity. To address this concern, we applied a correction based on composite reliability at each wave, following (Kline, 2016). We also estimated item-level models, but they failed to fit adequately, likely due to their substantially greater complexity. Reliability-corrected composite scores therefore provided a reasonable compromise between accounting for measurement error and maintaining model parsimony. The within-person associations remained small, and their theoretical and practical significance should not be overstated. Effects of this magnitude are yet common when stable between-person differences are separated from within-person variations (Hamaker et al., 2015), but future studies using fully latent models are needed to obtain more precise estimates.</p>
+<p>Confidence in the main findings is strengthened by the consistency of the overall pattern across achievement goals, experimental conditions, and analyses including versus excluding outliers.</p>
+<p>Finally, gender and educational track were included as covariates, but their potential moderating effects were not examined due to unbalanced group compositions. This limits our ability to determine whether the longitudinal associations differ across these groups, despite previous evidence of moderation by gender and educational track (Likhanov, Fillon, et al., 2026).</p>
+<p>Nevertheless, including both variables as covariates allowed the main estimates to account for mean-level differences associated with these group characteristics.</p>
+<h3>Methodological, theoretical, and practical implications</h3>
+<p>Despite these limitations, the present study has several important methodological, theoretical, and practical implications. At the methodological level, the contrast between traditional CLPMs and RI-CLPMs demonstrates that the choice of longitudinal model can substantially alter the conclusions drawn. Previous cross-sectional and two-wave studies may yield associations consistent with theoretically plausible bidirectional relations, and traditional CLPMs can further reinforce this interpretation by producing reciprocal cross-lagged paths. However, such converging evidence does not establish that these processes unfold within individuals, because these designs do not adequately separate stable between-person differences from within-person variations. The present findings illustrate the added value of the RI-CLPM: reciprocal associations between error sensitivity and achievement goals disappeared once these two sources of variance were distinguished. This methodological issue extends beyond the constructs examined here. Recent research on academic self-concept and achievement similarly shows that conclusions about reciprocal relations depend on separating stable and dynamic components and on aligning model specifications with the timescale of the underlying processes (Núñez-Regueiro et al., 2026). This does not imply that RI-CLPMs should invariably replace traditional CLPMs; rather, different models capture different sources and timescales of variation and should not be interpreted interchangeably (Hamaker et al., 2015; Núñez-Regueiro et al., 2026).</p>
+<p>At the theoretical level, ruling out a general reciprocal within-person process changes how the relations among achievement goals, error sensitivity, and self-perceived academic ability should be conceptualized. Rather than forming a self-reinforcing motivational system, these constructs appear to follow an asymmetric organization in which perceived competence and sensitivity to errors contribute to subsequent goal endorsement, whereas there was no evidence that achievement goals directly predict subsequent changes in these beliefs and error-related responses.</p>
+<p>One possible interpretation is that achievement goals influence perceived competence and error sensitivity only indirectly, through the experiences associated with goal pursuit, such as engagement, goal attainment, success or failure, and evaluative feedback (Arens et al., 2017; Hübner et al., 2025; Theobald et al., 2023). These potential pathways were not examined in the present study and should be tested in future longitudinal research. The contrast between performance-avoidance and the other three goals also suggests a possible refinement of the 2 × 2 achievement-goal framework. Although mastery-approach, mastery-avoidance, and performanceapproach goals occupy different positions within this framework, they showed the same general pattern of longitudinal associations, possibly because they all involve continued investment in attaining, maintaining, or demonstrating competence. Performance-avoidance goals showed a distinct pattern and may instead involve protecting the self from evidence of incompetence by disengaging from errors and threatening evaluative information. Achievement-goal theory may therefore benefit from considering not only how competence is defined and valenced, but also whether students remain actively engaged with competence-relevant information or defensively withdraw from it.</p>
+<p>These theoretical implications, in turn, inform several practical recommendations. Because self-perceived academic ability preceded stronger endorsement of three achievement goals, teachers may support students&#x27; motivation by creating credible experiences of competence through appropriately challenging tasks, progressive scaffolding, opportunities to improve, and feedback that makes individual progress visible (Belland et al., 2013; Jang et al., 2010; Ryan &amp; Deci, 2020).</p>
+<p>However, strengthening perceived competence should not be expected, by itself, to produce more constructive responses to errors. Similarly, promoting adaptive achievement goals-even masteryapproach goals-may benefit engagement and learning but is unlikely to be sufficient to change how students respond to mistakes. Error processing should therefore be addressed directly.</p>
+<p>Teachers can ask students to identify the source of an error, explain the reasoning that produced it, compare alternative strategies, correct their response, and apply what they have learned in a subsequent attempt. At the same time, they should reduce classroom conditions that foster performance-avoidance, including public social comparison, excessive emphasis on normative evaluation, and feedback that presents errors as indicators of low ability. Framing errors as informative and revisable and providing feedback privately when appropriate may help students remain engaged with potentially threatening information. These practices could reduce defensive disengagement without encouraging indifference to mistakes, while supporting both students&#x27; sense of competence and their constructive use of errors (Steuer et al., 2022; Tulis &amp; Dresel, 2025). Given the small longitudinal effects and observational design of the study, these recommendations should nevertheless be tested directly in classroom interventions.</p>
+<h3>Conclusion</h3>
+<p>The present study investigated the longitudinal associations among achievement goals, error sensitivity, and self-perceived academic ability. The findings from traditional CLPM suggested that they form a reciprocal, self-reinforcing motivational system. However, once stable differences between persons were separated from within-person variations in RI-CLPM, their longitudinal relations proved selective and asymmetric, with performance-avoidance showing a particularly distinct pattern. More broadly, adaptive motivation cannot be inferred from stronger goal endorsement or lower error sensitivity alone, but should be understood in terms of students&#x27; continued and constructive engagement with competence-relevant feedback.</p>
+<p>Conceptualization: ML, FB, PH, PB, IR. Formal analysis: ML. Writing-original draft: ML. Writing-review and editing: FB, PH, PB, IR, MD, AB, MB, GB, AC, CD, ALDP, OD, AF, LG, EJ, VM, NMe, EMi, NMi, FNR, NO, PP, LP, CP, MR, AR, OR, FT, EPV, EV. Funding acquisition: PH, IR. Project administration: PH, IR, MD. Supervision:</p>
+<p>Model 0 assessed traditional CLPM model with cross-lagged fixed between periods and control variables included (grades in French and maths at T1, major and gender at T1, as well as experimental condition at T2 and T3) The model included: 1) autoregressive and cross-lag paths for 3 variables (one out of the four of Achievement goals, Error sensitivity and Self perceived ability) measured at 3 time points; Six longitudinal stability paths were tested: two paths liking achievement goals; two paths linking Error sensitivity and two paths linking self-perceived ability; Twelve cross-lagged path predicting change over time (from T1 to T2 and from T2 to T3) were also estimated: from AG to later Error sensitivity and Self-perceived ability; from Selfperceived ability to later AG and Errorsensitivity; and from Error Sensitivity to later AG and Self-perceived ability.</p>
+<p>person differences. Autoregressive paths represented within-person stability over time, whereas cross-lagged paths represented prospective within-person associations between variables across adjacent waves. The model included autoregressive and cross-lag paths for 3 variables (one out of the four of Achievement goals, Error sensitivity and Self perceived ability) measured at 3 time points. Six longitudinal stability paths were tested: two paths liking achievement goals; two paths linking Error sensitivity and two paths linking self-perceived ability. Twelve cross-lagged path predicting change over time (from T1 to T2 and from T2 to T3) were also estimated: from AG to later Error sensitivity and Self-perceived ability; from Selfperceived ability to later AG and Errorsensitivity; and from Error Sensitivity to later AG and Self-perceived ability. Model 2 tested whether the change from T1 The model included all previous paths but the to T2 is equal to change from T2 to T3. autoregressive paths were fixed (constrained to equality). Model 3 was fitted to control for variables emerged at the stage of attrition testing (gender, SES and educational major), as well as to control for initial achievement at T1, given that attrition check showed some effects for it and previous research highlighted importance of controlling for previous achievement when investigating self-perceived ability (Honicke et al., 2023). The model included all previous paths but also included gender, SES and educational major loaded on three variables at T1 and Experimental condition loading on the three variables at T2 and T3. In addition, the model included grades in French and maths loaded on all three variables at T1. Such achievement was not assessed at T2 and T3, which precluded building separate cross-lag models with it along with self-concept. Model 4 was fitted to control for effects of experimental condition (which also emerged during attrition testing). The original design of the ProFAN study was experimental, demonstrating small or negligible effect on a range of learning outcomes (Riant et al., 2024; Rudmann et al., 2024) and thus do not preclude usage of CLPM. However, we controlled for it in the current study (see section 2.5). Instead for including condition as a variable that loaded on variables at T2 and T3, we decided to fit a multigroup model. Thus, the same Model 3 was assessed in 3 groups: A &quot;Jigsaw&quot; condition involving strong cooperation through resource interdependence (N = 2,770), a &quot;cooperation&quot; condition involving weak cooperation without resource interdependence (N = 2,733), and a &quot;business-as-usual&quot; condition involving individual work (no cooperation; N = 2,291). Model 5 was fitted to control for effect of Cohort -to check whether the results differ This model repeated model 3, Cohort was used as a clustering variable. as a function of time of data collection. These models were estimated separately for each achievement goal and compared within domain. Model fit was evaluated using standard fit indices and thresholds (Kenny, 2015): a) the Chi-square test with a chi-square value close to zero indicating greater correspondence between the expected and observed covariance matrices; b) the Comparative Fit Index (CFI), with values closer to 1 indicating better fit (acceptable values &gt;0.90); c) the Root Mean Square Error of Approximation (RMSEA), with smaller RMSEA values indicating better model fit (acceptable is 0.08 or less; (Hu &amp; Bentler, 1999)); d) Akaike Information Criterion (AIC) with lower values indicating a better fit and so the model with the lowest AIC is the best fitting model; and e) Bayesian</p>
+<h3>Figure 1 Random</h3>
+<p>Figure1</p>
+<h3>Table 1</h3>
+<p>Description of study variablesTotal scores were computed by averaging the items associated with each construct across all measures (except grades); these total scores were used in subsequent analysis. Self-perceived ability in French and Mathematics were averaged to create a composite score of self-perceived academic ability -to match the general nature of Error sensitivity and achievement goals measures, and to reduce the number of models. These scores were used for further analysis.</p>
+<h3>Table 2</h3>
+<p>SEM models used in the study</p>
+<h3>Table 4</h3>
+<p>Fit indices for cross-lag models for 4 achievement goals, Error sensitivity and Self perceived academic ability</p>
+<h3>References</h3>
+<p>An, M., Zhang, X., Wang, Y., Zhao, J., &amp; Kong, L. (2022). Reciprocal relations between achievement goals and academic performance in a collectivist higher education context: A longitudinal study. European Journal of Psychology of Education, 37(3), 971-988. https://doi.org/10.1007/s10212-021- 00572-y</p>
+<p>Arens, A. K., Marsh, H. W., Pekrun, R., Lichtenfeld, S., Murayama, K., &amp; Vom Hofe, R. (2017). Math self-concept, grades, and achievement test scores: Long-term reciprocal effects across five waves and three achievement tracks. Journal of Educational Psychology, 109(5), 621-634. https://doi.org/10.1037/edu0000163</p>
+<p>Arrighi, J.-J., &amp; Gasquet, C. (2010). Orientation et affectation: La sélection dans l&#x27;enseignement professionnel du second degré. Formation Emploi, (109), 99- 112. https://doi.org/10.4000/formationemploi.2814</p>
+<p>Baranik, L. E., Stanley, L. J., Bynum, B. H., &amp; Lance, C. E. (2010). Examining the Construct Validity of Mastery-Avoidance Achievement Goals: A Meta- Analysis. Human Performance, 23(3), 265-282. https://doi.org/10.1080/08959285.2010.488463</p>
+<p>Bardach, L., Popper, V., Hochfellner, E., &amp; Lüftenegger, M. (2019). Associations between vocational students&#x27; perceptions of goal structures, mastery goals, and self-efficacy in five subjects-Practical relevance as a potential mediator. Empirical Research in Vocational Education and Training, 11(1), 9. https://doi.org/10.1186/s40461-019-0084-0</p>
+<p>Belland, B. R., Kim, C., &amp; Hannafin, M. J. (2013). A Framework for Designing Scaffolds That Improve Motivation and Cognition. Educational Psychologist, 48(4), 243-270. https://doi.org/10.1080/00461520.2013.838920</p>
+<p>Bernard, P.-Y., &amp; Troger, V. (2012). La réforme du baccalauréat professionnel en trois ans ou l&#x27;appropriation d&#x27;une politique éducative par les familles populaires ?: Éducation et Sociétés, n° 30(2), 131-143. https://doi.org/10.3917/es.030.0131</p>
+<p>Boksem, M. A. S., Meijman, T. F., &amp; Lorist, M. M. (2006). Mental fatigue, motivation and action monitoring. Biological Psychology, 72(2), 123-132. https://doi.org/10.1016/j.biopsycho.2005.08.007</p>
+<p>Bruno, A., Jury, M., Toczek-Capelle, M.-C., &amp; Darnon, C. (2019). Are performance- avoidance goals always deleterious for academic achievement in college? The moderating role of social class. Social Psychology of Education, 22(3), 539-555. https://doi.org/10.1007/s11218-019-09480-y</p>
+<p>Butera, F., Dompnier, B., &amp; Darnon, C. (2024). Achievement Goals: A Social Influence Cycle. Annual Review of Psychology, 75(1), 527-554. https://doi.org/10.1146/annurev-psych-013123-102139</p>
+<p>Cecalupo, A., Scarci, F., Marini, M., Parisse, C., Prislei, L., &amp; Livi, S. (2026). Students&#x27; achievement goals: Examining the impact of parental influences and perfectionism. Social Psychology of Education, 29(1), 77. https://doi.org/10.1007/s11218-026-10244-8</p>
+<p>Ciani, K. D., Sheldon, K. M., Hilpert, J. C., &amp; Easter, M. A. (2011). Antecedents and trajectories of achievement goals: A self-determination theory perspective. British Journal of Educational Psychology, 81(2), 223-243. https://doi.org/10.1348/000709910X517399</p>
+<p>Crouzevialle, M., &amp; Butera, F. (2017). Performance Goals and Task Performance: Integrative Considerations on the Distraction Hypothesis. European Psychologist, 22(2), 73-82. https://doi.org/10.1027/1016-9040/a000281</p>
+<p>Daniels, L. M., Stupnisky, R. H., Pekrun, R., Haynes, T. L., Perry, R. P., &amp; Newall, N. E. (2009). A longitudinal analysis of achievement goals: From affective antecedents to emotional effects and achievement outcomes. Journal of Educational Psychology, 101(4), 948-963. https://doi.org/10.1037/a0016096</p>
+<p>Darnon, B., &amp; Butera, F. (2005). Buts d&#x27;accomplissement, stratégies d&#x27;étude, et motivation intrinsèque: Présentation d&#x27;un domaine de recherche et validation française de l&#x27;échelle d&#x27;Elliot et McGregor (2001). L&#x27;année psychologique, 105(1), 105-131. https://doi.org/10.3406/psy.2005.3821</p>
+<p>Darnon, C., Butera, F., &amp; Harackiewicz, J. M. (2007). Achievement Goals in Social Interactions: Learning with Mastery vs. Performance Goals. Motivation and Emotion, 31(1), 61-70. https://doi.org/10.1007/s11031-006-9049-2</p>
+<p>Diaconu-Gherasim, L. R., Elliot, A. J., Zancu, A. S., Brumariu, L. E., Măirean, C., Opariuc-Dan, C., &amp; Crumpei-Tanasă, I. (2024). A Meta-Analysis of the Relations Between Achievement Goals and Internalizing Problems. Educational Psychology Review, 36(4), 109. https://doi.org/10.1007/s10648- 024-09943-5</p>
+<p>Dresel, M., Daumiller, M., Spear, J., Janke, S., Dickhäuser, O., &amp; Steuer, G. (2025). Learning from errors in mathematics classrooms: Development over 2 years in dependence of perceived error climate. British Journal of Educational Psychology, 95(1), 180-196. https://doi.org/10.1111/bjep.12697</p>
+<p>Duru, E., Balkis, M., &amp; Duru, S. (2024). Fear of failure and academic satisfaction: The mediating role of emotion regulation difficulties and procrastination. European Journal of Psychology of Education, 39(3), 2901-2914. https://doi.org/10.1007/s10212-024-00868-9</p>
+<p>Elliot, A. J. (1999). Approach and avoidance motivation and achievement goals. Educational Psychologist, 34(3), 169-189. https://doi.org/10.1207/s15326985ep3403_3</p>
+<p>Elliot, A. J., &amp; Church, M. A. (1997). A hierarchical model of approach and avoidance achievement motivation. Journal of Personality and Social Psychology, 72(1), 218-232. https://doi.org/10.1037/0022-3514.72.1.218</p>
+<p>Elliot, A. J., &amp; McGregor, H. A. (2001). A 2 × 2 achievement goal framework. Journal of Personality and Social Psychology, 80(3), 501-519. https://doi.org/10.1037/0022-3514.80.3.501</p>
+<p>Elliot, A. J., &amp; Murayama, K. (2008). On the measurement of achievement goals: Critique, illustration, and application. Journal of Educational Psychology, 100(3), 613-628. https://doi.org/10.1037/0022-0663.100.3.613</p>
+<p>European Centre for the Development of Vocational Training. (2017). Cedefop European public opinion survey on vocational education and training. Publications Office. https://data.europa.eu/doi/10.2801/264585</p>
+<p>Fang, J., &amp; Sotardi, V. (2026). Perfectionistic profiles, achievement goal orientations, and academic performance among first-year university students in New Zealand. European Journal of Psychology of Education, 41(3), 93. https://doi.org/10.1007/s10212-026-01156-4</p>
+<p>Fiévé, J., Likhanov, M., Colé, P., &amp; Régner, I. (2025). Achievement Goal Profiles and Academic Performance in Mathematics and Literacy: A Person-Centered Approach in Third Grade Students. Journal of Intelligence, 13(9), 108. https://doi.org/10.3390/jintelligence13090108</p>
+<p>George, D., &amp; Mallery, P. (1998). SPSS for Windows Step by Step: A Simple Guide and Reference. https://api.semanticscholar.org/CorpusID:58691753</p>
+<p>Giel, L. I. S., Noordzij, G., Noordegraaf-Eelens, L., &amp; Denktaş, S. (2020). Fear of failure: A polynomial regression analysis of the joint impact of the perceived learning environment and personal achievement goal orientation. Anxiety, Stress, &amp; Coping, 33(2), 123-139. https://doi.org/10.1080/10615806.2019.1695603</p>
+<p>Graham, J. W., Olchowski, A. E., &amp; Gilreath, T. D. (2007). How Many Imputations are Really Needed? Some Practical Clarifications of Multiple Imputation Theory. Prevention Science, 8(3), 206-213. https://doi.org/10.1007/s11121-007- 0070-9</p>
+<p>Hamaker, E. L., Kuiper, R. M., &amp; Grasman, R. P. P. P. (2015). A critique of the cross- lagged panel model. Psychological Methods, 20(1), 102-116. https://doi.org/10.1037/a0038889</p>
+<p>Harter, S. (1985). The self-perception profile for children: Revision of the perceived competence scale for children (Manual). 574.</p>
+<p>Honicke, T., Broadbent, J., &amp; Fuller-Tyszkiewicz, M. (2023). The self-efficacy and academic performance reciprocal relationship: The influence of task difficulty and baseline achievement on learner trajectory. Higher Education Research &amp; Development, 42(8), 1936-1953. https://doi.org/10.1080/07294360.2023.2197194</p>
+<p>Hu, L., &amp; Bentler, P. M. (1999). Cutoff criteria for fit indexes in covariance structure analysis: Conventional criteria versus new alternatives. Structural Equation Modeling: A Multidisciplinary Journal, 6(1), 1-55. https://doi.org/10.1080/10705519909540118</p>
+<p>Huang, C. (2011). Self-concept and academic achievement: A meta-analysis of longitudinal relations. Journal of School Psychology, 49(5), 505-528. https://doi.org/10.1016/j.jsp.2011.07.001</p>
+<p>Hübner, N., Winstone, N., Merk, S., &amp; Hattie, J. (2025). Teacher feedback and students&#x27; self-concept, intrinsic value, and achievement in mathematics: Juxtaposing between-and within-person perspectives on long-term reciprocal relationships. Contemporary Educational Psychology, 81, 102365. https://doi.org/10.1016/j.cedpsych.2025.102365</p>
+<p>Jang, H., Reeve, J., &amp; Deci, E. L. (2010). Engaging students in learning activities: It is not autonomy support or structure but autonomy support and structure. Journal of Educational Psychology, 102(3), 588-600. https://doi.org/10.1037/a0019682</p>
+<p>Janosz, M., Archambault, I., Lacroix, M., &amp; Lévesque, J. (2007). Trousse d&#x27;évaluation des décrocheurs potentiels (TEDP): Manuel d&#x27;utilisation.</p>
+<p>Jellab, A. (2017). Un ordre d&#x27;enseignement paradoxal: Le lycée professionnel comme analyseur des avancées et des obstacles à la démocratisation scolaire: Éducation et Sociétés, n° 38(2), 123-138. https://doi.org/10.3917/es.038.0123</p>
+<p>Johansson, A., Savi, A. O., Van Der Maas, H. L. J., &amp; Hofman, A. D. (2024). Three Strikes and Who is Out? Individual Differences in Error-Induced Quitting. PsyArXiv. https://doi.org/10.31234/osf.io/6tduv</p>
+<p>Jonsson, A.-C., &amp; Beach, D. (2015). Institutional discrimination: Stereotypes and social reproduction of &quot;class&quot; in the Swedish upper-secondary school. Social Psychology of Education, 18(4), 703-717. https://doi.org/10.1007/s11218-014-9279-1</p>
+<p>Jorgensen, T., Pornprasertmanit, S., Schoemann, A., &amp; Rosseel, Y. (2018). semTools: Useful tools for structural equation modeling (Version R package version 0.5- 1) [Computer software]. Retrieved from https://CRAN.R-project.org/package=semTools</p>
+<p>Käfer, J., Kuger, S., Klieme, E., &amp; Kunter, M. (2019). The significance of dealing with mistakes for student achievement and motivation: Results of doubly latent multilevel analyses. European Journal of Psychology of Education, 34(4), 731-753. https://doi.org/10.1007/s10212-018-0408-7</p>
+<p>Kaplan, A., Middleton, M. J., Urdan, T., &amp; Midgley, C. (2002). Achievement goals and goal structures. Goals, Goal Structures, and Patterns of Adaptive Learning., 21-53.</p>
+<p>Katz-Vago, I., &amp; Benita, M. (2024). Mastery-approach and performance-approach goals predict distinct outcomes during personal academic goal pursuit. British Journal of Educational Psychology, 94(2), 309-327. https://doi.org/10.1111/bjep.12645</p>
+<p>Kenny, D. (2015, November 24). Measuring Model Fit. http://davidakenny.net/cm/fit.htm</p>
+<p>Kline, R. B. (2016). Principles and practice of structural equation modeling (Fourth edition). The Guilford Press.</p>
+<p>Kristensen, S. M., Larsen, T. M. B., Urke, H. B., &amp; Danielsen, A. G. (2023). Academic Stress, Academic Self-efficacy, and Psychological Distress: A Moderated Mediation of Within-person Effects. Journal of Youth and Adolescence, 52(7), 1512-1529. https://doi.org/10.1007/s10964-023-01770-1</p>
+<p>Likhanov, M., Alenina, E., Bloniewski, T., Zhou, X., &amp; Kovas, Y. (2026). Anxiety and Performance in High-Achieving Adolescents: Associations Among 8 General and Specific Anxiety Measures and 13 School Grades. PsyCh Journal, 15(2), e70088. https://doi.org/10.1002/pchj.70088</p>
+<p>Likhanov, M., Fillon, A., Demolliens, M., Robert, A., Darnon, C., Huguet, P., on behalf of the ProFAN Consortium, &amp; Régner, I. (2026). Leverage Points for Wellbeing and Achievement in Vocational Education: A Network Analysis of Psychological Factors Across Gender and Majors. Behavioral Sciences, 16(5), 706. https://doi.org/10.3390/bs16050706</p>
+<p>Likhanov, M., Fillon, A., Demolliens, M., Robert, A., Darnon, C., Huguet, P., &amp; Regner, I. (2025). Network analysis of anxiety-related traits in male and female vocational students: Identifying potential targets for educational interventions. PsyArXiv. https://doi.org/10.31234/osf.io/53awj_v1</p>
+<p>Loose, F., Régner, I., Morin, A. J. S., &amp; Dumas, F. (2012). Are academic discounting and devaluing double-edged swords? Their relations to global self-esteem, achievement goals, and performance among stigmatized students. Journal of Educational Psychology, 104(3), 713-725. https://doi.org/10.1037/a0027799</p>
+<p>Lubin, A., Houdé, O., &amp; De Neys, W. (2015). Evidence for children&#x27;s error sensitivity during arithmetic word problem solving. Learning and Instruction, 40, 1-8. https://doi.org/10.1016/j.learninstruc.2015.07.005</p>
+<p>Lüdtke, O., &amp; Robitzsch, A. (2022). A Comparison of Different Approaches for Estimating Cross-Lagged Effects from a Causal Inference Perspective. Structural Equation Modeling: A Multidisciplinary Journal, 29(6), 888-907. https://doi.org/10.1080/10705511.2022.2065278</p>
+<p>Marsh, H. W., &amp; Craven, R. G. (2006). Reciprocal Effects of Self-Concept and Performance From a Multidimensional Perspective: Beyond Seductive Pleasure and Unidimensional Perspectives. Perspectives on Psychological Science, 1(2), 133-163. https://doi.org/10.1111/j.1745-6916.2006.00010.x</p>
+<p>Marsh, H. W., &amp; O&#x27;Mara, A. (2008). Reciprocal Effects Between Academic Self- Concept, Self-Esteem, Achievement, and Attainment Over Seven Adolescent Years: Unidimensional and Multidimensional Perspectives of Self-Concept. Personality and Social Psychology Bulletin, 34(4), 542-552. https://doi.org/10.1177/0146167207312313</p>
+<p>Marsh, H. W., Pekrun, R., &amp; Lüdtke, O. (2022). Directional Ordering of Self-Concept, School Grades, and Standardized Tests Over Five Years: New Tripartite Models Juxtaposing Within-and Between-Person Perspectives. Educational Psychology Review, 34(4), 2697-2744. https://doi.org/10.1007/s10648-022- 09662-9</p>
+<p>Maruo, Y., Schacht, A., Sommer, W., &amp; Masaki, H. (2016). Impacts of motivational valence on the error-related negativity elicited by full and partial errors. Biological Psychology, 114, 108-116. https://doi.org/10.1016/j.biopsycho.2015.12.004</p>
+<p>McCaughey, N. J., Hill, T. G., &amp; Mackinnon, S. P. (2022). The association of self- efficacy, anxiety sensitivity, and perfectionism with statistics and math anxiety. Personality Science, 3, e7091. https://doi.org/10.5964/ps.7091</p>
+<p>McGill, R., Tukey, J. W., &amp; Larsen, W. A. (1978). Variations of Box Plots. The American Statistician, 32(1), 12. https://doi.org/10.2307/2683468</p>
+<p>Metcalfe, J., Xu, J., Vuorre, M., Siegler, R., Wiliam, D., &amp; Bjork, R. A. (2025). Learning from errors versus explicit instruction in preparation for a test that counts. British Journal of Educational Psychology, 95(1), 11-25. https://doi.org/10.1111/bjep.12651</p>
+<p>Möcklinghoff, S., Rapoport, O., Heckel, C., Messerschmidt-Grandi, C., &amp; Ringeisen, T. (2023). Relationships between achievement goal orientations, multidimensional test anxiety, and performance -In conclusion, every facet counts. Learning and Individual Differences, 102, 102269. https://doi.org/10.1016/j.lindif.2023.102269</p>
+<p>Moller, A. C., &amp; Elliot, A. J. (2006). The 2 × 2 Achievement Goal Framework: An Overview of Empirical Research. Focus on Educational Psychology., 307-326.</p>
+<p>Mõttus, R., Realo, A., Allik, J., Esko, T., Metspalu, A., &amp; Johnson, W. (2015). Within- Trait Heterogeneity in Age Group Differences in Personality Domains and Facets: Implications for the Development and Coherence of Personality Traits. PLOS ONE, 10(3), e0119667. https://doi.org/10.1371/journal.pone.0119667</p>
+<p>Mulder, J. D. (2023). Power Analysis for the Random Intercept Cross-Lagged Panel Model Using the powRICLPM R-Package. Structural Equation Modeling: A Multidisciplinary Journal, 30(4), 645-658. https://doi.org/10.1080/10705511.2022.2122467</p>
+<p>Mulder, J. D., &amp; Hamaker, E. L. (2021). Three Extensions of the Random Intercept Cross-Lagged Panel Model. Structural Equation Modeling: A Multidisciplinary Journal, 28(4), 638-648. https://doi.org/10.1080/10705511.2020.1784738</p>
+<p>Niepel, C., Brunner, M., &amp; Preckel, F. (2014). Achievement goals, academic self- concept, and school grades in mathematics: Longitudinal reciprocal relations in above average ability secondary school students. Contemporary Educational Psychology, 39(4), 301-313. https://doi.org/10.1016/j.cedpsych.2014.07.002</p>
+<p>Nobakht, H. N., Steinsbekk, S., &amp; Wichstrøm, L. (2025). Longitudinal Relations Between Aggression, Emotion Dysregulation, and Social Skills Across Middle Childhood: A Study of Within-Person Effects. Journal of Interpersonal Violence, 08862605251393737. https://doi.org/10.1177/08862605251393737</p>
+<p>Núñez-Regueiro, F., Marsh, H. W., Bressoux, P., Batruch, A., Bouet, M., Bressan, M., Brown, G., Butera, F., Cherbonnier, A., Darnon, C., Demolliens, M., De Place, A.-L., Desrichard, O., Goron, L., Hémon, B., Huguet, P., Jamet, E., Mazenod, V., Mella, N., … Pansu, P. (2026). I Feel Competent, Therefore I Am: Self-concept and Skill Interact at Different Speeds. Educational Psychology Review, 38(1), 39. https://doi.org/10.1007/s10648-026-10131-w</p>
+<p>Núñez-Regueiro, F., Marsh, H. W., Pekrun, R., Lüdtke, O., &amp; Guo, J. (2025). The Reciprocal Effects Model is Robust to Alternative Modeling Specifications: A Response to Sorjonen et al., 2025. Educational Psychology Review, 37(3), 79. https://doi.org/10.1007/s10648-025-10059-7</p>
+<p>Orth, U., Clark, D. A., Donnellan, M. B., &amp; Robins, R. W. (2021). Testing prospective effects in longitudinal research: Comparing seven competing cross-lagged models. Journal of Personality and Social Psychology, 120(4), 1013-1034. https://doi.org/10.1037/pspp0000358</p>
+<p>Orth, U., Meier, L. L., Bühler, J. L., Dapp, L. C., Krauss, S., Messerli, D., &amp; Robins, R. W. (2024). Effect size guidelines for cross-lagged effects. Psychological Methods, 29(2), 421-433. https://doi.org/10.1037/met0000499</p>
+<p>Pailing, P. E., &amp; Segalowitz, S. J. (2004). The error-related negativity as a state and trait measure: Motivation, personality, and ERPs in response to errors. Psychophysiology, 41(1), 84-95. https://doi.org/10.1111/1469-8986.00124</p>
+<p>Pan, S. C., Sana, F., Samani, J., Cooke, J., &amp; Kim, J. A. (2020). Learning from errors: Students&#x27; and instructors&#x27; practices, attitudes, and beliefs. Memory, 28(9), 1105-1122. https://doi.org/10.1080/09658211.2020.1815790</p>
+<p>Papageorgiou, K. A., Likhanov, M., Li, J., Alenina, E., Tsigeman, E., Bartseva, K., Kovas, Y., &amp; Luo, Y. L. L. (2026). Light in the dark: Cross-sectional and longitudinal investigation of the network of Dark Triad and Big Five personality traits, resilience and anxiety. Personality and Individual Differences, 263, 114019. https://doi.org/10.1016/j.paid.2026.114019</p>
+<p>Pekrun, R. (2024). Control-Value Theory: From Achievement Emotion to a General Theory of Human Emotions. Educational Psychology Review, 36(3), 83. https://doi.org/10.1007/s10648-024-09909-7</p>
+<p>Peterson, B. (2020). PerformanceAnalytics: Econometric tools for performance and risk analysis [Computer software]. https://github.com/braverock/PerformanceAnalytics</p>
+<p>Peugh, J. L., &amp; Enders, C. K. (2004). Missing Data in Educational Research: A Review of Reporting Practices and Suggestions for Improvement. Review of Educational Research, 74(4), 525-556. https://doi.org/10.3102/00346543074004525</p>
+<p>R Core Team. (2017). R: A Language and Environment for Statistical Computing. [Computer software]. https://www.R-project.org/</p>
+<p>Raykov, T. (1997). Estimation of Composite Reliability for Congeneric Measures. Applied Psychological Measurement, 21, 173-184.</p>
+<p>Reimann, C., Filzmoser, P., &amp; Garrett, R. G. (2005). Background and threshold: Critical comparison of methods of determination. Science of The Total Environment, 346(1-3), 1-16. https://doi.org/10.1016/j.scitotenv.2004.11.023</p>
+<p>Revelle, W. (2013). Psych: Procedures for Personality and Psychological Research. R package version 1.3.2. [Computer software]. http://personality-project.org/r</p>
+<p>Riant, M., De Place, A.-L., Bressoux, P., Batruch, A., Bouet, M., Bressan, M., Brown, G., Butera, F., Cepeda, C., Cherbonnier, A., Darnon, C., Demolliens, M., Desrichard, O., Ducros, T., Goron, L., Hémon, B., Huguet, P., Jamet, E., Martinez, R., … Pansu, P. (2024). Does the Jigsaw method improve motivation and self-regulation in vocational high schools? Contemporary Educational Psychology, 77, 102278. https://doi.org/10.1016/j.cedpsych.2024.102278</p>
+<p>Rosseel, Y. (2012). lavaan: An R Package for Structural Equation Modeling. Journal of Statistical Software, 48(2), 1-36.</p>
+<p>Rudmann, O., Batruch, A., Visintin, E. P., Sommet, N., Bressoux, P., Darnon, C., Bouet, M., Bressan, M., Brown, G., Cepeda, C., Cherbonnier, A., Demolliens, M., De Place, A.-L., Desrichard, O., Ducros, T., Goron, L., Hemon, B., Huguet, P., Jamet, E., … Butera, F. (2024). Cooperative learning reduces the gender gap in perceived social competences: A large-scale nationwide longitudinal experiment. Journal of Educational Psychology, 116(6), 903-920. https://doi.org/10.1037/edu0000870</p>
+<p>Ruthig, J. C., Jones, K., Vanderzanden, K., Gamblin, B. W., &amp; Kehn, A. (2017). Learning From One&#x27;s Mistakes: Understanding Changes in Performance Estimates as a Function of Experience, Evaluative Feedback, and Post- Feedback Emotions. Social Psychology, 48(4), 185-193. https://doi.org/10.1027/1864-9335/a000307</p>
+<p>Ryan, R. M., &amp; Deci, E. L. (2020). Intrinsic and extrinsic motivation from a self- determination theory perspective: Definitions, theory, practices, and future directions. Contemporary Educational Psychology, 61, 101860. https://doi.org/10.1016/j.cedpsych.2020.101860</p>
+<p>Schwinger, M., &amp; Stiensmeier-Pelster, J. (2011). Prevention of self-handicapping- The protective function of mastery goals. Learning and Individual Differences, 21(6), 699-709. https://doi.org/10.1016/j.lindif.2011.09.004</p>
+<p>Seaton, M., Parker, P., Marsh, H. W., Craven, R. G., &amp; Yeung, A. S. (2014). The reciprocal relations between self-concept, motivation and achievement: Juxtaposing academic self-concept and achievement goal orientations for mathematics success. Educational Psychology, 34(1), 49-72. https://doi.org/10.1080/01443410.2013.825232</p>
+<p>Seidah, A., Bouffard, T., &amp; Vezeau, C. (2002). La mesure du perfectionnisme: Validation canadienne-française du Positive and Negative Perfectionism Scale. Canadian Journal of Behavioural Science / Revue Canadienne Des Sciences Du Comportement, 34(3), 168-171. https://doi.org/10.1037/h0087169</p>
+<p>Selig, J. P., &amp; Little, T. D. (2012). Autoregressive and cross-lagged panel analysis for longitudinal data. Handbook of Developmental Research Methods., 265-278.</p>
+<p>Senko, C., &amp; Freund, A. M. (2015). Are mastery-avoidance achievement goals always detrimental? An adult development perspective. Motivation and Emotion, 39(4), 477-488. https://doi.org/10.1007/s11031-015-9474-1</p>
+<p>Senko, C., Hama, H., &amp; Belmonte, K. (2013). Achievement goals, study strategies, and achievement: A test of the &quot;learning agenda&quot; framework. Learning and Individual Differences, 24, 1-10. https://doi.org/10.1016/j.lindif.2012.11.003</p>
+<p>Senko, C., Hulleman, C. S., &amp; Harackiewicz, J. M. (2011). Achievement Goal Theory at the Crossroads: Old Controversies, Current Challenges, and New Directions. Educational Psychologist, 46(1), 26-47. https://doi.org/10.1080/00461520.2011.538646</p>
+<p>Shim, S. S., Ryan, A. M., &amp; Cassady, J. (2012). Changes in self-esteem across the first year in college: The role of achievement goals. Educational Psychology, 32(2), 149-167. https://doi.org/10.1080/01443410.2011.627837</p>
+<p>Smith, M. M., Sherry, S. B., Ge, S. Y. J., Hewitt, P. L., Flett, G. L., &amp; Baggley, D. L. (2022a). Multidimensional perfectionism turns 30: A review of known knowns and known unknowns. Canadian Psychology / Psychologie Canadienne, 63(1), 16-31. https://doi.org/10.1037/cap0000288</p>
+<p>Smith, M. M., Sherry, S. B., Ge, S. Y. J., Hewitt, P. L., Flett, G. L., &amp; Baggley, D. L. (2022b). Multidimensional perfectionism turns 30: A review of known knowns and known unknowns. Canadian Psychology / Psychologie Canadienne, 63(1), 16-31. https://doi.org/10.1037/cap0000288</p>
+<p>Solberg, S., Laundal, Ø., &amp; Garrels, V. (2023). Scoping Review of Positive Mental Health Research for Students in Vocational Education and Training. International Journal for Research in Vocational Education and Training, 10(2), 258-287. https://doi.org/10.13152/IJRVET.10.2.6</p>
+<p>Soncini, A., Matteucci, M. C., &amp; Butera, F. (2021). Error handling in the classroom: An experimental study of teachers&#x27; strategies to foster positive error climate. European Journal of Psychology of Education, 36(3), 719-738. https://doi.org/10.1007/s10212-020-00494-1</p>
+<p>Soncini, A., Visintin, E. P., Matteucci, M. C., Tomasetto, C., &amp; Butera, F. (2022). Positive error climate promotes learning outcomes through students&#x27; adaptive reactions towards errors. Learning and Instruction, 80, 101627. https://doi.org/10.1016/j.learninstruc.2022.101627</p>
+<p>Sorjonen, K., Melin, B., &amp; Nilsonne, G. (2025a). Inconclusive Evidence for a Prospective Effect of Academic Self-Concept on Achievement: A Simulated Reanalysis and Comment on Marsh et al. (2024). Educational Psychology Review, 37(2), 30. https://doi.org/10.1007/s10648-025-10008-4</p>
+<p>Sorjonen, K., Melin, B., &amp; Nilsonne, G. (2025b). Still No Convincing Evidence for a Causal Effect of Academic Self-Concept on Achievement: A Reply to Núñez- Regueiro et al., 2025. Educational Psychology Review, 37(4), 98. https://doi.org/10.1007/s10648-025-10083-7</p>
+<p>Speyer, L. G., Ushakova, A., Blakemore, S.-J., Murray, A. L., &amp; Kievit, R. (2023). Testing for Within × Within and Between × Within Moderation Using Random Intercept Cross-Lagged Panel Models. Structural Equation Modeling: A Multidisciplinary Journal, 30(2), 315-327. https://doi.org/10.1080/10705511.2022.2096613</p>
+<p>Steinberg, O., Kulakow, S., &amp; Raufelder, D. (2024). Academic self-concept, achievement, and goal orientations in different learning environments. European Journal of Psychology of Education, 39(4), 3893-3917. https://doi.org/10.1007/s10212-024-00825-6</p>
+<p>Steinmayr, R., Weidinger, A. F., Schwinger, M., &amp; Spinath, B. (2019). The Importance of Students&#x27; Motivation for Their Academic Achievement -Replicating and Extending Previous Findings. Frontiers in Psychology, 10, 1730. https://doi.org/10.3389/fpsyg.2019.01730</p>
+<p>Steuer, G., Rosentritt-Brunn, G., &amp; Dresel, M. (2013). Dealing with errors in mathematics classrooms: Structure and relevance of perceived error climate. Contemporary Educational Psychology, 38(3), 196-210. https://doi.org/10.1016/j.cedpsych.2013.03.002</p>
+<p>Steuer, G., Tulis, M., &amp; Dresel, M. (2022). Is dealing with errors in the classroom specific for school subjects? A study of the error climate in mathematics, German, and English. European Journal of Psychology of Education, 37(2), 355-373. https://doi.org/10.1007/s10212-020-00525-x</p>
+<p>Susperreguy, M. I., Davis-Kean, P. E., Duckworth, K., &amp; Chen, M. (2018). Self- Concept Predicts Academic Achievement Across Levels of the Achievement Distribution: Domain Specificity for Math and Reading. Child Development, 89(6), 2196-2214. https://doi.org/10.1111/cdev.12924</p>
+<p>Świątkowski, W., &amp; Dompnier, B. (2021). When pursuing bad goals for good reasons makes it even worse: A social value approach to performance- avoidance goal pursuit. Social Psychology of Education, 24(3), 653-677. https://doi.org/10.1007/s11218-021-09623-0</p>
+<p>Teimouri, Y., Goetze, J., &amp; Plonsky, L. (2019). SECOND LANGUAGE ANXIETY AND ACHIEVEMENT: A META-ANALYSIS. Studies in Second Language Acquisition, 41(2), 363-387. https://doi.org/10.1017/S0272263118000311</p>
+<p>Theobald, M., Bäulke, L., Bellhäuser, H., Breitwieser, J., Mattes, B., Brod, G., Daumiller, M., Dresel, M., Liborius, P., &amp; Nückles, M. (2023). A multi-study examination of intra-individual feedback loops between competence and value beliefs, procrastination, and goal achievement. Contemporary Educational Psychology, 74, 102208. https://doi.org/10.1016/j.cedpsych.2023.102208</p>
+<p>Tierney, N., &amp; Cook, D. (2023). Expanding Tidy Data Principles to Facilitate Missing Data Exploration, Visualization and Assessment of Imputations. Journal of Statistical Software, 105(7). https://doi.org/10.18637/jss.v105.i07</p>
+<p>Tulis, M., &amp; Dresel, M. (2025). Effects on and consequences of responses to errors: Results from two experimental studies. British Journal of Educational Psychology, 95(1), 143-161. https://doi.org/10.1111/bjep.12686</p>
+<p>Tulis, M., Steuer, G., &amp; Dresel, M. (2016). Learning from errors: A model of individual processes. Frontline Learning Research, 4(4), 12-26. https://doi.org/10.14786/flr.v4i2.168</p>
+<p>Van Der Kaap-Deeder, J., Soenens, B., Boone, L., Vandenkerckhove, B., Stemgée, E., &amp; Vansteenkiste, M. (2016). Evaluative concerns perfectionism and coping with failure: Effects on rumination, avoidance, and acceptance. Personality and Individual Differences, 101, 114-119. https://doi.org/10.1016/j.paid.2016.05.063</p>
+<p>Wang, Y., Zhang, J., &amp; Pellicioni, M. S. (2025a). Math anxiety is associated with skipping problems and less help-seeking behavior after error commission. Learning and Individual Differences, 120, 102681. https://doi.org/10.1016/j.lindif.2025.102681</p>
+<p>Wang, Y., Zhang, J., &amp; Pellicioni, M. S. (2025b). Math anxiety is associated with skipping problems and less help-seeking behavior after error commission. Learning and Individual Differences, 120, 102681. https://doi.org/10.1016/j.lindif.2025.102681</p>
+<p>Weller, J., Fogelgarn, R., &amp; O&#x27;Reilly-Briggs, K. (2025). The impact of teacher qualification on vocational schoolteachers&#x27; professional identity. Educational Research, 67(4), 504-524. https://doi.org/10.1080/00131881.2025.2558969</p>
+<p>Wu, H., Guo, Y., Yang, Y., Zhao, L., &amp; Guo, C. (2021). A Meta-analysis of the Longitudinal Relationship Between Academic Self-Concept and Academic Achievement. Educational Psychology Review, 33(4), 1749-1778. https://doi.org/10.1007/s10648-021-09600-1</p>
+<p>Yu, J., Järvinen, J., &amp; Salmela-Aro, K. (2025). Momentary achievement goal profiles: Associations with instructional activities, interest, and anxiety. Learning and Instruction, 95, 102037. https://doi.org/10.1016/j.learninstruc.2024.102037</p>
+<p>Zhang, Q., &amp; Fiorella, L. (2023). An integrated model of learning from errors. Educational Psychologist, 58(1), 18-34. https://doi.org/10.1080/00461520.2022.2149525</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
