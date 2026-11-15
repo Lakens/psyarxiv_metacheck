@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Multi-Study Exploration Across Controlled
+Indoor Spaces: Initial Evaluation of the Feasibility and Sensitivity of
+the NeuroDesign/NeuroArchitecture Index (NDIX)</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Multi-Study Exploration Across Controlled Indoor Spaces: Initial
+Evaluation of the Feasibility and Sensitivity of the
+NeuroDesign/NeuroArchitecture Index (NDIX)
+</p>
+<p class="meta">
+2026-11-15 · Metacheck 0.4.4.2
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>1</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>2</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>2</b><span>fine</span></a><a class="count na" href="#na"><b>11</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Exact
+P-Values</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 3 imprecise <em>p</em> values out of 18 detected <em>p</em>
+values.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Reporting <em>p</em> values imprecisely (e.g., <em>p</em> &lt; .05)
+reduces transparency, reproducibility, and re-use (e.g., in <em>p</em>
+value meta-analyses). Best practice is to report exact p-values with
+three decimal places (e.g., <em>p</em> = .032) unless <em>p</em> values
+are smaller than 0.001, in which case you can use <em>p</em> &lt;
+.001.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (e.g., “decreased at the <em>p</em>
+&lt; .05 significance threshold”).</p>
+<div style="max-height:8em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+P-Value
+</th>
+<th style="text-align:left;">
+Text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p &lt; .01
+</td>
+<td style="text-align:left;">
+Shapiro-Wilk tests indicated that the paired difference distributions
+departed from normality for NDIX Overall, Safety and Accessibility,
+Sensory and Cognitive (all p &lt; .01) but not for Emotional, Social or
+Naturalness (all p ≥ .48); tests were selected accordingly.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p ≥ .48
+</td>
+<td style="text-align:left;">
+Shapiro-Wilk tests indicated that the paired difference distributions
+departed from normality for NDIX Overall, Safety and Accessibility,
+Sensory and Cognitive (all p &lt; .01) but not for Emotional, Social or
+Naturalness (all p ≥ .48); tests were selected accordingly.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .05
+</td>
+<td style="text-align:left;">
+Test selection followed Shapiro-Wilk tests on the paired difference
+scores: Wilcoxon signed-rank where normality was rejected (p &lt; .05),
+paired-samples t otherwise.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>The APA manual states: Report exact <em>p</em> values (e.g.,
+<em>p</em> = .031) to two or three decimal places. However, report
+<em>p</em> values less than .001 as <em>p</em> &lt; .001. However, 2
+decimals is too imprecise for many use-cases (e.g., a <em>p</em> value
+meta-analysis), so report <em>p</em> values with three digits.</p>
+<p>American Psychological Association (2020). <em>Publication manual of
+the American Psychological Association</em>, 7 edition. American
+Psychological Association.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="improve">To check <span class="n">(2)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 3 non-significant p values that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p ≥ .48
+</td>
+<td style="text-align:left;">
+Shapiro-Wilk tests indicated that the paired difference distributions
+departed from normality for NDIX Overall, Safety and Accessibility,
+Sensory and Cognitive (all p &lt; .01) but not for Emotional, Social or
+Naturalness (all p ≥ .48); tests were selected accordingly.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .126
+</td>
+<td style="text-align:left;">
+For NDIX Overall the effect of condition was large, F(1, 40) = 145.03, p
+&lt; .001, ηp² = .78, and the condition × order interaction was not
+significant, F(1, 40) = 2.44, p = .126, ηp² = .06.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .112
+</td>
+<td style="text-align:left;">
+WHO-5 scores, reported here on the transformed 0-100 scale, did not
+differ between the two environments, M = 49.60 in the standard condition
+and M = 54.20 in the enriched condition, t(41) = 1.63, p = .112, dz =
+0.25, 95% CI [-0.06, 0.56].
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Effect Sizes in t-tests and F-tests</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 t-test and/or F-test where effect sizes are not reported.
+Check these tests in the table below, and consider adding effect
+sizes.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We recommend checking the sentences below, and add any missing effect
+sizes.</p>
+<p>For t-tests with a reported d, coherence checks yielded 6 matches
+under assumptions.</p>
+<p>For F-tests with a reported eta-squared effect size, coherence checks
+yielded 4 matches under assumptions.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A significant main effect of order was also observed for NDIX Overall,
+F(1, 40) = 9.53, p = .004, and for four domains.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating that effect sizes are often
+not reported:</p>
+<ul>
+<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
+(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
+Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
+</ul>
+<p>For educational material on reporting effect sizes:</p>
+<ul>
+<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
+to Effect Sizes and Confidence Intervals</a></li>
+</ul>
+</div>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<div style="max-height:15em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+For NDIX Overall the effect of condition was large, F(1, 40) = 145.03, p
+&lt; .001, ηp² = .78, and the condition × order interaction was not
+significant, F(1, 40) = 2.44, p = .126, ηp² = .06.
+</td>
+<td style="text-align:left;">
+ηp² = .78
+</td>
+<td style="text-align:left;">
+F(1, 40) = 145.03
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+partial_eta_squared
+</td>
+<td style="text-align:left;">
+Match under partial eta-squared formula from F and dfs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+For NDIX Overall the effect of condition was large, F(1, 40) = 145.03, p
+&lt; .001, ηp² = .78, and the condition × order interaction was not
+significant, F(1, 40) = 2.44, p = .126, ηp² = .06.
+</td>
+<td style="text-align:left;">
+ηp² = .06
+</td>
+<td style="text-align:left;">
+F(1, 40) = 2.44
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+partial_eta_squared
+</td>
+<td style="text-align:left;">
+Match under partial eta-squared formula from F and dfs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The enrichment effect on NDIX Overall was closely comparable in the
+enriched-first group, t(20) = 8.46, p &lt; .001, dz = 1.85, and the
+standard-first group, t(20) = 8.82, p &lt; .001, dz = 1.92.
+</td>
+<td style="text-align:left;">
+dz = 1.85
+</td>
+<td style="text-align:left;">
+t(20) = 8.46
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+paired_dz
+</td>
+<td style="text-align:left;">
+Match under paired-samples dz assumption.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The enrichment effect on NDIX Overall was closely comparable in the
+enriched-first group, t(20) = 8.46, p &lt; .001, dz = 1.85, and the
+standard-first group, t(20) = 8.82, p &lt; .001, dz = 1.92.
+</td>
+<td style="text-align:left;">
+dz = 1.92
+</td>
+<td style="text-align:left;">
+t(20) = 8.82
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+paired_dz
+</td>
+<td style="text-align:left;">
+Match under paired-samples dz assumption.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+At the domain level, however, the interaction was significant for Safety
+and Accessibility, F(1, 40) = 9.08, p = .004, ηp² = .19, and marginal
+for Sensory, F(1, 40) = 4.13, p = .049, ηp² = .09.
+</td>
+<td style="text-align:left;">
+ηp² = .19
+</td>
+<td style="text-align:left;">
+F(1, 40) = 9.08
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+partial_eta_squared
+</td>
+<td style="text-align:left;">
+Match under partial eta-squared formula from F and dfs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+At the domain level, however, the interaction was significant for Safety
+and Accessibility, F(1, 40) = 9.08, p = .004, ηp² = .19, and marginal
+for Sensory, F(1, 40) = 4.13, p = .049, ηp² = .09.
+</td>
+<td style="text-align:left;">
+ηp² = .09
+</td>
+<td style="text-align:left;">
+F(1, 40) = 4.13
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+partial_eta_squared
+</td>
+<td style="text-align:left;">
+Match under partial eta-squared formula from F and dfs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A significant main effect of order was also observed for NDIX Overall,
+F(1, 40) = 9.53, p = .004, and for four domains.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(1, 40) = 9.53
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WHO-5 scores, reported here on the transformed 0-100 scale, did not
+differ between the two environments, M = 49.60 in the standard condition
+and M = 54.20 in the enriched condition, t(41) = 1.63, p = .112, dz =
+0.25, 95% CI [-0.06, 0.56].
+</td>
+<td style="text-align:left;">
+dz = 0.25
+</td>
+<td style="text-align:left;">
+t(41) = 1.63
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+paired_dz
+</td>
+<td style="text-align:left;">
+Match under paired-samples dz assumption.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Emotional increased from M = 49.72 (SD = 5.65) to M = 59.98 (SD = 6.10),
+t(41) = 10.32, p &lt; .001, dz = 1.59, 95% CI [1.14, 2.05].
+</td>
+<td style="text-align:left;">
+dz = 1.59
+</td>
+<td style="text-align:left;">
+t(41) = 10.32
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+paired_dz
+</td>
+<td style="text-align:left;">
+Match under paired-samples dz assumption.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Social increased from M = 53.51 (SD = 9.45) to M = 66.13 (SD = 9.03),
+t(41) = 8.20, p &lt; .001, dz = 1.27, 95% CI [0.86, 1.67].
+</td>
+<td style="text-align:left;">
+dz = 1.27
+</td>
+<td style="text-align:left;">
+t(41) = 8.20
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+paired_dz
+</td>
+<td style="text-align:left;">
+Match under paired-samples dz assumption.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Naturalness increased from M = 27.76 (SD = 7.56) to M = 56.10 (SD =
+9.14), t(41) = 19.43, p &lt; .001, dz = 3.00, 95% CI [2.29, 3.71].
+</td>
+<td style="text-align:left;">
+dz = 3.00
+</td>
+<td style="text-align:left;">
+t(41) = 19.43
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+paired_dz
+</td>
+<td style="text-align:left;">
+Match under paired-samples dz assumption.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</details>
+</div>
+<h2 id="fine">Fine <span class="n">(2)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>We detected no errors in t-tests or F-tests.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(11)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>Before the environmental assessment, participants completed the
+five-item World Health Organization Well-Being Index (WHO-5), a brief
+self-report measure of subjective psychological wellbeing over the
+preceding two weeks (Topp et al., 2015).</p>
+</blockquote>
+<blockquote>
+<p>All participants were briefed on the purpose of the research and
+provided informed consent before taking part.</p>
+</blockquote>
+<blockquote>
+<p>Participants were informed that participation was voluntary and that
+they could withdraw at any point without consequence, and were debriefed
+at the end of each session.</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>Ethics approval and consent Study 1 was approved by the University
+College London Research Ethics Committee (UCL Research Ethics Approval
+ID: EP/2018/008), and Study 2 was approved under a separate application
+to the same committee (UCL Research Ethics Approval ID:
+EP/2024/020).</p>
+</blockquote>
+<blockquote>
+<p>The full NDIX item bank and deidentified pilot data are not publicly
+released at this stage, due to ongoing validation and standardisation
+processes, but may be shared on request subject to University College
+London Research Ethics Committee approval (IDs: EP/2018/008 for Study 1
+and EP/2024/020 for Study 2).</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 49 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 49 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 49 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold” or “legend”). Notes in other
+forms, such as a marker after the p-value (“p &lt; .05 (*)“), are still
+flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 225 papers containing 405 instances of
+non-exact p-values, the module correctly detected 269 cases (true
+positives) and incorrectly identified 78 (false positives). It missed
+136 instances of imprecisely reported p-values (false negatives) and
+correctly identified 4557 cases of precisely reported p-values (true
+negative). Additionally, 78% of positive detections were correct
+(positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 194 papers with 1602 instances of
+non-significant p-values, this module correctly detected 1486 of them,
+and incorrectly identified 153. Additionally, 91% of detections were
+true instances (positive predictive value). That is, when this module
+flags non-significant p-values in a paper, it correctly identifies an
+issue 91% of the time.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>People spend much of their lives in built environments, yet methods for evaluating how these environments are experienced remain limited. This research reports the first multi-study application of the NeuroDesign/NeuroArchitecture Index (NDIX), a multidimensional measure of environmental experience, and examines whether it is sensitive to meaningful differences between standard and environmentally enriched indoor spaces. Study 1 used a randomised repeated-measures crossover design in which 42 participants evaluated a standard quiet room and an enriched redesign of the same space. Study 2 (N = 40) evaluated standard and enriched innovation environments using complementary repeated-measures (n = 19) and independent-groups (n = 20 per group) comparisons. In both settings the instrument was administered in full in a single short session. In Study 1, NDIX Overall was higher in the enriched environment than in the standard environment (dz = 1.83), with higher scores across all six domains after false discovery rate correction and an equivalent effect in both presentation orders. Internal consistency was good for NDIX Overall (α = .87 and .89) but variable across domains (α = .40 to .77). Free-text descriptions of the most salient change centred on green plants, artwork and layout. Study 2 reproduced the pattern, with NDIX Overall higher in the enriched environment both within participants (dz = 2.50) and between independent groups (d = 1.90). The findings indicate that the NDIX is practical to administer and sensitive to meaningful environmental variation, while further psychometric evaluation is required across populations, environmental contexts, and more subtly differing settings.</p>
+<h3>1. Introduction</h3>
+<p>To understand how environments influence cognitive and emotional wellbeing, the concept of enriched environments offers valuable insights. Previous studies in humans and animal models demonstrate that exposure to complex, sensory-rich settings promotes neurogenesis and neural plasticity, particularly in areas such as the hippocampus and prefrontal cortex (Diamond, Krech, &amp; Rosenzweig, 1964; Eriksson et al., 1998; Fuchs &amp; Flügge, 2014; Kempermann, 2019; Kempermann, Kuhn, &amp; Gage, 1997; Kühn et al., 2017; Diamond et al., 1972; Diamond, 2001; Spalding et al., 2013; van Praag, Kempermann, &amp; Gage, 2000).</p>
+<p>Similarly, theories of embedded and embodied cognition suggest that cognitive and emotional processes are fundamentally shaped by physical and sensory interactions with the environment (Gath-Morad et al., 2024; Zisch, Gage, &amp; Spiers, 2014; Djebbara et al., 2019; Djebbara, Fich, &amp; Gramann, 2021; Valentine et al., 2024). Environments that promote sensory and bodily engagement have been associated with enhanced effective connectivity and regulatory influence between the amygdala and prefrontal cortex, regions crucial for emotional regulation (Barbas &amp; García-Cabezas, 2016; Barrett et al., 2007). In sum, biophilic and enriched environments may support emotional regulation, stress-reduction, interoceptive awareness, cognitive flexibility, and mental health. This body of work motivates the study of environmental quality, but it also makes plain how far the available evidence sits from the decisions designers actually make. Much of it derives from animal models, from tightly controlled laboratory exposures, or from neural measures obtained under conditions unlike ordinary occupancy. It establishes that environments matter to the brain; it does not establish how a given room, street, or building is experienced by the people in it, nor does it supply a way of recording that experience so that one setting can be compared with another. The present studies address the second of these problems rather than the first: they concern the measurement of environmental experience, and make no claim about underlying neural or physiological mechanisms.</p>
+<h3>1.1. NeuroArchitecture and NeuroDesign</h3>
+<p>The emerging interdisciplinary fields known as neuroarchitecture and neurodesign explore the intersection of how the brain reacts and responds to architecture and design, offering new perspectives for implementing solutions that can profoundly enhance built environments (Coburn, Vartanian, &amp; Chatterjee, 2017; Eberhard, 2009; Guite, Clark, &amp; Ackrill, 2006; Kirk, Skov, Hulme, Christensen, &amp; Zeki, 2009; Mallgrave, 2010; Pallasmaa, 2024; Sternberg &amp; Wilson, 2006; Sjövall &amp; Spiers, 2024; Valentine et al., 2025; Vartanian et al., 2013; Zisch, Gage, &amp; Spiers, 2014; Zisch et al., 2024). A key aim in these fields is to test real-world environments that account for a comprehensive and holistic approach including embodied cognition, complementing laboratory studies and focusing on how spaces can balance risk and resilience factors while supporting human, ecological, and economic sustainability. One dimension of neuroarchitecture and neurodesign is the recognition of how built environments impact mental health, which has led to a focus on biophilic design, grounded in theories that explore an intrinsic connection to nature (Sjövall &amp; Spiers, 2024). The following theoretical frameworks, including the Biophilia Hypothesis (Kellert &amp; Wilson, 1993), evolutionary perspectives, and established models of cognitive and emotional restoration, provide insight into how biophilic design can enhance wellbeing by addressing human psychological and physiological needs. Despite growing evidence that built environments influence human experience, there remains a need for multidimensional methods capable of detecting meaningful differences across controlled and real-world settings. Existing approaches capture parts of this. Building certification schemes such as WELL, LEED, and BREEAM assess provision and compliance, but record what a building contains rather than how it is experienced. Environmental audit instruments inventory physical features reliably and at scale, yet are similarly designed around presence rather than perception. Single-construct scales of perceived restorativeness, environmental preference, or satisfaction capture one dimension of experience well, but cannot indicate whether two settings differ in safety, sensory quality, emotional tone, cognitive ease, social affordance, or naturalness, nor which of these a design change has altered. What is missing is an instrument that represents environmental experience as a differentiated profile across theoretically motivated dimensions while remaining brief enough to administer in situ. The NDIX was developed to meet that requirement.</p>
+<h3>1.2. Aims and hypotheses</h3>
+<p>The primary aim was to examine whether the NDIX was sensitive to meaningful differences between standard and environmentally enriched indoor environments. Two hypotheses were tested: 1.</p>
+<p>NDIX Overall scores would be higher for environmentally enriched environments than for standard comparison environments.</p>
+<p>2. NDIX scores would be higher in the enriched environments in the domains most directly targeted by the enrichment (Sensory, Emotional, Cognitive and Naturalness), but not necessarily in the Social or Safety and Accessibility domains, which the modifications were not designed to change.</p>
+<h3>2. Methods</h3>
+<p>The present research comprised two studies evaluating whether the NeuroDesign and NeuroArchitecture Index (NDIX) was sensitive to meaningful differences between standard and environmentally enriched indoor environments. Study 1 used a repeated-measures design in which the same participants evaluated a standard quiet room and an enriched redesign of the same space. Study 2 combined repeated-measures and independent-groups comparisons of standard and enriched innovation environments. Across both studies, the primary outcome was the NDIX Overall score. Scores for the six NDIX domains were examined as secondary outcomes, and participants&#x27; free-text descriptions of the most salient environmental change were analysed alongside them. Across both studies, the environmental contrasts were primarily characterised by differences in biophilic design, alongside related sensory, aesthetic, and comfort features. These features are described to characterise the environments rather than as individually tested manipulations. The enriched environments were created within existing university spaces, redesigned by university students in line with the biophilic design literature outlined above and subject to practical constraints such as budget and the fixed structural shell of each room. Both studies also collected physiological and behavioural measures that address separate research questions and are reported elsewhere; the present article concerns the NDIX alone.</p>
+<h3>2.1. Environmental settings</h3>
+<p> &gt;Environmental settings</p>
+<h3>2.1.1. Study 1</h3>
+<p>The standard condition was a pre-existing quiet room in the Division of Psychology and Language Sciences, University College London (26 Bedford Way), designated as a space for quiet contemplation. The room measured approximately 200 cm × 200 cm with a ceiling height of approximately 220 cm (floor area ≈ 4 m²; volume ≈ 8.8 m³), and was windowless with no access to natural daylight. Three walls were painted beige and one pale blue. The room contained two cushioned chairs, a coat stand, a baby-change table, a wipes dispenser, a small circular carpet, and an uplight lamp with adjustable light level. Apart from the pale blue wall, which falls within the range of colours described in the biophilic design literature, the standard condition contained no designated biophilic elements. This room was announced in a newsletter to staff as a new environment to help support staff with a quiet space to relax and for quiet contemplation.</p>
+<p>The enriched condition was the same room, redesigned in co-production with three undergraduate students within a materials budget of approximately £600, with most items sourced from charity shops. Because the room was windowless and received no daylight, live plants were not used; natural elements were instead evoked through materials, patterns, forms and an artificial floor plant, and through dried botanical material. The coat stand, original carpet and paper-towel dispenser were removed, and the carpet was replaced with a reedweave rug. The seating and baby-change table were repositioned so that both seats had a clearer view of the door, following prospect-refuge principles. A lamp and a fan were labelled with instructions encouraging participants to adjust them for comfort. The biophilic items introduced are listed in Table 1. Items were selected for compatibility with published enrichment design principles (Kellert &amp; Calabrese, 2015; Ryan et al., 2014). Live planting was not feasible in a windowless room without daylight.</p>
+<h3>2.1.2. Study 2</h3>
+<p>The standard condition was a pre-existing innovation and group-work room in the Division of Psychology and Language Sciences, University College London (26 Bedford Way). The room measured approximately 300 cm × 300 cm with a ceiling height of approximately 220 cm, had windows providing access to natural daylight, and had walls painted beige. The room contained a table and seven chairs. The enriched condition was the same space, redesigned by students with sponsored materials, following the same design principles as in Study 1. The design items introduced are listed in Table 2. Similar to study 1, items were selected for compatibility with published enrichment design principles (Kellert &amp; Calabrese, 2015; Ryan et al., 2014).</p>
+<h3>2.2. NeuroDesign and NeuroArchitecture Index</h3>
+<p>The NeuroDesign and NeuroArchitecture Index (NDIX) is an 88-item measure developed to assess perceived experience of the built environment. It was created in response to the limited availability of multidimensional methods for evaluating how architectural and environmental qualities are experienced (Sjövall et al., 2025). The conceptual framework was informed by interdisciplinary literature and expert judgement spanning neuroscience, psychology, physiology, architecture, design, and sensory processing (Chatterjee, 2014; Damasio, 1994; Evans, 2003; Jeffery &amp; Zisch, 2022; Pallasmaa, 2024; Sjövall &amp; Spiers, 2024; Spence, 2020; Vigliocco et al., 2024). The NDIX comprises six domains: Safety and Accessibility, Sensory, Emotional, Cognitive, Social, and Naturalness. Together, these domains are intended to capture complementary dimensions of environmental experience.</p>
+<p>Safety and Accessibility includes 11 items and assesses perceived security, ease of navigation, autonomy, and inclusivity. Feeling safe is important for wellbeing and is closely linked to stress and comfort, while accessibility supports independence and participation across diverse populations (Spiers &amp; Maguire, 2006 , 2007; Maslow, 1943; Molloy, Knight, &amp; Woodfield, 2003).</p>
+<p>Sensory includes 16 items and examines how the environment is experienced through visual, auditory, tactile, and other sensory qualities. Sensory experience is central to environmental perception and may influence wellbeing and cognitive functioning. Features such as natural elements and comfortable lighting have been associated with mood and stress-related outcomes (Pallasmaa, 2024; Tomchek &amp; Dunn, 2007; Boubekri et al., 2014; Uvnäs Moberg et al., 2022).</p>
+<p>Emotional includes 29 items and assesses the emotional tone and affective experience associated with the environment. Emotional processes play an important role in how people interpret and interact with their surroundings, and positively experienced environments may be associated with wellbeing and lower perceived stress and anxiety (Chatterjee &amp; Vartanian, 2016; Damasio, 1996; Damasio &amp; Damasio, 2024; Spence &amp; Driver, 2004; Spence, 2011; Spence et al., 2014; Bratman et al., 2015).</p>
+<p>Cognitive includes 14 items and examines perceived support for attention, concentration, creativity, curiosity, and problem-solving. Environmental experience has been linked to cognitive functioning, while spaces that foster curiosity and creativity may support cognitive flexibility (Clemenson, Deng, &amp; Gage, 2015; Nilsson et al., 1999; Kempermann, Kuhn, &amp; Gage, 1997; Kounios &amp; Beeman, 2015).</p>
+<p>Social includes eight items and assesses how the environment supports or constrains social interaction, belonging, and community. Social connection is important for psychological wellbeing, and the built environment can influence opportunities for interaction and participation (Gehl &amp; Svarre, 2013; Gehl, 2011; Uvnäs Moberg et al., 2022).</p>
+<p>Naturalness includes 10 items and evaluates the presence and experiential quality of natural elements, materials, forms, and connections to nature. Exposure to natural environments has been associated with restorative outcomes, including reduced stress and improved mood, while biophilic design incorporates natural materials, views, patterns, and forms that may contribute to psychological and physiological wellbeing (Hartig et al., 2014; Kellert &amp; Calabrese, 2015; Ryan et al., 2014; Ulrich, 1983 Ulrich, , 1984;; Ulrich et al., 1991; Ulrich &amp; Parsons, 1992; Zhong, Schröder, &amp; Bekkering, 2022; Kellert, Heerwagen, &amp; Mador, 2008).</p>
+<p>Items were rated on a 5-point response scale. Negatively worded items were reverse-scored before analysis. Item responses were aggregated to produce scores for the six domains and an NDIX Overall score. Scores were expressed as percentages of the maximum possible score, with higher scores indicating a more positively experienced environment. NDIX Overall was treated as the primary outcome, while the six domain scores were examined as secondary outcomes. Internal consistency was assessed using Cronbach&#x27;s alpha for NDIX Overall and each of the six domains, estimated separately within each participant group or environmental condition. Estimates were not pooled across conditions, because the same participants contributed observations to both.</p>
+<h3>2.3. Baseline wellbeing</h3>
+<p>Before the environmental assessment, participants completed the five-item World Health Organization Well-Being Index (WHO-5), a brief self-report measure of subjective psychological wellbeing over the preceding two weeks (Topp et al., 2015). The WHO-5 was collected as a baseline participant characteristic and as a screening measure; it does not index the environments under evaluation. Baseline scores were compared between condition-order groups to check group equivalence, and scores in the two environments were compared alongside the NDIX outcomes.</p>
+<h3>2.4. Room preference</h3>
+<p>Participants who evaluated both environments were additionally asked, after their second session, which of the two rooms they preferred. This single forced-choice item was collected as a global preference comparator against which the NDIX Overall difference could be considered, and is reported descriptively.</p>
+<h3>2.5. Qualitative responses</h3>
+<p>After completing the NDIX in each session, participants were asked to describe in free text the most salient change in the room since the previous session. Responses were coded using descriptive content analysis into environmental and experiential themes, with a response contributing to more than one theme where it named more than one feature. Theme frequencies were summarised descriptively. Responses were additionally classified by whether they framed the change as the presence of an added feature or as the absence of a feature. The qualitative data were collected to identify which aspects of the environmental contrast participants noticed spontaneously, and were not treated as an independent test of the study hypotheses.</p>
+<h3>2.6. Study 1: Quiet Room</h3>
+<p> &gt;Study 1: Quiet Room</p>
+<h3>2.6.1. Participants</h3>
+<p>A total of 43 participants aged 18-55 years were recruited through the UCL SONA participant pool and social-media recruitment. One participant was excluded because both of their sessions were recorded under the same environmental condition, leaving no usable within-participant pair. This was a data-recording error and the exclusion was made on that basis alone, before any outcome data were examined. The final sample was N = 42, comprising 32 women and 10 men with a mean age of 25.0 years (SD = 9.40, range 18-55).</p>
+<p>Educational background was secondary or further education for 24 participants, college or university for 8, and postgraduate for 10. All participants provided informed consent before participation. Participants were allocated to one of two condition-order groups, enriched-first (n = 21) or standard-first (n = 21), which did not differ in age, t(40) = 0.36, p = .722. The two order groups also did not differ on baseline WHO-5 Well-being Index scores, reported here on the raw 0-25 scale, enriched-first M = 9.86, SD = 3.97; standard-first M = 10.62, SD = 3.96, t(40) = 0.62, p = .538, d = 0.19.</p>
+<h3>2.6.2. Design</h3>
+<p>Study 1 included 42 participants and compared a standard quiet room with an enriched quiet room using a randomised repeated-measures crossover design. Each participant evaluated both environmental conditions. Environmental condition was therefore the within-participant independent variable, with two levels: standard and enriched. The primary dependent variable was NDIX Overall, and the six NDIX domain scores were examined as secondary dependent variables.</p>
+<h3>2.6.3. Procedure</h3>
+<p>Participants were randomly assigned to experience either the standard or enriched condition first, followed by the alternative condition after a washout period of 1-3 days. During each session, participants spent 3 minutes alone in the room before completing the NDIX in relation to that environment.</p>
+<h3>2.6.4. Statistical Analysis</h3>
+<p>Standard and enriched conditions were compared for NDIX Overall and the six NDIX domain scores. Distributional assumptions were examined using Shapiro-Wilk tests on the paired difference scores. Paired-samples t tests were used where the difference distribution was consistent with normality (p ≥ .05), and Wilcoxon signed-rank tests were used where it was not. Because seven outcomes were tested, p values were adjusted using the Benjamini-Hochberg false discovery rate procedure. Standardised mean differences were reported as</p>
+<p>Cohen&#x27;s dz for paired observations, accompanied by 95% confidence intervals. To assess order effects and carryover in the crossover design, each outcome was additionally submitted to a 2 (condition: standard, enriched) × 2 (order: enriched-first, standard-first) mixed analysis of variance, with particular attention to the condition × order interaction.</p>
+<p>Internal consistency was assessed using Cronbach&#x27;s alpha for NDIX Overall and each of the six domains, computed after reverse-scoring the 19 negatively worded items. Because the same participants rated both environments, coefficients were estimated separately within each condition rather than pooled across them, and are reported alongside average inter-item correlations.</p>
+<h3>2.7. Study 2: Innovation Space</h3>
+<p> &gt;Study 2: Innovation Space</p>
+<h3>2.7.1. Participants</h3>
+<p>A total of N = 40 participants were recruited through the UCL SONA participant pool and social-media recruitment, using the same recruitment approach as in Study 1. The sample comprised 28 women and 12 men. Participants were randomly allocated to Group A (n = 20) or Group B (n = 20), with each group comprising 14 women and six men.</p>
+<p>Across the full sample, 15 participants had educational qualifications below bachelor&#x27;s degree level, nine held a bachelor&#x27;s degree, and 16 held a postgraduate qualification. All participants provided informed consent before participation.</p>
+<h3>2.7.2. Design</h3>
+<p>Study 2 compared a standard environment with an enriched innovation environment using both repeated-measures and independent-groups components. Group A attended two sessions, evaluating the standard environment in Session 1 and the enriched environment in Session 2; Group B attended a single session and evaluated the enriched environment only.</p>
+<p>One Group A participant dropped out of the study before Session 2, so the repeated-measures analysis was based on the 19 participants with complete paired observations. That participant&#x27;s Session 1 data were retained in the independent-groups comparison, which compared first-session assessments from Group A (n = 20) and Group B (n = 20). The primary dependent variable was NDIX Overall, and the six NDIX domain scores were examined as secondary dependent variables.</p>
+<h3>2.7.3. Procedure</h3>
+<p>Before the environmental assessment, participants completed a pre-experiment questionnaire including demographic information. During the first session, 20 participants completed the standard condition and 20 completed the enriched condition. In each condition, participants spent 5 min relaxing in the environment, completed a 10-min creativity task, and then completed the NDIX. Participants initially assigned to the standard condition subsequently completed a second session in the enriched condition following the same procedure.</p>
+<p>Participants initially assigned to the enriched condition did not complete a second standardcondition session. NDIX Overall and domain scores were expressed as percentages of their respective maximum possible scores.</p>
+<h3>2.7.4. Statistical Analysis</h3>
+<p>Two complementary analytical approaches were used. First, paired-samples t tests compared the standard and enriched conditions among the 19 participants with complete observations in both conditions. Separate tests were conducted for NDIX Overall and each of the six NDIX domains: Safety and Accessibility, Sensory, Emotional, Cognitive, Social, and Naturalness.</p>
+<p>Wilcoxon signed-rank tests were conducted as confirmatory non-parametric analyses.</p>
+<p>Parametric tests were used as the primary analyses, with non-parametric tests retained as confirmatory throughout. Between-groups comparisons used Welch&#x27;s t tests, which do not assume homogeneity of variance between the Session 1 groups.</p>
+<p>Second, first-session scores were compared between Group A (standard; n = 20) and Group B (enriched; n = 20) using Welch&#x27;s t tests, with Mann-Whitney U tests as confirmatory nonparametric analyses. Standardised mean differences were reported as Cohen&#x27;s d; for paired comparisons, effect sizes were calculated as Cohen&#x27;s dz . Internal consistency was assessed using Cronbach&#x27;s alpha for NDIX Overall and each of the six domains, estimated separately within each environmental condition.</p>
+<h3>3. Results</h3>
+<p> &gt;Results</p>
+<h3>3.1. Study 1</h3>
+<p>These studies represent the first full empirical application of the NDIX, with Study 1 extending the pilot evaluation reported in Sjövall et al. (2025). In both the quiet-room and innovation-space settings, and in both the standard and enriched conditions, the instrument was administered in full within a single short session without practical difficulty.</p>
+<p>Shapiro-Wilk tests indicated that the paired difference distributions departed from normality for NDIX Overall, Safety and Accessibility, Sensory and Cognitive (all p &lt; .01) but not for Emotional, Social or Naturalness (all p ≥ .48); tests were selected accordingly. NDIX Overall was significantly higher in the enriched environment (M = 66.01, SD = 6.10) than in the standard environment (M = 51.75, SD = 6.00), Wilcoxon W = 4.00, p &lt; .001, dz = 1.83 (Table 3). All six NDIX domain scores were also significantly higher in the enriched environment, and every comparison remained significant after false discovery rate correction across the seven outcomes (all pFDR &lt; .001). Safety and Accessibility increased from M = 67.40 (SD = 11.88) to M = 82.08 (SD = 7.91), W = 49.00, p &lt; .001, dz = 1.02, 95% CI [0.65, 1.39].</p>
+<p>Sensory increased from M = 59.49 (SD = 9.29) to M = 73.18 (SD = 6.46), W = 2.00, p &lt; .001, Order effects were examined using 2 (condition) × 2 (order) mixed analyses of variance. For NDIX Overall the effect of condition was large, F(1, 40) = 145.03, p &lt; .001, ηp² = .78, and the condition × order interaction was not significant, F(1, 40) = 2.44, p = .126, ηp² = .06. The enrichment effect on NDIX Overall was closely comparable in the enriched-first group, t(20) = 8.46, p &lt; .001, dz = 1.85, and the standard-first group, t(20) = 8.82, p &lt; .001, dz = 1.92. At the domain level, however, the interaction was significant for Safety and Accessibility, F(1, 40) = 9.08, p = .004, ηp² = .19, and marginal for Sensory, F(1, 40) = 4.13, p = .049, ηp² = .09.</p>
+<p>In both cases the asymmetry lay in the standard condition rather than the enriched condition.</p>
+<p>Participants who encountered the enriched room first subsequently rated the standard room substantially lower on Safety and Accessibility (M = 61.65) than participants who encountered the standard room first (M = 73.16), whereas ratings of the enriched room were almost identical across order groups (M = 82.42 and 81.73). A significant main effect of order was also observed for NDIX Overall, F(1, 40) = 9.53, p = .004, and for four domains.</p>
+<p>The direction of these effects is consistent with a contrast effect, in which prior exposure to the enriched environment lowered subsequent evaluation of the standard environment.</p>
+<p>Importantly, the enrichment effect remained present and significant within both order groups for every outcome.</p>
+<h3>3.1.1. Baseline wellbeing across conditions</h3>
+<p>WHO-5 scores, reported here on the transformed 0-100 scale, did not differ between the two environments, M = 49.60 in the standard condition and M = 54.20 in the enriched condition, t(41) = 1.63, p = .112, dz = 0.25, 95% CI [-0.06, 0.56]. The dissociation is informative: the NDIX distinguished the two environments on every dimension while a general measure of subjective wellbeing did not, consistent with the NDIX indexing the experience of a space rather than a downstream change in the respondent&#x27;s wellbeing after a brief exposure.</p>
+<h3>3.1.2. Room preference</h3>
+<p>Asked at the end of the second session which room they preferred, 95.2% of participants chose the enriched environment. Preference therefore tracked the direction of the NDIX Overall difference. Because the item is a single forced choice between two rooms rather than a graded rating of each, it indicates only that the enriched environment was preferred and cannot establish how much of the NDIX Overall difference a graded global preference measure would independently capture.</p>
+<h3>3.1.3. Internal consistency</h3>
+<p>Internal consistency estimates for NDIX Overall and the six domains are presented in Table 4, separately for each environmental condition. NDIX Overall showed good internal consistency in both the standard condition, α = .87, and the enriched condition, α = .89.</p>
+<p>Domain-level estimates were more variable, ranging from .40 to .74 in the standard condition and from .42 to .77 in the enriched condition. Cognitive was the most consistent domain across conditions (α = .74 and .77), and Safety and Accessibility and Naturalness were acceptable in the standard condition (α = .74 and .73). Social (α = .40 and .47), Sensory (α = .63 and .42) and Emotional (α = .52 and .66) fell below conventional thresholds in at least one condition. Average inter-item correlations were low, ranging from .05 to .38 across domains and conditions, suggesting that several domains combine partly distinct aspects of experience rather than a single construct.</p>
+<h3>3.1.4. Qualitative responses</h3>
+<p>Free-text descriptions of the most salient change were optional, and are reported at the level of responses rather than participants; 42 responses were provided. Coded theme frequencies are shown in Figure 2C. Green plants were by far the most frequently named feature (19 mentions), followed by artwork and wall decoration (10), layout and spaciousness (7), other natural elements (6), and books, scent and soft furnishings (5 each). Colour (3), chair (2), lighting (2), wooden materials (2), mirror (1) and noise (1) were named less often. The same small set of features therefore accounted for most of what participants noticed, and they correspond closely to the domains showing the largest quantitative differences. Responses were sharply asymmetric in how they framed the change. Almost every response given in the enriched condition described the addition of a feature, referring for example to the introduction of plants, wall hangings, books, wooden decoration or scent. Most responses given in the standard condition instead described an absence, using terms such as the lack of greenery, the removal of the artwork, or the room feeling bare, clinical or sterile. Participants thus registered the same environmental contrast from either direction, and did so in terms of the specific features that had been manipulated rather than in terms of general preference.</p>
+<p>Descriptive word clouds of participants&#x27; broader impressions of each room are shown in   Coefficients are reported separately for each environmental condition (n = 42 per condition); 95% confidence intervals for these coefficients are reported in Sjövall et al. (2025), because the two conditions were rated by the same participants; pooling them would violate the independence assumption on which alpha rests and would inflate the coefficient by adding between-condition variance to the total-score variance. All coefficients are computed after reverse-scoring the 19 negatively worded items. Cronbach&#x27;s alpha increases with the number of items, so the high coefficient for NDIX Overall reflects instrument length as well as item coherence and should not be read as evidence of unidimensionality.  3. C, Frequency of coded theme mentions in participants&#x27; descriptions of the most salient change in the room. D, Word clouds of participants&#x27; descriptions of how they felt about each room; larger words occur more frequently.</p>
+<h3>3.2. Study 2</h3>
+<p> &gt;Study 2</p>
+<h3>3.2.1. Distributional assumptions</h3>
+<p>Parametric tests were used as the primary analyses throughout, with non-parametric tests retained as confirmatory. Paired-samples t tests were used for the within-subjects comparisons, and Welch&#x27;s t tests, which do not assume homogeneity of variance, for the between-groups comparisons. Wilcoxon signed-rank and Mann-Whitney U tests agreed with every parametric result reported below. In the repeated-measures analysis (n = 19), NDIX Overall was significantly higher in the enriched environment (M = 77.73, SD = 6.69) than in the standard environment (M = 59.61, SD = 8.75), t(18) = -10.91, p &lt; .001, dz = 2.50 (Table 5, Panel A). All six NDIX domains were also significantly higher in the enriched environment. Safety and Accessibility increased from M = 71.48 (SD = 12.29) to M = 84.69 (SD = 7.98), t(18) = -5.41, p &lt; .001, dz = 1.24. Sensory increased from M = 65.07 (SD = 6.23) to M = 79.93 (SD = 6.71), t(18) = -10.40, p &lt; .001, dz = 2.38. Emotional increased from M = 58.58 (SD = 10.54) to M = 78.62 (SD = 8.27), t(18) = -9.11, p &lt; .001, dz = 2.09.</p>
+<p>Cognitive increased from M = 54.44 (SD = 9.94) to M = 72.41 (SD = 7.35), t(18) = -9.72, p &lt; .001, dz = 2.23. Social increased from M = 65.66 (SD = 12.80) to M = 78.29 (SD = 7.95), t(18) = -4.81, p &lt; .001, dz = 1.10. Naturalness increased from M = 43.16 (SD = 13.17) to M = 70.95 (SD = 12.81), t(18) = -8.76, p &lt; .001, dz = 2.01. Wilcoxon signed-rank tests confirmed every comparison.</p>
+<p>The between-groups analysis of first-session observations, using Welch&#x27;s t tests (n = 20 per group), showed the same overall pattern (Table 5, Panel B). NDIX Overall was significantly higher in the enriched group (M = 74.11, SD = 6.57) than in the standard group (M = 59.65, SD = 8.52), t(38) = -6.01, p &lt; .001, d = 1.90. Safety and Accessibility, Sensory, Emotional, Cognitive and Naturalness were also higher in the enriched group (all p &lt; .001), with effect sizes ranging from d = 1.28 to d = 2.18. Social was likewise higher in the enriched group (M = 72.88, SD = 9.81) than in the standard group (M = 65.25, SD = 12.59), t(38) = -2.14, p = .040, d = 0.68, although this was the smallest effect and the only comparison not significant at p &lt; .001. Mann-Whitney U tests confirmed the pattern.</p>
+<p>The room preference item was available only for the participants who evaluated both environments, since the remaining participants encountered a single room. Of these, 94.7% preferred the enriched environment.</p>
+<h3>3.2.3. Internal consistency</h3>
+<p>Internal consistency estimates are presented in Table 6, separately for each environmental condition. NDIX Overall showed high internal consistency in both the standard condition, α = .95, and the enriched condition, α = .93. Across the six domains, coefficients were more variable. Emotional was highest in both conditions, α = .91 and α = .88, and Safety and Accessibility, Cognitive, Social and Naturalness fell between α = .58 and α = .77. Sensory showed an anomalous pattern, with an acceptable coefficient in the enriched condition, α = .74, but an unacceptably low estimate in the standard condition, α = .33, which is out of line with the enriched estimate for the same items, although Sensory was also among the less consistent domains in Study 1. The confidence interval around this estimate was correspondingly wide, 95% CI [-.19, .69].</p>
+<h3>3.2.4. Qualitative responses</h3>
+<p>Free-text descriptions of the most salient change were optional, and are reported at the level of responses rather than participants. Coded theme frequencies are shown in Figure 3C.</p>
+<p>Green plants were the most frequently named feature (11 mentions), followed by furniture and seating (9), artwork and wall decoration (8), layout and atmosphere (4) and other natural elements (4). Colour (3), scent (1) and wooden materials (1) were named less often. As in Study 1, a small set of features accounted for most of what participants noticed, and these correspond to the domains showing the largest quantitative differences. Descriptive terms differed between conditions (Figure 3D). The enriched environment was characterised using terms such as comfortable, peaceful, relaxed, warm, natural and beautiful. The standard environment drew a mixture of functional and mildly positive terms, including work, meeting, temperature and stuffy alongside cozy, special, quiet and calm. The contrast in Study 2 was therefore one of degree rather than valence, in that the standard innovation environment was not described in predominantly negative terms. Table 5. C, Frequency of coded theme mentions in participants&#x27; qualitative responses to the environmental changes. D, Word clouds summarising participants&#x27; descriptions of how they experienced the standard and enriched environments; larger words indicate more frequently occurring terms.</p>
+<h3>3.3. Summary of results</h3>
+<p>Across both studies, NDIX Overall was significantly higher in the enriched environments than in the standard environments, with large effect sizes. In Study 1 all six domains were significantly higher in the enriched condition, all comparisons survived false discovery rate correction, and the enrichment effect on NDIX Overall was equivalent across presentation orders. In Study 2 all six domains were again significantly higher, in both the withinparticipant and the independent-groups comparison. Naturalness showed the largest absolute difference in Study 1 and among the largest in Study 2.</p>
+<p>Internal consistency was good to high for NDIX Overall in both studies, but domain-level estimates were variable, particularly in Study 1, where Social, Sensory and Emotional fell below conventional thresholds in at least one condition.</p>
+<p>Free-text responses converged on the same features that drove the quantitative differences.</p>
+<h3>4. Discussion</h3>
+<p>The present investigation examined whether the NeuroDesign and NeuroArchitecture Index (NDIX) was sensitive to theoretically and experientially meaningful differences between standard and environmentally enriched indoor environments. Across two studies conducted in different indoor settings, NDIX Overall consistently distinguished the enriched environments from their standard comparison environments. This pattern was observed in a repeatedmeasures quiet-room study and reproduced in an innovation setting using both withinparticipant and independent-groups comparisons. Together, the findings provide initial evidence that the NDIX is sensitive to substantial differences in perceived environmental experience across controlled indoor contexts.</p>
+<p>Both hypotheses were largely supported. NDIX Overall was higher in the enriched environments in both studies, as were the four domains predicted to change: Sensory, Emotional, Cognitive and Naturalness. Naturalness showed the largest absolute difference in Study 1 and among the largest in Study 2, as expected given the explicit biophilic emphasis of the environmental modifications. Because the Naturalness domain indexes the perceived presence of natural elements, and the enrichment consisted substantially of adding such elements, this domain functions in part as a manipulation check and establishes that the intended environmental change was perceptually registered. The pronounced difference in this domain should therefore be read as confirmation that the manipulation was salient, rather than as an independent test of instrument sensitivity. Beyond the predicted domains, Social and Safety and Accessibility scores were also higher in the enriched environments in both studies, although the Social difference was the smallest effect in the Study 2 independentgroups comparison (d = 0.68). The environmental contrast was therefore reflected across all six dimensions of perceived experience, suggesting that a coherent redesign may also change how safe, accessible and socially inviting a space feels, even when these qualities are not targeted directly.</p>
+<p>Two prerequisites for a usable instrument were addressed. The first is practical. An 88-item measure invites the objection that it is too long for field use, and the Introduction argued that what is needed is an instrument brief enough to administer in situ. These studies are the first full application of the NDIX, and in both indoor settings it was administered in full within a single short session without practical difficulty, suggesting that its length is not in itself a barrier to use in occupied environments. This is an encouraging first indication rather than a formal evaluation: no measure of respondent burden or acceptability was collected, and a systematic assessment of administration time, completion and user experience across settings remains to be carried out. The second prerequisite is discrimination. Across two different indoor settings, two different procedures and three analytic designs, NDIX Overall separated standard from enriched environments in the predicted direction and with large effects, and in Study 1 it did so equivalently whether participants met the enriched room first or second. The qualitative responses reinforce this reading: participants spontaneously named the specific features that had been introduced or removed, so the quantitative shift corresponds to environmental properties they actually perceived rather than to a diffuse impression of improvement. The prominence of Naturalness is theoretically coherent with the environmental contrast. Both enriched settings incorporated a strong biophilic component, and the particularly pronounced difference in this domain is consistent with literature linking contact with natural elements and environments to restorative, affective, and stress-related responses (Hartig et al., 2014; Ryan et al., 2014; Ulrich, 1983 Ulrich, , 1984;; Ulrich et al., 1991). At the same time, it is reasonable that the observed differences were not restricted to Naturalness. Biophilic and environmentally enriched settings are inherently multisensory and may alter visual, tactile, acoustic, spatial, and affective qualities simultaneously. Natural and enriched environments have been associated with sensory experience and comfort (Pallasmaa, 2024; Spence, 2020), emotional experience and affect (Bratman et al., 2015; Chatterjee &amp; Vartanian, 2016), and attentional and cognitive processes related to restoration, curiosity, and engagement (Hartig et al., 2014; Kounios &amp; Beeman, 2015). Built-environment characteristics may also shape perceptions of safety and accessibility and influence opportunities for social interaction, belonging, and participation (Evans, 2003; Gehl, 2011; Gehl &amp; Svarre, 2013; Uvnäs Moberg et al., 2022). The higher scores across the other NDIX domains are therefore conceptually compatible with the integrated nature of the enrichment rather than being unexpected given the primarily biophilic manipulation.</p>
+<p>The qualitative responses provide complementary context for this pattern. Asked what had changed, participants named a narrow and consistent set of features, dominated by green plants and followed by artwork, layout, other natural elements, books, scent and soft furnishings. These are the features the redesign actually introduced, and they map onto the domains that showed the largest quantitative differences. The framing asymmetry is also informative: the enriched room was described in terms of what had been added, whereas the standard room was described in terms of what was missing, in language such as bare, clinical and sterile. Participants therefore encoded the contrast in terms of concrete environmental features rather than global evaluation, which is consistent with the NDIX registering specific properties of the setting. These responses should not, however, be read as demonstrating that particular features caused the observed NDIX differences, since relationships between individual themes and domain scores were not formally tested. This pattern speaks to the multidimensional rationale underlying the NDIX. NDIX Overall provides a global summary of how an environment is experienced, whereas the six domains offer a differentiated profile across Safety and Accessibility, Sensory, Emotional, Cognitive, Social, and Naturalness.</p>
+<p>Architectural experience is unlikely to be reducible to a single evaluative dimension and instead arises through interacting perceptual, affective, cognitive, social, and embodied processes (Chatterjee &amp; Vartanian, 2016; Pallasmaa, 2024; Spence &amp; Driver, 2004; Spence, 2020). In the present studies the domains moved together rather than selectively, which is consistent with an environmental manipulation that altered many properties of the setting at once but does not by itself demonstrate that the domains capture separable aspects of experience. Establishing that will require environments that differ on some domains and not others, and a concurrent measure of global environmental preference. Without such a comparator the present data cannot establish how much of the NDIX Overall difference a single-item rating would also capture, so the incremental value of the NDIX over simpler measures remains untested.</p>
+<p>The consistency of the NDIX Overall findings is notable given that the studies differed in environmental setting and procedure. Rather than depending on a single room type or comparison, the overall score differentiated standard and enriched environments in both a quiet-room and an innovation-space context. Study 2 further reproduced the same result when the environmental contrast was examined within participants, and when independent groups were compared using first-session observations. Convergence across these two analyses, which draw on partly overlapping observations, strengthens confidence that the principal finding was not specific to a single analytical design. The repeated-measures evidence is particularly informative because each participant serves as their own comparison, thereby reducing the influence of stable between-person differences. The independent-groups comparison in Study 2 is informative for a different and equally important reason.</p>
+<p>Participants in that comparison rated only one environment and therefore had no opportunity to infer the environmental contrast or the direction of the expected difference. That the effect persisted under these conditions (d = 1.90) indicates that the findings are not solely attributable to participants&#x27; awareness of having been shown two versions of the same space.</p>
+<p>Internal consistency provides an additional perspective on the current performance of the NDIX. NDIX Overall showed good to high internal consistency in both studies and both conditions (α = .87 to .95). Domain-level estimates were more variable. In Study 1, Social (α = .40 and .47), Sensory (α = .63 and .42) and Emotional (α = .52 and .66) fell below conventional thresholds in at least one condition, and in Study 2 Sensory was low in the standard condition (α = .33). Emotional was considerably more consistent in Study 2 (α = .91 and .88) than in Study 1, a difference that should be examined at item level together with the weaker domains. The high overall coefficients should not be over-interpreted: Cronbach&#x27;s alpha increases mechanically with the number of items, so a high value for an 88-item instrument is close to guaranteed and indicates only that the items are not mutually contradictory. Average inter-item correlations in Study 1 are more informative: they were low (.05 to .38), indicating that several domains combine partly distinct aspects of experience, which is useful guidance for item refinement. These findings have several implications for the further development of the NDIX. The principal contribution of the present studies is that the measure distinguished environments designed to differ in theoretically and experientially meaningful ways. The findings suggest that perceived environmental experience can be represented both as an overall evaluation and as a differentiated profile across theoretically relevant dimensions. This distinction may be useful for environmental research and practice because an overall score can indicate whether environments are experienced differently, whilst domain scores may help characterise the nature of those differences.</p>
+<p>The findings also reinforce the importance of distinguishing perceived environmental experience from downstream outcomes such as mental health, cognition, or physiological regulation. The NDIX was designed to characterise how environmental qualities are experienced; it is not itself a measure of health or cognitive performance. Previous research indicates that environmental characteristics can be associated with affect, stress, attention, social experience, and wellbeing (Bratman et al., 2015; Evans, 2003; Hartig et al., 2014; Ulrich, 1984), but the present studies did not test whether differences in NDIX scores corresponded to such outcomes. The present work should therefore be regarded as an initial evaluation of sensitivity and feasibility rather than as a full psychometric validation.</p>
+<p>Demonstrating that a measure differentiates theoretically meaningful environmental conditions is an important step, but represents only one component of validation. Further work is needed to examine factor structure, item performance, test-retest reliability, convergent and discriminant validity, predictive validity, responsiveness to longitudinal environmental change, and measurement invariance across populations and contexts. The variability observed in some domain-level reliability estimates further reinforces the need for continued item-level evaluation.</p>
+<p>Several limitations should nevertheless be considered. First, the environments differed across multiple features, and this was deliberate. Studies that vary a single element, such as artwork (Nanda et al., 2012) or wall curvature (Strachan-Regan &amp; Baumann, 2024), can isolate its contribution, but that was not the aim here. Instead, we examined a full redesign of the kind that might take place outside laboratory settings: in Study 1 the room was redesigned through co-creation with students, and in Study 2 using materials provided by a company, each representing the best that could be achieved within the available budget. The question was therefore whether a complete redesign produces a detectable difference in experience, as a first step before attributing effects to individual features. Biophilic design was central to the enrichment, but lighting, materials, colour, furniture, sensory qualities and spatial organisation also differed, so the findings concern environmental configurations as integrated wholes rather than the effects of individual design elements. Each redesign also added elements rather than removing them. This was part of the design strategy: none of the existing features failed the design criteria, and the original rooms, like many on campus, were sparsely furnished, so the redesigned rooms were enriched rather than reconfigured.</p>
+<p>Relatedly, the contrasts were deliberately salient. This is appropriate for an initial test of sensitivity, and participants readily identified what had changed, but the data establish sensitivity to substantial environmental variation rather than to subtle or incremental change.</p>
+<p>A measure intended for refurbishment decisions, comparative design assessment or postoccupancy evaluation will need to discriminate between environments that differ less conspicuously, and the effects reported here should not be taken as an estimate of what to expect from smaller interventions.</p>
+<p>Second, NDIX scores are self-reported measures of environmental experience and may be influenced by expectations, familiarity, prior preferences, or awareness of environmental differences. The findings therefore demonstrate differences in perceived environmental experience rather than establishing differences in objective environmental quality. This concern applies with particular force to the within-participant comparisons, in which the same individuals evaluated two versions of the same space a short time apart and could reasonably infer both that a redesign had occurred and which version was intended to be the improvement. The order analyses in Study 1 provide direct evidence bearing on this. Ratings of the enriched room were almost invariant across presentation orders, whereas ratings of the standard room were substantially lower among participants who had already seen the enriched version. This asymmetry is the signature of a contrast effect rather than of a uniform expectancy bias, and it implies that within-participant estimates for the affected domains are inflated relative to a between-participants design. The interaction was not significant for NDIX Overall, and the enrichment effect held within both order groups, so the primary finding is not attributable to sequence. The independent-groups comparison in Study 2, in which each participant encountered only one environment, provides a further check.</p>
+<p>Third, both studies involved relatively modest samples. This was due to term time constraints on testing by the teams involved. The modest sample size is particularly relevant for the domain-level reliability estimates, which are unstable at these sample sizes. Larger samples will be required to determine how stable these estimates are and whether the current domain structure performs consistently across different populations and environmental contexts.</p>
+<p>Relatedly, neither study was large enough to permit a factor analysis of an instrument of this length, so the six-domain structure remains an a priori framework rather than an empirically established one.</p>
+<p>Finally, the present studies did not include independent behavioural, physiological, cognitive, or clinical outcomes capable of establishing whether differences in NDIX scores correspond to differences in broader human functioning. The findings therefore establish sensitivity to perceived environmental differences, but not whether those differences translate into changes in health, cognition, behaviour, or physiological regulation.</p>
+<p>Future work should extend the NDIX into naturally varying and occupied environments, including workplaces, healthcare settings, educational environments, homes, and public spaces. This will be important for determining whether the sensitivity observed under Future studies should additionally test environments that differ only modestly, rather than focusing exclusively on conspicuous environmental contrasts. This will be necessary to determine whether the NDIX is sufficiently sensitive to detect practically meaningful changes during real-world design and refurbishment processes. The potential decision-making value of the domain profiles should likewise be investigated by examining whether variation in particular domains corresponds to independently identifiable environmental characteristics and whether targeted modifications subsequently produce domain-specific changes. With appropriate validation, this could extend the NDIX from comparative evaluation towards a structured framework for identifying environmental strengths and priorities for intervention.</p>
+<h3>5. Conclusion</h3>
+<p>Across two studies, the NDIX was applied for the first time and proved straightforward to use in both indoor settings, being administered in full within a single short session in each environment. NDIX Overall consistently differentiated standard from environmentally enriched environments in the hypothesised direction, with large effects reproduced in a within-participant crossover, a within-participant comparison in a second setting, and an independent-groups comparison in which participants evaluated only one environment. In</p>
+<p>Study 1 the effect was equivalent across presentation orders and survived correction for multiple comparisons. All six domains differed in the expected direction in both studies, and Naturalness showed the largest absolute difference in Study 1, consistent with the biophilic emphasis of the enrichment. Participants&#x27; free-text accounts of what had changed converged on the same features. The measure is therefore sensitive to meaningful environmental variation and to change within a single space that has been redesigned. In Study 1, NDIX Overall showed good internal consistency, while domain-level estimates were variable. The findings therefore provide initial evidence that NDIX Overall has discriminative sensitivity to theoretically and experientially meaningful environmental differences, while several domain subscales, notably Social, Sensory and Emotional in Study 1 and Sensory in the standard condition of Study 2, require further item-level evaluation. The next stage is to determine whether this sensitivity generalises to naturally varying real-world environments and whether NDIX scores correspond to independent behavioural, physiological, and neurobiological outcomes. With further validation, the NDIX may provide a structured bridge between subjective environmental experience and multimethod assessment of how built environments relate to human functioning. Ethics approval and consent Study 1 was approved by the University College London Research Ethics Committee (UCL Research Ethics Approval ID: EP/2018/008), and Study 2 was approved under a separate application to the same committee (UCL Research Ethics Approval ID: EP/2024/020). All participants were briefed on the purpose of the research and provided informed consent before taking part. Participants were informed that participation was voluntary and that they could withdraw at any point without consequence, and were debriefed at the end of each session. The research was conducted in compliance with the General Data Protection Regulation (GDPR) to protect participant confidentiality.</p>
+<h3>Disclosure statement</h3>
+<p>The first author is the originator of the NeuroDesign/NeuroArchitecture Index (NDIX) and retains intellectual property rights associated with its development and potential future application. No other potential competing interests are declared.</p>
+<h3>Data and materials availability</h3>
+<p>The NDIX protocol (version 1.0), scoring sheets, and sample items used in these studies are available from the first author on reasonable request. The full NDIX item bank and deidentified pilot data are not publicly released at this stage, due to ongoing validation and standardisation processes, but may be shared on request subject to University College London Research Ethics Committee approval (IDs: EP/2018/008 for Study 1 and EP/2024/020 for Study 2).</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Standard and enriched indoor environments evaluated across the two studies. Panels A) and B) show the standard and enriched space condition in Study 1; Panels C) and D) show the standard and enriched space condition in Study 2.</p>
+<p>dz = 1.20, 95% CI [0.80, 1.60]. Emotional increased from M = 49.72 (SD = 5.65) to M = 59.98 (SD = 6.10), t(41) = 10.32, p &lt; .001, dz = 1.59, 95% CI [1.14, 2.05]. Cognitive increased from M = 50.92 (SD = 10.04) to M = 64.69 (SD = 10.56), W = 22.50, p &lt; .001, dz = 1.09, 95% CI [0.70, 1.47]. Social increased from M = 53.51 (SD = 9.45) to M = 66.13 (SD = 9.03), t(41) = 8.20, p &lt; .001, dz = 1.27, 95% CI [0.86, 1.67]. Naturalness increased from M = 27.76 (SD = 7.56) to M = 56.10 (SD = 9.14), t(41) = 19.43, p &lt; .001, dz = 3.00, 95% CI [2.29, 3.71]. Naturalness showed the largest absolute difference between conditions.</p>
+<h3>Figure</h3>
+<p>Figure2Dfor context.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. NDIX Overall and domain scores and qualitative responses for the standard and enriched environments in Study 1. A, Mean NDIX Overall scores for the standard and enriched rooms (n = 42). B, Mean scores across the six NDIX domains. Error bars show ±1 standard error of the mean; higher scores indicate a more positively experienced environment. Statistical tests are reported in Table3. C, Frequency of coded theme mentions in participants&#x27; descriptions of the most salient change in the room. D, Word clouds of participants&#x27; descriptions of how they felt about each room; larger words occur more frequently.</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. NDIX Overall and domain scores and qualitative responses for the standard and enriched environments in Study 2. A, Mean NDIX Overall scores for the standard and enriched conditions in the withinparticipant and first-session independent-groups comparisons. B, Mean scores across the six NDIX domains for the corresponding comparisons. Error bars show ±1 standard error of the mean; higher scores indicate a more positively experienced environment. Statistical tests are reported in Table 5. C, Frequency of coded theme mentions in participants&#x27; qualitative responses to the environmental changes. D, Word clouds summarising participants&#x27; descriptions of how they experienced the standard and enriched environments; larger words indicate more frequently occurring terms.</p>
+<p>controlled environmental contrasts generalises to real-world contexts and whether the measure can support intervention evaluation, refurbishment, comparative design assessment, and post-occupancy evaluation. Further psychometric evaluation should examine factor structure, item performance, test-retest reliability, convergent and discriminant validity, predictive validity, and measurement invariance. Particular attention should be given to domains showing more variable internal consistency and to whether their psychometric performance depends on the characteristics of the environments being evaluated.Multimethod validation is also an important next step. Combining NDIX assessments with behavioural measures and independent physiological or neurobiological indicators could test whether perceived environmental experience corresponds to measurable differences in human functioning. Depending on the research question, relevant measures could include heart-rate variability, electrodermal activity, neuroimaging, mobile electroencephalography, functional near-infrared spectroscopy, and other markers related to stress, attention, affect, and cognitive processing. Longitudinal and experimental studies integrating subjective and objective measures would be particularly valuable for examining predictive and criterion-related validity. The NDIX should also be tested alongside validated measures of stress, affect, attention, cognitive performance, social behaviour, and wellbeing. Such work would help establish whether NDIX Overall or specific domain profiles explain variance beyond global environmental preference or satisfaction and whether particular patterns of environmental experience correspond to distinct behavioural, physiological, or neurobiological responses.</p>
+<h3>Table 1.</h3>
+<p>Biophilic items introduced in the enriched condition of Study 1</p>
+<h3>Table 2.</h3>
+<p>Biophilic items introduced in the enriched condition of Study 2</p>
+<h3>Table 3.</h3>
+<p>NDIX Overall and Domain Scores in the Standard and Enriched Environments in Study 1Scores are expressed as percentages of the maximum possible score, with higher scores indicating a more positively experienced environment. Test selection followed Shapiro-Wilk tests on the paired difference scores: Wilcoxon signed-rank where normality was rejected (p &lt; .05), paired-samples t otherwise. Effect sizes are Cohen&#x27;s dz for paired observations. p values were adjusted across the seven outcomes using the Benjamini-Hochberg false discovery rate procedure; all seven comparisons remained significant after adjustment (all pFDR &lt; .001).</p>
+<h3>Table 4.</h3>
+<p>Internal Consistency of NDIX Overall and Domain Scores in Study 1</p>
+<h3>Table 5.</h3>
+<p>NDIX overall and domain scores in the standard and enriched environments in Study 2Panel A includes participants with complete paired observations (n = 19). Panel B compares first-session observations from the standard and enriched groups (n = 20 per group). NDIX scores are expressed as percentages of the maximum possible score, with higher scores indicating a more positively experienced environment. dz denotes Cohen&#x27;s d for paired observations; d denotes Cohen&#x27;s d for independent groups. Wilcoxon signed-rank and Mann-Whitney U tests were conducted as confirmatory non-parametric analyses and agreed with every result reported here.</p>
+<h3>Table 6.</h3>
+<p>Internal consistency of NDIX overall and domain scores in Study 2</p>
+<h3>References</h3>
+<p>Barbas, H., &amp; García-Cabezas, M. Á. (2016). How the prefrontal executive got its stripes. Current Opinion in Neurobiology, 40, 125-134.</p>
+<p>Barrett, L. F., Mesquita, B., Ochsner, K. N., &amp; Gross, J. J. (2007). The experience of emotion. Annual Review of Psychology, 58, 373-403.</p>
+<p>Boubekri, M., Cheung, I. N., Reid, K. J., Wang, C. H., &amp; Zee, P. C. (2014). Impact of windows and daylight exposure on overall health and sleep quality of office workers: A case- control pilot study. Journal of Clinical Sleep Medicine, 10(6), 603-611.</p>
+<p>Bratman, G. N., Hamilton, J. P., Hahn, K. S., Daily, G. C., &amp; Gross, J. J. (2015). Nature experience reduces rumination and subgenual prefrontal cortex activation. Proceedings of the National Academy of Sciences, 112(28), 8567-8572.</p>
+<p>Chatterjee, A. (2014). The aesthetic brain: How we evolved to desire beauty and enjoy art. Oxford University Press.</p>
+<p>Chatterjee, A., &amp; Vartanian, O. (2016). Neuroscience of aesthetics. Annals of the New York Academy of Sciences, 1369(1), 172-194.</p>
+<p>Clemenson, G. D., Deng, W., &amp; Gage, F. H. (2015). Environmental enrichment and neurogenesis: From mice to humans. Current Opinion in Behavioral Sciences, 4, 56-62.</p>
+<p>Coburn, A., Vartanian, O., &amp; Chatterjee, A. (2017). Buildings, beauty, and the brain: A neuroscience of architectural experience. Journal of Cognitive Neuroscience, 29(9), 1521- 1531.</p>
+<p>Damasio, A., &amp; Damasio, H. (2024). Homeostatic feelings and the emergence of consciousness. Journal of Cognitive Neuroscience, 36(8), 1653-1659.</p>
+<p>Damasio, A. R. (1994). Descartes&#x27; error: Emotion, reason, and the human brain. Putnam.</p>
+<p>Damasio, A. R. (1996). The somatic marker hypothesis and the possible functions of the prefrontal cortex. Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences, 351(1346), 1413-1420.</p>
+<p>Diamond, M. C. (2001). Response of the brain to enrichment. Anais da Academia Brasileira de Ciências, 73(2), 211-220.</p>
+<p>Diamond, M. C., Krech, D., &amp; Rosenzweig, M. R. (1964). The effects of an enriched environment on the histology of the rat cerebral cortex. Journal of Comparative Neurology, 123(1), 111-119.</p>
+<p>Diamond, M. C., Rosenzweig, M. R., Bennett, E. L., Lindner, B., &amp; Lyon, L. (1972). Effects of environmental enrichment and impoverishment on rat cerebral cortex. Journal of Neurobiology, 3(1), 47-64.</p>
+<p>Djebbara, Z., Fich, L. B., &amp; Gramann, K. (2021). The brain dynamics of architectural affordances during transition. Scientific Reports, 11, Article 2796.</p>
+<p>Djebbara, Z., Fich, L. B., Petrini, L., &amp; Gramann, K. (2019). Sensorimotor brain dynamics reflect architectural affordances. Proceedings of the National Academy of Sciences, 116(29), 14769-14778.</p>
+<p>Eberhard, J. P. (2009). Applying neuroscience to architecture. Neuron, 62(6), 753-756.</p>
+<p>Eriksson, P. S., Perfilieva, E., Björk-Eriksson, T., Alborn, A. M., Nordborg, C., Peterson, D.</p>
+<p>A., &amp; Gage, F. H. (1998). Neurogenesis in the adult human hippocampus. Nature Medicine, 4(11), 1313-1317.</p>
+<p>Evans, G. W. (2003). The built environment and mental health. Journal of Urban Health, 80(4), 536-555.</p>
+<p>Fuchs, E., &amp; Flügge, G. (2014). Adult neuroplasticity: More than 40 years of research. Neural Plasticity, 2014, Article 541870.</p>
+<p>Gath-Morad, M., Egli, S., Grübel, J., Steemers, K., Hölscher, C., &amp; Aguilar, L. (2024). Designing affective workplace environments: The impact of typology, contour, ceiling and partition height on cognitive and aesthetic appraisal. Building and Environment, 265, Article 111928.</p>
+<p>Gehl, J. (2011). Life between buildings: Using public space. Island Press. (Original work published 1971)</p>
+<p>Gehl, J., &amp; Svarre, B. (2013). How to study public life. Island Press.</p>
+<p>Guite, H. F., Clark, C., &amp; Ackrill, G. (2006). The impact of the physical and urban environment on mental well-being. Public Health, 120(12), 1117-1126.</p>
+<p>Hartig, T., Mitchell, R., de Vries, S., &amp; Frumkin, H. (2014). Nature and health. Annual Review of Public Health, 35, 207-228.</p>
+<p>Jeffery, K., &amp; Zisch, F. (2022). Spatial entities of the future: Design through the lens of neuroscience. In M. Kanaani (Ed.), The Routledge companion to ecological design thinking: Healthful ecotopian visions for architecture and urbanism (pp. 92-103). Routledge.</p>
+<p>Kellert, S. R., &amp; Calabrese, E. F. (2015). The practice of biophilic design. https://www.biophilic-design.com</p>
+<p>Kellert, S. R., Heerwagen, J., &amp; Mador, M. (Eds.). (2008). Biophilic design: The theory, science and practice of bringing buildings to life. Wiley.</p>
+<p>Kellert, S. R., &amp; Wilson, E. O. (Eds.). (1993). The biophilia hypothesis. Island Press.</p>
+<p>Kempermann, G. (2019). Environmental enrichment, new neurons and the neurobiology of individuality. Nature Reviews Neuroscience, 20(4), 235-245.</p>
+<p>Kempermann, G., Kuhn, H. G., &amp; Gage, F. H. (1997). More hippocampal neurons in adult mice living in an enriched environment. Nature, 386(6624), 493-495.</p>
+<p>Kirk, U., Skov, M., Hulme, O., Christensen, M. S., &amp; Zeki, S. (2009). Modulation of aesthetic value by semantic context: An fMRI study. NeuroImage, 44(3), 1125-1132.</p>
+<p>Kounios, J., &amp; Beeman, M. (2015). The eureka factor: Aha moments, creative insight, and the brain. Random House.</p>
+<p>Kühn, S., Düzel, S., Eibich, P., Krekel, C., Wüstemann, H., Kolbe, J., Mårtensson, J., Goebel, J., Gallinat, J., Wagner, G. G., &amp; Lindenberger, U. (2017). In search of features that constitute an &quot;enriched environment&quot; in humans: Associations between geographical properties and brain structure. Scientific Reports, 7, Article 11920.</p>
+<p>Mallgrave, H. F. (2010). The architect&#x27;s brain: Neuroscience, creativity, and architecture. Wiley-Blackwell.</p>
+<p>Maslow, A. H. (1943). A theory of human motivation. Psychological Review, 50(4), 370- 396.</p>
+<p>Molloy, D., Knight, T., &amp; Woodfield, K. (2003). Diversity in disability: Exploring the interactions between disability, ethnicity, age, gender and sexuality (Department for Work and Pensions Research Report No. 188). Corporate Document Services.</p>
+<p>Nanda, U., Chanaud, C., Nelson, M., Zhu, X., Bajema, R., &amp; Jansen, B. H. (2012). Impact of visual art on patient behavior in the emergency department waiting room. The Journal of Emergency Medicine, 43(1), 172-181.</p>
+<p>Nilsson, M., Perfilieva, E., Johansson, U., Orwar, O., &amp; Eriksson, P. S. (1999). Enriched environment increases neurogenesis in the adult rat dentate gyrus and improves spatial memory. Journal of Neurobiology, 39(4), 569-578.</p>
+<p>Pallasmaa, J. (2024). The eyes of the skin: Architecture and the senses (4th ed.). Wiley.</p>
+<p>Ryan, C. O., Browning, W. D., Clancy, J. O., Andrews, S. L., &amp; Kallianpurkar, N. B. (2014). Biophilic design patterns: Emerging nature-based parameters for health and well-being in the built environment. International Journal of Architectural Research (Archnet-IJAR), 8(2), 62-</p>
+<p>Sjövall, I. A. K., &amp; Spiers, H. J. (2024). The potential of biophilic design and nature to improve health, creativity and well-being. In S. Kühn (Ed.), Environmental neuroscience (pp. 255-281). Springer.</p>
+<p>Sjövall, I., Chatterjee, A., Kühn, S., Sternberg, E., Meyer-Lindenberg, A., Lundblad, N. B., Eyre, H., Carlsson, R., Kounios, J., Tyler, N., Viding, E., Zisch, F., &amp; Spiers, H. J. (2025).</p>
+<p>The NeuroDesign/NeuroArchitecture Index (NDIX): Development of a method to evaluate the impact of the built environment on health, cognitive performance, and wellbeing [Preprint]. PsyArXiv. https://doi.org/10.31234/osf.io/8369k_v2</p>
+<p>Spalding, K. L., Bergmann, O., Alkass, K., Bernard, S., Salehpour, M., Huttner, H. B., Boström, E., Westerlund, I., Vial, C., Buchholz, B. A., Possnert, G., Mash, D. C., Druid, H., &amp; Frisén, J. (2013). Dynamics of hippocampal neurogenesis in adult humans. Cell, 153(6), 1219-1227.</p>
+<p>Spence, C. (2011). Crossmodal correspondences: A tutorial review. Attention, Perception, &amp; Psychophysics, 73(4), 971-995.</p>
+<p>Spence, C. (2020). Senses of place: Architectural design for the multisensory mind. Cognitive Research: Principles and Implications, 5, Article 46.</p>
+<p>Spence, C., &amp; Driver, J. (Eds.). (2004). Crossmodal space and crossmodal attention. Oxford University Press.</p>
+<p>Spence, C., Puccinelli, N. M., Grewal, D., &amp; Roggeveen, A. L. (2014). Store atmospherics: A multisensory perspective. Psychology &amp; Marketing, 31(7), 472-488.</p>
+<p>Spiers, H. J., &amp; Maguire, E. A. (2006). Thoughts, behaviour, and brain dynamics during navigation in the real world. NeuroImage, 31(4), 1826-1840.</p>
+<p>Spiers, H. J., &amp; Maguire, E. A. (2007). A navigational guidance system in the human brain. Hippocampus, 17(8), 618-626.</p>
+<p>Sternberg, E. M., &amp; Wilson, M. A. (2006). Neuroscience and architecture: Seeking common ground. Cell, 127(2), 239-242.</p>
+<p>Strachan-Regan, K., &amp; Baumann, O. (2024). The impact of room shape on affective states, heartrate, and creative output. Heliyon, 10(6), Article e28340.</p>
+<p>Tomchek, S. D., &amp; Dunn, W. (2007). Sensory processing in children with and without autism: A comparative study using the Short Sensory Profile. American Journal of Occupational Therapy, 61(2), 190-200.</p>
+<p>Topp, C. W., Østergaard, S. D., Søndergaard, S., &amp; Bech, P. (2015). The WHO-5 Well-being Index: A systematic review of the literature. Psychotherapy and Psychosomatics, 84(3), 167- 176.</p>
+<p>Ulrich, R. S. (1983). Aesthetic and affective response to natural environment. In I. Altman &amp; J. F. Wohlwill (Eds.), Behavior and the natural environment (pp. 85-125). Plenum Press.</p>
+<p>Ulrich, R. S. (1984). View through a window may influence recovery from surgery. Science, 224(4647), 420-421.</p>
+<p>Ulrich, R. S., &amp; Parsons, R. (1992). Influences of passive experiences with plants on individual well-being and health. In D. Relf (Ed.), The role of horticulture in human well- being and social development (pp. 93-105). Timber Press.</p>
+<p>Ulrich, R. S., Simons, R. F., Losito, B. D., Fiorito, E., Miles, M. A., &amp; Zelson, M. (1991). Stress recovery during exposure to natural and urban environments. Journal of Environmental Psychology, 11(3), 201-230.</p>
+<p>Uvnäs Moberg, K., Julius, H., Handlin, L., &amp; Petersson, M. (2022). Editorial: Sensory stimulation and oxytocin: Their roles in social interaction and health promotion. Frontiers in Psychology, 13, Article 929741.</p>
+<p>Valentine, C., Mitcheltree, H., Sjövall, I. A. K., &amp; Khalil, M. H. (2025). Architecturally mediated allostasis and neurosustainability: A proposed theoretical framework for the impact of the built environment on neurocognitive health. Brain Sciences, 15(2), Article 201.</p>
+<p>Valentine, C., Steffert, T., Mitcheltree, H., &amp; Steemers, K. (2024). Architectural neuroimmunology: A pilot study examining the impact of biophilic architectural design on neuroinflammation. Buildings, 14(5), Article 1292.</p>
+<p>van Praag, H., Kempermann, G., &amp; Gage, F. H. (2000). Neural consequences of environmental enrichment. Nature Reviews Neuroscience, 1(3), 191-198.</p>
+<p>Vartanian, O., Navarrete, G., Chatterjee, A., Fich, L. B., Leder, H., Modroño, C., Nadal, M., Rostrup, N., &amp; Skov, M. (2013). Impact of contour on aesthetic judgments and approach- avoidance decisions in architecture. Proceedings of the National Academy of Sciences, 110(Supplement 2), 10446-10453.</p>
+<p>Vigliocco, G., Convertino, L., De Felice, S., Gregorians, L., Kewenig, V., Mueller, M. A. E., Veselic, S., Musolesi, M., Hudson-Smith, A., Tyler, N., Flouri, E., &amp; Spiers, H. J. (2024). Ecological brain: Reframing the study of human behaviour and cognition. Royal Society Open Science, 11(11), Article 240762.</p>
+<p>Zhong, W., Schröder, T., &amp; Bekkering, J. (2022). Biophilic design in architecture and its contributions to health, well-being, and sustainability: A critical review. Frontiers of Architectural Research, 11(1), 114-141.</p>
+<p>Zisch, F., Gage, S., &amp; Spiers, H. (2014). Navigating the museum. In N. Levent &amp; A. Pascual- Leone (Eds.), The multisensory museum: Cross-disciplinary perspectives on touch, sound, smell, memory, and space (pp. 215-237). Rowman &amp; Littlefield.</p>
+<p>Zisch, F. E., Coutrot, A., Newton, C., Murcia-López, M., Motala, A., Greaves, J., de Cothi, W., Steed, A., Tyler, N., Gage, S. A., &amp; Spiers, H. J. (2024). Real and virtual environments have comparable spatial memory distortions after scale and geometric transformations. Spatial Cognition &amp; Computation, 24(2), 115-143.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
