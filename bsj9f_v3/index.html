@@ -1,0 +1,3135 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: People Offload Empathy When They Think AI Can
+Give It Instead</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+People Offload Empathy When They Think AI Can Give It Instead
+</p>
+<p class="meta">
+2026-11-15 · Metacheck 0.4.4.1
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>2</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>3</b><span>fine</span></a><a class="count na" href="#na"><b>9</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(2)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Power
+Analysis Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We detected 3 potential power analyses.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We used the LLM model ‘vllm/DeepSeek-V41-Flash-1017-FP8’ to check the
+contents of 3 paragraphs that contained words suggesting they might
+contain power analyses.</p>
+<p>Some essential information could not be detected: statistical_test,
+sample_size, alpha_level, software</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:right;">
+power_<wbr>id
+</th>
+<th style="text-align:left;">
+power_<wbr>type
+</th>
+<th style="text-align:left;">
+statistical_<wbr>test
+</th>
+<th style="text-align:right;">
+sample_<wbr>size
+</th>
+<th style="text-align:right;">
+alpha_<wbr>level
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_<wbr>size
+</th>
+<th style="text-align:left;">
+effect_<wbr>size_<wbr>metric
+</th>
+<th style="text-align:left;">
+software
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+apriori
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.300
+</td>
+<td style="text-align:left;">
+Cohen’s d
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+apriori
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+223
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.014
+</td>
+<td style="text-align:left;">
+eta squared
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+apriori
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+134
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.140
+</td>
+<td style="text-align:left;">
+Cohen’s f
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+power_<wbr>id
+</th>
+<th style="text-align:left;">
+text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Participants. An <strong>a priori</strong> <strong>power</strong>
+analysis suggested we needed a minimum sample size of 175 per condition
+to achieve 80% <strong>power</strong> to detect a small effect size,
+specified as Cohen’s d = .30. We aimed to get 250 participants per
+condition to account for possible exclusions. We recruited 502
+participants from CloudResearch Connect to participate in a
+between-groups study.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Participants. An <strong>a priori</strong> <strong>power</strong>
+analysis suggested we needed a minimum sample size of 223 per condition
+to achieve 80% <strong>power</strong> to detect a small effect,
+specified as η² = .014 or Cohen’s f = .12. We aimed to get 250
+participants per condition to account for possible exclusions. We
+recruited 750 participants from CloudResearch Connect to participate in
+a between-groups study. We excluded seven participants for failing
+attention checks and/or choosing not to have their data be a part of the
+analysis, for a remainder of 743 participants (M age = 38.06, SD age =
+11.57; 47.24% Men, 50.74% Women, 2.02% Other; 70.70% White).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Participants. An <strong>a priori</strong> <strong>power</strong>
+analysis suggested we needed a minimum sample size of 134 per condition
+to achieve 80% <strong>power</strong> to detect a small effect,
+specified as Cohen’s f = .14.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Exact
+P-Values</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 5 imprecise <em>p</em> values out of 64 detected <em>p</em>
+values.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Reporting <em>p</em> values imprecisely (e.g., <em>p</em> &lt; .05)
+reduces transparency, reproducibility, and re-use (e.g., in <em>p</em>
+value meta-analyses). Best practice is to report exact p-values with
+three decimal places (e.g., <em>p</em> = .032) unless <em>p</em> values
+are smaller than 0.001, in which case you can use <em>p</em> &lt;
+.001.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (e.g., “decreased at the <em>p</em>
+&lt; .05 significance threshold”).</p>
+<div style="max-height:8em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+P-Value
+</th>
+<th style="text-align:left;">
+Text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ps &gt; .14
+</td>
+<td style="text-align:left;">
+The Human Support condition was between the other two conditions and was
+not significantly different from either, ps &gt; .14.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &gt; .08
+</td>
+<td style="text-align:left;">
+RMET performance in the Human Support condition (M = 7.29, SD = 2.37)
+was not significantly different from the other two conditions, ps &gt;
+.08 (see Figure 3).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &gt; .72
+</td>
+<td style="text-align:left;">
+These other three conditions were not significantly different from each
+other, ps &gt; .72.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &lt; .05
+</td>
+<td style="text-align:left;">
+When using equal weights (simply counting clicks with no weighting), the
+AI Empathy condition again had the fewest empathy clicks and the most
+indifference clicks (ps &lt; .05).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &lt; .004
+</td>
+<td style="text-align:left;">
+Social connection was highest in the Friends Empathy condition (M =
+4.40, SD = 1.05) compared to the AI Empathy (M = 3.64, SD = 1.27), the
+Therapist Empathy (M = 3.99, SD = 1.13), and the No Support conditions
+(M = 3.90, SD = 1.18), ps &lt; .004.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>The APA manual states: Report exact <em>p</em> values (e.g.,
+<em>p</em> = .031) to two or three decimal places. However, report
+<em>p</em> values less than .001 as <em>p</em> &lt; .001. However, 2
+decimals is too imprecise for many use-cases (e.g., a <em>p</em> value
+meta-analysis), so report <em>p</em> values with three digits.</p>
+<p>American Psychological Association (2020). <em>Publication manual of
+the American Psychological Association</em>, 7 edition. American
+Psychological Association.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 17 non-significant p values that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<div style="max-height:28em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = .90
+</td>
+<td style="text-align:left;">
+Trait empathy did not differ between conditions, t(492) = -0.12, p =
+.90, Cohen’s d = -.01.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .51
+</td>
+<td style="text-align:left;">
+When the effect of perceived capacity was included with the relation
+between condition and offloading, the direct effect of condition on
+empathy offloading became non-significant, b = 0.10, β = .03, SE = 0.15,
+z = 0.65, p = .51, 95% bootstrap CI [-0.19, 0.40].
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .51
+</td>
+<td style="text-align:left;">
+The total effect of condition on offloading (c = 0.83, p &lt; .001) is
+decomposed into the indirect effect through perceived capacity (ab =
+0.73, p &lt; .001, 95% bootstrap CI [0.52, 0.95]) and the direct effect
+(c′ = 0.10, p = .51).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .14
+</td>
+<td style="text-align:left;">
+Across conditions, participants did not differ in ChatGPT’s perceived
+capacity for empathy, F(2, 740) = 2.01, p = .14, η² = .005, or trait
+empathy, F(2, 740) = 1.73, p = .18, η² = .005.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .18
+</td>
+<td style="text-align:left;">
+Across conditions, participants did not differ in ChatGPT’s perceived
+capacity for empathy, F(2, 740) = 2.01, p = .14, η² = .005, or trait
+empathy, F(2, 740) = 1.73, p = .18, η² = .005.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &gt; .14
+</td>
+<td style="text-align:left;">
+The Human Support condition was between the other two conditions and was
+not significantly different from either, ps &gt; .14.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .27
+</td>
+<td style="text-align:left;">
+Interestingly, there were no significant differences in explicit ratings
+of personal obligation or responsibility to help J.S., F(2, 740) = 1.32,
+p = .27, η² = .004.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .81
+</td>
+<td style="text-align:left;">
+Yet participants asked the same number of questions in the No Support
+and Human Support conditions, p = .81.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &gt; .08
+</td>
+<td style="text-align:left;">
+RMET performance in the Human Support condition (M = 7.29, SD = 2.37)
+was not significantly different from the other two conditions, ps &gt;
+.08 (see Figure 3).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .15
+</td>
+<td style="text-align:left;">
+Ratings of J.S.’s emotional pain did not differ by condition, F(2, 740)
+= 1.87, p = .15, η² = .005, suggesting that this construct cannot
+explain differences in empathy offloading. help J.S., and question
+results.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .09
+</td>
+<td style="text-align:left;">
+While there was no significant difference in perceived capacity between
+the AI Empathy and No Support conditions (again, both rated AI), p =
+.09, the means were in the expected direction.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .83
+</td>
+<td style="text-align:left;">
+There was no difference in willingness to offload empathy between the AI
+Empathy and No Support conditions, p = .83, but offloading was higher in
+the Therapist Empathy than the Friends Empathy condition, p = .005.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .06
+</td>
+<td style="text-align:left;">
+Interestingly, the perceived empathic capacity of friends did not
+predict empathy offloading to friends in the Friends Empathy condition,
+b = -0.24, SE = 0.13, t(728) = -1.88, p = .06, 95% CI [-0.49, 0.01], R²
+= .39, nor did the perceived empathic capacity of therapists predict
+offloading to a therapist in the Therapist Empathy condition, b = 0.12,
+SE = 0.11, t(728) = 1.08, p = .28, 95% CI [-0.10, 0.33], probably
+because the restriction of range created a ceiling effect (see Figure
+5).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .28
+</td>
+<td style="text-align:left;">
+Interestingly, the perceived empathic capacity of friends did not
+predict empathy offloading to friends in the Friends Empathy condition,
+b = -0.24, SE = 0.13, t(728) = -1.88, p = .06, 95% CI [-0.49, 0.01], R²
+= .39, nor did the perceived empathic capacity of therapists predict
+offloading to a therapist in the Therapist Empathy condition, b = 0.12,
+SE = 0.11, t(728) = 1.08, p = .28, 95% CI [-0.10, 0.33], probably
+because the restriction of range created a ceiling effect (see Figure
+5).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &gt; .72
+</td>
+<td style="text-align:left;">
+These other three conditions were not significantly different from each
+other, ps &gt; .72.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .84
+</td>
+<td style="text-align:left;">
+There were no significant differences between the No Support and
+Therapist Empathy conditions, p = .84, nor the No Support and AI Empathy
+conditions, p = .16.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .16
+</td>
+<td style="text-align:left;">
+There were no significant differences between the No Support and
+Therapist Empathy conditions, p = .84, nor the No Support and AI Empathy
+conditions, p = .16.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>We found 1 replication for 1 original you cited.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(3)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>We detected no errors in t-tests or F-tests.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>All detected t-tests and F-tests had an effect size reported in the
+same sentence.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(9)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>We recruited 251 participants from CloudResearch Connect to
+participate in an online study.</p>
+</blockquote>
+<blockquote>
+<p>Participants completed seven randomly ordered items (α = .88) from
+the Empathic Concern subscale (sample item: “I often have tender,
+concerned feelings for people less fortunate than me”) of the
+Interpersonal Reactivity Index (IRI; Davis, 2011).</p>
+</blockquote>
+<blockquote>
+<p>We recruited 502 participants from CloudResearch Connect to
+participate in a between-groups study.</p>
+</blockquote>
+<blockquote>
+<p>Participants were randomly assigned to one of two conditions
+manipulating perceived ChatGPT capacity for empathy.</p>
+</blockquote>
+<blockquote>
+<p>We recruited 750 participants from CloudResearch Connect to
+participate in a between-groups study.</p>
+</blockquote>
+<blockquote>
+<p>Participants were randomly assigned to one of three conditions
+manipulating prior emotional support.</p>
+</blockquote>
+<blockquote>
+<p>Participants were aware that J.S. was a hypothetical person in all
+three conditions.</p>
+</blockquote>
+<blockquote>
+<p>For each set of eyes, participants were told the following: “Imagine
+this is J.S., who told you they have been having a tough time
+lately.”</p>
+</blockquote>
+<blockquote>
+<p>In the “ChatGPT Support” and “Human Support” conditions, participants
+were additionally reminded that J.S. had “been going to [GPT/another
+person] for emotional support over the past week.”</p>
+</blockquote>
+<blockquote>
+<p>All participants were then asked to guess what emotion J.S. was
+feeling (see Figure 3).</p>
+</blockquote>
+<blockquote>
+<p>In Study 3, people were asked to imagine someone who needed empathy,
+but in this study, participants were given the initials of a real
+student at the Ohio State University who was experiencing emotional
+distress (although we did include a fictional manipulation about
+who/what they received empathy from).</p>
+</blockquote>
+<blockquote>
+<p>Participants were presented with a cloud of words-some empathic
+(e.g., understanding), some un-empathic (e.g., indifferent)-that they
+clicked to represent how they would act or feel toward K.D. We predicted
+that people would select the fewest empathic words (and the most
+un-empathic words) in the AI Empathy condition.</p>
+</blockquote>
+<blockquote>
+<p>We recruited 800 participants from CloudResearch Connect to
+participate in a between-groups study.</p>
+</blockquote>
+<blockquote>
+<p>Participants were then randomly assigned to one of four conditions:
+1.</p>
+</blockquote>
+<blockquote>
+<p>Participants were told that K.D. felt like they didn’t really have
+anyone to talk to for emotional support.</p>
+</blockquote>
+<blockquote>
+<p>Participants completed the Empathic Concern subscale from the IRI (α
+= .86).</p>
+</blockquote>
+<blockquote>
+<p>Participants were shown a word cloud consisting of 18 words relating
+to empathy and 25 words relating to indifference (see Figure 4).</p>
+</blockquote>
+<blockquote>
+<p>Participants were told to click on the words that expressed how they
+would act or feel toward K.D. We intentionally presented more
+indifference than empathy words and randomly varied the sizes of all
+words.</p>
+</blockquote>
+<blockquote>
+<p>We recruited U.S. participants, but different cultural contexts
+likely shape differences in empathy offloading and social judgment
+behaviors.</p>
+</blockquote>
+<blockquote>
+<p>Participants in all studies were provided informed consent and were
+debriefed after the studies.</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>Ethical approval was granted for Studies 1-3 in this paper from the
+Office of Human Research Ethics at the University of North Carolina at
+Chapel Hill Institutional Review Board (IRB25-0589).</p>
+</blockquote>
+<blockquote>
+<p>Ethical approval was granted for Study 4 by the Institutional Review
+Board at the Enterprise for Research, Innovation, and Knowledge at the
+Ohio State University (STUDY20252413).</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Effect Sizes in t-tests and F-tests
+</summary>
+<div class="fold">
+<p>All detected t-tests and F-tests had an effect size reported in the
+same sentence.</p>
+<p>For t-tests with a reported d, coherence checks yielded 2 matches
+under assumptions, 9 indeterminate cases.</p>
+<p>For F-tests with a reported eta-squared effect size, coherence checks
+yielded 12 indeterminate cases.</p>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<div style="max-height:15em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+As predicted, perceiving ChatGPT as capable of providing empathy was
+positively correlated with offloading empathy to ChatGPT, b = 0.44, SE =
+0.05, t(247) = 9.64, p &lt; .001, 95% CI [0.35, 0.53], R² = .27 (see
+Figure 1).
+</td>
+<td style="text-align:left;">
+b = 0.44
+</td>
+<td style="text-align:left;">
+t(247) = 9.64
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+This correlation remained significant even after controlling for trait
+empathy and experience using ChatGPT for empathy, b = 0.31, SE = 0.04,
+t(245) = 7.38, p &lt; .001, 95% CI [0.23, 0.40], R² = .47.
+</td>
+<td style="text-align:left;">
+b = 0.31
+</td>
+<td style="text-align:left;">
+t(245) = 7.38
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Confirming our manipulation, participants in the AI Empathy condition
+rated ChatGPT as more capable of empathy (M = 4.30, SD = 1.69) than in
+the AI Image Generation condition (M = 3.23, SD = 1.72), t(492) = -7.02,
+p &lt; .001, Cohen’s d = -.63.
+</td>
+<td style="text-align:left;">
+Cohen’s d = -.63
+</td>
+<td style="text-align:left;">
+t(492) = -7.02
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+independent_equal_n
+</td>
+<td style="text-align:left;">
+Match under independent-samples equal-n assumption (n1 = n2 = 247, N =
+494).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+As predicted, people in the AI Empathy condition reported more empathy
+offloading (M = 3.27, SD = 1.93) than those in the AI Image Generation
+condition (M = 2.43, SD = 1.74), t(487.28) = -5.02, p &lt; .001, Cohen’s
+d = -.45.
+</td>
+<td style="text-align:left;">
+Cohen’s d = -.45
+</td>
+<td style="text-align:left;">
+t(487.28) = -5.02
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+Non-integer df indicates Welch’s t-test (unequal variances); sample
+sizes cannot be determined.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trait empathy did not differ between conditions, t(492) = -0.12, p =
+.90, Cohen’s d = -.01.
+</td>
+<td style="text-align:left;">
+Cohen’s d = -.01
+</td>
+<td style="text-align:left;">
+t(492) = -0.12
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+paired_dz
+</td>
+<td style="text-align:left;">
+Match under paired-samples dz assumption.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Across conditions, participants did not differ in ChatGPT’s perceived
+capacity for empathy, F(2, 740) = 2.01, p = .14, η² = .005, or trait
+empathy, F(2, 740) = 1.73, p = .18, η² = .005.
+</td>
+<td style="text-align:left;">
+η² = .005
+</td>
+<td style="text-align:left;">
+F(2, 740) = 2.01
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Across conditions, participants did not differ in ChatGPT’s perceived
+capacity for empathy, F(2, 740) = 2.01, p = .14, η² = .005, or trait
+empathy, F(2, 740) = 1.73, p = .18, η² = .005.
+</td>
+<td style="text-align:left;">
+η² = .005
+</td>
+<td style="text-align:left;">
+F(2, 740) = 1.73
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+But as predicted, participants significantly differed in empathy
+offloading across conditions, F(2, 740) = 3.25, p = .04, η² = .009.
+</td>
+<td style="text-align:left;">
+η² = .009
+</td>
+<td style="text-align:left;">
+F(2, 740) = 3.25
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interestingly, there were no significant differences in explicit ratings
+of personal obligation or responsibility to help J.S., F(2, 740) = 1.32,
+p = .27, η² = .004.
+</td>
+<td style="text-align:left;">
+η² = .004
+</td>
+<td style="text-align:left;">
+F(2, 740) = 1.32
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Participants differed significantly in the number of questions they
+asked about J.S.’s emotional situation, F(2, 740) = 19.51, p &lt; .001,
+η² = .05.
+</td>
+<td style="text-align:left;">
+η² = .05
+</td>
+<td style="text-align:left;">
+F(2, 740) = 19.51
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Participants also differed significantly in the number of questions they
+asked about how they could help J.S., F(2, 740) = 9.48, p &lt; .001, η²
+= .02.
+</td>
+<td style="text-align:left;">
+η² = .02
+</td>
+<td style="text-align:left;">
+F(2, 740) = 9.48
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+There were significant differences in RMET accuracy across conditions,
+F(2, 739) = 4.36, p = .01, η² = .01.
+</td>
+<td style="text-align:left;">
+η² = .01
+</td>
+<td style="text-align:left;">
+F(2, 739) = 4.36
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ratings of J.S.’s emotional pain did not differ by condition, F(2, 740)
+= 1.87, p = .15, η² = .005, suggesting that this construct cannot
+explain differences in empathy offloading. help J.S., and question
+results.
+</td>
+<td style="text-align:left;">
+η² = .005
+</td>
+<td style="text-align:left;">
+F(2, 740) = 1.87
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+There was a significant difference across conditions in perceived
+capacity for empathy, F(3, 732) = 333.50, p &lt; .001, η² = .58.
+</td>
+<td style="text-align:left;">
+η² = .58
+</td>
+<td style="text-align:left;">
+F(3, 732) = 333.50
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Participants differed in their willingness to offload empathy to the
+relevant empathy source, F(3, 733) = 84.30, p &lt; .001, η² = .26.
+</td>
+<td style="text-align:left;">
+η² = .26
+</td>
+<td style="text-align:left;">
+F(3, 733) = 84.30
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interestingly, the perceived empathic capacity of friends did not
+predict empathy offloading to friends in the Friends Empathy condition,
+b = -0.24, SE = 0.13, t(728) = -1.88, p = .06, 95% CI [-0.49, 0.01], R²
+= .39, nor did the perceived empathic capacity of therapists predict
+offloading to a therapist in the Therapist Empathy condition, b = 0.12,
+SE = 0.11, t(728) = 1.08, p = .28, 95% CI [-0.10, 0.33], probably
+because the restriction of range created a ceiling effect (see Figure
+5).
+</td>
+<td style="text-align:left;">
+b = -0.24
+</td>
+<td style="text-align:left;">
+t(728) = -1.88
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interestingly, the perceived empathic capacity of friends did not
+predict empathy offloading to friends in the Friends Empathy condition,
+b = -0.24, SE = 0.13, t(728) = -1.88, p = .06, 95% CI [-0.49, 0.01], R²
+= .39, nor did the perceived empathic capacity of therapists predict
+offloading to a therapist in the Therapist Empathy condition, b = 0.12,
+SE = 0.11, t(728) = 1.08, p = .28, 95% CI [-0.10, 0.33], probably
+because the restriction of range created a ceiling effect (see Figure
+5).
+</td>
+<td style="text-align:left;">
+b = 0.12
+</td>
+<td style="text-align:left;">
+t(728) = 1.08
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Participants differed in how strongly they felt a moral duty to help
+K.D., F(3, 733) = 5.66, p &lt; .001, η² = .02.
+</td>
+<td style="text-align:left;">
+η² = .02
+</td>
+<td style="text-align:left;">
+F(3, 733) = 5.66
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Participants differed in their perceived social connection to K.D., F(3,
+733) = 13.63, p &lt; .001, η² = .05.
+</td>
+<td style="text-align:left;">
+η² = .05
+</td>
+<td style="text-align:left;">
+F(3, 733) = 13.63
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+More frequent ChatGPT use was positively correlated with greater
+offloading willingness (when controlling for perceived capacity and
+trait empathy), b = 0.49, SE = 0.07, t(245) = 7.31, p &lt; .001, 95% CI
+[0.36, 0.62].
+</td>
+<td style="text-align:left;">
+b = 0.49
+</td>
+<td style="text-align:left;">
+t(245) = 7.31
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+People higher in trait empathy were less likely to offload (when
+controlling for perceived capacity and ChatGPT use), b = -0.45, SE =
+0.08, t(245) = -5.44, p &lt; .001, 95% CI [-0.62, -0.29].
+</td>
+<td style="text-align:left;">
+b = -0.45
+</td>
+<td style="text-align:left;">
+t(245) = -5.44
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+While empathy offloading was lower in the AI Empathy condition, AI’s
+perceived capacity for empathy still strongly predicted empathy
+offloading in the AI Empathy condition, b = 0.44, SE = 0.06, t(728) =
+7.26, p &lt; .001, 95% CI [0.32, 0.55], consistent with our previous
+studies.
+</td>
+<td style="text-align:left;">
+b = 0.44
+</td>
+<td style="text-align:left;">
+t(728) = 7.26
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Perceived capacity also predicted empathy offloading in the No Support
+condition, b = 0.61, SE = 0.06, t(728) = 10.30, p &lt; .001, 95% CI
+[0.50, 0.73], consistent with the correlational Study 1.
+</td>
+<td style="text-align:left;">
+b = 0.61
+</td>
+<td style="text-align:left;">
+t(728) = 10.30
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 80 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 80 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 80 references with DOIs. We found 1 replication for 1
+original you cited.</p>
+<p>Check if you are aware of the replication studies, and cite them
+where appropriate.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:50%" />
+<col style="width:50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:left;">
+Replication
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Finkel, E. J., Rusbult, C. E., Kumashiro, M., &amp; Hannon, P. A.
+(2002). Dealing with betrayal in close relationships: Does commitment
+promote forgiveness? Journal of Personality and Social Psychology,
+82(6), 956-974. <a href="https://doi.org/10.1037/0022-3514.82.6.956" class="uri">https://doi.org/10.1037/0022-3514.82.6.956</a>
+</td>
+<td style="text-align:left;">
+Cheung, I., Campbell, L., LeBel, E. P., Ackerman, R. A., Aykutoğlu, B.,
+Bahník, Š., Bowen, J. D., Bredow, C. A., Bromberg, C., Caprariello, P.
+A., Carcedo, R. J., Carson, K. J., Cobb, R. J., Collins, N. L.,
+Corretti, C. A., DiDonato, T. E., Ellithorpe, C., Fernández-Rouco, N.,
+Fuglestad, P. T., … Yong, J. C. (2016). Registered Replication Report.
+Perspectives on Psychological Science, 11(5), 750–764.
+<a href="https://doi.org/10.1177/1745691616664694" target="_blank">doi:10.1177/1745691616664694</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold” or “legend”). Notes in other
+forms, such as a marker after the p-value (“p &lt; .05 (*)“), are still
+flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 225 papers containing 405 instances of
+non-exact p-values, the module correctly detected 269 cases (true
+positives) and incorrectly identified 78 (false positives). It missed
+136 instances of imprecisely reported p-values (false negatives) and
+correctly identified 4557 cases of precisely reported p-values (true
+negative). Additionally, 78% of positive detections were correct
+(positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 194 papers with 1602 instances of
+non-significant p-values, this module correctly detected 1486 of them,
+and incorrectly identified 153. Additionally, 91% of detections were
+true instances (positive predictive value). That is, when this module
+flags non-significant p-values in a paper, it correctly identifies an
+issue 91% of the time.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Giving empathy is good, but providing emotional support is hard work. Empathic AI gives cheap and easy support, but may be ethically costly. When AI provides empathy, people may feel less compelled to support others. Four studies provide evidence for &quot;empathy offloading&quot;: when people see AI as capable of empathy, they become less willing to empathize with the suffering of others, even without realizing it. When AI seems more capable of empathy, people-both with correlations (Study 1) and causal experiments (Study 2)-report more empathy offloading. When people learn that someone has received emotional support from large language models (LLMs), they engage less with others&#x27; mental states (Study 3) and offer fewer empathic responses and more social judgment (Study 4). Empathic AI might provide emotional support at any time, but it may weaken our ethical and emotional commitments to fellow human beings. The implications of offloading emotional support may include empathic devaluing and atrophy, moral deskilling, and societal fraying.</p>
+<h3>Introduction</h3>
+<p>Providing others with empathy is virtuous. It is also hard work. One good thing about artificial intelligence (AI) is that it reduces hard work, but it may also reduce the virtuous behavior of providing others with empathy. Like many other time-saving inventions (e.g., calculators, computers), large language models (LLMs) are agents of replacement (Gray et al., 2025). They can replace cognitive labor-analyzing complex equations and collating data-but they can also replace emotional labor. They can listen carefully to people&#x27;s problems and then sympathize with them to foster emotional support (Ovsyannikova et al., 2025). Because LLMs can provide empathic behaviors, people may outsource those behaviors to AI. Once we know that someone is going to AI, we may &quot;offload empathy,&quot; perhaps giving less effort, attention, or concern to others who need emotional support. Offloading empathy can change how we interact with each other, and may reduce our ethical commitments to fellow humans.</p>
+<p>What do we owe each other? This is perhaps the most foundational question of ethics (Rawls, 2003; Scanlon, 2000). How much do we have a duty to care for others versus to pursue our own self-interest (Batson, 2014; Nagel, 2016; Singer, 2016)? Our genes are inherently selfish, and yet humans can perform incredible acts of compassion, like donating organs to strangers and sacrificing lives to protect comrades and countries. Most of us will never have the chance to act heroically, but we still express the ethical behaviors of care and compassion by providing empathy to each other (Davis, 1983; Tangney et al., 2007; Zagefka et al., 2011). Both philosophers and everyday people agree that providing emotional support to others is morally good (Algoe et al., 2008; Gable et al., 2006) and believe that those who consistently provide compassion to others deserve the label of &quot;hero&quot; (Walker &amp; Frimer, 2007).</p>
+<p>One reason human empathy is ethically celebrated (but see Bloom, 2017) is that it is personally costly. Providing empathy is effortful. It can be emotionally exhausting, uncomfortable, financially taxing, and can lead to burnout and compassion fatigue (Cameron et al., 2019; Hodges &amp; Klein, 2001; Lockwood et al., 2017; Robertson et al., 2024). But the work required to provide empathy is a powerful reason why we praise those who emotionally support others (Inzlicht et al., 2018)-humans generally praise effort (Bigman &amp; Tamir, 2016).</p>
+<p>Providing empathy is often experienced as an ethical duty grounded in one&#x27;s relationship with someone. People still feel some obligation to provide empathy to others, even after learning that they have already received some support (Aquino et al., 2011; Hong et al., 2022; Jordan et al., 2011; Zhang et al., 2017). But even in the face of ethical duty, we feel entitled to some emotional self-preservation. Scholars argue that people should protect their &quot;emotional boundaries&quot; by not providing empathy (Bloom, 2017; Brown, 2021; Sheldon et al., 2010).</p>
+<p>Whether this self-concern is selfish or ultimately ethical (you can&#x27;t help others if you&#x27;re too exhausted) is open to debate (Maslach &amp; Jackson, 1981; Neff, 2003), but it is clear that psychologically, people trade off costs to the self against benefits to others (Cameron &amp; Payne, 2011).</p>
+<p>The tension between fulfilling ethical duties versus being emotionally self-protective (or lazy) means that every chance to provide empathy is a trade-off: expend effort and be a virtuous person, or conserve effort and be less virtuous. This choice is complicated by empathic AI, which can provide empathy to other people without them having to do it, helping save people emotional labor and time.</p>
+<p>Humans are usually happy to offload labor. Research on cognitive offloading, social loafing, compassion fatigue, and the bystander effect (Fischer et al., 2011; Risko &amp; Gilbert, If we feel comfortable shirking our ethical obligations to others, might that ultimately further fray the social fabric of society (Morelli et al., 2017)? When AI replaces humans as a source of empathy, will empathy itself be seen as less virtuous, and will that make humanity itself less ethical? When someone can go cry to AI, why bother getting splashed with their tears?</p>
+<p>Four studies test whether people from the U.S. offload empathy to AI (specifically, ChatGPT). Study 1 explores the correlation between self-reported willingness to offload empathy and perceptions of AI as capable of empathy. Study 2 manipulates whether AI is capable of empathy and tests whether that increases self-reported empathy offloading. Study 3 tests whether learning that someone has already sought support from AI reduces quasi-behavioral empathic engagement. Study 4 extends this by comparing empathy offloading across AI, friends, and therapist conditions, exploring whether people&#x27;s reported moral duty to empathize aligns with their actual empathic responses.</p>
+<h3>Data Statement</h3>
+<p>Across all studies, sample recruitment, data exclusion practices, measures, manipulations, and procedures are all reported here in the text, in linked preregistrations, or in the online supplemental materials. Data were analyzed using R. We preregistered Studies 1, 2, and 3, but accidentally overwrote our pre-registration for Study 4, and so Study 4 should be treated as exploratory. Study materials are available in the online supplemental files. Data, analysis code, and preregistrations are available on OSF: https://tinyurl.com/2x7m75um. The only departures from preregistrations were in Study 1, where we used a more parsimonious approach (linear regression rather than structural equation modeling) to test our hypotheses, and Study 3, where we used the RMET as a measure of engagement with mental states (rather than perspectivetaking).</p>
+<h3>Study 1: Perceived Capacity of AI and Empathy Offloading</h3>
+<p>If people see AI as capable of providing empathy, would they feel less need to provide empathy themselves? In this study, people rated 1) how much they believe ChatGPT is capable of providing empathic support, and 2) their willingness to offload empathy to ChatGPT. We predicted a positive correlation between these ratings.</p>
+<h3>Method</h3>
+<p>Participants. We recruited 251 participants from CloudResearch Connect to participate in an online study. We excluded one participant for choosing not to have their data be a part of the analysis and one participant for being younger than 18, leaving a remainder of 249 participants (M age = 38.07; SD age = 12.22; 52.61% Men, 46.59% Women, .80% Other; 68.27% White).</p>
+<h3>Perceived ChatGPT Capacity for Empathy.</h3>
+<p>Participants first rated their agreement with three randomly ordered items measuring ChatGPT&#x27;s capacity to provide empathy (&quot;GPT is capable of providing empathy/being compassionate/understanding pain&quot;) from Strongly Disagree (1) to Strongly Agree (7). These items were adapted from Gray et al. (2007) and were averaged to make a composite score of capacity (α = .90).</p>
+<h3>Empathy Offloading.</h3>
+<p>Participants then rated their agreement with four randomly ordered items (α = .93) measuring willingness to offload empathy to ChatGPT (&quot;I&#x27;d rather GPT provide emotional support to someone I know than have them rely on me; If someone seeks empathy from me, I&#x27;d prefer they turn to GPT instead; GPT can take over my role in offering emotional support to others; I would offload my empathic responsibilities to GPT&quot;) from Strongly Disagree (1) to Strongly Agree (7).</p>
+<h3>Trait Empathy.</h3>
+<p>Different people may have different baseline tendencies to provide empathy, so we measured individual differences in empathy as a covariate. Participants completed seven randomly ordered items (α = .88) from the Empathic Concern subscale (sample item: &quot;I often have tender, concerned feelings for people less fortunate than me&quot;) of the Interpersonal Reactivity Index (IRI; Davis, 2011). Items were rated on a scale from Does not describe me well (A) to Describes me very well (E).</p>
+<h3>ChatGPT Use for Empathy.</h3>
+<p>Those who already use AI for empathy might have a different perspective, so we measured how often participants use LLMs like ChatGPT for emotional support from Not at all often (1) to Extremely often (5) as a covariate.</p>
+<h3>Results</h3>
+<h3>Main Finding: Empathy Offloading.</h3>
+<p>As predicted, perceiving ChatGPT as capable of providing empathy was positively correlated with offloading empathy to ChatGPT, b = 0.44, SE = 0.05, t(247) = 9.64, p &lt; .001, 95% CI [0.35, 0.53], R² = .27 (see Figure 1). This correlation remained significant even after controlling for trait empathy and experience using ChatGPT for empathy, b = 0.31, SE = 0.04, t(245) = 7.38, p &lt; .001, 95% CI [0.23, 0.40], R² = .47. People saw ChatGPT as somewhat incapable of empathy, scoring below the scale midpoint of 4 (&quot;neither agree nor disagree&quot;) on the 7-point scale but well above the floor of 1 (M = 3.24, SD = 1.64).  to offload empathy.</p>
+<h3>Discussion</h3>
+<p>The results show that people who view ChatGPT as capable of providing empathy are more willing to offload empathy to it. Although perceptions of ChatGPT&#x27;s empathic capacity were modest, many participants still viewed ChatGPT as a viable source of empathy, and these beliefs predicted offloading. We also found that using ChatGPT more for empathic support predicted offloading, and that trait empathy was negatively correlated with offloading. Of course, this study was only correlational, a limitation we now address.</p>
+<h3>Study 2: Manipulating AI&#x27;s Empathic Capacity</h3>
+<p>Study 2 experimentally manipulated perceived empathic capacity of ChatGPT using a naturalistic manipulation-real newspaper articles describing the rise of AI being used for empathy-compared to control articles about AI generating images. We predicted that participants exposed to articles about empathic AI would view ChatGPT as more capable of providing empathy and, in turn, report greater willingness to offload empathic responsibilities to AI. We also tested whether perceived capacity of ChatGPT for empathy mediated the link between condition and willingness to offload.</p>
+<h3>Method</h3>
+<p>Participants. An a priori power analysis suggested we needed a minimum sample size of 175 per condition to achieve 80% power to detect a small effect size, specified as Cohen&#x27;s d = .30. We aimed to get 250 participants per condition to account for possible exclusions. We recruited 502 participants from CloudResearch Connect to participate in a between-groups study.</p>
+<p>We excluded six participants for choosing not to have their data be a part of the analysis, one participant for not consenting, and one participant for being an outlier, leaving a remainder of 494 participants (M age = 37.4; SD age = 12.5; 45.95% Men, 51.82% Women, 2.22% Other; 64.98% White).</p>
+<p>Manipulation. Participants were randomly assigned to one of two conditions manipulating perceived ChatGPT capacity for empathy. In the &quot;AI Image Generation&quot; condition (n = 246), participants viewed news headlines and snippets about AI generating images. In the &quot;AI Empathy&quot; condition (n = 248), participants viewed headlines and snippets about AI being used for empathy. All articles were published between January 2024 and April 2025 and were drawn from high-traffic U.S. news outlets (The New York Times, CBS News, The Wall Street Journal, MSN, and Forbes; Similarweb, 2025), presented in random order. Screenshots and article selection details are provided in the online supplemental materials (Figures S1-S10).</p>
+<p>Measures. After viewing the five newspaper headlines, participants rated ChatGPT&#x27;s capacity for empathy with the same measure as in Study 1 (α = .89), which served as a manipulation check here. They also rated their willingness to offload empathy with a single item from Study 1-selected because it was the most face-valid among items (&quot;I would offload my empathic responsibilities to GPT&quot;). Participants then completed the Empathic Concern subscale from the IRI (α = .87).</p>
+<h3>Results</h3>
+<h3>Main Finding: Empathy Offloading.</h3>
+<p>Confirming our manipulation, participants in the AI Empathy condition rated ChatGPT as more capable of empathy (M = 4.30, SD = 1.69) than in the AI Image Generation condition (M = 3.23, SD = 1.72), t(492) = -7.02, p &lt; .001, Cohen&#x27;s d = -.63.</p>
+<p>As predicted, people in the AI Empathy condition reported more empathy offloading (M = 3.27, SD = 1.93) than those in the AI Image Generation condition (M = 2.43, SD = 1.74), t(487.28) = -5.02, p &lt; .001, Cohen&#x27;s d = -.45. Trait empathy did not differ between conditions, t(492) = -0.12, p = .90, Cohen&#x27;s d = -.01. More information about trait empathy and correlations can be found in the online supplemental materials (Table S1).</p>
+<h3>Mediation.</h3>
+<p>As in Study 1, ChatGPT&#x27;s perceived capacity for empathy significantly predicted greater willingness to offload empathy, b = 0.58, β = .59, SE = 0.04, z = 14.82, p &lt; .001, 95% bootstrap CI [0.50, 0.65], and mediated the link between condition (AI Image Generation vs. AI Empathy) and empathy offloading (see Figure 2). When the effect of perceived capacity was included with the relation between condition and offloading, the direct effect of condition on empathy offloading became non-significant, b = 0.10, β = .03, SE = 0.15, z = 0.65, p = .51, 95% bootstrap CI [-0.19, 0.40]. Consistent with mediation, the indirect effect of condition on offloading willingness through perceived capacity was significant, b = 0.73, β = .19, SE = 0.11, z = 6.66, p &lt; .001, 95% bootstrap CI [0.52, 0.95].</p>
+<p>To formally test the mediation, we used the lavaan package in R (Rosseel, 2012), specifying perceived capacity as a latent factor indicated by the three items measuring</p>
+<p>ChatGPT&#x27;s capacity for empathy, rather than using the observed composite mean. This latent variable specification accounts for measurement error in the perceived capacity construct and yields model degrees of freedom (df = 4) from the additional observed covariances introduced by the three items. The model demonstrated acceptable fit based on commonly used criteria (Lai &amp; Green, 2016; Shi et al., 2022): χ²(4) = 29.54, p &lt; .001; CFI = .98; TLI = .95; SRMR = .03.</p>
+<p>Although the RMSEA was somewhat elevated (.11, 90% CI: [.08, .15]), the CFI and SRMR met conventional thresholds for good fit, suggesting the model was reasonably specified overall. via perceived capacity. Note. Unstandardized coefficients shown. The total effect of condition on offloading (c = 0.83, p &lt; .001) is decomposed into the indirect effect through perceived capacity (ab = 0.73, p &lt; .001, 95% bootstrap CI [0.52, 0.95]) and the direct effect (c′ = 0.10, p = .51).</p>
+<p>Perceived capacity was modeled as a latent factor with three indicators. ***p &lt; .001.</p>
+<h3>Discussion</h3>
+<p>The results show that reading news articles about empathic AI increased empathy offloading, and this effect was explained by changes in perceived capacity. The next study extends empathy offloading to two key measurement domains: explicit ratings of moral obligation and more quasi-behavioral measures.</p>
+<h3>Study 3: Testing Offloading Empathy with Quasi-Behavioral Proxies</h3>
+<p>Study 3 was an experiment that compared empathy offloading after someone learned that a sad acquaintance had already received empathy from ChatGPT, a friend, or no one (the control condition). We predicted more empathy offloading for ChatGPT versus the control condition, but were unsure about the relative offloading between someone receiving support from ChatGPT or another person. On one hand, people are generally seen as more capable of providing empathy, and our first two studies show that perceived capacity can drive offloading. On the other hand, when other people provide empathy, it sets some social norms for empathy that others might follow (Algoe et al., 2008).</p>
+<p>We also explored whether empathy offloading might extend beyond self-reports to explicit ratings of moral obligation and to more quasi-behavioral measures. Given that empathic behavior often involves asking questions (Nils &amp; Rimé, 2012) and engaging with others&#x27; expressions and mental states (Bensalah et al., 2016; Decety &amp; Jackson, 2004; Malle &amp; Hodges, 2007; Preston &amp; de Waal, 2002), we included two quasi-behavioral measures: a question-writing task and the Reading the Mind in the Eyes Test (Baron-Cohen et al., 2001). Finally, we measured ratings of emotional pain to test for an alternative hypothesis about empathy offloading: that people infer other people have less pain when they go to AI for empathy.</p>
+<h3>Method</h3>
+<p>Participants. An a priori power analysis suggested we needed a minimum sample size of 223 per condition to achieve 80% power to detect a small effect, specified as η² = .014 or Cohen&#x27;s f = .12. We aimed to get 250 participants per condition to account for possible exclusions. We recruited 750 participants from CloudResearch Connect to participate in a between-groups study. We excluded seven participants for failing attention checks and/or choosing not to have their data be a part of the analysis, for a remainder of 743 participants (M age = 38.06, SD age = 11.57; 47.24% Men, 50.74% Women, 2.02% Other; 70.70% White).</p>
+<p>Manipulation. Participants were randomly assigned to one of three conditions manipulating prior emotional support. In the &quot;No Support&quot; condition (control; n = 248), participants read the following vignette: &quot;Imagine someone you know, J.S., told you that they have been having a really tough time lately. It seemed like they want to talk to you.&quot; In the &quot;ChatGPT Support&quot; condition (n = 249), participants read the same vignette but were also told that J.S. &quot;has been going to ChatGPT for emotional support over the past week.&quot; In the &quot;Human Support&quot; condition (n = 246), participants read the same vignette as the &quot;No Support&quot; condition but were also told that J.S. &quot;has been going to another person for emotional support over the past week.&quot; Participants were aware that J.S. was a hypothetical person in all three conditions.</p>
+<h3>Measures</h3>
+<p>We used the same face-valid measures of perceived ChatGPT empathic capacity (α = .90), empathy offloading, and trait empathy (α = .87) as in Studies 1 and 2. We also included a more explicit measure of personal responsibility, and two quasi-behavioral proxies for empathy.</p>
+<p>The first was asking questions to J.S., and the second was the Reading the Mind in the Eyes Test to measure engagement with mental states. We also included perceptions of J.S.&#x27;s emotional pain.</p>
+<h3>Personal Responsibility.</h3>
+<p>Participants rated their agreement with three randomly ordered items (α = .83) measuring perceived personal responsibility to help J.S. out (&quot;I feel obligated to provide emotional support to J.S.; I feel personally responsible to help J.S.; I feel compelled to talk to J.S.&quot;) from Strongly Disagree (1) to Strongly Agree (7).</p>
+<h3>Question Asking.</h3>
+<p>Participants asked up to five questions to J.S. about their sad situation.</p>
+<p>We were especially interested in questions about J.S.&#x27;s &quot;emotional situation,&quot; reflecting participants&#x27; interest in providing empathy. Three undergraduate research assistants independently coded these questions into two subcategories: questions about J.S.&#x27;s emotional situation in general (e.g., &quot;What is bothering you?&quot; ; α = .94) and, given J.S.&#x27;s situation, questions about how participants themselves could help out J.S. (e.g., &quot;Do you want me to just sit and listen?&quot; ; α = .89). Fewer questions indicated less emotional effort and more offloading.</p>
+<h3>Engagement with Mental States. Participants completed the Reading the Mind in the</h3>
+<p>Eyes Test (RMET), which asks people to guess the emotions of different people who are represented by only their eyes. Originally a task developed for autism research, the RMET reflects variation in people&#x27;s capacity for emotional mental state reading, a skill related to empathy (Decety &amp; Jackson, 2004; Yalçın &amp; DiPaola, 2020). While the RMET is traditionally seen as a measure of emotion recognition ability (and we originally preregistered the RMET as a perspective-taking measure), performance on the task also requires attention to and engagement with others&#x27; mental states. We therefore included the RMET to assess whether situational factors, such as prior AI support, might influence how attentive people are to others&#x27; mental states. Prior work has shown that experimentally induced states can shift RMET performance (Harkness et al., 2005 (Harkness et al., , 2010;; Nolte et al., 2013), suggesting the task is sensitive to contextual influences and not solely a fixed trait measure. We reasoned that the RMET could also predict differences in engagement across conditions, especially because we selected the 12 most difficult stimuli from the original set of 36 eyes (defined as those with the lowest mean accuracy in emotion identification across both the general population and student samples from the original paper). The correct emotions for the 12 selected items were: uneasy, cautious, anticipating, doubtful, decisive, tentative, interested, cautious, interested, confident, serious, and concerned.</p>
+<p>For each set of eyes, participants were told the following: &quot;Imagine this is J.S., who told you they have been having a tough time lately.&quot; In the &quot;ChatGPT Support&quot; and &quot;Human Support&quot; conditions, participants were additionally reminded that J.S. had &quot;been going to [GPT/another person] for emotional support over the past week.&quot; All participants were then asked to guess what emotion J.S. was feeling (see Figure 3). Fewer correct emotions guessed indicated less engagement and-we inferred-more empathy offloading.</p>
+<h3>Ratings of Emotional Pain.</h3>
+<p>Participants rated how much emotional pain J.S. was in using two randomly ordered items (&quot;How much emotional pain is J.S. experiencing? ; How much is J.S. suffering?&quot; ; α = .90) from No pain/suffering at all (1) to Extreme pain/suffering (5).</p>
+<h3>Results</h3>
+<h3>Perceived Capacity, Empathy Offloading, and Trait Empathy.</h3>
+<p>Across conditions, participants did not differ in ChatGPT&#x27;s perceived capacity for empathy, F(2, 740) = 2.01, p = .14, η² = .005, or trait empathy, F(2, 740) = 1.73, p = .18, η² = .005. But as predicted, participants significantly differed in empathy offloading across conditions, F(2, 740) = 3.25, p = .04, η² = .009. Post-hoc analyses using Tukey&#x27;s Honestly Significant Difference (HSD) revealed that offloading was highest in the ChatGPT Support condition (M = 2.79, SD = 1.77) compared to the No Support condition (M = 2.43, SD = 1.60), p = .04. The Human Support condition was between the other two conditions and was not significantly different from either, ps &gt; .14. Full descriptive statistics of variables and correlations are in Tables S3-S4 in the online supplemental materials.</p>
+<h3>Mediation.</h3>
+<p>Given the results of the ANOVA above, we focused the mediation analyses on comparing empathy offloading between the ChatGPT Support condition and the No Support condition (see the online supplemental materials for mediations with the Human Support condition). Compared to the No Support condition, the ChatGPT Support condition significantly increased perceived ChatGPT capacity, b = 0.35, β = .10, SE = 0.16, z = 2.21, p = .03, 95% bootstrap CI [0.04, 0.65]. Perceived ChatGPT capacity, in turn, strongly predicted willingness to offload empathy, b = 0.58, β = .59, SE = 0.03, z = 16.94, p &lt; .001, 95% bootstrap CI [0.51, 0.65].</p>
+<p>As in Study 2, the indirect effect of ChatGPT support (vs. no support) on empathy offloading through perceived capacity was significant, b = 0.20, β = .06, SE = 0.09, z = 2.19, p = .03, 95% bootstrap CI [0.02, 0.38].</p>
+<p>The model demonstrated acceptable fit based on commonly used criteria (Lai &amp; Green, 2016; Shi et al., 2022): χ²(6) = 87.57, p &lt; .001; CFI = .96; TLI = .90; SRMR = .04. Although the RMSEA was somewhat elevated (.14, 90% CI: [.11, .16]), the CFI and SRMR met conventional thresholds for good fit, suggesting the model was reasonably specified overall.</p>
+<h3>Personal Responsibility.</h3>
+<p>Interestingly, there were no significant differences in explicit ratings of personal obligation or responsibility to help J.S., F(2, 740) = 1.32, p = .27, η² = .004.</p>
+<h3>Question Asking about J.S.&#x27;s Emotional Situation.</h3>
+<p>Participants differed significantly in the number of questions they asked about J.S.&#x27;s emotional situation, F(2, 740) = 19.51, p &lt; .001, η² = .05. Pairwise comparisons revealed that participants asked more questions about J.S.&#x27;s emotional situation in the No Support condition (M = 3.73, SD = 0.99) compared to the ChatGPT Support (M = 3.15, SD = 1.33) and Human Support conditions (M = 3.18, SD = 1.13), ps &lt; .001.</p>
+<h3>Question Asking about Helping J.S.</h3>
+<p>Participants also differed significantly in the number of questions they asked about how they could help J.S., F(2, 740) = 9.48, p &lt; .001, η² = .02. Participants asked fewer questions in the ChatGPT Support condition (M = 0.70, SD = 0.73) compared to the No Support condition (M = 0.98, SD = 0.82), p &lt; .001, and the Human Support condition (M = 0.94, SD = 0.77), p = .002. Yet participants asked the same number of questions in the No Support and Human Support conditions, p = .81.</p>
+<p>Participants&#x27; written questions were also analyzed using the English dictionary in LIWC-22 (Boyd et al., 2022), a validated text analysis tool that computes the percentage of words belonging to psychologically meaningful linguistic categories. We used categories relevant to empathic engagement: (1) target-focused pronoun use to capture attentional focus on J.S.&#x27;s perspective (Davis, 1983), and first-person pronouns to test for shifts toward self-focus; (2) affective tone and emotion categories to assess the emotional quality of participants&#x27; language; and (3) prosocial and social behavior categories to capture supportive language. All analyses were run with and without controlling for word count (see Table S2).</p>
+<h3>Engagement with Mental States.</h3>
+<p>There were significant differences in RMET accuracy across conditions, F(2, 739) = 4.36, p = .01, η² = .01. People guessed more correct emotions in the No Support condition (M = 7.73, SD = 2.27) compared to the ChatGPT Support condition (M = 7.13, SD = 2.32), p = .012. RMET performance in the Human Support condition (M = 7.29, SD = 2.37) was not significantly different from the other two conditions, ps &gt; .08 (see Figure 3).</p>
+<h3>Ratings of Emotional Pain.</h3>
+<p>Ratings of J.S.&#x27;s emotional pain did not differ by condition, F(2, 740) = 1.87, p = .15, η² = .005, suggesting that this construct cannot explain differences in empathy offloading. help J.S., and question results. Right panel shows an example RMET stimulus (correct answer is &quot;Concerned&quot;) and RMET results. **p &lt; .05, ***p &lt; .001.</p>
+<h3>Discussion</h3>
+<p>Consistent with predictions, participants showed more empathy offloading after learning that an acquaintance went to AI for support versus not receiving any previous empathic support.</p>
+<p>These results were found with self-reports of empathy offloading, with question asking, and with the RMET. Notably, the RMET emotions span a range of affective states from positive to neutral-cognitive to negative. Because affective states were not uniformly negative, we reduced the likelihood that the &quot;tough time&quot; framing inflated accuracy through base-rate guessing of negative emotions. All three conditions received the same &quot;tough time&quot; framing, so any inflation in accuracy would apply equally across conditions and cannot account for the significant differences we observed.</p>
+<p>Evidence for differences between AI and human support was limited. While some measures showed small differences favoring greater offloading in the AI condition, others showed no reliable differences. Interestingly, participants&#x27; explicit ratings of personal responsibility (or perceived emotional pain) were not significantly different across conditions, suggesting that people feel the same ethical responsibility to help someone regardless of any previous support they received. This mismatch between self-reports and quasi-behavioral outcomes suggests that offloading may happen more implicitly: even if people feel ethically compelled to help someone after they go to empathic AI, their actions showcase less empathy.</p>
+<h3>Study 4: Differences in Empathy Offloading Among Friends, Therapists, and AI</h3>
+<p>The previous studies found evidence for empathy offloading, but still, open questions remain. First, would we find the same effects for someone less hypothetical? In Study 3, people were asked to imagine someone who needed empathy, but in this study, participants were given the initials of a real student at the Ohio State University who was experiencing emotional distress (although we did include a fictional manipulation about who/what they received empathy from).</p>
+<p>Second, how does empathy offloading for AI compare to other sources of empathy? To test this, this study included four conditions: an AI empathy condition, a control/no support condition, and conditions where the student received empathy from either friends or a therapist.</p>
+<p>We again assessed self-reports of empathy offloading and responsibility. This study also included a new quasi-behavioral measure of empathy offloading: language selection. Participants were presented with a cloud of words-some empathic (e.g., understanding), some un-empathic (e.g., indifferent)-that they clicked to represent how they would act or feel toward K.D. We predicted that people would select the fewest empathic words (and the most un-empathic words) in the AI Empathy condition.</p>
+<p>We also broadened our focus on empathic AI, discussing AI chat platforms in general instead of ChatGPT specifically, to provide more generalizability.</p>
+<h3>Method</h3>
+<p>Participants. An a priori power analysis suggested we needed a minimum sample size of 134 per condition to achieve 80% power to detect a small effect, specified as Cohen&#x27;s f = .14.</p>
+<p>We aimed to get at least 150 analyzable participants per condition after exclusions. We recruited 800 participants from CloudResearch Connect to participate in a between-groups study. Due to general increases in bot farming, we imposed stricter exclusion criteria. We excluded 59 participants for failing attention checks (i.e., choosing inaccurate scale items to the statement &quot;Choose Somewhat disagree for this statement,&quot; choosing an irrelevant answer to the question &quot;In the beginning of the survey, you were asked to read a prompt about K.D. What did we mention about K.D.?&quot; and/or failing the Müller-Lyer illusion bot-detection checks). We excluded seven other participants for choosing not to have their data be a part of the analyses and/or failing data quality checks (i.e., completion times that were less than one-third of the median or values exceeding 3.29 standard deviations from the mean). We had a remainder of 737 participants (M age = 40.28, SD age = 13.97; 42.88% Men, 54.14% Women, 2.98% Other; 68.25% White).</p>
+<h3>Manipulation.</h3>
+<p>Participants first read the following vignette: &quot;A survey led by the Chief Wellness Officer at the Ohio State University found that many students report feeling emotionally overwhelmed and burned out. Students are having a tough time managing the stress from juggling course work, jobs, extracurriculars, and their personal lives. In this survey, we will present one student to you, K.D., who is feeling overwhelmed. We would like you to answer some questions about them.&quot; Participants were then randomly assigned to one of four conditions: 1.</p>
+<p>&quot;No Support&quot; (n = 186). Participants were told that K.D. felt like they didn&#x27;t really have anyone to talk to for emotional support. After the language selection task, participants rated agreements to items about AI chat platforms for the rest of the study, which served as baseline AI perceptions.</p>
+<p>2. &quot;AI Empathy&quot; (n = 178). Participants read the following: &quot;People often reach out to an AI chat platform for emotional support. Studies show that AI chat platforms are very effective at providing emotional support. In fact, a recent research paper from Harvard found that the top use of generative AI in 2025 was for providing therapy and companionship. Consistent with this, K.D. has reported going to an AI chat platform for empathy. K.D. has also reported feeling understood and emotionally validated after talking with the AI chat platform.&quot; Only for this condition did we include an additional reference to a recent research paper from Harvard (Zao-Sanders, 2025) to explicitly increase perceptions of AI being commonly used for-and capable of-empathy. Although this creates an imbalance across conditions, we wanted to overcome current intuitions about AI&#x27;s inability to offer empathy.</p>
+<p>For example, in Study 1, the average rating of ChatGPT&#x27;s ability to provide empathy was 3.24 out of 7.</p>
+<p>3. &quot;Friends Empathy&quot; (n = 185). Participants read the following: &quot;People often reach out to close friends for emotional support. Studies show that friends are very effective at providing emotional support. Consistent with this, K.D. has reported going to their two closest friends for empathy. K.D. has also reported feeling understood and emotionally validated after talking with their friends.&quot; 4. &quot;Therapist Empathy&quot; (n = 188). Participants read the same vignette as when K.D. went to friends, but instead it said &quot;a therapist.&quot;</p>
+<p>Perceived Capacity for Empathy. Participants rated the same perceived capacity for empathy items used in Studies 1-3 (α = .95), slightly adapted to refer to the relevant empathy source for each condition (&quot;Friends/Therapists/AI chat platforms are capable of providing empathy/ giving compassionate advice/ understanding pain&quot;). This time, participants rated items from Strongly Disagree (1) to Strongly Agree (6), excluding the &quot;Neither agree nor disagree&quot; option.</p>
+<h3>Empathy Offloading.</h3>
+<p>Participants rated the same willingness to offload items from Study 1 (α = .92), slightly adapted to refer to the relevant empathy source for each condition (&quot;I&#x27;d rather have friends/therapists/AI chat platforms provide emotional support to someone than have them rely on me for support; I&#x27;d prefer someone turn to friends/therapists/AI chat platforms for empathy instead of me; Friends/Therapists/AI chat platforms can take over my role in offering emotional support to others; I would offload my responsibilities to give empathy to friends/therapists/AI chat platforms&quot;) from Strongly Disagree (1) to Strongly Agree (6).</p>
+<h3>Trait Empathy.</h3>
+<p>Participants completed the Empathic Concern subscale from the IRI (α = .86).</p>
+<h3>Moral Duty.</h3>
+<p>Participants rated their agreement with four randomly ordered items (α = .88) measuring their perceived moral duty to provide K.D. empathy (&quot;I feel ethically compelled to provide empathy to them; I think it&#x27;s a moral imperative to provide emotional support to them; It would be wrong not to listen to their problems; I have a moral duty to help them&quot;) from Strongly Disagree (1) to Strongly Agree (6).</p>
+<p>Language Selection Task. Participants were shown a word cloud consisting of 18 words relating to empathy and 25 words relating to indifference (see Figure 4). Participants were told to click on the words that expressed how they would act or feel toward K.D. We intentionally presented more indifference than empathy words and randomly varied the sizes of all words.</p>
+<p>These design choices required participants to engage in greater visual search to find and select empathy-related words, while indifference words were more visually accessible and easier to click on. This was done to reflect the finding that expressing empathy can be effortful (Cameron et al., 2019).</p>
+<p>More specifically, we created the word cloud on an online free word cloud generator and gave each word an assigned point value inversely proportional to the size, such that smaller words (harder to find/click on) were worth more points. We had five sizes, with the biggest sized words being worth 1 point and the smallest sized words 5 points (see Figure 4). For example, &quot;comforting&quot; or &quot;apathetic&quot; would each be worth 5 points (smallest words), and &quot;empathic&quot; and &quot;indifferent&quot; would each be worth 1 point. Two indices were computed by combining the weights and clicks of each word category (i.e., Σ(weight*clicks)-one for empathy word selections and one for indifference word selections). It bears mentioning that the absolute value of each index hinges on specific design and analytic choices of the study-all made in advance of conducting the study-but here we examine the relative difference between these indices across conditions. empathic quasi-behavior.</p>
+<h3>Social Connection.</h3>
+<p>Participants rated their agreement with two randomly ordered exploratory items (α = .95) measuring their perceived social connection to K.D. (&quot;I feel close/connected to the student&quot;), from Strongly Disagree (1) to Strongly Agree (6). Full information about other exploratory measures, including other reasons to offload, is in the online supplemental materials.</p>
+<h3>Results</h3>
+<h3>Perceived Capacity for Empathy.</h3>
+<p>There was a significant difference across conditions in perceived capacity for empathy, F(3, 732) = 333.50, p &lt; .001, η² = .58. Perceived capacity was lowest in the conditions where people rated AI&#x27;s capacity-both the AI Empathy condition (M = 3.10, SD = 1.36) and the No Support condition (M = 2.84, SD = 1.35)-compared to the Friends Empathy (M = 5.55, SD = 0.63) and Therapist Empathy conditions (M = 5.34, SD = 0.73), ps &lt; .001. While there was no significant difference in perceived capacity between the AI Empathy and No Support conditions (again, both rated AI), p = .09, the means were in the expected direction.</p>
+<p>Empathy Offloading. Participants differed in their willingness to offload empathy to the relevant empathy source, F(3, 733) = 84.30, p &lt; .001, η² = .26. Surprisingly, willingness to offload was lower in the AI Empathy (M = 2.39, SD = 1.27) and the No Support conditions (M = 2.28, SD = 1.31) compared to the Friends Empathy (M = 3.49, SD = 1.13) and the Therapist</p>
+<p>Empathy conditions (M = 3.91, SD = 1.06), ps &lt; .001. There was no difference in willingness to offload empathy between the AI Empathy and No Support conditions, p = .83, but offloading was higher in the Therapist Empathy than the Friends Empathy condition, p = .005. Interestingly, the perceived empathic capacity of friends did not predict empathy offloading to friends in the Friends Empathy condition, b = -0.24, SE = 0.13, t(728) = -1.88, p = .06, 95% CI [-0.49, 0.01], R² = .39, nor did the perceived empathic capacity of therapists predict offloading to a therapist in the Therapist Empathy condition, b = 0.12, SE = 0.11, t(728) = 1.08, p = .28, 95% CI [-0.10, 0.33], probably because the restriction of range created a ceiling effect (see Figure 5). Both friends and therapists were generally seen to be highly capable of empathy, unlike AI. But again, people reported more willingness to offload empathy to AI when they saw it as more capable of emotional support. for empathy for all four conditions. Dashed line represents AI Empathy condition. ***p &lt; .001</p>
+<p>Moral Duty. Participants differed in how strongly they felt a moral duty to help K.D., F(3, 733) = 5.66, p &lt; .001, η² = .02. People rated the highest moral duty to provide empathy in the Friends Empathy condition (M = 4.74, SD = 0.89), compared to the AI Empathy (M = 4.36, SD = 0.98), p &lt; .001, No Support (M = 4.46, SD = 1.05), p = .03, and Therapist Empathy conditions (M = 4.43, SD = 0.94), p = .01. These other three conditions were not significantly different from each other, ps &gt; .72.</p>
+<p>Language Selection Task. Self-report tasks revealed that people in the AI Empathy condition were not more likely to explicitly report more empathy offloading, but what did their responses in the language selection task reveal?</p>
+<p>Because the language selection task used count data, we used Poisson generalized linear models to test whether the empathy-word index and indifference-word index differed by condition. The empathy index differed by condition, χ²(3) = 45.93, p &lt; .001. Participants in the AI Empathy condition made the fewest empathic selections (M = 18.68, SE = 0.32), compared to the Friends Empathy (M = 21.84, SE = 0.34, rate ratio = 0.86), the Therapist Empathy (M = 20.54, SE = 0.33, rate ratio = 0.91), and the No Support conditions (M = 20.73, SE = 0.33, rate ratio = 0.90), ps &lt; .001 (see Figure 6).</p>
+<p>The indifference index also differed by condition, χ²(3) = 140.88, p &lt; .001. Participants in the AI Empathy condition made the highest indifference selections (M = 2.39, SE = 0.12), compared to the Friends Empathy (M = 0.90, SE = 0.07, rate ratio = 2.65), the Therapist Empathy (M = 1.32, SE = 0.08, rate ratio = 1.82), and No Support conditions (M = 1.29, SE = 0.08, rate ratio = 1.86), ps &lt; .001 (see Figure 7).</p>
+<p>To ensure that our results were robust beyond our specific weighting regime (again, decided upon a priori), a Monte Carlo simulation was conducted in which we randomly assigned weights (1-5) to each word across 5,000 iterations. Across all 5,000 simulations, the AI Empathy condition had the lowest empathy score and the highest indifference score. The condition effect on indifference was significant in 100% of simulations. When using equal weights (simply counting clicks with no weighting), the AI Empathy condition again had the fewest empathy clicks and the most indifference clicks (ps &lt; .05). These results confirm that the findings were robust across weighting schemes and were not an artifact of our specific point assignments.</p>
+<p>Unweighted click counts are reported in the online supplemental materials (Table S5).</p>
+<h3>Social Connection.</h3>
+<p>Participants differed in their perceived social connection to K.D., F(3, 733) = 13.63, p &lt; .001, η² = .05. Social connection was highest in the Friends Empathy condition (M = 4.40, SD = 1.05) compared to the AI Empathy (M = 3.64, SD = 1.27), the Therapist Empathy (M = 3.99, SD = 1.13), and the No Support conditions (M = 3.90, SD = 1.18), ps &lt; .004. Social connection was also lower in the AI Empathy condition compared to the Therapist Empathy condition, p = .02. There were no significant differences between the No Support and Therapist Empathy conditions, p = .84, nor the No Support and AI Empathy conditions, p = .16. Full results on exploratory items, including descriptive statistics, exploratory factor analysis on character trait perceptions, and correlations are reported in the online supplemental materials (Tables S5-S7).</p>
+<h3>Discussion</h3>
+<p>Discussion and what they actually do.</p>
+<h3>Study 4 again revealed a dissociation between what people say about providing empathy</h3>
+<p>People said they were less willing to offload in the AI Empathy condition compared to the Friends and Therapist Empathy conditions. In the language selection task, however, participants in the AI Empathy condition selected fewer empathy words and more indifference words than all other conditions. Consistent with all our previous studies, AI&#x27;s perceived capacity for empathy also strongly predicted willingness to offload to it. Even though average perceptions of AI&#x27;s capacity were modest, variation in perceived capacity reliably tracked offloading.</p>
+<p>Interestingly, participants selected the most empathy words (and the fewest indifference words) when the student went to friends for support, consistent with the power of social norms to personally provide empathy even if others already have (Algoe et al., 2008; House, 2018).</p>
+<p>Furthermore, moral duty to provide empathy was highest when the student received support from friends, compared to AI, therapists, and no support, which did not differ from each other. This pattern further highlights that friends set a social norm that heightens perceived relational obligation to provide support.</p>
+<p>Another important pattern is the difference between the AI and Therapist conditions, where people may be reducing their empathy giving for different reasons. Participants reported greater willingness to offload to therapists and perceived them as more capable, yet showed the most indifference when K.D. went to AI. Offloading to therapists may reflect a rational reduction in empathy to a trusted, socially accepted source. But the increased selection of indifference words after K.D. went to AI may not only reflect offloading to save empathic effort. People may also be signaling social judgment, disapproval, or psychological distancing toward the person who sought support from AI (Fehr &amp; Gächter, 2002; Williams, 2007), consistent with participants also rating K.D. as more weird, antisocial, and desperate than in the Friends and Therapist Empathy conditions (see the online supplemental materials). Offloading and social distancing may therefore be operating simultaneously, meaning that the person who turns to AI for support may end up doubly worse off, receiving even less empathy for how they chose to get support.</p>
+<h3>General Discussion</h3>
+<p>Philosophers mostly agree that it is ethically good to provide empathy. It also seems clear that it is a (moral) good for people to receive empathy if they need it. In other words, when it comes to the question of what we owe each other (Rawls, 2003; Scanlon, 2000; Singer, 2016), we do seem to owe each other some kind of emotional support. However, this sense of empathic obligation seems to reduce when we learn that someone has gone to AI for empathic support.</p>
+<p>To be sure, there is good in empathic AI, because it allows people to feel supported at all hours of the day with little cost, but our research reveals support for the idea of empathy offloading. Four studies show that, when AI is seen as capable of providing empathy, it reduces people&#x27;s willingness to emotionally support people who could go-or who have gone-to AI for empathy.</p>
+<p>Study 1 found that people who see AI as more capable of providing empathy are also more willing to offload interpersonal empathy to it. Study 2 manipulated the perceived capacity of AI and found the predicted effect: when AI was described as more capable of empathy, people offloaded interpersonal empathic support to it. Studies 3 and 4 provided evidence beyond simple self-report that learning someone sought AI support reduces empathy given to them, including asking fewer questions and engaging less with others&#x27; mental states (Study 3), and selecting fewer empathy words and more indifference words in a language selection task (Study 4).</p>
+<p>Interestingly, empathy offloading occurred while people explicitly reported having the moral responsibility to provide interpersonal empathy, highlighting a disconnect between what people say and do. This suggests that empathy offloading may occur more implicitly and intuitively than deliberatively, consistent with models of moral judgment as an intuitive process (Greene, 2014).</p>
+<h3>Implications AI and Empathy.</h3>
+<p>Scholars disagree about whether AI can authentically provide empathy (Kleinert et al., 2026; Perry, 2023; Rubin et al., 2025; Yin et al., 2024), and science has largely focused on how recipients react to AI empathy: do people trust and benefit from it, does the &quot;AI&quot; label matter to people, and how does AI empathy compare to receiving real human empathy (Inzlicht et al., 2024; Laban &amp; Cross, 2024; Ovsyannikova et al., 2025; Pelau et al., 2021; Wenger et al., 2026; Yam et al., 2023).</p>
+<p>Far less attention has been paid to the downstream consequences of empathic AI-how the rise of AI impacts human connection. Some work examines how people can feel less empathy when writing AI-assisted empathic messages (Lee et al., 2025), and other work shows that AI can corrupt ethical behavior, such as by increasing dishonesty (Köbis et al., 2021 (Köbis et al., , 2025)).</p>
+<p>Our work suggests that AI can shift ethical behavior between people. Even if empathic AI is good for recipients in the moment, it may quietly weaken our empathic behaviors without us recognizing it.</p>
+<h3>Ethical Change.</h3>
+<p>Our findings suggest at least two ways empathic AI can reduce human empathy, each with distinct ethical implications: offloading and social judgment.</p>
+<p>Studies 1-3 reveal that when people believe that AI can provide empathy, they may put less effort into providing empathy themselves. Over time, this behavior may lead people to devalue empathy as a morally important emotion. People intuitively associate value with effort and intention (Inzlicht et al., 2018), and we often devalue the tasks done by AI (Böhm et al., 2023; Lubars &amp; Tan, 2019; Zhang &amp; Gosline, 2023). So, when AI provides empathy automatically and effortlessly, people may see offering empathy as cheap, trivial, and ultimately, a less ethically meaningful resource.</p>
+<p>The devaluation of empathy may eventually lead to moral deskilling-the gradual loss of human ability to exercise moral judgment and cultivate moral skills, especially empathy. This stems from increased reliance on technology to perform labor on humans&#x27; behalf, paralleling how automation devalues skilled labor in the workforce (Vallor, 2015). If people increasingly offload their empathy-giving behaviors to AI, they may no longer appreciate all the hard work and kindness that goes into giving and receiving empathy.</p>
+<p>Alternatively, when people see others going to AI for empathy, they may also express disapproval for this choice and withdraw empathy as a form of social punishment. Study 4 revealed that participants in the AI Empathy condition actively selected more indifference words and rated K.D. as more weird, antisocial, and desperate (see the online supplemental materials).</p>
+<p>Rather than saving the laborious effort of giving empathy, people may be penalizing the struggling person because they view AI as an unsuitable source of support, and-consequentlywithdrawing their support. If AI-seeking remains stigmatized, recipients may hide their emotional struggles out of fear of social disapproval, leading to more general loneliness, less help-seeking, and perhaps other social ills.</p>
+<p>Societal Fraying. Society is not a single &quot;thing&quot; but instead a web of connections between people. These connections are built by social interactions and mutual exchanges of kindness and support (Morelli et al., 2017). Yet offloading empathy may hinder one of the main ways we maintain social connections: noticing distress and emotionally responding to show that we matter to each other.</p>
+<p>If social connection is severed by empathic AI, we may stop feeling like we owe each other love, care, and support. We may deprive ourselves of emotional intimacy, shared understanding, and feelings of vulnerability that make us human (George et al., 2023; Krapp et al., 2024; Laban &amp; Cross, 2024). We may also grow distant and isolated from each other, feeding into the loneliness epidemic (Office of the Surgeon General, 2023; Twenge et al., 2021). As empathy offloading becomes normalized, social norms around relational responsibility may weaken, lowering the ethical commitments we make to each other.</p>
+<h3>Empathy Atrophying.</h3>
+<p>Aristotle argued that moral virtue is developed through repeated practice (Aristotle, 1999, Book II). Empathy may not be a muscle in the traditional sense, but it certainly strengthens with repeated practice and atrophies with decreased use (Shastry et al., 2025). If AI replaces empathy, people in all kinds of relationships may lose the ability to practice genuine human empathy.</p>
+<p>Likewise, the rise of empathic AI may change how children learn to live. Some are already worrying that by offloading emotional labor to AI, like writing break-up notes, kids may skip out on the difficult but essential parts of social development (Shirky, 2026). When the default response to any distress is &quot;go cry to AI,&quot; generations may not learn how to connect with others. Friendships and romantic relationships may also wane if people struggle to open up emotionally and instead run to AI (Ho et al., 2025). Without practicing empathy, we may end up losing our virtues of compassion and care.</p>
+<h3>Study Limitations</h3>
+<p>It is important to note that our conclusions come with a number of caveats.</p>
+<p>Overall Low Perceived Empathic Capacity of AI. Empathic AI is in its infancy, and accordingly, people gave relatively low ratings for AI&#x27;s capacity to provide empathy (see Figure S11 in the online supplemental materials for histograms of AI&#x27;s capacity for empathy across conditions). These low AI empathy ratings likely explained the relatively low explicit endorsement of empathy offloading after learning that someone went to AI for emotional support, versus a friend or therapist. Of course, all four studies revealed support for the crucial thesis-that the more people saw AI as capable of empathy, the more they offloaded empathybut we acknowledge these low ratings. Importantly, this paper attempts to get ahead of the curve of social change by examining the social and ethical phenomenon of offloading empathy to AI before its widespread use.</p>
+<p>Consistent with lower perceptions of AI&#x27;s capacity for empathy, the average amount of empathy offloading was relatively low across Studies 1-3 (M = 2.10-3.27 on a 7-point scale), which could raise concerns about floor effects and violations of normality assumptions underlying parametric tests. To assess this, we examined skewness and kurtosis values.</p>
+<p>Following Curran et al. (1996), skewness values below 2 and kurtosis values below 7 are considered acceptable for parametric testing. Our values fell within these ranges across all studies and all primary measures. To further confirm robustness for the word cloud task in Study 4, we ran Kruskal-Wallis tests on the equal-weights indices, and all primary findings held. The low means therefore reflect genuine variation around a low baseline, consistent with the fact that AI empathy is still an emerging phenomenon and people&#x27;s baseline willingness to offload remains modest.</p>
+<h3>Interpreting Expressed Indifference.</h3>
+<p>As discussed in Study 4, the number of indifference word selections in the AI Empathy condition may reflect negative social judgment toward AI-seekers. However, exploratory analyses of our data suggest the existence of more authentic empathy offloading. Regression analyses find that offloading was predicted by both perceiving AI as setting a higher empathic standard and by people wanting to put in less effort (see Table S6), consistent with cognitive offloading (Risko &amp; Gilbert, 2016) and growing evidence that AI can match or exceed human empathic responses (Ovsyannikova et al., 2025; Wenger et al., 2026). Thus, offloading and disapproval may not be mutually exclusive and may even operate simultaneously, but they call for meaningfully different interventions: one focused on restoring felt responsibility, the other on reducing stigma toward AI-seekers.</p>
+<p>We also acknowledge a broader limitation of the Language Selection Task: visual search does not directly operationalize interpersonal emotional labor, and the task reflects symbolic effort with minimal real-world consequences. We also note that empathic expression was the predominant selection of words across all conditions, consistent with the idea of a general ethical obligation to endorse empathy. As our methods stated, we examined the relative difference between indices across conditions rather than absolute levels. The between-condition differences should be interpreted as shifts in how much empathy people expressed rather than a wholesale abandonment of empathic engagement. Future work should use measures that more directly capture empathic labor to establish stronger construct validity and to cleanly isolate mechanisms.</p>
+<h3>Study Measures.</h3>
+<h3>Reading the Mind in the Eyes Test (RMET).</h3>
+<p>The RMET, a task where participants identify emotions of people shown only by their eyes, is typically treated as a measure of stable individual differences in emotion recognition ability rather than momentary engagement. While we still observed significant differences in engagement with others&#x27; mental states and were able to shift empathic engagement toward an acquaintance who has gone to AI for empathy, the RMET is still an imperfect proxy for the active, interpersonal engagement involved in real-world empathy. Future work should build on these findings using more targeted measures of empathic engagement and perspective-taking.</p>
+<h3>Study 4 Manipulation Imbalance.</h3>
+<p>In Study 4, where we described a student receiving empathy from AI, we note that this was the only condition where we included an institutional endorsement-a reference to Harvard research identifying therapy and companionship as the top use of generative AI. This institutional endorsement may have independently and asymmetrically influenced AI&#x27;s perceived capacity for empathy.</p>
+<p>We intentionally designed the vignette in this way to ensure our manipulation was strong enough to test whether capacity leads to offloading, because people&#x27;s baseline perceptions of AI&#x27;s empathic capacity were low (Study 1 mean = 3.24/7; Yin et al., 2024). We prioritized experimental validity (creating conditions under which offloading could plausibly occur) over perfect symmetry across conditions. Of course, this tradeoff is a limitation that means that we cannot fully rule out whether the institutional framing contributed to the effects we observed, potentially creating some demand characteristics. Future work should continue to test offloading effects among participants who already believe that AI can provide empathy with more symmetrically framed vignettes to isolate the effect of support source from the effect of institutional framing.</p>
+<h3>A Scale Change.</h3>
+<p>Participants rated perceived capacity for empathy and empathy offloading from Strongly Disagree (1) to Strongly Agree (7) in Studies 1-3, and from Strongly Disagree (1) to Strongly Agree (6) in Study 4, which may impact interpretability of mean values.</p>
+<p>We removed the &quot;Neither agree nor disagree&quot; (4) scale point in Study 4 to encourage participants to choose one side of agreement, since Study 2 had a mean of 4.30 for AI&#x27;s perceived capacity when participants read newspaper headlines about AI and empathy.</p>
+<h3>Contextualizing Effect Sizes.</h3>
+<p>Behavioral science has long debated which effect sizes are meaningful. Many well-replicated findings in social psychology have small to medium effect sizes (Richard et al., 2003), and some of our effects fall within this range (e.g., d = .45-.63 for Study 2, η² = .005-.009 in Study 3 for perceived capacity and empathy offloading), with not all comparisons reaching significance in Studies 3 and 4. While a small effect might suggest that any single encounter with someone who sought AI empathy likely only has a modest impact on the empathy they receive, small effects are not necessarily unimportant. If people start to learn about struggling others using AI for empathy more often, over time many small independent empathy reductions can sum to a meaningful amount of empathy withheld (Funder &amp; Ozer, 2019). Our studies estimate the per-encounter effect, but they do not test how often this situation actually occurs in everyday life, though recent work suggests it is becoming more common (Huang et al., 2026; Zao-Sanders, 2025). Future work should test whether such effects accumulate over repeated exposures, both within-person and across populations.</p>
+<h3>Future Directions</h3>
+<p>The current research poses many questions, understandably given this paper is among the first to examine the interpersonal consequences of empathic AI.</p>
+<p>One obvious future direction is to use more behavioral measures, which is always important for establishing the real-world importance-and robustness-of psychological findings. Our studies used both self-report ratings and quasi-behavioral measures, but we acknowledge that we did not explore real-time embodied social interactions. This is only an initial exploration of empathy offloading, and so we encourage other work that explores these effects in more real-world contexts.</p>
+<p>Real-world empathy also unfolds between specific people with specific relationships, and likely hinges on who is giving support, who is seeking support, and what they are seeking it for.</p>
+<h3>Differences in Empathy Givers.</h3>
+<p>Not all observers will respond to someone seeking AI emotional support in the same way. Observers who are averse to AI or who have less in common with AI-seekers are likely to judge them more harshly, while those who personally value AI support may not show disapproval (Meyers et al., 2026). Our own exploratory data suggest that people who found AI empathy helpful expressed greater willingness to offload, while those who found friends or therapists more helpful showed greater indifference (see Table S5).</p>
+<p>Younger people may also be more receptive to people seeking AI empathy. Young people appear more open about discussing their mental health struggles and broadcasting how they seek support (Rüsch &amp; Kösters, 2021), and they may also be less concerned (and judgmental) about empathic AI use.</p>
+<h3>Differences in Empathy Seekers.</h3>
+<p>Who is seeking support also shapes how much empathy observers can give or offload to AI. Someone may not be worried about their acquaintance going to AI for empathy if they are technologically competent, while the same behavior in someone who is seen as less tech-savvy may elicit stronger disapproval (Meyers et al., 2026).</p>
+<p>The closeness of the relationship between empathy givers and seekers also likely plays a pivotal role. Offloading empathy when a close friend is struggling may feel more like a betrayal of relational duty (Finkel et al., 2002) than the same behavior toward a casual acquaintance, where obligations to give empathy are weaker.</p>
+<p>Additionally, people may choose to offload empathy (or communicate disapproval), depending on the reason why someone is seeking AI empathy. People turn to AI for concerns ranging from everyday anxiety to serious mental health struggles and abusive situations (Huang et al., 2026), and empathy givers may be less likely to offload if someone really needs help, such as in a serious crisis. But for less serious situations, like everyday stress or minor frustrations, people may be more willing to offload.</p>
+<h3>Differences Across Cultures.</h3>
+<p>We recruited U.S. participants, but different cultural contexts likely shape differences in empathy offloading and social judgment behaviors. Western countries tend to be more skeptical of AI while Eastern cultures tend to be more trusting and optimistic about AI (Gillespie et al., 2025; Zhang et al., 2026), suggesting that perceived capacity for AI empathy-and consequently, empathy offloading-may be higher in Eastern cultures. At the same time, people in more collectivist cultures display higher empathic concern and stronger felt obligations toward others (Chopik et al., 2017; Markus &amp; Kitayama, 1991), which could prevent offloading even when AI is trusted. Whether greater trust in AI or stronger felt obligation to provide human empathy dominates-and whether norms around support amplify or decrease social judgment toward AI-seekers-remains an open question. Future work should test empathy offloading effects beyond Western populations to understand when empathic AI leads to offloading behaviors.</p>
+<h3>Awareness in AI Empathy Use.</h3>
+<p>Before deciding to offload emotional support to AI, someone must first become aware that someone they know has sought AI empathy. While people often keep their empathy-seeking private (Gross &amp; John, 2003; Vogel &amp; Wade, 2009), some are publicly disclosing their use of empathic AI in online communities like Reddit (Huang et al., 2026), and perhaps they will soon disclose to friends and family. Our two study designs capture two potential routes through which such awareness likely spreads: Study 2 tests how people learn about empathic AI from the media, and Study 3 tests observers learning about another&#x27;s AIseeking in a personal context. As AI emotional support becomes more visible and discussed, the situations we study here will only become more common, making the ethical questions they raise more urgent to explore.</p>
+<h3>Conclusion</h3>
+<p>AI is changing how we live with one another. LLMs already draft our emails and edit our prose. But, with the rise of empathic AI, machines replace not just human cognition, but human empathy. For most of human history, providing emotional support was an ethical behavior that bound people together. But now, we can offload this crucial interpersonal behavior to AI-and our data suggest that people are willing to let AI shoulder some of the burden of empathic support. As empathic AI advances, the answer to the question &quot;What do we owe each other?&quot; might be &quot;less than before.&quot;</p>
+<h3>AdditionalFindings.</h3>
+<p>More frequent ChatGPT use was positively correlated with greater offloading willingness (when controlling for perceived capacity and trait empathy), b = 0.49, SE = 0.07, t(245) = 7.31, p &lt; .001, 95% CI [0.36, 0.62]. People higher in trait empathy were less likely to offload (when controlling for perceived capacity and ChatGPT use), b = -0.45, SE = 0.08, t(245) = -5.44, p &lt; .001, 95% CI [-0.62, -0.29]. See Table 1 below for means, standard deviations, and correlations.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Perceptions of ChatGPT&#x27;s capacity to provide empathy predicted stronger willingness</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Group-level information about AI Empathy increases empathy offloading willingness</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Left panel shows example questions that participants wrote asking how they could</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. Word cloud consisting of words relating to empathy and indifference to measure</p>
+<p>While empathy offloading was lower in the AI Empathy condition, AI&#x27;s perceived capacity for empathy still strongly predicted empathy offloading in the AI Empathy condition, b = 0.44, SE = 0.06, t(728) = 7.26, p &lt; .001, 95% CI [0.32, 0.55], consistent with our previous studies. Perceived capacity also predicted empathy offloading in the No Support condition, b = 0.61, SE = 0.06, t(728) = 10.30, p &lt; .001, 95% CI [0.50, 0.73], consistent with the correlational Study 1. It seems that people simply saw friends and therapists as much more capable of empathy, and that drove differences in offloading across conditions.</p>
+<h3>Figure 5.</h3>
+<p>Figure 5. Linear regressions predicting willingness to offload empathy from perceived capacity</p>
+<h3>Figure 6.</h3>
+<p>Figure 6. Value of the empathy index from the language selection task across conditions.</p>
+<h3>Table 1</h3>
+<p>Descriptive statistics and correlations between perceived capacity, empathy offloading, trait empathy, and ChatGPT use</p>
+<p>Ethical approval was granted for Studies 1-3 in this paper from the Office of Human Research Ethics at the University of North Carolina at Chapel Hill Institutional Review Board (IRB25-0589). Ethical approval was granted for Study 4 by the Institutional Review Board at the Enterprise for Research, Innovation, and Knowledge at the Ohio State University (STUDY20252413). Participants in all studies were provided informed consent and were debriefed after the studies.</p>
+<h3>Fi gure 7.</h3>
+<p>Value of the indifference index from the language selection task across conditions.</p>
+<h3>References</h3>
+<p>Algoe, S. B., Haidt, J., &amp; Gable, S. L. (2008). Beyond Reciprocity: Gratitude and Relationships in Everyday Life. Emotion (Washington, D.C.), 8(3), 425-429. https://doi.org/10.1037/1528-3542.8.3.425</p>
+<p>Aquino, K., McFerran, B., &amp; Laven, M. (2011). Moral identity and the experience of moral elevation in response to acts of uncommon goodness. Journal of Personality and Social Psychology, 100(4), 703-718. https://doi.org/10.1037/a0022540</p>
+<p>Aristotle. (1999). Nicomachean Ethics (Irwin, Second Edition) (T. Irwin, Trans.). Hackett Publishing Company. https://hackettpublishing.com/nicomachean-ethics</p>
+<p>Baron-Cohen, S., Wheelwright, S., Hill, J., Raste, Y., &amp; Plumb, I. (2001). The &quot;Reading the Mind in the Eyes&quot; Test Revised Version: A Study with Normal Adults, and Adults with Asperger Syndrome or High-functioning Autism. The Journal of Child Psychology and Psychiatry and Allied Disciplines, 42(2), 241-251. https://doi.org/10.1017/S0021963001006643</p>
+<p>Batson, C. D. (2014). The Altruism Question: Toward A Social-psychological Answer. Psychology Press. https://doi.org/10.4324/9781315808048</p>
+<p>Bensalah, L., Caillies, S., &amp; Anduze, M. (2016). Links among cognitive empathy, Theory of mind, and affective perspective taking by young children. The Journal of Genetic Psychology, 177(1), 17-31. https://doi.org/10.1080/00221325.2015.1106438</p>
+<p>Bigman, Y. E., &amp; Tamir, M. (2016). The road to heaven is paved with effort: Perceived effort amplifies moral judgment. Journal of Experimental Psychology: General, 145(12), 1654- 1669. https://doi.org/10.1037/xge0000230</p>
+<p>Bloom, P. (2017). Against Empathy: The Case for Rational Compassion. Random House.</p>
+<p>Böhm, R., Jörling, M., Reiter, L., &amp; Fuchs, C. (2023). People devalue generative AI&#x27;s competence but not its advice in addressing societal and personal challenges. Communications Psychology, 1(1), 32. https://doi.org/10.1038/s44271-023-00032-x</p>
+<p>Boyd, R., Ashokkumar, A., Seraj, S., &amp; Pennebaker, J. (2022). The Development and Psychometric Properties of LIWC-22. https://doi.org/10.13140/RG.2.2.23890.43205</p>
+<p>Brown, B. (2021). Atlas of the Heart: Mapping Meaningful Connection and the Language of Human Experience. Random House Publishing Group.</p>
+<p>Cameron, C. D., Hutcherson, C. A., Ferguson, A. M., Scheffer, J. A., Hadjiandreou, E., &amp; Inzlicht, M. (2019). Empathy is hard work: People choose to avoid empathy because of its cognitive costs. Journal of Experimental Psychology: General, 148(6), 962-976. https://doi.org/10.1037/xge0000595</p>
+<p>Cameron, C. D., &amp; Payne, B. K. (2011). Escaping affect: How motivated emotion regulation creates insensitivity to mass suffering. Journal of Personality and Social Psychology, 100(1), 1.</p>
+<p>Chopik, W. J., O&#x27;Brien, E., &amp; Konrath, S. H. (2017). Differences in Empathic Concern and Perspective Taking Across 63 Countries. Journal of Cross-Cultural Psychology, 48(1), 23-38. https://doi.org/10.1177/0022022116673910</p>
+<p>Cuff, B. M. P., Brown, S. J., Taylor, L., &amp; Howat, D. J. (2016). Empathy: A review of the concept. Emotion Review, 8(2), 144-153. https://doi.org/10.1177/1754073914558466</p>
+<p>Curran, P. J., West, S. G., &amp; Finch, J. F. (1996). The robustness of test statistics to nonnormality and specification error in confirmatory factor analysis. Psychological Methods, 1(1), 16- 29. https://doi.org/10.1037/1082-989X.1.1.16</p>
+<p>Davis, M. H. (1983). Measuring individual differences in empathy: Evidence for a multidimensional approach. Journal of Personality and Social Psychology, 44(1), 113.</p>
+<p>Davis, M. H. (2011). Interpersonal Reactivity Index [Dataset]. https://doi.org/10.1037/t01093- 000</p>
+<p>Decety, J., &amp; Jackson, P. L. (2004). The Functional Architecture of Human Empathy. Behavioral and Cognitive Neuroscience Reviews, 3(2), 71-100. https://doi.org/10.1177/1534582304267187</p>
+<p>Fehr, E., &amp; Gächter, S. (2002). Altruistic punishment in humans. Nature, 415(6868), 137-140.</p>
+<p>Finkel, E. J., Rusbult, C. E., Kumashiro, M., &amp; Hannon, P. A. (2002). Dealing with betrayal in close relationships: Does commitment promote forgiveness? Journal of Personality and Social Psychology, 82(6), 956-974. https://doi.org/10.1037/0022-3514.82.6.956</p>
+<p>Fischer, P., Krueger, J. I., Greitemeyer, T., Vogrincic, C., Kastenmüller, A., Frey, D., Heene, M., Wicher, M., &amp; Kainbacher, M. (2011). The bystander-effect: A meta-analytic review on bystander intervention in dangerous and non-dangerous emergencies. Psychological Bulletin, 137(4), 517-537. https://doi.org/10.1037/a0023304</p>
+<p>Funder, D. C., &amp; Ozer, D. J. (2019). Evaluating effect size in psychological research: Sense and nonsense. Advances in methods and practices in psychological science, 2(2), 156-168.</p>
+<p>Gable, S. L., Gonzaga, G. C., &amp; Strachman, A. (2006). Will you be there for me when things go right? Supportive responses to positive event disclosures. Journal of Personality and Social Psychology, 91(5), 904-917. https://doi.org/10.1037/0022-3514.91.5.904</p>
+<p>George, A. S., George, A. S. H., Baskar, T., &amp; Pandey, D. (2023). The Allure of Artificial Intimacy: Examining the Appeal and Ethics of Using Generative AI for Simulated Relationships. Partners Universal International Innovation Journal, 1(6), Article 6. https://doi.org/10.5281/zenodo.10391614</p>
+<p>Gillespie, N., Lockey, S., Ward, T., Macdade, A., &amp; Hassed, G. (2025). Trust, attitudes and use of artificial intelligence: A global study 2025. The University of Melbourne and KPMG.</p>
+<p>Gray, H. M., Gray, K., &amp; Wegner, D. M. (2007). Dimensions of Mind Perception. Science, 315(5812), 619-619. https://doi.org/10.1126/science.1134475</p>
+<p>Gray, K., Yam, K. C., Eng, A., Wilbanks, D., &amp; Waytz, A. (2025). The Psychology of Robots and Artificial Intelligence. https://doi.org/10.70400/IKVM1257</p>
+<p>Greene, J. D. (2014). Beyond point-and-shoot morality: Why cognitive (neuro)science matters for ethics. Ethics, 124(4), 695-726. https://doi.org/10.1086/675875</p>
+<p>Gross, J. J., &amp; John, O. P. (2003). Individual differences in two emotion regulation processes: Implications for affect, relationships, and well-being. Journal of Personality and Social Psychology, 85(2), 348-362. https://doi.org/10.1037/0022-3514.85.2.348</p>
+<p>Harkness, K. L., Jacobson, J. A., Duong, D., &amp; Sabbagh, M. A. (2010). Mental state decoding in past major depression: Effect of sad versus happy mood induction. Cognition &amp; Emotion, 24(3), 497-513. https://doi.org/10.1080/02699930902750249</p>
+<p>Harkness, K. L., Sabbagh, M. A., Jacobson, J. A., Chowdrey, N. K., &amp; Chen, T. (2005). Enhanced accuracy of mental state decoding in dysphoric college students. Cognition and Emotion, 19(7), 999-1025. https://doi.org/10.1080/02699930541000110</p>
+<p>Ho, J. Q. H., Hu, M., Chen, T. X., &amp; Hartanto, A. (2025). Potential and pitfalls of romantic Artificial Intelligence (AI) companions: A systematic review. Computers in Human Behavior Reports, 19, 100715. https://doi.org/10.1016/j.chbr.2025.100715</p>
+<p>Hodges, S. D., &amp; Klein, K. J. K. (2001). Regulating the costs of empathy: The price of being human. The Journal of Socio-Economics, 30(5), 437-452. https://doi.org/10.1016/S1053- 5357(01)00112-3</p>
+<p>Hong, Y., Cai, J., Lan, R., Wang, K., Lian, R., &amp; Chen, L. (2022). Empathy and teachers&#x27; fairness behavior: The mediating role of moral obligation and moderating role of social value orientation. PloS One, 17(6), e0268681. https://doi.org/10.1371/journal.pone.0268681</p>
+<p>House, B. R. (2018). How do social norms influence prosocial development? Current Opinion in Psychology, Early Development of Prosocial Behavior, 20, 87-91. https://doi.org/10.1016/j.copsyc.2017.08.011</p>
+<p>Hua, Y., Liu, F., Yang, K., Li, Z., Na, H., Sheu, Y., Zhou, P., Moran, L. V., Ananiadou, S., Beam, A., &amp; Torous, J. (2024). Large Language Models in Mental Health Care: A Scoping Review (arXiv:2401.02984). arXiv. https://doi.org/10.48550/arXiv.2401.02984</p>
+<p>Huang, O. Y., Stodolska, M., &amp; Sultana, S. (2026). Emotional support with conversational AI: Talking to machines about life. arXiv preprint arXiv:2603.22618.</p>
+<p>Inzlicht, M., Cameron, C. D., D&#x27;Cruz, J., &amp; Bloom, P. (2024). In praise of empathic AI. Trends in Cognitive Sciences, 28(2), 89-91. https://doi.org/10.1016/j.tics.2023.12.003</p>
+<p>Inzlicht, M., Shenhav, A., &amp; Olivola, C. Y. (2018). The Effort Paradox: Effort Is Both Costly and Valued. Trends in Cognitive Sciences, 22(4), 337-349. https://doi.org/10.1016/j.tics.2018.01.007</p>
+<p>Jordan, J., Mullen, E., &amp; Murnighan, J. K. (2011). Striving for the Moral Self: The Effects of Recalling Past Moral Actions on Future Moral Behavior. Personality and Social Psychology Bulletin, 37(5), 701-713. https://doi.org/10.1177/0146167211400208</p>
+<p>Klein, S. H. (2025). The effects of human-like social cues on social responses towards text-based conversational agents-A meta-analysis. Humanities and Social Sciences Communications, 12(1), 1322. https://doi.org/10.1057/s41599-025-05618-w</p>
+<p>Kleinert, T., Waldschütz, M., Blau, J., Heinrichs, M., &amp; Schiller, B. (2026). AI outperforms humans in establishing interpersonal closeness in emotionally engaging interactions, but only when labelled as human. Communications Psychology, 4(1), 23. https://doi.org/10.1038/s44271-025-00391-7</p>
+<p>Köbis, N., Bonnefon, J.-F., &amp; Rahwan, I. (2021). Bad machines corrupt good morals. Nature Human Behaviour, 5(6), 679-685. https://doi.org/10.1038/s41562-021-01128-2</p>
+<p>Köbis, N., Rahwan, Z., Rilla, R., Supriyatno, B. I., Bersch, C., Ajaj, T., Bonnefon, J.-F., &amp; Rahwan, I. (2025). Delegation to artificial intelligence can increase dishonest behaviour. Nature, 646(8083), 126-134. https://doi.org/10.1038/s41586-025-09505-x</p>
+<p>Krapp, E., Neuhaus, R., Hassenzahl, M., &amp; Laschke, M. (2024). In a Quasi-Social Relationship With ChatGPT. An Autoethnography on Engaging With Prompt-Engineered LLM Personas. Nordic Conference on Human-Computer Interaction, 1-16. https://doi.org/10.1145/3679318.3685501</p>
+<p>Laban, G., &amp; Cross, E. S. (2024). Sharing our Emotions with Robots: Why do we do it and how does it make us feel? IEEE Transactions on Affective Computing, 1-18. IEEE Transactions on Affective Computing. https://doi.org/10.1109/TAFFC.2024.3470984</p>
+<p>Lai, K., &amp; Green, S. B. (2016). The Problem with Having Two Watches: Assessment of Fit When RMSEA and CFI Disagree. Multivariate Behavioral Research, 51(2-3), 220-239. https://doi.org/10.1080/00273171.2015.1134306</p>
+<p>Lee, E. H., Yin, Y., &amp; Wakslak, C. J. (2025). Machines that care: On receiving and providing AI-driven empathy. In A. Perry &amp; C. D. Cameron (Eds.), Empathy and Artificial Intelligence: Challenges, Advances, and Ethical Considerations. Cambridge University Press.</p>
+<p>Lockwood, P. L., Hamonet, M., Zhang, S. H., Ratnavel, A., Salmony, F. U., Husain, M., &amp; Apps, M. A. J. (2017). Prosocial apathy for helping others when effort is required. Nature Human Behaviour, 1(7), 0131. https://doi.org/10.1038/s41562-017-0131</p>
+<p>Lubars, B., &amp; Tan, C. (2019). Ask not what AI can do, but what AI should do: Towards a framework of task delegability. Advances in Neural Information Processing Systems, 32. https://proceedings.neurips.cc/paper_files/paper/2019/hash/d67d8ab4f4c10bf22aa353e27 879133c-Abstract.html</p>
+<p>Ma, Z., Mei, Y., &amp; Su, Z. (2024). Understanding the Benefits and Challenges of Using Large Language Model-based Conversational Agents for Mental Well-being Support. AMIA Annual Symposium Proceedings, 2023, 1105-1114.</p>
+<p>Malle, B. F., &amp; Hodges, S. D. (2007). Other Minds: How Humans Bridge the Divide Between Self and Others. Guilford Press.</p>
+<p>Markus, H. R., &amp; Kitayama, S. (1991). Cultural Variation in the Self-Concept. In J. Strauss &amp; G. R. Goethals (Eds.), The Self: Interdisciplinary Approaches (pp. 18-48). Springer. https://doi.org/10.1007/978-1-4684-8264-5_2</p>
+<p>Maslach, C., &amp; Jackson, S. E. (1981). The measurement of experienced burnout. Journal of Organizational Behavior, 2(2), 99-113. https://doi.org/10.1002/job.4030020205</p>
+<p>Meyers, S., Briker, R., &amp; Bigman, Y. E. (2026). Social Judgments of Generative AI Users. Current Directions in Psychological Science, 09637214261466635.</p>
+<p>Morelli, S. A., Ong, D. C., Makati, R., Jackson, M. O., &amp; Zaki, J. (2017). Empathy and well- being correlate with centrality in different social networks. Proceedings of the National Academy of Sciences of the United States of America, 114(37), 9843-9847. https://doi.org/10.1073/pnas.1702155114</p>
+<p>Nagel, T. (2016). The possibility of altruism. Princeton University Press. https://doi.org/10.1515/9781400884490</p>
+<p>Nass, C., &amp; Moon, Y. (2000). Machines and mindlessness: Social responses to computers. Journal of Social Issues, 56(1), 81-103. https://doi.org/10.1111/0022-4537.00153</p>
+<p>Neff, K. (2003). Self-Compassion: An Alternative Conceptualization of a Healthy Attitude Toward Oneself. Self and Identity, 2(2), 85-101. https://doi.org/10.1080/15298860309032</p>
+<p>Nils, F., &amp; Rimé, B. (2012). Beyond the myth of venting: Social sharing modes determine the benefits of emotional disclosure. European Journal of Social Psychology, 42(6), 672- 681. https://doi.org/10.1002/ejsp.1880</p>
+<p>Nolte, T., Bolling, D. Z., Hudac, C. M., Fonagy, P., Mayes, L., &amp; Pelphrey, K. A. (2013). Brain mechanisms underlying the impact of attachment-related stress on social cognition. Frontiers in Human Neuroscience, 7, 816. https://doi.org/10.3389/fnhum.2013.00816</p>
+<p>Office of the Surgeon General (OSG). (2023). Our Epidemic of Loneliness and Isolation: The U.S. Surgeon General&#x27;s Advisory on the Healing Effects of Social Connection and Community. US Department of Health and Human Services. http://www.ncbi.nlm.nih.gov/books/NBK595227/</p>
+<p>Ovsyannikova, D., de Mello, V. O., &amp; Inzlicht, M. (2025). Third-party evaluators perceive AI as more compassionate than expert humans. Communications Psychology, 3(1), 1-11. https://doi.org/10.1038/s44271-024-00182-6</p>
+<p>Pelau, C., Dabija, D.-C., &amp; Ene, I. (2021). What makes an AI device human-like? The role of interaction quality, empathy and perceived psychological anthropomorphic characteristics in the acceptance of artificial intelligence in the service industry. Computers in Human Behavior, 122, 106855. https://doi.org/10.1016/j.chb.2021.106855</p>
+<p>Perry, A. (2023). AI will never convey the essence of human empathy. Nature Human Behaviour, 7(11), 1808-1809. https://doi.org/10.1038/s41562-023-01675-w</p>
+<p>Preston, S. D., &amp; de Waal, F. B. M. (2002). Empathy: Its ultimate and proximate bases. Behavioral and Brain Sciences, 25(1), 1-20. https://doi.org/10.1017/S0140525X02000018</p>
+<p>Rawls, J. (2003). A theory of justice (Rev. ed., 5.-6. printing). Belknap Press of Harvard Univ. Press.</p>
+<p>Richard, F. D., Bond, C. F., Jr., &amp; Stokes-Zoota, J. J. (2003). One Hundred Years of Social Psychology Quantitatively Described. Review of General Psychology, 7(4), 331-363. https://doi.org/10.1037/1089-2680.7.4.331</p>
+<p>Risko, E. F., &amp; Gilbert, S. J. (2016). Cognitive Offloading. Trends in Cognitive Sciences, 20(9), 676-688. https://doi.org/10.1016/j.tics.2016.07.002</p>
+<p>Robertson, C. E., Shariff, A., &amp; Van Bavel, J. J. (2024). Morality in the anthropocene: The perversion of compassion and punishment in the online world. PNAS Nexus, 3(6), pgae193. https://doi.org/10.1093/pnasnexus/pgae193</p>
+<p>Rosseel, Y. (2012). lavaan: An R Package for Structural Equation Modeling. Journal of Statistical Software, 48, 1-36. https://doi.org/10.18637/jss.v048.i02</p>
+<p>Rubin, M., Li, J. Z., Zimmerman, F., Ong, D. C., Goldenberg, A., &amp; Perry, A. (2025). Comparing the value of perceived human versus AI-generated empathy. Nature Human Behaviour. https://doi.org/10.1038/s41562-025-02247-w</p>
+<p>Rüsch, N., &amp; Kösters, M. (2021). Honest, Open, Proud to support disclosure decisions and to decrease stigma&#x27;s impact among people with mental illness: Conceptual review and meta-analysis of program efficacy. Social Psychiatry and Psychiatric Epidemiology, 56(9), 1513-1526. https://doi.org/10.1007/s00127-021-02076-y</p>
+<p>Scanlon, T. M. (2000). What We Owe to Each Other. Harvard University Press.</p>
+<p>Shastry, M., Fernandes, S., &amp; Gray, K. (2025). Empathic AI Will Undermine Human Kindness (Vdu7m_v1). PsyArXiv. https://doi.org/10.31234/osf.io/vdu7m_v1</p>
+<p>Sheldon, K. M., Kashdan, T. B., &amp; Steger, M. F. (2010). Designing Positive Psychology: Taking Stock and Moving Forward. Oxford University Press.</p>
+<p>Shi, D., DiStefano, C., Maydeu-Olivares, A., &amp; Lee, T. (2022). Evaluating SEM Model Fit with Small Degrees of Freedom. Multivariate Behavioral Research, 57(2-3), 179-207. https://doi.org/10.1080/00273171.2020.1868965</p>
+<p>Shirky, C. (2026, January 30). Opinion | Students Are Skipping the Hardest Part of Growing Up. The New York Times. https://www.nytimes.com/2026/01/30/opinion/ai-social-skills- relationships.html</p>
+<p>Similarweb. (2025). Top websites ranking: Most visited websites in April 2025. https://www.similarweb.com/top-websites</p>
+<p>Simms, A., &amp; Nichols, T. (2014). Social loafing: A review of the literature. Journal of Management Policy and Practice, 15(1), 58-67.</p>
+<p>Singer, P. (2016). Famine, Affluence, and Morality. In Applied Ethics (6th ed.). Routledge.</p>
+<p>Tangney, J. P., Stuewig, J., &amp; Mashek, D. J. (2007). Moral Emotions and Moral Behavior. Annual Review of Psychology, 58(Volume 58, 2007), 345-372. https://doi.org/10.1146/annurev.psych.56.091103.070145</p>
+<p>Twenge, J. M., Haidt, J., Blake, A. B., McAllister, C., Lemon, H., &amp; Le Roy, A. (2021). Worldwide increases in adolescent loneliness. Journal of Adolescence, 93, 257-269. https://doi.org/10.1016/j.adolescence.2021.06.006</p>
+<p>Vallor, S. (2015). Moral Deskilling and Upskilling in a New Machine Age: Reflections on the Ambiguous Future of Character. Philosophy &amp; Technology, 28(1), 107-124. https://doi.org/10.1007/s13347-014-0156-9</p>
+<p>Vogel, D. L., &amp; Wade, N. G. (2009). Stigma and help-seeking. The Psychologist, 22(1), 20-23.</p>
+<p>Walker, L. J., &amp; Frimer, J. A. (2007). Moral personality of brave and caring exemplars. Journal of Personality and Social Psychology, 93(5), 845-860. https://doi.org/10.1037/0022- 3514.93.5.845</p>
+<p>Wenger, J. D., Cameron, C. D., &amp; Inzlicht, M. (2026). People choose to receive human empathy despite rating AI empathy higher. Communications Psychology, 4(1), 19. https://doi.org/10.1038/s44271-025-00387-3</p>
+<p>Williams, K. D. (2007). Ostracism: The kiss of social death. Social and Personality Psychology Compass, 1(1), 236-247.</p>
+<p>Yalçın, Ö. N., &amp; DiPaola, S. (2020). Modeling empathy: Building a link between affective and cognitive processes. Artificial Intelligence Review, 53(4), 2983-3006. https://doi.org/10.1007/s10462-019-09753-0</p>
+<p>Yam, K. C., Bigman, Y. E., &amp; Gray, K. (2023). People treat social robots as real social agents. Behavioral and Brain Sciences, 46, e23. https://doi.org/10.1017/S0140525X22001686</p>
+<p>Yam, K. C., Tan, T., Jackson, J. C., Shariff, A., &amp; Gray, K. (2023). Cultural Differences in People&#x27;s Reactions and Applications of Robots, Algorithms, and Artificial Intelligence. Management and Organization Review, 19(5), 859-875. https://doi.org/10.1017/mor.2023.21</p>
+<p>Yin, Y., Jia, N., &amp; Wakslak, C. J. (2024). AI can help people feel heard, but an AI label diminishes this impact. Proceedings of the National Academy of Sciences, 121(14), e2319112121. https://doi.org/10.1073/pnas.2319112121</p>
+<p>Zagefka, H., Noor, M., Brown, R., de Moura, G. R., &amp; Hopthrow, T. (2011). Donating to disaster victims: Responses to natural and humanly caused events. European Journal of Social Psychology, 41(3), 353-363. https://doi.org/10.1002/ejsp.781</p>
+<p>Zao-Sanders, M. (2025). How People Are Really Using Gen AI in 2025. Harvard Business Review. https://hbr.org/2025/04/how-people-are-really-using-gen-ai-in-2025</p>
+<p>Zhang, H., Chen, S., Wang, R., Jiang, J., Xu, Y., &amp; Zhao, H. (2017). How Upward Moral Comparison Influences Prosocial Behavioral Intention: Examining the Mediating Role of Guilt and the Moderating Role of Moral Identity. Frontiers in Psychology, 8. https://doi.org/10.3389/fpsyg.2017.01554</p>
+<p>Zhang, H., Jing, Y., &amp; Gu, R. (2026). Who gets more trust-AI or humans, and why? A cross- cultural analysis of AI and interpersonal trust. Behavioral Sciences, 16(3), 320.</p>
+<p>Zhang, Y., &amp; Gosline, R. (2023). Human favoritism, not AI aversion: People&#x27;s perceptions (and bias) toward generative AI, human experts, and human-GAI collaboration in persuasive content generation. Judgment and Decision Making, 18, e41. https://doi.org/10.1017/jdm.2023.37</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
