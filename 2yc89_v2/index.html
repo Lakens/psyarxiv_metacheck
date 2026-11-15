@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Meaningfulness shapes strategic memory
+use</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Meaningfulness shapes strategic memory use
+</p>
+<p class="meta">
+2026-11-16 · Metacheck 0.4.4.3
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>1</b><span>to fix</span></a><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>15</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Ethics
+Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to involve live data collection and lacked an
+ethics approval statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, but it was not present:</p>
+<blockquote>
+<p>Twenty participants (mean age = 29.50 years, SD = 4.32; 9 females, 11
+males) were recruited via Prolific and met the pre-established inclusion
+criterion (median number of inspections per trial &gt; 1; for details,
+see Data Analysis section).</p>
+</blockquote>
+<blockquote>
+<p>On each trial, participants were presented with three grids (see Fig.
+1): a Model grid on the left, a Workspace in the center, and a Resource
+grid on the right.</p>
+</blockquote>
+<blockquote>
+<p>The Model grid contained the 6 target items whose location
+participants were required to memorize.</p>
+</blockquote>
+<blockquote>
+<p>The 6 target items in each trial constituted the memory set; the
+specific stimuli participants were required to encode and subsequently
+place in the Workspace to reproduce the Model display.</p>
+</blockquote>
+<blockquote>
+<p>The Model grid, which contained six target items that participants
+were required to memorize, was covered by a gray square at the start of
+each trial.</p>
+</blockquote>
+<blockquote>
+<p>A new group of 20 participants (mean age = 27.95 years, SD = 4.81; 10
+females, 10 males) was recruited via Prolific.</p>
+</blockquote>
+<blockquote>
+<p>Participants were randomly assigned to Stimulus Set A or B,
+completing a total of 48 trials.</p>
+</blockquote>
+<blockquote>
+<p>We therefore included the rating task to confirm that real-world
+objects were familiar (consistent with prior visual experience), whereas
+novel-but-realistic objects were unfamiliar to our participant pool.</p>
+</blockquote>
+<blockquote>
+<p>Participants were presented with all 24 target base images from their
+assigned stimulus set (in their intact configurations) one by one in a
+randomized order.</p>
+</blockquote>
+<blockquote>
+<p>This successfully validates our stimulus manipulation, confirming
+that participants had substantially more prior visual experience with
+real-world objects than novel-but-realistic objects.</p>
+</blockquote>
+<blockquote>
+<p>In this study, we examined how the meaningfulness of items influences
+strategic working memory use in natural behavior, where participants are
+free to decide what to memorize and when.</p>
+</blockquote>
+<blockquote>
+<p>Participants are required to</p>
+</blockquote>
+</div>
+</details>
+</div>
+<h2 id="na">Not applicable <span class="n">(15)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 27 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 27 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 27 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Recent studies show that working memory for meaningful real-world objects can far exceed traditional capacity limits (~4 items) under experimental conditions where items are briefly presented. In everyday life, however, information often remains accessible, and observers freely choose how much to remember now and how much to inspect later.</p>
+<p>Under such unconstrained conditions, people typically memorize only 1-2 items at a time, far below maximum capacity. Here, we asked how meaningfulness influences strategic memory use during unconstrained memory-guided behavior. Using a copying task that allows for reinspection of the display, we compared meaningful real-world objects with meaningless (novel-but-realistic) objects matched on low-level visual features. Across two experiments, meaningfulness increased memory use, boosting it from ~2.5 items (meaningless objects) to ~3.8 items (meaningful objects) per sampling.</p>
+<p>Thus, the advantage of real-world objects extends beyond capacity: it changes how people balance memory use against re-sampling of information in natural behavior.</p>
+<h3>Introduction</h3>
+<p>Working memory, the cognitive system that keeps information in mind to guide behavior, has been classically characterized by a limited capacity (~4 items; Luck &amp; Vogel, 1997). Traditionally, working memory studies used simple, abstract stimuli (e.g., colored squares) in single-shot encoding tasks, such as change detection (e.g., Luck &amp; Vogel, 1997) and delayed estimation (e.g., Zhang &amp; Luck, 2008). Over the past decade, however, a growing number of studies have investigated working memory in more naturalistic settings. Two key lines of research have driven this shift: The first breaks away from traditional constraints on stimulus materials, showing that capacity is not fixed but depends on what is remembered (Brady et al., 2016). For real-world objects, meaningfulness can substantially expand capacity beyond the classic limit of ~4 items (for reviews, see Brady et al., 2024; Chung et al., 2024). The second breaks away from traditional, single-shot encoding paradigms by allowing participants to remember objects across multiple instances, mirroring the flexible access of everyday information.</p>
+<p>When participants can look back at the memory array freely, the number of items that they choose to load into memory (1-2 items) is far below their maximum capacity (Ballard et al., 1995; Draschkow et al., 2021; Sahakian et al., 2023 Sahakian et al., , 2025;; Xu et al., 2025; Qing et al., 2025; Van der Stigchel, 2020). Interestingly, these two lines of research, capturing distinct properties of naturalistic memory use, have largely proceeded in parallel, with minimal cross-talk. This disconnect leaves a core question unanswered: does the well-documented memory advantage for real-world objects in traditional, single-shot encoding tasks shape how we actually use memory during unconstrained memory-guided behavior?</p>
+<p>This question can be framed within a cost-benefit account of the memory-sampling trade-off: when sampling is effortless (e.g., requiring only a few saccades), observers remember less at every inspection and instead choose to frequently look back at the tobe-remembered information (Ballard et al., 1995; Sahakian et al., 2023 Sahakian et al., , 2025;; Draschkow et al., 2021; Qing et al., 2025). Conversely, when memorization is effortless (e.g., through stimulus repetition), the trade-off shifts toward greater reliance on memory, encoding more items per inspection (Kumle et al., 2025; Xu et al., 2026).</p>
+<p>These studies, however, focused on external manipulations (i.e., varying sampling or memorization cost), leaving open the possibility that intrinsic stimulus properties may also influence strategic memory use. Given that intrinsic stimulus properties can reduce memory cost (e.g., high memorability and low complexity; Ye et al., 2024; Alvarez &amp; Cavanagh, 2004), meaningfulness, a salient property of real-world objects, may similarly lower memory cost and thereby encourage greater reliance on memory.</p>
+<p>The memory advantage for real-world objects has often been attributed primarily to their meaningfulness-that is, semantic knowledge (verbal labels, recognizability) and visual experience (about what they typically look like; Chung et al., 2024). During encoding, meaningfulness provides a high-level framework that binds individual features into meaningful chunks, constructing hierarchical representations with semantic dimensions for real-world objects (Brady et al., 2024). During maintenance, the rich multidimensional representation (e.g., function, typical color, shape, category) reduces representational similarity among items, protecting visual features from interference and confusion (Morales-Torres &amp; Egner, 2026). This distinctiveness allows more information to be robustly maintained in working memory, as reflected by a stronger contralateral delay activity (CDA) for real-world than for meaningless objects (Asp et al., 2021; Brady et al., 2016; Thibeault et al., 2024). Together, these encoding and maintenance benefits should make memory for meaningful objects more robust and less effortful. We therefore hypothesize that meaningfulness encourages greater reliance on memory during unconstrained behavior. Specifically, participants should encode more meaningful objects than meaningless ones per inspection and thus revisit the display less often.</p>
+<p>To test this hypothesis, we used a copying paradigm (Ballard et al., 1995; Draschkow et al., 2021; Hayhoe et al., 1998; Sahakian et al., 2023) that allows participants to freely choose how much to memorize at every inspection (or how often to look back at the example), directly measuring unconstrained memory use during naturalistic behavior. To get around a common problem in previous studies (e.g., Brady et al., 2016; Brady &amp; Störmer, 2022) where meaningful and meaningless stimuli differed in low-level visual features, we used GAN-generated counterfeit objects (Cooper et al., 2023). These stimuli match real-world objects on low-level features but lack meaning: they look real but do not exist and do not have associated verbal, semantic labels.</p>
+<p>To summarize, we examined how meaningfulness influences memory use (i.e., the trade-off between remembering and sampling) across two distinct levels of spatial organization: between-object arrangements (Experiment 1), in which participants positioned distinct objects to match the example, and within-object arrangements (Experiment 2), in which they reassembled one fragmented object like a jigsaw puzzle. This dual-level manipulation allowed us to test whether the effect of meaningfulness on memory use is specific to between-object arrangements or also generalizes to withinobject arrangements.</p>
+<h3>Experiment 1</h3>
+<p>Experiment 1 first examined whether meaningfulness influences strategic memory use in a between-object spatial layout task, where participants placed individual objects in their correct locations. We contrasted meaningful real-world objects with meaningless novel-but-realistic objects matched to real-world objects on low-level visual features.</p>
+<p>We predicted that the lower memory cost of meaningful objects would lead participants to load more objects into memory per inspection and thus look back less often when copying real-world (vs. novel-but-realistic) objects.</p>
+<h3>Methods</h3>
+<h3>Participants.</h3>
+<p>The target sample size was set to 20 participants based on prior experience and budget constraints. Twenty participants (mean age = 29.50 years, SD = 4.32; 9 females, 11 males) were recruited via Prolific and met the pre-established inclusion criterion (median number of inspections per trial &gt; 1; for details, see Data Analysis section). Additional recruitment, payment, and screening details are in Supplementary Materials S1.</p>
+<h3>Apparatus and stimuli.</h3>
+<p>The experiment was programmed in the code editor Visual Studio Code (version 1.75) using the JavaScript libraries jsPsych (version 7; de Leeuw, 2015). The experiment was programmed and hosted on the Gorilla platform (https://app.gorilla.sc). A physical calibration procedure ensured that each grid cell was 1 cm × 1 cm on all displays (see Supplementary Materials S2).</p>
+<p>The stimulus set contained 400 novel-but-realistic and 400 real-world objects (Cooper et al., 2023; Brodeur et al., 2010 Brodeur et al., , 2014)), yielding 400 objects per condition. Full stimulus sources and generation details are in Supplementary Materials S3.</p>
+<p>On each trial, participants were presented with three grids (see Fig. 1): a Model grid on the left, a Workspace in the center, and a Resource grid on the right. The Model grid contained the 6 target items whose location participants were required to memorize.</p>
+<p>The Workspace was initially empty, and participants could drag and drop items from the Resource grid to reconstruct the configuration shown in the Model grid. The Resource grid contained 16 items: the same 6 target items plus 10 distractor items. reproduce the Model grid (left) by dragging items from the Resources grid (right) to the correct position in the Workspace (middle).</p>
+<p>The 6 target items in each trial constituted the memory set; the specific stimuli participants were required to encode and subsequently place in the Workspace to reproduce the Model display. These targets were drawn without replacement in a fixed order from either the real-world or novel-but-realistic set, depending on the trial type (see Fig. 2). but-realistic condition. In both conditions, all items in the Model and Resource grids belonged to a single stimulus set (real-world or novel-but-realistic).</p>
+<p>Across the 24 trials with real-world objects and 24 trials with novel-but-realistic objects, all 144 real-world and 144 novel-but-realistic stimuli were used only once in the Model grids, with the order randomized between participant. The 10 distractor items added to the Resources grid on each trial were randomly selected from the same stimulus condition (i.e., real-world or novel-but-realistic) as the target items on that trial. Distractors were sampled with replacement from the available pool of 256 stimuli in each stimulus condition (400 stimuli minus the 144 used as targets), meaning that distractor images it the Resources grid could appear multiple trials throughout the experiment. All stimuli were rescaled to fit within the grid cells of the experiment displays.</p>
+<p>Procedure. Before the experiment began, participants received task instructions and completed two practice trials to familiarize themselves with the procedure.</p>
+<p>The Model grid, which contained six target items that participants were required to memorize, was covered by a gray square at the start of each trial. Participants used a computer mouse to reveal the Model grid by moving the cursor over it, allowing them to inspect the target configuration. Revealing required holding the cursor over the grid for 3 seconds, during which a white progress bar indicated the remaining wait; the target configuration appeared only once this delay had elapsed. As soon as the cursor moved away, the cover returned and the Model was no longer visible. Each inspection therefore incurred a 3-second delay, making sampling costly and forcing participants to trade off sampling against reliance on memory. To reproduce an item, participants dragged an item from the Resource grid and dropped it onto a cell in the Workspace. When a dragged item hovered over an empty cell, that cell was highlighted in yellow to provide visual feedback. Upon dropping the item, it was immediately revealed whether the placement was correct: if the item matched both the identity and the location required by the Model grid, it remained fixed in the center of that cell; if the placement was incorrect, the item instantly flew back to its original location in the Resource grid.</p>
+<p>Participants could inspect the Model and attempt placements as often as needed until all six target items were correctly positioned in the Workspace, at which point they could click a button to proceed to the next trial. We use the term &quot;trial&quot; to refer to the entire sequence of placements required to reproduce one entire Model grid configuration.</p>
+<p>The main experiment consisted of 48 trials, comprising 24 real-world object trials and 24 novel-but-realistic object trials, presented in random order. The interleaved design was chosen over a blocked design to prevent the emergence of condition-specific strategies and minimize the impact of learning effects.</p>
+<h3>Data Analysis</h3>
+<p>To capture the extent to which participants relied on memory versus sampling, we used two main measures: the number of inspections (i.e., views of the Model grid) per trial and the average duration per inspection. We analyzed these two measures separately because inspection frequency reflects the overall sampling strategy (with fewer inspections indicating greater reliance on memory), whereas inspection duration reflects encoding dynamics. To assess overall task performance, we measured the total number of placement errors per trial (i.e., item placements that are inconsistent with the Model) and the average trial duration; fewer errors indicate greater effectiveness, and shorter durations indicate greater efficiency. Data were preprocessed by removing metric-specific outliers (&gt;3 SD from each participant&#x27;s condition mean) and excluding participants with a median of ≤1 inspection per trial according to pre-established criteria. See Supplementary Materials S4 for a detailed explanation of all behavioral measures, S1 for full preprocessing details, and S8 for analyses evaluating the robustness of the findings to participants exclusion.</p>
+<p>A Bayesian paired-samples t-test was conducted for each outcome measure to compare the novel-but-realistic and real-world object conditions. All Bayesian analyses reported in this article were conducted in JASP (Love et al., 2019) with default priors (for ANOVAs: fixed effects = 0.5, random effects = 1, covariates = 0.354; for t-tests: a Cauchy distribution with a scale parameter of 0.707) and the seed value to 1 for reproducibility. The Bayes Factor ( 𝑩𝑭 𝟏𝟎 ) obtained from this analysis indicates evidence strength, classified as anecdotal or inconclusive for values between 0.33 and 3, as evidence in favor of the presence of the effect for values greater than 3 (moderate: 3-10; strong: 10-30; very strong: &gt; 30), and as evidence against the effect for values less than 0.33 (moderate: 0.1-0.33; strong: 0.03-0.1; very strong: &lt; 0.03; Lee &amp; Wagenmakers, 2014).</p>
+<h3>Results</h3>
+<p>To investigate whether the meaningfulness of real-world objects influences the memory-sampling trade-off (i.e., promotes strategic memory use), we first examined our two measures of sampling behavior: the total number of inspections per trial and the average duration per inspection. Bayesian paired-samples t-tests revealed very strong evidence that participants made fewer inspections per trial in the real-world object condition compared to the novel-but-realistic object condition (real-world objects: M = 1.98, SD = 0.69; novel-but-realistic objects: M = 2.90, SD = 0.82; 𝑩𝑭 𝟏𝟎 = 1.61 × 10 5 ), see Fig. 3. In contrast, when analyzing the duration per inspection, we found only anecdotal, inconclusive evidence for a condition difference (𝑩𝑭 𝟏𝟎 = 2.78), despite a slight trend indicating longer inspections for real-world objects (real-world objects: M = 7.21, SD = 6.31; novel-but-realistic objects: M = 6.48, SD = 6.56). These results indicate that meaningfulness of real-world objects leads to a substantially lower frequency of sampling, which was not compensated for by longer inspection times per sampling. Thus, this demonstrates that participants strategically loaded more items into memory when interacting with meaningful real-world objects than with meaningless novel-but-realistic objects. To further quantify how many items participants encoded per sampling, we divided the total number of placed items by the number of inspections. This estimate for real-world objects was ~3.8 items per sampling, which is higher than that for novel-but-realistic objects (~2.5 items per sampling) and than the 1-2 items per sampling typically observed in copying tasks. bars), and participant means (colored dots) for real-world vs. novel-but-realistic conditions across four measures (A-D); gray lines connect individual participant data.</p>
+<p>Next, to determine whether this shift in sampling was accompanied by changes in the quality and efficiency of task completion, we assessed overall task performance.</p>
+<p>We found very strong evidence that real-world objects yielded fewer placement errors per trial (real-world objects: M = 1.65, SD = 1.63; novel-but-realistic objects: M = 2.37, SD = 1.83; 𝑩𝑭 𝟏𝟎 = 327.09). Furthermore, there was very strong evidence for shorter overall trial durations in the real-world object condition (real-world objects: M = 42.08, SD = 15.24; novel-but-realistic objects: M = 57.08, SD = 26.02; 𝑩𝑭 𝟏𝟎 = 661.58).</p>
+<p>These findings demonstrate that the reduced reliance on visual sampling (mirrored by increased reliance on memory) for real-world objects was accompanied by enhanced general performance (fewer placement errors) and higher efficiency (shorter trial durations).</p>
+<h3>Experiment 2</h3>
+<p>Real-world memory-guided behavior operates on multiple spatial scales. Experiment 2 examined whether the meaningfulness of real-world objects also influences strategic memory use in a within-object spatial layout task, where participants reassembled fragments of a single object. Prior visual experience with an object&#x27;s typical global structure (e.g., a door) may provide a memory advantage beyond the semantic information carried by isolated fragments (e.g., the door handle). To test this, we manipulated stimulus configuration (intact vs. scrambled) of both real-world and novelbut-realistic objects. We predicted that participants would rely less on sampling for real-world (vs. novel-but-realistic) objects, specifically in the intact condition. A reduction or elimination of this real-world advantage in the scrambled condition would indicate that prior visual experience with global structure contributes independently to strategic memory use, rather than being driven by local semantic features alone.</p>
+<h3>Methods</h3>
+<h3>Participants.</h3>
+<p>A new group of 20 participants (mean age = 27.95 years, SD = 4.81; 10 females, 10 males) was recruited via Prolific. To ensure strict methodological consistency across the study, the sample size rationale, exclusion criteria, and data collection stopping rules were identical to those established in Experiment 1. original spatial arrangement, forming a coherent image; in the scrambled condition (B), the same segments are rearranged. This figure shows an example of a trial with a real-world object; the same manipulation was also applied to trials with novel-but-realistic objects. Apparatus and stimuli. The apparatus and software setup in the current experiment were identical to those in Experiment 1. To systematically investigate the mechanisms driving memory-guided behavior, Experiment 2 employed a 2 × 2 × 2 mixed To isolate the contribution of holistic processing, each base image was divided into a 3×3 grid of segments. In the intact condition, the segments were arranged in their original spatial order, preserving the global structure. In the scrambled condition, the segments were shuffled, disrupting the global structure. This manipulation allowed us to test whether any advantage for real-world objects depends on an intact global structure.</p>
+<p>Procedure. Participants were randomly assigned to Stimulus Set A or B, completing a total of 48 trials. The experiment followed a balanced design, featuring 24 real-world and 24 novel-but-realistic object trials, with half of each stimulus condition consisting of intact images and the other half of scrambled images (i.e., 12 trials for each of four conditions). Trial order was randomized per participant, in a fully interleaved design.</p>
+<p>To verify that participants indeed had prior visual experience with the real-world objects (but not with the novel-but-realistic objects), we included a surprise post-experiment rating task. This manipulation check was particularly relevant for Experiment 2, in which only 24 stimuli per stimulus condition were used (instead of 144 in Experiment 1). We therefore included the rating task to confirm that real-world objects were familiar (consistent with prior visual experience), whereas novel-but-realistic objects were unfamiliar to our participant pool. Participants were presented with all 24 target base images from their assigned stimulus set (in their intact configurations) one by one in a randomized order. They were instructed to rate the subjective familiarity of each image on a 7-point Likert scale (ranging from1 = completely unfamiliar to7 = highly familiar).</p>
+<h3>Data Analysis</h3>
+<h3>Primary Analysis.</h3>
+<p>Behavioral performance (i.e., number of inspections, inspection durations, number of errors, and trial durations) was primarily assessed using a 2×2 mixed Analysis of Variance (ANOVA), with object type (real-world vs.</p>
+<p>novel-but-realistic) and stimulus configuration (intact vs. scrambled) as within-subject factors. The critical theoretical focus of this analysis was the two-way interaction between object type and stimulus configuration. Specifically, we expected performance benefits for real-world over novel-but-realistic objects to be larger for intact than for scrambled objects. Such an interaction would indicate that the advantage for real-world objects depends on intact global image structure.</p>
+<p>In the original 2×2×2 mixed ANOVA, the between-subjects factor Stimulus Set contributed negligibly to all four measures (maximum 𝑩𝑭 𝒊𝒏𝒄𝒍 = 1.35) and was dropped from subsequent analyses (see Supplementary Materials S6). Because scrambling rearranges the exact same physical components of each base image, local low-level visual properties are perfectly matched across intact and scrambled states, so any interaction effect must be attributed to the disruption of global structure rather than to low-level visual confounds.</p>
+<h3>Familiarity ratings and copying-task performance.</h3>
+<p>To verify our stimulus manipulation, we compared subjective familiarity ratings between real-world and novel-but-realistic objects. Additionally, we conducted exploratory analyses to test whether subjective familiarity was associated with behavioral performance. The detailed methods, results, and discussion of limitations for these exploratory analyses are reported in Supplementary Materials S7.</p>
+<h3>Analysis framework and criteria.</h3>
+<p>We used the same Bayesian approach and evidence classification as in Experiment 1, except that here the data were analyzed using ANOVAs rather than t-tests, due to the factorial design. Accordingly, we report Inclusion Bayes Factor (𝑩𝑭 𝒊𝒏𝒄𝒍 ) comparing models with and without the effect of interest.</p>
+<h3>Results</h3>
+<h3>Number of inspections per trial.</h3>
+<p>Akin to the results of Experiment 1, we obtained strong evidence for the main effect of object type (real-world objects: M = 2.54, SD = 0.92; novel-but-realistic objects: M = 3.00, SD = 1.21; 𝑩𝑭 𝒊𝒏𝒄𝒍 = 26.24), with realworld objects requiring fewer inspections overall compared to novel-but-realistic objects. There was also very strong evidence for the main effect of stimulus configuration (intact: M = 1.76, SD = 0.72; scrambled: M = 3.77, SD = 1.54; 𝑩𝑭 𝒊𝒏𝒄𝒍 = 4.61× 10 4 ), indicating fewer inspections for intact than scrambled objects. Moreover, we found moderate evidence for an interaction between object type and stimulus configuration (𝑩𝑭 𝒊𝒏𝒄𝒍 = 3.66, see Table 1 for statistical detail). Post-hoc Bayesian comparisons showed that the advantage of real-world objects over novel-but-realistic objects was evident in the intact condition (difference = 0.59, 𝑩𝑭 𝟏𝟎 = 39.10) but was anecdotal in the scrambled condition (difference = 0.20, 𝑩𝑭 𝟏𝟎 = 2.68), reflecting that scrambling impaired performance for real-world objects (difference = 2.17, 𝑩𝑭 𝟏𝟎 = 5.10 × 10 4 ) more than for novel-but-realistic objects (difference = 1.78, 𝑩𝑭 𝟏𝟎 = 2.48 × 10⁴). Thus, the higher reliance on memory use for meaningful versus novel objects was specific to the intact condition (where global structure was preserved) and was reduced in the scrambled condition (where global structure was disrupted). bars), and participant means (colored dots) for real-world vs. novel-but-realistic conditions across four measures (A-D); gray lines connect individual participant data; the top bracket denotes the configuration × object type interaction.</p>
+<p>Inspection duration per inspection. The analysis revealed strong evidence for a main effect of object type (real-world objects: M = 3.59, SD = 1.56; novel-but-realistic objects: M = 4.85, SD = 2.57; 𝑩𝑭 𝒊𝒏𝒄𝒍 = 4.82), indicating that real-world objects elicited shorter inspection durations than novel-but-realistic objects. Evidence for the main effect of stimulus configuration was inconclusive (intact: M = 4.05, SD = 2.46; scrambled: M = 4.39, SD = 1.99; 𝑩𝑭 𝒊𝒏𝒄𝒍 = 0.35). Moreover, we observed strong evidence for the interaction between object type and stimulus configuration (𝑩𝑭 𝒊𝒏𝒄𝒍 = 4.09). Post-hoc Bayesian comparisons showed that the advantage of real-world objects over novel-but-realistic objects was evident in the intact condition (difference = 2.04, 𝑩𝑭 𝟏𝟎 = 6.13) but was anecdotal in the scrambled condition (difference = 0.34, 𝑩𝑭 𝟏𝟎 = 0.55). That is, scrambling increased inspection duration for real-world objects (difference = 1.18, 𝑩𝑭 𝟏𝟎 = 9.64) but not for novel-but-realistic objects (difference = -0.53, 𝑩𝑭 𝟏𝟎 = 0.29). Thus, participants showed an encoding efficiency benefit for real-world objects (shorter inspection durations), but only in the intact condition; this benefit disappeared when the structure was scrambled.</p>
+<h3>Number of errors per trial.</h3>
+<p>The reduced frequency and duration of sampling observed for real-world objects (compared to novel-but-realistic objects) were not accompanied by a difference in the number of placement errors. Specifically, analysis of placement errors revealed no reliable differences between conditions. Bayesian analysis yielded only anecdotal evidence for the main effect of configuration (intact: M = 3.56, SD = 3.06; scrambled: M = 4.59, SD = 3.73; 𝑩𝑭 𝒊𝒏𝒄𝒍 = 2.06). Furthermore, evidence for both the main effect of object type and the two-way interaction was inconclusive (𝑩𝑭 𝒊𝒏𝒄𝒍 &lt; 1). Importantly, this absence of error differences between conditions also rules out the possibility that the observed gains for real-world items in other measures (e.g., fewer inspections) came at the cost of reduced accuracy.</p>
+<h3>Trial duration per trial.</h3>
+<p>Finally, for total trial durations, there was only anecdotal evidence for a main effect of object type (real-world objects: M = 68.39, SD = 18.91; novel-but-realistic objects: M = 73.41, SD = 19.47; 𝑩𝑭 𝒊𝒏𝒄𝒍 = 1.56). There was very strong evidence for a main effect of stimulus configuration (intact: M = 64.34, SD = 20.76; scrambled: M = 77.39, SD = 18.10; 𝑩𝑭 𝒊𝒏𝒄𝒍 = 227.93), so that trials with scrambled objects took substantially longer than trials with intact stimuli. Importantly, we found moderate evidence for the interaction between object type and stimulus configuration ( 𝑩𝑭 𝒊𝒏𝒄𝒍 = 3.82). Post-hoc Bayesian comparisons showed that the advantage of real-world objects over novel-but-realistic objects was evident in the intact condition (difference = 10.41, 𝑩𝑭 𝟏𝟎 = 342.65) but was absent in the scrambled condition (difference = 0.50, 𝑩𝑭 𝟏𝟎 = 0.23). Scrambling increased trial duration more for real-world objects (difference = 17.63, 𝑩𝑭 𝟏𝟎 = 172.56) than for novel-but-realistic objects (difference = 7.71, 𝑩𝑭 𝟏𝟎 = 3.34). This pattern corroborates that the overall task performance (i.e., trial durations) of real-world objects was better than novel-butrealistic objects only in the intact condition, but not in the scrambled condition.</p>
+<p>Together, these findings show that participants (1) performed better and (2) relied more on working memory (and thus less on sampling) when interacting with real-world objects compared to realistic-but-novel objects. But, these differences between stimulus types were specific to intact images and disappeared when images were scrambled.</p>
+<h3>Familiarity ratings and copying-task performance.</h3>
+<p>To confirm that our real-world objects were indeed related to prior visual experience, we compared post-experiment familiarity ratings between the two stimulus types. Given the ordinal nature of the 7point Likert scale, mean familiarity scores for real-world and novel-but-realistic objects were computed for each participant and compared using a non-parametric Bayesian Wilcoxon signed-rank test. Results showed strong evidence that participants perceived the real-world objects as more familiar than the novel-but-realistic objects (real-world objects: M = 6.15, SD = 1.01; novel-but-realistic objects: M = 2.51, SD = 1.90; 𝑩𝑭 𝟏𝟎 = 6.46 × 10 5 ). This successfully validates our stimulus manipulation, confirming that participants had substantially more prior visual experience with real-world objects than novel-but-realistic objects. Furthermore, exploratory analyses of the trial-by-trial subjective familiarity ratings showed that higher familiarity was associated with less visual sampling with no costs in accuracy (see Supplementary Materials S7 for full analyses and a discussion of the limitations of these analyses).</p>
+<p>Taken together, Experiment 2 replicated the key finding that meaningfulness shifts the memory-sampling trade-off towards greater memory use, extending it from a between-object scenario (Experiment 1) to a within-object scenario. Dividing the 9 fragments by the number of inspections showed that the familiar intact condition stood out, with participants memorizing on average ~7.5 fragments per sampling, compared with ~6.0 in the novel intact condition and only ~3.3 and ~3.0 in the familiar and novel shuffled conditions, respectively. These absolute values, however, are not directly comparable to those in Experiment 1 or to the 1-2 items per sampling typically reported in copying tasks, because Experiment 1 indexed whole objects whereas Experiment 2 indexed fragments of a single object, whose encoding may be supported by global configural representations.</p>
+<h3>General Discussion</h3>
+<p>In this study, we examined how the meaningfulness of items influences strategic working memory use in natural behavior, where participants are free to decide what to memorize and when. Across two experiments, we found that participants sampled meaningful real-world objects less frequently (for shorter or comparable durations) than visually matched but meaningless novel-but-realistic objects. Thus, participants strategically choose to rely more on memory than on external sampling when interacting with meaningful objects. This strategic shift in memory use was observed both when participants arranged multiple objects in their original spatial locations (Experiment 1) and when they reassembled fragments of a single object (Experiment 2). Consistent with these results, participants rated the real-world objects as highly familiar and the novel-but-realistic objects as unfamiliar, providing converging evidence that the strategic shift is linked to prior visual experience with meaningful objects. However, this strategic shift disappeared when the object&#x27;s global structure was disrupted (Experiment 2), highlighting the importance of (prior experience with) the global image structure of meaningful objects in steering strategic working memory use.</p>
+<p>The present findings replicate the memory advantage (e.g., more efficient memory encoding, fewer errors, and shorter task duration) for real-world objects reported in forced-memory paradigms (e.g., Brady et al., 2016 Brady et al., , 2024;; Chung et al., 2023 Chung et al., , 2024;; Morales-Torres &amp; Egner, 2026; Thibeault et al., 2024). More importantly, we show that this advantage translates into greater reliance on memory: participants inspected the display less often, without spending more time per inspection. An alternative was that participants merely exploited the greater encoding efficiency of real-world objects to shorten each inspection without actually increasing the amount of information encoded per inspection-a strategy that would reflect reduced effort rather than enhanced memory load. Our data show otherwise: in Experiment 1, inspection durations did not differ between meaningful and novel objects; and in Experiment 2 inspection durations even dropped along with the number of inspections, an effect that was not accompanied by an increase in errors. Thus, the reduced cost associated with memorizing meaningful real-world objects was not used to reduce task effort but to memorize more information per inspection (without compromising accuracy).</p>
+<p>Participants inspected meaningful objects fewer times in both experiments, but only in Experiment 2 did they also spend less time on each inspection. Experiment 2 required participants to encode fragments of a single object, which may be more difficult to distinguish individually. Retrieving a global template of the meaningful objects from long-term memory may be particularly helpful for recognizing and organizing these fragments, thereby speeding encoding. Such a template offered less support in Experiment 1, where individual object identities did not predict their locations, and the arbitrary identity-location mappings still had to be learned on each trial, even for meaningful objects. The scrambling manipulation supports this account: disrupting the global structure abolished nearly all behavioral differences between realworld and novel-but-realistic objects, while preserving all local features. Thus, neither local semantics nor low-level visual differences can explain the difference in memory use between meaningful and meaningless objects. Conversely, the advantage in memory use of intact over scrambled images was specific to real-world objects.</p>
+<p>Therefore, global structure alone (e.g., Gestalt properties) is not sufficient for driving the observed differences in memory use. Instead, prior experience with the global image structure of meaningful objects drives the difference in memory use between meaningful and meaningless images.</p>
+<p>The vast majority of studies to date studying strategic memory use, in unrestrained tasks (e.g., the copy task) used meaningless stimuli (for an exception, see Koolhaas et al., 2026). These studies consistently found that participants memorize only 1-2 items per sampling (Ballard et al., 1995; Draschkow et al., 2021; Sahakian et al., 2023 Sahakian et al., , 2025)).</p>
+<p>By contrasting meaningful and meaningless objects in a controlled design, we found that meaningfulness increased memory use to ~3.8 items per sampling, surpassing the 1-2 items typically observed in most copying-task studies. But how might meaningfulness increase the reliance on memory use? One account is that it lowers the cost of memory by activating structured semantic knowledge (category labels, functional associations, typical structure), expanding representations from a low-dimensional perceptual space to a high-dimensional conceptual space (Chung et al., 2024). This reduces interference (Morales-Torres &amp; Egner, 2026) and stabilizes maintenance (Thibeault et al., 2024). Another factor is subjective confidence: richer, more distinctive traces may boost participants&#x27; confidence (see Thibeault et al., 2024; Morales-Torres &amp; Egner, 2026) and thus reduce the number of reinspections driven by uncertainty. Future research may dissociate these possibilities to clarify whether the observed shift in memory use is rooted in objective cognitive cost, subjective confidence, or both.</p>
+<p>The memory-sampling trade-off, in essence, is a strategic cost-benefit calibration.</p>
+<p>Historically, theories of this process have been governed by a constraint-driven framework, wherein observers react to extrinsic task constraints (e.g., physical effort, error penalties, or repetition; Sahakian et al., 2025; Xu et al., 2026) and internal capacity bottlenecks (e.g., working memory limits; Böing et al., 2023). Critically, this framework treats stimuli as passive placeholders, with strategies dictated solely by environmental costs or memory limits. The present study broadens this framework by introducing a content-driven dimension: intrinsic stimulus properties alter the memory-sampling trade-off. Meaningful objects can draw on pre-existing knowledge in long-term memory, making their representations easier to encode and maintain. This advantage occurs upon first encounter with specific images, showing the effect of preexisting semantic knowledge (e.g., labels, functions, visual familiarity) and contrasting with repetition-based familiarity, which relies on episodic long-term memory built over time (Xu et al., 2026). While both long-term memory systems reduce working memory costs, they differ mechanistically: episodic memory retrieves specific learned instances, eliminating active maintenance (Carlisle et al., 2011; Bartsch &amp; Shepherdson, 2022); semantic memory leverages structured category knowledge to immediately expand the dimensionality and stability of working memory representations, reducing interference and encoding demands (Brady et al., 2016; Asp et al., 2021; Chung et al., 2024). Thus, observers do not merely react to constraints (in the environment or in their internal capacity); they proactively capitalize on the inherent semantic richness of the visual world to determine how much they rely on external sampling versus memory.</p>
+<h3>Conclusion</h3>
+<p>In sum, meaningfulness shapes strategic working memory use by modulating the tradeoff between (internal) memory use and (external) sampling. The impact of meaningfulness arises even upon the first encounter with specific images, demonstrating an advantage conveyed by long-term memory retrieval, independent of recent exposure. Breaking away from traditional, &#x27;reductionist&#x27; stimuli and forced-response, &#x27;single-shot&#x27; paradigms, our findings show that object meaning fundamentally changes how people use memory in unrestrained, naturalistic behavior.</p>
+<p>Ultimately, the decision to memorize now (or resample later) is driven not solely by external constraints or individual capacity limits, but also by the intrinsic meaning of the memoranda themselves.</p>
+<h3>Fig 1.</h3>
+<p>Fig 1. The copying task displays when the Model grid is (A) covered and (B) revealed. Participants are required to</p>
+<h3>Fig 2.</h3>
+<p>Fig 2. Example of the displays when the Model grid was revealed in (A) a real-world condition and (B) a novel-</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Results of Experiment 1. Violin plots show group-level medians (white circles), inter-quartile range (thick</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. Example stimuli for Experiment 2. In the intact condition (A), the 3×3 image segments preserve the</p>
+<h3>Figure 5.</h3>
+<p>Figure 5. Results of Experiment 2. Violin plots show group-level medians (white circles), inter-quartile range (thick</p>
+<h3>Table 1</h3>
+<p>Descriptive Statistics for Behavioral Measures Across Conditions</p>
+<h3>References</h3>
+<p>Alvarez, G. A., &amp; Cavanagh, P. (2004). The capacity of visual short-term memory is set both by visual information load and by number of objects. Psychological science, 15(2), 106-111.</p>
+<p>Asp, I. E., Störmer, V. S., &amp; Brady, T. F. (2021). Greater visual working memory capacity for visually matched stimuli when they are perceived as meaningful. Journal of Cognitive Neuroscience, 33(5), 902-918.</p>
+<p>Ballard, D. H., Hayhoe, M. M., &amp; Pelz, J. B. (1995). Memory representations in natural tasks. Journal of Cognitive Neuroscience, 7(1), 66-80.</p>
+<p>Bartsch, L. M., &amp; Shepherdson, P. (2022). Freeing capacity in working memory (WM) through the use of long-term memory (LTM) representations. Journal of Experimental Psychology: Learning, Memory, and Cognition, 48(4), 465-482.</p>
+<p>Böing, S., Ten Brink, A. F., Hoogerbrugge, A. J., Oudman, E., Postma, A., Nijboer, T. C., &amp; Van der Stigchel, S. (2023). Eye movements as proxy for visual working memory usage: Increased reliance on the external world in korsakoff syndrome. Journal of Clinical Medicine, 12(11), 3630.</p>
+<p>Brady, T. F., &amp; Störmer, V. S. (2022). The role of meaning in visual working memory: Real-world objects, but not simple features, benefit from deeper processing. Journal of Experimental Psychology: Learning, Memory, and Cognition, 48(7), 942.</p>
+<p>Brady, T. F., Robinson, M. M., &amp; Williams, J. R. (2024). Noisy and hierarchical visual memory across timescales. Nature Reviews Psychology, 3(3), 147-163.</p>
+<p>Brady, T. F., Störmer, V. S., &amp; Alvarez, G. A. (2016). Working memory is not fixed- capacity: More active storage capacity for real-world objects than for simple stimuli. Proceedings of the National Academy of Sciences, 113(27), 7459-7464.</p>
+<p>Brodeur, M. B., Dionne-Dostie, E., Montreuil, T., &amp; Lepage, M. (2010). The Bank of Standardized Stimuli (BOSS), a new set of 480 normative photos of objects to be used as visual stimuli in cognitive research. PloS one, 5(5), e10773.</p>
+<p>Brodeur, M. B., Gué rard, K., &amp; Bouras, M. (2014). Bank of Standardized Stimuli (BOSS) phase II: 930 new normative photos. PloS one, 9(9), e106953.</p>
+<p>Carlisle, N. B., Arita, J. T., Pardo, D., &amp; Woodman, G. F. (2011). Attentional templates in visual working memory. Journal of Neuroscience, 31(25), 9315-9322.</p>
+<p>Chung, Y. H., Brady, T. F., &amp; Störmer, V. S. (2023). No fixed limit for storing simple visual features: Realistic objects provide an efficient scaffold for holding features in mind. Psychological Science, 34(7), 784-793.</p>
+<p>Chung, Y. H., Brady, T. F., &amp; Störmer, V. S. (2024). Meaningfulness and familiarity expand visual working memory capacity. Current Directions in Psychological Science, 33(5), 275-282.</p>
+<p>Cooper, P. S., Colton, E., Bode, S., &amp; Chong, T. T. J. (2023). Standardised images of novel objects created with generative adversarial networks. Scientific Data, 10(1), 575. de Leeuw, J. R. (2015). jsPsych: A JavaScript library for creating behavioral experiments in a Web browser. Behavior Research Methods, 47(1), 1-12.</p>
+<p>Draschkow, D., Kallmayer, M., &amp; Nobre, A. C. (2021). When natural behavior engages working memory. Current Biology, 31(4), 869-874.</p>
+<p>Hayhoe, M. M., Bensinger, D. G., &amp; Ballard, D. H. (1998). Task constraints in visual working memory. Vision Research, 38(1), 125-137.</p>
+<p>Koolhaas, C., Blaser, E., &amp; Kaldy, Z. (2026). How much do you remember when it&#x27;s up to you? Measuring memory use without response bias in young children. Developmental Science, 29(2), e70152.</p>
+<p>Kumle, L., Kovoor, J., Watt, R. L., Boettcher, S. E., Nobre, A. C., &amp; Draschkow, D. (2025). Long-term memory facilitates spontaneous memory usage through multiple pathways. Current Biology, 35(5), 1171-1179.</p>
+<p>Lee, M. D., &amp; Wagenmakers, E. J. (2014). Bayesian cognitive modeling: A practical course. Cambridge university press.</p>
+<p>Love, J., Selker, R., Marsman, M., Jamil, T., Dropmann, D., Verhagen, J., ... &amp; Wagenmakers, E. J. (2019). JASP: Graphical statistical software for common statistical designs. Journal of Statistical Software, 88, 1-17.</p>
+<p>Luck, S. J., &amp; Vogel, E. K. (1997). The capacity of visual working memory for features and conjunctions. Nature, 390(6657), 279-281.</p>
+<p>Morales-Torres, R., &amp; Egner, T. (2026). Visual working memory for real-world objects is resistant to visual but vulnerable to semantic interference. Journal of Experimental Psychology: General. Advance online publication.</p>
+<p>Qing, T., Strauch, C., Van Maanen, L., &amp; Van der Stigchel, S. (2025). Shifting reliance between the internal and external world: A meta-analysis on visual-working memory use. Psychonomic Bulletin &amp; Review, 32(3), 1118-1130. https://doi.org/10.3758/s13423-024-02623-z</p>
+<p>Sahakian, A., Gayet, S., Paffen, C. L., &amp; Van der Stigchel, S. (2025). Action consequences guide the use of visual working memory. Journal of Experimental Psychology: Learning, Memory, and Cognition, 51(1), 4-13.</p>
+<p>Sahakian, A., Gayet, S., Paffen, C. L., &amp; Van der Stigchel, S. (2023). Mountains of memory in a sea of uncertainty: sampling the external world despite useful information in visual working memory. Cognition, 234, 105381.</p>
+<p>Thibeault, A. M., Stojanoski, B., &amp; Emrich, S. M. (2024). Investigating the effects of perceptual complexity versus conceptual meaning on the object benefit in visual working memory. Cognitive, Affective, &amp; Behavioral Neuroscience, 24(3), 453- 468.</p>
+<p>Van der Stigchel, S. (2020). An embodied account of visual working memory. Visual Cognition, 28(5-8), 414-419.</p>
+<p>Xu, L., Gayet, S., Sahakian, A., Gottlieb, J. P., Van der Stigchel, S., &amp; Paffen, C. L. E. (2026). Trade-offs between visual sampling and memory in stable and changing worlds. Journal of Experimental Psychology: Human Perception and Performance, 52(5), 653-671.</p>
+<p>Xu, L., Sahakian, A., Gayet, S., Paffen, C. L. E., &amp; Van der Stigchel, S. (2025). Latent memory traces for prospective items in visual working memory. Journal of Experimental Psychology: Human Perception and Performance, 51(2), 164-177.</p>
+<p>Ye, C., Guo, L., Wang, N., Liu, Q., &amp; Xie, W. (2024). Perceptual encoding benefit of visual memorability on visual memory formation. Cognition, 248, 105810.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
