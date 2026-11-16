@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Humans and Large Language Models Infer a
+Multidimensional Structure of Moral Motivation</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Humans and Large Language Models Infer a Multidimensional Structure of
+Moral Motivation
+</p>
+<p class="meta">
+2026-11-16 · Metacheck 0.4.4.3
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>3</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>2</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>11</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(3)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Ethics
+Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to involve live data collection and lacked an
+ethics approval statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, but it was not present:</p>
+<blockquote>
+<p>We recruited a total of 1,031 adult participants (67.1%
+White/European American, 14.5% Black or African American, 6.1% Asian
+American, 12.3%, Multiracial/Other; 47.0% male, 51.3% female, 1.7%
+other/prefer not to say, M age = 42.5, SD age = 13.5) via Prolific, who
+were roughly balanced by sex, age, and race.</p>
+</blockquote>
+<blockquote>
+<p>Participants were required to be fluent in English, located in the
+United States, and have a minimum approval rating of 99%.</p>
+</blockquote>
+<blockquote>
+<p>Participants were monetarily compensated consistent with platform
+norms.</p>
+</blockquote>
+<blockquote>
+<p>Participants were instructed that any number of motivations could be
+present in a given narrative, including none or all four.</p>
+</blockquote>
+<blockquote>
+<p>Participants completed the study online using Qualtrics.</p>
+</blockquote>
+<blockquote>
+<p>In the Evaluation-First condition, participants completed the same
+tasks with the two blocks reversed: the evaluation tasks (Step 3 then 4)
+preceded the motivation tasks (Step 1 then 2).</p>
+</blockquote>
+<blockquote>
+<p>Participants were informed that sentences could support one,
+multiple, or no moral motivations.</p>
+</blockquote>
+<blockquote>
+<p>Median identification rates across participants were correspondingly
+high (90% for Approach Good and Avoid Bad, and 60% for Approach Bad and
+Avoid Good), indicating that the aggregate presence rates reflected
+broadly distributed inference patterns rather than a small number of
+unusually liberal raters.</p>
+</blockquote>
+<blockquote>
+<p>Generalizability across populations Human participants were U.S.
+adults, and language models were predominantly Western-developed
+frontier systems.</p>
+</blockquote>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Marginal Significance</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>You described 1 effect with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>You described effects with terms related to ‘marginally significant’.
+If <em>p</em> values above 0.05 are interpreted as an effect, you
+inflate the alpha level, and increase the Type 1 error rate. If a
+<em>p</em> value is higher than the prespecified alpha level, it should
+be interpreted as a non-significant result.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Section Header
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Language models inferred Approach Bad significantly less frequently than
+human raters (26.9% vs. 
+</td>
+<td style="text-align:left;">
+Are All Four Moral Motivations Commonly Inferred?
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate at which
+non-significant p-values are interpreted as marginally significant,
+see:</p>
+<p>Olsson-Collentine A, van Assen MALM, Hartgerink CHJ (2019). “The
+Prevalence of Marginally Significant Results in Psychology Over Time.”
+<em>Psychological Science</em>, <b>30</b>, 576–586.
+<a href="https://doi.org/10.1177/0956797619830326">doi:10.1177/0956797619830326</a>.</p>
+<p>For the list of terms used to identifify marginally significant
+results, see this <a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Exact
+P-Values</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 2 imprecise <em>p</em> values out of 5 detected <em>p</em>
+values.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Reporting <em>p</em> values imprecisely (e.g., <em>p</em> &lt; .05)
+reduces transparency, reproducibility, and re-use (e.g., in <em>p</em>
+value meta-analyses). Best practice is to report exact p-values with
+three decimal places (e.g., <em>p</em> = .032) unless <em>p</em> values
+are smaller than 0.001, in which case you can use <em>p</em> &lt;
+.001.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (e.g., “decreased at the <em>p</em>
+&lt; .05 significance threshold”).</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+P-Value
+</th>
+<th style="text-align:left;">
+Text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ps &lt; .05
+</td>
+<td style="text-align:left;">
+Chi-square tests of independence revealed that all six pairwise
+combinations of motivations significantly deviated from chance
+co-occurrence for both humans and LMs (all ps &lt; .05).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .01
+</td>
+<td style="text-align:left;">
+Within-provider model pairs were more similar to each other (mean JS =
+0.071) than between-provider model pairs (mean JS = 0.093), with the
+within-to-between ratio of 0.765 differing significantly from chance
+(permutation p &lt; .01).
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>The APA manual states: Report exact <em>p</em> values (e.g.,
+<em>p</em> = .031) to two or three decimal places. However, report
+<em>p</em> values less than .001 as <em>p</em> &lt; .001. However, 2
+decimals is too imprecise for many use-cases (e.g., a <em>p</em> value
+meta-analysis), so report <em>p</em> values with three digits.</p>
+<p>American Psychological Association (2020). <em>Publication manual of
+the American Psychological Association</em>, 7 edition. American
+Psychological Association.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="improve">To check <span class="n">(2)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 non-significant p value that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = .22
+</td>
+<td style="text-align:left;">
+83.2%, p = .22), and although Avoid Bad differed statistically, the
+effect size was negligible (h = -0.07).
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Repository Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We found 2 files in 1 repository.</li>
+<li>We found 0 README files and 1 repository without READMEs.</li>
+<li>We found 3 file naming problems to fix.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<h4 id="whose-deposits">Whose Deposits</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Cited in
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/hpzy9/overview" target="_blank">osf.io/hpzy9/overview</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/hpzy9" target="_blank">osf.io/hpzy9</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="osf.io/5b26t" target="_blank">osf.io/5b26t</a>
+</td>
+<td style="text-align:left;">
+reference list
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="osf.io/preprints" target="_blank">osf.io/preprints</a>
+</td>
+<td style="text-align:left;">
+reference list
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="repositories">Repositories</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Platform
+</th>
+<th style="text-align:right;">
+All Files
+</th>
+<th style="text-align:right;">
+Data Files
+</th>
+<th style="text-align:right;">
+Code Files
+</th>
+<th style="text-align:right;">
+READMEs
+</th>
+<th style="text-align:right;">
+Archives
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/hpzy9/overview" target="_blank">osf.io/hpzy9/overview</a>
+</td>
+<td style="text-align:left;">
+osf
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="files">Files</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Size
+</th>
+<th style="text-align:left;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/hpzy9/overview" class="uri">https://osf.io/hpzy9/overview</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/jty6v/" target="_blank">MoMA
+Motivations LLMs and Humans (2).pdf</a>
+</td>
+<td style="text-align:left;">
+231.9 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/hpzy9/overview" class="uri">https://osf.io/hpzy9/overview</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/6ad9789031b3f473267d52a9/" target="_blank">Supplemental
+Material for Preprint MoMA Motivations LLMs and Humans.pdf</a>
+</td>
+<td style="text-align:left;">
+336.8 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="readme-files">README Files</h4>
+<p>README files are a way to document the contents and structure of a
+folder, helping users locate the information they need. You can use a
+README to document changes to a repository, and explain how files are
+named. Please consider adding a README to each repository or including
+‘README’ in the name of your overview document.</p>
+<h4 id="file-naming">File Naming</h4>
+<p>File names should be machine-parseable: no spaces or special
+characters, and every file should be classifiable by name or extension.
+We found 3 naming problems that should be fixed, and 1 file with a
+naming suggestion (not required, but a good habit).</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Rule
+</th>
+<th style="text-align:left;">
+Severity
+</th>
+<th style="text-align:left;">
+Detail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MoMA Motivations LLMs and Humans (2).pdf
+</td>
+<td style="text-align:left;">
+spaces
+</td>
+<td style="text-align:left;">
+Required
+</td>
+<td style="text-align:left;">
+contains a space
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MoMA Motivations LLMs and Humans (2).pdf
+</td>
+<td style="text-align:left;">
+special-characters
+</td>
+<td style="text-align:left;">
+Required
+</td>
+<td style="text-align:left;">
+contains a character other than letters, digits, underscore, or dash
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Supplemental Material for Preprint MoMA Motivations LLMs and Humans.pdf
+</td>
+<td style="text-align:left;">
+spaces
+</td>
+<td style="text-align:left;">
+Required
+</td>
+<td style="text-align:left;">
+contains a space
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Supplemental Material for Preprint MoMA Motivations LLMs and Humans.pdf
+</td>
+<td style="text-align:left;">
+filename-length-50
+</td>
+<td style="text-align:left;">
+Suggestion
+</td>
+<td style="text-align:left;">
+The file name is 71 characters, over the recommended 50
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-classification">File Classification</h4>
+<div class="callout-note" title="See how every file was classified and grouped" collapse="true">
+<p><strong>documentation</strong> (2 files)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MoMA Motivations LLMs and Humans (2).pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+MoMA Motivations LLMs and Humans (2).pdf
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Supplemental Material for Preprint MoMA Motivations LLMs and Humans.pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+Supplemental Material for Preprint MoMA Motivations LLMs and Humans.pdf
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<h2 id="na">Not applicable <span class="n">(11)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>We found 2 OSF links, but no registrations.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We classified 2 files: 2 documentation.</li>
+<li>We found 0 tabular data files and extracted 0 columns from 0 of
+them.</li>
+<li>We grouped the files into 1 study group (ex1). We found no readable
+tabular data files to validate.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="files">Files in the repository</h2>
+<p>Where the files sit within each repository. Each file is followed by
+how it was classified, which study it belongs to, and any file-naming
+issue found by repo_check; junk files, hidden files and empty folders
+are marked.</p>
+<p><strong>Repository: <a href="https://osf.io/hpzy9/overview" class="uri">https://osf.io/hpzy9/overview</a></strong></p>
+<div style="max-height: 40em; overflow: auto;">
+<pre><code>├── MoMA Motivations LLMs and Humans (2).pdf                                 📖 documentation ex1  contains a space
+└── Supplemental Material for Preprint MoMA Motivations LLMs and Humans.pdf  📖 documentation ex1  contains a space</code></pre>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+Data Check
+</summary>
+<div class="fold">
+<p>This module classifies repository files and, for tabular data files
+available locally, extracts each column’s type and summary
+statistics.</p>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 29 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 29 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 29 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Moral evaluation depends not only on what people do, but on why observers believe they acted as they did. Although motive inference has long been recognized as central to moral judgment, moral motivation itself has rarely been conceptualized as a multidimensional psychological representation. We investigated whether observers infer four distinct moral motivational dimensions (Approach Good, Avoid Bad, Approach Bad, and Avoid Good) from natural-language narratives and whether this representational structure is recovered by frontier large language models (LLMs). Human participants (N = 1,031) and 23 frontier LLMs evaluated 344 real-world moral narratives using identical procedures. All four motivational dimensions were inferred frequently in both populations and exhibited structured patterns of co-occurrence.</p>
+<p>Human observers clustered antisocial motivations (Approach Bad and Avoid Good) more strongly than prosocial motivations, whereas LLMs exhibited the opposite pattern. Across all evaluative outcomes, inferred motivations systematically predicted judgments of rightness, wrongness, praiseworthiness, and blameworthiness. Supervised machine learning analyses further demonstrated that the complete four-dimensional representation consistently outperformed every reduced two-dimensional alternative, indicating that each motivational dimension contributed unique predictive information. Although LLMs broadly recovered the multidimensional structure observed in humans, they inferred antisocial motivations less frequently, concentrated those attributions within fewer narratives, and produced systematically compressed response distributions characterized by lower variance and entropy. Together, these findings suggest that moral motivation is best understood as a multidimensional representational system and that representational richness provides a useful framework for evaluating both human moral cognition and its approximation by artificial systems.</p>
+<h3>Introduction</h3>
+<p>Human societies depend on the capacity to evaluate moral behavior not only by assessing what people do but also by inferring why they do it. Across legal adjudication, institutional governance, and everyday social interactions, moral evaluation frequently turns on perceived motivation. Courts distinguish deliberate wrongdoing from negligence and murder from manslaughter (Goldberg &amp; Zipursky, 2010; Ploeg et al., 2024). Organizations distinguish between wrongdoing that is deliberate and that which is accidental and between misconduct intended to harm or to help (Palmer, 2012; Mishra, Ghosh, &amp; Sharma, 2022). In interpersonal life, observers routinely seek to understand why another person acted as they did, and blame often depends as much on inferred motives as on the actions themselves (Li, Xiao, &amp; Sun, 2025).</p>
+<h3>Moral Motivation as the Basis of Moral Evaluation</h3>
+<p>Psychological research has repeatedly confirmed that motive inference plays a central role in moral cognition. Observers spontaneously infer goals and desires from minimal behavioral cues (Aarts, Gollwitzer, &amp; Hassin, 2004; Hassin, Aarts, &amp; Ferguson, 2005; Malle &amp; Holbrook, 2012), and these inferred motives shape downstream judgments of blame, praise, and character (Reeder, 2009; Carlson et al., 2022). Moral responsibility and character judgments are powerfully shaped by inferred motives independent of behavioral outcomes (Woolfolk, Doris, &amp; Darley, 2006; Bigman &amp; Tamir, 2016), and individuals judge it morally wrong merely to harbor a harmful desire, even if no harm occurs (Young et al., 2007; Cushman, 2008). Moreover, growing evidence suggests that moral evaluations are jointly shaped by characteristics of both the observer and the situation. For example, individual differences such as fear of missing out influence the severity of moral judgments (McKee et al., 2024b), while characteristics of the actors involved, including the identity of the perpetrator and victim, systematically alter moral evaluations even when the underlying actions remain constant (McKee et al., 2024a). Together with numerous demonstrations of framing effects, contextual influences, and observer differences, these findings suggest that moral judgment is constructed from multiple interacting sources of information rather than read directly from behavior itself. Moral evaluation, therefore, is fundamentally multi-faceted, inferential, and motivational.</p>
+<p>Despite this centrality, moral psychology has historically focused more heavily on moral judgment than on moral motivation. Dominant frameworks have sought to explain how individuals classify actions as right or wrong, permissible or impermissible, often treating motivation as derivative of outcome valence or norm violation. When motivation is explicitly theorized, it is frequently reduced to dichotomies such as prosocial versus antisocial or approach versus avoidance (Hardy, 2006; Janoff-Bulman, Sheikh, &amp; Baldacci, 2008). These simplifications obscure empirically robust features of moral life and constrain the representational vocabulary available to psychological theory.</p>
+<p>The present research argues that inferences about moral motivation are structurally multidimensional and that this structure is detectable in narratives describing real-world moral decisions. Our focus is not on recovering agents&#x27; actual motivations (which are generally unobservable) but on understanding how observers infer them from narrative evidence.</p>
+<p>We test this framework across two populations: human raters and frontier large language models (LLMs). The inclusion of LLMs provides a complementary test of whether the proposed motivational structure is recoverable from human-generated language. Contemporary LLMs are trained on a vast corpora of human-produced text and therefore learn statistical regularities embedded in how people describe actions, motives, and social situations. If independently developed model families recover the same motivational distinctions observed in human raters when evaluating previously unseen narratives, such convergence would provide additional evidence that the proposed structure is reflected in the linguistic patterns through which humans communicate about moral behavior. Importantly, this would not establish that LLMs possess the same underlying psychological representations as humans; rather, it would demonstrate that the structure is sufficiently instantiated in human-generated language to be recovered by computational systems trained on it.</p>
+<p>The inclusion of LLMs is also practically consequential. Language models underpin the autonomous and semi-autonomous agents increasingly deployed across society in systems where moral decisions are made. LLMs already contribute to, and in some cases autonomously execute, decisions in domains such as content moderation (Oversight Board, 2024), healthcare triage (Laws, 2026; Schellmann, 2026), and financial services (Olivares Gallego, 2026). Prior work has reported substantial agreement between LLM and human moral judgments at the level of average responses (Dillion et al., 2023) and that human raters perceive LLM moral reasoning as expert-level (Dillion et al., 2025). However, agreement in average responses does not imply distributional equivalence: correlation-based metrics can obscure differences in variability, uncertainty, and the shape of response distributions, and emerging evidence documents systematic biases in LLM moral decision-making distinct from human patterns (Cheung, Maier, &amp; Lieder, 2025). Building on frameworks for treating LLMs as participants in psychological research (Aher, Arriaga, &amp; Kalai, 2023), we examine whether the multidimensional structure of moral motivation is recoverable across both populations and where their inferences converge or diverge.</p>
+<h3>The Structural Plurality of Moral Motivation</h3>
+<p>Three features of moral cognition challenge unidimensional accounts of moral motivation. First, the same action can arise from distinct motives. Helping behavior may reflect empathic concern, fairness, reputational signaling, guilt avoidance, or instrumental self-interest. Harmful actions may stem from cruelty, retaliation, enforcement of fairness, protection of loyalty, or self-preservation. Observers are exquisitely sensitive to these distinctions and routinely differentiate identical behaviors based on inferred motive (Barasch et al., 2014; Levine &amp; Schweitzer, 2015). Moral cognition, therefore, requires a representational system capable of distinguishing qualitatively different motivational configurations.</p>
+<p>Second, individuals frequently experience multiple motives simultaneously. Classic motivational theory has long emphasized the coexistence of competing and complementary forces in action (Lewin, 1938; Heider, 1958), and philosophers as far back as Plato argued that the soul must have separate parts because of conflicts among moral motivations (Cooper, 1984).</p>
+<p>Moral dilemmas often involve tensions between fairness and loyalty, honesty and compassion, self-protection and altruism. Observers detect such tensions and incorporate them into moral evaluation. A complete account of moral motivation must therefore accommodate co-occurrence rather than assume exclusivity.</p>
+<p>Third, moral valence and motivational direction are not inherently aligned. While the behavioral approach system and avoidance system are functionally distinct (Gray, 1982; Elliot, 2006), neither moral valence maps cleanly onto a motivational direction. Moral good can motivate both approach and avoidance. Individuals may actively pursue what they regard as morally good, but they may also avoid morally good action because of anticipated cost, fatigue, resentment, or competing obligations. Likewise, moral bad can motivate both avoidance and approach. Individuals may resist wrongdoing, but they may also actively pursue actions they regard as wrong, such as retaliation, exploitation, or revenge. Consequently, moral valence and motivational direction should be treated as conceptually independent dimensions.</p>
+<h3>The Motivation of Moral Action (MoMA) Framework</h3>
+<p>The Motivation of Moral Action (MoMA) framework formalizes how agents experience moral motivations and how observers represent and infer them from available evidence. With respect to the observer&#x27;s inferences, the framework is agnostic regarding whether inferred motivations correspond perfectly to agents&#x27; actual motivations. Instead, it seeks to characterize the structure of motivational attributions made by observers. We summarize the main points here, but A central methodological note for this work is that motivation is not directly observable to outsiders. Observers must infer moral motives from behavior, language, or self-report, and each is a partial signal. For human observers, the present design partially addresses this challenge by asking raters to identify the sentences that support each motivational inference, thereby providing some check on their reasoning (although analysis of specific sentence selections falls outside of the scope of this paper). Recent work suggests that models may be able to reliably report on their own internal states (Plunkett et al., 2025). That capacity, however, is not relevant in our design. The model does not report on its own motives but instead infers the motives of a third party (the human agent in each scenario). The task is therefore third-party inference, not introspection. Because a model&#x27;s stated judgment is a produced, probabilistic output rather than a readout of internal computation, and any verbal justification it offers is post-hoc, we accordingly treat LLM responses as observed inferences about another entity&#x27;s actions, rather than reports on the model&#x27;s internal cognition. By comparing inferences produced by both populations, we can examine where human and model representations of moral motivation converge and diverge.</p>
+<h3>The Present Research</h3>
+<p>We examine whether the multidimensional structure of inferred moral motivation can be recovered from real-world narratives describing moral decisions. Using a corpus of 344 real-world moral narratives (Cesarini et al., 2026), we collected motivational inferences from over one thousand human raters and a suite of frontier large language models. Both populations evaluated the same narratives using identical instructions and response formats, enabling direct comparison of human and model inferences.</p>
+<p>Existing comparisons of human and language-model moral judgment have often relied on a single model from a single provider, typically the GPT family, and on correlation-based metrics that cannot reveal distributional divergence (Grizzard et al., 2025). The present design addresses these limitations by sampling 23 frontier models across six providers, collecting multiple independent evaluations per narrative per model to support distributional analysis, and counterbalancing question-order conditions to assess framing effects that are shown to be amplified in language models relative to humans (Cheung et al., 2025).</p>
+<p>We test whether observers infer all four MoMA motivations at rates exceeding a theoretical noise threshold, whether those motivations exhibit patterned co-occurrence, and whether motivational distinctions predict moral evaluation. The purpose of the threshold test is not to establish practice importance per se, but to determine whether each motivational category was inferred at rates substantially exceeding a conservative floor that might plausibly arise from random responding, scale use tendencies, or occasional idiosyncratic attribution. We therefore preregistered a 5% baseline, reflecting a rate well above zero while remaining sufficiently conservative to detect infrequently inferred motivations.</p>
+<p>Specifically, we test whether motivational inferences deviate from statistical independence, whether antisocial motivational pairings (Approach Bad × Avoid Good) exhibit stronger clustering than prosocial pairings (Approach Good × Avoid Bad), and whether both exceed mixed-valence combinations. We further test whether motivational distinctions predict judgments of rightness, wrongness, praiseworthiness, and blameworthiness using both traditional statistical modeling and supervised machine learning methods. Finally, we assess distributional alignment between human and language-model inferences, examining whether mean-level agreement is accompanied by similar variance, distributional shape, and entropy. The study was preregistered at https://osf.io/hpzy9/overview.</p>
+<h3>Methods</h3>
+<h3>Participants</h3>
+<h3>Humans</h3>
+<p>We recruited a total of 1,031 adult participants (67.1% White/European American, 14.5% Black or African American, 6.1% Asian American, 12.3%, Multiracial/Other; 47.0% male, 51.3% female, 1.7% other/prefer not to say, M age = 42.5, SD age = 13.5) via Prolific, who were roughly balanced by sex, age, and race. We chose this sample size so that each participant evaluated 10 narratives, yielding approximately 30 independent human ratings per narrative. Participants were required to be fluent in English, located in the United States, and have a minimum approval rating of 99%. Participants were monetarily compensated consistent with platform norms.</p>
+<h3>Language Models</h3>
+<p>Twenty-three frontier large language models from six providers (Anthropic, DeepSeek, Google, Mistral, OpenAI, and xAI) were evaluated-the set comprised both reasoning-optimized and speed-optimized variants from each provider. A complete list of model versions and API access dates is provided in the Supplemental Materials. Each model annotated each of the 344 narratives approximately 60 times, yielding 474,608 raw evaluations. After exclusions detailed in the Supplemental Materials, 465,345 evaluations were retained for analysis. Models were accessed via publicly available Batch APIs, except for DeepSeek, which did not offer this capability at the time of data collection.</p>
+<p>Prompt wording, model versions, timestamps, and full outputs were logged for reproducibility and are available on OSF.</p>
+<h3>Materials</h3>
+<h3>Moral Narratives</h3>
+<p>The stimulus set consisted of 344 real-world moral narratives (Cesarini et al., 2026), each describing a morally relevant situation where a real person made a decision. These narratives were previously edited to follow a consistent structure (situation, deliberation, decision) and a common length (~150-200 words), while preserving the storyteller&#x27;s original language and tone.</p>
+<p>Multiple coders previously screened narratives to ensure that each reflected a single, interpretable moral decision and did not require substantial clarification. Importantly, the narratives were not selected because they explicitly stated the agent&#x27;s motivation. In most cases, the narratives described the situation, deliberation, and decision. However, they did not include direct statements such as &#x27;I did this because I wanted to help someone&#x27; or &#x27;I did this in order to avoid doing something wrong.&#x27; Consequently, both human raters and language models were required to infer motivations from narrative evidence rather than simply identify motivations that were explicitly provided. Full narrative information is available on OSF (see Cesarini et al., 2026 for full norming information) with an exemplar narrative in the Supplemental Materials.</p>
+<p>The decision to use real-world moral narratives reflects two methodological considerations. First, canonical moral paradigms widely used in prior research, such as trolley-problem variants, are almost certainly present in language model training corpora, raising concerns about contamination when evaluating model inferences (Aher et al., 2023). Real-world narratives drawn from a non-canonical corpus reduce, but do not eliminate, this concern; even unique narratives may share semantic structure with content represented in the training data.</p>
+<p>Although at the time of the LLM prompting, this corpus was not available online (i.e., it was not ingested into LLM training data). Second, real-world narratives preserve the contextual ambiguity, deliberation, and competing motivations characteristic of everyday moral life, providing more ecologically valid material for establishing theory on motivational inference than artificially constructed dilemmas.</p>
+<h3>Moral Motivation Framework</h3>
+<p>Participants evaluated narratives using the MoMA framework (McKee et al., 2026), which distinguishes four moral motivations outlined above: Approach Good, Avoid Good, Approach Bad, Avoid Bad. Participants were instructed that any number of motivations could be present in a given narrative, including none or all four. See Supplemental Materials for full study materials.</p>
+<h3>Procedure</h3>
+<h3>Humans</h3>
+<p>Participants completed the study online using Qualtrics. Narratives were presented one at a time in randomized order. Each participant was randomly assigned to one of two counterbalanced question-order conditions to assess and reduce any potential order effects.</p>
+<p>In the Motivation-First condition, participants: 1.</p>
+<p>Rated the perceived strength of each moral motivation, with the scale anchors also indicating its presence or absence (0 = not present at all,100 = played a very strong role).</p>
+<p>2. Selected the sentence(s) in the narrative supporting each motivation.</p>
+<h3>3. Made a binary moral classification of the decision (morally good vs. morally bad).</h3>
+<p>4. Rated the decision on rightness, wrongness, praiseworthiness, and blameworthiness (0 = not at all,100 = extremely).</p>
+<p>In the Evaluation-First condition, participants completed the same tasks with the two blocks reversed: the evaluation tasks (Step 3 then 4) preceded the motivation tasks (Step 1 then 2). The language models completed the same procedure in the same two counterbalanced orders.</p>
+<p>We treated question order as a robustness check rather than a primary manipulation. A first-pass comparison of the two orders across all judgment and motivation measures (FDR-corrected) is reported in the Supplementary Materials. In brief, human responses showed no order effect surviving correction, whereas the LLMs showed small but highly consistent shifts: across the 23 models, the Motivation-First order yielded slightly higher motivation strengths, presence rates, and moral ratings, reaching significance on roughly half of the measures after correction. Although minor in absolute terms (typically under one point on the 0-100 scales), their consistent direction across nearly all models points to a systematic, if modest, sensitivity to question order that humans did not exhibit.</p>
+<h3>Language Models</h3>
+<p>Each model session began with a fixed system prompt that specified task instructions and the required response format, identical in content to the instructions provided to human raters (see Supplemental Materials for the full prompt text). The narrative text was then presented, and the model produced its annotation. Each evaluation was a single, stateless interaction: no examples were provided, no prior responses were retained in context, and each narrative was evaluated independently. This design ruled out inadvertent few-shot learning effects and ensured comparability with human ratings.</p>
+<h3>Measures</h3>
+<h3>Moral Motivation Attribution</h3>
+<p>For each narrative, raters indicated whether each motivation was present (or absent) by rating its perceived strength of role in influencing the person&#x27;s decision on a 0-100 scale (where0 = the motivation is not present at all,1 = the motivation plays a very small or minor role, and100 = the motivation plays a very strong or central role). Ratings greater than zero were treated as indicating presence.</p>
+<h3>Sentence Selection</h3>
+<p>For each motivation identified as present, raters selected the sentence(s) from a numbered list that best supported their inference that a specific moral motivation was present. Participants were informed that sentences could support one, multiple, or no moral motivations. Analysis of this sentence selection is outside the scope of this analysis and will be reported in a separate NLP-focused paper.</p>
+<h3>Moral Evaluation</h3>
+<p>Raters provided a binary moral classification of the action taken by the agent (morally good vs. morally bad) and continuous ratings (0 = not at all [outcome anchor; right, deserving of praise, deserving of blame] -100 = Extremely [outcome anchor; right, deserving of praise, deserving of blame]) for rightness, wrongness, praiseworthiness, and blameworthiness.</p>
+<h3>Statistical Analysis</h3>
+<p>The statistical analyses were designed to evaluate complementary questions regarding the multidimensional structure of moral motivation inference. Unless otherwise noted, analyses were conducted separately for human raters and language models using identical procedures to facilitate direct comparison. False discovery rate (FDR) correction was applied within each family of hypothesis tests where appropriate.</p>
+<h3>Structure of Moral Motivation</h3>
+<p>Our first set of analyses examined whether the four MoMA motivations formed a structured representational system rather than independent or redundant categories. We first calculated the frequency with which each motivation was inferred to determine whether all four motivations occurred at rates substantially exceeding the preregistered theoretical noise threshold. We then examined pairwise associations among the four motivations using chi-square tests of independence and corresponding effect sizes (φ coefficients).</p>
+<h3>Associations With Moral Evaluation</h3>
+<p>Our second set of analyses examined whether inferred motivations were systematically associated with moral evaluation. For each of the four evaluative outcomes (rightness, wrongness, praiseworthiness, and blameworthiness), observations in which a motivation was inferred as present were compared with observations in which that motivation was absent using independent-samples t tests and Cohen&#x27;s d effect sizes.</p>
+<h3>Predictive Value of the Complete MoMA Representation</h3>
+<p>To determine whether the complete four-dimensional MoMA representation contained predictive information beyond simpler motivational representations, we compared the predictive performance of the full model against every possible two-motivation alternative. Continuous moral evaluation outcomes were analyzed using ordinary least squares regression, whereas binary moral classification (morally good vs. morally bad) was analyzed using logistic regression. For each outcome, seven models were estimated: one containing all four motivations and six containing every possible pairwise combination of motivations. Analyses were conducted separately using binary motivation presence and continuous motivation strength as predictors.</p>
+<p>Question-order condition was included as a covariate in all models, and standard errors were clustered at the narrative level to account for the non-independence of repeated evaluations of the same story. Model performance was compared using adjusted R² and mean squared error for continuous outcomes, and McFadden&#x27;s pseudo-R² and classification accuracy for binary outcomes. The principal comparison evaluated whether the complete four-motivation model consistently outperformed the strongest reduced two-motivation model.</p>
+<h3>Human-Language Model Distributional Alignment</h3>
+<p>Our final analyses examined agreement between human and language-model motivational attributions beyond the mean level of correspondence. Narrative-level rank-order agreement was assessed using Pearson correlations between average human and language-model motivation ratings. Distributional similarity was further evaluated using four complementary metrics: standard deviation ratios to assess variance compression, Jensen-Shannon divergence to quantify differences in distributional shape, Shannon entropy to evaluate representational uncertainty, and provider-level clustering analyses to assess similarities among language models developed by the same organization. Together, these analyses assessed whether language models reproduced not only the average motivational attributions humans make but also the variability and uncertainty that characterize human moral inference.</p>
+<h3>Results</h3>
+<p>Upon finishing data collection, there were 10,310 total observations from 1,031 human raters and 474,608 observations for LLMs. 9,263 observations were removed from the LLM data for various reasons (reported in more detail in the Supplemental Materials), leaving us with 465,345 observations in total from 23 unique models.</p>
+<h3>Are All Four Moral Motivations Commonly Inferred?</h3>
+<p>MoMA predicts that all four motivations are psychologically available to observers and can be inferred from narrative texts. Consistent with this prediction, all four primary moral motivations were endorsed at rates that dramatically exceeded the 5% baseline in both humans and LMs (all ps &lt; .001, FDR-corrected).</p>
+<p>Among human raters, Approach Good (AG = 83.2% of all observations) and Avoid Bad (AvB = 81.5%) were most frequently detected, followed by Approach Bad (AB = 59.6%) and Avoid Good (AvG = 57.5%). These presence rates indicate that no motivation type was considered a rare edge case, but was inferred in the majority of moral decisions.</p>
+<p>Language models similarly detected prosocial motivations at high rates (AG = 80.7%, AvB = 84.0%). However, they identified Approach Bad motivations at substantially lower rates (AB = 26.9%) than humans, and Avoid Good was also less frequently detected (AvG = 47.3% vs 57.5% in humans). The source of this difference remains unclear. It may reflect differences in how humans and LMs interpret narrative evidence, differences in training and alignment procedures, or other representational differences. See Table 2 below. Because the large number of language model responses can make even trivial differences statistically significant, we compared endorsement rates across the same set of narratives using narrative-level paired analyses in addition to pooled proportion tests. Three of the four motivations differed reliably. Language models inferred Approach Bad significantly less frequently than human raters (26.9% vs. 59.6%), representing the largest difference observed (Cohen&#x27;s h = 0.67). Avoid Good was also inferred less frequently by language models (47.3% vs. 57.5%; h = 0.21). In contrast, Approach Good showed no significant difference between populations (80.7% vs. 83.2%, p = .22), and although Avoid Bad differed statistically, the effect size was negligible (h = -0.07). Thus, humans and language models were highly similar in their attribution of prosocial motivations but diverged markedly in their willingness to infer Approach Bad. Note. Percentage-point differences are reported as Human -LLM. Cohen&#x27;s h quantifies standardized differences in proportions. Narrative-paired tests compare endorsement rates across the same 344 narratives and provide a conservative assessment that is less sensitive to differences in sample size than pooled proportion tests.</p>
+<p>To determine whether the aggregate motivation frequencies reflected broad consensus or were driven by a small subset of raters or models, we examined the narrative-level distribution of motivation attributions across human raters and language models (Figure 1). Overall, the aggregate results reflected widespread use of each motivational category rather than idiosyncratic responding. Among human raters, nearly all participants used every motivational category at least occasionally. No participant failed to identify Approach Good, and fewer than 2% never identified Approach Bad. Although Avoid Good was the least consistently used category, only ~6.8% of participants never inferred it across their 10 assigned narratives. Conversely, many participants inferred each motivation frequently: ~37.1% of participants identified Approach Good in every narrative they rated, ~38.3% did so for Avoid Bad, and approximately one-fifth consistently identified both Approach Bad (~21.9%) and Avoid Good (~22.3%). Median identification rates across participants were correspondingly high (90% for Approach Good and Avoid Bad, and 60% for Approach Bad and Avoid Good), indicating that the aggregate presence rates reflected broadly distributed inference patterns rather than a small number of unusually liberal raters.</p>
+<p>Language models showed a different pattern. Across the 23 frontier models, Approach Good and Avoid Bad were inferred consistently by nearly every model, with median identification rates of ~82.4% and ~85.5%, respectively. Approach Bad, however, was inferred much less frequently (median = ~27.8%), whereas Avoid Good occupied an intermediate position (median = ~44.6%). Importantly, these lower aggregate rates were not driven by a small subset of models that systematically avoided inferring this motivation; every model inferred each motivation at least occasionally.</p>
+<p>Examination of the narrative-level distributions revealed that the reduced frequency of Approach Bad in language models was concentrated at the narrative level rather than at the model level. Human raters inferred Approach Bad in every narrative, with a median narrative-level presence of ~56.9%. In contrast, language models never inferred Approach Bad in 65 of the 344 narratives and exhibited a median narrative-level presence rate of only 4.0%. Thus, rather than uniformly down-weighting Approach Bad across all narratives, language models appeared to reserve this attribution for a relatively restricted subset of situations. In contrast, Avoid Bad and Avoid Good were inferred in every narrative by at least some language models, and in four narratives Approach Good was not inferred by any language model.</p>
+<p>Together, these results demonstrate that the observed aggregate differences cannot be attributed to a small number of atypical raters or models. Instead, they reflect systematic differences in how human observers and language models distribute motivational attributions across moral situations.</p>
+<h3>Do Moral Motivations Form a Structured Representational Space?</h3>
+<p>Chi-square tests of independence revealed that all six pairwise combinations of motivations significantly deviated from chance co-occurrence for both humans and LMs (all ps &lt; .05). Thus, motivations are psychologically structured rather than randomly inferred. However, the pattern of this structure differed between populations. See Supplemental Materials for full statistics.</p>
+<p>MoMA predicts a hierarchical clustering pattern: antisocial (AvG + AB) and prosocial (AvB + AG) motivation pairs should co-occur most strongly, with weaker relationships for mixed-valence pairs (e.g., AvG + AvB).</p>
+<p>This hierarchy was supported in humans but not in LMs. Human data exhibited the following descending ordering: antisocial &gt; prosocial &gt; mixed. LM data, instead, exhibited a prosocial &gt; antisocial &gt; mixed ordering.</p>
+<p>Thus, while both populations demonstrated structured clustering and, in line with this, valenced pairings co-occurred more frequently than mixed-valence pairs, humans and LMs disagreed on the relative ordering of anti-and prosocial pairings. This asymmetry suggests that LMs may overweight morally norm-conforming motivational symmetry relative to morally deviant motivational integration.</p>
+<p>Among humans, the strongest co-occurrence emerged for antisocial motivations (Approach Bad × Avoid Good; φ = .515). Prosocial motivations (Approach Good × Avoid Bad) showed a moderate positive association (φ = .365), and mixed-valence pairs were near zero.</p>
+<p>Among LMs, the strongest co-occurrence occurred for prosocial motivations (AG × AvB; φ = .472), whereas antisocial pairing was markedly weaker (φ = .217). Mixed-valence pairs were strongly negative (-0.343).</p>
+<p>This divergence indicates that humans treat antisocial motivational configurations as highly complementary psychological states, whereas LMs more strongly reinforce symmetrical prosocial coupling. Because repeated evaluations are nested within narratives, we quantified each human-LM difference using a narrative-level bootstrap (2,000 resamples, narrative as the resampling unit). All six Δφ confidence intervals excluded zero, including the antisocial (Δφ = 0.298, 95% CI [0.251, 0.346]) and prosocial (Δφ = -0.107, 95% CI [-0.156, -0.058]) pairings.</p>
+<p>See Table 4 and Figure 2. Note. φ coefficients index pairwise co-occurrence between inferred motivations; positive values indicate that two motivations were inferred together more often than expected by chance, and negative values indicate that they were inferred together less often. The Mixed row is the signed mean of the four mixed-valence pairs (humans: -.09 to .08; language models: -.45 to -.24).</p>
+<p>Because the human values fall on both sides of zero, their signed mean (.01) is smaller than their mean absolute value (.06). Bootstrap comparisons of human and language-model φ are reported in the text.</p>
+<h3>Do Moral Motivations Predict Moral Evaluation?</h3>
+<p>All 16 predicted motivation-evaluation associations were confirmed in both populations.</p>
+<p>Prosocial motivations predicted higher rightness and praiseworthiness and lower wrongness and blameworthiness. Antisocial motivations predicted the exact opposite patterns. Effect magnitudes differed substantially between populations. Across the 16 motivation-evaluation pairs, human</p>
+<p>Cohen&#x27;s d values ranged from 0.41 to 1.46 (absolute value; median ~0.65), while LLM Cohen&#x27;s d values ranged from 1.01 to 2.00 (median ~1.50). Language models exhibited larger motivation-evaluation effect sizes than humans across all 16 tested relationships on identical narratives. This finding is consistent with the variance and entropy compression documented below. See Tables 5 and 6.</p>
+<h3>Does the Complete MoMA Representation Outperform Reduced Models?</h3>
+<p>To examine whether all four motivational dimensions contribute uniquely to moral evaluation, we compared the predictive performance of the full MoMA model against every possible two-motivation alternative. For each outcome variable (rightness, wrongness, praiseworthiness, and blameworthiness), we estimated a series of regression models predicting evaluations from inferred motivations. The focal comparison contrasted the full four-motivation model with the best-performing two-motivation model.</p>
+<p>Across all outcomes, the full MoMA representation consistently outperformed every reduced alternative. This pattern held when motivations were represented as binary presence indicators and when they were represented using continuous strength ratings.</p>
+<p>For binary presence measures, the full model explained more variance than the best-performing two-motivation model for rightness (Δadj-R² = .016), wrongness (Δadj-R² = .019), praiseworthiness (Δadj-R² = .011), and blameworthiness (Δadj-R² = .015). Similar results emerged when motivations were represented by their inferred strengths, with gains ranging from Δadj-R² = .016 to .026.</p>
+<p>The same pattern emerged for binary moral classification. Models incorporating all four motivations outperformed the strongest two-motivation alternatives for both presence-based and strength-based representations, yielding improvements in McFadden&#x27;s psuedo-R² and classification accuracy.</p>
+<p>These findings indicate that each motivational dimension contributes information relevant to moral evaluation. No pair of motivations was sufficient to recover the predictive performance of the complete four-dimensional representation. Thus, the empirical value of MoMA lies not merely in identifying multiple motivations but in demonstrating that the full motivational space contains evaluative information lost when the representation is compressed into fewer dimensions.</p>
+<h3>Where Do Human and Language Model Inferences Converge and Diverge?</h3>
+<p>The findings above establish that language models reproduce broad patterns in human motivational attributions. However, prior comparisons of human and LLM moral cognition have largely relied on correlation-based metrics that can mask distributional divergence between populations, even when mean-level alignment appears strong (Grizzard et al., 2025). We therefore examined four properties of the human-LLM comparison.</p>
+<h3>Rank-order agreement</h3>
+<p>Across the 344 narratives, human and LLM mean motivation strengths were strongly correlated for all four motivations (Approach Good r = .86, Avoid Bad r = .76, Approach Bad r = .78, Avoid Good r = .69). At the level of which narratives elicited which motivations, human and LLM inferences agreed substantially.</p>
+<h3>Variance compression</h3>
+<p>Despite rank-order agreement, language models produced systematically less variable ratings than humans across narratives. The median ratio of human to LLM standard deviation ranged from 1.24 (Avoid Good) to 2.48 (Approach Bad), with all comparisons significant after FDR correction.</p>
+<h3>Distributional divergence</h3>
+<p>Pairwise Jensen-Shannon divergence between human and LLM rating distributions exceeded the 0.10 threshold for meaningful divergence on all four motivations (median JS = 0.18-0.24; base-2, bounded [0,1]). One-sample Wilcoxon signed-rank tests confirmed that narrative-level divergences exceeded 0.10 for every motivation (all p &lt; .001, FDR-corrected). Human and LLM rating distributions differ in scale and shape.</p>
+<h3>Entropy compression</h3>
+<p>Language models produced lower-entropy distributions than humans across all four motivations, with the strongest compression for Approach Bad (mean entropy ratio 2.22).</p>
+<p>Where humans express graded uncertainty, language models concentrate probability mass on a narrower range of responses.</p>
+<p>Together, these results establish that high mean-level alignment between humans and LLMs coexists with substantial distributional divergence. See Table 7 below.</p>
+<p>Correlation-based comparisons alone would miss the differences in variance, shape, and entropy documented here. Note. Correlations quantify agreement in motivation ordering. Standard deviation ratios, Jensen-Shannon divergence, and entropy ratios quantify differences in the dispersion and shape of response distributions.</p>
+<h3>Provider-Level Differences</h3>
+<p>Prior work has reported that language models differ from one another and in their alignment with humans (Almeida et al., 2024). We assessed within-provider versus between-provider similarity directly using pairwise Jensen-Shannon divergence between models.</p>
+<p>Within-provider model pairs were more similar to each other (mean JS = 0.071) than between-provider model pairs (mean JS = 0.093), with the within-to-between ratio of 0.765 differing significantly from chance (permutation p &lt; .01). Models from the same provider produced more similar moral motivation inferences than models from different providers, a result not entirely surprising.</p>
+<p>The mean Jensen-Shannon divergence from human ratings varied across providers when all model combinations for each provider were treated as a single result (Table 8).</p>
+<p>DeepSeek (mean JS = 0.319) and xAI (0.320) produced inferences most similar to human distributions, followed by Google (0.326), OpenAI (0.341), Mistral (0.409), and Anthropic (0.464). Within each provider, model-to-model variation was modest relative to between-provider differences. The present research advances a multidimensional account of moral motivation (MoMA; McKee et al., 2026) and provides large-scale evidence that this structure is recoverable from natural language in both human observers and frontier language models. Across 344 real-world moral narratives, more than one thousand human raters and 23 frontier language models consistently inferred four motivational dimensions (Approach Good, Avoid Bad, Approach Bad, and Avoid Good) that exhibited systematic patterns of co-occurrence and reliably predicted judgments of rightness, wrongness, praiseworthiness, and blameworthiness. Importantly, supervised machine learning analyses demonstrated that the complete four-dimensional representation consistently outperformed every reduced two-dimensional alternative across all prediction tasks. Although language models broadly recovered this representational structure, they differed systematically from humans in how they distributed motivational attributions, particularly for antisocial motivations and morally ambiguous situations.</p>
+<p>Taken together, these findings suggest that moral evaluation depends not simply on whether observers perceive behavior as morally good or morally bad, but on the particular motivational configuration they infer from the available evidence. More broadly, they support the view that moral motivation is best understood as a multidimensional representational system in which motivational direction (approach versus avoidance) remains psychologically distinguishable within both morally good and morally bad domains.</p>
+<h3>Moral Motivation Is Best Represented as a Multidimensional System</h3>
+<p>The central contribution of the present research is theoretical. Although many theories acknowledge that motives matter for moral judgment (e.g., Cushman, 2008; Malle, 2011), motivation itself has often been represented using relatively coarse psychological distinctions, such as prosocial versus antisocial intentions or approach versus avoidance orientations. These frameworks capture important aspects of moral cognition but implicitly assume that such broad categories preserve the information observers use when interpreting moral behavior.</p>
+<p>The present findings suggest that this assumption is incomplete. Human observers consistently distinguished between actively pursuing what they perceived as morally good and merely refraining from what they perceived as morally bad. Likewise, they distinguished between actively pursuing what they perceived as morally bad and deliberately failing to pursue what they perceived as morally good. These distinctions were not simply alternative ways of describing the same underlying construct. Rather, they exhibited distinct patterns of co-occurrence, differed in their relationships with moral evaluation, and each contributed unique predictive information.</p>
+<p>The supervised machine learning analyses provide particularly compelling evidence for this conclusion. Across every evaluative outcome examined, including judgments of rightness, wrongness, praiseworthiness, blameworthiness, and binary moral classification, the complete four-dimensional MoMA representation consistently outperformed every reduced two-dimensional alternative. Although simpler representations captured substantial variance, none matched the predictive performance of the full model. Thus, the value of the proposed framework lies not merely in introducing additional motivational categories, but in demonstrating that preserving all four dimensions retains psychologically meaningful information that is systematically lost when the representational space is compressed. This distinction between descriptive richness and explanatory value is important. Psychological theories should not introduce additional constructs simply because they are conceptually possible; additional dimensions are theoretically justified only when they explain meaningful variance beyond simpler alternatives. The present findings suggest that the four motivational dimensions satisfy this criterion. Each dimension contributed incrementally to predicting moral evaluation, indicating that they function as distinct components of a broader representational system rather than interchangeable labels for a single evaluative continuum.</p>
+<p>The observed co-occurrence patterns reinforce this interpretation. Observers neither inferred motivations independently nor treated them as mutually exclusive. Instead, motivational attributions clustered in theoretically meaningful ways. In particular, Approach Bad and Avoid Good formed the strongest association, whereas Approach Good and Avoid Bad also clustered reliably, albeit somewhat less strongly. Mixed-valence combinations occurred comparatively less often, suggesting that observers distinguished motivational conflict from motivational consistency rather than indiscriminately combining all possible motivational states. Collectively, these findings indicate that moral motivation is represented as a structured psychological space in which multiple motivational dimensions can coexist while remaining partially independent.</p>
+<h3>Motivational Direction and Moral Valence Are Distinct Dimensions of Moral Representation</h3>
+<p>A second theoretical implication concerns the relationship between motivational direction and moral valence. Traditional motivational theories have long distinguished approach and avoidance systems (Gray, 1982; Elliot, 2006), whereas moral psychology has primarily focused on distinguishing morally desirable from morally undesirable actions.</p>
+<p>The present findings show that human observers consistently distinguished between Approach Good and Avoid Bad despite their similar prosocial behavioral consequences. Likewise, they distinguished between Approach Bad and Avoid Good despite both generally producing antisocial outcomes. These distinctions emerged not only in the frequency with which each motivation was inferred, but also in their patterns of co-occurrence, their relationships with moral evaluation, and the machine learning analyses demonstrating that eliminating any one of the four dimensions reduced predictive performance.</p>
+<p>Importantly, these distinctions cannot be explained solely by observable behavior.</p>
+<p>Consider an individual who returns a lost wallet. Observers may infer that the individual acted because they wanted to help another person, because they wished to avoid acting dishonestly, or because both motivations were simultaneously operative. Likewise, an individual who keeps the wallet may be interpreted as actively pursuing personal gain despite recognizing its immorality, as deliberately declining to do what they regarded as morally right, or as exhibiting both motivational states concurrently. Although the behavior is identical in each case, the inferred motivational configuration differs, and those differences systematically shape moral evaluation.</p>
+<p>One particularly notable implication concerns Avoid Good. Existing theories have generally devoted greater attention to active wrongdoing than to deliberate failures to pursue morally desirable action. The present findings suggest that observers nevertheless treat such omissions as a psychologically meaningful motivational state rather than simply the absence of prosocial motivation. Avoid Good was inferred frequently across narratives, exhibited unique relationships with moral evaluation, and often, but not invariably, co-occurred with Approach Bad. This pattern suggests that deliberate omission occupies its own position within the representational structure of moral motivation while remaining closely associated with broader antisocial motivational profiles.</p>
+<p>Together, these findings indicate that motivational direction is not merely a byproduct of moral valence. Instead, approach and avoidance appear to constitute psychologically meaningful dimensions that remain distinguishable within both morally positive and morally negative domains. Preserving these distinctions provides a richer account of how observers interpret moral behavior than representations that reduce motivation to a single evaluative continuum or a small set of broad motivational categories.</p>
+<h3>Human and Language Models Recover Similar Representational Structures but Differ in</h3>
+<h3>Representational Richness</h3>
+<p>A secondary objective of the present research was to examine whether the multidimensional structure of moral motivation recovered from human judgments is similarly recoverable from contemporary frontier language models. Recent work has reported substantial agreement between language models and humans across a variety of moral judgment tasks, leading some researchers to propose these systems as proxies for human participants in psychological research (Aher et al., 2023; Dillion et al., 2023). Much of this evidence, however, has focused on agreement in average judgments rather than on whether language models recover the underlying representational structure that gives rise to those judgments.</p>
+<p>The present findings provide a nuanced answer. Across multiple analyses, language models recovered many of the broad regularities observed in human judgments. All four motivational dimensions were inferred at rates substantially above what would be expected as random noise, motivational attributions exhibited systematic patterns of co-occurrence, and the relationships between inferred motivations and moral evaluations closely paralleled those observed among human participants. These findings suggest that the multidimensional structure proposed by MoMA is recoverable from natural language and that contemporary language models capture many of the same motivational distinctions that human observers spontaneously infer when interpreting moral behavior.</p>
+<p>At the same time, recovering the broad structure should not be equated with reproducing the full representational properties of human moral cognition. Although language models generally agreed with humans about which narratives were most characteristic of each motivational dimension, they differed systematically in how those motivational attributions were distributed.</p>
+<p>The clearest example involved Approach Bad. Human observers inferred this motivation in approximately 60% of evaluations, whereas language models inferred it in only 27%.</p>
+<p>Importantly, this discrepancy did not arise because a small number of models failed to infer Approach Bad altogether. Every frontier model attributed this motivation at least occasionally.</p>
+<p>Instead, language models concentrated Approach Bad within a relatively small subset of narratives, whereas human observers distributed these attributions much more broadly. The difference therefore reflected how motivational attributions were allocated across narratives rather than whether they occurred at all. Differences also emerged in the internal organization of the motivational space. Human observers most strongly associated Approach Bad with Avoid Good, suggesting that active wrongdoing and deliberate omission frequently formed complementary components of a broader antisocial motivational profile. In contrast, language models exhibited their strongest association between Approach Good and Avoid Bad, reflecting a greater tendency to combine prosocial motivational states. Both humans and language models therefore organized motivations into coherent multidimensional structures, but the internal relationships of those structures differed in theoretically meaningful ways.</p>
+<p>Perhaps the most striking divergence emerged in the distributional analyses.</p>
+<p>Narrative-level correlations between humans and language models were consistently high, indicating substantial agreement regarding the relative ordering of narratives. However, correlation captured only one aspect of representational similarity. Across every complementary metric examined, language models exhibited systematically compressed representations characterized by lower variance, lower entropy, and greater Jensen-Shannon divergence from human judgments. These differences became especially pronounced for narratives that human observers themselves judged ambiguously. Rather than preserving disagreement and uncertainty, language models tended to produce more concentrated motivational attributions. These findings highlight an important distinction between recovering the topology of a representational space and reproducing its full statistical properties. Two systems may rank stimuli similarly while nevertheless differing in the certainty, variability, and ambiguity with which those judgments are expressed. In the present study, language models successfully recovered much of the multidimensional organization of human motivational inference but represented that space in a systematically compressed manner. Consequently, evaluating psychological alignment may require moving beyond measures of average agreement toward richer descriptions of representational structure that capture variability as well as central tendency.</p>
+<p>These findings also have practical implications as language models are increasingly deployed in domains requiring judgments about human intentions and motivations, including healthcare, legal reasoning, education, employment, and content moderation. Models that systematically compress uncertainty or infer particular motivational states less frequently than humans may reach similar average conclusions while differing in how they interpret morally ambiguous situations. Whether such differences prove desirable will depend on the application.</p>
+<p>In some settings, encouraging more charitable interpretations may reduce unnecessary conflict; in others, systematically under-attributing harmful motivations could reduce sensitivity to genuine misconduct. The present findings do not resolve these normative questions, but they demonstrate that representational differences exist and therefore deserve consideration when language models are used in morally consequential contexts.</p>
+<p>Importantly, these conclusions should not be interpreted as claims about the internal psychological states of language models. The present study evaluated only the motivational attributions that models generated from identical narrative inputs. Whether these outputs arise from representations analogous to those underlying human cognition remains an open question.</p>
+<p>Nevertheless, because these systems increasingly influence downstream human decisions, understanding the structure of their outputs is valuable regardless of the computational mechanisms that produce them.</p>
+<h3>Limitations and Future Directions</h3>
+<p>The present findings should be interpreted within the scope of the present methods. Most importantly, this work concerns the structure of motivational attributions rather than the objective motivations of moral agents themselves. Neither human observers nor language models had direct access to the protagonists&#x27; internal psychological states; both inferred motivation from the same narrative evidence. Consequently, the present framework characterizes how observers represent moral motivation, not whether those representations are veridical. Similarly, although the use of real-world narratives substantially improves ecological validity relative to canonical moral dilemmas, future work should examine whether the same multidimensional structure emerges in interactive settings, across cultures, and in naturally occurring moral decisions.</p>
+<p>Finally, while the present results support a four-dimensional minimum representational architecture, they should not be interpreted as demonstrating that these four motivations exhaust the full space of human moral motivation. Table 9 below outlines the core limitations worth taking note of.</p>
+<h3>Table 9. Assessment of Study Limitations Dimension Assessment</h3>
+<p>Internal Validity Human and language-model populations completed identical tasks using identical narratives and counterbalanced question order. The study was preregistered. However, motivational attributions were observational rather than experimentally manipulated, preventing causal inference.</p>
+<h3>Construct Validity</h3>
+<p>The research examined inferred moral motivations rather than agents&#x27; objectively true motivations. Because motivations are inherently unobservable, the framework characterizes motivational attribution rather than motivational accuracy.</p>
+<h3>Statistical Validity</h3>
+<p>Sample sizes were large for both humans (N = 1,031) and language models (&gt;465,000 evaluations), providing high power for the primary analyses. Multiple-comparison corrections (FDR) were applied where appropriate. Distributional assumptions and variability were explicitly evaluated using complementary metrics (e.g., variance, entropy, Jensen-Shannon divergence).</p>
+<h3>Generalizability across methods</h3>
+<p>Results were obtained using written natural-language narratives. Generalization to face-to-face interaction, audiovisual stimuli, or observed behavior remains to be tested.</p>
+<h3>Generalizability to field settings</h3>
+<p>The narratives reflected real-world moral experiences, improving ecological validity relative to hypothetical dilemmas, but participants evaluated stories rather than making real decisions in natural environments.</p>
+<p>Generalizability across populations Human participants were U.S. adults, and language models were predominantly Western-developed frontier systems. Cross-cultural and multilingual generalization remains an important direction for future research.</p>
+<p>Generalizability across time Human moral reasoning and language models both evolve over time. Future model versions or changing social norms may alter the specific representational patterns reported here.</p>
+<h3>Theoretical limitations</h3>
+<p>The MoMA framework identifies a four-dimensional representational structure. Additional motivational dimensions or hierarchical relationships may exist. Furthermore, the present work focuses on representational structure rather than the cognitive processes by which observers generate motivational attributions.</p>
+<p>The authors declare no conflicts of interest concerning the authorship or the publication of this article.</p>
+<p>interested readers are invited to readMcKee et al. (2026) for the full outline of the theory. In both use cases (subjective experience of the agent or inferred motivations made by observers), MoMA defines moral motivation along two orthogonal dimensions: moral valence (good vs. bad) and motivational direction (approach vs. avoidance). Crossing these dimensions yields four distinct motivational states. Approach Good reflects the active pursuit of what the agent regards as morally good. Avoid Bad reflects active avoidance of what the agent regards as morally wrong. Approach Bad reflects the active pursuit of what the agent recognizes as morally wrong. Avoid Good reflects deliberate refraining from what the agent recognizes as morally good. Importantly, these motivations are not mutually exclusive. An agent may simultaneously approach good and bad, or avoid bad while avoiding good.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Distribution of Narrative-Level Moral Motivation Attribution Rates in Humans and Language Models. Each panel represents one of the moral motivation types. The x-axis indicates the percentage of evaluations for a given narrative that have the respective moral motivation inferred, and the y-axis indicates the number of narratives with that attribution rate. Solid blue lines denote the human median; dashed orange lines denote the language model median.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Co-occurrence Structure of Moral Motivation Attributions. Heat maps display pairwise phi coefficients for the four motivations. Positive values indicate that two motivations tended to be inferred together; negative values indicate that they tended not to co-occur.</p>
+<h3>Table 2.</h3>
+<p>Overall Rates of Moral Motivation Attribution Across Humans and Language ModelsValues indicate the proportion of observations in which each motivation was inferred as present (rating &gt; 0). All frequencies significantly exceeded the preregistered theoretical noise threshold after FDR correction.</p>
+<h3>Table 3.</h3>
+<p>Comparisons of Moral Motivation Attribution Rates Between Human Raters and</p>
+<h3>Table 4.</h3>
+<p>Co-occurrence of Moral Motivation Attributions Across Human Raters and Language Models</p>
+<h3>Table 5.</h3>
+<p>Associations Between Inferred Moral Motivations and Moral Evaluation in HumanValues compare evaluation scores for observations in which each motivation was inferred to be present or absent. Positive Cohen&#x27;s d values indicate higher evaluation scores when the motivation was present; negative values indicate lower evaluation scores.</p>
+<h3>Table 6.</h3>
+<p>Associations Between Inferred Moral Motivations and Moral Evaluation in LanguageValues compare evaluation scores for observations in which each motivation was inferred to be present or absent. Positive Cohen&#x27;s d values indicate higher evaluation scores when the motivation was present; negative values indicate lower evaluation scores.</p>
+<h3>Table 7.</h3>
+<p>Distributional Alignment Between Human and Language Model Moral</p>
+<h3>Table 8.</h3>
+<p>Similarity of Language Model Providers to Human Moral Motivation Attributions.</p>
+<h3>References</h3>
+<p>Aarts, H., Gollwitzer, P. M., &amp; Hassin, R. R. (2004). Goal contagion: perceiving is for pursuing. Journal of personality and social psychology, 87(1), 23.</p>
+<p>Aher, G. V., Arriaga, R. I., &amp; Kalai, A. T. (2023). Using large language models to simulate multiple humans and replicate human subject studies. In Proceedings of the 40th International Conference on Machine Learning (Vol. 202, pp. 337-371). PMLR.</p>
+<p>Almeida, G. F. C. F., Nunes, J. L., Engelmann, N., Wiegmann, A., &amp; de Araújo, M. (2024). Exploring the psychology of LLMs&#x27; moral and legal reasoning. Artificial Intelligence, 333, Article 104145. https://doi.org/10.1016/j.artint.2024.104145</p>
+<p>Atari, M., Xue, M. J., Park, P. S., Blasi, D. E., &amp; Henrich, J. (2023). Which humans? PsyArXiv. https://doi.org/10.31234/osf.io/5b26t</p>
+<p>Barasch, A., Levine, E. E., Berman, J. Z., &amp; Small, D. A. (2014). Selfish or selfless? On the signal value of emotion in altruistic behavior. Journal of personality and social psychology, 107(3), 393.</p>
+<p>Bigman, Y. E., &amp; Tamir, M. (2016). The road to heaven is paved with effort: Perceived effort amplifies moral judgment. Journal of experimental psychology: general, 145(12), 1654.</p>
+<p>Carlson, R. W., Bigman, Y. E., Gray, K., Ferguson, M. J., &amp; Crockett, M. J. (2022). How inferred motives shape moral judgements. Nature Reviews Psychology, 1(8), 468-478.</p>
+<p>Cesarini, D., et al. (2026). Real-life moral narratives. Unpublished work.</p>
+<p>Chakraborty, M., et al. (2025). Structured moral reasoning in language models: A value-grounded evaluation framework. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (pp. ...). Association for Computational Linguistics.</p>
+<p>Cheung, V., Maier, M., &amp; Lieder, F. (2025). Large language models show amplified cognitive biases in moral decision-making. Proceedings of the National Academy of Sciences, 122(25), Article e2412015122. https://doi.org/10.1073/pnas.2412015122</p>
+<p>Cushman, F. (2008). Crime and punishment: Distinguishing the roles of causal and intentional analyses in moral judgment. Cognition, 108(2), 353-380.</p>
+<p>Dillion, D., Tandon, N., Gu, Y., &amp; Gray, K. (2023). Can AI language models replace human participants? Trends in Cognitive Sciences, 27(7), 597-600. https://doi.org/10.1016/j.tics.2023.04.008</p>
+<p>Dillion, D., Mondal, D., Tandon, N., &amp; Gray, K. (2025). AI language model rivals expert ethicist in perceived moral expertise. Scientific Reports, 15, Article 4084. https://doi.org/10.1038/s41598-025-86510-0</p>
+<p>Goldberg, J. C., &amp; Zipursky, B. C. (2010). Torts as wrongs. Texas Law Review, 88.</p>
+<p>Graham, J., Haidt, J., Koleva, S., Motyl, M., Iyer, R., Wojcik, S. P., &amp; Ditto, P. H. (2013). Moral foundations theory: The pragmatic validity of moral pluralism. Advances in Experimental Social Psychology, 47, 55-130. https://doi.org/10.1016/B978-0-12-407236-7.00002-4</p>
+<p>Grizzard, M., Frazer, R., Luttrell, A., Monge, C. K., Matthews, N. L., Francemone, C. J., &amp; Frazer, M. E. (2025). ChatGPT does not replicate human moral judgments: The importance of examining metrics beyond correlation to assess agreement. Scientific Reports, 15, Article 40965. https://doi.org/10.1038/s41598-025-24700-6</p>
+<p>Hardy, S. A. (2006). Identity, reasoning, and emotion: An empirical comparison of three sources of moral motivation. Motivation and Emotion, 30(3), 205-213.</p>
+<p>Hassin, R. R., Aarts, H., &amp; Ferguson, M. J. (2005). Automatic goal inferences. Journal of Experimental Social Psychology, 41(2), 129-140.</p>
+<p>Hendrycks, D., Burns, C., Basart, S., Critch, A., Li, J., Song, D., &amp; Steinhardt, J. (2021). Aligning AI with shared human values. In Proceedings of the International Conference on Learning Representations (ICLR 2021). https://openreview.net/forum?id=dNy_RKzJacY</p>
+<p>Janoff-Bulman, R., Sheikh, S., &amp; Baldacci, K. G. (2008). Mapping moral motives: Approach, avoidance, and political orientation. Journal of Experimental Social Psychology, 44(4), 1091-1099.</p>
+<p>Laws, J. (2026, April 26). Hospitals are deploying AI chatbots. Doctors are divided. Newsweek. https://www.newsweek.com/hospitals-are-deploying-ai-chatbots-doctors-are-divided-118 62567</p>
+<p>Levine, E. E., &amp; Schweitzer, M. E. (2015). Prosocial lies: When deception breeds trust. Organizational Behavior and Human Decision Processes, 126, 88-106.</p>
+<p>Li, Z. M., Xiao, L., &amp; Sun, H. Y. (2025). Which Matters More: Intention or Outcome? The Asymmetry of Moral Blame and Moral Praise. Behavioral Sciences, 15(9), 1265.</p>
+<p>Malle, B. F., &amp; Holbrook, J. (2012). Is there a hierarchy of social inferences? The likelihood and speed of inferring intentionality, mind, and personality. Journal of Personality and Social Psychology, 102(4), 661.</p>
+<p>McKee, P., Kim, H. E., Tang, H., Everett, J. A., Chituc, V., Gibea, T., ... &amp; Sinnott-Armstrong, W. (2024). Does it matter who harmed whom? A cross-cultural study of moral judgments about harm by and to insiders and outsiders. Current psychology, 43(9), 7997-8007.</p>
+<p>McKee, P. C., Senthilnathan, I., Budnick, C. J., Bind, M. A., Antonios, I., &amp; Sinnott-Armstrong, W. (2024). Fear of missing Out&#x27;s (FoMO) relationship with moral judgment and behavior. PloS one, 19(11), e0312724.</p>
+<p>McKee, P., Samanez-Larkin, G. R., Huettel, S. A., &amp; Sinnott-Armstrong, W. (2026, September 16). How should Moral Motivation be Represented? The Motivation of Moral Action (MoMA). Retrieved from osf.io/preprints/psyarxiv/be7zn_v1</p>
+<p>Mishra, M., Ghosh, K., &amp; Sharma, D. (2022). Unethical pro-organizational behavior: A systematic review and future research agenda. Journal of business ethics, 179(1), 63-87.</p>
+<p>Olivares Gallego, D. (2026, June 11). Why the finance industry is looking to agentic AI. CNN. https://www.cnn.com/world/why-the-finance-industry-is-looking-to-agentic-ai-spc Oversight Board. (2024, September 17). Content moderation in a new era for AI and automation.https://www.oversightboard.com/news/content-moderation-in-a-new-era-for- ai-and-automation/</p>
+<p>Palmer, D. (2012). Normal organizational wrongdoing: A critical analysis of theories of misconduct in and by organizations. Oxford University Press.</p>
+<p>Ploeg, O. H., Mehigan, J., Grace, R. C., &amp; Cording, J. R. (2024). Murder or manslaughter: the role of premeditation and associated behavioural characteristics. Psychology, Crime &amp; Law, 1-24.</p>
+<p>Plunkett, D., Morris, A., Reddy, K., &amp; Morales, J. (2025). Self-interpretability: LLMs can describe complex internal processes that drive their decisions (arXiv:2505.17120). arXiv. https://arxiv.org/abs/2505.17120</p>
+<p>Rao, A., Khandelwal, A., Tanmay, K., Agarwal, U., &amp; Choudhury, M. (2023). Ethical reasoning over moral alignment: A case and framework for in-context ethical policies in LLMs. In Findings of the Association for Computational Linguistics: EMNLP 2023 (pp. 13370-13388). Association for Computational Linguistics. https://doi.org/10.18653/v1/2023.findings-emnlp.892</p>
+<p>Reeder, G. (2009). Mindreading: Judgments about intentionality and motives in dispositional inference. Psychological inquiry, 20(1), 1-18.</p>
+<p>Schellmann, H. (2026, February 17). AI is entering health care, and nurses are being asked to trust it. Scientific American. https://www.scientificamerican.com/article/ai-is-entering-health-care-and-nurses-are-bein g-asked-to-trust-it/</p>
+<p>Simmons, G. (2023). Moral mimicry: Large language models produce moral rationalizations tailored to political identity. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics: Student Research Workshop(pp. 282-297). Association for Computational Linguistics. https://doi.org/10.18653/v1/2023.acl-srw.40</p>
+<p>Young, L., Cushman, F., Hauser, M., &amp; Saxe, R. (2007). The neural basis of the interaction between theory of mind and moral judgment. PNAS, 104(20), 8235-8240. https://doi.org/10.1073/pnas.0701408104</p>
+<p>Woolfolk, R. L., Doris, J. M., &amp; Darley, J. M. (2006). Identification, situational constraint, and social cognition: Studies in the attribution of moral responsibility. Cognition, 100(2), 283-301.</p>
+<p>Zewail, A., Figueroa, A., Graham, J., &amp; Atari, M. (2025). Moral stereotyping in large language models. Proceedings of the National Academy of Sciences, 122(...), Article e2519941123. https://doi.org/10.1073/pnas.2519941123</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
