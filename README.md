@@ -4,6 +4,21 @@ The reports are at **https://lakens.github.io/psyarxiv_metacheck/**. Search by t
 
 The goal of this project is to automatically generate Metacheck reports for PsyArXiv preprints. This service helps authors to see what they can improve in their preprints before submission. Automated checks have false positives. Despite extensive validation efforts (see our [values](https://www.scienceverse.org/metacheck_book/chapters/intro.html#our-values)), false positives will be present. Another goal of this project is to check a large number of real papers and identify where Metacheck can be improved. Do not take a classification of 'something to fix' as a certain guarantee that the paper has a problem. Metacheck is intended to assist people, not replace them. It is designed like a spellchecker: it might have false positives, but the cost-benefit analysis of using the tool should be positive through the real mistakes it identifies.
 
+## How we use these reports to improve Metacheck
+
+These reports are also how we test Metacheck on real papers. We regularly take a sample of the reports and check them by hand: we compare what each check says with the paper, with the files in the paper's data and code deposits, and with the output of the code that Metacheck ran. Every error we find is recorded in an issue on GitHub, and those issues decide what we fix first.
+
+The first round, on 16 November 2026, covered the 132 preprints from PsyArXiv and medRxiv whose deposits had been downloaded, and looked at four checks: the repository, data, code and reproducibility checks. It found 101 kinds of error. In only 3 of the 132 preprints did these four checks make no error at all. The most common kinds were:
+
+- study groups assigned wrongly, or a mismatch between studies and files reported where there is none (41 preprints);
+- ordinary file types reported as naming problems, or third-party code that the authors copied into their deposit judged as their own (40);
+- numbers that are not results, such as plot settings, stored as statistics (39);
+- files that one of the scripts makes reported as missing from the deposit (35);
+- the same deposit counted twice (23);
+- another team's deposit or software checked as the authors' own (22).
+
+The full list, with the evidence for each preprint, is in [scienceverse/metacheck#648](https://github.com/scienceverse/metacheck/issues/648).
+
 ## About Metacheck
 
 Metacheck screens scientific manuscripts to identify potential issues or areas for improvement and guide researchers in adopting best practices. It is a module based [open source tool](https://github.com/scienceverse/metacheck). For information on the available modules, see the [manual](https://www.scienceverse.org/metacheck_book/). The reports are automated: they miss things and flag things that are fine, so read every finding as a question, not a verdict. If you find an error, please [leave an issue on GitHub](https://github.com/scienceverse/metacheck/issues) or email us at [metacheck@scienceverse.org](mailto:metacheck@scienceverse.org). You can run Metacheck on your own paper on [our server](https://metacheckserve.metacheck.src.surf-hosted.nl). We thank [SURF](https://www.surf.nl/en/services/surf-research-cloud) for SURF Research Cloud, on which these checks run. If Metacheck was useful in improving your preprint, you can cite it as:
