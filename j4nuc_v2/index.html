@@ -1,0 +1,2432 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: The Effects of Target Characteristics on Public
+Support for Hate Speech Laws</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+The Effects of Target Characteristics on Public Support for Hate Speech
+Laws
+</p>
+<p class="meta">
+2026-11-16 · Metacheck 0.4.4.3
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>1</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>3</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>10</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Reproducibility Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We assessed AND ran 1 R code file for reproducibility (each in an
+isolated Docker container).</li>
+<li>0 of 1 script ran without error when executed.</li>
+<li>11 installable dependencies detected.</li>
+</ul>
+</div>
+<div class="label">
+<p>Note</p>
+</div>
+<div class="text">
+<p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
+for the details.</p>
+</div>
+</div>
+</div>
+<h2 id="improve">To check <span class="n">(3)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Repository Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We found 6 files in 1 repository.</li>
+<li>We found 0 README files and 1 repository without READMEs.</li>
+<li>We found 1 file naming problem to fix.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<h4 id="whose-deposits">Whose Deposits</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Cited in
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6/overview" target="_blank">osf.io/7xvq6/overview</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+the deposit names this paper (its DOI, its title, or a link to it)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://doi.org/10.31234/osf.io/qsg7j" target="_blank">doi.org/10.31234/osf.io/qsg7j</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6" target="_blank">osf.io/7xvq6</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+the deposit names this paper (its DOI, its title, or a link to it)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="osf.io/qsg7j" target="_blank">osf.io/qsg7j</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="repositories">Repositories</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Platform
+</th>
+<th style="text-align:right;">
+All Files
+</th>
+<th style="text-align:right;">
+Data Files
+</th>
+<th style="text-align:right;">
+Code Files
+</th>
+<th style="text-align:right;">
+READMEs
+</th>
+<th style="text-align:right;">
+Archives
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6/overview" target="_blank">osf.io/7xvq6/overview</a>
+</td>
+<td style="text-align:left;">
+osf
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="files">Files</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Size
+</th>
+<th style="text-align:left;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6/overview" class="uri">https://osf.io/7xvq6/overview</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/6ad676416e220fdf9fa28016/" target="_blank">script.Rmd</a>
+</td>
+<td style="text-align:left;">
+105.2 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6/overview" class="uri">https://osf.io/7xvq6/overview</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/6ad676670bb8a37c5d1b13e5/" target="_blank">data.Rdata</a>
+</td>
+<td style="text-align:left;">
+850.7 kB
+</td>
+<td style="text-align:left;">
+data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6/overview" class="uri">https://osf.io/7xvq6/overview</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/w4v3k/" target="_blank">US_DEP1-4.pdf</a>
+</td>
+<td style="text-align:left;">
+486.6 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6/overview" class="uri">https://osf.io/7xvq6/overview</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/nzm4y/" target="_blank">SURVEY_DK_BLINDED.pdf</a>
+</td>
+<td style="text-align:left;">
+159.2 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6/overview" class="uri">https://osf.io/7xvq6/overview</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/j8s6k/" target="_blank">SURVEY_US_BLINDED.pdf</a>
+</td>
+<td style="text-align:left;">
+144.7 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/7xvq6/overview" class="uri">https://osf.io/7xvq6/overview</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/mxgf3/" target="_blank">Experimental
+setup.pdf</a>
+</td>
+<td style="text-align:left;">
+92.7 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="readme-files">README Files</h4>
+<p>README files are a way to document the contents and structure of a
+folder, helping users locate the information they need. You can use a
+README to document changes to a repository, and explain how files are
+named. Please consider adding a README to each repository or including
+‘README’ in the name of your overview document.</p>
+<h4 id="file-naming">File Naming</h4>
+<p>File names should be machine-parseable: no spaces or special
+characters, and every file should be classifiable by name or extension.
+We found 1 naming problem that should be fixed, and 0 files with a
+naming suggestion (not required, but a good habit).</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Rule
+</th>
+<th style="text-align:left;">
+Severity
+</th>
+<th style="text-align:left;">
+Detail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Experimental setup.pdf
+</td>
+<td style="text-align:left;">
+spaces
+</td>
+<td style="text-align:left;">
+Required
+</td>
+<td style="text-align:left;">
+contains a space
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-classification">File Classification</h4>
+<div class="callout-note" title="See how every file was classified and grouped" collapse="true">
+<p><strong>code</strong> (1 file)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+script.Rmd
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+script.Rmd
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>data</strong> (1 file)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+data.Rdata
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+data.Rdata
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>documentation</strong> (4 files)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+US_DEP1-4.pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+Experimental design/US_DEP1-4.pdf
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SURVEY_DK_BLINDED.pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+Experimental design/SURVEY_DK_BLINDED.pdf
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SURVEY_US_BLINDED.pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+Experimental design/SURVEY_US_BLINDED.pdf
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Experimental setup.pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+Experimental design/Experimental setup.pdf
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Code Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We found 1 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code file.</li>
+<li>All your code files had comments.</li>
+<li>Libraries/imports were loaded in multiple places in script.Rmd.</li>
+<li>No pinned R/package environment (renv.lock, sessionInfo(), or
+groundhog/checkpoint) was found. Consider adding a solution to improve
+computational reproducibility.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Below, we describe some best coding practices and give the results of
+automatic evaluation of these practices in the code files below. This
+check may miss things or produce false positives if your scripts are
+less typical.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File Name
+</th>
+<th style="text-align:left;">
+% Comments
+</th>
+<th style="text-align:right;">
+Missing Files
+</th>
+<th style="text-align:right;">
+Absolute Paths
+</th>
+<th style="text-align:right;">
+Code Between Libraries
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/download/6ad676416e220fdf9fa28016/" target="_blank">script.Rmd</a>
+</td>
+<td style="text-align:left;">
+9%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+678
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="code-comments">Code Comments</h4>
+<p>Best programming practice is to add comments to code, to explain what
+the code does (to yourself in the future, or peers who want to re-use
+your code). All your code files had comments.</p>
+<h4 id="missing-files">Missing Files</h4>
+<p>All files loaded in the code were present in the repository.</p>
+<h4 id="absolute-paths">Absolute Paths</h4>
+<p>Best programming practice is to use relative file paths (e.g.,
+‘./files’) instead of absolute file paths (e.g.,
+‘C://Lakens/project_dir/files’) as these folder names do not exist on
+other computers. No absolute file paths were found in any of the code
+files.</p>
+<h4 id="working-directory-setwd">Working Directory (setwd)</h4>
+<p>Best programming practice is to avoid <code>setwd()</code> in
+analysis code: it hardcodes an assumption about the working directory
+(often an absolute path on the author’s own machine), so the code breaks
+when run anywhere else. Keep the working directory as the caller sets it
+and use relative paths. No <code>setwd()</code> calls were found in any
+of the code files.</p>
+<h4 id="package-installation-install.packages">Package Installation
+(install.packages)</h4>
+<p>Best programming practice is to avoid <code>install.packages()</code>
+in analysis code: it installs software on whoever runs the script
+without asking, which is at minimum disruptive (an unexpected install,
+network access, a package version the author never tested against) and
+at worst a security risk if it points at an untrusted repository.
+Document required packages instead (a README, or a list of them: an
+<code>renv.lock</code>/<code>DESCRIPTION</code> for R, a
+<code>requirements.txt</code> for Python). No
+<code>install.packages()</code> calls were found in any of the code
+files.</p>
+<h4 id="libraries-imports">Libraries / Imports</h4>
+<p>Best programming practice is to load all required libraries/imports
+in one block near the top of the code. In 1 code file, libraries/imports
+were at multiple places (i.e., with more than 3 non-comment lines in
+between).</p>
+<h4 id="packages-dependencies">Packages / Dependencies</h4>
+<p>The code files load 11 distinct packages/libraries: cregg, dplyr,
+gridExtra, here, kableExtra, knitr, modelsummary, pacman, readr, rlang,
+scales. These are the names found in the source (no version information
+is available from static analysis).</p>
+<h4 id="reproducible-environment">Reproducible Environment</h4>
+<p>No <code>renv.lock</code> file,
+<code>sessionInfo()</code>/<code>session_info()</code> record, or
+<code>groundhog</code>/<code>checkpoint</code> date-pin call was found
+anywhere in the repository. Without one of these, the exact R and
+package versions used for the analysis are not recoverable, and package
+versions may drift between when this analysis was run and any later
+reproduction attempt. Consider depositing an <code>renv.lock</code> (via
+the <code>renv</code> package), a <code>sessionInfo()</code> text dump,
+or a <code>groundhog</code>/<code>checkpoint</code> date-pin alongside
+the code.</p>
+<h4 id="parsable-code">Parsable code</h4>
+<p>All R-type code files (.R, .Rmd, .qmd) could be read in. There were
+no parsing issues.</p>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Data Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We classified 6 files: 1 data, 1 code, 4 documentation.</li>
+<li>We found 1 tabular data file and extracted 0 columns from 1 of
+them.</li>
+<li>We grouped the files into 1 study group (ex1).</li>
+<li>1 R workspace file (<code>.RData</code>/<code>.rda</code>) contains
+no reusable tabular data — only fitted models or saved session objects.
+Such files need R (and the exact packages used) to open and are not
+machine-readable. Share the underlying data as CSV (or a documented
+<code>.sav</code>/<code>.dta</code>) with a codebook so it can be reused
+without R: data.Rdata. We found no readable tabular data files to
+validate.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>This module classifies repository files and, for tabular data files
+available locally, extracts each column’s type and summary
+statistics.</p>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 1 reference with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(10)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>We found 4 OSF links, but no registrations.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="section-reproducibility_check">Reproducibility Check</h2>
+<p>We ran the paper’s 1 R script in the order they depend on each other,
+each in an isolated container, for at most 5 minutes per script.</p>
+<p><strong>0 of 1 script ran to the end</strong>: 1 stopped with an
+error.</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Script</th>
+<th>Result</th>
+<th>What happened</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>script.Rmd</td>
+<td>Stopped with an error</td>
+<td><code>Error in dataframes$dfdk %&gt;% mutate(party = party_id2) :
+could not find function “%&gt;%”</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-make-your-code-run-on-another-computer">How to make your
+code run on another computer</h3>
+<p>We ran your code on a clean computer, the way a reader or reviewer
+would. Below is each problem we found, the scripts it affects, and how
+to fix it. Fix them in the order given: a problem near the top can cause
+the ones below it.</p>
+<p><strong>A script uses something it does not create or load
+itself.</strong></p>
+<ul>
+<li><code>script.Rmd</code>: <code>%&gt;%</code></li>
+</ul>
+<p>Usually the object was still in your R session from earlier work, or
+another script made it.</p>
+<ol style="list-style-type: decimal">
+<li>Restart R (in RStudio: Session &gt; Restart R).</li>
+<li>Run each script from top to bottom, and fix what is missing.</li>
+<li>If a script needs results of another, save them to a file in the
+first script and read them in the second.</li>
+<li>Load every package with <code>library()</code> at the top.</li>
+</ol>
+<h3 id="comparison-with-the-paper">Comparison with the paper</h3>
+<p>We found no statistical tests in the paper to compare with the output
+of the code.</p>
+<details>
+<summary>
+All details of the Reproducibility Check
+</summary>
+<div class="fold">
+<p>This module assesses whether the paper’s code could be run on its
+data, and — because <code>execute = TRUE</code> — <strong>actually ran
+it</strong>. We examined 1 R code file.</p>
+<h4 id="run-order">Run order</h4>
+<p>The scripts were ordered by their data dependencies (a script writing
+a file another reads runs first), <code>source()</code> calls, and
+numeric filename prefixes.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:right;">
+Order
+</th>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Runs after
+</th>
+<th style="text-align:left;">
+Basis
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+script.Rmd
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-paths">File paths</h4>
+<p>Every data path in the code works in the repository as deposited.</p>
+<h4 id="execution">Execution</h4>
+<p><strong>The code was run.</strong> Each script ran in an isolated
+Docker container against a throwaway copy of the repository, in the run
+order above, with a 300-second per-script timeout. Of 1 script: 0 ran
+without error, 1 errored, 0 timed out, 0 could not run because one of
+its own dependencies is unavailable, 0 did not parse. Running against
+current package versions: a break can reflect version drift, which
+argues for pinning versions.</p>
+<p><em>a script hit a <code>could not find function &quot;...&quot;</code> error;
+we added the <code>library()</code> calls it needs (see below), and
+re-ran once. The outcomes above are from that corrected run.</em></p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Outcome
+</th>
+<th style="text-align:left;">
+Detail
+</th>
+<th style="text-align:right;">
+Time (s)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+script.Rmd
+</td>
+<td style="text-align:left;">
+errored
+</td>
+<td style="text-align:left;">
+undefined_variable
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Undefined-variable errors</strong></p>
+<p><strong>1 script failed on an undefined variable or function</strong>
+(<code>object &#39;...&#39; not found</code> /
+<code>could not find function &quot;...&quot;</code>). This typically means the
+script expects a variable or function that another script defines —
+i.e. it is meant to be sourced into a larger session, not run on its own
+— or the symbol is simply never created. When another of the paper’s own
+script files defines the same name, this is called out below as a likely
+sourcing/copy-paste gap. Each is counted as an error (red).</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Missing variable
+</th>
+<th style="text-align:left;">
+Defined in
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+script.Rmd
+</td>
+<td style="text-align:left;">
+%&gt;%
+</td>
+<td style="text-align:left;">
+(not defined anywhere in the paper’s code)
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Calls that install packages in the code</strong></p>
+<p>4 calls to <code>install.packages()</code>, <code>groundhog</code>,
+<code>checkpoint</code>, <code>renv</code>, <code>pacman</code> and the
+like were replaced, since they install packages themselves:
+<code>groundhog.library()</code> and <code>p_load()</code> by
+<code>library()</code>, the others by a statement that does nothing. The
+scripts ran with the packages installed before the run.</p>
+<p><strong><code>library()</code> calls added</strong></p>
+<p><strong>1 script uses functions from packages it does not load
+itself.</strong> The packages are usually loaded in another script of
+the project, which only helps when the scripts run in one R session in
+the right order. To run it we added the <code>library()</code> calls
+below at the top. Any such script that then ran is <strong>reproducible
+only after adding <code>library()</code> calls it should make
+itself</strong>.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+library() calls added
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+script.Rmd
+</td>
+<td style="text-align:left;">
+library(ggplot2)
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Expand a row below to see the output each script
+produced.</em></p>
+<div class="callout-tip" title="Output — script.Rmd (errored)" collapse="true">
+<p><strong>Output (stdout):</strong></p>
+<pre><code>&gt; library(ggplot2)
+&gt; invisible(&quot;reproducibility_check removed the loading of a package manager&quot;)
+&gt; options(pkgType = &quot;source&quot;)
+&gt; invisible(NULL)
+&gt; palette1 = c(&quot;Don&#39;t know&quot; = &quot;#CCCCCC&quot;, 
+&gt;                  &quot;Should be illegal&quot; =  &quot;#fa654a&quot;,
+&gt;                  &quot;Should be legal&quot; = &quot;#76A08A&quot;)
+&gt; party_colors = c( 
+&gt;   &quot;Biden&quot; = &quot;#CCCCCC&quot;, 
+&gt;   &quot;Democrat&quot; = &quot;#CCCCCC&quot;, 
+&gt;   &quot;Among Democrats&quot; = &quot;#CCCCCC&quot;,
+&gt;   &quot;Left-wing&quot; = &quot;#CCCCCC&quot;, 
+&gt;   &quot;Independent&quot; = &quot;#AAAAAA&quot;,
+&gt;   &quot;Trump&quot; =  &quot;#888888&quot;,
+&gt;   &quot;Republican&quot; = &quot;#888888&quot;,
+&gt;   &quot;Among Republicans&quot; = &quot;#888888&quot;,
+&gt;   &quot;Right-wing&quot; = &quot;#888888&quot;,
+&gt;   &quot;Pooled&quot; = &quot;Black&quot;  
+&gt; )
+&gt; party_shape = c( 
+&gt;   &quot;Democrat&quot; = 0, 
+&gt;   &quot;Independent&quot; = 5,
+&gt;   &quot;Republican&quot; = 2,
+&gt;   &quot;Left-wing&quot; = 0, 
+&gt;   &quot;Right-wing&quot; = 2,
+&gt;   &quot;Pooled&quot; = 19  
+&gt; )
+&gt; no_zero &lt;- function(x) {
+&gt;   y &lt;- sprintf(&#39;%.1f&#39;,x)
+&gt;   y[x &gt; 0 &amp; x &lt; 1] &lt;- sprintf(&#39;.%s&#39;,x[x &gt; 0 &amp; x &lt; 1]*10)
+&gt;   y[x == 0] &lt;- &#39;0&#39;
+&gt;   y[x &gt; -1 &amp; x &lt; 0] &lt;- sprintf(&#39;-.%s&#39;,x[x &gt; -1 &amp; x &lt; 0]*-10)
+&gt;   y
+&gt; }
+&gt; knitr::opts_chunk$set(echo = FALSE)
+&gt; options(knitr.table.format = function() {
+&gt;   if (knitr::is_latex_output()) &#39;latex&#39; else &#39;pandoc&#39;
+&gt; })
+&gt; options(scipen = 999)
+&gt; main_text_theme &lt;- theme_set(theme_classic())
+&gt; main_text_theme &lt;- theme_update(
+&gt;   panel.border = element_rect(fill = NA, colour = &quot;black&quot;),
+&gt;              strip.background = element_blank(),
+&gt;              strip.text.y = element_text(angle =  0, size = 8),
+&gt;   axis.text=element_text(size=8))
+&gt; load(here::here(&quot;data.Rdata&quot;))
+&gt; dfdk = dataframes$dfdk %&gt;% 
+&gt;   mutate(party = party_id2)</code></pre>
+<p><strong>Messages / errors (stderr):</strong></p>
+<pre><code>Error in dataframes$dfdk %&gt;% mutate(party = party_id2) : 
+  could not find function &quot;%&gt;%&quot;
+Calls: .repro_docker_run -&gt; withVisible -&gt; eval -&gt; eval
+Execution halted</code></pre>
+</div>
+<p>Dependencies were installed into a throwaway library before running:
+10 succeeded, 1 failed. cregg, dplyr, gridExtra, here, kableExtra,
+knitr, modelsummary, pacman, readr, rlang, scales were installed.</p>
+<p><strong>Failed:</strong> cregg [not available on CRAN for this R
+version] (package ‘cregg’ is not available for this version of R</p>
+<p>A version of this package for your version of R might be available
+elsewhere, see the ideas at <a href="https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages" class="uri">https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</a>)</p>
+</div>
+</details>
+<h2 id="files">Files in the repository</h2>
+<p>Where the files sit within each repository. Each file is followed by
+how it was classified, which study it belongs to, and any file-naming
+issue found by repo_check; junk files, hidden files and empty folders
+are marked.</p>
+<p><strong>Repository: <a href="https://osf.io/7xvq6/overview" class="uri">https://osf.io/7xvq6/overview</a></strong></p>
+<div style="max-height: 40em; overflow: auto;">
+<pre><code>├── Experimental design/
+│   ├── Experimental setup.pdf  📖 documentation ex1  contains a space
+│   ├── SURVEY_DK_BLINDED.pdf   📖 documentation ex1
+│   ├── SURVEY_US_BLINDED.pdf   📖 documentation ex1
+│   └── US_DEP1-4.pdf           📖 documentation ex1
+├── data.Rdata                  📊 data          ex1
+└── script.Rmd                  💻 code          ex1</code></pre>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>Participants were asked to respond to the following question: “Do you
+think that it should be legal or illegal to write the statement in [the
+U.S./Denmark]?”</p>
+</blockquote>
+<blockquote>
+<p>Informed consent was obtained from all participants.</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>As per Section 14(2) of the act underlying the Danish National
+Research Ethics Committee, “notification of questionnaire surveys … to
+the system of research ethics committee system is only required if the
+project involves human biological material.”</p>
+</blockquote>
+<blockquote>
+<p>The Research Ethics Committee (Institutional Review Board) confirmed
+that the study complies with the ethical standards of Aarhus University
+(BSS-2023-023).</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 63 references with DOIs. You cited 1 reference with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Graham, J., Haidt, J., &amp; Nosek, B. A. (2009). Liberals and
+conservatives rely on different sets of moral foundations. Journal of
+Personality and Social Psychology, 96(5), 1029-1046. <a href="https://doi.org/10.1037/a0015141" class="uri">https://doi.org/10.1037/a0015141</a>.
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/BAB2622364200DA46486E216776799" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 63 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 63 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Does the target of speech shape public support for hate speech laws? Regulating hate speech is controversial, partly because partisans are assumed to disagree over which groups such laws should protect. This article conducts a comprehensive test of how support for hate speech laws varies across partisan lines when speech targets ethnic, religious, gender, or political groups.</p>
+<p>Based on conjoint experiments in Denmark and the United States, the results show that support for regulation increases by up to 32 percentage points when severity increases from &quot;incivility&quot; to &quot;incitement to violence.&quot; Target characteristics increase support for regulation by up to 6.3 percentage points and exert the strongest effects when speech targets ethnic and religious groups rather than gender or political groups. These effects persist when severity is held constant and are broadly stable across severity levels. They are also heterogeneous across partisan groups, mostly ranging from 3 to 7.2 percentage points, with one exception reaching 11.9 percentage points. In neither country are partisans more willing to regulate hate speech targeting their political opponents than hate speech targeting their political allies. Overall, severity has the strongest effect on support for hate speech regulation, while target characteristics have smaller, heterogeneous effects that are largest when speech targets ethnic or religious groups.</p>
+<h3>Introduction</h3>
+<p>Does the target of speech shape public support for hate speech laws? Countries around the world are introducing laws that restrict hate speech (Parekh, 2012, p. 37) directed at groups based on target characteristics such as ethnicity, religion, and gender (Sellars, 2016, p. 25). Public opinion polls often indicate that partisans are polarized on restricting hate speech (Ekins, 2017, p. 14; Knight Foundation, 2024, p. 24; Poushter, 2015; Skaaning &amp; Krishnarajan, 2025, p. 31).</p>
+<p>Nevertheless, existing evidence often relies on questions that do not make it possible to distinguish whether support for hate speech restrictions depends on whom the speech targets or on how severe it is.</p>
+<p>To make valid inferences about public opinion on restrictions of civil liberties, scholars have recommended using a concrete context instead of abstract questions (Gibson &amp; Gouws, 2001 , pp. 1067 -71, 1074; Petersen et al., 2011, pp. 581-85). This may be particularly important in the context of hate speech, as people can have different perceptions of what it is. As noted by Gagliardone et al. (2016, p. 7), &quot;hate speech continues largely to be used in everyday discourse as a generic term, mixing concrete threats to individuals&#x27; and groups&#x27; security with cases in which people may be simply venting their anger against authority.&quot; Thus, a central challenge in measuring support for hate speech laws is to separate the target of the speech from its severity.</p>
+<p>Yet while hate speech laws have sparked considerable controversy (Howard, 2019, p. 94), empirical evidence on the extent to which ethnic, religious, gender, or political target characteristics shape people&#x27;s support for such laws is limited.</p>
+<p>The article addresses this shortcoming using two large conjoint experiments fielded in Denmark and the U.S., which make it possible to separate the effects of speech severity and target characteristics on support for regulating hate speech. The design also permits an assessment of whether and to what extent specific target identities influence support for hate speech laws across partisan divides. Moreover, it extends existing work by systematically testing the most salient target characteristics. In short, this article conducts a comprehensive, crossnational test of how targeting people based on ethnicity, religion, gender, and political affiliation affects support for hate speech regulation.</p>
+<p>The results show that severity and target characteristics have independent effects on support for hate speech regulation. Support for regulation increases by up to 32 percentage points in Denmark and 31 percentage points in the U.S. when severity changes from incivility to incitement to violence. The target of hate speech also affects support for regulation, although to a lesser degree. On average, support for hate speech regulation increases by up to 6.3 percentage points in Denmark and the U.S. The effects of target characteristics are strongest when hate speech targets ethnic or religious groups rather than gender or political groups, and the effects are broadly stable across levels of severity. Support for hate speech regulation also varies across partisan groups, as target characteristics have larger effects for some partisans when hate speech targets religious or ethnic minority groups. Among partisans, target characteristics affect support for hate speech laws by 3 to 7.2 percentage points, with one exception: among left-wing respondents in Denmark, support for regulation increases by 11.9 percentage points when statements target Muslims. Although the effects of target characteristics vary across partisans, the results also suggest substantial overlap in the extent to which target characteristics influence partisans&#x27; support for hate speech laws in the U.S. and Denmark.</p>
+<p>The article also speaks to concerns about the adverse consequences of polarization in the U.S. Previous research shows that partisans can engage in selective censorship (Ashokkumar et al., 2020; Dias et al., 2025; Kubin et al., 2025; Lelkes &amp; Westwood, 2016). This article finds little evidence that these preferences extend to hate speech restrictions, as partisans were neither more nor less willing to regulate hate speech targeting political opponents, allies, or people supporting particular political viewpoints.</p>
+<h3>Measuring Support for Hate Speech Restrictions</h3>
+<p>Hate speech laws are increasingly being introduced (Parekh, 2012, p. 37). According to Howard (2019, pp. 95-96), hate speech refers to &quot;particular expressions of hatred against particular (groups of) people in particular contexts&quot; on the basis of characteristics such as race, ethnicity, or religion (Sellars, 2016, p. 25). Yet hate speech is a broad and contested term that &quot;continues largely to be used in everyday discourse as a generic term, mixing concrete threats to individuals&#x27; and groups&#x27; security with cases in which people may be simply venting their anger against authority&quot; (Gagliardone et al., 2016, p. 7).</p>
+<p>Scholars have highlighted the importance of assessing support for speech restrictions based on concrete judgments rather than abstract questions (Gibson &amp; Gouws, 2001 , pp. 1069 -71, 1074). However, much existing evidence relies on measures that do not specify the level of severity and conflate multiple minority groups. For example, prior studies ask about speech that is &quot;harmful or offensive to&quot; (Doré et al., 2022), speech that &quot;attacks people based on [characteristics]&quot; (Knight Foundation, 2024), or speech that &quot;offend[s] certain minorities or religious groups&quot; (Chong et al., 2024, pp. 141-43; McClosky &amp; Brill, 1983). Such measures therefore do not make it possible to isolate the effect of whom hate speech targets from the effect of its severity. As an illustrative example, a public opinion survey by YouGov and the Cato Institute compared support for hate speech laws across multiple ethnic and religious groups among partisans in the U.S. (Ekins, 2017, p. 14). Respondents in an American sample were asked, &quot;Would you favor or oppose a law that would make it illegal to say offensive or insulting things in public about [African Americans/Christians/Muslims/White people]?&quot; The results show partisan differences between Democrats and Republicans depending on the target of the offensive or insulting statements. Likewise, Chong et al. (2024, p. 143), using a measure from McClosky and Brill (1983), found that conservatives are more tolerant than liberals of offensive speech targeting minorities and women but less tolerant of &quot;unpopular or controversial left-wing opinions and ideas on nonracial topics&quot; (Chong et al., 2024, pp. 141-43). Overall, existing research suggests that partisans differ in their support for speech restrictions, but the extent to which this support depends on the target of the speech or on how severe it is remains unclear.</p>
+<p>The importance of separating severity from target characteristics is highlighted by previous public opinion research in other domains. Research on affective polarization (Druckman et al., 2022; Klar et al., 2018) and support for political violence (Westwood et al., 2022) has shown that reliance on abstract questions can lead to misleading inferences about public opinion. For example, Westwood et al. (2022) demonstrate that when researchers &quot;ask about general support for violence without offering context, [the researchers] leave the respondent to infer what &#x27;violence&#x27; means,&quot; which results in misleading inferences. Similarly, general questions about banning &quot;offensive&quot; language without specifying context or level of severity may complicate inferences about whether people support hate speech regulation because of its severity or its target. These challenges underscore the value of research designs that separate the effects of severity and target characteristics to yield credible inferences about public support for hate speech regulation. This article does not provide an empirical test of whether respondents presented with generic survey questions infer different levels of severity depending on the target group; this potential mechanism is beyond its scope. The aim is instead to separate the effects of speech severity and target characteristics on support for hate speech regulation.</p>
+<h3>Public Opinion and Hate Speech Regulation</h3>
+<p>Drawing on the literature, I outline three predictions about public demand for regulating hate speech. First, the severity of the speech matters; when severity increases, people are more supportive of regulating it. Second, the group being targeted matters; people may be willing to restrict hate speech directed at vulnerable or historically marginalized groups (e.g., racial or religious minorities). Third, popular support for hate speech regulation may be shaped through a partisan lens, such that partisans are more supportive of regulating hate speech directed at groups they sympathize with or believe deserve protection. I address these three accounts in turn.</p>
+<p>Severity is a key feature in definitions of hate speech. Although there is no single definition of online hate speech (Article 19, 2015; Siegel, 2020, pp. 56-57), it generally portrays a group negatively and may range from offensive speech to threats and incitement to violence (Alkiviadou et al., 2020; Rossini, 2019; Siegel, 2020). The International Covenant on Civil and Political Rights (ICCPR), adopted by the United Nations General Assembly in 1966, stipulates that &quot;any advocacy of national, racial or religious hatred that constitutes incitement to discrimination, hostility or violence shall be prohibited by law&quot; (ICCPR, 1966). Some types of hate speech may be lawful but still raise concerns about intolerance and discrimination, while other types of speech, such as dehumanization and degradation, can be unlawful (Article 19, 2015; Mchangama et al., 2021).</p>
+<p>Empirical evidence also documents the effect of severity on public support for content moderation (Ashokkumar et al., 2020; Kozyreva et al., 2023; Pradel et al., 2024; Solomon et al., 2024), crowd moderation (Wilhelm et al., 2020), and regulation (Munzert et al., 2025). Perceived threat is a crucial factor when people judge whether statements are acceptable (Davis &amp; Silver, 2004; Gibson, 2011; Marcus et al., 1995; Petersen et al., 2011). Most people perceive threatening statements and harassment as unacceptable in political discussions (Stryker et al., 2016), and Skytte (2022 Skytte ( , p. 1746) ) finds that while copartisans tolerate milder forms of incivility, &quot;a limit exists beyond which the rhetoric becomes too extreme for even the base.&quot; Hypothesis 1: Severity increases support for hate speech regulation.</p>
+<p>Hate speech laws are often introduced to protect social or demographic groups from harm (but see Mchangama, 2014), although which groups are legally protected from hate speech varies considerably across countries (for an overview, see Alkiviadou et al., 2020). Hate speech laws and content moderation policies on social media often protect groups based on race, ethnicity, or religion because they represent salient group markers within societies (Sellars, 2016, p. 25). As noted by Mchangama (2021, p. 20): &quot;Given the long and bloody history of religious, ethnic and racial intolerance in Europe and the US, equality and non-discrimination are vital goods constituting cornerstones of liberal democratic societies. These fundamental principles are undermined when minority groups are subject to hatred and bigotry.&quot;</p>
+<p>Evidence indicates that when people consider whether speech should be allowed, they often place considerable emphasis on the groups targeted. Recent evidence shows that people are more supportive of social media platforms removing hate speech targeting certain minorities and historically marginalized groups (Munzert et al., 2025; Solomon et al., 2024). Public opinion tends to emphasize racial, ethnic, and religious group markers in the regulation of hate speech. Chong et al. (2024) argue that there has been a &quot;dramatic realignment in public tolerance of offensive expression about race, gender, and religious groups,&quot; suggesting that the public increasingly supports regulating hate speech targeting minority groups. Moreover, Eady and Rasmussen (2025, p. 1446) find that politicians and citizens &quot;regard messages targeting women politicians as more toxic than otherwise equivalent messages targeting men.&quot; This suggests that target characteristics may play an important role in shaping public opinion on hate speech regulation.</p>
+<p>Hypothesis 2: Statements targeting groups based on gender, race, national origin, or religion increase support for hate speech regulation compared to statements that do not mention an identity group. 1Partisans have different opinions about whom hate speech laws should protect. People on the political left and right identify with different social groups (Finkel et al., 2020; Mason, 2018) and have different views of which groups are vulnerable to harm (Crawford, 2017; Gray &amp; Kubin, 2024; Womick et al., 2024). For example, Democrats in the U.S. are more supportive of protecting minority groups (Chong et al., 2024, p. 143; Moore, 2015; Poushter, 2015; Skaaning &amp; Krishnarajan, 2025, p. 31; Solomon et al., 2024, p. 4). In contrast, right-leaning partisans show greater opposition to hate speech prohibitions. Research shows that conservatism and Republican party identification predict social dominance orientation (Pratto et al., 1994, pp. 754-55), which has been found to predict acceptance of hate speech targeting minorities (Bilewicz et al., 2017). Evidence also shows that partisanship predicts perceptions of hostile rhetoric (Druckman et al., 2019; Gervais, 2015; Muddiman, 2017; Skytte, 2022; Stevens et al., 2015), censorship (Ashokkumar et al., 2020; Lelkes &amp; Westwood, 2016), and dehumanization of outpartisans (Martherus et al., 2021; Moore-Berg et al., 2020). Taken together, these findings provide reason to expect partisanship to shape public support for regulating hate speech. 2Hypothesis 3: Partisanship moderates the effect of severity and target characteristics on support for hate speech regulation.</p>
+<h3>Research Design</h3>
+<p>To study the factors shaping support for restricting hate speech, two conjoint experiments were fielded in the U.S. and Denmark. Conjoint experiments make it possible to disentangle the relative influence of multiple attributes (e.g., severity and target characteristics) of social media 3s on support for regulating hate speech (Bansak et al., 2021; Hainmueller et al., 2014). The causal quantity of interest in conjoint experiments is the average marginal component effect (AMCE).</p>
+<p>The AMCE for each attribute is the marginal effect of seeing a particular attribute level in a statement, relative to the baseline, on the preference for restricting a statement, averaged across all other possible combinations of statement attributes (Hainmueller et al., 2014). For example, it allows researchers to estimate the average causal effect on support for hate speech regulation when the speech is directed at Muslims compared with Christians.</p>
+<p>The conjoint experiments were fielded in two national samples in Denmark and the U.S.</p>
+<p>The survey agency YouGov conducted 1,518 interviews in the U.S. and 1,535 interviews in Denmark between February 2 and 9, 2021. YouGov sampled from its internet panels and employed quota sampling to match population characteristics on age, gender, region, and education. All analyses use survey weights (see Section B in the appendix). Respondents were excluded if they did not answer the main outcome question in any task of the conjoint experiment (147 in Denmark and 110 in the U.S.). The final sample was 1,388 respondents in Denmark and 1,408 in the U.S. Preregistration, questionnaire, and other materials are available on the Open Science Framework: https://osf.io/7xvq6/overview.</p>
+<p>Publics in Denmark and the U.S. generally support freedom of expression (Skaaning &amp; Krishnarajan, 2025), but the two countries differ in two respects that are relevant to support for hate speech regulation. First, they differ in their legal frameworks for restricting freedom of expression, including hate speech (Bleich, 2014). Both countries restrict freedom of expression when expressions incite violence or imminent lawless action. However, below this threshold, Danish law is more restrictive of hate speech targeting certain characteristics (see Table S4 in the appendix for an overview). While U.S. law relies solely on the severity of the speech, Danish law is more closely aligned with the legal framework of the European Union. For example, at the time of data collection, section 266b of the Danish Criminal Code restricted speech by which &quot;a group of people are threatened, insulted or degraded on account of their race, skin colour, national or ethnic origin, religious belief, or because of their sexual orientation&quot; (Justitsministeriet, 2021).</p>
+<p>However, in neither country were there restrictions on speech targeting groups based on political beliefs, disabilities, age, or social status. 3 Some theories argue that criminal laws primarily originate from a common set of intuitions of justice (Sznycer &amp; Patrick, 2020), but an alternative perspective suggests that national variation in laws may reflect political culture and norms (Bleich, 2014, pp. 297-298). If the latter is the case, we should expect larger target effects in Denmark. Thus, using Denmark and the U.S. as cases provides an opportunity to study the alignment between public opinion and existing laws in different legal contexts.</p>
+<p>Second, the U.S. is considered a polarized context (Iyengar et al., 2019). This study advances the extensive literature on the origins and consequences of polarization, including the relationship between polarization and partisan hostility (Amira et al., 2021; Iyengar &amp; Westwood, 2015; Lelkes &amp; Westwood, 2016; Westwood et al., 2022), by examining preferences for regulating hate speech against political, religious, gendered, or ethnic groups in countries with varying levels of polarization. For instance, if polarization matters for regulating hate speech, partisans should be less (more) restrictive when hate speech targets out-group (in-group) members. In sum, Americans likely live in a more politically polarized society with fewer restrictions on freedom of expression than Danes. Consequently, Denmark and the U.S. provide an opportunity to assess support for hate speech regulation across distinct legal frameworks and levels of polarization.</p>
+<h3>Stimuli</h3>
+<p>Table 1 shows a simplified version of the experimental setup (see Table S3 in Section A of the appendix for a detailed description of all attributes). Seven attributes were manipulated in the vignettes, and all were randomly assigned. The first four attributes in Table 1 were manipulated as text, whereas the latter three were incorporated into contextual elements such as the profile picture, the individual&#x27;s name, and the nature of the conversation (public/private). All attribute levels had equal probability (uniform distribution) except for the ethnicity of the sender (majority/minority), as this attribute by definition entails an unequal real-world distribution. To better reflect the actual demographic proportions in the U.S. and Denmark, an 80/20 split was used (De la Cuesta et al., 2022).</p>
+<p>The analysis focuses on two key attributes relevant to evaluating the hypotheses: (1) the severity of the speech and (2) the target of the statement. The severity of statements was manipulated by presenting participants with four types of hate speech through eight statements: (1) incivility, (2) degradation and dehumanization without a direct threat, (3) degradation and dehumanization with a threat, and (4) incitement to violence. 4 This conceptualization builds on past work on incivility (Druckman et al., 2019; Skytte, 2022), toxic speech (Eady &amp; Rasmussen, 2025; Petersen et al., 2024), and content moderation (Munzert et al., 2025; Pradel et al., 2024; Solomon et al., 2024).</p>
+<p>The hierarchical progression in severity also reflects definitions of hate speech in international and national legal frameworks (Article 19, 2015, pp. 18-22; United Nations, 2012, p. 13). Crucially, it makes it possible to separate the effects of severity and target characteristics across varying degrees of severity. Moreover, it enables testing whether variations in severity condition the effects of target characteristics (Druckman et al., 2019, p. 295).</p>
+<p>Next, the target of the statement was manipulated. Specifically, groups were included along political lines (left-wing/right-wing), religion (Christian/Muslim), ethnicity (Black/White in the U.S., Danes/immigrants in Denmark), and gender (male/female), as these are central to legal and public understandings of hate speech (Alkiviadou et al., 2020, pp. 3-12; Howard, 2019, p. 95; Siegel, 2020, pp. 56-59).</p>
+<p>Five additional attributes were included to mimic political posts on social media and to capture potential effects based on context, message, and sender. First, the target type was manipulated so that the statement targeted either politicians or voters. Previous research has examined perceptions of toxic behaviors such as incivility, intolerance, and hate speech directed at politicians (Eady &amp; Rasmussen, 2025). Partisans have more negative feelings toward politicians of the opposing party than toward its voters (Druckman &amp; Levendusky, 2019; Kingzette, 2021).</p>
+<p>Varying the target type (politicians/voters) makes it possible to test whether citizens are more restrictive of hate speech toward voters than toward politicians.</p>
+<p>Second, the valence of the targeted issue position (e.g., support for or opposition to affirmative action) was manipulated to make it possible to assess whether people selectively supported regulating ideas they disagreed with. Research shows that &quot;supporters of a political cause (e.g., abortion or gun rights) preferentially censored comments that opposed their cause&quot; (Ashokkumar et al., 2020, p. 1). Similarly, Crawford and Pilanski (2014, p. 849) found that &quot;both liberals and conservatives were intolerant of those with whom they disagreed.&quot; If this is true, we should expect a person who supports affirmative action programs to be more restrictive when hate speech targets people who support such policies. Third, the gender and ethnicity of the sender were varied, as prior research suggests that these attributes can shape public evaluations of speech. For example, Eady and Rasmussen (2025, p. 1456) show how &quot;toxic messages sent to a woman politician are deemed more toxic if it is sent by a user [who] is a man rather than a woman.&quot; Lindner and Nosek (2009, p. 86) find mixed evidence regarding Americans&#x27; willingness to restrict speech based on the speaker&#x27;s ethnicity. To capture potential effects of sender characteristics, the study varied them using profile images and names that signaled the sender&#x27;s gender and whether they belonged to an ethnic majority or minority. For the Danish experiment, profile images were drawn from the Oslo Face Database (Chelnokova et al., 2014), while the American experiment used images from the Chicago Face Database (Ma et al., 2015).</p>
+<p>Fourth, the publicness of the statement was manipulated. Previous research indicates that public hate speech is perceived as more offensive and that speakers are held more accountable for public speech (Cowan &amp; Hodge, 1996, p. 366). The present study therefore manipulated whether the statement was disseminated in a public social media post or a private message.</p>
+<p>The number of attributes introduces complexity and potential threats to causal interpretation. For instance, estimated effects may be conditional on sender characteristics or the presence of issue positions. A series of robustness checks in the supplementary material demonstrates that the results hold across alternative specifications. These include re-estimating the main model while conditioning on sender ethnicity (Figures S3-S4), severity levels across partisanship (Figure S2), and profile position (Figures S6-S7), as well as excluding profiles with issue positions (Figure S5).</p>
+<p>The study used a paired vignette design in which participants saw two social media posts at a time (Bansak et al., 2021; Hainmueller et al., 2015). The vignettes resemble typical content on social media platforms (Munzert et al., 2025). A limitation of the design is that it does not simulate a complete social media feed, which may affect its ecological validity (Mutz, 2011).</p>
+<p>Figure 1 shows a paired vignette task. Each participant repeated the task eight times, rating a total of 16 statements.</p>
+<h3>Figure 1: Example of paired vignette task</h3>
+<h3>Measures</h3>
+<p>The main outcome of interest, support for hate speech regulation, was assessed using a rating outcome, which is among &quot;the two most common measures of stated preference in political science applications of conjoint designs&quot; (Bansak et al., 2021, p. 27). The main advantage is that a rating outcome enables estimation of the absolute level of support for restriction, unlike forced-choice designs, which only capture relative preferences. Participants were asked to respond to the following question: &quot;Do you think that it should be legal or illegal to write the statement in [the U.S./Denmark]?&quot; (see Figure 1). Response options included &quot;Should be legal,&quot; &quot;Should be illegal,&quot; and &quot;Don&#x27;t know.&quot; &quot;Don&#x27;t know&quot; responses were excluded from the analysis.</p>
+<p>Figure S18 in the appendix replicates the main results with &quot;Don&#x27;t know&quot; coded as the midpoint on the scale (0.5). Bansak et al. (2021, p. 28) recommend eliciting preferences through multiple measures. Accordingly, three additional outcomes were preregistered: (1) a choice-based measure of perceived offensiveness (&quot;Which of the two statements do you find most offensive?&quot;), (2) a rating-based measure of perceived offensiveness (&quot;On a scale from 1 to 7, where 1 indicates that the statement is not at all offensive and 7 indicates that the statement is extremely offensive, how would you rate [Statement A/Statement B]?&quot;), and (3) a measure of perceived legality (&quot;Do you think that it is legal or illegal to write the statement in [the U.S./Denmark]?&quot;). All preregistered analyses related to these outcomes are reported in Figures S19-S20 in the appendix.</p>
+<p>To measure partisanship, standard measures from the American (ANES) and Danish (DNES) National Election Studies were used. Based on answers to the question of whether participants saw themselves as supporters of a specific party, they were categorized as either Republican, Independent, or Democrat in the U.S. and either left-wing or right-wing in Denmark.</p>
+<p>Respondents who did not report supporting or leaning toward a specific party were not included in the analyses of heterogeneous effects across partisan groups.</p>
+<h3>Results</h3>
+<p>The Effects of Target Characteristics I begin the analysis by separating the effects of target characteristics and severity on support for hate speech laws. To this end, I estimate the average marginal component effect (AMCE) of each target group and severity level. 5 Positive values indicate that a specific attribute level increases support for regulation (see Figure 2). On average, support for hate speech restrictions in Denmark and the U.S. increases by 3 to 6.3 percentage points when hate speech targets religious groups (Christians and Muslims) and ethnic minorities (Black people in the U.S. and immigrants in Denmark) relative to statements that do not mention an identity group. The largest effects of target characteristics in Denmark are observed for statements targeting Muslims, which increase support for regulation by 6.3 percentage points. In the U.S., hate speech targeting Black people increases support by 5.4 percentage points. In both countries, the second-largest target effects are for statements targeting Christians, which increase support for regulation by 3.5 (U.S.) and 3.4 percentage points (Denmark). These results suggest that the public is, on average, more supportive of hate speech laws when speech targets Muslims, Christians, and ethnic minorities.</p>
+<p>Figure 2 also displays the effects of severity. It shows that, compared with incivility, threatening dehumanization or degradation and incitement to violence increase support for hate speech regulation by 25.3 and 32 percentage points, respectively, in Denmark and by 17.4 and 31 percentage points in the U.S. The overall pattern is that people primarily support regulating hate speech when it amounts to threats and incitement to violence, whereas they do not seem to differentiate between incivility and degradation or dehumanization that falls short of direct threats or incitement to violence. Note: Points are OLS estimates with 95% confidence interval bars based on clustered standard errors at the respondent level, controlling for issue position, publicness, target type, sender gender, and sender ethnicity. The pooled sample contains 18,655 observations (1,388 respondents) in Denmark and 19,130 observations (1,408 respondents) in the U.S. Partisan subgroups: Denmark: 8,403 observations among 627 left-wing partisans; 7,724 observations among 547 right-wing partisans. U.S.: 9,736 observations among 714 Democrats and 6,002 observations among 428 Republicans. See Table S7 in the appendix for the full model output.</p>
+<p>While statistically significant effects of target characteristics are in the range of 3 to 6.3 percentage points, we might expect target characteristics to have heterogeneous effects across partisan groups and levels of severity. In the following, I examine four plausible empirical patterns.</p>
+<p>Are partisans more supportive of regulating hate speech targeting their political in-group or less supportive when it targets their political opponents? The results indicate that they are not. In Figure 2, the rows with &quot;Democratic (Left-wing)&quot; and &quot;Republican (Right-wing)&quot; provide evidence on this question. They show null effects for partisans in Denmark and the U.S. This suggests that partisans were neither more nor less likely to support hate speech regulation when it targeted their political allies or opponents than when no identity group was mentioned. These findings contrast with research suggesting that partisans selectively accept or oppose hostility conditional on its political motivation (Kalmoe &amp; Mason, 2022; Lelkes &amp; Westwood, 2016; Westwood et al., 2022). Thus, the findings provide no evidence that partisans distinguish between hate speech targeting their fellow partisans and the opposing party.</p>
+<p>Are partisans more supportive of regulating hate speech targeting ethnic, gender, or religious groups they sympathize with? In Denmark, the effects of target characteristics are also heterogeneous: they are more pronounced among left-wing partisans, who are more supportive of hate speech restrictions when speech targets people based on religious, ethnic, and gender characteristics. Specifically, their support increases by 11.9 percentage points when hate speech targets Muslims, 7.2 percentage points when it targets immigrants, 5.4 percentage points when it targets women, and 5.2 percentage points when it targets Christians. In contrast, there are no statistically significant effects of target characteristics among right-wing partisans in Denmark. Overall, target characteristics have heterogeneous effects across partisan groups in both Denmark and the U.S.</p>
+<p>Does the effect of target characteristics depend on the level of severity? The results suggest that it does not. Figure 3 shows the conditional effects of target characteristics. The left panel shows the AMCEs at low severity, while the center panel shows the AMCEs at high severity.</p>
+<p>The right panel makes it possible to assess directly whether the AMCEs for target characteristics vary across levels of severity. The results show no statistically significant differences in AMCEs between low and high severity. This suggests that the effects of target characteristics on support for hate speech regulation are broadly stable and do not vary systematically between low-and high-severity conditions. In other words, the effects of target characteristics persist when severity is held constant, and the evidence does not suggest that they depend on the level of severity.</p>
+<h3>Figure 3: The effects of target characteristics are broadly stable at low and high levels of severity in Denmark and the U.S.</h3>
+<p>Note: Points are OLS estimates with 95% confidence interval bars based on clustered standard errors at the respondent level. Estimates are based on 18,655 observations (1,388 respondents) in Denmark and 19,130 observations (1,408 respondents) in the U.S. To ease interpretation, severity is collapsed into two levels: low severity, comprising incivility and non-threatening dehumanization/degradation, and high severity, comprising threatening dehumanization/degradation and incitement to violence. See Table S8 in the appendix for the full model output.</p>
+<p>Does the effect of target characteristics depend on the level of severity among partisans? The results indicate that it does not. One might expect the effect of target groups to be stronger at higher levels of severity among partisans. For example, Democrats might be especially likely to support restricting threatening hate speech against Black people. This was tested with a threeway interaction between severity, target group, and partisanship. The results do not support this proposition, as none of the interaction terms were statistically significant (see Figure S2).</p>
+<p>Overall, the results suggest that severity and target characteristics have independent effects on support for hate speech regulation. Although the effect of severity is substantially larger, the effect of target characteristics persists when severity is held constant and is largest when speech targets religious and ethnic groups. The persistence of target effects when severity is held constant suggests that they are not wholly attributable to severity. Moreover, partisans are neither more nor less supportive of hate speech regulation when it targets their political ingroup or out-group. Finally, the effects of target characteristics on support for hate speech regulation are broadly similar at low and high levels of severity.</p>
+<h3>Support for Hate Speech Regulation</h3>
+<p>Having separated the effects of target characteristics and severity on support for hate speech regulation, I now turn to the overall level of support. Figure 4 shows marginal means, which correspond to the average support for regulating a statement with a specific attribute (e.g., targeting Muslims) for each subgroup (e.g., Democrats). In other words, Figure 4 describes the overall demand for making statements illegal in both the U.S. and Denmark (see Table S9 in the appendix for all estimates). Notably, a majority support regulation only when statements include direct incitement to violence. Turning to differences across the political spectrum, Figure 4 shows that people on the political left are on average more supportive of hate speech regulation than those on the right. Moreover, partisan differences in support for hate speech restrictions are greater in the U.S. than in Denmark, particularly at higher levels of severity. The partisan differences in support for regulation increase with content severity in both countries. In other words, severity has a larger effect on left-wing partisans and Democrats than on right-wing partisans and Republicans. For target characteristics, the largest partisan differences in marginal means are observed when statements target Muslims in Denmark and Black people in the U.S. Note: Points are OLS estimates with 95% confidence interval bars based on clustered standard errors at the respondent level, controlling for issue position, publicness, target type, sender gender, and sender ethnicity. The pooled sample contains 18,655 observations (1,388 respondents) in Denmark and 19,130 observations (1,408 respondents) in the U.S. The partisan subgroups comprise 8,403 observations (627 left-wing partisans) and 7,724 observations (547 right-wing partisans) in Denmark, and 9,736 observations (714 Democrats) and 6,002 observations (428 Republicans) in the U.S. See Table S9 in the appendix for the full model output.</p>
+<h3>Discussion</h3>
+<p>While hate speech laws are being introduced around the globe (Parekh, 2012, p. 37), evidence on the extent to which public support for such laws depends on the target of hate speech or on its severity remains limited. This article contributes by estimating the independent effects of severity and target characteristics on support for hate speech laws through conjoint experiments fielded in Denmark and the U.S. The results show that when severity increases from incivility to incitement to violence, support for hate speech regulation increases by up to 32 percentage points. Target characteristics have smaller but non-zero effects that are heterogeneous across target groups and partisan groups. These effects are broadly stable across low and high levels of severity. In other words, the effect of target characteristics persists when the level of severity is held constant. On average, support for hate speech regulation changes by up to 6.3 percentage points depending on the target in Denmark and the U.S. The effects are largest when hate speech targets religious groups (Christians and Muslims) and ethnic minorities (Black people in the U.S., immigrants in Denmark). This suggests that people in Denmark and the U.S. are more supportive of regulating hate speech targeting certain groups. There is variation across partisan groups, as the effects of target characteristics are more pronounced for some partisans when hate speech targets certain religious or ethnic minority groups. With one exception, statistically significant effect sizes among partisans range from 3 to 7.2 percentage points. The exception is among leftwing respondents in Denmark, whose support for regulation increases by 11.9 percentage points when statements target Muslims. Finally, I find no evidence that partisans are more supportive of regulating hate speech targeting their political opponents than of hate speech targeting their political allies.</p>
+<p>The findings speak to concerns about the adverse consequences of polarization among partisans (Lelkes &amp; Westwood, 2016; Westwood et al., 2022). In short, partisans in both countries are no more willing to regulate hate speech targeting their political opponents than to regulate hate speech targeting their political allies. This contribution is important, as previous research suggests that partisans harbor negative feelings about their political opponents (Iyengar et al., 2012 (Iyengar et al., , 2019) ) and are more willing to tolerate and support preferential treatment of in-partisans (Lelkes &amp; Westwood, 2016, p. 498), particularly when their partisan identity is threatened (Amira et al., 2021, pp. 473-74). This article provides no evidence that partisans apply different standards when regulating hate speech targeting political opponents versus political allies.</p>
+<p>The main focus of the article, severity and target characteristics, is central to public debates about regulating hate speech (Kaye, 2021). The experiments also tested whether people were more likely to support regulation when hate speech targeted individuals (voters or politicians) holding certain opinions (e.g., opposing affirmative action), whether the speech was public or private, and whether the sender&#x27;s gender and ethnicity influenced responses. Overall, the results showed limited or null effects of these attributes (see Figure S20 in the appendix; see Figures S8-S15 for an extensive test of heterogeneity by issue position). These findings align with previous research showing minimal effects of source cues on support for content moderation (Feezell et al., 2023; Kozyreva et al., 2023; Munzert et al., 2025; Solomon et al., 2024) and censorship (Carlos et al., 2023; Dias et al., 2025) but contradict studies suggesting that partisans censor political out-groups (Ashokkumar et al., 2020). An important difference is that many of these studies examine content moderation, whereas this article focuses on support for hate speech regulation. Future studies should compare differences in support for platform moderation, national legislation, and other types of moderation such as crowd moderation. The results also show that publicness had no effect on support for hate speech regulation, despite broad dissemination typically being considered an aggravating factor (Alkiviadou et al., 2020).</p>
+<p>While this result is consistent with findings that the number of followers does not influence support for moderating misinformation (Kozyreva et al., 2023), future research is warranted to further test this proposition.</p>
+<p>The study adds to a burgeoning literature on public opinion about regulation and content moderation (Ashokkumar et al., 2020; Dias et al., 2025; Kozyreva et al., 2023; Munzert et al., 2025; Pradel et al., 2024; Solomon et al., 2024; Wilhelm et al., 2020) but naturally has limitations that merit investigation. One limitation concerns the question of why some individuals are more supportive of regulating hate speech directed at certain groups. For example, why are Democrats more supportive of regulating hate speech targeting Black people? A prominent explanation is that liberals tend to place greater emphasis on fairness and the prevention of harm (Graham et al., 2009; Gray &amp; Kubin, 2024). Recent research supports the view that people are more likely to support censorship when they perceive content as harmful (Boch, 2020; Crawford, 2017; Kubin et al., 2025; Womick et al., 2024). Relatedly, a large literature in political science has shown that the major political parties in the U.S. have &quot;sorted in terms of ideological identity and demography&quot; (Finkel et al., 2020, p. 534). This attachment to and alignment with specific groups may shape support for speech restrictions. Another perspective suggests that support for regulating hate speech arises from concerns about its role in perpetuating social inequalities affecting historically marginalized groups (Sidanius &amp; Pratto, 2001). Indeed, research has shown that a preference for group-based dominance is associated with racism, sexism, and prejudice (Kunst et al., 2017), dehumanization of refugees and immigrants (Costello &amp; Hodson, 2011; Esses et al., 2008; Kteily et al., 2015), and even acceptance of hate speech (Bilewicz et al., 2017).</p>
+<p>Conversely, some argue that opposition to hate speech regulation stems from principled conservatism and a general resistance to government intervention (Grossmann &amp; Hopkins, 2015; Sniderman et al., 1996).</p>
+<p>This study contributes by disentangling the effect of target characteristics from the severity of the content and estimating their independent causal impact on support for hate speech regulation. The design manipulates different levels of severity (e.g., incivility and incitement to violence) through concrete statements (e.g., &quot;I&#x27;m so sick of [group]! They&#x27;re a bunch of idiots who are tearing our country apart!&quot;), which makes it possible to show that target characteristics have independent effects that are not wholly attributable to severity. However, the design does not test whether respondents presented with generic survey questions (e.g., &quot;offensive to [group]&quot;) infer different levels of severity depending on the target group. Future research should test this potential mechanism by comparing generic questions with conditions in which severity is explicitly fixed.</p>
+<p>The conjoint experiments were designed to capture a wide range of typical hate speech targets at varying levels of severity in two countries with distinct socio-political contexts, thereby enhancing the generalizability of the findings. However, three issues warrant further investigation. First, the experiments were designed so that each severity statement (incivility; degradation/dehumanization without threat; degradation/dehumanization with threat; incitement to violence) could apply to each target to allow for valid inferences. This design facilitates the estimation of average marginal component effects (AMCEs) for both severity and Overall, this study demonstrates that severity is the main driver of support for hate speech regulation. Target characteristics also have smaller but non-zero effects, particularly when hate speech targets ethnic or religious groups. These effects of target characteristics persist when severity is held constant and broadly similar across levels of severity. In both the U.S. and Denmark, partisans differ in their overall support for hate speech regulation and, to some extent, in which target groups they are most inclined to protect.</p>
+<h3>Acknowledgements</h3>
+<p>The author is grateful for constructive feedback from Matt Levendusky, Kristina Bakkær Simonsen, Rebecca Adler-Nissen, Jay Van Bavel, Michael Bang Petersen, Yphtach Lelkes, Rongbo Jin, Yevgeniy Golovchenko, Joshua Tucker, Emily Kubin, Nicholas Dias, Sean Westwood, Patricia Rossini, Alexander Bor, Mathias Osmundsen, Lea Pradella, Ashraf Raschid, Matias Engdal, Kristian Vrede Skaaning Frederiksen, Andreas Videbæk Jensen, Lasse Lindekilde, Lasse Laustsen, Steffen Borch Selmer, Suthan Krishnarajan, and Stig Hebbelstrup Rye Rasmussen.</p>
+<h3>Funding Statement</h3>
+<p>This study was funded by the Carlsberg Foundation with Grant CF20-0044</p>
+<h3>Competing Interests</h3>
+<p>The author declares no competing interests.</p>
+<h3>AI Statement</h3>
+<p>In preparing this manuscript, the author used Claude for copyediting to improve the clarity and consistency of the manuscript. The author maintains full responsibility for the final content.</p>
+<h3>Ethics Statement</h3>
+<p>As per Section 14(2) of the act underlying the Danish National Research Ethics Committee, &quot;notification of questionnaire surveys … to the system of research ethics committee system is only required if the project involves human biological material.&quot; The Research Ethics Committee (Institutional Review Board) confirmed that the study complies with the ethical standards of Aarhus University (BSS-2023-023). Informed consent was obtained from all participants. Communication Research, 47(6), 921-944. https://doi.org/10.1177/0093650219855330. Womick, J., Kubin, E., Goya-Tocchetto, D., et al. (2024). Liberals and conservatives make different assumptions of vulnerability, explaining moral disagreement. OSF. https://doi.org/10.31234/osf.io/qsg7j.</p>
+<h3>Figure 2 :</h3>
+<p>Figure 2: Average marginal component effects (AMCEs) of severity and target characteristics across partisans in Denmark and the U.S.</p>
+<p>Figure 2 provides some evidence in support of this proposition, as target characteristics have heterogeneous effects across partisan groups in Denmark and the U.S. In the U.S., Democrats are 6.9 percentage points more supportive of hate speech restrictions when speech targets Black people and 4.2 percentage points more supportive when it targets Muslims. By comparison, Republican support for hate speech restrictions increases by 6.5 percentage points when speech targets Christians, by 5.6 percentage points when it targets Muslims, and by 6.6 percentage points when it targets White people. This indicates cross-partisan alignment on hate speech regulation when statements target Muslims in the U.S. However, whereas Democrats are more supportive of restrictions when speech targets Black people, a historically marginalized ethnic group, Republicans are more supportive of restrictions when speech targets Christians and White people, who belong to religious and ethnic majority groups.</p>
+<h3>Figure 4 :</h3>
+<p>Figure 4: Support for regulating hate speech across partisanship in Denmark and the U.S.</p>
+<p>target groups in relation to typical forms of hate speech. However, it may overlook idiosyncratic forms of hate speech that might be perceived as more or less severe depending on the target group. The study focused on typical forms of hate speech, but future research could explore these variations by considering a wider range of hate speech forms, including forms that might be uniquely severe for particular groups. Second, the inferences drawn from the study are constrained by the specific target groups included in the experiments. For example, it is plausible that the political right in Denmark and the U.S. might show stronger support for regulating hate speech directed at targets not represented in the experiment (e.g., national symbols such as the flag). Future research should continue to assess citizens&#x27; support for speech restrictions across different target groups and institutional contexts. Third, although the conjoint experiments used vignettes to mimic what people experience on social media, the design is still limited by not embedding these vignettes in real social media feeds, which may constrain the external validity of the findings. Future research should seek to address this limitation and improve the external validity of the findings.</p>
+<h3>Table 1 : Experimental setup</h3>
+<p>There is a certain similarity between vermin and … Let&#x27;s exterminate both! Any volunteers who want to take on that task? It&#x27;s nauseating listening to … Find these inferior people and send them off to rot on a desert island! Incitement to violence I&#x27;ve had enough of … These people are a cancer to American society and must be wiped off the face of the earth! I just started collecting names of … Those kinds of people deserve a bullet to the This table shows a simplified version of the experimental setup for the conjoint experiment. Detailed information including probabilities can be found in Section A of the appendix.</p>
+<p>516. https://doi.org/10.1038/s41562-020-0827-8. United Nations. (2012). Report of the special rapporteur on the promotion and protection of .org/doc/UNDOC/GEN/N12/501/25/PDF/N1250125.pdf? OpenElement. Westwood, S. J., Grimmer, J., Tyler, M., &amp; Nall, C. (2022). Current research overstates American support for political violence. Proceedings of the National Academy of Sciences, 119(12), e2116870119. https://doi.org/10.1073/pnas.2116870119. Wilhelm, C., Joeckel, S., &amp; Ziegler, I. (2020). Reporting hate comments: Investigating the effects of deviance characteristics, neutralization strategies, and users&#x27; moral orientation.</p>
+<p>To align the hypothesis with the reference category used in the analysis, the hypothesis deviates from the preregistration, as it uses &quot;no identity group&quot; rather than &quot;political groups&quot; as the reference category. The preregistered hypothesis reads: &quot;Statements targeting groups based on gender, race, national origin, or religion compared to statements targeting political groups increase support for hate speech regulation.&quot;</p>
+<p>H3 corresponds to H8 (&quot;Partisanship moderates the effect on perceived offensiveness, perception of legality, and preference for legality&quot;) and is further specified under exploratory analyses in the preregistration. The article deviates from the preregistration in order to focus on public support for regulating hate speech. See FiguresS19-S20in Section E of the appendix for all preregistered analyses with auxiliary outcomes.</p>
+<p>Since the data collection, the following characteristics have been added to section 266b of the Danish Criminal Code: disability, gender identity, gender expression, and gender characteristics.</p>
+<p>I preregistered the severity types as &quot;Incivility, dehumanization, degradation, and call for violence&quot; and noted that two of the statements categorized under degradation and dehumanization &quot;contain elements that can be interpreted as an incitement to violence.&quot; In the analysis, I grouped the threatening severity types to reflect the hierarchical structure of severity.</p>
+<p>I present the two key attributes, severity and target characteristics, in the main text to evaluate the key hypotheses and report all preregistered analyses of the other attributes in the appendix (FiguresS19-S20).</p>
+<h3>References</h3>
+<p>Alkiviadou, N., Mchangama, J., &amp; Mendiratta, R. (2020). Global handbook on hate speech laws. The Future of Free Speech, 7, 2.</p>
+<p>Amira, K., Cole Wright, J., &amp; Goya-Tocchetto, D. (2021). In-group love versus out-group hate: Which is more important to partisans and when? Political Behavior, 43(2), 473-494. https://doi.org/10.1007/s11109-019-09557-6.</p>
+<p>Article 19. (2015). &#x27;Hate speech&#x27; explained: A toolkit. https://www.article19.org/data/files/medialibrary/38231/&#x27;Hate-Speech&#x27;-Explained---A-Toolkit- %282015-Edition%29.pdf</p>
+<p>Ashokkumar, A., Talaifar, S., Fraser, W. T., et al. (2020). Censoring political opposition online: Who does it and why. Journal of Experimental Social Psychology, 91, 104031. https://doi.org/10.1016/j.jesp.2020.104031.</p>
+<p>Bansak, K., Hainmueller, J., Hopkins, D. J., &amp; Yamamoto, T. (2021). Conjoint survey experiments.</p>
+<p>In J. Druckman &amp; D. P. Green (Eds.), Advances in experimental political science, 1st ed. Cambridge University Press. https://doi.org/10.1017/9781108777919.004.</p>
+<p>Bilewicz, M., Soral, W., Marchlewska, M., &amp; Winiewski, M. (2017). When authoritarians confront prejudice: Differential effects of SDO and RWA on support for hate-speech prohibition. Political Psychology, 38(1), 87-99. https://doi.org/10.1111/pops.12313.</p>
+<p>Bleich, E. (2014). Freedom of expression versus racist hate speech: Explaining differences between high court regulations in the USA and Europe. Journal of Ethnic and Migration Studies, 40(2), 283-300. https://doi.org/10.1080/1369183X.2013.851476.</p>
+<p>Boch, A. (2020). Increasing American political tolerance: A framework excluding hate speech. Socius 6: 2378023120903959. https://doi.org/10.1177/2378023120903959.</p>
+<p>Carlos, R. F., Sheagley, G., &amp; Taylor, K. L. (2023). Tolerance for the free speech of outgroup partisans. PS: Political Science &amp; Politics, 56(2), 240-244. https://doi.org/10.1017/S1049096522001202.</p>
+<p>Chelnokova, O., Laeng, B., Eikemo, M., et al. (2014). Rewards of beauty: The opioid system mediates social motivation in humans. Molecular Psychiatry, 19(7), 746-747. https://doi.org/10.1038/mp.2014.1.</p>
+<p>Chong, D., Citrin, J., &amp; Levy, M. (2024). The realignment of political tolerance in the United States. Perspectives on Politics, 22(1), 131-152. https://doi.org/10.1017/S1537592722002079.</p>
+<p>Costello, K., &amp; Hodson, G. (2011). Social dominance-based threat reactions to immigrants in need of assistance. European Journal of Social Psychology, 41(2), 220-231. https://doi.org/10.1002/ejsp.769.</p>
+<p>Cowan, G., &amp; Hodge, C. (1996). Judgments of hate speech: The effects of target group, publicness, and behavioral responses of the target. Journal of Applied Social Psychology, 26(4), 355-374. https://doi.org/10.1111/j.1559-1816.1996.tb01854.x.</p>
+<p>Crawford, J. T. (2017). Are conservatives more sensitive to threat than liberals? It depends on how we define threat and conservatism. Social Cognition, 35(4), 354-373. https://doi.org/10.1521/soco.2017.35.4.354.</p>
+<p>Crawford, J. T., &amp; Pilanski, J. M. (2014). Political intolerance, right and left. Political Psychology, 35(6), 841-851. https://doi.org/10.1111/j.1467-9221.2012.00926.x.</p>
+<p>Davis, D. W., &amp; Silver, B. D. (2004). Civil liberties vs. security: Public opinion in the context of the terrorist attacks on America. American Journal of Political Science, 48(1), 28-46. https://doi.org/10.1111/j.0092-5853.2004.00054.x.</p>
+<p>De la Cuesta, B., Egami, N., &amp; Imai, K. (2022). Improving the external validity of conjoint analysis: The essential role of profile distribution. Political Analysis, 30(1), 19-45. https://doi:10.1017/pan.2020.40</p>
+<p>Dias, N. C., Druckman, J. N., &amp; Levendusky, M. S. (2025). Unraveling a &quot;cancel culture&quot; dynamic: When, why, and which Americans sanction offensive speech. The Journal of Politics, 87(2), 588- 600. https://doi.org/10.1086/733004.</p>
+<p>Doré, N., Satherley, N., Yogeeswaran, K., Vonasch, A. J., Verkuyten, M., &amp; Sibley, C. G. (2022). Boundaries of free speech: Profiling support for acceptance of free speech and restrictions on offensive speech. International Journal of Public Opinion Research, 34(4), edac039. https://doi.org/10.1093/ijpor/edac039.</p>
+<p>Druckman, J. N., Gubitz, S. R., Levendusky, M. S., &amp; Lloyd, A. M. (2019). How incivility on partisan media (de)polarizes the electorate. The Journal of Politics, 81(1), 291-295. https://doi.org/10.1086/699912.</p>
+<p>Druckman, J. N., Klar, S., Krupnikov, Y., Levendusky, M., &amp; Ryan, J. B. (2022). (Mis)estimating affective polarization. The Journal of Politics, 84(2), 1106-1117. https://doi.org/10.1086/715603.</p>
+<p>Druckman, J. N., &amp; Levendusky, M. S. (2019). What do we measure when we measure affective polarization? Public Opinion Quarterly, 83(1), 114-122. https://doi.org/10.1093/poq/nfz003.</p>
+<p>Eady, G., &amp; Rasmussen, A. (2025). Gendered perceptions and the costs of political toxicity: Experimental evidence from politicians and citizens in four democracies. American Political Science Review, 119(3), 1446-1462. https://doi.org/10.1017/S0003055424001205.</p>
+<p>Ekins, E. (2017). The state of free speech and tolerance in America. https://www.cato.org/survey- reports/state-free-speech-tolerance-america.</p>
+<p>Esses, V. M., Veenvliet, S., Hodson, G., &amp; Mihic, L. (2008). Justice, morality, and the dehumanization of refugees. Social Justice Research, 21(1), 4-25. https://doi.org/10.1007/s11211-007-0058-4.</p>
+<p>Feezell, J. T., Conroy, M., Gomez-Aguinaga, B., &amp; Wagner, J. K. (2023). Who gets flagged? An experiment on censorship and bias in social media reporting. PS: Political Science &amp; Politics, 56(2), 222-226. https://doi.org/10.1017/S1049096522001238.</p>
+<p>Finkel, E. J., Bail, C. A., Cikara, M., Ditto, P. H., Iyengar, S., Klar, S., Mason, L., McGrath, M. C., Nyhan, B., Rand, D. G., Skitka, L. J., Tucker, J. A., Van Bavel, J. J., Wang, C. S., &amp; Druckman, J. N. (2020). Political sectarianism in America. Science, 370(6516), 533-536. https://doi.org/10.1126/science.abe1715</p>
+<p>Gagliardone, I., Gal, D., Alves, T., &amp; Martinez, G. (2016). Countering online hate speech. UNESCO.</p>
+<p>Gervais, B. T. (2015). Incivility online: Affective and behavioral reactions to uncivil political posts in a web-based experiment. Journal of Information Technology &amp; Politics, 12(2), 167-185. https://doi.org/10.1080/19331681.2014.997416.</p>
+<p>Gibson, J. L. (2011). Political intolerance in the context of democratic theory. In Robert Goodin (eds), The Oxford Handbook of Political Science. Oxford Academic https://doi.org/10.1093/oxfordhb/9780199604456.013.0021.</p>
+<p>Gibson, J. L., &amp; Gouws, A. (2001). Making tolerance judgments: The effects of context, local and national. The Journal of Politics, 63(4), 1067-1090. https://doi.org/10.1111/0022-3816.00101.</p>
+<p>Graham, J., Haidt, J., &amp; Nosek, B. A. (2009). Liberals and conservatives rely on different sets of moral foundations. Journal of Personality and Social Psychology, 96(5), 1029-1046. https://doi.org/10.1037/a0015141.</p>
+<p>Gray, K., &amp; Kubin, E. (2024). Victimhood: The most powerful force in morality and politics. Advances in Experimental Social Psychology, 70, 137-220. https://www.sciencedirect.com/science/chapter/bookseries/abs/pii/S0065260124000169.</p>
+<p>Grossmann, M., &amp; Hopkins, D. A. (2015). Ideological Republicans and group interest Democrats: The asymmetry of American party politics. Perspectives on Politics, 13(1), 119-139. https://doi.org/10.1017/s1537592714003168.</p>
+<p>Hainmueller, J., Hangartner, D., &amp; Yamamoto, T. (2015). Validating vignette and conjoint survey experiments against real-world behavior. Proceedings of the National Academy of Sciences of the United States of America, 112(8), 2395-2400. https://doi.org/10.1073/pnas.1416587112.</p>
+<p>Hainmueller, J., Hopkins, D. J., &amp; Yamamoto, T. (2014). Causal inference in conjoint analysis: Understanding multidimensional choices via stated preference experiments. Political Analysis, 22(1), 1-30. https://doi.org/10.1093/pan/mpt024.</p>
+<p>Howard, J. W. (2019). Free speech and hate speech. Annual Review of Political Science, 22(1), 93- 109. https://doi.org/10.1146/annurev-polisci-051517-012343.</p>
+<p>ICCPR. (1966). International Covenant on Civil and Political Rights, 19 December 1966, 999 UNTS 171, Can TS 1976 No 47 (Entered into Force 23 March 1976) [ICCPR]. https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=IV- 4&amp;chapter=4&amp;clang=_en.</p>
+<p>Iyengar, S., Lelkes, Y., Levendusky, M., Malhotra, N., &amp; Westwood, S. J. (2019). The origins and consequences of affective polarization in the United States. Annual Review of Political Science, 22(1), 129-146. https://doi.org/10.1146/annurev-polisci-051117-073034.</p>
+<p>Iyengar, S., Sood, G., &amp; Lelkes, Y. (2012). Affect, not ideology. Public Opinion Quarterly, 76(3), 405-431. https://doi.org/10.1093/poq/nfs038.</p>
+<p>Iyengar, S., &amp; Westwood, S. J. (2015). Fear and loathing across party lines: New evidence on group polarization. American Journal of Political Science, 59(3), 690-707. https://doi.org/10.1111/ajps.12152.</p>
+<p>Justitsministeriet. (2021). Bekendtgørelse Af Straffeloven. https://www.retsinformation.dk/eli/lta/2021/1851#P266b</p>
+<p>Kalmoe, N. P., &amp; Mason, L. (2022). Radical American partisanship: Mapping violent hostility, its causes, and the consequences for democracy. University of Chicago Press.</p>
+<p>Kaye, D. (2021). Four questions about regulating online hate speech. In Medium. https://onezero.medium.com/four-questions-about-online-hate-speech-ae3e0a134472.</p>
+<p>Kingzette, J. (2021). Who do you loathe? Feelings toward politicians vs. ordinary people in the opposing party. Journal of Experimental Political Science, 8(1), 75-84. https://doi.org/10.1017/xps.2020.9.</p>
+<p>Klar, S., Krupnikov, Y., Ryan, J. B. (2018). Affective polarization or partisan disdain? Public Opinion Quarterly, 82(2), 379-390. https://doi.org/10.1093/poq/nfy014.</p>
+<p>Knight Foundation. (2024). College student views on free expression and campus speech 2024. https://knightfoundation.org/reports/college-student-views-on-free-expression-and-campus- speech-2024/.</p>
+<p>Kozyreva, A., Herzog, S. M., Lewandowsky, S., et al. (2023). Resolving content moderation dilemmas between free speech and harmful misinformation. Proceedings of the National Academy of Sciences, 120(7). https://doi.org/10.1073/pnas.2210666120.</p>
+<p>Kteily, N., Bruneau, E., Waytz, A., &amp; Cotterill, S. (2015). The ascent of man: Theoretical and empirical evidence for blatant dehumanization. Journal of Personality and Social Psychology, 109(5), 901-931. https://doi.org/10.1037/pspp0000048.</p>
+<p>Kubin, E., von Sikorski, C., &amp; Gray, K. (2025). Political censorship feels acceptable when ideas seem harmful and false. Political Psychology, 46(2), 279-299. https://doi.org/10.1111/pops.13011.</p>
+<p>Kunst, J. R., Fischer, R., Sidanius, J., &amp; Thomsen, L. (2017). Preferences for group dominance track and mediate the effects of macro-level social inequality and violence across societies. Proceedings of the National Academy of Sciences, 114(21), 5407-5412. https://doi.org/10.1073/pnas.1616572114.</p>
+<p>Lelkes, Y., &amp; Westwood, S. J. (2016). The limits of partisan prejudice. The Journal of Politics, 79(2), 485-501. https://doi.org/10.1086/688223.</p>
+<p>Lindner, N. M., &amp; Nosek, B. A. (2009). Alienable speech: Ideological variations in the application of free-speech principles. Political Psychology, 30(1), 67-92. https://doi.org/10.1111/j.1467-9221.2008.00681.x.</p>
+<p>Ma, D. S., Correll, J., &amp; Wittenbrink, B. (2015). The Chicago Face Database: A free stimulus set of faces and norming data. Behavior Research Methods, 47(4), 1122-1135. https://doi.org/10.3758/s13428-014-0532-5.</p>
+<p>Marcus, G. E., Sullivan, J. L., Theiss-Morse, E., &amp; Wood, S. L. (1995). With malice toward some: How people make civil liberties judgments. Cambridge Studies in Public Opinion and Political Psychology. Cambridge University Press. https://doi.org/10.1017/CBO9781139174046.</p>
+<p>Martherus, J. L., Martinez, A. G., Piff, P. K., &amp; Theodoridis, A. G. (2021). Party animals? Extreme partisan polarization and dehumanization. Political Behavior, 43(2), 517-540. https://doi.org/10.1007/s11109-019-09559-4.</p>
+<p>Mason, L. (2018). Uncivil agreement: How politics became our identity. University of Chicago Press.</p>
+<p>McClosky, H., &amp; Brill, A. (1983). The dimensions of tolerance: What Americans believe about civil liberties. Russell Sage Foundation. www.jstor.org/stable/10.7758/9781610443869.</p>
+<p>Mchangama, J. (2014). The sordid origin of hate-speech laws. https://justitia-int.org/en/the- sordid-origin-of-hate-speech-laws/.</p>
+<p>Mchangama, J. (2021). A history of laws on hate and abuse. In Threats to Free Speech in the 21st Century. https://justitia-int.org/book-a-history-of-laws-on-hate-and-abuse/.</p>
+<p>Mchangama, J., Alkiviadou, N., &amp; Mendiratta, R. (2021). A framework of first reference: Decoding a human rights approach to content moderation in the era of &quot;platformization.&quot;</p>
+<p>Moore, P. (2015). Half of Democrats support a ban on hate speech. In YouGovAmerica. https://today.yougov.com/topics/politics/articles-reports/2015/05/20/hate-speech.</p>
+<p>Moore-Berg, S. L., Ankori-Karlinsky, L-O., Hameiri, B., &amp; Bruneau, E. (2020). Exaggerated meta- perceptions predict intergroup hostility between American political partisans. Proceedings of the National Academy of Sciences, 117(26), 14864-14872. https://doi.org/10.1073/pnas.2001263117.</p>
+<p>Muddiman, A. (2017). Personal and public levels of political incivility. International Journal of Communication, 11(0), 21. https://ijoc.org/index.php/ijoc/article/view/6137.</p>
+<p>Munzert, S., Traunmüller, R., Barberá, P., Guess, A., &amp; Yang, J. H. (2025). Citizen preferences for online hate speech regulation. PNAS Nexus, 4(2), pgaf032. https://doi.org/10.1093/pnasnexus/pgaf032.</p>
+<p>Mutz, D. C. (2011). External validity reconsidered. In Population-based survey experiments. Princeton University Press. https://www.degruyterbrill.com/document/doi/10.1515/9781400840489-010/html?srsltid=AfmBOoosJ0WnU8rcLLqRcQRVrL1rhd2DI0tm5aUvFlgqXq7HHUhPj6Ye.</p>
+<p>Parekh, B. (2012). Is there a case for banning hate speech? In M. Herz &amp; P. Molnar (Eds.), The content and context of hate speech: Rethinking regulation and responses. Cambridge University Press. https://doi.org/10.1017/CBO9781139042871.006.</p>
+<p>Petersen, M., Slothuus, R., Stubager, R., &amp; Togeby, L. (2011). Freedom for all? The strength and limits of political tolerance. British Journal of Political Science, 41(03), 581-597. https://doi.org/10.1017/s0007123410000451.</p>
+<p>Petersen, N. B. G., Tue Pedersen, R., &amp; Thau, M. (2024). Citizens&#x27; perceptions of online abuse directed at politicians: Evidence from a survey experiment. European Journal of Political Research. https://doi.org/10.1111/1475-6765.12724.</p>
+<p>Poushter, J. (2015). 40% of millennials OK with limiting speech offensive to minorities. In Pew Research Center. https://www.pewresearch.org/short-reads/2015/11/20/40-of-millennials-ok- with-limiting-speech-offensive-to-minorities/.</p>
+<p>Pradel, F., Zilinsky, J., Kosmidis, S., &amp; Theocharis, Y. (2024). Toxic speech and limited demand for content moderation on social media. American Political Science Review, 118(4), 1895-1912. doi:10.1017/S000305542300134X.</p>
+<p>Pratto, F., Sidanius, J., Stallworth, L. M., &amp; Malle, B. F. (1994). Social dominance orientation: A personality variable predicting social and political attitudes. Journal of Personality and Social Psychology, 67(4), 741-763. https://doi.org/10.1037/0022-3514.67.4.741</p>
+<p>Rossini, P. (2019). Disentangling uncivil and intolerant discourse. In R. G. Boatright, T. J. Shaffer, S. Sobieraj, &amp; D. G. Young (Eds.), A crisis of civility? Contemporary research on civility, incivility, and political discourse. Routledge.</p>
+<p>Sellars, A. F. (2016). Defining hate speech. Berkman Klein Center Research Publication No. 2016- 20. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2882244.</p>
+<p>Sidanius, J., &amp; Pratto, F. (2001). Social dominance: An intergroup theory of social hierarchy and oppression. Cambridge University Press.</p>
+<p>Siegel, A. (2020). Online hate speech. In N. Persily &amp; J. A. Tucker (Eds.), Social media and democracy: The state of the field, prospects for reform. Cambridge University Press. https://doi.org/10.1017/9781108890960.</p>
+<p>Skaaning, S.-E., &amp; Krishnarajan, S. (2025). Who in the world supports free speech? Findings from a global survey. The Future of Free Speech. https://futurefreespeech.org/wp- content/uploads/2025/03/Who-In-The-World-Supports-Free-Speech-The-Future-of-Free- Speech.pdf</p>
+<p>Skytte, R. (2022). Degrees of disrespect: How only extreme and rare incivility alienates the base. The Journal of Politics, 84(3), 1746-1759. https://doi.org/10.1086/717852.</p>
+<p>Sniderman, P. M., Carmines, E. G., Layman, G. C., &amp; Carter, M. (1996). Beyond race: Social justice as a race neutral ideal. American Journal of Political Science, 40(1), 33-55. https://doi.org/10.2307/2111693.</p>
+<p>Solomon, B. C., Hall, M. E. K., Hemmen, A., &amp; Druckman, J. N. (2024). Illusory interparty disagreement: Partisans agree on what hate speech to censor but do not know it. Proceedings of the National Academy of Sciences, 121(39), e2402428121. https://doi.org/10.1073/pnas.2402428121.</p>
+<p>Stevens, D., Allen, B., Sullivan, J., &amp; Lawrence, E. (2015). Fair&#x27;s fair? Principles, partisanship, and perceptions of the fairness of campaign rhetoric. British Journal of Political Science, 45(1), 195- 213. https://doi.org/10.1017/s0007123413000045.</p>
+<p>Stryker, R., Conway, B. A., &amp; Danielson, J. T. (2016). What is political incivility? Communication Monographs, 83(4), 535-556. https://doi.org/10.1080/03637751.2016.1201207.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
