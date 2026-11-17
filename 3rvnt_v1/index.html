@@ -1,0 +1,3239 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: The Face of Agency: A Reverse Correlation
+Study</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+The Face of Agency: A Reverse Correlation Study
+</p>
+<p class="meta">
+2026-11-17 · Metacheck 0.4.4.3
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>4</b><span>fine</span></a><a class="count na" href="#na"><b>10</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 5 non-significant p values that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = .072
+</td>
+<td style="text-align:left;">
+On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) =
+-1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) =
+-1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76],
+t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24,
+0.60], t(427) = -1.70, p = .090) did not reach significance.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .143
+</td>
+<td style="text-align:left;">
+On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) =
+-1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) =
+-1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76],
+t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24,
+0.60], t(427) = -1.70, p = .090) did not reach significance.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .332
+</td>
+<td style="text-align:left;">
+On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) =
+-1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) =
+-1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76],
+t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24,
+0.60], t(427) = -1.70, p = .090) did not reach significance.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .090
+</td>
+<td style="text-align:left;">
+On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) =
+-1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) =
+-1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76],
+t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24,
+0.60], t(427) = -1.70, p = .090) did not reach significance.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .759
+</td>
+<td style="text-align:left;">
+When it came to dominance, however, the high AoA CI was not
+significantly different from the base face (b = -0.80, 95% CI [-5.92,
+4.32], t(242) = -0.31, p = .759), both of which were rated as more
+dominant than the low AoA CI (b = -10.14, 95% CI [-15.25, -5.04], t(243)
+= -3.91, p &lt; .001).
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>We found 2 preregistrations.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(4)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>We detected no errors in t-tests or F-tests.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values or <em>p</em>-values of
+exactly zero out of 32 detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>All detected t-tests and F-tests had an effect size reported in the
+same sentence.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(10)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>In Study 1a, participants completed a traditional reverse correlation
+task with an androgynous base image, selecting the face that looked more
+or less agentic depending on their assigned condition.</p>
+</blockquote>
+<blockquote>
+<p>In the image generation phase, participants are presented with two
+stimuli and asked to select the one that better fits a target
+representation [12].</p>
+</blockquote>
+<blockquote>
+<p>As a post-hoc analysis, we also split our participant group in phase
+2 of each study by gender and tested whether their CIs differed.</p>
+</blockquote>
+<blockquote>
+<p>Emotional Faces Database (B) Base image used for Study 2B: MNES from
+the Karolinska Directed Emotional Faces Database (C) Example stimulus
+from Study 1A (D) Example stimulus from Study 2A (E) For every trial,
+participants had to choose which of two faces looked more [less] in
+control of actions and their consequences (F) We averaged the noise from
+all the images selected by the participants and superposed it back onto
+the base image to create our Classification Images (CIs).</p>
+</blockquote>
+<blockquote>
+<p>Participants were recruited via Prolific from a United Kingdom
+sample.</p>
+</blockquote>
+<blockquote>
+<p>A total of 100 participants were recruited, with 50 participants
+randomly assigned to each of the two AoA conditions (high vs. low).</p>
+</blockquote>
+<blockquote>
+<p>Participants were redirected to Jatos via Prolific.</p>
+</blockquote>
+<blockquote>
+<p>Participants were then provided with the instructions: “Your job is
+to choose the person who looks more [less] in control of what they do
+and what happens as a result.”</p>
+</blockquote>
+<blockquote>
+<p>Participants were instructed to use the right and left arrow keys to
+make their choice.</p>
+</blockquote>
+<blockquote>
+<p>Participants had to select the corresponding side.</p>
+</blockquote>
+<blockquote>
+<p>Participants were excluded if they missed more than 2 attention
+checks.</p>
+</blockquote>
+<blockquote>
+<p>After exclusion criteria were applied, the final sample consisted of
+87 participants (M<sub>age</sub> = 32 years; 33 women, 39 men, 15 who
+did not select a gender).</p>
+</blockquote>
+<blockquote>
+<p>Participants were recruited via Prolific from a United Kingdom
+sample, matching the sample size and characteristics of Study 1b.</p>
+</blockquote>
+<blockquote>
+<p>The CIs from Study 2a were rated as more masculine A main effect of
+participant gender was found only for masculinity ratings (b = 5.40, 95%
+CI [0.61, 10.20], t(434) = 2.21, p = .027): the CIs of male participants
+were rated as more masculine than those of female participants
+overall.</p>
+</blockquote>
+<blockquote>
+<p>We also included attention checks which ensured that the participants
+were attending to the stimuli throughout the task, even if they end up
+with a lower infoVal.</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>The study was approved by the Humboldt University Psychology
+Department Ethical Review Board (2025-19-k-R).</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+Preregistration Check
+</summary>
+<div class="fold">
+<p>We found 2 preregistrations.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:left;">
+title
+</th>
+<th style="text-align:left;">
+template
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://aspredicted.org/6nu75m.pdf" target="_blank">6nu75m</a>
+</td>
+<td style="text-align:left;">
+Reverse Correlation and Agency
+</td>
+<td style="text-align:left;">
+AsPredicted
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://aspredicted.org/i9qu79.pdf" target="_blank">i9qu79</a>
+</td>
+<td style="text-align:left;">
+Reverse Correlation and Agency
+</td>
+<td style="text-align:left;">
+AsPredicted
+</td>
+</tr>
+</tbody>
+</table>
+<p>Meta-scientific research has shown that deviations from
+preregistrations are often not reported or checked, and that the most
+common deviations concern the sample size. We recommend manually
+checking the full preregistration at the links above, and have provided
+the preregistered sample size.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+id
+</th>
+<th style="text-align:left;">
+sample_<wbr>size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+6nu75m
+</td>
+<td style="text-align:left;">
+For Phase 1, we will have N=50 for each condition. There are no standard
+practices for a power analysis for reverse correlation, so we matched
+the standard sample sizes from past studies. <br><br>For Study 2, N=156.
+We ran a power analysis using MorePower (ver. 6.0.4) to determine our
+sample size based on the main effect of gender perception. While
+MorePower cannot handle linear mixed-effect models, we opted to use a
+t-test between two dependent means (matched pairs), specifically
+powering (at 80%) assuming a small effect size d of 0.2 for a one-tailed
+test.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i9qu79
+</td>
+<td style="text-align:left;">
+For Phase 1, we will have N=50 for each condition. There are no standard
+practices for a power analysis for reverse correlation, so we matched
+the standard sample sizes from past studies.<br><br>For Study 2, N=156.
+We ran a power analysis using MorePower (ver. 6.0.4) to determine our
+sample size based on the main effect of gender perception. While
+MorePower cannot handle linear mixed-effect models, we opted to use a
+t-test between two dependent means (matched pairs), specifically
+powering (at 80%) assuming a small effect size d of 0.2 for a one-tailed
+test.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Full Preregistration" collapse="true">
+<div style="max-height:15em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Field
+</th>
+<th style="text-align:left;">
+Preregistration 1
+</th>
+<th style="text-align:left;">
+Preregistration 2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+template_name
+</td>
+<td style="text-align:left;">
+AsPredicted
+</td>
+<td style="text-align:left;">
+AsPredicted
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+id
+</td>
+<td style="text-align:left;">
+6nu75m
+</td>
+<td style="text-align:left;">
+i9qu79
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+link
+</td>
+<td style="text-align:left;">
+<a href="https://aspredicted.org/6nu75m.pdf" class="uri">https://aspredicted.org/6nu75m.pdf</a>
+</td>
+<td style="text-align:left;">
+<a href="https://aspredicted.org/i9qu79.pdf" class="uri">https://aspredicted.org/i9qu79.pdf</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+title
+</td>
+<td style="text-align:left;">
+Reverse Correlation and Agency
+</td>
+<td style="text-align:left;">
+Reverse Correlation and Agency
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+date_created
+</td>
+<td style="text-align:left;">
+2025/10/24 04:04 (PT)
+</td>
+<td style="text-align:left;">
+2026/01/27 02:15 (PT)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+date_registered
+</td>
+<td style="text-align:left;">
+2025-10-24
+</td>
+<td style="text-align:left;">
+2026-01-27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+existing_data_explanation
+</td>
+<td style="text-align:left;">
+No, no data have been collected for this study yet.
+</td>
+<td style="text-align:left;">
+It’s complicated. We have already collected some data but explain in
+Question 8 why readers may consider this a valid pre-registration
+nevertheless.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+research_questions
+</td>
+<td style="text-align:left;">
+Using reverse correlation, we aim to explore the mental representation
+of agency. First, we will explore whether the mental representation of a
+person with high agency is perceived as more masculine and a face with
+low agency being perceived as more feminine. Second, we will explore
+dominance, attractiveness, trustworthiness, and perceived agency.
+</td>
+<td style="text-align:left;">
+Using reverse correlation, we aim to explore the mental representation
+of agency. First, we will explore whether the mental representation of a
+person with high agency is perceived as more masculine and a face with
+low agency being perceived as more feminine. Second, we will explore
+other traits such as dominance, attractiveness, mood, etc. <br><br>This
+is a replication of a previous study using the same methods, but
+changing one aspect of the stimulus: namely, using a male face as the
+base image in the task.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+design_dependent_variables
+</td>
+<td style="text-align:left;">
+The dependent variable will be the ratings of classification images
+created in the reverse correlation task (more information is provided in
+question 4).
+</td>
+<td style="text-align:left;">
+The dependent variable will be the ratings of classification images
+created in the reverse correlation task (more information is provided in
+question 4).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+study_design_overview
+</td>
+<td style="text-align:left;">
+Our experiment will have two phases:<br>We will run a reverse
+correlation task in which participants will have to pick which of two
+faces looks like they have either (a) high agency for one group or (b)
+low agency for another group. We will use the RCICR package on R to
+construct the CIs for high agency and low agency. To have a wider range
+of variability in the second phase of the task, we will also create
+multiple CIs from a random subset of 20 participants. <br><br>In the
+second phase of the study, we will ask a different group of participants
+to rate the CIs on gender, attractiveness, trustworthiness, dominance,
+and agency. We will use a linear scale going from 0 to 100.
+</td>
+<td style="text-align:left;">
+Our experiment will have two phases:<br>We will run a reverse
+correlation task in which participants will have to pick which of two
+faces looks like they have either (a) high agency for one group or (b)
+low agency for another group. We will use the RCICR package on R to
+construct the CIs for high agency and low agency. To have a wider range
+of variability in the second phase of the task, we will create multiple
+CIs for each condition. <br><br>In the second phase of the study, we
+will ask a different group of participants to rate the CIs on different
+traits, including which gender identity they perceive them to have. We
+will use a linear scale going from 0 to 100.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+statistical_tests
+</td>
+<td style="text-align:left;">
+For the statistical analysis, we will conduct a linear mixed model to
+look at the results from phase 2. We will run multiple mixed model
+analyses to look at the relationship between agency and each of the
+traits. We pre-register the most complex model here; however, it is
+possible that we may need to reduce the complexity of the model if it
+does not converge.<br><br>Model (using the lme4 syntax on r): <br>Trait
+~ 1 + Agency + (1 + Agency | Participants)
+</td>
+<td style="text-align:left;">
+For the statistical analysis, we will conduct a linear mixed model to
+look at the results from phase 2. We will run multiple mixed model
+analyses to look at the relationship between agency and each of the
+traits. We pre-register the most complex model here; however, it is
+possible that we may need to reduce the complexity of the model if it
+does not converge.<br><br>Model (using the lme4 syntax on r):<br>Trait ~
+1 + Agency + (1 + Agency | Participants)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+outliers_and_exclusions
+</td>
+<td style="text-align:left;">
+We will include six attention check questions in the task. The questions
+will be explicitly asking the participants to press the left or right
+arrow. We will exclude all participants who miss more than 2 of the
+attention checks.
+</td>
+<td style="text-align:left;">
+We will include six attention check questions in the task. The questions
+will be explicitly asking the participants to press the left or right
+arrow. We will exclude all participants who miss more than 2 of the
+attention checks.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sample_size
+</td>
+<td style="text-align:left;">
+For Phase 1, we will have N=50 for each condition. There are no standard
+practices for a power analysis for reverse correlation, so we matched
+the standard sample sizes from past studies. <br><br>For Study 2, N=156.
+We ran a power analysis using MorePower (ver. 6.0.4) to determine our
+sample size based on the main effect of gender perception. While
+MorePower cannot handle linear mixed-effect models, we opted to use a
+t-test between two dependent means (matched pairs), specifically
+powering (at 80%) assuming a small effect size d of 0.2 for a one-tailed
+test.
+</td>
+<td style="text-align:left;">
+For Phase 1, we will have N=50 for each condition. There are no standard
+practices for a power analysis for reverse correlation, so we matched
+the standard sample sizes from past studies.<br><br>For Study 2, N=156.
+We ran a power analysis using MorePower (ver. 6.0.4) to determine our
+sample size based on the main effect of gender perception. While
+MorePower cannot handle linear mixed-effect models, we opted to use a
+t-test between two dependent means (matched pairs), specifically
+powering (at 80%) assuming a small effect size d of 0.2 for a one-tailed
+test.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+additional_comments
+</td>
+<td style="text-align:left;">
+We will do some exploratory analyses to look at different mixed models,
+the specific pixels used to gather information in the task and create z
+maps of the relevant face areas. We will also include questionnaires to
+capture particioants’ gender biases and will check for any effect os
+biases on CI ratings.
+</td>
+<td style="text-align:left;">
+The data has been collected on Prolific but the pre-registration is
+being written and published before looking at the data, exporting the
+data, or manipulating it in any way.<br><br>We also will do some
+exploratory analyses to look at different mixed models, the specific
+pixels used to gather information in the task and create z maps of the
+relevant face areas. We will also include questionnaires to capture
+particioants’ gender biases and will check for any effect os biases on
+CI ratings.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+paper_id
+</td>
+<td style="text-align:left;">
+input
+</td>
+<td style="text-align:left;">
+input
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of deviations from
+preregistrations, see:</p>
+<p>van den Akker O, Bakker M, van Assen M, Pennington C, Verweij L,
+Elsherif M, Claesen A, Gaillard S, Yeung S, Frankenberger J, Krautter K,
+Cockcroft J, Kreuer K, Evans T, Heppel F, Schoch S, Korbmacher M, Yamada
+Y, Albayrak-Aydemir N, Wicherts J (2024). “The potential of
+preregistration in psychology: Assessing preregistration producibility
+and preregistration-study consistency.” <em>Psychological Methods</em>.
+<a href="https://doi.org/10.1037/met0000687">doi:10.1037/met0000687</a>.</p>
+<p>For educational material on how to report deviations from
+preregistrations, see:</p>
+<p>Lakens, Daniël (2024). “When and How to Deviate From a
+Preregistration.” <em>Collabra: Psychology</em>, <b>10</b>(1), 117094.
+<a href="https://doi.org/10.1525/collabra.117094">doi:10.1525/collabra.117094</a>.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+Effect Sizes in t-tests and F-tests
+</summary>
+<div class="fold">
+<p>All detected t-tests and F-tests had an effect size reported in the
+same sentence.</p>
+<p>For t-tests with a reported d, coherence checks yielded 31
+indeterminate cases.</p>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<div style="max-height:15em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+We found that high AoA CI and the base image were rated equally high to
+each other but higher than the low AoA CI for agency (Please refer to
+Figure 6 For attractiveness ratings, on the other hand, the high AoA CI
+was rated higher than the base image (b = 4.95, 95% CI [1.30, 8.59],
+t(272) = 2.67, p = .008), both of which were also rated higher than the
+low AoA CI (b = -30.35, 95% CI [-33.99, -26.71], t(273) = -16.40, p &lt;
+.001).
+</td>
+<td style="text-align:left;">
+b = 4.95
+</td>
+<td style="text-align:left;">
+t(272) = 2.67
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+We found that high AoA CI and the base image were rated equally high to
+each other but higher than the low AoA CI for agency (Please refer to
+Figure 6 For attractiveness ratings, on the other hand, the high AoA CI
+was rated higher than the base image (b = 4.95, 95% CI [1.30, 8.59],
+t(272) = 2.67, p = .008), both of which were also rated higher than the
+low AoA CI (b = -30.35, 95% CI [-33.99, -26.71], t(273) = -16.40, p &lt;
+.001).
+</td>
+<td style="text-align:left;">
+b = -30.35
+</td>
+<td style="text-align:left;">
+t(273) = -16.40
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The CIs from Study 2a were rated as more masculine A main effect of
+participant gender was found only for masculinity ratings (b = 5.40, 95%
+CI [0.61, 10.20], t(434) = 2.21, p = .027): the CIs of male participants
+were rated as more masculine than those of female participants overall.
+</td>
+<td style="text-align:left;">
+b = 5.40
+</td>
+<td style="text-align:left;">
+t(434) = 2.21
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) =
+-1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) =
+-1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76],
+t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24,
+0.60], t(427) = -1.70, p = .090) did not reach significance.
+</td>
+<td style="text-align:left;">
+b = -3.96
+</td>
+<td style="text-align:left;">
+t(431) = -1.80
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) =
+-1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) =
+-1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76],
+t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24,
+0.60], t(427) = -1.70, p = .090) did not reach significance.
+</td>
+<td style="text-align:left;">
+b = -3.68
+</td>
+<td style="text-align:left;">
+t(430) = -1.47
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) =
+-1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) =
+-1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76],
+t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24,
+0.60], t(427) = -1.70, p = .090) did not reach significance.
+</td>
+<td style="text-align:left;">
+b = 1.91
+</td>
+<td style="text-align:left;">
+t(433) = 0.97
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) =
+-1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) =
+-1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76],
+t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24,
+0.60], t(427) = -1.70, p = .090) did not reach significance.
+</td>
+<td style="text-align:left;">
+b = -3.82
+</td>
+<td style="text-align:left;">
+t(427) = -1.70
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Turning to interaction effects, we found a significant interaction
+between study and participant gender for agency ratings: in Study 1a,
+the CI from female participants was rated as having more agency than the
+CI from male participants (b = 8.85, 95% CI [0.73, 16.96], t(432) =
+2.14, p = .033).
+</td>
+<td style="text-align:left;">
+b = 8.85
+</td>
+<td style="text-align:left;">
+t(432) = 2.14
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A significant interaction was also found for masculinity ratings, where
+the CI from male participants was associated with a more
+masculine-looking CI in Study 1a compared to the CI from female
+participants (b = -12.42, 95% CI [-22.01, -2.84], t(432) = -2.55, p =
+.011).
+</td>
+<td style="text-align:left;">
+b = -12.42
+</td>
+<td style="text-align:left;">
+t(432) = -2.55
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+For Study 1a, the CI generated from female participants was rated as
+more feminine (b = 21.16, 95% CI [11.32, 31.01], t(428) = 4.22, p &lt;
+.001), attractive (b = 34.62, 95% CI [25.78, 43.55], t(425) = 7.69, p
+&lt; .001), and trustworthy (b = 24.48, 95% CI [16.77, 32.18], t(430) =
+6.24, p &lt; .001) than the one generated from male participants.
+</td>
+<td style="text-align:left;">
+b = 21.16
+</td>
+<td style="text-align:left;">
+t(428) = 4.22
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+For Study 1a, the CI generated from female participants was rated as
+more feminine (b = 21.16, 95% CI [11.32, 31.01], t(428) = 4.22, p &lt;
+.001), attractive (b = 34.62, 95% CI [25.78, 43.55], t(425) = 7.69, p
+&lt; .001), and trustworthy (b = 24.48, 95% CI [16.77, 32.18], t(430) =
+6.24, p &lt; .001) than the one generated from male participants.
+</td>
+<td style="text-align:left;">
+b = 34.62
+</td>
+<td style="text-align:left;">
+t(425) = 7.69
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+For Study 1a, the CI generated from female participants was rated as
+more feminine (b = 21.16, 95% CI [11.32, 31.01], t(428) = 4.22, p &lt;
+.001), attractive (b = 34.62, 95% CI [25.78, 43.55], t(425) = 7.69, p
+&lt; .001), and trustworthy (b = 24.48, 95% CI [16.77, 32.18], t(430) =
+6.24, p &lt; .001) than the one generated from male participants.
+</td>
+<td style="text-align:left;">
+b = 24.48
+</td>
+<td style="text-align:left;">
+t(430) = 6.24
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+b = 19.30, 95% CI [14.50, 24.00], t(241) = 8.01, p &lt; .001, and b =
+-18.08, 95% CI [-23.31, -12.80], t(243) = -6.80, p &lt; .001,
+respectively) and the low AoA face (b = -25.90, 95% CI [-30.60, -21.20],
+t(241) = -10.79, p &lt; .001, and b = 9.26, 95% CI [4.04, 14.50], t(242)
+= 3.49, p &lt; .001, respectively).
+</td>
+<td style="text-align:left;">
+b = 19.30
+</td>
+<td style="text-align:left;">
+t(241) = 8.01
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+b = 19.30, 95% CI [14.50, 24.00], t(241) = 8.01, p &lt; .001, and b =
+-18.08, 95% CI [-23.31, -12.80], t(243) = -6.80, p &lt; .001,
+respectively) and the low AoA face (b = -25.90, 95% CI [-30.60, -21.20],
+t(241) = -10.79, p &lt; .001, and b = 9.26, 95% CI [4.04, 14.50], t(242)
+= 3.49, p &lt; .001, respectively).
+</td>
+<td style="text-align:left;">
+b = -18.08
+</td>
+<td style="text-align:left;">
+t(243) = -6.80
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+b = 19.30, 95% CI [14.50, 24.00], t(241) = 8.01, p &lt; .001, and b =
+-18.08, 95% CI [-23.31, -12.80], t(243) = -6.80, p &lt; .001,
+respectively) and the low AoA face (b = -25.90, 95% CI [-30.60, -21.20],
+t(241) = -10.79, p &lt; .001, and b = 9.26, 95% CI [4.04, 14.50], t(242)
+= 3.49, p &lt; .001, respectively).
+</td>
+<td style="text-align:left;">
+b = -25.90
+</td>
+<td style="text-align:left;">
+t(241) = -10.79
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+b = 19.30, 95% CI [14.50, 24.00], t(241) = 8.01, p &lt; .001, and b =
+-18.08, 95% CI [-23.31, -12.80], t(243) = -6.80, p &lt; .001,
+respectively) and the low AoA face (b = -25.90, 95% CI [-30.60, -21.20],
+t(241) = -10.79, p &lt; .001, and b = 9.26, 95% CI [4.04, 14.50], t(242)
+= 3.49, p &lt; .001, respectively).
+</td>
+<td style="text-align:left;">
+b = 9.26
+</td>
+<td style="text-align:left;">
+t(242) = 3.49
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Similarly, the high AoA CI was also rated as more attractive and more
+trustworthy than both the base image (b = 18.80, 95% CI [14.60, 22.90],
+t(242) = 8.78, p &lt; .001, and b = 7.12, 95% CI [3.26, 11.00], t(242) =
+3.63, p &lt; .001, respectively) and the low AoA CI (b = -30.30, 95% CI
+[-34.50, -26.10], t(241) = -14.23, p &lt; .001, and b = -20.87, 95% CI
+[-24.73, -17.00], t(242) = -10.63, p &lt; .001, respectively).
+</td>
+<td style="text-align:left;">
+b = 18.80
+</td>
+<td style="text-align:left;">
+t(242) = 8.78
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Similarly, the high AoA CI was also rated as more attractive and more
+trustworthy than both the base image (b = 18.80, 95% CI [14.60, 22.90],
+t(242) = 8.78, p &lt; .001, and b = 7.12, 95% CI [3.26, 11.00], t(242) =
+3.63, p &lt; .001, respectively) and the low AoA CI (b = -30.30, 95% CI
+[-34.50, -26.10], t(241) = -14.23, p &lt; .001, and b = -20.87, 95% CI
+[-24.73, -17.00], t(242) = -10.63, p &lt; .001, respectively).
+</td>
+<td style="text-align:left;">
+b = 7.12
+</td>
+<td style="text-align:left;">
+t(242) = 3.63
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Similarly, the high AoA CI was also rated as more attractive and more
+trustworthy than both the base image (b = 18.80, 95% CI [14.60, 22.90],
+t(242) = 8.78, p &lt; .001, and b = 7.12, 95% CI [3.26, 11.00], t(242) =
+3.63, p &lt; .001, respectively) and the low AoA CI (b = -30.30, 95% CI
+[-34.50, -26.10], t(241) = -14.23, p &lt; .001, and b = -20.87, 95% CI
+[-24.73, -17.00], t(242) = -10.63, p &lt; .001, respectively).
+</td>
+<td style="text-align:left;">
+b = -30.30
+</td>
+<td style="text-align:left;">
+t(241) = -14.23
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Similarly, the high AoA CI was also rated as more attractive and more
+trustworthy than both the base image (b = 18.80, 95% CI [14.60, 22.90],
+t(242) = 8.78, p &lt; .001, and b = 7.12, 95% CI [3.26, 11.00], t(242) =
+3.63, p &lt; .001, respectively) and the low AoA CI (b = -30.30, 95% CI
+[-34.50, -26.10], t(241) = -14.23, p &lt; .001, and b = -20.87, 95% CI
+[-24.73, -17.00], t(242) = -10.63, p &lt; .001, respectively).
+</td>
+<td style="text-align:left;">
+b = -20.87
+</td>
+<td style="text-align:left;">
+t(242) = -10.63
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+When it came to dominance, however, the high AoA CI was not
+significantly different from the base face (b = -0.80, 95% CI [-5.92,
+4.32], t(242) = -0.31, p = .759), both of which were rated as more
+dominant than the low AoA CI (b = -10.14, 95% CI [-15.25, -5.04], t(243)
+= -3.91, p &lt; .001).
+</td>
+<td style="text-align:left;">
+b = -0.80
+</td>
+<td style="text-align:left;">
+t(242) = -0.31
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+When it came to dominance, however, the high AoA CI was not
+significantly different from the base face (b = -0.80, 95% CI [-5.92,
+4.32], t(242) = -0.31, p = .759), both of which were rated as more
+dominant than the low AoA CI (b = -10.14, 95% CI [-15.25, -5.04], t(243)
+= -3.91, p &lt; .001).
+</td>
+<td style="text-align:left;">
+b = -10.14
+</td>
+<td style="text-align:left;">
+t(243) = -3.91
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+; b = -19.43, 95% CI [-23.59, -15.28], t(273) = -9.19, p &lt; .001),
+masculinity (b = -17.78, 95% CI [-21.67, -13.89], t(271) = -8.98, p &lt;
+.001), trustworthiness (b = -18.95, 95% CI [-23.03, -14.88], t(273) =
+-9.15, p &lt; .001), and dominance (b = -19.00, 95% CI [-23.04, -14.95],
+t(271) = -9.24, p &lt; .001).
+</td>
+<td style="text-align:left;">
+b = -19.43
+</td>
+<td style="text-align:left;">
+t(273) = -9.19
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+; b = -19.43, 95% CI [-23.59, -15.28], t(273) = -9.19, p &lt; .001),
+masculinity (b = -17.78, 95% CI [-21.67, -13.89], t(271) = -8.98, p &lt;
+.001), trustworthiness (b = -18.95, 95% CI [-23.03, -14.88], t(273) =
+-9.15, p &lt; .001), and dominance (b = -19.00, 95% CI [-23.04, -14.95],
+t(271) = -9.24, p &lt; .001).
+</td>
+<td style="text-align:left;">
+b = -17.78
+</td>
+<td style="text-align:left;">
+t(271) = -8.98
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+; b = -19.43, 95% CI [-23.59, -15.28], t(273) = -9.19, p &lt; .001),
+masculinity (b = -17.78, 95% CI [-21.67, -13.89], t(271) = -8.98, p &lt;
+.001), trustworthiness (b = -18.95, 95% CI [-23.03, -14.88], t(273) =
+-9.15, p &lt; .001), and dominance (b = -19.00, 95% CI [-23.04, -14.95],
+t(271) = -9.24, p &lt; .001).
+</td>
+<td style="text-align:left;">
+b = -18.95
+</td>
+<td style="text-align:left;">
+t(273) = -9.15
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+; b = -19.43, 95% CI [-23.59, -15.28], t(273) = -9.19, p &lt; .001),
+masculinity (b = -17.78, 95% CI [-21.67, -13.89], t(271) = -8.98, p &lt;
+.001), trustworthiness (b = -18.95, 95% CI [-23.03, -14.88], t(273) =
+-9.15, p &lt; .001), and dominance (b = -19.00, 95% CI [-23.04, -14.95],
+t(271) = -9.24, p &lt; .001).
+</td>
+<td style="text-align:left;">
+b = -19.00
+</td>
+<td style="text-align:left;">
+t(271) = -9.24
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Figure 6: Mean ratings of attractiveness, trustworthiness, dominance,
+agency, .48, 95% CI[29.68, 39.28], t(446) = 14.10, p &lt; .001) and more
+dominant (b = 5.91, 95% CI[1.59, 10.24], t(443) = 2.69, p = .007) than
+those from Study 1a, while the CIs from Study 1a were rated as more
+feminine (b = -39.17, 95% CI [-44.11, -34.23], t(442) = -15.59, p &lt;
+.001), more trustworthy (b = -9.27, 95% CI [-13.13, -5.40], t(443) =
+-4.78, p &lt; .001), and more attractive (b = -10.33, 95% CI [-14.76,
+-5.90], t(438) = -4.58, p &lt; .001) than those from Study 2a.
+</td>
+<td style="text-align:left;">
+b = 5.91; b = -39.17; b = -9.27; b = -10.33
+</td>
+<td style="text-align:left;">
+t(446) = 14.10
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Figure 6: Mean ratings of attractiveness, trustworthiness, dominance,
+agency, .48, 95% CI[29.68, 39.28], t(446) = 14.10, p &lt; .001) and more
+dominant (b = 5.91, 95% CI[1.59, 10.24], t(443) = 2.69, p = .007) than
+those from Study 1a, while the CIs from Study 1a were rated as more
+feminine (b = -39.17, 95% CI [-44.11, -34.23], t(442) = -15.59, p &lt;
+.001), more trustworthy (b = -9.27, 95% CI [-13.13, -5.40], t(443) =
+-4.78, p &lt; .001), and more attractive (b = -10.33, 95% CI [-14.76,
+-5.90], t(438) = -4.58, p &lt; .001) than those from Study 2a.
+</td>
+<td style="text-align:left;">
+b = 5.91; b = -39.17; b = -9.27; b = -10.33
+</td>
+<td style="text-align:left;">
+t(443) = 2.69
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Figure 6: Mean ratings of attractiveness, trustworthiness, dominance,
+agency, .48, 95% CI[29.68, 39.28], t(446) = 14.10, p &lt; .001) and more
+dominant (b = 5.91, 95% CI[1.59, 10.24], t(443) = 2.69, p = .007) than
+those from Study 1a, while the CIs from Study 1a were rated as more
+feminine (b = -39.17, 95% CI [-44.11, -34.23], t(442) = -15.59, p &lt;
+.001), more trustworthy (b = -9.27, 95% CI [-13.13, -5.40], t(443) =
+-4.78, p &lt; .001), and more attractive (b = -10.33, 95% CI [-14.76,
+-5.90], t(438) = -4.58, p &lt; .001) than those from Study 2a.
+</td>
+<td style="text-align:left;">
+b = 5.91; b = -39.17; b = -9.27; b = -10.33
+</td>
+<td style="text-align:left;">
+t(442) = -15.59
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Figure 6: Mean ratings of attractiveness, trustworthiness, dominance,
+agency, .48, 95% CI[29.68, 39.28], t(446) = 14.10, p &lt; .001) and more
+dominant (b = 5.91, 95% CI[1.59, 10.24], t(443) = 2.69, p = .007) than
+those from Study 1a, while the CIs from Study 1a were rated as more
+feminine (b = -39.17, 95% CI [-44.11, -34.23], t(442) = -15.59, p &lt;
+.001), more trustworthy (b = -9.27, 95% CI [-13.13, -5.40], t(443) =
+-4.78, p &lt; .001), and more attractive (b = -10.33, 95% CI [-14.76,
+-5.90], t(438) = -4.58, p &lt; .001) than those from Study 2a.
+</td>
+<td style="text-align:left;">
+b = 5.91; b = -39.17; b = -9.27; b = -10.33
+</td>
+<td style="text-align:left;">
+t(443) = -4.78
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Figure 6: Mean ratings of attractiveness, trustworthiness, dominance,
+agency, .48, 95% CI[29.68, 39.28], t(446) = 14.10, p &lt; .001) and more
+dominant (b = 5.91, 95% CI[1.59, 10.24], t(443) = 2.69, p = .007) than
+those from Study 1a, while the CIs from Study 1a were rated as more
+feminine (b = -39.17, 95% CI [-44.11, -34.23], t(442) = -15.59, p &lt;
+.001), more trustworthy (b = -9.27, 95% CI [-13.13, -5.40], t(443) =
+-4.78, p &lt; .001), and more attractive (b = -10.33, 95% CI [-14.76,
+-5.90], t(438) = -4.58, p &lt; .001) than those from Study 2a.
+</td>
+<td style="text-align:left;">
+b = 5.91; b = -39.17; b = -9.27; b = -10.33
+</td>
+<td style="text-align:left;">
+t(438) = -4.58
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 35 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 35 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 35 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>As people move through their social environment, they constantly make assumptions about others&#x27; abilities and personalities, often relying on personal characteristics as cues. One such characteristic is gender. One robust pattern is that people tend to attribute agency to masculine individuals. Here, we asked whether this relationship holds when approached from the opposite direction: is the representation of agency itself gendered? Using reverse correlation, we conducted two studies to construct a visual representation of agency and examine its associated attributes. In Study 1a, participants completed a traditional reverse correlation task with an androgynous base image, selecting the face that looked more or less agentic depending on their assigned condition. In Study 1b, a separate group of participants rated the resulting classification images (CIs) from Study 1a; agency was represented not as masculine, but as feminine, attractive, and trustworthy. Study 2a replicated Study 1a using a masculine base image instead, and in Study 2b, agency was represented as neither masculine nor feminine, but again as trustworthy and attractive. Together, these studies suggest that agency is not represented in a gendered way, but rather through attractiveness and trustworthiness, indicating that agency may be best captured by socially desirable traits more broadly, rather than by gender.</p>
+<h3>Introduction</h3>
+<p>When interacting with our environment, we constantly evaluate whether or not we are in control. This experience of being in control of our actions (and subsequent effects) has been termed the sense of agency (SoA) [1] https://www.zotero.org/google-docs/?imEV8V  [2] https://www.zotero.org/google-docs/?imEV8V  [3]. Importantly, we also attribute agency to others (attribution of agency, AoA).</p>
+<p>Agency is often described as a masculine trait [4] https://www.zotero.org/google-docs/?TKK71V  [5]. While men are represented as strong agents, women are represented as dependent on others. The gender bias around AoA has consistently been noted and observed across different disciplines. In biologyhttps://www.zotero.org/google-docs/?0klX2y discussions of anatomy and evolution have been shaped by stereotypes of passive females and active males [6] ,  [7]. In the media, women have been represented as docile and passive while men are described as adventurous and agentic [8]. Psychologicallyhttps://www.zotero.org/google-docs/?KUenXC although gender stereotypes are shifting, the conceptualisation of AoA as masculine still stands and is moderated by factors such as sexual orientation, relationship status, and specific agency traits [5] ,  [9].</p>
+<p>Beyond descriptive stereotypinghttps://www.zotero.org/google-docs/?FPhrFf biases in AoA carry direct social consequences: because agency is one of the two fundamental dimensions along which people evaluate others (alongside warmth/communion [10] , how much agency an observer attributes to someone shapes judgments of their competence, leadership potential, and credit for shared outcomes. When women act in agentic ways, this agency is often either underattributed to them (e.g.: &quot;Matilda effect&quot; [11]) or attributed but socially penalized (backlash effects [9]). Gender bias in AoA is therefore not a peripheral phenomenon but leads to tangible downstream effects on who is seen as a leader, an innovator, or a hero, and who is not. The question remains, however, how strongly agency and gender are associated on an implicit level and whether masculinity is an integral part of our conception of agency.. In order to address these questions, we suggest a new approach to investigate gender biases in AoA: Rather than using traditional self-report and behavioural measures, we instead use reverse correlation to investigate the association of agency and gender.. Reverse correlation is a data-driven method that allows one to visualize the perceptual content of the mental representation of some target concept, such as agency [12]. In other words, this method allows us to flip the question around: rather than asking participants whether they perceive masculinity to showcase agency, we explore whether their representation of agency involves masculinity.</p>
+<p>The technique originated in psychophysics and auditory research and is grounded in signal detection theory [13] https://www.zotero.org/google-docs/?pL35qC  [14] https://www.zotero.org/google-docs/?pL35qC before it was adopted in social psychology to be used as an implicit measure of mental representations for social constructs such as trustworthinesshttps://www.zotero.org/google-docs/?cCtyug dominancehttps://www.zotero.org/google-docs/?cCtyug racehttps://www.zotero.org/google-docs/?cCtyug social class, and attractiveness [15] ,  [16] ,  [17] ,  [18].</p>
+<p>The paradigm has already been used to explore gender biases by testing for example whether feminists are represented as more masculine [19] or leaders were represented in a less feminine manner than non-leaders [20]. As outlined above, our aim is to investigate whether the mental representation of agency is gendered.</p>
+<p>A standard reverse correlation set-up consists of two phases. In the image generation phase, participants are presented with two stimuli and asked to select the one that better fits a target representation [12]. For example, when the researcher is aiming to capture the mental representation of trustworthiness, they might ask participants to pick the face that looks more trustworthy. A key point of the task is that all the stimuli are based on the same base image (often an average face computed from a database of face stimuli) and only differ in the noise superimposed. By averaging the noise from all the selected stimuli, one can create a Classification Image (CI), which contains the visual information used by participants to form their representation of the construct. In the image rating phase, a different group of participants is asked to rate the CIs on dimensions of interest, which serves to quantify the distinctive features of the CI -that is, the mental representation captured in the image generation phase.</p>
+<p>Here, we ran two studies that consist of two parts each. In the image generation phase of Study 1a and Study 2a we asked participants to classify faces based on whether they have either high or low agency. The studies only differed in the gender of the base image. While in Study 1 we used an average of male and female faces that looked nevertheless more feminine, in Study 2 we used a clearly masculine base image. In studies 1b and 2b, we asked a second group of participants to rate the classification images of the image generation phase based on personality characteristics, including perceived gender. As a post-hoc analysis, we also split our participant group in phase 2 of each study by gender and tested whether their CIs differed.</p>
+<p>We expected that the CI resulting from high AoA would look more masculine than that resulting from low AoA. Furthermore, we expected that the high AoA CI would be represented as more attractive and trustworthy than low AoA CI. Emotional Faces Database (B) Base image used for Study 2B: MNES from the Karolinska Directed Emotional Faces Database (C) Example stimulus from Study 1A (D) Example stimulus from Study 2A (E) For every trial, participants had to choose which of two faces looked more [less] in control of actions and their consequences (F) We averaged the noise from all the images selected by the participants and superposed it back onto the base image to create our Classification Images (CIs).</p>
+<h3>Study 1a</h3>
+<h3>Methods</h3>
+<p>Participants. Participants were recruited via Prolific from a United Kingdom sample. A total of 100 participants were recruited, with 50 participants randomly assigned to each of the two AoA conditions (high vs. low). Our sample size was based on past studies, as there is no standard power analysis to perform on reverse correlation tasks. After exclusion criteria were applied (please refer to the Procedure section for more details), the final sample consisted of 95 participants (M~age~ = 32 years; 40 women, 37 men, 18 who did not select a gender). The study was approved by the Humboldt University Psychology Department Ethical Review Board (2025-19-k-R). Here, you can find our pre-registration for Studies 1a and 1b: https://aspredicted.org/6nu75m.pdf.</p>
+<h3>Materials.</h3>
+<p>The task was programmed using PsychoPy builder and then uploaded on the Humboldt University JATOS server [21] https://www.zotero.org/google-docs/?RVsTgj  [22]. To create our stimuli, we used an average of 32 male and female faces with a neutral emotion (i.e.: AKDEF from the Karolinska Directed Emotional Faces Database; Lundqvist and Litton , 1998). Since the base image was a morph of male and female faces, it served as an androgynous/gender-neutral base for our task. Following standard methods in the field, we used the function generateStimuli2IFC from the RCICR package on R to create 500 unique pairs of stimuli for the task [12]. Each pair of images of stimuli consisted of 512 x 512 pixel images of the base face with sinusoidal noise superposed on one image and the inverse of that noise superimposed on the second image (Please refer to Figure 1).</p>
+<p>Procedure. Participants were redirected to Jatos via Prolific. We first presented them with the chance to read the letter of information to provide their consent. Participants were then provided with the instructions: &quot;Your job is to choose the person who looks more [less] in control of what they do and what happens as a result.&quot; We also provided them with an example of having control as a person flipping a switch to turn the light on.</p>
+<p>Participants were instructed to use the right and left arrow keys to make their choice.</p>
+<p>There was no time limit for each trial, but we noted that the faces might look very similar to each other but are indeed different. We asked participants to make the choice based on their initial intuition and to stay fully concentrated. The order of the stimuli was randomized per participant.</p>
+<p>We also included 6 attention check trials to our task. For these trials, the images on the screen would have an arrow pointing either left or right. Participants had to select the corresponding side. Participants were excluded if they missed more than 2 attention checks.</p>
+<p>You can also find the scripts for the task and analysis, as well as the stimuli on our OSF repository.</p>
+<h3>Data Analysis Plan.</h3>
+<p>We used the generateCI function from the RCICR package to compute the classification images. We created CIs for the full sample of each condition, as well as CIs based on the gender of the participant.</p>
+<p>To assess how meaningful each participant&#x27;s classification image (CI) was, we computed the information value (infoVal) for each individual CI using the computeInfoVal2IFC function from the RCICR package. The infoVal indicates how different a participant&#x27;s responses were from what would be expected by chance, using a comparison against a randomly simulated dataset (Brinkman et al., 2019). Because infoVal is expressed on a z-score scale, a value of 1.96 or higher indicates that a participant&#x27;s CI was significantly more informative than random noise, at the conventional threshold of p = .05. We used this cutoff to identify a subset of participants (hereafter referred to as the high infoVal group) whose individual CIs carried significant informational content.</p>
+<p>We also generated z-maps for two CIs: the high AoA CI for the low AoA CI, and the CI derived from the high infoVal group of the high AoA condition. A z-map visualizes, pixel by pixel, which regions of a CI significantly predicted participants&#x27; judgments; higher z-scores at a given pixel indicate that variation in that pixel was more strongly associated with participants&#x27; ratings.</p>
+<h3>Results</h3>
+<p>Based on visual observations alone, the CI of high AoA appeared more feminine and less masculine than the one from low AoA (Please refer to Figures 2 and 3). The high AoA CI also looked like it would be more trustworthy, attractive, and dominant. The CI of high AoA has very defined eyes, nose, lips and jawline. Our visual observations are also supported by our Z-maps. For our infoVals, we found a mean value of 1.57, with a range from -1.38 to 5.39. gender. Rows represent Study 1 (androgynous base image) and Study 2 (masculine base image). Columns show the full-sample CI alongside CIs split by participant gender (female, male) from the image generation phase. The left panel shows High AoA CIs; the right panel shows Low AoA CIs.</p>
+<h3>Transparency and Openness</h3>
+<p>We originally pre-registered that we would create 10 CIs from random subsets of 20 participants to use for ratings in Study 1b. However, we have deviated from the preregistration and instead used group-level CIs and anti-CIs for low and high AoA, as well as gender-split CIs for low and high AoA. We have two reasons for the deviation.</p>
+<p>First, the main reason for this deviation is that we found that infoVals would be a better way to make sure that the CIs are informative. We, hence, looked into the infoVals and found that the CI from the whole group and the CI from participants with an infoVal higher than 1.96 look highly similar. We also found a strong correlation of 0.89 between z-maps from the group CI and high infoVal CI and a moderate correlation of 0.53 between the low and high infoVal CIs. Second, we found that the 10 CIs created from random subsets of participants looked highly similar to each other. You can find more information in the Supplementary Materials.</p>
+<h3>Study 1b</h3>
+<p>Study 1b serves as the second phase of the reverse correlation experiment. Since the output from Phase 1 is images that are only interpretable by visual observation, this second phase aims to provide quantitative information on the appearances of the different CIs.</p>
+<h3>Methods</h3>
+<h3>Participants.</h3>
+<p>Participants were recruited via Prolific from a United Kingdom sample. The final sample consisted of 156 participants (M~age~ = 30.21 years; 60 women, 67 men, 29 who did not select a gender).</p>
+<h3>Materials and Procedure.</h3>
+<p>We used PsychoPy to create a simple rating task and uploaded it onto Jatos. Each image was shown once, alongside the personality traits to be rated, from 1 to 100. Each image was rated on trustworthiness, dominance, attractiveness, agency, femininity, and masculinity. Trustworthiness and attractiveness are both measures related to femininity. Dominance was included as a masculinity factor and to control for the possibility that participants might be conflating agency with dominance. We asked participants to rate the base image, as well as all classification images from study 1a.</p>
+<h3>Analysis.</h3>
+<p>We used R to pre-process the data and Jamovi to analyze the results. We ran mixed model analyses as defined in the pre-registration, as well as exploratory analyses looking at the ratings of the gender-split CIs.</p>
+<h3>Results</h3>
+<p>Pre-Registered Analysis. The ratings confirmed our visual impression. The high AoA CI was rated as more feminine and less masculine than both the base image (Please refer</p>
+<h3>Interim Discussion</h3>
+<p>Following our expectations, high AoA looked more attractive and trustworthy.The representation of high AoA was rated as more feminine than masculine, making our findings go in the opposite direction as our hypothesis. However, one possible reason that high AoA was rated with high femininity might have been due to the base image used for the reverse correlation task. Although androgynous by construction, the base image was rated more feminine than masculine. Hence, it could be that selecting a face as high agency might amplify the gender of the base image.. For this reason, we ran a second study which aimed to address this possibility. In the second study, we ran the reverse correlation task again, using an average masculine face as the base image. If our reasoning above is correct, then participants should now enhance the masculine features of the base image when thinking about &quot;High Agency&quot;. masculinity, and femininity as a function of condition (base image, high-agency CI, low-agency CI) in Study 1b. Error bars represent 95% confidence intervals.</p>
+<h3>Study 2a</h3>
+<h3>Methods</h3>
+<h3>Participants.</h3>
+<p>Participants were recruited via Prolific from a United Kingdom sample. A total of 100 participants were recruited, with 50 participants randomly assigned to each of the two AoA conditions (high vs. low). After exclusion criteria were applied, the final sample consisted of 87 participants (M~age~ = 32 years; 33 women, 39 men, 15 who did not select a gender). Here, you can find our pre-registration for Studies 1a and 1b: https://aspredicted.org/i9qu79.pdf.</p>
+<h3>Materials and Procedure.</h3>
+<p>We used the same set up as Study 1a, except for the base face of the stimuli. We used the Karolinska Directed Emotional Faces Database again but used the average male face with a neutral emotion, instead of the one with both genders.</p>
+<h3>Results</h3>
+<p>Results more masculine than the one from Study 1 (Please refer to Figures 2 and 5).</p>
+<h3>Based on visual observation the classification image of high AoA from Study 2 looks</h3>
+<p>Moreover, the CI of high AoA looks more masculine and less feminine than the one of low AoA. The CI of high AoA also looks more trustworthy, attractive, and dominant than the low AoA CI. Similarly to Study1a, the CI of high AoA has very defined eyes, nose, lips and jawline. Our visual observations are also supported by our Z-maps. For our infoVals, we found a mean value of 1.50, with a range from -1.52 to 6.71. Study 2b Methods Participants. Participants were recruited via Prolific from a United Kingdom sample, matching the sample size and characteristics of Study 1b. The final sample consisted of 156 participants (M~age~ = 30.3 years; 73 women, 69 men, 14 who did not select a gender). Materials and Procedure. We used the same set up as Study 1b, but using the CIs generated in study Study 2a.</p>
+<h3>Results</h3>
+<p>We ran the pre-registered mixed model to compare the ratings between studies and conditions. We found that high AoA CI and the base image were rated equally high to each other but higher than the low AoA CI for agency (Please refer to Figure 6 For attractiveness ratings, on the other hand, the high AoA CI was rated higher than the base image (b = 4.95, 95% CI [1.30, 8.59], t(272) = 2.67, p = .008), both of which were also rated higher than the low AoA CI (b = -30.35, 95% CI [-33.99, -26.71], t(273) = -16.40, p &lt; .001). For femininity ratings, however, there were no significant differences between conditions. masculinity, and femininity as a function of condition (base image, high-agency CI, low-agency CI) in Study 2b. Error bars represent 95% confidence intervals.</p>
+<h3>Studies 1b and 2b Comparisons</h3>
+<p>We also ran an exploratory mixed model analysis to compare the ratings of CIs based on the gender of the participant. It should be noted that the gender split was done based on the gender of participants in Studies 1a and 2a (the image generation phase) and not Studies 1b and 2b (the image rating phase). As such, the CIs reflect the representation of AoA depending on the gender of the observer. Another key factor is that the base image used in Study 1a was the one rated as more feminine by participants, while the base image used in Study 2a was rated as more masculine.</p>
+<p>Several measures showed a main effect of study alone, independent of participant gender (Please refer to Figure 7). The CIs from Study 2a were rated as more masculine A main effect of participant gender was found only for masculinity ratings (b = 5.40, 95% CI [0.61, 10.20], t(434) = 2.21, p = .027): the CIs of male participants were rated as more masculine than those of female participants overall. On the other hand, dominance (b = -3.96, 95% CI [-8.27, 0.36], t(431) = -1.80, p = .072), femininity (b = -3.68, 95% CI [-8.61, 1.24], t(430) = -1.47, p = .143), trustworthiness (b = 1.91, 95% CI [-1.95, 5.76], t(433) = 0.97, p = .332), and attractiveness (b = -3.82, 95% CI [-8.24, 0.60], t(427) = -1.70, p = .090) did not reach significance.</p>
+<p>Turning to interaction effects, we found a significant interaction between study and participant gender for agency ratings: in Study 1a, the CI from female participants was rated as having more agency than the CI from male participants (b = 8.85, 95% CI [0.73, 16.96], t(432) = 2.14, p = .033). A significant interaction was also found for masculinity ratings, where the CI from male participants was associated with a more masculine-looking CI in Study 1a compared to the CI from female participants (b = -12.42, 95% CI [-22.01, -2.84], t(432) = -2.55, p = .011). Finally, significant interactions between study and participant gender emerged for femininity, trustworthiness, and attractiveness. For Study 1a, the CI generated from female participants was rated as more feminine (b = 21.16, 95% CI [11.32, 31.01], t(428) = 4.22, p &lt; .001), attractive (b = 34.62, 95% CI [25.78, 43.55], t(425) = 7.69, p &lt; .001), and trustworthy (b = 24.48, 95% CI [16.77, 32.18], t(430) = 6.24, p &lt; .001) than the one generated from male participants. Conversely, although no difference was found in femininity ratings, the CI for Study 2a was more attractive and trustworthy when generated from male participants than female participants. agency, masculinity, and femininity for the high-agency CI, plotted separately for Study 1b and Study 2b and split by participant gender. Error bars represent 95% confidence intervals.</p>
+<h3>Discussion</h3>
+<p>The present study investigated whether the mental representation of agency is gendered. Extensive prior work has shown that facial or trait masculinity predicts perceptions of greater agency [4] https://www.zotero.org/google-docs/?lDia5u  [5]. The present study inverted this direction, asking instead whether agency is associated with a representation of masculinity: does an agentic mental representation itself carry a masculine appearance? Our findings suggest that, while perceptions of masculinity may predict an increase in AoA, AoA does not predict perceptions of masculinity. Across two studies using different base images, our findings show that agency is not strictly represented as masculine, but rather depends on the facial features of the base image and the gender of the viewer.</p>
+<p>In Study 1a, when the stimulus we used as the base of our task had feminine-rated features, agency was actually represented as feminine. Although using a masculine base image in Study 2a did attenuate these results, high agency was represented as more masculine than low agency but equally masculine to the base image. The masculinity and femininity of high agency CIs were also dependent on the gender of the viewer for both studies. The findings of Studies 1a and 2a may therefore be attributable to the base image used for the stimuli. Although technically gender-neutral, the base image used in Study 1a was rated as more feminine than masculine and participants might have integrated the feminine features from the base image into their representation of agency.</p>
+<p>However, the role of gender in agency perception might be too complex to manifest in a simple pattern and depends on factors such as the viewer&#x27;s gender. Another possible explanation for the AoA agency CI being represented in a feminine manner in Study 1a could be linked to the finding that gender representations in faces that do not always align with those captured through verbal or behavioral measures [23] https://www.zotero.org/google-docs/?gBTPUS  [24]. One example is that androcentrism (the tendency to attribute masculinity as the default when no gender information is given) does not generalize to face perception.</p>
+<p>When asked to pick the face that looks most like a typical person, the CI turned out looking feminine [25]. There are many possible explanations for this finding, such as the softening of facial traits due to the averaging process. The absence of androcentrism in facial representations could partially explain why our high agency CIs looked more feminine than masculine. Because CIs have a tendency to look feminine, even when in contexts where we expect gender-neutrality or masculinity, it is possible that the mental representation of agency does not look masculine in spite of the verbal associations of masculinity.</p>
+<p>Based on our results, it seems to be that agency is not represented in a gendered manner but in a socially desirable way. That is, instead of masculinity, we found that trustworthiness and attractiveness were represented in agency. The high agency CIs from Studies 1a and 2a were both rated as more attractive and trustworthy than the low agency CI and the base image. This pattern suggests that, at least in the context of our study, perceivers may be relying on general evaluative dimensions-how good, competent, or likeable a face appears-rather than on gender-typical features when inferring agentic qualities. This finding is consistent with the literaturehttps://www.zotero.org/google-docs/?P3SS9h where agency is discussed to be a desirable traithttps://www.zotero.org/google-docs/?P3SS9h especially when it comes to choosing a mate [26] ,  [27] ,  [28]. Given that agency is already understood as a socially desirable characteristic, it follows that a face designed to convey high agency would also be perceived as more attractive, since desirable traits tend to cluster together in social perception. This interpretation goes in line with the&quot;what is good is beautiful&quot; theory [29] https://www.zotero.org/google-docs/?gGwpy7 which claims that traits judged as positive are bundled together in our perception of attractiveness. Hence, agency being a positive trait to have, it seems to be bundled with trustworthiness (another positive trait) and represented by an attractive face.</p>
+<p>The increased representation of trustworthiness and attractiveness in both studies (more strongly so in Study 1a) may also be tied to our finding that high agency is not associated with masculinity. Using both reverse correlation and other models of facial feature attributionshttps://www.zotero.org/google-docs/?YjlpJ1 trustworthiness has repeatedly been linked to femininity while dominance has been linked with masculinity [30] https://www.zotero.org/google-docs/?YjlpJ1  [31] ,  [32]. As the CIs of high agency portrayed a strong trustworthiness representation and a lack of dominance representation the link between dominance/trustworthiness and gender might be driving our findings regarding agency being represented in a feminine manner. Arguably, the representation of agency as trustworthy and attractive (and thus feminine) might be overriding the representation of agency as masculine, suggesting that even though masculinity is associated with agency in explicit trait judgments, the implicit/visual representation of agency inherits trustworthiness&#x27;s feminine coding rather than dominance&#x27;s masculine coding.</p>
+<p>Moreover, the gender of participants played an important role in their mental representation of agency. We found a gender congruency effect: when the base face&#x27;s gender matched that of the participants from Studies 1a and 2a, that gender representation was exaggerated in the CIs of high agency. In Study 1a, when the base face was rated as high on femininity, the CI of high agency looked more agentic for the female group than the male group. In Study 2a, when the base face was high on masculinity, the CI of high agency looked more agentic for the male group than the female group. Interestingly, in Study 2a, female participants also rated the high agency CI (built from the masculine base image) as more dominant. This suggests that when the underlying face already had masculine features, women&#x27;s mental representation of agency incorporated dominance as well.</p>
+<p>The gender congruency effect could also be discussed in terms of in-and out-group representations rather than a gender-specific phenomenon. Reframing the gender congruency effect described above, when the base face characterized the in-group of the participant, the CI also looked to be higher on agency. This finding could be an aspect of self-projection or in-group projectionhttps://www.zotero.org/google-docs/?N1yeRO onto one&#x27;s representation of high agency [33] ,  [34]. In other words, participants might have projected both themselves and their perception of their in-group onto their representation of high agency. Our results, however, cannot differentiate between an in-group representation of agency and a gender-congruent representation of agency. For this reason, future studies could explore how self-projection, in-group projection, or gender representations influence one&#x27;s representation of agency.</p>
+<p>It&#x27;s also important to mention that the reverse correlation method has been criticized for having inflated type 1 errors [35]. Our task includes some measures to ensure that our results are not due to a type 1 error. First of all, we included two opposing conditions (High Agency vs Low Agency), which provides a control through comparison between conditions. We also included a comparison of the CIs to those of the base image, which informs us that the ratings we get on the CI go beyond the main features of the base image. We have also taken some of the suggestions by Cone et al [35] to make sure that our results are not due to general statistical effects: we designed the task to have 500 trials in Studies 1a and 2a, which is shown to lead to higher infoVals and computed the infoVals at the individual level and ran a correlation analysis on the z-maps of the group CI and high infoVal CIs to ensure that the group CIs are informative. We also included attention checks which ensured that the participants were attending to the stimuli throughout the task, even if they end up with a lower infoVal.</p>
+<h3>Conclusion</h3>
+<p>Our study aimed to investigate whether agency is represented by masculinity. Taken togetherhttps://www.zotero.org/google-docs/?rurb5a our findings suggest that the relationship between agency and masculinity is not symmetrical: while masculinity reliably predicts perceptions of agency [4] ,  [5], the reverse does not hold: we do not associate agency with masculinity. Instead, the representation of agency was coded through trustworthiness and attractiveness rather than masculinity. Given that AoA shapes real-world judgments of leadership and credit [9], this dissociation raises the question of where the masculine-agency bias actually takes hold (whether in explicit trait attribution, in visual representation, or in the mapping between the two) a question future work combining reverse correlation with explicit trait measures could directly address. More broadly, as gender is a social construct, identifying which features are and are not intrinsically represented as gendered helps clarify how gender itself is defined and constructed [36].</p>
+<h3>Funding Statement</h3>
+<p>S.B discloses her doctoral funding from the Berlin School of Mind and Brain (S.00006.14.510100). M.B. discloses support for the research of this work from the Einstein Foundation [Einstein Strategic Professorship, grant number EPP-2018-483] and the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Germany&#x27;s Excellence Strategy-EXC 2002/1 &quot;Science of Intelligence&quot; [project number 390523135].</p>
+<h3>Data Availability:</h3>
+<p>All study materials, including preregistrations, datasets, and analysis code, used in the current study are available in the Open Science Framework (OSF) repository.</p>
+<h3>Author Contributions:</h3>
+<p>All authors contributed to the conceptualization of the study and its methodology. S.B. developed the prepared the stimuli, collected the data, and performed the formal analyses, prepared the figures, and wrote the original draft. M.B. and C.M.G. provided supervision, and M.B. additionally provided resources and acquired funding. All authors contributed to, reviewed, edited, and approved the manuscript.</p>
+<h3>Figure 1 :</h3>
+<p>Figure 1: (A) Base image used in study 1A: AKDEF from the Karolinska Directed</p>
+<h3>Figure 2 :</h3>
+<p>Figure 2: Classification images (CIs) of high AoA and low AoA by study and participant</p>
+<h3>Figure 3 :</h3>
+<p>Figure 3: Z-maps of high AoA (on the left) and low AoA (on the right) for Study 1a.</p>
+<h3>Figure 4 ;</h3>
+<p>b = 19.30, 95% CI [14.50, 24.00], t(241) = 8.01, p &lt; .001, and b = -18.08, 95% CI [-23.31, -12.80], t(243) = -6.80, p &lt; .001, respectively) and the low AoA face (b = -25.90, 95% CI [-30.60, -21.20], t(241) = -10.79, p &lt; .001, and b = 9.26, 95% CI [4.04, 14.50], t(242) = 3.49, p &lt; .001, respectively). Similarly, the high AoA CI was also rated as more attractive and more trustworthy than both the base image (b = 18.80, 95% CI [14.60, 22.90], t(242) = 8.78, p &lt; .001, and b = 7.12, 95% CI [3.26, 11.00], t(242) = 3.63, p &lt; .001, respectively) and the low AoA CI (b = -30.30, 95% CI [-34.50, -26.10], t(241) = -14.23, p &lt; .001, and b = -20.87, 95% CI [-24.73, -17.00], t(242) = -10.63, p &lt; .001, respectively). When it came to dominance, however, the high AoA CI was not significantly different from the base face (b = -0.80, 95% CI [-5.92, 4.32], t(242) = -0.31, p = .759), both of which were rated as more dominant than the low AoA CI (b = -10.14, 95% CI [-15.25, -5.04], t(243) = -3.91, p &lt; .001).</p>
+<h3>Figure 4 :</h3>
+<p>Figure 4: Mean ratings of attractiveness, trustworthiness, dominance, agency,</p>
+<h3>Figure 5 :</h3>
+<p>Figure 5: Z-maps of high AoA (on the left) and low AoA (on the right) for Study 2a.</p>
+<p>; b = -19.43, 95% CI [-23.59, -15.28], t(273) = -9.19, p &lt; .001), masculinity (b = -17.78, 95% CI [-21.67, -13.89], t(271) = -8.98, p &lt; .001), trustworthiness (b = -18.95, 95% CI [-23.03, -14.88], t(273) = -9.15, p &lt; .001), and dominance (b = -19.00, 95% CI [-23.04, -14.95], t(271) = -9.24, p &lt; .001).</p>
+<h3>Figure 6 :</h3>
+<p>Figure 6: Mean ratings of attractiveness, trustworthiness, dominance, agency, .48, 95% CI[29.68, 39.28], t(446) = 14.10, p &lt; .001) and more dominant (b = 5.91, 95% CI[1.59, 10.24], t(443) = 2.69, p = .007) than those from Study 1a, while the CIs from Study 1a were rated as more feminine (b = -39.17, 95% CI [-44.11, -34.23], t(442) = -15.59, p &lt; .001), more trustworthy (b = -9.27, 95% CI [-13.13, -5.40], t(443) = -4.78, p &lt; .001), and more attractive (b = -10.33, 95% CI [-14.76, -5.90], t(438) = -4.58, p &lt; .001) than those from Study 2a.</p>
+<h3>Figure 7 :</h3>
+<p>Figure 7: Mean base-corrected ratings of attractiveness, trustworthiness, dominance,</p>
+<h3>References</h3>
+<p>P. Haggard, S. Clark, and J. Kalogeras, &quot;Voluntary action and conscious awareness,&quot; Nat. Neurosci., vol. 5, no. 4, pp. 382-385, Apr. 2002, doi: 10.1038/nn827.</p>
+<p>S. Gallagher, &quot;Multiple aspects in the sense of agency,&quot; New Ideas Psychol., vol. 30, no. 1, pp. 15-31, Apr. 2012, doi: 10.1016/j.newideapsych.2010.03.003.</p>
+<p>P. Haggard, &quot;Sense of agency in the human brain,&quot; Nat. Rev. Neurosci., vol. 18, no. 4, Art. no. 4, Apr. 2017, doi: 10.1038/nrn.2017.14.</p>
+<p>S. L. Bem, &quot;The Measurement of Psychological Androgyny&quot; 1974.</p>
+<p>N. Hsu, K. L. Badura, D. A. Newman, and M. E. P. Speach, &quot;Gender, &#x27;masculinity,&#x27; and &#x27;femininity&#x27;: A meta-analytic review of gender differences in agency and communion.,&quot; Psychol. Bull., vol. 147, no. 10, pp. 987-1011, Oct. 2021, doi: 10.1037/bul0000343.</p>
+<p>I. Ahnesjö et al., &quot;Considering Gender-Biased Assumptions in Evolutionary Biology,&quot; Evol. Biol., vol. 47, no. 1, pp. 1-5, Mar. 2020, doi: 10.1007/s11692-020-09492-z.</p>
+<p>V. Hayssen, &quot;Misconceptions about Conception and Other Fallacies: Historical Bias in Reproductive Biology,&quot; Integr. Comp. Biol., vol. 60, no. 3, pp. 683-691, Sep. 2020, doi: 10.1093/icb/icaa035.</p>
+<p>M. Pownall and N. Heflick, &quot;Mr. Active and Little Miss Passive? The Transmission and Existence of Gender Stereotypes in Children&#x27;s Books,&quot; Sex Roles, vol. 89, no. 11, pp. 758-773, Dec. 2023, doi: 10.1007/s11199-023-01409-2.</p>
+<p>L. A. Rudman and P. Glick, &quot;Prescriptive Gender Stereotypes and Backlash Toward Agentic Women,&quot; J. Soc. Issues, vol. 57, no. 4, pp. 743-762, 2001, doi: 10.1111/0022-4537.00239.</p>
+<p>O. Bareket and S. T. Fiske, &quot;A systematic review of the ambivalent sexism literature: Hostile sexism protects men&#x27;s power; benevolent sexism guards traditional gender roles.,&quot; Psychol. Bull., vol. 149, no. 11-12, pp. 637-698, Nov. 2023, doi: 10.1037/bul0000400.</p>
+<p>M. W. Rossiter, &quot;The Matthew Matilda Effect in Science,&quot; Soc. Stud. Sci., vol. 23, no. 2, pp. 325-341, May 1993, doi: 10.1177/030631293023002004.</p>
+<p>L. Brinkman, A. Todorov, and R. Dotsch, &quot;Visualising mental representations: A primer on noise-based reverse correlation in social psychology,&quot; Eur. Rev. Soc. Psychol., vol. 28, no. 1, pp. 333-361, Jan. 2017, doi: 10.1080/10463283.2017.1381469.</p>
+<p>A. J. Ahumada, &quot;Perceptual Classification Images from Vernier Acuity Masked by Noise,&quot; Perception, vol. 25, no. 1_suppl, pp. 2-2, Aug. 1996, doi: 10.1068/v96l0501.</p>
+<p>A. Ahumada and J. Lovell, &quot;Stimulus Features in Signal Detection,&quot; J. Acoust.</p>
+<p>Soc. Am., vol. 49, no. 6B, pp. 1751-1756, Jun. 1971, doi: 10.1121/1.1912577.</p>
+<p>R. Dotsch, D. H. J. Wigboldus, O. Langner, and A. van Knippenberg, &quot;Ethnic Out-Group Faces Are Biased in the Prejudiced Mind,&quot; Psychol. Sci., vol. 19, no. 10, pp. 978-980, Oct. 2008, doi: 10.1111/j.1467-9280.2008.02186.x.</p>
+<p>R. Dotsch and A. Todorov, &quot;Reverse Correlating Social Face Perception,&quot; Soc.</p>
+<p>Psychol. Personal. Sci., vol. 3, no. 5, pp. 562-571, Sep. 2012, doi: 10.1177/1948550611430272.</p>
+<p>J. C. Karremans, R. Dotsch, and O. Corneille, &quot;Romantic relationship status biases memory of faces of attractive opposite-sex others: Evidence from a reverse-correlation paradigm,&quot; Cognition, vol. 121, no. 3, pp. 422-426, Dec. 2011, doi: 10.1016/j.cognition.2011.07.008.</p>
+<p>R. F. Lei and G. V. Bodenhausen, &quot;Racial Assumptions Color the Mental Representation of Social Class,&quot; Front. Psychol., vol. 8, Apr. 2017, doi: 10.3389/fpsyg.2017.00519.</p>
+<p>A. B. Gundersen and J. R. Kunst, &quot;Feminist ≠ Feminine? Feminist Women Are Visually Masculinized Whereas Feminist Men Are Feminized,&quot; Sex Roles, vol. 80, no. 5, pp. 291-309, Mar. 2019, doi: 10.1007/s11199-018-0931-7.</p>
+<p>M. Giacomin, K. O. Tskhay, and N. O. Rule, &quot;Gender stereotypes explain different mental prototypes of male and female leaders,&quot; Leadersh. Q., vol. 33, no. 6, p. 101578, Dec. 2022, doi: 10.1016/j.leaqua.2021.101578.</p>
+<p>K. Lange, S. Kühn, and E. Filevich, &quot;&quot;Just Another Tool for Online Studies&quot; (JATOS): An Easy Solution for Setup and Management of Web Servers Supporting Online Studies,&quot; PLOS ONE, vol. 10, no. 6, p. e0130834, Jun. 2015, doi: 10.1371/journal.pone.0130834.</p>
+<p>J. Peirce et al., &quot;PsychoPy2: Experiments in behavior made easy,&quot; Behav. Res.</p>
+<p>Methods, vol. 51, no. 1, pp. 195-203, Feb. 2019, doi: 10.3758/s13428-018-01193-y.</p>
+<p>A. G. Greenwald et al., &quot;The Implicit Association Test at age 20: What is known and what is not known about implicit bias,&quot; Apr. 07, 2020, OSF. doi: 10.31234/osf.io/bf97c.</p>
+<p>B. A. Nosek, C. B. Hawkins, and R. S. Frazier, &quot;Implicit social cognition: from measures to mechanisms,&quot; Trends Cogn. Sci., vol. 15, no. 4, pp. 152-159, Apr. 2011, doi: 10.1016/j.tics.2011.01.005.</p>
+<p>J. R. Kunst et al., &quot;Investigation of gender bias in the mental imagery of faces,&quot; Group Process. Intergroup Relat., vol. 27, no. 6, pp. 1376-1402, Sep. 2024, doi: 10.1177/13684302231200168.</p>
+<p>M. Dufner and S. Krause, &quot;On How to Be Liked in First Encounters: The Effects of Agentic and Communal Behaviors on Popularity and Unique Liking -Michael Dufner, Sascha Krause, 2023.&quot; Accessed: Jul. 02, 2026. [Online]. Available: https://journals.sagepub.com/doi/full/10.1177/09567976221147258?__cf_chl_f_tk=HOIs Dk8apCJOPT4Avx9l0y49Uy4OJxRWDHx9amHcxxw-1782994460-1.0.1.1-cTF6zf6nCnu 2lLwFZlEGXDW3MdXH45nv_ZkZRJkdcn4#bibr25-09567976221147258</p>
+<p>M. Moroń, &quot;Mate preferences toward agency and communion,&quot; Lett. Evol. Behav.</p>
+<p>Sci., vol. 6, no. 1, pp. 1-4, Mar. 2015, doi: 10.5178/lebs.2015.32.</p>
+<p>D. L. Paulhus, &quot;The Big Two Dimensions of Desirability,&quot; in Agency and Communion in Social Psychology, Routledge, 2018.</p>
+<p>A. C. Little, D. M. Burt, and D. I. Perrett, &quot;What is good is beautiful: Face preference reflects desired personality,&quot; Personal. Individ. Differ., vol. 41, no. 6, pp. 1107-1118, Oct. 2006, doi: 10.1016/j.paid.2006.04.015.</p>
+<p>A. Bagnis, V. Colonnello, P. M. Russo, and K. Mattarozzi, &quot;Facial trustworthiness dampens own-gender bias in emotion recognition,&quot; Psychol. Res., vol. 88, no. 2, pp. 458-465, Mar. 2024, doi: 10.1007/s00426-023-01864-2.</p>
+<p>N. N. Oosterhof and A. Todorov, &quot;The functional basis of face evaluation,&quot; Proc.</p>
+<p>Natl. Acad. Sci., vol. 105, no. 32, pp. 11087-11092, Aug. 2008, doi: 10.1073/pnas.0805664105.</p>
+<p>A. Todorov, C. Y. Olivola, R. Dotsch, and P. Mende-Siedlecki, &quot;Social Attributions from Faces: Determinants, Consequences, Accuracy, and Functional Significance,&quot; Annu. Rev. Psychol., vol. 66, no. Volume 66, 2015, pp. 519-545, Jan. 2015, doi: 10.1146/annurev-psych-113011-143831.</p>
+<p>R. Imhoff, R. Dotsch, M. Bianchi, R. Banse, and D. H. J. Wigboldus, &quot;Facing Europe: Visualizing Spontaneous In-Group Projection,&quot; Psychol. Sci., vol. 22, no. 12, pp. 1583-1590, Dec. 2011, doi: 10.1177/0956797611419675.</p>
+<p>R. Imhoff and R. Dotsch, &quot;Do We Look Like Me or Like Us? Visual Projection as Self-or Ingroup-Projection,&quot; Soc. Cogn., vol. 31, no. 6, pp. 806-816, Dec. 2013, doi: 10.1521/soco.2013.31.6.806.</p>
+<p>J. Cone, J. L. Brown-Iannuzzi, R. Lei, and R. Dotsch, &quot;Type I Error Is Inflated in the Two-Phase Reverse Correlation Procedure,&quot; Soc. Psychol. Personal. Sci., vol. 12, no. 5, pp. 760-768, Jul. 2021, doi: 10.1177/1948550620938616.</p>
+<p>T. Morgenroth and M. K. Ryan, &quot;Gender Trouble in Social Psychology: How Can Butler&#x27;s Work Inform Experimental Social Psychologists&#x27; Conceptualization of Gender?,&quot; Front. Psychol., vol. 9, p. 1320, Jul. 2018, doi: 10.3389/fpsyg.2018.01320.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
