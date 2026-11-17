@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: From structured knowledge to flexible
+behaviour: the importance of local prefrontal computations</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+From structured knowledge to flexible behaviour: the importance of local
+prefrontal computations
+</p>
+<p class="meta">
+2026-11-17 · Metacheck 0.4.4.3
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>2</b><span>to fix</span></a><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>13</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(2)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Ethics
+Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to involve live data collection and lacked an
+ethics approval statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, but it was not present:</p>
+<blockquote>
+<p>Subjects were then cued to either repeat the sequence as shown or
+produce it in reverse (Figure 4c).</p>
+</blockquote>
+<blockquote>
+<p>Subjects were shown different colours at the top and bottom of a
+screen, and a subsequent contextual cue indicated whether to saccade to
+the ‘top’ or ‘bottom’ colour on a colour wheel. (b) Lateral PFC
+representations of the top and bottom colour were initially
+orthogonal.</p>
+</blockquote>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Effect
+Sizes in t-tests and F-tests</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 t-test and/or F-test where effect sizes are not reported.
+Check these tests in the table below, and consider adding effect
+sizes.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We recommend checking the sentences below, and add any missing effect
+sizes.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+This structured connectivity allows inference at t = 5, where the
+ABCD-loop is completed and a new repeat begins. (c) Example cell
+recorded by El-Gaby et al., (2024) which has no consistent tuning for
+the current location of the animal across tasks (top).
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating that effect sizes are often
+not reported:</p>
+<ul>
+<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
+(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
+Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
+</ul>
+<p>For educational material on reporting effect sizes:</p>
+<ul>
+<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
+to Effect Sizes and Confidence Intervals</a></li>
+</ul>
+</div>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+This structured connectivity allows inference at t = 5, where the
+ABCD-loop is completed and a new repeat begins. (c) Example cell
+recorded by El-Gaby et al., (2024) which has no consistent tuning for
+the current location of the animal across tasks (top).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+t = 5
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable t(df)=value found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 1 reference with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(13)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 154 references with DOIs. You cited 1 reference with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Samborska, V., Butler, J.L., Walton, M.E., Behrens, T.E.J., Akam, T.,
+2022. Complementary task representations in hippocampus and prefrontal
+cortex for generalizing the structure of problems. Nat. Neurosci. 25,
+1314-1326. <a href="https://doi.org/10.1038/s41593-022-01149-8" class="uri">https://doi.org/10.1038/s41593-022-01149-8</a>
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/886D270E8D4E05B7D4A7D73745D82F" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 154 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 154 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>The prefrontal cortex (PFC) transforms what we know about the world into intelligent, adaptive behaviour. Existing theories have traditionally explained this function through cross-circuit interactions, where PFC neurons control sensory-action mappings elsewhere in the brain. However, recent findings reveal a remarkable organisation of neuronal activity that enables flexible computation within the PFC itself. These findings motivate a framework of duplicated and structured representations (DSRs), where the abstract structure of the world is embedded locally in connections between prefrontal neurons encoding conjunctions of action and context. We review an extensive body of empirical findings showing that DSRs explain canonical PFCdependent behaviours as diverse as sequence working memory, planning, and value-guided decisions. In each case, PFC neurons represent multiple actions simultaneously. Structured connectivity between these action representations then guides local network dynamics to infer how behaviour should be organised -simplifying both computation and readout. Taken further, the same logic offers a mechanistic foothold on some of the PFC&#x27;s most elusive functions, including hierarchical reasoning and social computations. Overall, the DSR framework provides a unified understanding of prefrontal computations and a tractable basis for a new generation of mechanistic research.</p>
+<p>How can we make sense of these seemingly disparate roles of PFC, from gating simple stimulus-response mappings to sequential planning, schematic inferences, and social computations?</p>
+<p>Cognitive neuroscience has made great strides towards uncovering the computational principles used by the PFC to achieve behavioural flexibility. A dominant view has emerged, which proposes that the PFC encodes the abstract contexts governing behaviour -the &quot;if-then&quot; conditionals that make Hassan prioritise weeding over watering after a rainy night. Under this regime, structured knowledge is encoded by abstract prefrontal context representations that are dissociated, or &quot;factorised&quot;, from representations of concrete actions and sensory inputs (</p>
+<h3>1-Introduction</h3>
+<p>Our rich repertoire of behaviours, and ability to adjust them when necessary, is central to our success in a changing world (Miller et al., 1960). This flexibility requires us to turn knowledge about the world into organised actions that serve our current goals, a process that critically involves the Prefrontal cortex (PFC; see Supplementary Box 1 for a discussion of PFC definitions). Indeed, PFC damage often spares knowledge of the world while impairing the ability to use it to guide behaviour (Duncan et al., 1996; Shallice, 1982; Shallice and Burgess, 1991). Moreover, the dramatic expansion of the primate PFC has been linked to our unique capacity to devise new ways of organising complex behaviours (Klein-Flügge et al., 2022; Passingham, 2021), such as those that enabled the invention of farming in ancient Mesopotamia (Smith, 1995; Zeder, 2011). Such a revolutionary invention necessitated inferring how our actions, and those of others, would change under a multitude of different scenarios -like changing weather conditions, market demands and family dynamics. The PFC is strongly implicated in such inferences about ourselves and others (Klein-Flügge et al., 2022; Mahmoodi and Rushworth, 2026). Yet this diversity of functions poses a challenge for any attempt at a unified mechanistic understanding.</p>
+<p>An emerging body of work suggests an additional type of representation that coexists with factorised representations of abstract context. These findings reveal that the PFC itself computes possible actions through two key representational features. First, dedicated neurons explicitly represent possible actions, and these representations are duplicated across different contexts -different neurons represent the same action depending on its context. Second, structured knowledge is embedded in the connectivity between these duplicated representations, allowing knowledge about the outside world or internal states to shape which combinations of actions can be encoded. Together, duplication and structured connectivity allow the PFC to encode &quot;local copies&quot; of possible actions whose organisation is constrained by synaptic connectivity that embeds abstract structure (Figure 1b). These two features therefore allow the PFC itself to compute over possible actions -it no longer acts merely as a mediator between stimulus and response in other circuits. Instead, the burden of behavioural control is shifted inwards, to local network dynamics within the PFC.</p>
+<p>In this review, we highlight a growing body of empirical findings that can be understood through this framework of duplicated and structured representations (DSRs) in the PFC. We first explain the representation and its algorithmic implications. We then outline how it provides a mechanistic framework that explains emerging empirical data across diverse PFC-dependent tasks, from stimulus-response mappings through value learning to sequence working memory and planning. Finally, we discuss how DSRs align with the diverse functions of different PFC subregions, shedding new light on the evolutionary expansion of PFC and its role in hierarchical reasoning and social inference. For simplicity, we visually illustrate DSRs using single neurons tuned to conjunctions of actions and contexts. However, the same computational principles apply when such conjunctions are encoded at the population level (Supplementary Box 2).</p>
+<h3>2-Local computation in the PFC uses duplication and structure</h3>
+<h3>2.1 Duplicated and Structured Representations (DSRs) of possible actions</h3>
+<p>How does the PFC translate abstract knowledge into flexible behaviour? Consider Hassan, an experienced farmer on the modern-day Euphrates who reorganises his actions depending on the weather. In dry conditions he fertilizes before sowing, but plants first if rain is expected (Figure 1c). Crucially, he can also imagine how his actions, and those of others, would change if the world was different. When his daughter finally gets the tractor she has always dreamed of, Hassan will immediately know how this will reshape both their daily schedules. A wealth of evidence places the PFC at the top of an action selection hierarchy critical for mediating such complex inferences (Fine and Hayden, 2021; Fuster, 2000; Koechlin and Summerfield, 2007; Miller et al., 1960). Here, actions encompass a broad set of volitional choices about states that can be planned over, from concrete limb movements to more abstract decisions like navigating to a particular goal. Under this view, PFC neurons represent possible ways of actively organising future actions rather than passively predicting sensory outcomes (Fine and Hayden, 2021; Miller et al., 1960). We propose that this function depends critically on a pervasive representational principle. The activity of PFC neurons explicitly represents possible actions, and their connectivity embeds structured knowledge that organises these actions. These representations have two key features. They are: 1-Duplicated: The PFC uses different neurons, or different population activity patterns (Supplementary Box 2), to represent the same action depending on its context.</p>
+<p>For example, representations can be duplicated for different ordinal positions; different expected times; different levels of preference; or different task rules. In sequential behaviours, representations are duplicated according to ordinal position. Different populations in Hassan&#x27;s PFC represent the same &#x27;sowing&#x27; action depending on whether it is planned for today, tomorrow, or the day after (Figure 1c). When actions are ranked by preference, representations of the same action are instead duplicated according to their rank. The same plan to &#x27;plant rice&#x27; is represented by different neurons depending on whether it is the first, second, or third priority (Figure 1d). Action representations can also be duplicated according to the sensorimotor mappings specified by different &#x27;rules&#x27;. For example, one set of neurons might encode that &quot;Hassan should water tomorrow if it is dry&quot;, while another would encode that &quot;Hassan should water tomorrow if his niece comes over to help&quot;. Crucially, such tuning generalises across different action combinations -the same neurons encode a particular conjunction of action and context regardless of which actions occur in other contexts. For example, a neuron encoding &#x27;plant oats at position 2&#x27; fires whenever this action occupies that position, regardless of which actions fill the remaining positions (Figure 1d). DSRs are therefore &#x27;combinatorial&#x27;: new combinations -or &quot;assemblies&quot; -of neurons within the local network can represent any of the many possible action combinations, including hypothetical ones that have never been executed before. The result is a highly expressive network brimming with possibilities.</p>
+<p>2-Structured: Our actions are structured by knowledge of the world and ourselves. This knowledge renders some action combinations more probable than others. Such &#x27;action statistics&#x27; can reflect the structure of a particular environment, mirror the abstract rules of a particular task, or emerge from internally generated constraints. We propose that the vast combinatorial landscape of duplicated representations is sculpted by the statistical relationships between actions. For instance, knowledge of seasonal food preferences will constrain connectivity between crop representations in Hassan&#x27;s PFC to determine the order of his planting cycles. In other words, action statistics should constrain the connectivity between the local action copies. Neurons encoding more probable ways of organising actions excite each other, and those encoding improbable action patterns are mutually inhibitory. When this connectivity is persistently active (Box 1), it stabilises neuronal assemblies representing highly probable action combinations (Figure 1e). These assemblies become &quot;attractor&quot; states of the network dynamics, which are more likely to be expressed in the network than assemblies representing alternative action combinations (Figure 1e). Structured connectivity can also be gated (Box 1). In this case, it only mediates information transfer after a control signal is received. This could be an external stimulus, but it could also reflect internal signals indicating execution of an action or a change in internal state. Such gated connectivity allows the PFC to perform various operations over duplicated representations (Figure 1f). Crucially, structured connectivity between duplicated representations does not need to be monosynaptic. Multi-synaptic pathways can impose equivalent structural constraints on action representations. stabilise representations of more likely action combinations. (f) While such persistent connectivity determines which representations are possible (top), gated connectivity implements flexible operations that move PFC between these representations (bottom). Here, gated connections rearrange Hassan&#x27;s crop preferences when he sees that the sun is shining. (g) Left: a factorised code uses separate neurons to encode context and action.</p>
+<p>The relative timing of neuronal activity is critical to represent an action sequence. Centre: a &#x27;latent state&#x27; encoding uses a different neuron to represent each sequence in its entirety. Right: DSRs use the instantaneous activity of different populations of neurons to represent the different elements of a sequence. Timing information is not needed to represent the sequence. (h) DSRs enable compositional generalisation and a linear readout without the need for exponentially many neurons. It does, however, use more neurons than the factorised solution -especially as the number of actions (A) and contexts (N) increases.</p>
+<h3>2.2 What do DSRs offer?</h3>
+<p>Duplicated and structured representations (DSRs) allow the PFC to organise behaviours through local dynamics. Dedicated neurons are tuned to different possible actions, and the relationships between actions are constrained by the network connectivity. This allows recurrent network dynamics to translate structured knowledge into flexible processing of complex, multi-action behaviours.</p>
+<h3>2.2.1 -Duplicated representations enable efficient readout</h3>
+<p>Under DSRs, the PFC represents several relevant actions simultaneously in the activity of different neuronal populations. Multiple actions can now be processed concurrently -an idea postulated by Lashley as early as the 1950s (Lashley, 1951). The challenge of organising actions, such as forming extended plans, is reduced to simply selecting among different assemblies within the local network. DSRs therefore differ from factorised representations, where the organisation of actions is encoded in the temporal pattern of neuronal activity (Figure 1g). A prominent example of this temporal coding is hippocampal replay, where several place cells fire one after another to encode a sequence of locations (Skaggs and McNaughton, 1996). In this case, the encoded action sequence can only be deciphered by integrating information over time, which is substantially more complicated than reading static assemblies (Branco et al., 2010; Buzsáki, 2010). By representing action combinations with static assemblies, duplication facilitates efficient &quot;linear&quot; readout by other sensory, motor, and memory systems. This simplified neural readout is similar in spirit to that offered by random non-linear mixed selectivity described in the PFC and wider neocortex (Rigotti et al., 2013; Tye et al., 2024). Both theories rely on high-dimensional representations to simplify downstream readout of conjunctive information, like actions and their contexts. However, they also have important differences. First, the duplication in DSRs is a special case of non-linear mixed selectivity, where the tuning of neurons to conjunctions of actions and contexts generalises across different action combinations. This enables flexible combinatorial coding of new action combinations (Figure 1c,d). Second, DSRs are not random projections of actions and contexts. Instead, they are connected in a way that embeds structured knowledge about the world (Figure 1b,e,f). This not only enables efficient readout, but also allows powerful computations over future actions within the local PFC network.</p>
+<h3>2.2.2 -Structured representations enable efficient computation</h3>
+<p>DSRs are poised for efficient computation. Inference happens locally through simple attractor dynamics that are constrained by the structure of the world and internal goals. By pre-configuring such structure into connectivity between action copies, network activity is steered towards stable assemblies that encode action sequences. Under DSRs, planning therefore becomes equivalent to recognition. Just as visual cortical activity is shaped by the statistics of visual scenes (Iacaruso et al., 2017; Lee and Nguyen, 2001; Marr, 2010) (Box 1), we propose that PFC activity is shaped by the statistical patterns of action transitions. This allows inference of future actions instead of objects and minimises the need for costly sequential planning at decision time. DSRs therefore unify our understanding of the PFC with other cortical regions that embed statistical structure in synaptic connections to enable efficient neural computation (Marr, 2010). Crucially, when this structured connectivity is gated, it enables abstract operations over multiple actions. Swaps, reversals and comparisons can now be computed locally, simultaneously, and on demand. Together, these features endow DSRs with remarkable flexibility and efficiency in organising our actions to solve new problems.</p>
+<p>At the core of this efficiency is the combinatorial nature of DSR duplication. This is distinct from the &quot;cloning&quot; in clone-structured cognitive graphs (CSCGs; George et al., 2021). Whereas CSCG states are split based on sequential history to de-alias similar observations, DSR actions are systematically copied across contexts to span all possible action combinations. Notably, the rich de-aliased representations built by CSCGs, such as place cells, can themselves serve as inputs to DSR duplication in the PFC, building a combinatorial code of possible future locations (e.g. see Section 3.1.2).</p>
+<h3>2.2.3 -DSRs balance computational and neuronal efficiency</h3>
+<p>DSRs are computationally efficient, but this efficiency requires large neuronal populations. To encode all possible action combinations, every conjunction of action (A) and context (N) must be represented by a different pattern of neural activity. This differs from the &#x27;factorised&#x27; representations proposed in the switchboard view of the PFC, where actions and contexts are encoded in separate neurons and combined via gating or synaptic plasticity at decision time (Behrens et al., 2018; Burgess and Hitch, 1999; Eichenbaum, 2004; Whittington et al., 2020) (Figure 1a,g,h). DSRs therefore require as many neurons as the product of actions and contexts (AxN), while the factorised solution only needs the sum (A+N; Figure 1h). Indeed, RNNs need many more neurons to learn DSRs than factorised representations, especially when A and N are large (Jensen et al., 2026; Whittington et al., 2025). However, this neuronal cost of DSRs is justified for two reasons. First, DSRs are more computationally flexible and efficient than factorised solutions (Section 2.2.1,2.2.2). Second, DSRs can be more neuronally efficient than alternative solutions that encode each combination of actions in a different neuron. This depends on how much flexibility is needed (Dorrell et al., 2026). If Hassan always plants his crops in the same order, a single neuron suffices to encode this stereotyped &quot;planting&quot; sequence. If he instead wants to consider all possible sequences, assigning one neuron per sequence uses more neurons (A N ) than the combinatorial DSR regime (Figure 1h).</p>
+<p>To summarise, we propose that the PFC leverages large neuronal resources to build expressive representations that allow efficient readout and inference. By duplicating action representations across different contexts and then connecting these duplicates to reflect structured action statistics, DSRs allow generalisation and efficient inference across a broad swathe of different behaviours. We next explore a growing body of empirical findings that can be understood through DSRs.</p>
+<h3>3-Understanding PFC function through DSRs</h3>
+<p>Recent decades have seen a surge in high-yield neurophysiological data (Jun et al., 2017; Pachitariu et al., 2016; Zong et al., 2022) obtained during increasingly more sophisticated tasks. These advances have revealed rich representations and dynamics within the PFC itself that go far beyond simple contextual gating of activity in other brain regions. In this section, we show that the DSR framework provides a unifying lens for understanding such rich PFC data across paradigms. We start with sequential tasks that range from simple sequence working memory to complex planning. We then consider tasks where actions are organised by stimulus-response rules or ranked by preference. Across these paradigms, DSRs provide a framework that explains how neuronal dynamics can implement canonical PFC-dependent computations.</p>
+<h3>3.1-Sequential behaviours</h3>
+<p>We begin with action sequences. Patients with PFC lesions are profoundly impaired in flexible (re)sequencing of their actions to achieve new goals (Petrides and Milner, 1982). Thanks to improved neuronal recordings, the field has made substantial strides in understanding the underlying neural computations.</p>
+<h3>3.1.1 -Sequence working memory uses duplicated and structured representations</h3>
+<p>One way to generate a sequence is to simply retrieve it. In such sequence working memory (SWM) tasks, subjects hold a cued chain of actions in memory and execute it in the correct order after a short delay. The DSR framework suggests that different actions are represented by different neurons depending on their relative order in the sequence. Consistent with this idea, early studies in macaques performing SWM tasks described frontal neurons tuned to conjunctions of action and ordinal position (Barone and Joseph, 1989; Botvinick and Watanabe, 2007; Funahashi et al., 1997; Inoue and Mikami, 2006; Ninokura et al., 2004 Ninokura et al., , 2003;; Rigotti et al., 2013; Tanji, 2001). More recently, Xie et al. (Xie et al., 2022) took advantage of higher recording yields to comprehensively characterise SWM representations (Figure 2a). They found that monkeys represented each element of the remembered sequence in near-orthogonal subspaces of the dorsolateral PFC (dlPFC) during the delay phase (Figure 2b). This provides direct evidence that the representation of each action is duplicated across different ordinal positions (Chen et al., 2024; Xie et al., 2022). Intriguingly, recurrent neural networks (RNNs) trained on SWM tasks learn a representation that similarly duplicates actions across different subspaces -or slots -according to ordinal position (Botvinick and Plaut, 2006; Wang et al., 2025; Whittington et al., 2025) (Figure 2c). Normative theory is beginning to explain why: Dorrell et al. (2026) showed that the observed nearorthogonal duplicated representations are optimal when many different action sequences are encountered (Dorrell et al., 2026) -that is, when all action-context combinations are possible.</p>
+<p>The DSR framework posits that connections between action copies in SWM tasks incorporate the linear order of actions, ensuring the first action is retrieved first, then the second, and so on. If the memory subspaces encode relative sequence position (now, next, next +1) instead of absolute position (steps 1, 2 and 3), gated connectivity can map each action in a given subspace (e.g. &#x27;next&#x27;) to the corresponding action in the preceding subspace (e.g. &#x27;now&#x27;; Figure 2d). Activating these connections after executing an action advances the representation one step: it &quot;moves&quot; the action from subspace N+1 into subspace N. This gives rise to a &#x27;conveyor belt&#x27; mechanism, gradually shifting actions from subspaces representing the distant future to the &#x27;now&#x27; subspace, where an action can be read out and executed (Figure 2e). Whether the PFC uses relative or absolute position coding, and thus whether a conveyor belt mechanism operates, can be resolved by tracking representations through execution, not just the delay period. In the simplest case, this conveyor belt provides an elegant mechanism for retrieving a sequence from memory (Botvinick and Plaut, 2006; Jensen et al., 2026; Whittington et al., 2025). Intriguingly, this principle can also extend to inference of action sequences. Action representations are duplicated according to ordinal position, and gated connections map action representations from the &quot;next&quot; position to the &quot;now&quot; position, and from &quot;next + 1&quot; to &quot;next&quot;, etc. (e) DSRs predict that, at execution time, conveyor belt dynamics read out the sequence one element at a time. As an action is executed, the remaining action representations are shifted by one position: a new action is moved to the &quot;now&quot; position then executed, leading to a further shift along the conveyor belt.</p>
+<h3>3.1.2 -Duplicated and structured representations support inference</h3>
+<p>The same duplicated representations that support SWM can, when their connectivity embeds knowledge of the world, do more than retrieve sequences from memory. They can infer new ones. Evidence for such inference through DSRs is emerging. In a recent study, El-Gaby et al. (El-Gaby et al., 2024) trained mice on the &quot;ABCD&quot; task. Animals learned to navigate multiple sequences comprising four reward locations that repeated according to an abstract loop structure (... ABCDABCD…; Figure 3a). Animals used this structure to make novel inferences -on the first trial of a new goal sequence, they navigated directly from goal D to goal A (Figure 3b). Neurons in the prelimbic cortex (area 32) encoded duplicated representations of different spatial goals and subgoals during task execution, with some neurons firing when the goal/subgoal was visited &quot;now&quot;, while others were tuned to the same goal/subgoal at a specific lag in the future (Figure 3c). Similar duplication is found in the PFC of humans performing on-screen variants of the ABCD task -both in single units and fMRI (Küchenhoff et al., 2025). Crucially, offline correlations between mouse prelimbic cells reflected the abstract task structure. The coactivity between action duplicates during sleep mirrored their proximity on the 4-goal loop -neighbouring positions showed stronger correlations than distant ones (Figure 3d). This is consistent with connections between action duplicates reflecting the abstract task structure. Embedding this abstract loop structure in gated connections allows a conveyor belt mechanism to both execute each action from memory and to infer the D→A step that completes the ABCD loop (Figure 3b). These findings suggest that even abstract structures can be embedded in functional connectivity between PFC action copies to support inference.  2024) which has no consistent tuning for the current location of the animal across tasks (top). However, it does have a well-defined &#x27;place field&#x27; for the expected location of the mouse two actions into the future (bottom). (d) During sleep, neurons are more coactive if they code for locations at &#x27;nearby times&#x27; along the circular task structure. This suggests the network has internally embedded the abstract task structure. This effect is stronger for neurons encoding copies of the same action across ordinal positions than neurons encoding different actions -consistent with a DSR conveyor-belt mechanism.</p>
+<h3>3.1.3 -DSRs enable efficient planning</h3>
+<p>We plan in rich ways by leveraging our internal world model to generate new action sequences. The PFC is critical for this ability to override habitual responses in favour of adaptive behaviour (Doohan et al., 2026; Miller and Cohen, 2001). In section 3.1.2, we saw that connecting duplicated representations of the same action at different ordinal positions supports simple inferences like loop closure. However, DSRs can also generalise structured connectivity to enable richer inferences. This requires structured information to be embedded in connections between duplicated representations of different actions across ordinal positions. Such connectivity should follow a simple principle: neurons are mutually excitatory if they represent compatible actions, and mutually inhibitory if they do not. For example, if Hassan has to avoid manual labor on the farm after a surgery, the representation of a scheduled surgery tomorrow should inhibit the representation of harvesting the day after (Figure 4a). Recent in silico simulations lend support to these intuitions, showing that DSRs can implement planning by embedding such structured knowledge (Jensen et al., 2026). The resulting &#x27;spacetime attractor&#x27; network steers representations towards plausible action sequences conditioned on a distant goal. Planning takes the form of attractor dynamics that simultaneously refine the plan backwards from the goal and forwards from the current state to converge on an entire action sequence, which can then be executed through the conveyorbelt mechanism discussed before (Botvinick and Plaut, 2006; El-Gaby et al., 2024; Jensen et al., 2026; Whittington et al., 2025). This contrasts with common planning algorithms that use sequential search to evaluate actions one by one. Recurrent neural networks trained to solve challenging planning tasks with minimal energy expenditure learn a solution that precisely recapitulates a DSR -in representation, in dynamics, and in connectivity (Jensen et al., 2026). DSRs may therefore constitute an efficient solution to planning through local dynamics.</p>
+<p>Several studies of PFC representations during planning can be understood through the DSR framework. PFC neurons represent actions multiple steps into the future after monkeys plan action sequences (Averbeck et al., 2002; Chiang and Wallis, 2018; Mushiake et al., 2006; Saito et al., 2005; Sakamoto et al., 2020). In particular, Chiang and Wallis found future representations to be stronger than representations of the past in the dlPFC, in line with the view that PFC is poised to infer future actions rather than merely remember the past (Figure 4b). In addition to this direct support, a broad set of findings are consistent with duplicated action representations during planning. For example, Manakov et al. (Manakov et al., 2025) recorded from ACC (area 24) in rats performing rewarded action sequences and found neurons tuned to conjunctions of actions and ordinal position within a specific sequence. This mixed selectivity rules out factorised ordinal representations. However, it could rule in DSRs if neurons represent the same conjunctions across different sequences, which remains to be tested. Separately, human neuroimaging has identified PFC BOLD responses that instantaneously represent entire sequences during planning (Schuck et al., 2016; Schwartenbeck et al., 2023; Tang et al., 2023; Wittmann et al., 2025). Such concurrent coding of extended sequences is consistent with DSRs but could also reflect a rapid sequential roll-out. This distinction can be resolved in fMRI by testing whether representations are conjunctive for action and ordinal position, as DSRs predict, or encode action alone, as sequential rollout would predict. Finally, DSRs propose that plans can be computed by prefrontal attractor dynamics. Consistent with this, Saito et al. (Saito et al., 2005) found that PFC representations of later actions often emerge before representations of early actions during planning. This could result from backward step-by-step planning from a goal. It would also naturally arise if plans were inferred within a DSR itself, where representations gradually propagate away from both the current location and distant goals to infer intermediate actions. Together, these results suggest that duplicated representations extend from working memory to internally generated action plans. However, direct characterisation of the structured connectivity underlying planning remains an important open question. Optical imaging and holographic stimulation offer promising tools to address this (Daie et al., 2021; Vinograd et al., 2024).</p>
+<h3>3.1.4 -DSRs enable flexible computations over sequences</h3>
+<p>We have so far presented examples that require us to plan once and then act. However, real-world behaviour is rarely so straightforward. We often revise and update previously planned sequences: we reorder, skip, or substitute actions as our goals or environment change. If Hassan&#x27;s niece shows up earlier than expected, he will reorder his plan: store the grain first and pen the animals later, so she can ride the donkey. DSRs simplify such &#x27;computations over sequences&#x27; because the entire future is represented concurrently, which facilitates simultaneous operations over multiple actions. In one demonstration of this, Tian et al. (Tian et al., 2024) trained macaques to remember sequences of 2 or 3 locations on a screen. Subjects were then cued to either repeat the sequence as shown or produce it in reverse (Figure 4c). Neurons in the dlPFC again duplicated action representations by their ordinal position (Figure 4d). Intriguingly, representations in the first and last subspaces were swapped on reversal trials by passing actions through two temporary subspaces (Figure 4d,e). Such a mechanism may help explain earlier fMRI findings, which showed greater dlPFC activation when subjects reversed a sequence than when they recalled it in order (Sakai and Passingham, 2003) -perhaps reflecting the additional activation of gated temporary subspaces. It also reveals remarkable flexibility in PFC representations, where information can be moved between different ordinal positions depending on control signals from the environment. Dedicated temporary subspaces allow common transformations, like reversals, to be carried out efficiently without the need to re-infer the updated sequence de novo. Other abstract operations can similarly be implemented through such &#x27;gated&#x27; subspaces that conjunctively code for an operation and the variables it operates over. These flexible operations over concurrent representations bear a striking resemblance to the transformer architecture that has revolutionised machine learning. Transformers represent extended sequences concurrently, which allows an &#x27;attention mechanism&#x27; to integrate information across time (Vaswani et al., 2023). This approach outperforms previous methods that process sequence elements one by one. The PFC may have arrived at the same solution: parallelising representations to enable powerful inferences and abstract operations through network dynamics.</p>
+<h3>3.2-Contextual behaviours beyond sequences</h3>
+<p>We now turn to prefrontal computations in non-sequential settings. Under DSRs, flexible processing of parallel action representations provides insights into a wide range of PFC-dependent contextual behaviours that require comparisons and integration of information about multiple possible actions. What unites these behaviours is a common principle: structured knowledge is used to organise actions flexibly when demands change. We highlight two especially prominent cases, where actions are either organised by the rules that govern them or by their changing priorities.</p>
+<h3>3.2.1 -Organising actions by rules</h3>
+<p>A hallmark of PFC-dependent flexibility is the ability to switch between different stimulus-response mappings depending on the context. In such &#x27;set-shifting&#x27; tasks, identical stimuli call for different actions depending on which &#x27;rule&#x27; is currently active (Birrell and Brown, 2000; Broschard et al., 2021). This can be achieved by duplicating representations, such that the same action is represented by different neurons for different rules. In a seminal study, Panichello and Buschman (2021) first presented monkeys with two colour cues positioned at the top and bottom of a screen (Panichello and Buschman, 2021). A subsequent cue indicated whether to attend to the top or bottom colour, and animals then selected their response on a colour wheel (Figure 5a). Colour representations were duplicated in three orthogonal subspaces: one encoded the top colour, one encoded the bottom colour, and a &quot;choice&quot; subspace was active at decision time for both rules (Figure 5b). This duplication allows any combination of top and bottom colours to coexist in the neural activity of PFC. Under DSRs, rule information selectively gates connections that move colour information from the appropriate input subspace into the choice subspace (Figure 5c). Similar duplication of choices across rules has also been found in mouse ACC (Tissot et al., 2025; area 24) and monkey dlPFC (Bernardi et al., 2020; area 46). Together, these results provide cross-species evidence for rule-dependent duplication of actions. DSRs also suggest structured connectivity between the rule subspaces, which could be used to infer actions that are not explicitly cued. Structured connectivity could impose specific dependencies between available choices: e.g. if the top colour is red, the bottom colour cannot be blue. The same inferential machinery used for sequential behaviour in Section 3.1 could therefore operate over &#x27;rule subspaces&#x27; to infer actions that were never explicitly cued.</p>
+<h3>3.2.2 -Ranking actions by preference</h3>
+<p>Our environment is constantly changing. To adapt, we must continually reassess which actions are most valuable. The importance of the PFC for this flexibility is evidenced by its well-established role in reversal learning tasks (Dias et al., 1996). Such value learning has traditionally been explained by reinforcement learning (RL), where choice values are learned via dopamine-dependent synaptic plasticity at cortico-striatal synapses (Reynolds et al., 2001; Schultz et al., 1997). However, recent computational and experimental work has motivated an alternative meta-reinforcement learning framework for reward-guided behaviour (Hattori et al., 2023; Jensen, 2024; Wang et al., 2018). In this view, the PFC meta-learns the abstract task structure through slow synaptic plasticity across many tasks. Once learned, this structure allows rapid adaptation to structurally similar tasks via recurrent dynamics rather than further synaptic change. Such &#x27;learning through dynamics&#x27; echoes a key hallmark of DSRs, where connections between action copies embed the task structure to support rapid inference in new tasks via neural dynamics. Consistent with this idea, recent theoretical work shows that neural networks can implement meta-RL by duplicating action representations according to their preference (Warren et al., 2026). In recurrent neural networks trained on multi-armed bandit tasks with drifting rewards, duplicated representations emerged for each action. One subspace encoded the identity of the preferred action, an orthogonal subspace encoded the second-best action, and so on (Figure 5d). Learning in a new task then involves reorganising the appropriate actions across these rank subspaces. Crucially, this reordering is governed by a separate representation of the value of each rank, independent of action identity. For example, when the value of the second option exceeds the preferred option, a gated connection is activated to swap the corresponding action representations (Figure 5d). DSRs may also encode structured dependencies between action preferences. For example, planting may consistently have low priority whenever irrigation has high priority. Such correlations could be embedded in persistent connectivity between representations of actions at different ranks. This would allow inference of action preferences in an analogous way to how structured connectivity inferred action sequences in Section 3.1.2.</p>
+<p>The DSR-based account of reward-driven learning makes three main predictions. First, PFC neurons should duplicate action representations according to their preference. Consistent with this, Li et al. recorded from the lateral PFC of macaques solving an economic decision-making task (Li et al., 2026). Subjects were first shown the identity and then value of option 1, and then the identity and value of option 2. Before &#x27;value 2&#x27; was shown, the representations of option 1 and option 2 were orthogonal. However, once value 2 was presented, a consistent subspace encoded the preferred option (Figure 5e). Prefrontal representations were therefore duplicated by preference when subjects had the information necessary to rank the options. A related literature has described non-linear mixed selectivity for actions and value in the PFC (Abe and Lee, 2011; Hayden and Platt, 2010; Johnston et al., 2024). Within a DSR framework, such mixed selectivity arises because value correlates with rank, and different subspaces represent actions at different ranks. Second, the PFC should encode the value associated with each rank independently of the corresponding action identity. This idea is consistent with the widely reported finding that the PFC separately represents the value of &quot;chosen&quot; (preferred) and &quot;unchosen&quot; (non-preferred) options in binary decision tasks (Boorman et al., 2011 (Boorman et al., , 2009;; Daw et al., 2006; Fouragnan et al., 2019; Hayden et al., 2009; Padoa-Schioppa and Assad, 2008, 2006), and the value of all ranks in tasks with three options (Boorman et al., 2011; Knudsen and Wallis, 2021; Zhang et al., 2026) (Figure 5f). Third, DSRs predict structured connectivity between subspaces that represent actions with different preferences. Value representations should control gated connections that swap the content of different ranked subspaces (Warren et al., 2026). Persistent connectivity could also impose correlations between actions at different ranks and allow inference to complement reward-driven learning. Although recent findings suggest that structure and value coding coexist in the PFC (Jahn et al., 2024; Veselic et al., 2025b), structured connections across subspaces for different preferences remain to be explored. DSRs therefore mechanistically integrate value representations and structured cognitive maps in the PFC.  2026) found initial representations of the &#x27;first presented&#x27; and &#x27;second presented&#x27; item in orthogonal subspaces of macaque lateral PFC (left). After the values of both items were known, the representation of &#x27;chosen item&#x27; became aligned across trials irrespective of its order of presentation (right). (f) Knudsen and Wallis (2020) recorded value representations that were ranked by preference in macaque OFC (top). This is consistent with recent models of DSRs for rewardguided behaviours (Warren et al., 2026; bottom).</p>
+<p>Overall, the DSR framework offers a mechanistic account that could unify previously separate literatures on canonical PFC-dependent behaviours such as sequence working memory, planning, set-shifting and value-based decision making. In all of these behaviours, PFC recordings reveal duplication of action representations across ordinal position, rule or rank. Functional connectivity between these action duplicates embeds both concrete and abstract structures -allowing not only memory retrieval but also inferences and flexible computations over actions. In the following section, we move beyond the classically well-studied PFC-dependent behaviours to explore how DSRs may help us understand broader, more complex roles of the PFC.</p>
+<h3>4-Why is the PFC so big?</h3>
+<p>So far, we have reviewed a large literature spanning normative theories (section 2) and neural data (section 3). To bridge the theory-data divide, the field has looked to a well-established tradition of modelling the PFC with recurrent neural networks (RNNs; Botvinick and Plaut, 2006; Wang et al., 2018; Whittington et al., 2025; Zipser et al., 1993). We have learned from a growing body of simulations that DSRs emerge when RNNs are trained on PFC-like tasks (Botvinick and Plaut, 2006; Dorrell et al., 2026; Jensen et al., 2026; Wang et al., 2025; Warren et al., 2026; Whittington et al., 2025). However, there is an elephant in the room. While RNNs typically use tens to hundreds of units, the human PFC boasts billions of neurons, organised into a rich landscape of anatomical and functional gradients (Passingham, 2021) (Figure 6a). This ten-million-fold disparity suggests an intriguing possibility: perhaps the core principle motivating DSRs -trading neuronal resources for computational efficiency -extends further. An expanded PFC could allow dedicated neuronal resources to be allocated to behaviours with distinct transition statistics, achieving efficiency not only within tasks but also across them.</p>
+<p>Over his lifetime, Hassan will engage in a wide range of behaviours that entail distinct actions governed by unique statistics. His hand movements when operating the tractor have different statistics to his spatial movements across the field, and both differ from his negotiations with the cattle merchant. If you challenge a small network with enough different tasks, it will eventually reconfigure the same neurons and synapses to encode new actions and their transition statistics (Jensen et al., 2026). With a billion neurons, the PFC can afford to do something different. It can allocate dedicated neural real estate to each class of behaviour, with connectivity tailored to its unique statistics. This minimizes the need for synaptic plasticity when switching between different types of behaviour. It also allows the PFC to process multiple action types in parallel, and to integrate information across these processes. We now explore how this perspective bears on representational heterogeneity in the PFCspanning different action modalities, levels of abstraction, and even different agents. We end by discussing how these different action statistics may emerge, through both evolution and experience.</p>
+<h3>4.1-Organising different action modalities</h3>
+<p>We have known since the 1970s that different subdivisions of the PFC process different actions in line with their anatomical inputs and outputs (Goldman and Nauta, 1977; Goldman-Rakic, 1984). For example, the dorsolateral PFC has strong interactions with parietal circuits that bias it towards sensorimotor information (Passingham, 2021; Petrides and Pandya, 1999). In contrast, medial PFC is biased towards allocentric representations that reflect its interactions with the hippocampal formation (Eichenbaum, 2017; Passingham, 2021). These differences map directly onto DSRs recorded from different subregions (Figure 6b). For example, DSRs in the dorsolateral PFC organise sequences of eye movements (Xie et al., 2022), while those in the medial PFC represent sequences of allocentric locations (El-Gaby et al., 2024; Küchenhoff et al., 2025). Finer subdivisions have also been reported. For instance, area 8/46 is biased towards occulomotor control due to its preferential inputs from parietal eye areas and outputs to the frontal eye fields (Cavada and Goldman-Rakic, 1989), while area 9/46 generalises across action modalities (Dum and Strick, 2005; Lu et al., 1994). This is reflected in DSRs recorded across these subdivisions. While Xie et al. report DSRs for eye movements in 8/46 neurons (Xie et al., 2022), Chiang and Wallis find DSR-consistent representations of hand movements that span areas 9 and 9/46 (Chiang and Wallis, 2018). These results suggest a basic idea: PFC subregions contain duplicated representations of the action modality they process. Under the DSR framework, such duplicated representations should be connected according to the statistics of the relevant modality. This may shed new light on action domains where mechanistic understanding remains limited, such as speech production in the inferior frontal gyrus. For example, recent single cell recordings from human PFC reveal simultaneous representations of past, present and future phonemes, syllables and words (Gadonneix et al., 2026). Connections between duplicated phoneme representations could reflect the transition probabilities driving the organisation of speech using a DSR-like mechanism. Recent advances in human single cell recordings (e.g. Khanna et al., (Khanna et al., 2024)) could shed new light on this and other examples of structured representations across modalities.</p>
+<h3>4.2-Representational Hierarchies</h3>
+<p>As well as different modalities, the PFC also represents actions at multiple levels of abstraction along a posterior to anterior gradient (Badre and Nee, 2018; Collins and Koechlin, 2012; Koechlin et al., 2003). Both single neurons and human neuroimaging have identified more abstract representations in anterior than posterior PFC (Badre and Nee, 2018; Collins and Koechlin, 2012; Koechlin et al., 2003), and anterior prefrontal lesions lead to deficits specifically when sequencing multiple abstract subtasks (Chau et al., 2025; Shallice and Burgess, 1991). If such hierarchical representations are combined with DSRs, exciting new computational possibilities emerge. A series of DSRs at different levels of abstraction could implement hierarchical planning -a hallmark of human behaviour (Eckstein and Collins, 2020). Critically, the use of different DSRs enables simultaneous planning across multiple levels of abstraction. This allows the different DSRs to interact, such that actions at one level of abstraction can constrain those at another. For example, an abstract &#x27;task-level&#x27; DSR might infer that Hassan should harvest before his surgery. This abstract plan could in turn constrain activity in an intermediate DSR that infers the need to refuel the tractor before beginning the harvest. Finally, a low-level DSR would infer the path to the petrol station (Jensen et al., 2026) (Figure 6c). This suggests a role for structured connections not just within one level of abstraction, but also across levels. Although these additional levels of abstraction require more investment of neural resources, they enable planning over long time horizons with fewer neurons than non-hierarchical alternatives. Instead of resource-intensive duplication of low-level actions throughout an entire plan, the distant future is represented only at a high level of abstraction. Plans can therefore unfold efficiently, with transitions between higher levels defining higher goals and lower levels filling in the details.</p>
+<h3>4.3-Social computations</h3>
+<p>Alongside its role in planning, the PFC is strongly implicated in social computations (Mahmoodi and Rushworth, 2026; Wittmann et al., 2025; Mitchell et al., 2005; Amodio and Frith, 2006; Tamir and Mitchell, 2010; Behrens et al., 2008; Nicolle et al., 2012; Wittmann et al., 2016; Yoo et al., 2020; Wittmann et al., 2021; Isoda, 2021). Parts of the cingulate gyrus and dorsal area 9 are functionally and anatomically specialised to process social information (Isoda, 2021; Mahmoodi and Rushworth, 2026). Famously, they are activated in human tasks that involve simulating the actions and minds of others (Amodio and Frith, 2006; Jamali et al., 2021; Tamir and Mitchell, 2010; Wittmann et al., 2016). If these representations were combined with the computational principles of DSRs, they would allow inference of the actions of other agents in the same way that DSRs enabled planning as an inference over our own actions in Section 3. Indeed, representations of self and others appear to be anatomically distinct. Human neuroimaging suggests that more ventral areas (24/32) encode our own actions, while more dorsal areas (9) encode the imagined actions of others (Tamir and Mitchell, 2010; Wittmann et al., 2016). Similarly, single unit recordings in the primate PFC have identified separate representations of the future actions of self and others (Chericoni et al., 2025; Falcone et al., 2017; Haroush and Williams, 2015). Extending DSRs along a social dimension is consistent with PFC size scaling positively with social group size, both within (Sallet et al., 2011; Powell et al., 2012) and across species (Bouret et al., 2024). While it remains to be tested, such a self-other separation of DSRs would allow knowledge of others&#x27; action statistics to be embedded in dedicated synaptic connections, enabling efficient inference of their future actions (Figure 6d). It would also enable computation of multi-agent interactions. Encoding the statistics of interactions in synaptic connectivity between DSRs for self and other would allow inference of their combined future. For example, if Hassan cooks a big breakfast, his daughter will be more energized to help on the farm. Hassan&#x27;s PFC could therefore contain a system of two DSRs that jointly settle into a representation of their mutually constrained future actions, akin to planning dynamics in a single DSR (Jensen et al., 2026) (Figure 6d). It is an intriguing prospect that such complex social interactions may become mechanistically tractable if we combine DSRs with known social specialisations across PFC subregions.</p>
+<h3>4.4-How does structured knowledge emerge in the PFC?</h3>
+<p>When functional specialisation in the PFC is combined with DSRs, domain-specific knowledge can be embedded in the synaptic connectivity of each PFC subregion to reflect the statistics of different actions. These preconfigured circuits allow network dynamics to rapidly infer actions at decision time, without the need for further plasticity. The burden of plasticity is instead shifted back to a time where the circuits are sculpted. How and when this happens remains unclear.</p>
+<p>On the one hand, functional subdivisions suggest the possibility of region-specific connectivity that is genetically hardwired into the circuits, similar to the hardwired encoding of attractor networks for navigation (Guardamagna et al., 2026). This would reflect evolutionary constraints on domain-specific action statistics. For example, to process sequences, the dlPFC might benefit from hardwired connections that link representations of the same action across adjacent ordinal positions. This would implement conveyor belt dynamics that can recall and generate behavioural sequences (Section 3.1). Indeed, monkeys passively viewing images had semiorthogonal dlPFC subspaces for current and past images despite not solving an explicit task (Bellet et al., 2024; Pu et al., 2024). This suggests an a priori task-agnostic neural algorithm that shifts stimuli from a &#x27;current&#x27; to a &#x27;previous&#x27; subspace in dlPFC. mPFC dynamics also prominently track progress towards goals across species and tasks (Basu et al., 2021; El-Gaby et al., 2024; Guidera et al., 2026; Holton et al., 2024). These goal progress sequences may provide an innate representational scaffold for pacing DSRs dynamics.</p>
+<p>Learning must also play a part, to encode structures our ancestors never encountered. Classical theories of complementary learning systems (CLS; McClelland et al., 1995) could provide a mechanistic basis for such learning. Domain-specific structured knowledge may first arise in the hippocampus, which encodes individual episodes, and then gradually consolidate into the PFC with repeated task experience (McClelland et al., 1995; Scoville and Milner, 1957; Spens and Burgess, 2024). Intriguingly, hippocampal replay is known to reflect the statistics of experience (Ólafsdóttir et al., 2015; Pfeiffer and Foster, 2013) and entrain cortex (Swanson et al., 2020). It is therefore ideally suited to catalyse the transfer of the transition structure of hippocampal memories into synaptic connections between prefrontal action copies. CLS theory posits that this transfer happens slowly after repeated experience of a particular environment (McClelland et al., 1995). This could provide a mechanism for allocating neuronal resources to DSRs only when they are useful (Sun et al., 2023). Hassan&#x27;s PFC will have DSRs for farming while chess DSRs in a professional chess player&#x27;s PFC will allow faster inference in a timepressured game. Future studies that track and manipulate activity in early postnatal development and during adult learning could help characterise both preconfigured structure and experience-dependent learning mechanisms.</p>
+<p>Overall, extending the logic of DSRs places our mechanistic understanding within the broader context of the rich and extensive anatomy of the PFC. Dedicating different patches of PFC to different action modalities, levels of abstraction and agents may allow embedding modality, level and agent-specific structure -allowing complex and parallel computations across different action types. This in turn has implications for how structured representations in the PFC may emerge during development or learning.</p>
+<h3>5-Outlook</h3>
+<p>How do we translate structured knowledge into adaptive behaviour? Classical work has focused on factorised representations, where abstract knowledge and concrete actions are encoded by separate circuits and flexibly combined at decision time (Behrens et al., 2018; Burgess and Hitch, 1999; Eichenbaum, 2017; Miller and Cohen, 2001; Whittington et al., 2020). We have reviewed a growing literature that highlights an alternative strategy, where abstract knowledge and concrete actions are represented conjunctively in the same PFC neurons. This shifts some of the computational burden to local circuits, emphasising the role of internal prefrontal dynamics in flexibly structuring our actions. The result is a representational regime with all the flexibility offered by world models but with computational speed and efficiency rivalling habitual mechanisms. DSRs in the PFC might therefore mark proficiency, reflecting an investment of neural resources to translate knowledge into efficient behaviour in domains relevant to the individual.</p>
+<p>The DSR framework motivates future analyses of structure between local action representations. However, elucidating structure in the PFC is challenging not only because of its size, but also because function is not easily mapped onto neuron identity. This is in stark contrast to simpler circuits like the fruit fly brain, where it suffices to build a connectome of a single brain to map the structured connectivity between known representations. Instead, we need to simultaneously measure prefrontal representations and connectivity de novo in each individual animal. Proxy measures of structure based on offline neuronal coactivity can allow progress (El-Gaby et al., 2024). Excitingly, more direct measures of structure are also becoming feasible. It is now possible to measure both representations and connectivity in the same neurons with optical holography (Yang and Yuste, 2018), and these tools can even be combined with freely moving neuronal imaging (Zong et al., 2022). These technologies may uncover how local connectivity implements flexible computations in a heterogeneous circuit like the PFC.</p>
+<p>An important future direction will be to situate prefrontal DSRs within the broader literature on &quot;cognitive maps&quot;, which finds structured knowledge representations throughout the brain (Behrens et al., 2018; Eichenbaum, 2004; Hafting et al., 2005; O&#x27;Keefe and Dostrovsky, 1971). A defining feature of DSRs is that they encode structured knowledge in a highly actionable form. Because such knowledge is embedded into connections between action representations, it constrains efficient local computations over actions. This avoids the more expensive cross-circuit control and online search used by other representations (Section 2). It may also explain why PFC lesions spare semantic knowledge while disrupting the flexible organisation of behaviour it supports (Duncan et al., 1996; Shallice, 1982; Shallice and Burgess, 1991). Hassan may know that smoking causes cancer and yet make no effort to quit until his PFC embeds this relational knowledge into representations of his daily routine. The PFC could learn this structure from other circuits that encode abstract cognitive maps, in temporal (Section 4.4) and parietal (Bottini and Doeller, 2020) areas. It is an intriguing prospect that we can now move towards an integrated mechanistic understanding of how different cognitive maps interact to enable flexible behaviour. By combining precise theories with emerging experimental tools, our field is poised for a revolution in its mechanistic understanding of cognitive functions.</p>
+<h3>Acknowledgements</h3>
+<p>We are grateful to Yang Xie, Feng-Kuei Chiang, Zhenghe Tian, Matthew Panichello, Huidi Li, and their co-authors   for sharing their data for this review. We would also like to thank Marco Wittmann, Michael Yoo, Giovanni Pezzulo, Christopher Summerfield, Matthew Rushworth, Benjamin Hayden, Rick Adams, Nina Kazanina and Matthew Nour for their helpful comments on the manuscript. The authors used AI language model assistance (Claude, Anthropic) during manuscript preparation to assist with prose editing and reference verification. All scientific content was generated and verified by the authors.</p>
+<h3>Competing interests statement</h3>
+<p>The authors declare no competing interests.</p>
+<h3>Author contributions</h3>
+<p>ME and KTJ conceptualised and wrote the manuscript with input from TEJB and all other authors. KTJ, PD, SK, and AB made the figures with input from ME, TEJB and all other authors. ME, KTJ, SR, MSM, ES, AB, TEJB conducted the literature search with input from all other authors.</p>
+<h3>Glossary terms</h3>
+<p>Actions Volitional choices about states the animal can plan over. These can be low level actions, like moving a particular limb. They can also be more abstract actions, like choosing to pursue a degree. This definition of actions treats the firing of PFC neurons for e.g. spatial locations as encoding the decision to move to such location.</p>
+<h3>Context</h3>
+<p>Any variable that determines which action is appropriate in a given situation -including task rules, ordinal position within a sequence, preference rank, or the identity of an agent. In DSRs, context is encoded conjunctively with action -the same action is represented by different neurons depending on its context.</p>
+<h3>Action statistics</h3>
+<p>The statistical regularities governing how actions relate to one another. This includes the periodicities by which actions repeat and how frequently certain action transitions occur. In the DSR framework, action statistics are embedded in the synaptic connectivity between duplicated action representations, allowing the network to favour more probable action combinations and suppress improbable ones.</p>
+<h3>Attractor dynamics</h3>
+<p>Network activity that evolves towards stable representations known as &#x27;attractor states&#x27;. The stability of different representations is determined by the pattern of synaptic connections. In DSRs, structured connectivity between action representations gives rise to attractor states that encode more probable action combinations. This allows planning and inference to emerge from dynamic relaxation rather than sequential search.</p>
+<h3>Factorised representations</h3>
+<p>A representational strategy in which different task variables, such as abstract context and concrete actions, are encoded by separate neural populations and combined only at decision time. This is in contrast to DSRs, where context and action are encoded conjunctively by the same neurons.</p>
+<h3>Mixed selectivity</h3>
+<p>A phenomenon where neurons respond to conjunctions of multiple task variables, such as an action and its context, rather than a single variable in isolation.</p>
+<h3>Readout</h3>
+<p>The process by which downstream circuits extract information from a neural population. DSRs represent action combinations in static population activity patterns, which allows a linear readout mechanism to decode the relevant information without needing to integrate activity over time.</p>
+<h3>Neural subspace</h3>
+<p>A low-dimensional subset of the high-dimensional space of all possible population activity patterns. In DSRs, different copies of the same action are represented in non-overlapping subspaces, each dedicated to a given context. This allows simultaneous encoding of multiple action-context combinations in population activity.</p>
+<h3>Meta-reinforcement learning</h3>
+<p>A framework in which the PFC learns the abstract statistical structure of a class of tasks through slow synaptic plasticity across many experiences. Once this structure is embedded in connectivity, the PFC can rapidly adapt to new tasks of the same class through fast recurrent dynamics alone, without further synaptic changes.</p>
+<h3>Box 1 |Two types of structured connectivity</h3>
+<p>DSRs can embed two classes of structured connectivity. The first is &#x27;persistent&#x27; connectivity, which is always active and determines the stable activity patterns, or &quot;fixed points&quot;, of a neural network. The second is &#x27;gated&#x27; connectivity, which is activated by additional context signals to move neural activity between fixed points.</p>
+<h3>Persistent connectivity</h3>
+<p>This connectivity between duplicated representations reflects ubiquitous action statistics. For example, a representation of &#x27;sowing&#x27; in the morning might excite a representation of &#x27;watering&#x27; in the afternoon and inhibit representations of &#x27;harvesting&#x27; in the near future. This idea has close parallels in visual cortex, where neurons with distant receptive fields are more frequently connected if they have similar orientation selectivity (Iacaruso et al., 2017) (Figure a: Persistent connectivity in visual cortex reflects the prevalence of straight lines in natural environments). This imposes structural constraints on visual representations and permits inference of global information from partial or noisy stimuli (Lee and Nguyen, 2001) (Figure b). We will see that PFC uses the same principle to infer representations of future actions, which enables efficient planning.</p>
+<h3>Gated connectivity</h3>
+<p>This connectivity implements structured operations over neural representations, such as swapping two sequence elements. Like persistent connectivity, gated connectivity reflects action statistics. Unlike persistent connectivity, gated connections are selectively engaged by additional context signals. Gated connections are well known from Drosophila, where a single head direction (HD) cell preferentially excites its &#x27;clockwise&#x27; (CW) neighbor when the fly is turning clockwise and vice versa. This control of effective connectivity is achieved by two auxiliary &#x27;turn&#x27; populations that implement the CW and CCW operations. When (de)activating the turn populations, HD cells change their effective connectivity to implement the appropriate rotation (Figure c: Gated &#x27;left&#x27; and &#x27;right&#x27; connections in the fruit fly head direction circuit implement angular velocity integration). PFC similarly controls the effective connectivity between duplicated representations by gating auxiliary neural populations that implement abstract computations. Such gating can be implemented through neurons that are conjunctively tuned to an operation and its substrate, similar to conjunctive cells that update spatial representations (Sargolini et al., 2006; Turner-Evans et al., 2017 , 2020).</p>
+<h3>Supplementary Box 1 | What is the PFC?</h3>
+<p>Classical definitions of the PFC rely on cytoarchitectonic (granular layer IV (Walker, 1940)), connectivity (mediodorsal thalamic input (Guldin et al., 2008; Leonard, 1969; Rose and Woolsey, 1948)), and functional (cognitive control (Fuster, 2001; Miller and Cohen, 2001)) criteria. These definitions disagree at the margins, with the cytoarchitectonic definition notably excluding agranular areas 32/24 in rodents. We focus instead on a functional definition of the PFC that side-steps these controversies. This widely adopted definition includes both granular (e.g. Walker area 9,10,45,46,47) and agranular (rodent Walker area 24, 32) subdivisions (Klein-Flügge et al., 2022; Passingham, 2021). Most data covered in this review comes from areas that are encompassed by all definitions. More broadly, however, the DSR framework aims to shed light across frontal areas that translate structured knowledge about the world into flexible behaviour.</p>
+<p>Exact delineations of subdivisions across the PFC have also been challenged, and recent studies emphasise that there is no one-to-one mapping between neuronal representations and anatomical subdivisions (Hayden et al., 2026). Here, we provide a brief overview of classical subdivisions as a reference for the reviewed studies, which often record from only a small part of the broader prefrontal cortex.</p>
+<h3>Medial PFC</h3>
+<p>In primates, &#x27;medial PFC&#x27; refers to cingulate and medial areas. This includes Walker areas [24, 25, 32], and the medial part of areas [9, 10, 11, 12, 13, 14]. In rodents, the anterior cingulate cortex (ACC), prelimbic (PL) and infralimbic (IL) areas are homologous to Walker areas 24, 32, and 25 respectively. However, other definitions have area 32 being homologous to cingulate areas in primates (Preuss, 1995). Across species, medial PFC has strong reciprocal connections with the hippocampal formation (ventral CA1/subiculum in rodents and anterior hippocampus in primates).</p>
+<p>Lateral PFC This is a primate-specific region that is not found in rodents. It includes Walker areas [8, 9, 10 (lateral), 44, 45, 46, 47]. Major inputs include parietal cortex, and major outputs include premotor and motor areas. This enables top-down control over sensorimotor mappings.</p>
+<p>Orbitofrontal/Ventral PFC In primates, this includes Walker areas [10 (orbital), 11, 12, 13, 14, and 47/12 (ventral)]. Rodent medial OFC, ventral OFC, and lateral OFC are homologous to Walker areas 11, 12 and 13 respectively.</p>
+<h3>Supplementary Box 2 | DSRs under the neuron and population doctrines</h3>
+<p>Duplication works similarly regardless of whether action-context conjunctions are encoded by single neurons or population patterns. As such, the distinction between DSRs and factorised representations is distinct from that between the neuron and population doctrines (Figure a). Under the &quot;neuron doctrine&quot;, different conjunctions of context and action are encoded by separate neurons. In contrast the &quot;population doctrine&quot; (Ebitz and Hayden, 2021) has orthogonal directions in activity space encoding the different context-action combinations. In other words, unique combinations of neuronal activity patterns encode context-action conjunctions. This has the same effect on network capacity and the same arguments about DSRs being &quot;neuron hungry&quot; but &quot;computationally efficient&quot; apply (section 2). This is because the dimensionality of the network, the number of orthogonal axes that the network can harbour, is limited by the number of neurons. While there is evidence in the literature for all 4 types of codes (Ebitz and Hayden, 2021; El-Gaby et al., 2024; Shima et al., 2007; Veselic et al., 2025a; Wallis et al., 2001; Xie et al., 2022), the current review focuses on DSRs, both when they are encoded by individual neurons or by population patterns (shaded green area). For simplicity, we use the single neuron notations in diagrams to illustrate the properties of DSRs more intuitively.</p>
+<p>Neuron doctrine DSRs Factorised representations Population doctrine Literature covered in this review PFC population patterns encode contexts context 1 context 2 context 3 PFC neurons encode context-action conjunctions context 1 context 2 context 3 action1 action2 action3 PFC population patterns encode context-action conjunctions context 1 context 2 context 3 PFC neurons encode contexts</p>
+<h3>Figure 1 :</h3>
+<p>Figure 1: Duplicated and structured representations in the prefrontal cortex. (a) In the common &#x27;switchboard&#x27; view, prefrontal cells encode abstract context (right). This contextual code flexibly gates different sensorimotor mappings in other brain regions (left). The &quot;switchboard&quot; is one particular instance of a factorised code, in which abstract context and concrete actions are encoded by separate brain regions. Note: the connectivity shown here and panel b is arbitrary and is intended to be purely illustrative. (b) The DSR framework proposes that PFC neurons represent a conjunction of context and action. The same action is represented by different neurons across different contexts -hence the &quot;duplication&quot;. Crucially, structured connectivity between these action copies embeds a model of the world locally into the PFC network. This allows prefrontal dynamics to perform flexible computations. (c) Under DSRs, an entire sequence can be encoded by the instantaneous activity of multiple neurons that encode different conjunctions of action and ordinal position. (d) DSRs can also encode lists of priorities through the concurrent activity of multiple neurons that encode different conjunctions of action and levels of preference. Activating a different combination of neurons allows encoding a preference to &#x27;sow rice&#x27; when it is wet, and to &#x27;sow maize&#x27; when it is dry. (e) Structured connectivity embeds action statistics to</p>
+<h3>Figure 2 :</h3>
+<p>Figure 2: Sequence memory in the PFC. (a) Xie et al. (2022) trained macaques to perform a working memory task, where subjects saccaded to a sequence of 3 cued target locations after a brief delay period. (b) Neural representations in the prefrontal cortex were duplicated across ordinal positions (left). Each panel depicts the activity in one neuronal subspace for each of the target positions. The same location (e.g. a green circle) is represented by different patterns of activity when the target is at positions 1, 2 or 3. The subspaces encoding each of the three sequence elements were approximately orthogonal (right). (c) RNNs trained to solve the task also learn representations that are duplicated across ordinal position (Figure adapted from Whittington et al., 2025). (d) Schematic illustration of a DSR representation for sequence working memory.Action representations are duplicated according to ordinal position, and gated connections map action representations from the &quot;next&quot; position to the &quot;now&quot; position, and from &quot;next + 1&quot; to &quot;next&quot;, etc. (e) DSRs predict that, at execution time, conveyor belt dynamics read out the sequence one element at a time. As an action is executed, the remaining action representations are shifted by one position: a new action is moved to the &quot;now&quot; position then executed, leading to a further shift along the conveyor belt.</p>
+<h3>Figure 3 :</h3>
+<p>Figure 3: Action inference in DSRs. (a) Illustration of the &#x27;ABCD&#x27; task (El-Gaby et al., 2024), where mice repeatedly have to visit the same sequence of four rewarded locations in order. Once the fourth location (D) is visited, the animal needs to go back to the first location (A) to complete a 4-goal loop. (b) DSR representation for the ABCD task. Gated connectivity advances the representation by one step after each goal, and the abstract repeated task structure is embedded in connectivity that copies actions from the &#x27;now&#x27; subspace into the &#x27;next+2&#x27; subspace. This structured connectivity allows inference at t = 5, where the ABCD-loop is completed and a new repeat begins. (c) Example cell recorded by El-Gaby et al., (2024) which has no consistent tuning for the current location of the animal across tasks (top). However, it does have a well-defined &#x27;place field&#x27; for the expected location of the mouse two actions into the future (bottom). (d) During sleep, neurons are more coactive if they code for locations at &#x27;nearby times&#x27; along the circular task structure. This suggests the network has internally embedded the abstract task structure. This effect is stronger for neurons encoding copies of the same action across ordinal positions than neurons encoding different actions -consistent with a DSR conveyor-belt mechanism.</p>
+<h3>Figure 4 :</h3>
+<p>Figure 4: Sequence computations. (a) Structured connections between duplicated action representations enable planning as an inference over sequence representations. Top: if Hassan has a surgery scheduled on Day 1 and wants to harvest on Day 2 or 3 (left), the DSR infers a representation of (i) surgery, followed by (ii) refuelling the tractor, and then (iii) harvesting (right). Bottom: if the surgery is scheduled for Day 3 instead, the DSR infers fuel→harvest→surgery. Changing only the &#x27;surgery&#x27; input leads to an entirely new representation. (b) Left: Chiang and Wallis (2018) found stronger representations of the future than the past in dlPFC when monkeys planned sequences of saccades. Right: This is consistent with handcrafted DSRs (grey) and DSRs learnt by RNNs (black) trained to plan in a maze (Jensen et al., 2026). (c) Left: Tian et al. (2024) showed macaques a sequence of two locations (left) and cued them to reproduce it in either forward (top right) or reverse order (bottom right). (d) A DSR can use gated temporary subspaces to &#x27;swap&#x27; actions in a sequence. (e) Before a &#x27;reverse&#x27; cue, orthogonal subspaces encoded the first and second item in prefrontal recordings by Tian et al. (blue vs. orange lines). After the &#x27;reverse&#x27; cue, the first item (top) was transferred from the &#x27;now&#x27; subspace (blue line) through a temporary subspace (red line) to the &#x27;next&#x27; subspace (orange line). The second item moved from &#x27;next&#x27; to &#x27;now&#x27; through a separate temporary subspace (bottom).</p>
+<h3>Figure 5 :</h3>
+<p>Figure 5: DSRs beyond sequences. (a) Panichello and Buschman (2021) trained macaques on a &#x27;set shifting&#x27; task. Subjects were shown different colours at the top and bottom of a screen, and a subsequent contextual cue indicated whether to saccade to the &#x27;top&#x27; or &#x27;bottom&#x27; colour on a colour wheel. (b) Lateral PFC representations of the top and bottom colour were initially orthogonal. After the contextual cue, choice representations were aligned across trials where the subject chose the top and bottom colour. (c) This prefrontal data is consistent with a DSR that duplicates colour representations across &#x27;top&#x27; and &#x27;bottom&#x27;. The contextual cue activates gated connections that copy only one of these representations into a single &#x27;readout&#x27; subspace. (d) DSRs can implement reward-guided learning by duplicating choice representations according to their preference. Orthogonal subspaces represent the identity of the current &#x27;best option&#x27;, &#x27;second best option&#x27;, etc. When preferences change, gated connections are activated that swap the content of the appropriate subspaces (bottom middle). (e) In an economic decision-making task (top), Li et al. (2026) found initial representations of the &#x27;first presented&#x27; and &#x27;second presented&#x27; item in orthogonal subspaces of macaque lateral PFC (left). After the values of both items were known, the representation of &#x27;chosen item&#x27; became aligned across trials irrespective of its order of presentation (right). (f)Knudsen and Wallis (2020)  recorded value representations that were ranked by preference in macaque OFC (top). This is consistent with recent models of DSRs for rewardguided behaviours(Warren et al., 2026; bottom).</p>
+<h3>Figure 6 :</h3>
+<p>Figure 6: DSRs across the prefrontal cortex. (a) Evolution has grown the human PFC to almost 3 billion neurons. However, the models discussed in this review only use tens to hundreds of neurons. This is partly because we have considered small state spaces, but it is also because we have ignored much of the heterogeneity in PFC. (b) DSRs for sensorimotor computations have been discovered in dorsolateral PFC (top; Xie et al. 2022), while DSRs for allocentric locations have been discovered in medial PFC (bottom; El-Gaby et al. 2024). This mirrors the distinct afferents from parietal cortex to dorsolateral PFC and from the hippocampal formation to medial PFC. Both types of DSRs require gated &#x27;conveyor belt&#x27; connections to read out sequences, but they operate on different action modalities and embed structure related to each modality&#x27;s action statistics. (c) Neurons represent increasingly more abstract actions from posterior to anterior PFC (left). If such hierarchical representations are combined with DSRs, it enables hierarchical planning (right). This mitigates the challenge of computing long sequences in DSRs. (d) Separate PFC representations have been recorded for self and other. If these representations are embedded in DSRs, it could enable social computations. In this case, Hassan knows that his daughter is more likely to help with the harvest tomorrow if she has a big breakfast. He therefore infers that he should buy eggs this evening to have the ingredients for pancakes in the morning.</p>
+<p>Factorised codes for context and action can also be encoded by individual neurons or by population patterns (Figure a). In the neuron doctrine case, individual neurons encode different contexts. In the population doctrine, context is encoded by a linear combination of neurons. The schematic below illustrates the extreme cases of factorised representations encoded by individual neurons (bottom left), DSRs encoded by individual neurons (bottom right), factorised representations encoded by population patterns (top left) and DSRs encoded by population patterns (top right).</p>
+<h3>References</h3>
+<p>Abe, H., Lee, D., 2011. Distributed Coding of Actual and Hypothetical Outcomes in the Orbital and Dorsolateral Prefrontal Cortex. Neuron 70, 731-741. https://doi.org/10.1016/j.neuron.2011.03.026</p>
+<p>Ährlund-Richter, S., Osako, Y., Jenks, K.R., Odom, E., Huang, H., Arnold, D.B., Sur, M., 2025. Prefrontal Cortex subregions provide distinct visual and behavioral feedback modulation to the Primary Visual Cortex. https://doi.org/10.1101/2024.08.06.606894</p>
+<p>Amodio, D.M., Frith, C.D., 2006. Meeting of minds: the medial frontal cortex and social cognition. Nat. Rev. Neurosci. 7, 268-277. https://doi.org/10.1038/nrn1884</p>
+<p>Averbeck, B.B., Chafee, M.V., Crowe, D.A., Georgopoulos, A.P., 2002. Parallel processing of serial movements in prefrontal cortex. Proc. Natl. Acad. Sci. U. S. A. 99, 13172-13177. https://doi.org/10.1073/pnas.162485599</p>
+<p>Badre, D., D&#x27;Esposito, M., 2009. Is the rostro-caudal axis of the frontal lobe hierarchical? Nat. Rev. Neurosci. 10, 659- 669. https://doi.org/10.1038/nrn2667</p>
+<p>Badre, D., Nee, D.E., 2018. Frontal Cortex and the Hierarchical Control of Behavior. Trends Cogn. Sci. 22, 170-188. https://doi.org/10.1016/j.tics.2017.11.005</p>
+<p>Banerjee, A., Parente, G., Teutsch, J., Lewis, C., Voigt, F.F., Helmchen, F., 2020. Value-guided remapping of sensory cortex by lateral orbitofrontal cortex. Nature 585, 245-250. https://doi.org/10.1038/s41586-020-2704-z</p>
+<p>Barone, P., Joseph, J.-P., 1989. Prefrontal cortex and spatial sequencing in macaque monkey. Exp. Brain Res. 78, 447- 464. https://doi.org/10.1007/BF00230234</p>
+<p>Basu, R., Gebauer, R., Herfurth, T., Kolb, S., Golipour, Z., Tchumatchenko, T., Ito, H.T., 2021. The orbitofrontal cortex maps future navigational goals. Nature 1-4. https://doi.org/10.1038/s41586-021-04042-9</p>
+<p>Behrens, T.E.J., Hunt, L.T., Woolrich, M.W., Rushworth, M.F.S., 2008. Associative learning of social value. Nature 456, 245-249. https://doi.org/10.1038/nature07538</p>
+<p>Behrens, T.E.J., Muller, T.H., Whittington, J.C.R., Mark, S., Baram, A.B., Stachenfeld, K.L., Kurth-Nelson, Z., 2018. What Is a Cognitive Map? Organizing Knowledge for Flexible Behavior. Neuron 100, 490-509. https://doi.org/10.1016/j.neuron.2018.10.002</p>
+<p>Bellet, M.E., Gay, M., Bellet, J., Jarraya, B., Dehaene, S., Kerkoerle, T. van, Panagiotaropoulos, T.I., 2024. Spontaneously emerging internal models of visual sequences combine abstract and event-specific information in the prefrontal cortex. Cell Rep. 43. https://doi.org/10.1016/j.celrep.2024.113952</p>
+<p>Bernardi, S., Benna, M.K., Rigotti, M., Munuera, J., Fusi, S., Salzman, C.D., 2020. The Geometry of Abstraction in the Hippocampus and Prefrontal Cortex. Cell 183, 954-967.e21. https://doi.org/10.1016/j.cell.2020.09.031</p>
+<p>Birrell, J.M., Brown, V.J., 2000. Medial Frontal Cortex Mediates Perceptual Attentional Set Shifting in the Rat. J. Neurosci. 20, 4320-4324. https://doi.org/10.1523/JNEUROSCI.20-11-04320.2000</p>
+<p>Boorman, E.D., Behrens, T.E., Rushworth, M.F., 2011. Counterfactual Choice and Learning in a Neural Network Centered on Human Lateral Frontopolar Cortex. PLoS Biol. 9, e1001093. https://doi.org/10.1371/journal.pbio.1001093</p>
+<p>Boorman, E.D., Behrens, T.E.J., Woolrich, M.W., Rushworth, M.F.S., 2009. How Green Is the Grass on the Other Side? Frontopolar Cortex and the Evidence in Favor of Alternative Courses of Action. Neuron 62, 733-743. https://doi.org/10.1016/j.neuron.2009.05.014</p>
+<p>Bottini, R., Doeller, C.F., 2020. Knowledge Across Reference Frames: Cognitive Maps and Image Spaces. Trends Cogn. Sci. 24, 606-619. https://doi.org/10.1016/j.tics.2020.05.008</p>
+<p>Botvinick, M., Watanabe, T., 2007. From Numerosity to Ordinal Rank: A Gain-Field Model of Serial Order Representation in Cortical Working Memory. J. Neurosci. 27, 8636-8642. https://doi.org/10.1523/JNEUROSCI.2110-07.2007</p>
+<p>Botvinick, M.M., Plaut, D.C., 2006. Short-term memory for serial order: A recurrent neural network model. Psychol. Rev. 113, 201-233. https://doi.org/10.1037/0033-295X.113.2.201</p>
+<p>Bouret, S., Paradis, E., Prat, S., Castro, L., Perez, P., Gilissen, E., Garcia, C., 2024. Linking the evolution of two prefrontal brain regions to social and foraging challenges in primates. eLife 12, RP87780. https://doi.org/10.7554/eLife.87780</p>
+<p>Branco, T., Clark, B.A., Hausser, M., 2010. Dendritic Discrimination of Temporal Input Sequences in Cortical Neurons. Science 329, 1671-1675. https://doi.org/10.1126/science.1189664</p>
+<p>Broschard, M.B., Kim, J., Love, B.C., Wasserman, E.A., Freeman, J.H., 2021. Prelimbic cortex maintains attention to category-relevant information and flexibly updates category representations. Neurobiol. Learn. Mem. 185, 107524. https://doi.org/10.1016/j.nlm.2021.107524</p>
+<p>Burgess, N., Hitch, G.J., 1999. Memory for serial order: A network model of the phonological loop and its timing. Psychol. Rev. 106, 551-581. https://doi.org/10.1037/0033-295X.106.3.551</p>
+<p>Buzsáki, G., 2010. Neural Syntax: Cell Assemblies, Synapsembles, and Readers. Neuron 68, 362-385. https://doi.org/10.1016/j.neuron.2010.09.023</p>
+<p>Cavada, C., Goldman-Rakic, P.S., 1989. Posterior parietal cortex in rhesus monkey: II. Evidence for segregated corticocortical networks linking sensory and limbic areas with the frontal lobe. J. Comp. Neurol. 287, 422-445. https://doi.org/10.1002/cne.902870403</p>
+<p>Chau, B.K.H., Law, C.-K., To, J.Y.L., Shum, D.H.K., Mars, R.B., 2025. Complex functions of human lateral frontopolar cortex. Brain 148, 3833-3843. https://doi.org/10.1093/brain/awaf289</p>
+<p>Chen, J., Zhang, C., Hu, P., Min, B., Wang, L., 2024. Flexible control of sequence working memory in the macaque frontal cortex. Neuron 112, 3502-3514.e6. https://doi.org/10.1016/j.neuron.2024.07.024</p>
+<p>Chericoni, A., Fine, J.M., Chavez, A.G., Franch, M.C., Mickiewicz, E.A., Mathura, R.K., Adkinson, J., Bartoli, E., Jacobs, J., Provenza, N.R., Watrous, A.J., Yoo, S.B.M., Sheth, S.A., Hayden, B.Y., 2025. Independent Continuous Tracking of Multiple Agents in the Human Hippocampus. https://doi.org/10.1101/2025.03.06.641914</p>
+<p>Chiang, F.-K., Wallis, J.D., 2018. Spatiotemporal encoding of search strategies by prefrontal neurons. Proc. Natl. Acad. Sci. U. S. A. 115, 5010-5015. https://doi.org/10.1073/pnas.1805044115</p>
+<p>Collins, A., Koechlin, E., 2012. Reasoning, learning, and creativity: frontal lobe function and human decision-making. PLoS Biol. 10, e1001293. https://doi.org/10.1371/journal.pbio.1001293</p>
+<p>Daie, K., Svoboda, K., Druckmann, S., 2021. Targeted photostimulation uncovers circuit motifs supporting short-term memory. Nat. Neurosci. 24, 259-265. https://doi.org/10.1038/s41593-020-00776-3</p>
+<p>Daw, N.D., O&#x27;Doherty, J.P., Dayan, P., Seymour, B., Dolan, R.J., 2006. Cortical substrates for exploratory decisions in humans. Nature 441, 876-879. https://doi.org/10.1038/nature04766</p>
+<p>Dias, R., Robbins, T.W., Roberts, A.C., 1996. Dissociation in prefrontal cortex of affective and attentional shifts. Nature 380, 69-72. https://doi.org/10.1038/380069a0</p>
+<p>Doohan, P.T., Jensen, K.T., Chen, Y., Godinho, B.S., Burns, C.D.G., Qin, C. (Xiao), Emery, J.L., Cini, R.J., Walton, M.E., Behrens, T.E.J., Akam, T.E., 2026. Structured and flexible representations in medial-frontal cortex support goal- directed navigation. https://doi.org/10.64898/2026.06.09.729603</p>
+<p>Dorrell, W., Latham, P.E., Behrens, T.E.J., Whittington, J.C.R., 2026. An Efficient Computing Theory of Prefrontal Structured Working Memory Representations. https://doi.org/10.64898/2026.02.16.706126</p>
+<p>Dum, R.P., Strick, P.L., 2005. Frontal Lobe Inputs to the Digit Representations of the Motor Areas on the Lateral Surface of the Hemisphere. J. Neurosci. 25, 1375-1386. https://doi.org/10.1523/JNEUROSCI.3902-04.2005</p>
+<p>Duncan, J., Emslie, H., Williams, P., Johnson, R., Freer, C., 1996. Intelligence and the frontal lobe: the organization of goal-directed behavior. Cognit. Psychol. 30, 257-303. https://doi.org/10.1006/cogp.1996.0008</p>
+<p>Ebitz, R.B., Hayden, B.Y., 2021. The population doctrine in cognitive neuroscience. Neuron 109, 3055-3068. https://doi.org/10.1016/j.neuron.2021.07.011</p>
+<p>Eckstein, M.K., Collins, A.G.E., 2020. Computational evidence for hierarchically structured reinforcement learning in humans. Proc. Natl. Acad. Sci. 117, 29381-29389. https://doi.org/10.1073/pnas.1912330117</p>
+<p>Eichenbaum, H., 2017. Prefrontal-hippocampal interactions in episodic memory. Nat. Rev. Neurosci. 18, 547-558. https://doi.org/10.1038/nrn.2017.74</p>
+<p>Eichenbaum, H., 2004. Hippocampus: Cognitive Processes and Neural Representations that Underlie Declarative Memory. Neuron 44, 109-120. https://doi.org/10.1016/j.neuron.2004.08.028</p>
+<p>El-Gaby, M., Harris, A.L., Whittington, J.C.R., Dorrell, W., Bhomick, A., Walton, M.E., Akam, T., Behrens, T.E.J., 2024. A cellular basis for mapping behavioural structure. Nature 636, 671-680. https://doi.org/10.1038/s41586-024-08145-x Falcone, R., Cirillo, R., Ferraina, S., Genovesio, A., 2017. Neural activity in macaque medial frontal cortex represents others&#x27; choices. Sci. Rep. 7, 12663. https://doi.org/10.1038/s41598-017-12822-5</p>
+<p>Fine, J.M., Hayden, B.Y., 2021. The whole prefrontal cortex is premotor cortex. Philos. Trans. R. Soc. B Biol. Sci. 377, 20200524. https://doi.org/10.1098/rstb.2020.0524</p>
+<p>Fouragnan, E.F., Chau, B.K.H., Folloni, D., Kolling, N., Verhagen, L., Klein-Flügge, M., Tankelevitch, L., Papageorgiou, G.K., Aubry, J.-F., Sallet, J., Rushworth, M.F.S., 2019. The macaque anterior cingulate cortex translates counterfactual choice value into actual behavioral change. Nat. Neurosci. 22, 797-808. https://doi.org/10.1038/s41593-019-0375-6</p>
+<p>Funahashi, S., Inoue, M., Kubota, K., 1997. Delay-period activity in the primate prefrontal cortex encoding multiple spatial positions and their order of presentation. Behav. Brain Res. 84, 203-223. https://doi.org/10.1016/S0166-4328(96)00151-9</p>
+<p>Fuster, J.M., 2001. The Prefrontal Cortex-An Update: Time Is of the Essence. Neuron 30, 319-333. https://doi.org/10.1016/S0896-6273(01)00285-9</p>
+<p>Fuster, J.M., 2000. Executive frontal functions. Exp. Brain Res. 133, 66-70. https://doi.org/10.1007/s002210000401</p>
+<p>Gadonneix, J., Zhang, M., Rapin, J., Evanson, L., Bourdillon, P., King, J.-R., 2026. Temporal structure of the language hierarchy within small cortical patches. https://doi.org/10.48550/arXiv.2604.03021</p>
+<p>George, D., Rikhye, R.V., Gothoskar, N., Guntupalli, J.S., Dedieu, A., Lázaro-Gredilla, M., 2021. Clone-structured graph representations enable flexible learning and vicarious evaluation of cognitive maps. Nat. Commun. 12, 2392. https://doi.org/10.1038/s41467-021-22559-5</p>
+<p>Goldman, P.S., Nauta, W.J.H., 1977. Columnar distribution of cortico-cortical fibers in the frontal association, limbic, and motor cortex of the developing rhesus monkey. Brain Res. 122, 393-413. https://doi.org/10.1016/0006-8993(77)90453-X Goldman-Rakic, P.S., 1984. Modular organization of prefrontal cortex. Trends Neurosci. 7, 419-424. https://doi.org/10.1016/S0166-2236(84)80146-0</p>
+<p>Guardamagna, M., Hermansen, E., Carpenter, J., Lykken, C.M., Dunn, B.A., Moser, E.I., Moser, M.-B., 2026. Toroidal topology of grid-cell activity precedes spatial navigation during development. https://doi.org/10.64898/2026.03.10.710908</p>
+<p>Guidera, J.A., Gramling, D.P., Comrie, A.E., Joshi, A., Tseng, S.-Y., Denovellis, E.L., Smyth, C.N., Lee, K.H., Zhou, J., Thompson, P., Hernandez, J., Yorita, A., Haque, R., Kirst, C., Frank, L.M., 2026. Regional specialization in prefrontal cortex manifests in the reliability of task progression codes. Neuron 114, 1152-1161.e8. https://doi.org/10.1016/j.neuron.2026.01.023</p>
+<p>Guldin, W.O., Pritzel, M., Markowitsch, H.J., 2008. Prefrontal Cortex of the Mouse Defined as Cortical Projection Area of the Thalamic Mediodorsal Nucleus. Brain. Behav. Evol. 93-107. https://doi.org/10.1159/000121636</p>
+<p>Hafting, T., Fyhn, M., Molden, S., Moser, M.-B., Moser, E.I., 2005. Microstructure of a spatial map in the entorhinal cortex. Nature 436, 801-806. https://doi.org/10.1038/nature03721</p>
+<p>Haroush, K., Williams, Z.M., 2015. Neuronal Prediction of Opponent&#x27;s Behavior during Cooperative Social Interchange in Primates. Cell 160, 1233-1245. https://doi.org/10.1016/j.cell.2015.01.045</p>
+<p>Hattori, R., Hedrick, N.G., Jain, A., Chen, S., You, H., Hattori, M., Choi, J.-H., Lim, B.K., Yasuda, R., Komiyama, T., 2023. Meta-reinforcement learning via orbitofrontal cortex. Nat. Neurosci. 26, 2182-2191. https://doi.org/10.1038/s41593-023-01485-3</p>
+<p>Hayden, B.Y., Heilbronner, S.R., Yoo, S.B.M., 2026. Rethinking the centrality of brain areas in understanding functional organization. Nat. Neurosci. 29, 267-278. https://doi.org/10.1038/s41593-025-02166-z</p>
+<p>Hayden, B.Y., Pearson, J.M., Platt, M.L., 2009. Fictive Reward Signals in the Anterior Cingulate Cortex. Science 324, 948-950. https://doi.org/10.1126/science.1168488</p>
+<p>Hayden, B.Y., Platt, M.L., 2010. Neurons in Anterior Cingulate Cortex Multiplex Information about Reward and Action. J. Neurosci. 30, 3339-3346. https://doi.org/10.1523/JNEUROSCI.4874-09.2010</p>
+<p>Holton, E., Grohn, J., Ward, H., Manohar, S.G., O&#x27;Reilly, J.X., Kolling, N., 2024. Goal commitment is supported by vmPFC through selective attention. Nat. Hum. Behav. 1-15. https://doi.org/10.1038/s41562-024-01844-5</p>
+<p>Iacaruso, M.F., Gasler, I.T., Hofer, S.B., 2017. Synaptic organization of visual space in primary visual cortex. Nature 547, 449-452. https://doi.org/10.1038/nature23019</p>
+<p>Inoue, M., Mikami, A., 2006. Prefrontal Activity During Serial Probe Reproduction Task: Encoding, Mnemonic, and Retrieval Processes. J. Neurophysiol. 95, 1008-1041. https://doi.org/10.1152/jn.00552.2005</p>
+<p>Isoda, M., 2021. The Role of the Medial Prefrontal Cortex in Moderating Neural Representations of Self and Other in Primates. Annu. Rev. Neurosci. 44, 295-313. https://doi.org/10.1146/annurev-neuro-101420-011820</p>
+<p>Jahn, C.I., Markov, N.T., Morea, B., Daw, N.D., Ebitz, R.B., Buschman, T.J., 2024. Learning attentional templates for value-based decision-making. Cell 187, 1476-1489.e21. https://doi.org/10.1016/j.cell.2024.01.041</p>
+<p>Jamali, M., Grannan, B.L., Fedorenko, E., Saxe, R., Báez-Mendoza, R., Williams, Z.M., 2021. Single-neuronal predictions of others&#x27; beliefs in humans. Nature 1-5. https://doi.org/10.1038/s41586-021-03184-0</p>
+<p>Jensen, K.T., 2024. An introduction to reinforcement learning for neuroscience. Neurons Behav. Data Anal. Theory. https://doi.org/10.51628/001c.127771</p>
+<p>Jensen, K.T., Doohan, P., Sablé-Meyer, M., Reinert, S., Baram, A., Akam, T., Behrens, T.E., 2026. A mechanistic theory of planning in prefrontal cortex. eLife 15. https://doi.org/10.7554/eLife.109757.1</p>
+<p>Johnston, W.J., Fine, J.M., Yoo, S.B.M., Ebitz, R.B., Hayden, B.Y., 2024. Semi-orthogonal subspaces for value mediate a binding and generalization trade-off. Nat. Neurosci. 27, 2218-2230. https://doi.org/10.1038/s41593-024-01758-5</p>
+<p>Jun, J.J., Steinmetz, N.A., Siegle, J.H., Denman, D.J., Bauza, M., Barbarits, B., Lee, A.K., Anastassiou, C.A., Andrei, A., Aydın, Ç., Barbic, M., Blanche, T.J., Bonin, V., Couto, J., Dutta, B., Gratiy, S.L., Gutnisky, D.A., Häusser, M., Karsh, B., Ledochowitsch, P., Lopez, C.M., Mitelut, C., Musa, S., Okun, M., Pachitariu, M., Putzeys, J., Rich, P.D., Rossant, C., Sun, W., Svoboda, K., Carandini, M., Harris, K.D., Koch, C., O&#x27;Keefe, J., Harris, T.D., 2017. Fully integrated silicon probes for high-density recording of neural activity. Nature 551, 232-236. https://doi.org/10.1038/nature24636</p>
+<p>Khanna, A.R., Muñoz, W., Kim, Y.J., Kfir, Y., Paulk, A.C., Jamali, M., Cai, J., Mustroph, M.L., Caprara, I., Hardstone, R., Mejdell, M., Meszéna, D., Zuckerman, A., Schweitzer, J., Cash, S., Williams, Z.M., 2024. Single-neuronal elements of speech production in humans. Nature 626, 603-610. https://doi.org/10.1038/s41586-023-06982-w</p>
+<p>Klein-Flügge, M.C., Bongioanni, A., Rushworth, M.F.S., 2022. Medial and orbital frontal cortex in decision-making and flexible behavior. Neuron 110, 2743-2770. https://doi.org/10.1016/j.neuron.2022.05.022</p>
+<p>Knudsen, E.B., Wallis, J.D., 2021. Hippocampal neurons construct a map of an abstract value space. Cell 184, 4640- 4650.e10. https://doi.org/10.1016/j.cell.2021.07.010</p>
+<p>Koechlin, E., Ody, C., Kouneiher, F., 2003. The Architecture of Cognitive Control in the Human Prefrontal Cortex. Science 302, 1181-1185. https://doi.org/10.1126/science.1088545</p>
+<p>Koechlin, E., Summerfield, C., 2007. An information theoretical approach to prefrontal executive function. Trends Cogn. Sci. 11, 229-235. https://doi.org/10.1016/j.tics.2007.04.005</p>
+<p>Küchenhoff, S., Baram, A., El-Gaby, M., SablŽ-Meyer, M., Harris, A., Bakermans, J., Shah, S., Bartoli, E., Watrous, A., Anand, A., Donoghue, T., Maesta-Pereira, S., Topalovic, U., Sakon, J., Smith, E.H., 2025. Algorithmic representations in the human brain that underlie schema generalisation. Proc. Annu. Meet. Cogn. Sci. Soc. 47.</p>
+<p>Lashley, K.S., 1951. The problem of serial order in behavior, in: Cerebral Mechanisms in Behavior; the Hixon Symposium. Wiley, Oxford, England, pp. 112-146.</p>
+<p>Lee, T.S., Nguyen, M., 2001. Dynamics of subjective contour formation in the early visual cortex. Proc. Natl. Acad. Sci. 98, 1907-1911. https://doi.org/10.1073/pnas.98.4.1907</p>
+<p>Leonard, C.M., 1969. The prefrontal cortex of the rat. I. cortical projection of the mediodorsal nucleus. II. efferent connections. Brain Res. 12, 321-343. https://doi.org/10.1016/0006-8993(69)90003-1</p>
+<p>Li, H., Chrysanthidis, N., Brincat, S.L., Rose, J., Miller, E.K., 2026. Neural subspace reorganization reflects value-based decision making. https://doi.org/10.64898/2026.02.02.703171</p>
+<p>Lu, M., Preston, J.B., Strick, P.L., 1994. Interconnections between the prefrontal cortex and the premotor areas in the frontal lobe. J. Comp. Neurol. 341, 375-392. https://doi.org/10.1002/cne.903410308</p>
+<p>Mahmoodi, A., Rushworth, M.F.S., 2026. Computational origins of cortical brain circuits for social cognition. Nat. Rev. Neurosci. 27, 345-356. https://doi.org/10.1038/s41583-026-01028-2</p>
+<p>Manakov, M., Proskurin, M., Wang, H., Kuleshova, E., Lustig, A., Behnam, R., Druckmann, S., Tervo, D.G.R., Karpova, A.Y., 2025. Cognitive Graphs of Latent Structure in Rostral Anterior Cingulate Cortex. https://doi.org/10.1101/2025.04.18.649507</p>
+<p>Marr, D., 2010. Vision: a computational investigation into the human representation and processing of visual information. MIT Press, Cambridge, Mass.</p>
+<p>McClelland, J.L., McNaughton, B.L., O&#x27;Reilly, R.C., 1995. Why there are complementary learning systems in the hippocampus and neocortex: insights from the successes and failures of connectionist models of learning and memory. Psychol. Rev. 102, 419-457. https://doi.org/10.1037/0033-295X.102.3.419</p>
+<p>Miller, E.K., Cohen, J.D., 2001. An integrative theory of prefrontal cortex function. Annu. Rev. Neurosci. 24, 167-202. https://doi.org/10.1146/annurev.neuro.24.1.167</p>
+<p>Miller, G.A., Galanter, E., Pribram, K.H., 1960. Plans and the structure of behavior, Plans and the structure of behavior. Henry Holt and Co, New York, NY, US. https://doi.org/10.1037/10039-000</p>
+<p>Mitchell, J.P., Banaji, M.R., Macrae, C.N., 2005. The Link between Social Cognition and Self-referential Thought in the Medial Prefrontal Cortex. J. Cogn. Neurosci. 17, 1306-1315. https://doi.org/10.1162/0898929055002418</p>
+<p>Mushiake, H., Saito, N., Sakamoto, K., Itoyama, Y., Tanji, J., 2006. Activity in the Lateral Prefrontal Cortex Reflects Multiple Steps of Future Events in Action Plans. Neuron 50, 631-641. https://doi.org/10.1016/j.neuron.2006.03.045</p>
+<p>Nicolle, A., Klein-Flügge, M.C., Hunt, L.T., Vlaev, I., Dolan, R.J., Behrens, T.E.J., 2012. An Agent Independent Axis for Executed and Modeled Choice in Medial Prefrontal Cortex. Neuron 75, 1114-1121. https://doi.org/10.1016/j.neuron.2012.07.023</p>
+<p>Ninokura, Y., Mushiake, H., Tanji, J., 2004. Integration of Temporal Order and Object Information in the Monkey Lateral Prefrontal Cortex. J. Neurophysiol. 91, 555-560. https://doi.org/10.1152/jn.00694.2003</p>
+<p>Ninokura, Y., Mushiake, H., Tanji, J., 2003. Representation of the Temporal Order of Visual Objects in the Primate Lateral Prefrontal Cortex. J. Neurophysiol. 89, 2868-2873. https://doi.org/10.1152/jn.00647.2002</p>
+<p>O&#x27;Keefe, J., Dostrovsky, J., 1971. The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat. Brain Res. 34, 171-175. https://doi.org/10.1016/0006-8993(71)90358-1</p>
+<p>Ólafsdóttir, H.F., Barry, C., Saleem, A.B., Hassabis, D., Spiers, H.J., 2015. Hippocampal place cells construct reward related sequences through unexplored space. eLife 4, e06063. https://doi.org/10.7554/eLife.06063</p>
+<p>Pachitariu, M., Steinmetz, N., Kadir, S., Carandini, M., D, H.K., 2016. Kilosort: realtime spike-sorting for extracellular electrophysiology with hundreds of channels. bioRxiv 061481. https://doi.org/10.1101/061481</p>
+<p>Padoa-Schioppa, C., Assad, J.A., 2008. The representation of economic value in the orbitofrontal cortex is invariant for changes of menu. Nat. Neurosci. 11, 95-102. https://doi.org/10.1038/nn2020</p>
+<p>Padoa-Schioppa, C., Assad, J.A., 2006. Neurons in the orbitofrontal cortex encode economic value. Nature 441, 223- 226. https://doi.org/10.1038/nature04676</p>
+<p>Panichello, M.F., Buschman, T.J., 2021. Shared mechanisms underlie the control of working memory and attention. Nature 592, 601-605. https://doi.org/10.1038/s41586-021-03390-w</p>
+<p>Passingham, R., 1993. The Frontal Lobes and Voluntary Action. Oxford University Press. https://doi.org/10.1093/oso/9780198521853.001.0001</p>
+<p>Passingham, R.E., 2021. Understanding the Prefrontal Cortex: Selective advantage, connectivity, and neural operations. Oxford University Press. https://doi.org/10.1093/oso/9780198844570.001.0001</p>
+<p>Petrides, M., 1982. Motor conditional associative-learning after selective prefrontal lesions in the monkey. Behav. Brain Res. 5, 407-413. https://doi.org/10.1016/0166-4328(82)90044-4</p>
+<p>Petrides, M., Milner, B., 1982. Deficits on subject-ordered tasks after frontal-and temporal-lobe lesions in man. Neuropsychologia 20, 249-262. https://doi.org/10.1016/0028-3932(82)90100-2</p>
+<p>Petrides, M., Pandya, D.N., 1999. Dorsolateral prefrontal cortex: comparative cytoarchitectonic analysis in the human and the macaque brain and corticocortical connection patterns. Eur. J. Neurosci. 11, 1011-1036. https://doi.org/10.1046/j.1460-9568.1999.00518.x</p>
+<p>Pfeiffer, B.E., Foster, D.J., 2013. Hippocampal place-cell sequences depict future paths to remembered goals. Nature 497, 74-79. https://doi.org/10.1038/nature12112</p>
+<p>Powell, J., Lewis, P.A., Roberts, N., García-Fiñana, M., Dunbar, R.I.M., 2012. Orbital prefrontal cortex volume predicts social network size: an imaging study of individual differences in humans. Proc. R. Soc. B Biol. Sci. 279, 2157- 2162. https://doi.org/10.1098/rspb.2011.2574</p>
+<p>Preuss, T.M., 1995. Do Rats Have Prefrontal Cortex? The Rose-Woolsey-Akert Program Reconsidered. J. Cogn. Neurosci. 7, 1-24. https://doi.org/10.1162/jocn.1995.7.1.1</p>
+<p>Pu, S., Dang, W., Qi, X.-L., Constantinidis, C., 2024. Prefrontal neuronal dynamics in the absence of task execution. Nat. Commun. 15, 6694. https://doi.org/10.1038/s41467-024-50717-y</p>
+<p>Reinert, S., Hübener, M., Bonhoeffer, T., Goltstein, P.M., 2021. Mouse prefrontal cortex represents learned rules for categorization. Nature 593, 411-417. https://doi.org/10.1038/s41586-021-03452-z</p>
+<p>Reynolds, J.N., Hyland, B.I., Wickens, J.R., 2001. A cellular mechanism of reward-related learning. Nature 413, 67-70. https://doi.org/10.1038/35092560</p>
+<p>Rigotti, M., Barak, O., Warden, M.R., Wang, X.-J., Daw, N.D., Miller, E.K., Fusi, S., 2013. The importance of mixed selectivity in complex cognitive tasks. Nature 497, 585-590. https://doi.org/10.1038/nature12160</p>
+<p>Rose, J.E., Woolsey, C.N., 1948. The orbitofrontal cortex and its connections with the mediodorsal nucleus in rabbit, sheep and cat. Res. Publ. -Assoc. Res. Nerv. Ment. Dis. 27 (1 vol.), 210-232.</p>
+<p>Saito, N., Mushiake, H., Sakamoto, K., Itoyama, Y., Tanji, J., 2005. Representation of Immediate and Final Behavioral Goals in the Monkey Prefrontal Cortex during an Instructed Delay Period. Cereb. Cortex 15, 1535-1546. https://doi.org/10.1093/cercor/bhi032</p>
+<p>Sakai, K., Passingham, R.E., 2003. Prefrontal interactions reflect future task operations. Nat. Neurosci. 6, 75-81. https://doi.org/10.1038/nn987</p>
+<p>Sakamoto, K., Saito, N., Yoshida, S., Mushiake, H., 2020. Dynamic Axis-Tuned Cells in the Monkey Lateral Prefrontal Cortex during a Path-Planning Task. J. Neurosci. 40, 203-219. https://doi.org/10.1523/JNEUROSCI.2526-18.2019</p>
+<p>Sallet, J., Mars, R.B., Noonan, M.P., Andersson, J.L., O&#x27;Reilly, J.X., Jbabdi, S., Croxson, P.L., Jenkinson, M., Miller, K.L., Rushworth, M.F.S., 2011. Social Network Size Affects Neural Circuits in Macaques. Science 334, 697-700. https://doi.org/10.1126/science.1210027</p>
+<p>Samborska, V., Butler, J.L., Walton, M.E., Behrens, T.E.J., Akam, T., 2022. Complementary task representations in hippocampus and prefrontal cortex for generalizing the structure of problems. Nat. Neurosci. 25, 1314-1326. https://doi.org/10.1038/s41593-022-01149-8</p>
+<p>Sargolini, F., Fyhn, M., Hafting, T., McNaughton, B.L., Witter, M.P., Moser, M.-B., Moser, E.I., 2006. Conjunctive Representation of Position, Direction, and Velocity in Entorhinal Cortex. Science 312, 758-762. https://doi.org/10.1126/science.1125572</p>
+<p>Schuck, N.W., Cai, M.B., Wilson, R.C., Niv, Y., 2016. Human Orbitofrontal Cortex Represents a Cognitive Map of State Space. Neuron 91, 1402-1412. https://doi.org/10.1016/j.neuron.2016.08.019</p>
+<p>Schultz, W., Dayan, P., Montague, P.R., 1997. A Neural Substrate of Prediction and Reward. Science 275, 1593-1599. https://doi.org/10.1126/science.275.5306.1593</p>
+<p>Schwartenbeck, P., Baram, A., Liu, Y., Mark, S., Muller, T., Dolan, R., Botvinick, M., Kurth-Nelson, Z., Behrens, T., 2023. Generative replay underlies compositional inference in the hippocampal-prefrontal circuit. Cell 186, 4885- 4897.e14. https://doi.org/10.1016/j.cell.2023.09.004</p>
+<p>Scoville, W.B., Milner, B., 1957. LOSS OF RECENT MEMORY AFTER BILATERAL HIPPOCAMPAL LESIONS. J. Neurol. Neurosurg. Psychiatry 20, 11-21.</p>
+<p>Shallice, T., 1982. Specific impairments of planning. Philos. Trans. R. Soc. Lond. B. Biol. Sci. 298, 199-209. https://doi.org/10.1098/rstb.1982.0082</p>
+<p>Shallice, T., Burgess, P.W., 1991. Deficits in strategy application following frontal lobe damage in man. Brain J. Neurol. 114 ( Pt 2), 727-741. https://doi.org/10.1093/brain/114.2.727</p>
+<p>Shima, K., Isoda, M., Mushiake, H., Tanji, J., 2007. Categorization of behavioural sequences in the prefrontal cortex. Nature 445, 315-318. https://doi.org/10.1038/nature05470</p>
+<p>Skaggs, W.E., McNaughton, B.L., 1996. Replay of Neuronal Firing Sequences in Rat Hippocampus During Sleep Following Spatial Experience. Science 271, 1870-1873. https://doi.org/10.1126/science.271.5257.1870</p>
+<p>Smith, B.D. (Bruce D., 1995. The emergence of agriculture. New York : Scientific American Library : Distributed by W.H. Freeman.</p>
+<p>Spens, E., Burgess, N., 2024. A generative model of memory construction and consolidation. Nat. Hum. Behav. 8, 526-543. https://doi.org/10.1038/s41562-023-01799-z</p>
+<p>Sun, W., Advani, M., Spruston, N., Saxe, A., Fitzgerald, J.E., 2023. Organizing memories for generalization in complementary learning systems. Nat. Neurosci. 26, 1438-1448. https://doi.org/10.1038/s41593-023-01382-9</p>
+<p>Swanson, R.A., Levenstein, D., McClain, K., Tingley, D., Buzsáki, G., 2020. Variable specificity of memory trace reactivation during hippocampal sharp wave ripples. Curr. Opin. Behav. Sci., Understanding memory: Which level of analysis? 32, 126-135. https://doi.org/10.1016/j.cobeha.2020.02.008</p>
+<p>Takeuchi, D., Roy, D., Muralidhar, S., Kawai, T., Bari, A., Lovett, C., Sullivan, H.A., Wickersham, I.R., Tonegawa, S., 2022. Cingulate-motor circuits update rule representations for sequential choice decisions. Nat. Commun. 13, 4545. https://doi.org/10.1038/s41467-022-32142-1</p>
+<p>Tamir, D.I., Mitchell, J.P., 2010. Neural correlates of anchoring-and-adjustment during mentalizing. Proc. Natl. Acad. Sci. 107, 10827-10832. https://doi.org/10.1073/pnas.1003242107</p>
+<p>Tang, J., LeBel, A., Jain, S., Huth, A.G., 2023. Semantic reconstruction of continuous language from non-invasive brain recordings. Nat. Neurosci. 26, 858-866. https://doi.org/10.1038/s41593-023-01304-9</p>
+<p>Tanji, J., 2001. Sequential Organization of Multiple Movements: Involvement of Cortical Motor Areas. Annu. Rev. Neurosci. 24, 631-651. https://doi.org/10.1146/annurev.neuro.24.1.631</p>
+<p>Tian, Z., Chen, J., Zhang, C., Min, B., Xu, B., Wang, L., 2024. Mental programming of spatial sequences in working memory in the macaque frontal cortex. Science 385, eadp6091. https://doi.org/10.1126/science.adp6091</p>
+<p>Tissot, H., Boucher, J., Reinert, S., Goltstein, P.M., Boubenec, Y., 2025. Sensorimotor remapping drives task specialization in prefrontal cortex. https://doi.org/10.1101/2025.09.22.677699</p>
+<p>Turner-Evans, D., Wegener, S., Rouault, H., Franconville, R., Wolff, T., Seelig, J.D., Druckmann, S., Jayaraman, V., 2017. Angular velocity integration in a fly heading circuit. eLife 6, e23496. https://doi.org/10.7554/eLife.23496</p>
+<p>Turner-Evans, D.B., Jensen, K.T., Ali, S., Paterson, T., Sheridan, A., Ray, R.P., Wolff, T., Lauritzen, J.S., Rubin, G.M., Bock, D.D., Jayaraman, V., 2020. The Neuroanatomical Ultrastructure and Function of a Biological Ring Attractor. Neuron 108, 145-163.e10. https://doi.org/10.1016/j.neuron.2020.08.006</p>
+<p>Tye, K.M., Miller, E.K., Taschbach, F.H., Benna, M.K., Rigotti, M., Fusi, S., 2024. Mixed selectivity: Cellular computations for complexity. Neuron 112, 2289-2303. https://doi.org/10.1016/j.neuron.2024.04.017</p>
+<p>Van de Maele, T., Dhoedt, B., Verbelen, T., Pezzulo, G., 2024. A hierarchical active inference model of spatial alternation tasks and the hippocampal-prefrontal circuit. Nat. Commun. 15, 9892. https://doi.org/10.1038/s41467-024-54257-3</p>
+<p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.N., Kaiser, L., Polosukhin, I., 2023. Attention Is All You Need. https://doi.org/10.48550/arXiv.1706.03762</p>
+<p>Veselic, S., Gutierrez, E., El-Gaby, M., Reinert, S., Sablé-Meyer, M., 2025a. Cognitive Maps in the Prefrontal Cortex. J. Neurosci. 45, e1358252025. https://doi.org/10.1523/JNEUROSCI.1358-25.2025</p>
+<p>Veselic, S., Muller, T.H., Gutierrez, E., Behrens, T.E.J., Hunt, L.T., Butler, J.L., Kennerley, S.W., 2025b. A cognitive map for value-guided choice in the ventromedial prefrontal cortex. Cell 188, 3259-3273.e22. https://doi.org/10.1016/j.cell.2025.03.038</p>
+<p>Vinograd, A., Nair, A., Kim, J.H., Linderman, S.W., Anderson, D.J., 2024. Causal evidence of a line attractor encoding an affective state. Nature 634, 910-918. https://doi.org/10.1038/s41586-024-07915-x</p>
+<p>Walker, A.E., 1940. A cytoarchitectural study of the prefrontal area of the macaque monkey. J. Comp. Neurol. 73, 59-86. https://doi.org/10.1002/cne.900730106</p>
+<p>Wallis, J.D., Anderson, K.C., Miller, E.K., 2001. Single neurons in prefrontal cortex encode abstract rules. Nature 411, 953-956. https://doi.org/10.1038/35082081</p>
+<p>Wang, J.X., Kurth-Nelson, Z., Kumaran, D., Tirumala, D., Soyer, H., Leibo, J.Z., Hassabis, D., Botvinick, M., 2018. Prefrontal cortex as a meta-reinforcement learning system. Nat. Neurosci. 21, 860-868. https://doi.org/10.1038/s41593-018-0147-8</p>
+<p>Wang, M., Fusi, S., Stachenfeld, K., 2025. Brain-like slot representation for sequence working memory in recurrent neural networks. Presented at the Second Workshop on Representational Alignment at ICLR 2025.</p>
+<p>Warren, J., Jensen, K.T., Behrens, T.E.J., Whittington, J.C.R., 2026. A Mechanistic Theory Unifying Value and Schema in the Prefrontal Cortex. bioRxiv 2026.10.17.759791. https://doi.org/10.64898/2026.10.17.759791</p>
+<p>Whittington, J.C.R., Dorrell, W., Behrens, T.E.J., Ganguli, S., El-Gaby, M., 2025. A tale of two algorithms: Structured slots explain prefrontal sequence memory and are unified with hippocampal cognitive maps. Neuron 113, 321- 333.e6. https://doi.org/10.1016/j.neuron.2024.10.017</p>
+<p>Whittington, J.C.R., Muller, T.H., Mark, S., Chen, G., Barry, C., Burgess, N., Behrens, T.E.J., 2020. The Tolman- Eichenbaum Machine: Unifying Space and Relational Memory through Generalization in the Hippocampal Formation. Cell 183, 1249-1263.e23. https://doi.org/10.1016/j.cell.2020.10.024</p>
+<p>Wilson, R.C., Takahashi, Y.K., Schoenbaum, G., Niv, Y., 2014. Orbitofrontal cortex as a cognitive map of task space. Neuron 81, 267-279. https://doi.org/10.1016/j.neuron.2013.11.005</p>
+<p>Wittmann, M.K., Kolling, N., Faber, N.S., Scholl, J., Nelissen, N., Rushworth, M.F.S., 2016. Self-Other Mergence in the Frontal Cortex during Cooperation and Competition. Neuron 91, 482-493. https://doi.org/10.1016/j.neuron.2016.06.022</p>
+<p>Wittmann, M.K., Lin, Y., Pan, D., Braun, M.N., Dickson, C., Spiering, L., Luo, S., Harbison, C., Abdurahman, A., Hamilton, S., Faber, N.S., Khalighinejad, N., Lockwood, P.L., Rushworth, M.F.S., 2025. Basis functions for complex social decisions in dorsomedial frontal cortex. Nature 641, 707-717. https://doi.org/10.1038/s41586-025-08705-9</p>
+<p>Wittmann, M.K., Trudel, N., Trier, H.A., Klein-Flügge, M.C., Sel, A., Verhagen, L., Rushworth, M.F.S., 2021. Causal manipulation of self-other mergence in the dorsomedial prefrontal cortex. Neuron 109, 2353-2361.e11. https://doi.org/10.1016/j.neuron.2021.05.027</p>
+<p>Xie, Y., Hu, P., Li, J., Chen, J., Song, W., Wang, X.-J., Yang, T., Dehaene, S., Tang, S., Min, B., Wang, L., 2022. Geometry of sequence working memory in macaque prefrontal cortex. Science 375, 632-639. https://doi.org/10.1126/science.abm0204</p>
+<p>Yang, W., Yuste, R., 2018. Holographic imaging and photostimulation of neural activity. Curr. Opin. Neurobiol., Neurotechnologies 50, 211-221. https://doi.org/10.1016/j.conb.2018.03.006</p>
+<p>Yoo, S.B.M., Tu, J.C., Piantadosi, S.T., Hayden, B.Y., 2020. The neural basis of predictive pursuit. Nat. Neurosci. 23, 252-259. https://doi.org/10.1038/s41593-019-0561-6</p>
+<p>Zeder, M.A., 2011. The Origins of Agriculture in the Near East. Curr. Anthropol. 52, S221-S235. https://doi.org/10.1086/659307</p>
+<p>Zhang, P.Q., Jutras, M.J., Dede, A.J.O., Walker, E.Y., Buffalo, E.A., Fairhall, A.L., 2026. Neural representations of beliefs in a multi-dimensional inference task. https://doi.org/10.64898/2025.12.31.697231</p>
+<p>Zipser, D., Kehoe, B., Littlewort, G., Fuster, J., 1993. A spiking network model of short-term active memory. J. Neurosci. 13, 3406-3420. https://doi.org/10.1523/JNEUROSCI.13-08-03406.1993</p>
+<p>Zong, W., Obenhaus, H.A., Skytøen, E.R., Eneqvist, H., de Jong, N.L., Vale, R., Jorge, M.R., Moser, M.-B., Moser, E.I., 2022. Large-scale two-photon calcium imaging in freely moving mice. Cell 185, 1240-1256.e30. https://doi.org/10.1016/j.cell.2022.02.017</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
