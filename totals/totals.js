@@ -949,6 +949,42 @@ function drawOpen(cards) {
   say(c4, fmt(withRepo) + " of the " + fmt(P.length) + " preprints link to at least one repository.");
 }
 
+// Whose data and code the preprints link to: repo_check's `ownership`, which
+// decides for each repository linked in the text, and each deposit cited in
+// the reference list, whether it is the authors' own (made for this preprint,
+// or from their earlier work) or other people's
+var OWN_KINDS = [
+  ["own_this", "their own deposit for this preprint"],
+  ["own_earlier_data", "their own data from earlier work"],
+  ["own_earlier_code", "their own code from earlier work"],
+  ["others_data", "other people's data"],
+  ["others_code", "other people's code"]
+];
+function drawOwnership(cards) {
+  var own = (D.counts.ownership || {});
+  function bars(c, place) {
+    var n = own[place] || {};
+    hbars(c, OWN_KINDS.map(function (k, j) {
+      return { label: k[1], value: n[k[0]] || 0, color: j < 3 ? C.s1 : C.greenLight };
+    }), { total: P.length, labelW: 260, clip: 40, what: "Links to", unit: "Preprints" });
+  }
+  var c = card(cards, "How often do preprints link to their own data and code, and to other people's?",
+    "The share of preprints that link, in the text or in the reference list, to at least one repository of each kind. Metacheck decides whose a repository is from the sentence or reference that cites it, the authors' names, and what the repository's own record says; telling a deposit made for this preprint from one of the authors' earlier work is the least certain.", true);
+  bars(c, "any");
+  var c2 = card(cards, "In the text", "Links in the preprint's text.");
+  bars(c2, "text");
+  var c3 = card(cards, "In the reference list", "Deposits cited in the reference list.");
+  bars(c3, "reference");
+  var c4 = card(cards, "Reuse at a glance", "The share of preprints with each.");
+  tiles(c4, [
+    { value: share(function (p) { return p.o_this > 0; }), label: "link to their own deposit for this preprint" },
+    { value: share(function (p) { return p.o_edata > 0 || p.o_ecode > 0; }), label: "reuse their own earlier data or code" },
+    { value: share(function (p) { return p.x_data > 0 || p.x_code > 0; }), label: "reuse other people's data or code" },
+    { value: share(function (p) { return p.x_data > 0; }), label: "reuse other people's data" },
+    { value: share(function (p) { return p.x_code > 0; }), label: "reuse other people's code" }
+  ]);
+}
+
 function drawEthics(cards) {
   var live = count(P, function (p) { return p.live > 0; });
   var eth = count(P, function (p) { return p.live > 0 && p.ethics > 0; });
@@ -1232,7 +1268,9 @@ var VARS = [
   ["scerr", "StatCheck inconsistencies"], ["pow", "power analyses"], ["files", "files in the repository"],
   ["code", "code files"], ["loc", "lines of code"], ["scr", "scripts run"], ["broke", "scripts that did not run through"],
   ["cols", "data columns"], ["dissues", "data problems"], ["pubpeer", "cited works with PubPeer comments"],
-  ["flags", "checks red or yellow"], ["reds", "checks red"]
+  ["flags", "checks red or yellow"], ["reds", "checks red"],
+  ["o_this", "the authors' own deposits for this preprint"], ["o_edata", "the authors' own earlier data"],
+  ["o_ecode", "the authors' own earlier code"], ["x_data", "other people's data"], ["x_code", "other people's code"]
 ];
 function drawCorrelations(cards) {
   var c2 = card(cards, "", "Choose any two counts. Each dot is a preprint; click one to open its report.", true);
@@ -1317,9 +1355,11 @@ fetch("../data/totals.json", { cache: "no-cache" })
       p.date = toDate(p.pub); p.cdate = toDate(p.chk);
     });
     var up = toDate(D.updated);
-    document.getElementById("updated").textContent = fmt(P.length) + " preprints, counted on " + dayYear(up) + ".";
+    document.getElementById("updated").textContent = fmt(P.length) + " preprints, counted on " + dayYear(up) + "." +
+      (D.not_current ? " " + fmt(D.not_current) + " preprints checked with an earlier version of Metacheck are left out until they have been checked again." : "");
     sectionsBox.innerHTML = "";
     section("open", "Open science", "", drawOpen);
+    section("ownership", "Own and others' data and code", "", drawOwnership);
     section("ethics", "Ethics approval", "", drawEthics);
     section("lights", "How often does Metacheck spot a potential issue to improve?", "Each check gives a preprint a light: red (to fix), yellow (to check), blue (for information), green (fine), or grey when it had nothing to check.", drawWall);
     section("relations", "How problems relate", "How strongly do potential issues correlate?", drawRelations);

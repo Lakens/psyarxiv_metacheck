@@ -20,8 +20,8 @@ import urllib.parse
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from update import (RAN_THROUGH, OUTCOME_REASON, data_rows, load, reproducibility_findings,  # noqa: E402
-                    true)
+from update import (RAN_THROUGH, OUTCOME_REASON, CURRENT_FROM, data_rows, is_current, load,  # noqa: E402
+                    reproducibility_findings, true)
 
 TOP = 30                # entries in each list of the most frequent
 LIGHT_CODE = {"red": "r", "yellow": "y", "green": "g", "info": "i", "na": "n", "fail": "f"}
@@ -65,6 +65,10 @@ MESSAGE_KINDS = [
     ("it ran out of time", r"timed out"),
     ("the data have another shape than expected", r"ValueError|must specify|no rows|invalid"),
 ]
+# repo_check's six kinds of linked repository (its `ownership` column), and the
+# name of each one's count in a preprint's line
+OWNERSHIP = {"own_this": "o_this", "own_earlier_data": "o_edata", "own_earlier_code": "o_ecode",
+             "others_data": "x_data", "others_code": "x_code", "not_data": "o_pub"}
 PACKAGE_MISSING = [re.compile(r"there is no package called ['‘’\"]?([A-Za-z0-9._]+)"),
                    re.compile(r"No module named ['\"]([A-Za-z0-9_.]+)")]
 
@@ -320,6 +324,21 @@ def paper_row(i, item, result, acc):
     useless = m.get("useless_files")
     row["useless"] = len(useless) if isinstance(useless, list) else 0
 
+    # whose deposit each linked repository is (repo_check's `ownership`, one
+    # row per link in the text and per deposit in the reference list): the
+    # number of repositories of each kind, each once, and per place (text,
+    # reference list) whether the preprint has one
+    own = m.get("ownership")
+    own = [r for r in own if isinstance(r, dict)] if isinstance(own, list) else []
+    by_kind = collections.defaultdict(set)
+    for r in own:
+        if r.get("ownership") in OWNERSHIP:
+            by_kind[r["ownership"]].add(r.get("repo_url"))
+            acc["ownership"][r.get("source") or "unknown"][r["ownership"]].add(base)
+            acc["ownership"]["any"][r["ownership"]].add(base)
+    for kind, key in OWNERSHIP.items():
+        row[key] = len(by_kind[kind])
+
     # the code
     code = table(result, "code_check")
     langs = collections.Counter(r.get("language") or "other" for r in code)
@@ -441,13 +460,21 @@ def main():
            "outcome_lang": collections.defaultdict(C), "reasons": C(), "message_kinds": C(),
            "missing_packages": C(), "messages": C(), "levels": C(), "quality": C(), "roles": C(),
            "qualtrics": set(), "data_issues": C(), "careless_reasons": C(),
-           "retraction_kinds": C(), "replication_outcomes": C()}
+           "retraction_kinds": C(), "replication_outcomes": C(),
+           "ownership": collections.defaultdict(S)}
 
-    results = []
+    # only the results that are current (update.py, is_current()): those made
+    # with an earlier metacheck, or before the server kept whose deposits the
+    # repositories are, are left out until they have been checked again
+    results, not_current = [], 0
     for item in index:
         path = os.path.join(data_dir, "papers", item["id"] + ".json")
         if os.path.exists(path):
-            results.append((item, load(path, {})))
+            result = load(path, {})
+            if is_current(result):
+                results.append((item, result))
+            else:
+                not_current += 1
     # the checks, in the order of the report (the order the server gives)
     for _, result in results:
         for m, v in (result.get("modules") or {}).items():
@@ -470,6 +497,9 @@ def main():
         "preprints_on_psyarxiv": tally.get("preprints"),
         "waiting": len(state.get("queue") or []),
         "failed": len(state.get("failed") or {}),
+        # checked preprints left out: their result is older (see above)
+        "not_current": not_current,
+        "current_from": CURRENT_FROM,
         "modules": [{"id": m, "title": acc["titles"][m]} for m in acc["modules"]],
         "light_codes": {v: k for k, v in LIGHT_CODE.items()},
         "section_codes": {v: k for k, v in SECTION_CODE.items()},
@@ -513,6 +543,10 @@ def main():
             "careless_reasons": top(acc["careless_reasons"]),
             "retraction_kinds": top(acc["retraction_kinds"]),
             "replication_outcomes": top(acc["replication_outcomes"]),
+            # per place ("text", "reference", "any"), the number of preprints
+            # that link to a repository of each kind
+            "ownership": {place: {kind: len(b) for kind, b in kinds.items()}
+                          for place, kinds in acc["ownership"].items()},
         },
     }
     path = os.path.join(data_dir, "totals.json")

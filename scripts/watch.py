@@ -14,7 +14,8 @@
 #   - a module that failed (traffic light "fail") in a stored report; grouped
 #     by module and error message, so one bug is listed once with its papers
 #   - a preprint listed as failed in data/state.json (its job failed twice,
-#     or GitHub refused its result)
+#     or GitHub refused its result), or whose new check with the current
+#     metacheck failed twice (rerun_failed; the earlier report stays)
 #   - keys removed from a result (the authors may want to know)
 # Which problems were already announced is kept in the issue itself, in a
 # line the issue page does not show.
@@ -179,6 +180,9 @@ def report(data_dir, now):
     for osf_id, why in sorted((state.get("failed") or {}).items()):
         problems.append((f"failed:{osf_id}", f"Preprint [{osf_id}](https://osf.io/preprints/psyarxiv/{osf_id}) "
                          f"failed and is not tried again: {why}"))
+    for osf_id, why in sorted((state.get("rerun_failed") or {}).items()):
+        problems.append((f"rerun-failed:{osf_id}", f"The new check of [{osf_id}]({SITE}{osf_id}/) with the current "
+                         f"Metacheck failed and is not tried again; its earlier report stays: {why}"))
     for osf_id, keys in sorted(keys_removed(data_dir).items()):
         problems.append((f"keys:{osf_id}", f"Keys were removed from the result of [{osf_id}]({SITE}{osf_id}/): "
                          f"{keys}. The authors may want to know."))
