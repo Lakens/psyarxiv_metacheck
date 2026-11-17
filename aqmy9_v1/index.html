@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Interactional Fingerprints of Personality: Big
+Five Traits Predict Conversational Behavior Similarly Across
+Face-to-Face and Video-Mediated Initial Interactions</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Interactional Fingerprints of Personality: Big Five Traits Predict
+Conversational Behavior Similarly Across Face-to-Face and Video-Mediated
+Initial Interactions
+</p>
+<p class="meta">
+2026-11-17 · Metacheck 0.4.4.3
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>3</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>2</b><span>fine</span></a><a class="count na" href="#na"><b>10</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(3)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Power
+Analysis Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We detected 3 potential power analyses.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We used the LLM model ‘vllm/DeepSeek-V41-Flash-1017-FP8’ to check the
+contents of 3 paragraphs that contained words suggesting they might
+contain power analyses.</p>
+<p>Some essential information could not be detected: statistical_test,
+sample_size, alpha_level, power, effect_size, effect_size_metric,
+software</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:right;">
+power_<wbr>id
+</th>
+<th style="text-align:left;">
+power_<wbr>type
+</th>
+<th style="text-align:left;">
+statistical_<wbr>test
+</th>
+<th style="text-align:right;">
+sample_<wbr>size
+</th>
+<th style="text-align:right;">
+alpha_<wbr>level
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_<wbr>size
+</th>
+<th style="text-align:left;">
+effect_<wbr>size_<wbr>metric
+</th>
+<th style="text-align:left;">
+software
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+sensitivity
+</td>
+<td style="text-align:left;">
+regression
+</td>
+<td style="text-align:right;">
+154
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+other
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+sensitivity
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+sensitivity
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:left;">
+other
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+power_<wbr>id
+</th>
+<th style="text-align:left;">
+text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+The sample consisted of 154 individuals organized into 77 dyads.
+Participants were recruited through student organization email lists and
+Facebook advertisements and were paired with an interaction partner who
+was unfamiliar to them at the time. The age range was 18 to 68 years (M
+= 28.34, SD = 10.60). Of the total sample, 104 participants identified
+as women and 50 as men. 90 participants (58.44%) were Finnish speaking
+and 64 (41.56%) were Swedish speaking. The participants were divided
+into face-to-face (41 dyads, 82 participants) and video-mediated (36
+dyads, 72 participants) conditions. Each dyad consisted of two
+same-gender participants. Table 1 A Monte Carlo simulation-based
+<strong>sensitivity</strong> <strong>power</strong> analysis was
+conducted to estimate the minimum detectable effect sizes for the
+regression models (Lakens, 2022). The simulations reproduced the models
+used in the main analyses, including the observed predictor structure
+and dyad-clustered CR2 standard errors with Satterthwaite-adjusted
+degrees of freedom.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+<strong>Sensitivity</strong> was estimated separately for the main
+effects of actor and partner personality traits and for trait ×
+communication medium interactions. To account for dependence between
+dyad members, outcome-specific residual within-dyad correlations
+estimated from the observed data were incorporated into the simulations.
+With 154 participants nested within 77 dyads, α = .05, and 80%
+<strong>power</strong>, the minimum detectable standardized actor and
+partner trait effects ranged from β = 0.23 to 0.28 across traits and
+outcomes, whereas the minimum detectable trait × medium interaction
+effects ranged from β = 0.24 to 0.28. Summary data files used in the
+statistical analyses and all analysis scripts are openly available in a
+GitHub repository: XX. To protect participants’ privacy and comply with
+applicable data protection requirements and the procedures specified in
+the study’s privacy notice, the content of the conversational
+transcripts has been masked. For the same reasons, the original video
+and audio recordings are not publicly available.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Finally, although the present sample was relatively large for a dyadic
+interaction study, statistical <strong>power</strong> was limited for
+detecting small personality effects. <strong>Sensitivity</strong>
+analyses indicated that the study had 80% <strong>power</strong> to
+detect standardized actor and partner effects of approximately β =
+.23-.28 and trait × medium interaction effects of β = .24-.28, depending
+on the trait and outcome. Several of the observed personality effects
+were smaller than these values, suggesting that effects of comparable or
+smaller magnitude could have remained undetected. This is particularly
+important when interpreting the results for H2: although the findings
+indicate that trait effects did not differ substantially between
+face-to-face and video-mediated interaction, smaller moderating effects
+of communication medium cannot be ruled out. Larger dyadic samples will
+therefore be needed to determine whether the communication medium
+moderates some trait-behavior associations to a smaller degree.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Exact
+P-Values</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 8 imprecise <em>p</em> values out of 61 detected <em>p</em>
+values.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Reporting <em>p</em> values imprecisely (e.g., <em>p</em> &lt; .05)
+reduces transparency, reproducibility, and re-use (e.g., in <em>p</em>
+value meta-analyses). Best practice is to report exact p-values with
+three decimal places (e.g., <em>p</em> = .032) unless <em>p</em> values
+are smaller than 0.001, in which case you can use <em>p</em> &lt;
+.001.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (e.g., “decreased at the <em>p</em>
+&lt; .05 significance threshold”).</p>
+<div style="max-height:8em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+P-Value
+</th>
+<th style="text-align:left;">
+Text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ps ≥ .406
+</td>
+<td style="text-align:left;">
+There were also no significant differences in the variables related to
+conversation content between the two groups (ps ≥ .406).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .070
+</td>
+<td style="text-align:left;">
+Regarding the engagement signalling, we found less smiling (b = -0.516,
+95% CI [-0.873, -0.159], p = .005) and more gaze dispersion (b = 0.753,
+95% CI [0.454, 1.051], p &lt; .001) in the face-to-face conversations
+compared to the video-mediated conversations, with no significant
+differences in vocal backchanneling or nodding (ps ≥ .070).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .097
+</td>
+<td style="text-align:left;">
+When testing the interaction effects between communication medium and
+partner and actor traits (H2), we found no effects that were significant
+even at the uncorrected level (ps ≥ .097), indicating that, contrary to
+H2, communication medium did not alter the effects of actor or partner
+personality traits on turn-taking dynamics (see Supplementary Table 1).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .072
+</td>
+<td style="text-align:left;">
+Although not hypothetized, we next tested whether communication medium
+moderated the effects of personality traits on topic exploration breadth
+and topic shift strength finding no significant interactions even at the
+uncorrected alpha level (ps ≥ .072, see Supplementary Table 3).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .079
+</td>
+<td style="text-align:left;">
+Furthermore, we found no actor-partner interaction effects that were
+significant (ps ≥ .079, see Supplementary Table 4).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .064
+</td>
+<td style="text-align:left;">
+When testing whether communication medium moderated the effects of actor
+or partner traits on engagement signalling, we found no significant
+interactions, even at the uncorrected alpha level (ps ≥ .064, see
+Supplementary Table 5).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .145
+</td>
+<td style="text-align:left;">
+The interactions between partner and actor traits tested in the last
+exploratory step were likewise nonsignificant (ps ≥ .145, see
+Supplementary Table 6), indicating that the effects of actor personality
+on engagement signalling did not depend on the partner’s personality.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .05
+</td>
+<td style="text-align:left;">
+The figure includes all actor and partner trait effects with uncorrected
+p &lt; .05.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>The APA manual states: Report exact <em>p</em> values (e.g.,
+<em>p</em> = .031) to two or three decimal places. However, report
+<em>p</em> values less than .001 as <em>p</em> &lt; .001. However, 2
+decimals is too imprecise for many use-cases (e.g., a <em>p</em> value
+meta-analysis), so report <em>p</em> values with three digits.</p>
+<p>American Psychological Association (2020). <em>Publication manual of
+the American Psychological Association</em>, 7 edition. American
+Psychological Association.</p>
+</div>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Effect
+Sizes in t-tests and F-tests</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 t-test and/or F-test where effect sizes are not reported.
+Check these tests in the table below, and consider adding effect
+sizes.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We recommend checking the sentences below, and add any missing effect
+sizes.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+The groups did not differ significantly in age, t(147) = 0.23, p = .819,
+or gender distribution, χ²(1) = 0.39, p = .530.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating that effect sizes are often
+not reported:</p>
+<ul>
+<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
+(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
+Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
+</ul>
+<p>For educational material on reporting effect sizes:</p>
+<ul>
+<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
+to Effect Sizes and Confidence Intervals</a></li>
+</ul>
+</div>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+The groups did not differ significantly in age, t(147) = 0.23, p = .819,
+or gender distribution, χ²(1) = 0.39, p = .530.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+t(147) = 0.23
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 20 non-significant p values that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<div style="max-height:28em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = .819
+</td>
+<td style="text-align:left;">
+The groups did not differ significantly in age, t(147) = 0.23, p = .819,
+or gender distribution, χ²(1) = 0.39, p = .530.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .530
+</td>
+<td style="text-align:left;">
+The groups did not differ significantly in age, t(147) = 0.23, p = .819,
+or gender distribution, χ²(1) = 0.39, p = .530.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .635
+</td>
+<td style="text-align:left;">
+There was no significant difference in turn length between the two
+communication mediums (p = .635).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .406
+</td>
+<td style="text-align:left;">
+There were also no significant differences in the variables related to
+conversation content between the two groups (ps ≥ .406).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .070
+</td>
+<td style="text-align:left;">
+Regarding the engagement signalling, we found less smiling (b = -0.516,
+95% CI [-0.873, -0.159], p = .005) and more gaze dispersion (b = 0.753,
+95% CI [0.454, 1.051], p &lt; .001) in the face-to-face conversations
+compared to the video-mediated conversations, with no significant
+differences in vocal backchanneling or nodding (ps ≥ .070).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .097
+</td>
+<td style="text-align:left;">
+When testing the interaction effects between communication medium and
+partner and actor traits (H2), we found no effects that were significant
+even at the uncorrected level (ps ≥ .097), indicating that, contrary to
+H2, communication medium did not alter the effects of actor or partner
+personality traits on turn-taking dynamics (see Supplementary Table 1).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p FDR = .144
+</td>
+<td style="text-align:left;">
+Finally, when exploring the trait-wise actor-partner interaction effects
+on speech gap duration, we found two significant interaction effects: a
+positive interaction effect between actor and partner openness (β =
+0.131, 95% CI [0.005, 0.257], p = .043, p FDR = .144), and a negative
+interaction effect between actor and partner neuroticism (β = -0.147,
+95% CI [-0.285, -0.008], p = .040, p FDR = .144).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p FDR = .144
+</td>
+<td style="text-align:left;">
+Finally, when exploring the trait-wise actor-partner interaction effects
+on speech gap duration, we found two significant interaction effects: a
+positive interaction effect between actor and partner openness (β =
+0.131, 95% CI [0.005, 0.257], p = .043, p FDR = .144), and a negative
+interaction effect between actor and partner neuroticism (β = -0.147,
+95% CI [-0.285, -0.008], p = .040, p FDR = .144).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p FDR = .144
+</td>
+<td style="text-align:left;">
+We also found a negative interaction effect between partner and actor
+extraversion on turn length (β = -0.174, 95% CI [-0.323, -0.024], p =
+.026, p FDR = .144), indicating that dyads with both partners having
+high extraversion produced shorter turns (see Supplementary table 2 for
+full results).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pFDR = .084
+</td>
+<td style="text-align:left;">
+Two personality effects were significant at the uncorrected level (see
+Table 4 for F-test results): a positive effect of partner
+conscientiousness on exploration breadth (β = 0.195, 95% CI [0.053,
+0.336], p = .008, pFDR = .033) and a negative effect of partner
+conscientiousness on topic shift strength (β = -0.202, 95% CI [-0.396,
+-0.008], p = .042, pFDR = .084).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .072
+</td>
+<td style="text-align:left;">
+Although not hypothetized, we next tested whether communication medium
+moderated the effects of personality traits on topic exploration breadth
+and topic shift strength finding no significant interactions even at the
+uncorrected alpha level (ps ≥ .072, see Supplementary Table 3).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .079
+</td>
+<td style="text-align:left;">
+Furthermore, we found no actor-partner interaction effects that were
+significant (ps ≥ .079, see Supplementary Table 4).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p FDR = .119
+</td>
+<td style="text-align:left;">
+Actor openness was associated with less frequent vocal backchanneling (β
+= -0.142, 95% CI [-0.281, -0.004], p = .045, p FDR = .119), whereas
+actor extraversion was associated with more frequent nodding (β = 0.155,
+95% CI [0.001, 0.310], p = .049, p FDR = .079).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p FDR = .079
+</td>
+<td style="text-align:left;">
+Actor openness was associated with less frequent vocal backchanneling (β
+= -0.142, 95% CI [-0.281, -0.004], p = .045, p FDR = .119), whereas
+actor extraversion was associated with more frequent nodding (β = 0.155,
+95% CI [0.001, 0.310], p = .049, p FDR = .079).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p FDR = .103
+</td>
+<td style="text-align:left;">
+Partner openness was associated with decreased smiling (β = -0.172, 95%
+CI [-0.322, -0.022], p = .026, p FDR = .103) and lower gaze dispersion
+(β = -0.212, 95% CI [-0.374, -0.050], p = .012, p FDR = .095), whereas
+partner agreeableness was associated with increased smiling (β = 0.182,
+95% CI [0.029, 0.335], p = .021, p FDR = .170).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p FDR = .095
+</td>
+<td style="text-align:left;">
+Partner openness was associated with decreased smiling (β = -0.172, 95%
+CI [-0.322, -0.022], p = .026, p FDR = .103) and lower gaze dispersion
+(β = -0.212, 95% CI [-0.374, -0.050], p = .012, p FDR = .095), whereas
+partner agreeableness was associated with increased smiling (β = 0.182,
+95% CI [0.029, 0.335], p = .021, p FDR = .170).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p FDR = .170
+</td>
+<td style="text-align:left;">
+Partner openness was associated with decreased smiling (β = -0.172, 95%
+CI [-0.322, -0.022], p = .026, p FDR = .103) and lower gaze dispersion
+(β = -0.212, 95% CI [-0.374, -0.050], p = .012, p FDR = .095), whereas
+partner agreeableness was associated with increased smiling (β = 0.182,
+95% CI [0.029, 0.335], p = .021, p FDR = .170).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .087
+</td>
+<td style="text-align:left;">
+Partner turn count, which was included as a covariate in the models for
+vocal backchanneling and nodding, predicted more frequent vocal
+backchanneling (β = 0.375, 95% CI [0.166, 0.583], p = .001), but did not
+significantly predict nodding frequency (p = .087).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .064
+</td>
+<td style="text-align:left;">
+When testing whether communication medium moderated the effects of actor
+or partner traits on engagement signalling, we found no significant
+interactions, even at the uncorrected alpha level (ps ≥ .064, see
+Supplementary Table 5).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps ≥ .145
+</td>
+<td style="text-align:left;">
+The interactions between partner and actor traits tested in the last
+exploratory step were likewise nonsignificant (ps ≥ .145, see
+Supplementary Table 6), indicating that the effects of actor personality
+on engagement signalling did not depend on the partner’s personality.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="fine">Fine <span class="n">(2)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>We detected no errors in t-tests or F-tests.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(10)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>Participants are especially sensitive to turn-taking dynamics,
+pauses, and other cues that signify conversational flow (Templeton et
+al., 2023).</p>
+</blockquote>
+<blockquote>
+<p>Participants were recruited through student organization email lists
+and Facebook advertisements and were paired with an interaction partner
+who was unfamiliar to them at the time.</p>
+</blockquote>
+<blockquote>
+<p>The participants were divided into face-to-face (41 dyads, 82
+participants) and video-mediated (36 dyads, 72 participants)
+conditions.</p>
+</blockquote>
+<blockquote>
+<p>Before the study began, participants were informed about the study
+protocol and their right to discontinue participation at any time, after
+which they signed an informed consent form.</p>
+</blockquote>
+<blockquote>
+<p>The participants were kept separate before the experimental task in
+order to prevent interaction between them.</p>
+</blockquote>
+<blockquote>
+<p>In the face-to-face condition, participants were escorted to the same
+room, into designated chairs.</p>
+</blockquote>
+<blockquote>
+<p>The participants were separated by a curtain in order to prevent
+interaction between them before the task.</p>
+</blockquote>
+<blockquote>
+<p>In the video-mediated condition, participants were escorted to
+separate rooms.</p>
+</blockquote>
+<blockquote>
+<p>By the end of the study the curtain was closed for the face-to-face
+condition, while the Zoom call ended in the video-call condition, after
+which participants completed a set of personality questionnaires.</p>
+</blockquote>
+<blockquote>
+<p>The head and torso recordings of each participant were first cut and
+temporally aligned based on the sound cues marking task onset and
+offset, and then paired with their dyadic partner’s recording into a
+combined video using Filmora software (Wondershare Technology Co.,
+Ltd.).</p>
+</blockquote>
+<blockquote>
+<p>All participants gave informed consent prior to participation and
+received compensation valued at 30 euros following the experiment.</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>The study was reviewed and received a positive statement [Statement
+number: 40/2023] from the University of X Research Ethics Committee in
+the Humanities and Social and Behavioural Sciences.</p>
+</blockquote>
+<blockquote>
+<p>The study was conducted in accordance with The Code of Ethics of the
+World Medical Association (Declaration of Helsinki).</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 60 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 60 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 60 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Little is known about how Big Five personality traits manifest in specific conversational behaviors or whether these associations depend on the communication medium. We examined 154 individuals interacting with strangers face-to-face or via video. Using manual annotations, computer vision, and LLMs, we examined actor and partner personality associations with turn-taking dynamics, engagement signalling, and topic development.</p>
+<p>Higher actor and partner extraversion predicted faster turn-taking and pronounced engagement signalling, whereas actor openness predicted slower turn-taking and reduced engagement signalling. In actors, conscientiousness predicted nodding and in partners it predicted broader topic exploration. However, we found no evidence that these associations differed between face-to-face and video-mediated interaction. Personality thus shapes conversational behavior and these interactional fingerprints appear to survive technological transmission.</p>
+<h3>1 Introduction</h3>
+<p>Conversations are the cornerstone of human sociality, through which information is shared, relationships are formed and maintained, and collaboration toward shared goals takes place.</p>
+<p>The progression of conversation depends on a remarkable degree of coordination between participants. Interactants must continuously manage turns of speaking and listening, display their engagement as listeners, and contribute content that advances the conversation (Cooney &amp; Wheatley, 2025). These processes are reflected in a wide range of verbal and non-verbal processeshttps://www.zotero.org/google-docs/?3uF275 including turn-taking dynamics (Levinson &amp; Torreirahttps://www.zotero.org/google-docs/?UqMovW 2015; Sacks et al., 1974) , listener behaviors such as vocal backchanneling, gaze shifts, nodding, and smiling (Schegloff, 1982; Stivers, 2008) , and the development of conversational content through the generation, pursuit, and closure of topics (Button &amp; Casey, 1985; Schmidt et al., 2025).</p>
+<p>Together, these behavioral patterns constitute the building blocks through which human sociality manifests and related personality differences emerge. The idea that personality is manifested in fingerprint patterns of conversational behavior has a long history. More than five decades ago, Bales (1970) proposed that stable individual differences could be understood through recurring patterns of verbal and non-verbal behavior emerging during social interaction. Yet, despite this longstanding interactional perspective on personality, surprisingly few studies have systematically examined how personality traits manifest across the specific conversational processes. Moreover, as social interaction increasingly takes place across both face-to-face and technology-mediated environments, it remains unclear whether these behavioral manifestations of personality are preserved across communication media (Baumaister et al., 2026). The current study builds on this decades-old idea by providing a fine-grained, multimethod examination of how personality is expressed across turn-taking dynamics, listener engagement, and conversational content, and whether these &quot;interactional fingerprints&quot; differ between face-to-face and video-mediated interaction.</p>
+<p>A fundamental feature of conversation is the turn-taking system through which interactants coordinate who holds the floor, for how long, and how much time elapses between successive turns (Levinson, 2016; Sacks et al., 1974). Because these processes are readily observable, researchers have long quantified turn-taking behavior using measures such as turn count, turn duration, and speech gaps (https://www.zotero.org/google-docs/?DCPaed  Cassotta et al., 1964; Chapple, 1939). One of the most robust findings from this work is that conversational turn transitions occur remarkably rapidly (Meyer, 2023). That is, across languages and cultures, speakers typically begin their turns within 250 milliseconds of the previous speaker&#x27;s turn ending, despite the substantial cognitive demands involved in planning and producing a consecutive turn (Levinson &amp; Torreira, 2015; Meyer, 2023; Stivers et al., 2009). Since the earliest quantitative studies of conversation, turn-taking dynamic variables like average turn length and speech gap duration were viewed as potential indicators of personality and interpersonal communication style (Chapple, 1939). Laterhttps://www.zotero.org/google-docs/?MbaZsW it was foundhttps://www.zotero.org/google-docs/?PPN632 for example, that the Big Five traits are associated with turn dynamics: Extraversion is associated with higher speech rates in informal and formal interpersonal situations (Dewaele &amp; Furnham, 1999) , higher speech coordination during argumentative conversations (Arellano-Véliz et al., 2025) , and shorter speech gaps in initial encounters (Cuperman &amp; Ickes, 2009a; Wang &amp; Ziano, 2022). Agreeablenesshttps://www.zotero.org/google-docs/?HlTnaR in turn, is associated with higher turn count and longer duration of talking in spontaneous initial encounters (Cuperman &amp; Ickes, 2009a) , and generally lower speech coordination during argumentative exchange (Arellano-Véliz et al., 2025).</p>
+<p>Beyond the coordination of speaking turns, conversations also depend on what is being said-that is, on the continuous development of shared content through the introduction, maintenance, and transition of conversational topics (Button &amp; Casey, 1985; Schegloff, 1982). Throughout conversation, interactants move through the semantic topic space, creating a common ground and exploring new ideas. Recent advances in natural language processing (NLP) through large language models (LLMs) have made it possible to quantify these semantic trajectories by measuring topic shift strength between consecutive turns and semantic exploration breadth across the entire encounter (Schmidt et al., 2025; Speer et al., 2024). To our knowledge, there is only one study that has used this methodological approach to examine personality differences in conversational topic development (Fischer &amp; Ram, 2024). The authors examined to what extent differences in interlocutors&#x27; personality traits predicted the breadth of topics covered during a conversation and the semantic shift between turns. They found that especially dyads with different levels of openness explored the topic space more broadly whereas dyads with differing levels of extraversion showed decrease in semantic alignment along conversation. Yet, the focus on dyad-level effects makes it impossible to make individual-level inferences about actor effects (how individuals&#x27; own traits predict their own behavior) and partner effects (how their partners&#x27; traits predict their behavior). It is therefore crucial to examine also the actor and partner effects of Big-Five traits on the development of conversation content.</p>
+<p>Yet, conversation involves more than the speaking turns. While the speaker holds the floor, the listener actively displays engagement through a range of verbal and non-verbal behaviors including turn dynamics, brief vocalizations (&quot;hmm&quot;, &quot;oh really?&quot;), nods, gaze shifts, and smiles (Bavelas et al., 2000; Peräkylä et al., 2022; Stivers, 2008). Such behaviors serve an important interpersonal function by allowing listeners to demonstrate understanding, continued participation, and affiliation (Gardner, 2001; Schegloff, 1982; Stivers, 2008).</p>
+<p>Moreover, speakers continuously monitor the listener&#x27;s engagement signalling and adapt their own behavior accordingly (Bavelas et al., 2000; Peräkylä et al., 2015; Stevanovic et al., 2019). Therefore, engagement signalling is a fundamental mechanism through which conversations are maintained. However, relatively little research has examined how individual differences in personality shape these engagement displays. Existing studies suggest that especially extraversion, agreeableness, and openness are associated with differences in engagement signalling (https://www.zotero.org/google-docs/?MKDcix  Berry &amp; Hansen, 2000; Cuperman &amp; Ickes, 2009a; Funder &amp; Sneed, 1993; Huang &amp; Gratch, 2013). For example, Cuperman and Ickes (2009) examined researcher-induced spontaneous dyadic first encounters and found that both individuals&#x27; own (i.e., actor effect) and their partners&#x27; (i.e., partner effect) agreeableness were associated with more frequent vocal backchannels, nods, and smiles. Huang and Gratch (2013) used simulated interaction scenario called the Parasocial Consensus Sampling and found that high extraversion, conscientiousness and openness and low neuroticism predicted higher nodding rate whereas smiling was more pronounced in high extraversion, agreeableness, conscientiousness and low neuroticism. Finally, Berry and Hansen (2000) examined female unacquainted dyads and found higher agreeableness and openness to predict listener gaze orientation. Howeverhttps://www.zotero.org/google-docs/?uD9a6n the existing evidence relies largely on manual annotation of conversational behaviors and self-reports (Berry &amp; Hansen, 2000; Cuperman &amp; Ickes, 2009a) , as well as laboratory tasks with limited ecological validity (Huang &amp; Gratch, 2013).</p>
+<p>Thus, there is a need to revisit the association between personality and engagement signalling using modern multimethod approaches in naturalistic social interaction.</p>
+<p>The need to understand personality in conversational behavior has become increasingly important following the rapid adoption of video calling across diverse social contexts, ranging from job interviews and medical consultations to dating and workplace meetings.</p>
+<p>While this technological transition has brought many benefits, it has also been associated with altered turn-dynamics and reduced engagement between interaction partners compared to face-to-face communication (Boland et al., 2022a; Brucks &amp; Levav, 2022; Söderman et al., 2026). These effects have been observed both in micro-interactional processes and in broader patterns of social influence and emotional dynamics (Baumaister et al., 2026). Recently, Lepistö and colleagues (2026) found that video-mediated communication weakened emotional dynamics between speaker and listener during moments of self-disclosure, reducing the extent to which listeners&#x27; gaze shifts were reflected in speakers&#x27; autonomic arousal. Similar disruptions have been observed in turn-dynamics. In a large-scale field study, Brucks and Levav (2022) found that colleagues interacting via video call produced less overlapping speech and fewer speaker transitions than colleagues interacting face-to-face.</p>
+<p>Likewise, Boland and colleagues (2022) reported that video-mediated communication more than tripled speech gap times in both a controlled question-answer task and unscripted conversation. Extending these findings to listener behavior, Söderman and colleagues (2026) showed that strangers meeting via video call produced fewer vocal backchannels than those interacting face-to-face. Thus, video-mediated communication seems to constrain several key conversational behaviors by hampering associated socio-emotional coordination.</p>
+<p>Consequently, the influence of personality on engagement signalling may also differ between face-to-face and video-mediated interaction.</p>
+<p>Finally, to examine the extent to which Big Five traits shape conversational behaviors and whether these effects are altered by communication technology, interaction should be observed in a context where these micro-interactional processes, such as speech gaps and nods, play a particularly important role. One such context is interaction between previously unacquainted interlocutors. First encounters are characterized by heightened uncertainty and a strong motivation to establish rapport and maintain a positive interactional climate (Flint, 2019; Haugh &amp; Carbaugh, 2015). Participants are especially sensitive to turn-taking dynamics, pauses, and other cues that signify conversational flow (Templeton et al., 2023).</p>
+<p>Moreover, first encounters are characterized by an active search for common ground that has been shown to result in semantic alignment and less broad exploration of topics (Speer et al., 2024). Both individuals&#x27; own and their partners&#x27; personality traits may shape the introduction, maintenance, and transition of conversational topics across turns, giving rise to variation in the semantic patterns of one&#x27;s speech content. Finally, when strangers interact, engagement signalling becomes particularly consequential for the progression of the interaction and mutual affiliation. Behaviors such as vocal backchanneling, nodding, and smiles not only signify understanding and affiliation but also provide a natural arena through which stable individual differences may be expressed. Nowadays increasing amounts of consequential first encounters, including first dates, job interviews, and medical appointments, happen through video-calls. It is therefore important to understand whether the interactional fingerprints of personality emerge similarly across face-to-face and video-mediated interactions, or whether technological mediation alters how personality is expressed in conversation.</p>
+<h3>1.2 Current study</h3>
+<p>In the present study, we examined how general Big Five personality traits influence a wide range of conversational behaviors during first encounters and whether the medium through which the conversation takes place moderates these trait-effects. Individuals were randomly assigned to one of two communication medium conditions (face-to-face or video call) and were asked to be acquainted with a same-sex stranger. By focusing on previously unacquainted participants, the design minimizes the influence of shared interactional history while enabling a systematic examination of personality and medium-related differences in three different behavioral processes: turn-taking dynamics, engagement signalling, and content development.</p>
+<p>To examine personality-related variation in conversational behavior, the present study focuses on Big Five personality traits: openness to experiences, conscientiousness, extraversion, agreeableness, and neuroticism (McCrae &amp; John, 1992). The Big Five was selected as the framework for examining personality because it is still the most widely used, empirically validated, and extensively studied model of personality in contemporary psychology (John et al., 2008). Its broad acceptance facilitates comparison with previous research and enhances the interpretability and generalizability of findings. Of the Big Five traits, particularly extraversion, agreeableness, and openness have been previously associated with conversational behavior, as cited above. At the same time, traits like conscientiousness and neuroticism may also influence how individuals coordinate turns, participate in content development, and display engagement as listeners. Building on previous dyadic research (Cuperman &amp; Ickeshttps://www.zotero.org/google-docs/?AX8a64 2009a) , we examine both actor and partner effects, investigating how individuals&#x27; own personality traits and those of their interaction partners are associated with conversational behavior.</p>
+<p>To capture the multimodal nature of conversational behavior and unilateral contributions of both speaker and listener, we examined three behavior clusters: turn-taking dynamics (turn length, speech gaps between turns), content development (topic exploration breadth across the entire encounter, topic shift strength between turns), and engagement signalling while listening (vocal backchannels, nods, smiles, gaze orientation). While turn-taking dynamics and content development primarily capture speaker behavior, engagement signalling captures the listener&#x27;s verbal and nonverbal contributions to the interaction. Of the content development variables, topic exploration breadth captured how broadly a person explored different topics over time, whereas topic shift strength captured local, turn-to-turn transitions between topics. To characterize these complementary aspects of conversational behavior, we combined manual annotation of speaking turns, nods, and backchannels with natural language processing (NLP) of content development, and computer-vision-based analysis of listener non-verbal behavior.</p>
+<p>Based on the reviewed research, we hypothesized that: H1.1: Higher openness in both actors and partners is associated with longer speaking turns and greater engagement signaling through eye contact and nodding as well as broader topic exploration and broader topic exploration and stronger semantic shifts between turns (Berry &amp; Hansen, 2000; Huang &amp; Gratch, 2013; Fischer &amp; Ram, 2024) H1.2: Higher conscientiousness in both actor and partner is associated with greater engagement signaling through eye contact and nodding (Funder &amp; Sneed, 1993; Huang &amp; Gratch, 2013) H1.3: Higher extraversion in both actor and partner is associated with shorter speech gaps, broader topic exploration and stronger semantic shifts between turns, and greater engagement signaling through vocal backchanneling, nodding, and smiling (Arellano-Véliz et al., 2025; Fischer &amp; Ram, 2024; Funder &amp; Sneed, 1993; Huang &amp; Gratch, 2013; Wang &amp; Ziano, 2022) H1.4: Higher agreeableness in both actor and partner is associated with greater engagement signaling through vocal backchanneling, nodding, smiling, and eye contact (Berry &amp; Hansen, 2000; Cuperman &amp; Ickes, 2009a; Funder &amp; Sneed, 1993; Huang &amp; Gratch, 2013) H1.5: Higher neuroticism of both actor and partner is associated with reduced engagement signaling through smiling and nodding (Huang &amp; Gratch, 2013). In addition, higher partner neuroticism is associated with greater actor engagement signaling through eye contact (Cuperman &amp; Ickes, 2009).</p>
+<p>Based on prior evidence, video-calling increases speech gaps and reduces overlapping turns (Basch et al., 2021; Brucks &amp; Levav, 2022), disturbs engagement in interaction (Lepistö et al., 2025; Söderman et al., 2026) as well as reduces culturally rooted differences in vocal backchanneling and nodding (Söderman et al., 2026). We therefore hypothesized that the moderating effect of communication medium would be specific to agreeableness and extraversion, which have been most consistently associated with a high-engagement conversational style (Arellano-Véliz et al., 2025; Berry &amp; Hansen, 2000; Cuperman &amp; Ickes, 2009a; Fischer &amp; Ram, 2024; Funder &amp; Sneed, 1993; Huang &amp; Gratch, 2013; Wang &amp; Ziano, 2022):</p>
+<p>H2: Video calling attenuates the associations of extraversion and agreeableness with greater engagement signalling, relative to face-to-face interaction (Basch et al., 2021; Brucks &amp; Levav, 2022; Holler &amp; Levinson, 2019; Lepistö et al., 2025; Söderman et al., 2026).</p>
+<p>Finally, in dyadic interaction, both interactants can influence each other&#x27;s conversational behavior. Previous research has demonstrated such actor-partner effects during spontaneous initial conversations (Cuperman &amp; Ickes, 2009). However, given the limited prior evidence regarding the specific form of these effects, we did not formulate directional hypotheses and instead examined actor-partner interactions exploratorily.</p>
+<h3>2 Methods</h3>
+<h3>2.1 Participants</h3>
+<p>The sample consisted of 154 individuals organized into 77 dyads. Participants were recruited through student organization email lists and Facebook advertisements and were paired with an interaction partner who was unfamiliar to them at the time. The age range was 18 to 68 years (M = 28.34, SD = 10.60). Of the total sample, 104 participants identified as women and 50 as men. 90 participants (58.44%) were Finnish speaking and 64 (41.56%) were Swedish speaking. The participants were divided into face-to-face (41 dyads, 82 participants) and video-mediated (36 dyads, 72 participants) conditions. Each dyad consisted of two same-gender participants. Table 1   A Monte Carlo simulation-based sensitivity power analysis was conducted to estimate the minimum detectable effect sizes for the regression models (Lakens, 2022). The simulations reproduced the models used in the main analyses, including the observed predictor structure and dyad-clustered CR2 standard errors with Satterthwaite-adjusted degrees of freedom.</p>
+<p>Sensitivity was estimated separately for the main effects of actor and partner personality traits and for trait × communication medium interactions. To account for dependence between dyad members, outcome-specific residual within-dyad correlations estimated from the observed data were incorporated into the simulations. With 154 participants nested within 77 dyads, α = .05, and 80% power, the minimum detectable standardized actor and partner trait effects ranged from β = 0.23 to 0.28 across traits and outcomes, whereas the minimum detectable trait × medium interaction effects ranged from β = 0.24 to 0.28. Summary data files used in the statistical analyses and all analysis scripts are openly available in a GitHub repository: XX. To protect participants&#x27; privacy and comply with applicable data protection requirements and the procedures specified in the study&#x27;s privacy notice, the content of the conversational transcripts has been masked. For the same reasons, the original video and audio recordings are not publicly available.</p>
+<h3>2.2 Procedure</h3>
+<p>Before the study began, participants were informed about the study protocol and their right to discontinue participation at any time, after which they signed an informed consent form. The participants were kept separate before the experimental task in order to prevent interaction between them. In the face-to-face condition, participants were escorted to the same room, into designated chairs. The participants were separated by a curtain in order to prevent interaction between them before the task. In the video-mediated condition, participants were escorted to separate rooms. Participants received individual instructions from diagonally positioned monitors in both settings. Figure 1 illustrates the experimental conditions.</p>
+<h3>Figure 1</h3>
+<p>Illustration of the laboratory setting and the experimental procedure.</p>
+<p>Participants used a small keypad to initiate the session and give responses to self-reports according to the instructions displayed on the monitors. In the video-mediated condition, the participants also had a laptop for the Zoom video call and a microphone headset for auditory communication.</p>
+<p>During preparation, the audiovisual recording setup was installed and calibrated. Audio was captured using chest-mounted microphones. In the face-to-face condition, both participants&#x27; upper bodies were recorded using video cameras positioned diagonally in opposite corners of the room, whereas in the video-call condition, each participant was recorded using a video camera positioned at the corner of their desk. In both conditions, the camera view was adjusted to capture the same portion of the participants&#x27; upper body and face. After the preparation phase, the curtain separating the participants was removed in the face-to-face condition. In the video call condition, the Zoom video call was activated at this stage, with the self-view turned off. Thereafter, the researchers moved behind a curtain and remained out of sight for the duration of the interaction.</p>
+<p>Next, the monitors instructed the participants to press the down arrow key to launch the Getting Acquainted task. Pressing of the key triggered a brief sound signalling the start of the task. Participants then engaged in a five-minute unstructured, spontaneous conversation, during which they were instructed to introduce themselves and become familiar with their interaction partner. After five minutes, the monitors displayed the message &quot;Time for getting acquainted has ended,&quot; accompanied by a brief sound signalling the end of the task. The onset and offset sound cues were used to cut and temporally align the audio and video recordings during data processing. By the end of the study the curtain was closed for the face-to-face condition, while the Zoom call ended in the video-call condition, after which participants completed a set of personality questionnaires.</p>
+<h3>2.3 Materials and equipment</h3>
+<p>The E-Prime 3 stimulus presentation software was used to implement the experimental procedure on two separate computers (Lenovo ThinkPad L13 Gen 3 laptops), one for each participant. The systems were synchronized using a local server connection over Ethernet, which provided a temporally aligned experimental progression. An adjacent monitor was used to provide instructions to each participant (HP Compaq LA2205wg 22-inch widescreen LCD monitor).</p>
+<p>In the video call condition, participants communicated through a secured Zoom video call using the local wireless network of the X. The video and audio signals for the video-mediated communication were captured using Logitech C270 HD webcams (720p resolution) and Logitech Stereo Headset H111, respectively. Zoom&#x27;s self-view was disabled in all video-mediated encounters.</p>
+<p>Video recordings of the head and torso were captured in both conditions to document the participants&#x27; behavior during the task. In both the face-to-face and video-call conditions, interactions were recorded using Canon Legria HF R88 video cameras. In the video-call condition, the interaction was additionally recorded using Zoom&#x27;s built-in recording function, with Logitech C270 HD webcams providing the video feed. The Zoom recordings were used for subsequent behavioral analysis in the video-call condition because they captured the view of each participant as it was transmitted to their interaction partner. AKG B29L lavalier microphones were attached to each participant&#x27;s chest to obtain high-quality audio recordings of the interactions.</p>
+<h3>2.4 Annotation of backchanneling behaviors</h3>
+<p>The head and torso recordings of each participant were first cut and temporally aligned based on the sound cues marking task onset and offset, and then paired with their dyadic partner&#x27;s recording into a combined video using Filmora software (Wondershare Technology Co., Ltd.). After that, the backchanneling behaviors and turn-taking were annotated in ELAN (v.</p>
+<p>6.9), which yielded 27 531 annotated instances. Only the first five minutes of interaction (the duration of the Getting Acquainted task) were annotated, aiming for comparability between dyads. For each participant, vocal backchannels and head nods were coded on different annotation tiers by two trained coders. All behavioral elements (turns, vocal backchannels, and nods) within any given dyad were coded by a single annotator. Each coder&#x27;s annotations for their first dyad were reviewed by a researcher with training in conversation-analytical transcription to ensure consistency with the coding criteria (see Measures for inter-rater reliability analysis).</p>
+<p>The onset and offset times of each turn and vocal backchannel were marked using the audible onset and offset of the instance, informed by the audio waveform. Turns were annotated following the framework of Sacks et al. (1974), according to which speech is organized into turn-constructional units (TCUs) that project possible completion points, or transition-relevance places (TRPs). A new turn was annotated when the interaction partner initiated a speaking turn or when the same speaker continued with a new turn following the completion of their previous TCU. Short vocal response tokens were coded as vocal backchannels when they occurred either within the current speaker&#x27;s turn or at a transition relevance place (TRP) (Gardner, 2001; Yngve, 1970). Backchannels occurring at a TRP could be followed by a speaking turn produced by the same person. As an exception, short responses to polar questions occurring at a TRP were coded as turns rather than backchannels, as they constituted answers to the preceding question. When annotating the nods, the onset was coded manually from the perceived initiation of a vertical head movement, either downward or upward. A nod was defined as a discrete vertical head movement including both a downward and an upward turn, in either order (Voutilainen et al., 2018). Following the annotation process, all participant-specific instances with their onset and offset times were exported as CSV output files for further processing and statistical analysis. For NLP analyses, the turn onset and offset times were combined with the auto-transcribed speech content data to identify the turn transitions between different speakers, which were used to estimate. For an overview of the entire annotation process, see</p>
+<h3>2.5 Natural language processing of conversation content</h3>
+<p>The recordings were automatically transcribed using Whisper-Timestamped (version 1.15.8;</p>
+<p>https://www.zotero.org/google-docs/?wu96H7) with the Whisper large model. Conversation content was analyzed using BERTopic (0.17.4), which represents utterances as contextual semantic embeddings using sentence transformers based on Bidirectional Encoder Representations from Transformers (BERT) (BERT; Grootendorst, 2022). Individual speaking turns/utterances were used as input to the BERTopic. The utterances were first preprocessed removing selected stop words identified during the annotation process (list in Supplementary Table X). Sentence embeddings were then generated using a multilingual Sentence-Transformer model from</p>
+<p>Hugging Face (Sentence-BERT; Reimers &amp; Gurevych, 2019). The multilingual model was selected because it can represent Finnish and Swedish sentences within a shared embedding space. This enabled the full dataset to be analysed jointly, providing a larger and more densely sampled basis for identifying semantic structures that might be insufficiently represented in smaller, language-specific subsets.</p>
+<p>The resulting sentence embeddings were reduced in dimensionality using Uniform Manifold</p>
+<p>Approximation and Projection (UMAP) to facilitate subsequent clustering and topic identification (UMAP; https://www.zotero.org/google-docs/?VjzXw8. UMAP was configured with n_neighbors = 10, n_components = 5, min_dist = 0.2, and cosine distance as the distance metric. The dimensionally reduced embeddings were subsequently clustered using HDBSCAN with min_cluster_size = 7 and min_samples = 2 (HDBSCAN; https://www.zotero.org/google-docs/?wA64a2.</p>
+<p>Topic representations for the resulting clusters were generated using CountVectorizer (scikit-learn; Pedregosa et al., 2011) in combination with class-based term frequency-inverse document frequency (c-TF-IDF) (BERTopic; Grootendorst, 2022). CountVectorizer was configured to consider n-grams consisting of one to three words, thereby capturing both individual terms and short multi-word expressions. c-TF-IDF was then used to estimate the relative importance of these terms within each cluster, allowing the terms most representative of each identified topic to be extracted.</p>
+<p>The model identified 244 distinct topics across the dataset and assigned each utterance to one of these topics. Each utterance was linked to the 384-dimensional embedding representing that topic in the semantic space. Each assignment was accompanied by a probability score indicating how strongly the utterance belonged to the assigned topic. The resulting utterance-level data, including person-specific topic assignments and their probabilities, were exported as CSV files for further processing. These data were subsequently used to derive two variables characterizing conversational content: topic exploration breadth and topic shift strength (see section 2.6.3). For an overview of the entire NLP process, see Figure 2, panel B.</p>
+<h3>2.6 Computer vision-based analysis of listeners&#x27; non-verbal behavior</h3>
+<p>Non-verbal behavior was extracted from the video recordings using OpenFace 2.0 (Baltrusaitis et al.https://www.zotero.org/google-docs/?mLYPuY 2018) , an automated computer vision toolkit for facial behavior and gaze estimation. OpenFace provided frame-by-frame estimates at 25 fps of facial Action Unit activation and gaze direction. Frames with missing values were linearly interpolated. For gaze estimation, frames with low tracking confidence (≤ .80) or unsuccessful facial tracking were additionally treated as missing and interpolated, as gaze estimates become unreliable when facial features cannot be adequately tracked. The resulting signals were low-pass filtered to attenuate high-frequency noise, using a second-order Butterworth filter with measure-specific cutoff frequencies (0.5 Hz for AU12 activity and 3 Hz for gaze direction).</p>
+<p>Because smiling and gaze were examined as listener engagement behaviors, the preprocessed signals were restricted to non-speaking periods, defined as periods outside the onset-to-offset interval of each participant&#x27;s own speaking turns (Figure 2, panel C). Participant-level measures of smiling and gaze dispersion were subsequently derived from these preprocessed signals as described below.</p>
+<h3>2.7 Measures</h3>
+<p>The measures consisted of self-report ratings of personality traits and conversational behavior outcomes measured with a multimethod approach combining manual annotation of actions, natural language processing of conversation content, and computer vision analysis of listener&#x27;s non-verbal behavior (see Figure 2 for overview).</p>
+<h3>2.7.1 Personality traits</h3>
+<p>Participants&#x27; personality traits were assessed with the Big Five Inventory (BFI; John et al.https://www.zotero.org/google-docs/?423bEp 2008 John et al., , 2012)) , a 44-item measure of the five-factor model. Participants rated the extent to which each statement described them. Each item corresponds to one of the five personality dimensions, for example: &quot;Is talkative&quot; (extraversion), &quot;Tends to find fault with others&quot; (agreeableness; reverse-coded), &quot;Does a thorough job&quot; (conscientiousness), &quot;Is depressed&quot; (neuroticism), and &quot;Is original, comes up with new ideas&quot; (openness). Responses were given on a five-point Likert scale ranging from 1 (strongly disagree) to 5 (strongly agree). Traits from both the participant and their dyadic partner were used to predict conversational outcomes in our analyses. These traits are referred to as actor and partner traits in later sections.</p>
+<p>Internal consistency for the trait scales was acceptable to high: openness (α = 0.74), conscientiousness (α = 0.80), extraversion (α = 0.85), agreeableness (α = 0.75), and neuroticism (α = 0.82).</p>
+<h3>Figure 2</h3>
+<p>Overview of the multimethod analyses of conversational behaviors.</p>
+<p>Note. A) Illustration of the annotation procedure for nods, vocal backchannels and turn-taking dynamics; B) Natural language processing of conversational content development; C) Computer vision approach to capture non-verbal engagement signalling through gaze orientation and smiling. The visual elements in Panels A, B, and C schematically illustrate the principles underlying the manual annotation, topic modelling, and computer vision analysis (i.e., the images do not depict actual analysis outputs).</p>
+<h3>2.7.2 Turn-taking dynamics</h3>
+<p>Speech gap duration was calculated as the duration of the temporal gap (in seconds) between the offset of the partner&#x27;s turn and the onset of the subject&#x27;s response (a turn or a vocal backchannel response). Positive values indicate a gap between turns and negative values reflect overlapping speech. Only the cases where the response was associated with the partner&#x27;s turn ending were used to calculate this metric, in order for it to reflect actual speaker transitions. Extreme values exceeding ±2.5 standard deviations from the mean were removed.</p>
+<p>Mean speech gap duration was then calculated for each participant across all valid speaker transitions within the conversation.</p>
+<p>Turn length was calculated as the difference between turn onset and offset (in seconds) for every turn occurring within the first five minutes of conversation. Mean turn length was then calculated as the subject-wise mean of this variable. A Box-Cox transformation was applied (λ = -0.38) for statistical testing, after which the assumptions related to model residuals were deemed satisfactory.</p>
+<h3>2.7.3 Conversational content development</h3>
+<p>The conversation content data with person-and utterance-specific topic assignments and their probabilities were used to derive topic exploration breadth and topic shift strength. Both variables were calculated based on utterances with a BERTopic assignment probability of at least .20. Of the 5,653 total utterances, 3,409 (60.3%) met this threshold. By excluding low-probability utterances, we aimed to reduce the influence of uncertain and noisy topic assignments on the analyses.</p>
+<p>Topic exploration breadth was calculated as the mean pairwise cosine distance across all unordered pairs of a participant&#x27;s retained utterances, using the topic embedding assigned to each utterance. Repeated assignments to the same topic were retained and therefore contributed zero-distance within-topic pairs. Topic exploration breadth therefore reflects the overall semantic diversity of a participant&#x27;s contributions across the conversation, with higher values indicating that their utterances spanned more semantically distinct topics and lower values indicating greater concentration within a narrower range of topics.</p>
+<p>Topic shift strength was calculated across consecutive utterances produced by different speakers. Speaker turns were first identified from the complete temporally ordered sequence of all utterances within each dyad, before applying the topic-probability threshold. In most cases, a manually annotated turn contained a single utterance, although some turns comprised two or more utterances. For each turn transition, the last utterance meeting the probability threshold in the immediately preceding partner speaker turn and the first utterance meeting the probability threshold in the current actor speaker turn were selected. Thus, when the utterance closest to the speaker boundary did not meet the threshold, the nearest eligible utterance within the same speaker turn was used. This procedure increased the number of usable transitions while retaining only utterances with sufficiently reliable topic assignments.</p>
+<p>The cosine distance between the BERTopic topic embeddings assigned to the selected partner and actor utterances was then calculated, with the resulting value assigned to the speaker of the response utterance. Cosine distances at transition points were then averaged separately for each participant. Higher values therefore indicate that a participant&#x27;s responses were, on average, more distant in topic space from the last partner utterance in the preceding speaker turn. To improve the robustness of the participant-level estimates, participants with fewer than five valid turn transitions were omitted from analyses involving this variable, resulting in n = 136.</p>
+<h3>2.7.4 Engagement signalling</h3>
+<p>Vocal backchannels and nods occurring within the first five minutes of interaction were counted separately for each participant from the annotation output csv files. To account for differences in listening time, these counts were standardized by dividing them by the participant&#x27;s listening time (calculated by subtracting the total duration of the participant&#x27;s turns from the five minutes of interaction time) and expressing them as backchannel rates (per minute). Thus, these variables reflect how frequently participants produced nods and vocal backchannels when listening to the speech of their dyadic partner. Since these instances were manually annotated by a research assistant, inter-rater reliability was assessed for both nods and vocal backchannels. For this, two dyads were randomly sampled from each of the pools defined by gender, communication channel, and language group, resulting in 16 total dyads. These dyads were then independently re-annotated by a second coder. Each coder calculated the participant-level rates per minute over the 5-min conversation. Agreement between coders was then estimated using intraclass correlation coefficients (ICCs). Inter-rater reliability was high for both nodding rate (ICC = .90, 95% CI [.81, .95]) and vocal backchannel rate (ICC = .94, 95% CI [.65, .98]). Finally, in order to satisfy the residual-related assumptions of our statistical models, Box-Cox transformations were applied to vocal backchanneling rate (λ = 0.55) and nodding rate (λ = 0.30).</p>
+<h3>Smiling.</h3>
+<p>Smiling was operationalized using OpenFace estimates of Action Unit 12 (AU12; lip corner puller), which reflects activation of the zygomaticus major muscle and constitutes a core facial action underlying smiling (Ekman &amp; Friesen, 1978; Rychlowska et al., 2017). To account for between-person differences in tonic AU12 activity, the preprocessed AU12 signal was mean-centered within participants and rectified such that values below the participant-specific baseline were set to zero. Smiling was quantified as the mean of this signal across listener periods, with higher values indicating greater average smiling activity.</p>
+<p>A Box-Cox transformation was applied to the resulting participant-level variable to satisfy the residual-related assumptions of the statistical models (λ = 0.63).</p>
+<h3>Gaze dispersion.</h3>
+<p>Gaze dispersion was operationalized using OpenFace estimates of horizontal (gaze_angle_x) and vertical (gaze_angle_y) gaze direction, expressed in radians.</p>
+<p>For each participant, the standard deviations of the preprocessed horizontal and vertical gaze angles across listener periods were calculated separately and summed to obtain an overall gaze dispersion score. Higher values indicated greater variation in gaze direction across the interaction, whereas lower values indicated more concentrated and stable gaze orientation.</p>
+<h3>2.8 Statistical analyses</h3>
+<p>All statistical analyses were conducted using R (v. 4.5.3). As preliminary checks of the success of random assignment, we first examined whether participants in the two communication media differed in age or gender distribution. We then tested whether personality trait scores differed between the communication media using linear models in which each personality trait was predicted by communication medium. Having established the comparability of the two groups, we used the same modeling approach to examine the effects of communication medium on the eight conversational behaviors. Here, behavioral variables were z-standardized; thus, the reported estimates (b) represent differences between the two communication media expressed in standard deviation units of the respective variable. To account for potential dependence between dyad members, cluster-robust standard errors were calculated using dyad as the clustering variable, with CR2 correction and Satterthwaite-adjusted degrees of freedom.</p>
+<p>For our main hypothesis tests, we examined whether the Big Five traits of both actor and partner predicted interactional behavior across three outcome clusters: turn-taking dynamics (average speech gap and turn duration), content development (topic exploration breadth, topic shift strength), and engagement signalling of the listener (vocal backchanneling, nodding, gaze, smiling). First, each outcome was predicted by the main effects of actor and partner traits and the communication medium in an ordinary least squares regression framework. To control for possible confounding effects of partner&#x27;s turn count on backchanneling (since the amount of partner&#x27;s turns was assumed to covary with the amount of listener backchanneling), it was included as a covariate in the models for nodding and vocal backchanneling. The same cluster robust framework and the same data transformations for engagement variables were used for these models as in the previous step. For the personality effects, p values were corrected using the Benjamini-Hochberg FDR procedure separately within each trait and each of the three outcome clusters. Traits were treated as separate groupings in the FDR correction because the hypotheses concerned the effects of each personality trait independently. Accordingly, the correction pool comprised four effects (actor and partner effects on two outcomes) for each trait in the turn-taking cluster, four effects for each trait in the content development cluster (actor and partner effects on two outcomes), and eight effects for each trait in the engagement-signalling cluster (actor and partner effects on four outcomes).</p>
+<p>As secondary hypothesis tests (H2), we examined whether the effects of actor and partner personality traits on the outcome variables depended on communication medium. For this purpose, we included communication medium-by-trait interaction terms alongside the corresponding main effects in the models. The p-values from these secondary hypothesis tests were FDR-corrected separately from those of the primary analyses. Correction was performed separately within each trait and outcome cluster, with the correction pools containing only the interaction terms.</p>
+<p>Finally, as an exploratory analysis, we examined whether the effects of actor personality traits on the outcome variables depended on the partner&#x27;s personality traits. For this analysis, we included actor-by-partner interaction terms for each trait alongside the trait and communication-medium main effects. Here, the FDR correction was not applied due to the exploratory nature of the analyses.</p>
+<h3>3 Results</h3>
+<h3>3.1 Preliminary checks of group comparability following random assignment</h3>
+<p>First, as a preliminary check, we examined whether the face-to-face and video-mediated groups differed in participant characteristics. The groups did not differ significantly in age, t(147) = 0.23, p = .819, or gender distribution, χ²(1) = 0.39, p = .530. Personality trait scores likewise did not differ significantly between the two communication medium groups (Table 2). Together, these results indicated that the sampling procedure produced broadly comparable groups with respect to demographic characteristics and personality traits.</p>
+<h3>3.2 Influence of communication medium on conversational behaviors</h3>
+<p>Differences in conversational behaviors between the communication mediums were examined. Regarding turn-taking dynamics, we found shorter speech gaps in the face-to-face condition than in the video-mediated condition (b = -0.631, 95% CI [-0.931, -0.331], p &lt; .001), indicating faster responses to partner&#x27;s turn during face-to-face interactions. There was no significant difference in turn length between the two communication mediums (p = .635).</p>
+<p>There were also no significant differences in the variables related to conversation content between the two groups (ps ≥ .406). Regarding the engagement signalling, we found less smiling (b = -0.516, 95% CI [-0.873, -0.159], p = .005) and more gaze dispersion (b = 0.753, 95% CI [0.454, 1.051], p &lt; .001) in the face-to-face conversations compared to the video-mediated conversations, with no significant differences in vocal backchanneling or nodding (ps ≥ .070). Figure 3 shows the significant effects of communication medium. Effect of communication channel on speech gaps, listener smiling, and gaze dispersion Note. The colored dots represent mean scores of each participant. Estimated marginal means and standard errors in each communication channel are plotted with black dots and lines. The outcome variables are z-score standardized.</p>
+<h3>3.3 Effects of personality traits on conversational behaviors</h3>
+<p>After the preliminary analyses, we moved on to test H1 examining whether actor and partner personality traits predicted conversational behaviors. Here, separate models were calculated for each behavioral outcome. We then tested H2 according to which the trait associations differed between video-mediated and face-to-face interaction by including trait-by-communication medium interactions in the same outcome-specific models. Finally, as an exploratory analysis, we examined the actor-by-partner trait interactions of each personality trait in the models. Results are presented separately for the three outcome clusters, progressing from tests of H1 and H2 to the exploratory analyses within each cluster.</p>
+<h3>3.3.1 Effects of personality traits on turn-taking dynamics</h3>
+<p>In the models testing trait-effects on turn-taking dynamics, four personality effects were found, all of which remained significant after FDR correction (see Table 3 for F test results). , 58.9) = 26.93 *** F(1, 58.9) = 0.60 Note. The table shows the cluster robust degrees of freedom and F-statistics based on CR2 standard errors and Satterthwaite-adjusted denominator degrees of freedom for all outcomes and predictors. For personality effects, asterisks indicate their significance before FDR correction, whereas the effects that remained significant after correction are bolded. *p &lt; .050 **p &lt; .010 ***p &lt; .001.</p>
+<p>For speech gap, actor openness was associated with longer speech gaps (β = 0.155, 95% CI [0.046, 0.264], p = .007, p FDR = .014), and extraversion of both actor (β = -0.220, 95% CI [-0.331, -0.109], p &lt; .001, p FDR = .001) and partner (β = -0.183, 95% CI [-0.289, -0.077], p = .001, p FDR = .002) was associated with shorter speech gaps. Regarding turn length, actor openness was associated with longer turns (β = 0.253, 95% CI [0.091, 0.415], p = .003, p FDR = .013). In addition, the effect of communication channel on speech gap remained significant when controlling for participants&#x27; personality traits (p &lt; .001). Consequently, H1.1, concerning the effect of actor openness on turn length, and H1.3, concerning the effects of actor and partner extraversion on speech gaps, received support. The analyses did not concern H1.2, H1.4, or H1.5.</p>
+<p>When testing the interaction effects between communication medium and partner and actor traits (H2), we found no effects that were significant even at the uncorrected level (ps ≥ .097), indicating that, contrary to H2, communication medium did not alter the effects of actor or partner personality traits on turn-taking dynamics (see Supplementary Table 1).</p>
+<p>Finally, when exploring the trait-wise actor-partner interaction effects on speech gap duration, we found two significant interaction effects: a positive interaction effect between actor and partner openness (β = 0.131, 95% CI [0.005, 0.257], p = .043, p FDR = .144), and a negative interaction effect between actor and partner neuroticism (β = -0.147, 95% CI [-0.285, -0.008], p = .040, p FDR = .144). The openness interaction indicated that partner&#x27;s openness increased the positive effect of actor openness on speech gap duration, whereas the neuroticism interaction indicated that partner&#x27;s neuroticism made the effect of actor neuroticism on speech gap duration more negative. We also found a negative interaction effect between partner and actor extraversion on turn length (β = -0.174, 95% CI [-0.323, -0.024], p = .026, p FDR = .144), indicating that dyads with both partners having high extraversion produced shorter turns (see Supplementary table 2 for full results).</p>
+<h3>3.3.2 Effects of personality traits on conversation content</h3>
+<p>The conversation content family included topic exploration breadth (across individual&#x27;s own utterances) and topic shift strength (in turn-switch situations). Two personality effects were significant at the uncorrected level (see Table 4 for F-test results): a positive effect of partner conscientiousness on exploration breadth (β = 0.195, 95% CI [0.053, 0.336], p = .008, pFDR = .033) and a negative effect of partner conscientiousness on topic shift strength (β = -0.202, 95% CI [-0.396, -0.008], p = .042, pFDR = .084). The effects indicated that participants whose partner was higher on conscientiousness explored a wider range of topics over the course of the interaction, but their responses to their partner&#x27;s utterances in speaker-switch situations stayed closer in semantic space to the preceding partner utterance. However, only the effect of partner conscientiousness on topic exploration breadth remained significant after FDR correction. Although not hypothetized, we next tested whether communication medium moderated the effects of personality traits on topic exploration breadth and topic shift strength finding no significant interactions even at the uncorrected alpha level (ps ≥ .072, see Supplementary Table 3). Thus, the effects of personality on conversational content development did not differ between face-to-face and video-mediated interaction. Furthermore, we found no actor-partner interaction effects that were significant (ps ≥ .079, see Supplementary Table 4).</p>
+<h3>3.3.3 Effects of personality traits on engagement signalling</h3>
+<p>The engagement signalling cluster-consisting of vocal backchanneling, nodding, smiling, and gaze dispersion-revealed five personality effects that survived the FDR and lent support for H1 (see Table 5 for F test results). Higher actor extraversion was associated with more prominent vocal backchanneling (β = 0.221, 95% CI [0.076, 0.367], p = .004, p FDR = .015) and with smiling (β = 0.179, 95% CI [0.027, 0.331], p = .022, p FDR = .045). So was partner extraversion positively associated with vocal backchanneling (β = 0.192, 95% CI [0.032, 0.353], p = .020, p FDR = .045) and smiling (β = 0.295, 95% CI [0.124, 0.465], p = .001, p FDR = .009). Higher actor conscientiousness was associated with more frequent nodding (β = 0.244, 95% CI [0.086, 0.402], p = .003, p FDR = .027). Five additional associations met the uncorrected significance threshold. Actor openness was associated with less frequent vocal backchanneling (β = -0.142, 95% CI [-0.281, -0.004], p = .045, p FDR = .119), whereas actor extraversion was associated with more frequent nodding (β = 0.155, 95% CI [0.001, 0.310], p = .049, p FDR = .079). Partner openness was associated with decreased smiling (β = -0.172, 95% CI [-0.322, -0.022], p = .026, p FDR = .103) and lower gaze dispersion (β = -0.212, 95% CI [-0.374, -0.050], p = .012, p FDR = .095), whereas partner agreeableness was associated with increased smiling (β = 0.182, 95% CI [0.029, 0.335], p = .021, p FDR = .170). However, as these effects did not survive FDR correction, they should be interpreted with caution.</p>
+<p>Additionally, we found a significant effect of communication medium on vocal backchanneling (b = 0.403, 95% CI [0.104, 0.701], p = .009), which was not present in the models that did not include personality traits as predictors. This indicated more frequent predicted vocal backchanneling during face-to-face interaction than in video-mediated conversations when personality trait scores were at their mean level. The effects of communication channel on smiling (p = .023) and gaze dispersion (p &lt; .001) remained significant. Partner turn count, which was included as a covariate in the models for vocal backchanneling and nodding, predicted more frequent vocal backchanneling (β = 0.375, 95% CI [0.166, 0.583], p = .001), but did not significantly predict nodding frequency (p = .087).</p>
+<p>When testing whether communication medium moderated the effects of actor or partner traits on engagement signalling, we found no significant interactions, even at the uncorrected alpha level (ps ≥ .064, see Supplementary Table 5). Contrary to H2, therefore, we found no evidence that the effects of personality on engagement signalling differed between communication media</p>
+<p>The interactions between partner and actor traits tested in the last exploratory step were likewise nonsignificant (ps ≥ .145, see Supplementary Table 6), indicating that the effects of actor personality on engagement signalling did not depend on the partner&#x27;s personality. Effects of actor and partner personality traits on turn-taking dynamics, conversation content development, and engagement signalling Note. Standardized regression coefficients are shown with 95% confidence intervals from cluster-robust standard errors. The figure includes all actor and partner trait effects with uncorrected p &lt; .05. Effects that remained significant after FDR correction are plotted with darker colors and texts, whereas faded colors and texts indicate effects that were significant only before correction.</p>
+<h3>4 Discussion</h3>
+<p>The present study examined how Big Five personality traits are associated with conversational behavior within a dyad and whether these associations depend on the communication medium. Using a multimethod approach, we examined both actor and partner personality effects on turn-taking dynamics, conversational content, and listener engagement signaling during first encounters. The findings provided partial support for H1, according to which different personality traits were expected to be associated with distinct patterns of conversational behavior. Specifically, higher actor openness predicted longer speaking turns and longer gaps between turns but was negatively associated with engagement signaling and unrelated to content development, providing only partial support for H1.1. Similarly, H1.2 concerning conscientiousness received partial support: higher actor conscientiousness was associated with more frequent nodding, but the hypothesized association with gaze orientation was not observed. Unexpectedly, partner consciousness was associated with the actor&#x27;s broader exploration of topics. Extraversion emerged as the most consistent predictor of conversational behavior. As hypothesized in H1.3, higher extraversion in both actors and partners was associated with shorter speech gaps. Higher extraversion in both actors and partners was further associated with more frequent vocal backchanneling and with increased smiling. The hypotheses concerning agreeableness (H1.4) and neuroticism (H1.5) received no clear support as none of these effects survived correction for multiple testing. Exploratory analyses of actor-partner interactions further indicated that combinations of dyad members&#x27; openness, neuroticism, and extraversion were associated with turn-taking dynamics. Finally, with regard to H2, the analyses provided no evidence that personality-behavior associations differed between face-to-face and video-mediated interactions. Thus, although communication medium itself influenced several aspects of conversational behavior, there were no substantial personality-related differences in conversational behavior across the two interaction settings. Together, these findings suggest that personality is expressed through distinct patterns of conversational behavior that generalize across face-to-face and video-mediated first encounters. We next discuss these findings in more detail trait by trait, starting with those that showed the most robust effects.</p>
+<p>Consistent with our hypotheses and with previous studieshttps://www.zotero.org/google-docs/?nUPECu people with higher extraversion exhibited faster and more active conversational style (Cuperman &amp; Ickes, 2009; Dewaele &amp; Furnham, 1999; Wang &amp; Ziano, 2022) , marked by rapid turn-taking and greater engagement signalling. For turn-dynamics, the associations emerged for both actor and partner extraversion: actors higher in extraversion took the turn more rapidly, but actors also responded more rapidly when their partners were more extraverted. This pattern highlights the fact that extraversion of both interlocutors contributes to the pace of conversational exchange. The same energetic fast-pace style was present in engagement cueing. Extraverted actors and people interacting with extraverted partners provided more vocal backchannels and smiled more. Given that rapid turn transitions and active backchanneling as listeners are particularly important in defining interactional satisfaction during initial conversations (Itzchakov &amp; Wheelerhttps://www.zotero.org/google-docs/?XRukAk 2024; Kawana, 1986; Templeton et al., 2023) , the finding may help explain why extraverted individuals are particularly successful in forming new social ties and tend to develop larger social networks (Feiler &amp; Kleinbaum, 2015; Rollings et al., 2023).</p>
+<p>Openness, in contrast, was associated with an almost opposite conversational style. People high in openness produced longer speaking turns and took longer to respond. These outcomes are likely related to each other, as people inhale deeper in preparation for a longer response, thereby taking longer to initiate their response (Torreira et al., 2015). People with higher openness also displayed less engagement through vocal backchannels, and their partners smiled less and maintained more eye contact, although these engagement-related effects did not remain significant after correction for multiple testing. The overall pattern was consistent with a slower-paced interactional style characterized by greater consideration and deliberation (Tannen, 1984). This interpretation is compatible with the broader characterization of openness as involving greater intellectual engagement and receptiveness to complex or novel ideas (DeYoung, 2015; McCrae &amp; Costa, 1997). One exception to this pattern was that people high in openness did not explore the conversational topic space more broadly, contrary to our hypothesis. The contrasting associations of extraversion and openness are nevertheless informative: whereas extraversion appears to manifest in fast-paced interpersonal exchange characterized by overt mutual engagement, openness appears to manifest in slower-paced, more deliberative actor turns resulting in less overt partner engagement.</p>
+<p>Conscientiousness has received relatively little attention in previous research on conversational behavior, but the present findings suggest that it may nevertheless shape specific aspects of interaction. In prior research utilizing the Parasocial Consensus Sampling approach, the trait was associated with more frequent nodding (Huang &amp; Gratch, 2013). In the current study, this finding was replicated in naturalistic conversation, with actors higher in conscientiousness nodding more frequently. Two additional partner effects provide an interesting perspective on how conscientiousness may influence the development of conversational content. Interestingly, higher partner conscientiousness was associated with broader topic exploration by the actor but with smaller semantic shifts between consecutive utterances. One possible explanation is that more conscientious individuals use what Mishler (1978) termed interrogative series to initiate and maintain conversational flow through successive questions. Such interrogative series could explain why partners covered a broader range of conversational topics while simultaneously showing smaller turn-to-turn semantic shifts: successive questions may elicit information across different topics, while partners&#x27; responses remain semantically closely related to the questions that elicited them. These effects suggest that conscientiousness may shape conversation not only through individuals&#x27; own behavior but also through the way they scaffold the conversational contributions of their partners.</p>
+<p>In regard to agreeableness and neuroticism, the effects were found to be surprisingly weak.</p>
+<p>As prior research had associated high agreeableness with greater engagement signaling (Berry &amp; Hansenhttps://www.zotero.org/google-docs/?dntn75 2000; Cuperman &amp; Ickes, 2009a; Funder &amp; Sneed, 1993; Huang &amp; Gratch, 2013) , we assumed this link to be found also in our data but none of the direct actor or partner effects reached significance. This suggests that, at least during brief interactions between previously unacquainted individuals, the rapidity of conversational exchange or the expressions of engagement may be more strongly associated with the energetic and socially assertive tendencies characteristic of extraversion than with the cooperative and affiliative tendencies characteristic of agreeableness. Based on prior research (Huang &amp; Gratch, 2013), we also expected higher neuroticism to be associated with reduced engagement signaling through smiling and nodding. This hypothesis was, likewise, not supported by the data. The only effects related to neuroticism came from the exploratory analyses of actor-partner interactions showing that gaps between speaker turns were shorter if both actor and partner were scoring high in neuroticism. Together, these findings suggest that agreeableness and neuroticism have limited direct associations with conversational behavior during brief initial encounters, although neuroticism may become behaviorally relevant if both partners are high on the trait.</p>
+<p>Turning to the communication medium, the current study revealed clear effects of video-calling on conversational behavior, replicating and extending previous evidence.</p>
+<p>Compared with face-to-face interaction, video-mediated conversations were characterized by longer speech gaps and less frequent vocal backchanneling, consistent with previous findings (Boland et al., 2022; Brucks &amp; Levav, 2022; Söderman et al., 2026). Importantly, however, the effects of video calling on engagement signalling were not uniformly suppressive.</p>
+<p>Participants smiled more frequently and maintained more direct gaze toward their partners during video-mediated than face-to-face interaction, suggesting that some visual engagement signals may be enhanced rather than diminished by the video-call setting (Croes et al., 2019;  see also Walther, 1992). The most notable finding, however, was the consistency of personality-behavior associations across communication media. Contrary to H2, none of the trait associations differed significantly between face-to-face and video-mediated interaction.</p>
+<p>This is particularly noteworthy given previous evidence that video calling not only alters conversational dynamics (Boland et al.https://www.zotero.org/google-docs/?JA7iaZ 2022; Brucks &amp; Levav, 2022) but can also attenuate individual or group differences in engagement behavior, such as culturally rooted variation in vocal backchanneling and nodding (Söderman et al., 2026) , and disrupt interpersonal emotional dynamics (Lepistö et al., 2025). The present findings therefore suggest that although video-mediated communication changes the overall level and timing of several conversational behaviors, we found no evidence that it alters how personality differences are expressed through these behaviors. In this sense, personality-related patterns of conversational behavior appear to survive the technological transmission of first encounters.</p>
+<h3>5 Limitations and future directions</h3>
+<p>The present findings should be interpreted in light of several features of the interactional setting. Participants engaged in five-minute conversations with previously unacquainted same-sex partners, with the explicit goal of getting acquainted. This standardized setting provided a controlled context for examining individual differences in conversational behavior and for comparing face-to-face and video-mediated interactions, but it also defines important boundary conditions for the generalizability of the findings.</p>
+<p>First, the instructions to become acquainted, together with participants&#x27; knowledge of the limited time, may have restricted the range of topics discussed and the extent to which participants explored topics. Consequently, the absence of other personality effects on topic development should not be interpreted as evidence that conscientiousness is the only trait related to conversational content more generally. As conscientiousness is related to goal directed behavior (Wilmot &amp; Oneshttps://www.zotero.org/google-docs/?MDwDvj 2019) , merely giving participants the goal of getting acquainted might have brought out the observed effect. Longer and more naturally unfolding conversations, in which participants can establish their own conversational goals, may therefore provide greater opportunities for personality differences to emerge.</p>
+<p>Second, the sample consisted exclusively of same-sex dyads. There is evidence showing that overt behavior such as eye contact and time spent talking is different in same-sex and different-sex dyads (e.g. Garcia et al., 1991; Mulac, 1989; Mulac et al., 1987). Different-sex dyads may thus involve distinct interactional dynamics that influence how personality is behaviorally expressed and how partners respond to one another. Future research should directly compare same-sex and different-sex interactions to determine whether dyadic sex composition moderates the effects of personality traits on conversational behavior.</p>
+<p>Third, the study only examined interactions between strangers. This was useful for examining personality-related differences without the influence and complexity of an established relationship, but it also limits the extent to which the findings can be generalized to conversations in established relationships, such as between friends, colleagues, or romantic partners. Familiarity may change both the topics that participants discuss and the interactional meanings and frequencies of behaviors such as pauses, nodding, and smiling. For examplehttps://www.zotero.org/google-docs/?EYpi0s it has been shown that friends explore broadening conversational topic spaces while strangers converge (Speer et al., 2024) , suggesting that personality too may manifest differently when participants already share interactional history. Future research should compare stranger and familiar-partner interactions to determine whether the observed personality-behavior associations are stable across relationship contexts.</p>
+<p>Finally, although the present sample was relatively large for a dyadic interaction study, statistical power was limited for detecting small personality effects. Sensitivity analyses indicated that the study had 80% power to detect standardized actor and partner effects of approximately β = .23-.28 and trait × medium interaction effects of β = .24-.28, depending on the trait and outcome. Several of the observed personality effects were smaller than these values, suggesting that effects of comparable or smaller magnitude could have remained undetected. This is particularly important when interpreting the results for H2: although the findings indicate that trait effects did not differ substantially between face-to-face and video-mediated interaction, smaller moderating effects of communication medium cannot be ruled out. Larger dyadic samples will therefore be needed to determine whether the communication medium moderates some trait-behavior associations to a smaller degree.</p>
+<p>Despite these boundary conditions, the present study provides a broad and methodologically rigorous examination of how personality is expressed in naturalistic conversational behavior.</p>
+<p>By combining manually annotated turn-taking, computational analysis of conversational content, and computer vision measures of listener engagement with dyadic actor-partner analyses, the study moves beyond single behavioral indicators and examines personality expression across multiple interacting layers of conversation. Empirically, the findings identify distinct conversational fingerprints associated particularly with extraversion, openness, and conscientiousness, while demonstrating that personality can shape not only individuals&#x27; own conversational behavior but also the behavior of their interaction partners.</p>
+<p>Finally, the absence of substantial differences in personality-behavior associations between face-to-face and video-mediated interaction suggests that these interactional expressions of personality persist across rather different communication environments.</p>
+<h3>6 Conclusions</h3>
+<p>The present findings demonstrate that personality is expressed in distinct fingerprint patterns of conversational behavior that extend beyond individuals&#x27; own actions to the behavior of their partners. Most notably, the findings point to different interactional modes through which conversational flow can be maintained. Extraversion is associated with a fast-paced, highly responsive mode characterized by rapid turn transitions and active engagement signaling, whereas openness is associated with a slower and more deliberative mode characterized by longer speaking turns, longer response latencies, and less overt engagement signaling.</p>
+<p>Conscientiousness, in turn, is associated with nodding and with partners&#x27; development of conversational content, illustrating how personality can shape not only one&#x27;s own behavior but also the way one&#x27;s partner is contributing to the encounter. Thus, there may be actor and partner-linked fingerprint patterns of conversational behavior, rather than a single behavioral profile emerging from the actors&#x27; own personality traits. Importantly, the absence of substantial differences in personality-behavior associations across face-to-face and video-mediated interaction suggests that interactional fingerprints of personality survive substantial changes in the technological conditions of communication. Together, the findings provide an empirical and theoretical foundation for conceptualizing these fingerprints as a multimodal, dyadic phenomenon, shaped not only by individuals&#x27; own traits but also by those of their interaction partners.</p>
+<h3>Declaration of generative AI and AI-assisted technologies in the manuscript preparation process</h3>
+<p>During the preparation of this work, the authors used ChatGPT (OpenAI) to assist with language refinement and the creation of illustrative elements for Figure 1 (changing of interactants&#x27; posture in the drawings) and Figure 2 (including schematic depictions of data-processing steps and the human face illustration in Panel C). The authors reviewed and edited all AI-assisted content and take full responsibility for the content of the published article.</p>
+<h3>3.3.4 Sensitivity analyses and summary of the main findings</h3>
+<p>Finally, sensitivity analyses were conducted to examine whether controlling for participants&#x27; age and gender altered the observed pattern of trait effects (H1). The results, reported in Supplementary Tables 7 8 9 10 11 12, showed that the pattern of trait effects remained unchanged after controlling for these variables.</p>
+<p>shows the mean age, proportion of women in the two communication channels. All participants gave informed consent prior to participation and received compensation valued at 30 euros following the experiment. The study was reviewed and received a positive statement [Statement number: 40/2023] from the University of X Research Ethics Committee in the Humanities and Social and Behavioural Sciences. The study was conducted in accordance with The Code of Ethics of the World Medical Association (Declaration of Helsinki).</p>
+<h3>Figure 2 ,</h3>
+<p>Figure 2, panel A.</p>
+<h3>Figure 3</h3>
+<p>Figure3</p>
+<h3>Figure 4</h3>
+<p>Figure4</p>
+<h3>Table 1</h3>
+<p>Group sizes and gender and age distribution in the two communication mediums</p>
+<h3>Table 2</h3>
+<p>Personality differences in the two communication mediums</p>
+<h3>Table 3</h3>
+<p>Cluster-robust F-test results for the models testing turn-taking dynamics</p>
+<h3>Table 4</h3>
+<p>Cluster-robust F-test results for the conversation content modelsThe table shows the cluster robust degrees of freedom and F-statistics based on CR2 standard errors and Satterthwaite-adjusted denominator degrees of freedom for all outcomes and predictors. For personality effects, asterisks indicate their significance before FDR correction, whereas the effects that remained significant after correction are bolded.</p>
+<h3>Table 5</h3>
+<p>Cluster-robust F-test results for the engagement-signalling modelsNote. The table shows the cluster robust degrees of freedom and F-statistics based on CR2 standard errors and Satterthwaite-adjusted denominator degrees of freedom for all outcomes and predictors. For personality effects, asterisks indicate their significance before FDR correction, whereas the effects that remained significant after correction are bolded.</p>
+<h3>Figure 4</h3>
+<p>summarizes the H1 results across all outcome clusters in a forest plot showing standardized beta coefficients and their 95% confidence intervals. Only statistically significant associations are displayed. Positive coefficients (to the right of zero) indicate that higher levels of a given personality trait are associated with higher levels of the corresponding conversational behavior, whereas negative coefficients (to the left of zero) indicate the opposite.</p>
+<h3>References</h3>
+<p>Arellano-Véliz, N. A., Castillo, R. D., Jeronimus, B. F., Kunnen, E. S., &amp; Cox, R. F. A. (2025). Beyond Words: Speech Coordination Linked to Personality and Appraisals. Journal of Nonverbal Behavior, 49(1), 85-123. https://doi.org/10.1007/s10919-025-00482-3</p>
+<p>Bales, R. F. (1970). Personality and interpersonal behavior. Holt, Rinehart &amp; Winston.</p>
+<p>Baltrusaitis, T., Zadeh, A., Lim, Y. C., &amp; Morency, L.-P. (2018). OpenFace 2.0: Facial Behavior Analysis Toolkit. 2018 13th IEEE International Conference on Automatic Face &amp; Gesture Recognition (FG 2018), 59-66. https://doi.org/10.1109/FG.2018.00019</p>
+<p>Basch, J. M., Melchers, K. G., Kurz, A., Krieger, M., &amp; Miller, L. (2021). It Takes More Than a Good Camera: Which Factors Contribute to Differences Between Face-to-Face Interviews and Videoconference Interviews Regarding Performance Ratings and Interviewee Perceptions? Journal of Business and Psychology, 36(5), 921-940. https://doi.org/10.1007/s10869-020-09714-3</p>
+<p>Baumaister, R., Bibby, M., Tice, D., &amp; Bushman, B. (2026). Socializing While Alone: Loss of Impact and Engagement When Interacting Remotely via Technology-2026. https://journals.sagepub.com/doi/10.1177/17456916251404368</p>
+<p>Bavelas, J. B., Coates, L., &amp; Johnson, T. (2000). Listeners as co-narrators. Journal of Personality and Social Psychology, 79(6), 941. https://doi.org/10.1037//0022-3514.79.6.941</p>
+<p>Berry, D. S., &amp; Hansen, J. S. (2000). Personality, nonverbal behavior, and interaction quality in female dyads. Personality and Social Psychology Bulletin, 26(3), 278-292. https://doi.org/10.1177/0146167200265002</p>
+<p>Boland, J. E., Fonseca, P., Mermelstein, I., &amp; Williamson, M. (2022a). Zoom disrupts the rhythm of conversation. Journal of Experimental Psychology: General, 151(6), 1272-1282. https://doi.org/10.1037/xge0001150</p>
+<p>Boland, J. E., Fonseca, P., Mermelstein, I., &amp; Williamson, M. (2022b). Zoom disrupts the rhythm of conversation. Journal of Experimental Psychology: General, 151(6), 1272-1282. https://doi.org/10.1037/xge0001150</p>
+<p>Boland, J. E., Fonseca, P., Mermelstein, I., &amp; Williamson, M. (2022c). Zoom disrupts the rhythm of conversation. Journal of Experimental Psychology: General, 151(6), 1272-1282. https://doi.org/10.1037/xge0001150</p>
+<p>Brucks, M. S., &amp; Levav, J. (2022). Virtual communication curbs creative idea generation. Nature, 605, 108-112. https://doi.org/10.1038/s41586-022-04643-y</p>
+<p>Button, G., &amp; Casey, N. (1985). Topic nomination and topic pursuit. Human Studies, 8(1), 3-55. https://doi.org/10.1007/BF00143022</p>
+<p>Cassotta, L., Feldstein, S., &amp; Jaffe, J. (1964). Avta: A Device for Automatic Vocal Transaction Analysis. Journal of the Experimental Analysis of Behavior, 7(1), 99-104. https://doi.org/10.1901/jeab.1964.7-99</p>
+<p>Chapple, E. D. (1939). Quantitative Analysis of the Interaction of Individuals. Proceedings of the National Academy of Sciences of the United States of America, 25(2), 58-67. https://doi.org/10.1073/pnas.25.2.58</p>
+<p>Cooney, G., &amp; Wheatley, T. (2025). Conversation. https://doi.org/10.70400/ZKHH6259</p>
+<p>Croes, E. A., Antheunis, M. L., Schouten, A. P., &amp; Krahmer, E. J. (2019). Social attraction in video-mediated communication: The role of nonverbal affiliative behavior. Journal of Social and Personal Relationships, 36(4), 1210-1232. https://doi.org/10.1177/0265407518757382</p>
+<p>Cuperman, R., &amp; Ickes, W. (2009a). Big Five predictors of behavior and perceptions in initial dyadic interactions: Personality similarity helps extraverts and introverts, but hurts &quot;disagreeables.&quot; Journal of Personality and Social Psychology, 97(4), 667-684. https://doi.org/10.1037/a0015741</p>
+<p>Cuperman, R., &amp; Ickes, W. (2009b). Big Five predictors of behavior and perceptions in initial dyadic interactions: Personality similarity helps extraverts and introverts, but hurts &quot;disagreeables.&quot; Journal of Personality and Social Psychology, 97(4), 667-684. https://doi.org/10.1037/a0015741</p>
+<p>Dewaele, J.-M., &amp; Furnham, A. (1999). Extraversion: The Unloved Variable in Applied Linguistic Research. Language Learning, 49(3), 509-544. https://doi.org/10.1111/0023-8333.00098</p>
+<p>DeYoung, C. G. (2015). Openness/intellect: A dimension of personality reflecting cognitive exploration. In APA handbook of personality and social psychology, Volume 4: Personality processes and individual differences (pp. 369-399). American Psychological Association. https://doi.org/10.1037/14343-017</p>
+<p>Feiler, D. C., &amp; Kleinbaum, A. M. (2015). Popularity, Similarity, and the Network Extraversion Bias. Psychological Science, 26(5), 593-603. https://doi.org/10.1177/0956797615569580</p>
+<p>Fischer, J. R., &amp; Ram, N. (2024). Personality Differences Drive Conversational Dynamics: A High-Dimensional NLP Approach. Proceedings of the Second Workshop on Social Influence in Conversations (SICon 2024), 36-45. https://doi.org/10.18653/v1/2024.sicon-1.</p>
+<p>Flint, H. (2019). Flint, Haugh, &amp; Merrison: Modulating troubles affiliating in initial interactions. John Benjamins Publishing Company. Prag.17010.Fli. https://benjamins.com/online/prag/articles/prag.17010.fli</p>
+<p>Funder, D. C., &amp; Sneed, C. D. (1993). Behavioral manifestations of personality: An ecological approach to judgmental accuracy. Journal of Personality and Social Psychology, 64(3), 479-490. https://doi.org/10.1037/0022-3514.64.3.479</p>
+<p>Garcia, S., Stinson, L., Ickes, W., Bissonnette, V., &amp; Briggs, S. R. (1991). Shyness and physical attractiveness in mixed-sex dyads. Journal of Personality and Social Psychology, 61(1), 35-49. https://doi.org/10.1037/0022-3514.61.1.35</p>
+<p>Gardner, R. (2001). When Listeners Talk. In Pbns.92. John Benjamins Publishing Company. https://benjamins.com/catalog/pbns.92</p>
+<p>Grootendorst, M. (2022a). BERTopic: Neural topic modeling with a class-based TF-IDF procedure (arXiv:2203.05794). arXiv. https://doi.org/10.48550/arXiv.2203.05794</p>
+<p>Grootendorst, M. (2022b). BERTopic: Neural topic modeling with a class-based TF-IDF procedure (arXiv:2203.05794). arXiv. https://doi.org/10.48550/arXiv.2203.05794</p>
+<p>Haugh, M., &amp; Carbaugh, D. (2015). Self-disclosure in initial interactions amongst speakers of American and Australian English. Multilingua, 34. https://doi.org/10.1515/multi-2014-0104</p>
+<p>Holler, J., &amp; Levinson, S. C. (2019). Multimodal Language Processing in Human Communication. Trends in Cognitive Sciences, 23(8), 639-652. https://doi.org/10.1016/j.tics.2019.05.006</p>
+<p>Huang, L., &amp; Gratch, J. (2013). Explaining the Variability of Human Nonverbal Behaviors in Face-to-Face Interaction. In R. Aylett, B. Krenn, C. Pelachaud, &amp; H. Shimodaira (Eds.), Intelligent Virtual Agents (pp. 275-284). Springer. https://doi.org/10.1007/978-3-642-40415-3_24</p>
+<p>Itzchakov, G., &amp; Wheeler, S. C. (2024). Listen to this: Why consumer behavior researchers should care about listening. Consumer Psychology Review, 7(1), 40-57. https://doi.org/10.1002/arcp.1092</p>
+<p>John, O. P., Donahue, E. M., &amp; Kentle, R. L. (2012). Big Five Inventory [Dataset]. https://doi.org/10.1037/t07550-000</p>
+<p>John, O. P., Naumann, L. P., &amp; Soto, C. J. (2008). Paradigm shift to the integrative Big Five trait taxonomy: History, measurement, and conceptual issues. In Handbook of personality: Theory and research, 3rd ed (pp. 114-158). The Guilford Press.</p>
+<p>Kawana, Y. (1986). The Effects of Listener&#x27;s Social Reinforcement on Interpersonal Attraction in the Dyadic Conversation. The Japanese Journal of Experimental Social Psychology, 26(1), 67-76. https://doi.org/10.2130/jjesp.26.67</p>
+<p>Lakens, D. (2022). Sample Size Justification. Collabra: Psychology, 8(1), 33267. https://doi.org/10.1525/collabra.33267</p>
+<p>Lepistö, S., Koskinen, E., Söderman, M., Celio, F., Wuolio, M., Jääskeläinen, I., Lindström, J., Ravaja, N., Peräkylä, A., &amp; Harjunen, V. J. (2025). Listener&#x27;s disengagement heightens speaker&#x27;s arousal during in-person self-disclosure-but not via video call. Computers in Human Behavior Reports, 18, 100620. https://doi.org/10.1016/j.chbr.2025.100620</p>
+<p>Lepistö, S. S. I., Koskinen, E., Söderman, M., Celio, F., Wuolio, M. P., Jääskeläinen, I. M. E., Lindström, J., Ravaja, N., Peräkylä, A., &amp; Harjunen, V. J. (2024). Wired But Disconnected: Speaker&#x27;s Physiological and Self-Reported Emotional Responses to Listener&#x27;s Disengagement in Face-to-Face and Video Call Settings. https://ssrn.com/abstract=4928480</p>
+<p>Levinson, S. C. (2016). Turn-taking in Human Communication-Origins and Implications for Language Processing. Trends in Cognitive Sciences, 20(1), 6-14. https://doi.org/10.1016/j.tics.2015.10.010</p>
+<p>Levinson, S. C., &amp; Torreira, F. (2015). Timing in turn-taking and its implications for processing models of language. Frontiers in Psychology, 6. https://doi.org/10.3389/fpsyg.2015.00731</p>
+<p>Louradour, J. (2023). Whisper-timestamped. In GitHub repository. GitHub. https://github.com/linto-ai/whisper-timestamped</p>
+<p>McCrae, R. R., &amp; Costa, P. T. (1997). Chapter 31-Conceptions and Correlates of Openness to Experience. In R. Hogan, J. Johnson, &amp; S. Briggs (Eds.), Handbook of Personality Psychology (pp. 825-847). Academic Press. https://doi.org/10.1016/B978-012134645-4/50032-9</p>
+<p>McCrae, R. R., &amp; John, O. P. (1992). An introduction to the five-factor model and its applications. Journal of Personality, 60(2), 175-215. https://doi.org/10.1111/j.1467-6494.1992.tb00970.x</p>
+<p>McInnes, L., Healy, J., &amp; Astels, S. (2017). hdbscan: Hierarchical density based clustering. The Journal of Open Source Software, 2, 205. https://doi.org/10.21105/joss.00205</p>
+<p>McInnes, L., Healy, J., &amp; Melville, J. (2020). UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction (arXiv:1802.03426). arXiv. https://doi.org/10.48550/arXiv.1802.03426</p>
+<p>Meyer, A. S. (2023). Timing in Conversation. Journal of Cognition, 6(1). https://doi.org/10.5334/joc.268</p>
+<p>Mishler, E. G. (1978). Studies in dialogue and discourse. III. Utterance structure and utterance function in interrogative sequences. Journal of Psycholinguistic Research, 7(4), 279-305. https://doi.org/10.1007/BF01068111</p>
+<p>Mulac, A. (1989). Men&#x27;s and Women&#x27;s Talk in Same-Gender and Mixed-Gender Dyads: Power or Polemic?&#x27;. Journal of Language and Social Psychology, 8(3-4), 249-270. https://doi.org/10.1177/0261927X8983006</p>
+<p>Mulac, A., Studley, L. B., Wiemann, J. M., &amp; Bradac, J. J. (1987). Male/Female Gaze in Same-Sex and Mixed-Sex Dyads Gender-Linked Differences and Mutual Influence. Human Communication Research, 13(3), 323-343. https://doi.org/10.1111/j.1468-2958.1987.tb00108.x</p>
+<p>Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Müller, A., Nothman, J., Louppe, G., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cournapeau, D., Brucher, M., Perrot, M., &amp; Duchesnay, É. (2011). Scikit-learn: Machine Learning in Python (arXiv:1201.0490). arXiv. https://doi.org/10.48550/arXiv.1201.0490</p>
+<p>Peräkylä, A., Henttonen, P., Voutilainen, L., Kahri, M., Stevanovic, M., Sams, M., &amp; Ravaja, N. (2015). Sharing the Emotional Load: Recipient Affiliation Calms Down the Storyteller. Social Psychology Quarterly, 78(4), 301-323. https://doi.org/10.1177/0190272515611054</p>
+<p>Peräkylä, A., Voutilainen, L., Lehtinen, M., &amp; Wuolio, M. (2022). From Engagement to Disengagement in a Psychiatric Assessment Process. Symbolic Interaction, 45(2), 257-296. https://doi.org/10.1002/symb.574</p>
+<p>Reimers, N., &amp; Gurevych, I. (2019). Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. In K. Inui, J. Jiang, V. Ng, &amp; X. Wan (Eds.), Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP) (pp. 3982-3992). Association for Computational Linguistics. https://doi.org/10.18653/v1/D19-1410</p>
+<p>Rollings, J., Micheletta, J., Van Laar, D., &amp; Waller, B. M. (2023). Personality Traits Predict Social Network Size in Older Adults. Personality and Social Psychology Bulletin, 49(6), 925-938. https://doi.org/10.1177/01461672221078664</p>
+<p>Sacks, H., Schegloff, E. A., &amp; Jefferson, G. (1974). A simplest systematics for the organization of turn-taking for conversation. Language, 50(4), 696-735. https://doi.org/10.2307/412243</p>
+<p>Schegloff, E. A. (1982). Discourse as an interactional achievement: Some uses of &quot;uh huh&quot; and other things that come between sentences. In Analyzing Discourse: Text and Talk. Georgetown University Press. https://repository.library.georgetown.edu/bitstream/handle/10822/555474/GURT_198</p>
+<p>pdf Schmidt, H., Bergey, C. A., Zhou, C., Helion, C., &amp; Hawkins, R. (2025). Dynamics of topic exploration in conversation. Proceedings of the Annual Meeting of the Cognitive Science Society, 47(0). https://escholarship.org/uc/item/15d3808f</p>
+<p>Söderman, M., Lepistö, S., Koskinen, E., Heikkinen, P., Sinisalo, A., Wuolio, M., Ravaja, N., Peräkylä, A., Lindström, J., &amp; Harjunen, V. J. (2026). Video-mediated interaction reduces cultural differences in conversational backchanneling (Hd6jw_v1). SocArXiv. https://osf.io/preprints/socarxiv/hd6jw_v1/</p>
+<p>Speer, S. P. H., Mwilambwe-Tshilobo, L., Tsoi, L., Burns, S. M., Falk, E. B., &amp; Tamir, D. I. (2024). Hyperscanning shows friends explore and strangers converge in conversation. Nature Communications, 15(1), 7781. https://doi.org/10.1038/s41467-024-51990-7</p>
+<p>Stevanovic, M., Henttonen, P., Koskinen, E., Peräkylä, A., Nieminen von-Wendt, T., Sihvola, E., Tani, P., Ravaja, N., &amp; Sams, M. (2019). Physiological responses to affiliation during conversation: Comparing neurotypical males and males with Asperger syndrome. PLOS ONE, 14(9), e0222084. https://doi.org/10.1371/journal.pone.0222084</p>
+<p>Stivers, T. (2008). Stance, Alignment, and Affiliation During Storytelling: When Nodding Is a Token of Affiliation. Research on Language and Social Interaction, 41(1), 31-57. https://doi.org/10.1080/08351810701691123</p>
+<p>Stivers, T., Enfield, N. J., Brown, P., Englert, C., Hayashi, M., Heinemann, T., Hoymann, G., Rossano, F., de Ruiter, J. P., Yoon, K.-E., &amp; Levinson, S. C. (2009). Universals and cultural variation in turn-taking in conversation. Proceedings of the National Academy of Sciences of the United States of America, 106(26), 10587-10592. https://doi.org/10.1073/pnas.0903616106</p>
+<p>Tannen, D. (1984). Conversational style: Analyzing talk among friends. Ablex Publishing Corporation.</p>
+<p>Templeton, E. M., Chang, L. J., Reynolds, E. A., Cone LeBeaumont, M. D., &amp; Wheatley, T. (2023). Long gaps between turns are awkward for strangers but not for friends. Philosophical Transactions of the Royal Society B: Biological Sciences, 378(1875), 20210471. https://doi.org/10.1098/rstb.2021.0471</p>
+<p>Torreira, F., Bögels, S., &amp; Levinson, S. C. (2015). Breathing for answering: The time course of response planning in conversation. Frontiers in Psychology, 6. https://doi.org/10.3389/fpsyg.2015.00284</p>
+<p>Voutilainen, L., Henttonen, P., Kahri, M., Ravaja, N., Sams, M., &amp; Peräkylä, A. (2018). Empathy, Challenge, and Psychophysiological Activation in Therapist-Client Interaction. Frontiers in Psychology, 9. https://doi.org/10.3389/fpsyg.2018.00530</p>
+<p>Walther, J. (1992). Interpersonal Effects in Computer-Mediated Interaction: A Relational Perspective. Communication Research, 19(1), 52-90. https://doi.org/10.1177/009365092019001003</p>
+<p>Wang, D., &amp; Ziano, I. (2022). Faster responders are perceived as more extraverted. Journal of Experimental Psychology: General, 151(12), 3177-3197. https://doi.org/10.1037/xge0001254</p>
+<p>Wilmot, M. P., &amp; Ones, D. S. (2019). A century of research on conscientiousness at work. Proceedings of the National Academy of Sciences, 116(46), 23004-23010. https://doi.org/10.1073/pnas.1908430116</p>
+<p>Yngve, V. (1970). On getting a word in edgewise. https://www.semanticscholar.org/paper/On-getting-a-word-in-edgewise-Yngve/17eb4</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
