@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Distributed patterns of facial muscle
+contractions drive pain judgments in both naturalistic and synthetic
+expressions</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Distributed patterns of facial muscle contractions drive pain judgments
+in both naturalistic and synthetic expressions
+</p>
+<p class="meta">
+2026-11-18 · Metacheck 0.4.4.18 · DOI 10.5281/zenodo.22248952
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>1</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>2</b><span>fine</span></a><a class="count na" href="#na"><b>12</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Effect
+Sizes in t-tests and F-tests</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 2 t-tests and/or F-tests where effect sizes are not
+reported. Check these tests in the table below, and consider adding
+effect sizes.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We recommend checking the sentences below, and add any missing effect
+sizes.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Instead, Cohort 3 showed a positive effect of AU 4 only, although it
+should be mentioned that AUs 1-2 were also observed at an uncorrected
+level (F (1,28) = 8.08, uncorrected p = 0.008, corrected p = 0.104).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+As for Sex*AU interaction, we found significant effects associated with
+AU 4 for both Cohort 1 classification (χ 2 (1) = 15.19, corrected p &lt;
+0.001) and Cohort 3 ratings (F (1,104) = 8.87, corrected p = 0.042).
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating that effect sizes are often
+not reported:</p>
+<ul>
+<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
+(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
+Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
+</ul>
+<p>For educational material on reporting effect sizes:</p>
+<ul>
+<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
+to Effect Sizes and Confidence Intervals</a></li>
+</ul>
+</div>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Instead, Cohort 3 showed a positive effect of AU 4 only, although it
+should be mentioned that AUs 1-2 were also observed at an uncorrected
+level (F (1,28) = 8.08, uncorrected p = 0.008, corrected p = 0.104).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(1,28) = 8.08
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+As for Sex*AU interaction, we found significant effects associated with
+AU 4 for both Cohort 1 classification (χ 2 (1) = 15.19, corrected p &lt;
+0.001) and Cohort 3 ratings (F (1,104) = 8.87, corrected p = 0.042).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(1,104) = 8.87
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 non-significant p value that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = 0.104
+</td>
+<td style="text-align:left;">
+Instead, Cohort 3 showed a positive effect of AU 4 only, although it
+should be mentioned that AUs 1-2 were also observed at an uncorrected
+level (F (1,28) = 8.08, uncorrected p = 0.008, corrected p = 0.104).
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="fine">Fine <span class="n">(2)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 34 detected.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(12)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found 0 files in 0 repositories.</li>
+<li>We did not check 1 linked deposit that is not this paper’s own: <a href="https://github.com/TadasBaltrusaitis/OpenFace" class="uri">https://github.com/TadasBaltrusaitis/OpenFace</a> (others’
+code).</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>Cohort 1 participants were exposed to the same set of spontaneous
+expressions of pain.</p>
+</blockquote>
+<blockquote>
+<p>Cohort 2 participants were exposed to 3 sec video-clips selected from
+the UNBC-McMaster Shoulder Pain Expression Archive Database [27].</p>
+</blockquote>
+<blockquote>
+<p>Cohort 3 participants were exposed to short (1 sec) video-clips from
+the Pain E-motion Faces Database (PEMF) [28].</p>
+</blockquote>
+<blockquote>
+<p>Cohort 1 participants were engaged in two tasks.</p>
+</blockquote>
+<blockquote>
+<p>Data were split into five parts, with all trials of a given
+participant assigned to the same fold.</p>
+</blockquote>
+<blockquote>
+<p>All participants provided written informed consent prior to the
+experiment and were compensated for their time.</p>
+</blockquote>
+<blockquote>
+<p>Participants completed a two-alternative forced-choice task
+implemented in MATLAB using the Psychtoolbox library.</p>
+</blockquote>
+<blockquote>
+<p>Participants were asked “which face displays the higher degree of
+pain?”</p>
+</blockquote>
+<blockquote>
+<p>Prior to the main task, participants completed a brief training phase
+to familiarize themselves with the procedure.</p>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Facial Expressions: Cohort 2 participants were exposed to 24
+video-clips selected from the UNBC-McMaster Shoulder Pain Expression
+Archive Database [6].</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>Task: Participants were engaged in a task where they had to quantify
+the intensity of pain attributed to each of the 24 facial expressions
+through a VAS ranging from 1 to 10.</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Finally, in the original paradigm, participants were sub-selected
+based on their sensitivity to selfpain and to their susceptibility to
+the exertion task.</p>
+</blockquote>
+<blockquote>
+<p>As these factors are irrelevant for the present analysis (which
+focuses exclusively on the assessment of facial expressions), here we
+included all participants recruited.</p>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Facial Expressions: Cohort 3 participants were exposed to
+video-clips from the Pain E-motion Faces Database (PEMF) [7].</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Participants were exposed also to simulated pain expressions (all
+sub-cohorts) and neutral expressions (sub-cohort 3.1 &amp; 3.4),
+although these were not taken into consideration in keeping with Cohorts
+1-2.</p>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Facial Expressions: Cohort 1 participants were exposed to the same
+database of spontaneous expressions of pain, disgust and neutral
+events.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>Task: Participants were engaged in two tasks.</li>
+</ol>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>Data from Cohorts 1-2 were acquired at the University of Geneva (see
+original publications for information about ethical approval).</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+Repository Check
+</summary>
+<div class="fold">
+<h4 id="deposits-we-did-not-check">Deposits we did not check</h4>
+<p>The paper links these deposits, but the paper or the deposit itself
+shows that they hold other people’s work or the authors’ earlier work,
+so we did not check them as the data and code of this paper (the table
+Whose Deposits gives the reason for each). If one of them is where you
+shared the data or code of this paper, name this paper in it: its title
+or DOI in the deposit’s description or README. Metacheck then checks
+it.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/TadasBaltrusaitis/OpenFace" target="_blank">github.com/TadasBaltrusaitis/OpenFace</a>
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+a widely used tool by others
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="whose-deposits">Whose Deposits</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Cited in
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/TadasBaltrusaitis/OpenFace" target="_blank">github.com/TadasBaltrusaitis/OpenFace</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+a widely used tool by others
+</td>
+</tr>
+</tbody>
+</table>
+<p>README files were found in all repositories.</p>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 51 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 51 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 51 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Assessing others&#x27; pain relies heavily on facial expressions, yet how individuals translate observable facial features into pain judgments remains poorly understood. We combined a retrospective analysis of spontaneous pain expressions across three cohorts (Study 1, N = 398) with a reverse correlation experiment using synthetic facial stimuli (Study 2, N = 63) to investigate which facial muscle contractions (Action Units, AUs) drive pain judgments. Across the two studies, brow raising (AUs 1-2), brow lowering (AU 4), nose wrinkling/upper lip raising (AUs 9-10), lips corner depressor (AU 15) and mouth aperture were identified as key contributors. Multivariate pattern analysis from Study 1 indicated that pain judgments rely on a distributed set of facial AUs that partly generalize across independent cohorts and stimulus sets. Tailored co-engagement analysis from Study 2 identified AU pairs that, when combined, facilitate (AUs 7 + 43) or inhibit (AUs 4 + 9, 10 + 27) pain assessments. Finally, Study 2 also revealed AU information that were taken into consideration depending on the Sex of the displayed face, although the overall contribution of this factor was modest and no systematic effect was observed in Study 1. These findings provide a first systematic mapping of the observable facial muscle contractions that drive human pain decoding. The identified facial features are best interpreted in terms of flexible pain processing, whereby individuals base their inference on distinct, partly-redundant patterns of facial responses.</p>
+<h3>Introduction</h3>
+<p>Assessing others&#x27; pain is crucial in many clinical and everyday contexts [1, 2]. Unlike most medical conditions, pain is difficult to quantify objectively, and is mainly assessed using patients&#x27; selfreports and indirect reactions. Facial responses are particularly informative in this respect, due to both their sensitivity to affect and to their communicative relevance, especially when verbal selfreports are unavailable [3]. Many studies investigated painful expressions through the Facial Action Coding System (FACS) [4], which decomposes facial responses into coordinated muscle groups, or Action Units (AUs). Several AUs have been consistently implicated in pain: brow lowering (AU 4), eye narrowing (AU 6/7), nose wrinkling/upper lip raising (AU 9/10), mouth opening (AU 25/26/27) and eyes closing/blinking (AU 43/45) [5, 6]. Importantly, strong inter-individual variability has also been observed, to the point that some scholars refer to distinct pain expressions, rather than to a single prototypical one [7, 8].</p>
+<p>Most studies investigated pain expressions in terms of encoding (which AUs are engaged during pain?), whereas less is known about decoding (which AU engagements influence observers&#x27; assessments?). Patrick et al. [9] recorded spontaneous reactions to electric stimulation, and found that movements associated with AUs 4 and 45 predicted observers&#x27; intensity ratings. Unfortunately, this research considered only a limited set of AUs, which often co-occurred with one another [9]. Other studies applied visual noise (reverse correlation [10, 11]) or spatial filtering [11, 12] to the face images, identifying which visual features explained pain judgments in a fully data-driven fashion. This approach, however, characterizes facial information only in terms of regions (eyes, mouth), rather than underlying musculature. To our knowledge, no study has combined the methodological strengths of reverse correlation [10, 11] with a careful assessment of the role played by facial muscle contractions.</p>
+<p>Meta-analyses and multi-center studies document sex and gender disparities in how pain is acknowledged and treated, with females being more likely to have their symptoms underestimated and less likely to receive medications [13] [14] [15] [16]. The literature on facial expression has also addressed this issue: albeit adult females generally exhibit stronger facial muscular responses to painful stimuli than males [17], findings on the decoding are mixed, with some suggesting that female facial expressions are associated with lower ratings than male expressions (even when controlling carefully for the intensity of facial contraction) [18, 19], and others showing instead opposite effects or no sex differences [20] [21] [22]. Conceivably, sex biases might in part reflect the fact that individuals hold separate representations for male and female pain expressions. However, this possibility remains untested.</p>
+<p>Here, we investigated which facial AUs observers rely on to evaluate pain. First, we ran a largescale analysis on multiple datasets to examine observers&#x27; evaluations of spontaneous facial reactions to pain. Second, we devised a modified reverse correlation task [10, 11] using synthetic expressions with pseudo-random AU engagement, enabling direct inference about the contribution of facial musculature to observers&#x27; judgments. Together, these approaches offer a comprehensive account of how facial information influences pain decoding.</p>
+<h3>Study 1: Spontaneous Facial Expressions</h3>
+<h3>Methods</h3>
+<h3>Participants</h3>
+<p>We used data from three independent cohorts, each obtained by combining multiple experiments. In particular, Cohort 1 was composed of N = 166 individuals (121 females, average age = 25.09 ± 5.92 [sd]) drawn from the studies by from Dirupo et al. [23, 24] plus an unpublished dataset from the same authors. Cohort 2 was composed of N = 119 individuals (73 females, average age = 23.49 ± 4.49) from Riontino et al. [25], plus an unpublished dataset from the same authors. Instead, Cohort 3 was composed of N = 113 individuals (66 females, 46 males, 1 missing value; mean age = 26.33 ± 4.58 years), obtained by combining four experiments that are part of an ongoing unpublished project. Supplementary Information provides full information about each cohort. Data from Cohorts 1-2 were acquired at the University of Geneva (see original publications for information about ethical approval). Data from Cohort 3 were acquired at the Center for Mind/Brain Sciences (CIMeC) of the University of Trento, in accordance with the local regulations and the &quot;Comitato Etico per la Ricerca&quot; of the University of Trento.</p>
+<h3>Facial Expressions</h3>
+<p>Cohort 1 participants were exposed to the same set of spontaneous expressions of pain. These were videos of variable duration (average 7.61 sec) recorded when neurotypical individuals received thermal painful stimuli [26]. Details about how these videos were created and validated are available in previous research [23, 24, 26]. Cohort 2 participants were exposed to 3 sec video-clips selected from the UNBC-McMaster Shoulder Pain Expression Archive Database [27]. This database depicts adults suffering from spontaneous shoulder pain due to a wide range of etiologies (arthritis, bursitis, tendonitis, subluxation, etc.), who were video-recorded while undergoing active or passive movements of their painful shoulder (abduction, flexion, internal/external rotation). Details about how the videos were selected and validated are available in Riontino et al. [25]. Cohort 3 participants were exposed to short (1 sec) video-clips from the Pain E-motion Faces Database (PEMF) [28]. In this dataset, neurotypical individuals were recorded while undergoing one nociceptive procedure: tonic pressure stimulation via an algometer, or phasic heat stimulation via a 𝐶𝑂 2 laser. Supplementary Information provides full information about all facial-expression databases, including how the videos used in Cohort 3 were selected and validated.</p>
+<h3>Task</h3>
+<p>Cohort 1 participants were engaged in two tasks. The first was a classification task, where they had to assess whether each facial expression displayed &quot;pain&quot; or another state (&quot;disgust&quot; or &quot;neutral&quot;), by pressing a key associated with the chosen label. The second was a rating task, where they were asked to quantify the degree of unpleasantness experienced by the person in the video. Ratings were provided using a visual analogue scale (VAS) where the two endpoints were labeled as &quot;neutral&quot; and &quot;extremely unpleasant&quot;, and a cursor could be moved along the scale by pressing two different keys. Participants from Cohorts 2 &amp; 3 were engaged in a task where they had to quantify the intensity of pain attributed to each facial expression through a VAS ranging from &quot;no pain&quot; to &quot;extreme pain&quot;. Importantly, in Cohort 2, face ratings were carried out following either a cognitive demanding task (e.g., an incongruent Stroop task), or a tailored control [25]. As the cognitive exertion had detrimental effects on the sensitivity to painful expressions [25], we decided to include in this analysis only the control condition with no exertion. See Supplementary Information for full information about the tasks used in each cohort.</p>
+<h3>Facial Action Units (AUs)</h3>
+<p>Information about facial reactions in the videos from the three cohorts was obtained using Open-Face 2.2.0 (https://github.com/TadasBaltrusaitis/OpenFace) [29], which has predefined algorithms for video-stream decoding and quantification of specific AU engagements [30]. Specifically, multivariate models allow estimating the involvement of AUs, not only in terms of engagement vs. non-engagement (classification models) but also in terms of strength of contraction (regression models). For each frame of each video-clip, we obtained regression estimates for relevant AUs. The only exception was the estimation of eye blinks (AU 45). As these movements are usually interpreted as an all-or-none response, a classification-based estimate of this AU was chosen instead. Although the original databases were subjected to human FACS scoring, this approach differed in terms of the measure assessed (only occurrence vs. also intensity) and in terms of resolution (cumulative engagement across the clip vs. frame-by-frame analysis) making it difficult to compare results from the three cohorts. In this respect, OpenFace estimates have the advantage of providing the same AU assessment for all video-clips. Supplementary Information reports the results of a follow-up validation analysis, where the human scoring was compared with OpenFace estimates. For all databases, there was good overall agreement between human FACS coding and OpenFace output for homologous AUs. However, in line with prior studies comparing human and computerbased AU scoring [26], we also found cross-predictions between dissimilar AUs (see Supplementary Figure 1 for more details).</p>
+<p>Having established that OpenFace output shows fairly good agreement with human FACS scoring, we took the Area Under the Curve of the OpenFace output as a measure of the cumulative effect of each AU within the whole clip. In particular, we followed studies showing the benefit of combining AUs underlying similar facial movements together, both when assessing the reliability of algorithms for facial feature extraction [31], and in the human coding of the facial expression of pain [5, 7, 8]. Hence, we decided to treat as equivalent and sum facial AUs related to eyebrow raising (AUs 1 &amp; 2), eye narrowing (AUs 6 &amp; 7), nose wrinkling (AUs 9 &amp; 10), and mouth opening (AUs 25 &amp; 26; no AU 27 output is provided by OpenFace). This led to 13 estimates: AUs 1/2, 4, 5, 6/7, 9/10, 12, 14, 15, 17, 20, 23, 25/26, 45. For AU 45, which was defined as a dichotomic variable, we calculated the percentage of frames in which it was estimated to be engaged.</p>
+<h3>Data Analysis</h3>
+<p>For the purpose of this work, we chose as dependent variables individual judgments about pain or unpleasantness. Specifically, for Cohort 1 we took unpleasantness ratings (on a VAS) and pain classifications (provided as a dichotomic response), whereas for Cohorts 2-3 we took pain ratings (on a VAS). In line with prior work [32], rating scales were recoded into proportions p (ranging from 0.025 [lowest possible score] to 0.975 [highest possible score]) and logit-transformed: 𝑙𝑜𝑔𝑖𝑡(𝑝) = 𝑙𝑛( 𝑝 (1-𝑝) ), to improve conformity to a normal distribution. As independent variables, we chose the 13 AU estimates provided by the OpenFace algorithm. Additionally, we controlled for the Sex of the participants (between-subjects factor: Sex) and that of the person displayed in the videos (withinsubjects factor: FaceSex).</p>
+<h3>Univariate Analysis.</h3>
+<p>We ran linear mixed models (LMMs) where single-trial judgments were assessed as a function of AU engagement, Sex, FaceSex and their interaction. The identity of the participants and that of the video-displayed person were specified as random factors (see Supplementary Information for full details on the random structure). Significance of the fixed effects was calculated with a Type II Analysis of Variance using the Satterthwaite approximation of degrees of freedom [33]. For pain classification, we exploited a Generalized LMM with a binomial distribution and Laplace approximation, and significance was assessed through Type II Analysis of Deviance and Wald 𝜒 2 statistics. For each cohort, separate models were run for each AU. Effects were considered significant at 𝛼 &lt; .05 Bonferroni-corrected for 13 repeated tests (corresponding to each of the AUs used as predictor). The analysis was carried out as implemented in the lmerTest [33] and car packages of R software (https://cran.r-project.org/).</p>
+<h3>Multivariate Pattern Analysis.</h3>
+<p>We also adopted a multivariate approach, and trained Random Forest (RF) regression (for unpleasantness/pain ratings; Cohorts 1-3) and classification (for pain classifications; Cohort 1) to predict participants&#x27; assessments of facial expressions. Random Forest involves the implementation of decision trees, which perform recursive partitioning of the facial (feature) space to lead to a non-linear predictive model. Because decision trees are susceptible to small perturbations in the dataset, RF reduces prediction variance by aggregating the outcomes from trees fitted to bootstrap resamples of the original dataset [34]. To ensure out-of-sample prediction, a five-fold cross-validation scheme was implemented on a per-subject basis. Data were split into five parts, with all trials of a given participant assigned to the same fold. Data from one fold were then predicted using a model trained on the remaining four folds. The analysis was run as implemented in the randomForest package in R using 1000 trees per model.</p>
+<p>Model performance for classification outcomes was summarized using classification accuracy (proportion of correct responses) and d-prime (d&#x27;) [35]. For continuous outcomes, two primary evaluation measures were used: the fixed-effect slope (b) obtained from an LMM, assessing the agreement between observed and predicted scores; and the mean squared error (MSE), averaged first within and then across participants. To assess whether model performance exceeded chance levels, permutation tests were performed using 1000 data shuffles of the original datasets. Critical thresholds were defined as the 95 𝑡ℎ percentile of the null distribution for classification accuracy, d&#x27; and regression slopes (in order to ensure greater-than-chance prediction), and the 5 𝑡ℎ percentile for MSE (in order to ensure lower-than-chance error). After evaluating model performance using cross-validation, the final model was refitted using the entire dataset to extract variable importance scores. Importance measures included the average decrease in accuracy for classification models, and the percentage MSE increase. The importance estimate for each feature was also validated using permutation techniques, in order to identify features whose contribution to the overall prediction was greater than the one observed under null hypothesis.</p>
+<p>Finally, regression models were run and also validated across cohorts, in order to establish whether a model tailored to one cohort could also predict responses in a different cohort. For each pair of cohorts, models were trained and validated across two independent folds, in each of which the model was trained on one cohort and tested in the other one.</p>
+<h3>Results</h3>
+<h3>Univariate Analysis</h3>
+<p>Figure 1 displays the main effects associated with each AU surviving correction for multiple comparisons (either for the whole face, or for a subportion of the facial response of theoretical interest). Results differ across cohorts: Cohorts 1 and 2 converge in implicating AUs 1-2, 9-10, 15, and 25-26 in stronger ratings and more likely classifications, whereas AU 4 is associated with either null or negative effects. Instead, Cohort 3 showed a positive effect of AU 4 only, although it should be mentioned that AUs 1-2 were also observed at an uncorrected level (𝐹 (1,28) = 8.08, uncorrected 𝑝 = 0.008, corrected 𝑝 = 0.104). We also tested potential interactions between AU and Sex/FaceSex. Supplementary Information (including Supplementary Table I and Figures 2 3) describes the full results from this analysis, which, however, were idiosyncratic to the specific cohort.</p>
+<h3>Multivariate Analysis</h3>
+<p>Thus far, we identified AUs that individually and linearly contribute to pain assessment. However, it is plausible that facial features might jointly contribute to participants&#x27; behavior in a non-linear fashion. Indeed, previous studies suggested that facial reactions to pain are not explainable in terms of a unique facial expression, but rather in terms of at least four independent patterns of responses [7, 8]. We therefore reasoned that decision trees (specifically Random Forest classification and regression [34]) represent a suitable way to model participants&#x27; assessment in terms of facial information. Table 1 describes the predictive proficiency associated with models predicting behavior as a function of all AU engagements together. All evaluation measures reveal a higher than chance proficiency (or lower-than-chance error) with permutation-based 𝑝s &lt; 0.001. Participants&#x27; classification (pain vs. non-pain) was predicted with 74% accuracy, whereas the models predicting ratings consistently yielded 𝑏 ∼ 0.50. Supplementary Figure 4 displays the features that contributed the most to the prediction ranked by importance. AU 9-10 ranks in the first/second position in Cohorts 1 &amp; 3, but in the middle for Cohort 2. Instead, AUs 1-2 rank top only in Cohort 1 (unpleasantness ratings) whereas AUs 6-7 &amp; 25-26 rank on top in Cohort 2. To provide a more stringent assessment of the similarity between different models developed for each cohort, we estimated cross-cohort prediction. This was achieved by focusing on the regression/prediction from the three cohorts and assessing whether a model trained on one cohort could predict the ratings in a different one. Table 2 displays the predictive proficiency of these models, which lead to two important, but distinct, observations. On the one hand, cross-cohort prediction leads to higher than chance predictive proficiency (permutation 𝑝s &lt; 0.001; except for MSE validation in the generalization between Cohorts 2 ↔ 3 where 𝑝 = 0.499; see Table 2), suggesting that some aspect of facial information is, to a certain extent, generalizable. On the other hand, however, the proficiency in the cross-cohort prediction is far lower than in the within-cohort prediction (𝑏 ∼ 0.10 vs. 0.50; 𝑀𝑆𝐸 ∼ 2.40 vs. 1.20). We also repeated the modeling procedure by including FaceSex and Sex as additional features. Supplementary Tables II-III and Supplementary Figure 5 describe the results that were roughly unaffected by the inclusion of these new features.</p>
+<p>Table 2. Random forest cross-cohort prediction of Unpleasantness and Pain Ratings Cohort 1 ↔ 2 Cohort 1 ↔ 3 Cohort 2 ↔ 3 b 0.13 [0.001] 0.12 [0.001] 0.11 [0.001] MSE 2.99 [3.32] 2.34 [2.80] 2.42 [2.40]</p>
+<h3>Interim Discussion</h3>
+<p>This retrospective analysis of three independent cohorts allowed us to identify a core set of AUs that significantly influence participants&#x27; pain-related judgments. In the univariate analysis we found no core set of facial responses implicated in all cohorts, although AUs 1-2, 9-10, 15, and 25-26 were observed in all analyses except that of Cohort 3 which, instead, implicated only AU 4 (Figure 1). It should be stressed that univariate results were constrained by correction for multiple compar-isons, which considers as relevant only the most pronounced influences, disregarding weaker (but potentially converging across cohorts) effects. Multivariate pattern analysis, instead, identified a higher degree of cross-cohort convergence (Table 2) suggesting that individuals assess pain using a partially shared set of AU patterns that univariate analyses failed to capture. Importantly, however, cross-cohort predictive performance, albeit higher than chance, is substantially lower than the one obtained when modeling each cohort alone. It is possible that AU contributions in this analysis are context-sensitive and influenced by idiosyncratic cohort characteristics, task structure, or differences in the facial expression databases (luminance, duration, angle, etc). Furthermore, previous work on pain expression encoding stresses how AU engagement tends to co-occur based on distinct patterns of pain reactions [7, 8]. Hence, although all datasets are characterized by facial reactions to pain, these do not necessarily depict exactly the same muscular information. It is therefore not surprising that, in some cases, AUs 9/10 appear more relevant (Cohorts 1-2), whereas in others it is AU 4 that best explains behavior (Cohort 3).</p>
+<p>It is important to stress that, as multiple pain-relevant AUs might co-engage following the same painful event [5] [6] [7] [8], it is often difficult to distinguish those AUs that are most relevant for pain decoding from those that are merely part of the same overall expression but are not actually taken into consideration by the observer. Overall, albeit relevant from an ecological point of view, these results underscore the inherent limitations associated with investigating pain expression decoding through spontaneous pain reactions, and call for alternative approaches where AU information is administered in a randomized (or pseudo-randomized) fashion.</p>
+<h3>Study 2: Synthetic Expressions</h3>
+<p>We ran a new experiment to complement existing findings, which was inspired by well-known reverse correlation paradigms, used to investigate people&#x27;s representation of facial features informative of pain [10, 11]. This approach revealed that pain attributions are driven by facial information around brows, nose and upper lip [10, 11], without providing insight into the underlying musculature. Furthermore, these paradigms rely on applying random noise patches to the same face, hence providing little information on whether the results observed are generalizable across different identities.</p>
+<p>To overcome these limitations we carried out an experiment where we adapted the reverse correlation paradigm using FACSGen, a validated facial synthesis tool [36] in which AUs can be parameterized to generate photorealistic synthetic facial expressions. Rather than applying random noise patches to a predefined face, we manipulated FACSGen parameters in order to obtain pictures where AU engagement was pseudo-randomized and applied to different identities of both sexes (Figure 2A, for an example).</p>
+<h3>Methods</h3>
+<h3>Participants</h3>
+<p>This cohort was composed of N = 63 individuals (40 females, 22 males, 1 sex non-reported; mean age = 25.65 ± 4.17 years). All participants provided written informed consent prior to the experiment and were compensated for their time. The study was conducted at the Center for Mind/Brain Sciences (CIMeC) of the University of Trento, in accordance with the local regulations and the &quot;Comitato Etico per la Ricerca&quot; of the University of Trento.</p>
+<h3>Facial Expressions</h3>
+<p>The facial expression stimuli used in this study were generated using FACSGen software [36] to create synthetic expressions with predefined AU engagements. In particular, in FACSGen each AU is implemented with its own independent &quot;blend shape&quot;, which was in turn sculpted by graphic designers (the company &quot;Trait d&#x27;Esprit&quot;, http://www.traitdesprit.ch/) on the basis of reference pictures and videos, and interactive validation with certified FACS coders [36]. Here, we created an initial picture database of 400 facial expressions, from 20 distinct identities (10 males and 10 females) each associated with 20 unique facial configurations. Each picture was created with a unique pseudorandomized set of AU engagements, where each blend shape can be assigned an index ranging from 0 (not engaged at all) to 1 (full facial response). It is important to underscore that AU blend shapes were created on an individual basis, and subsequently mixed together using linear interpolation to obtain a full facial expression. It is possible that combining different (independently validated) blend shapes might lead to implausible expressions, especially for AUs with opposing effects (e.g., lip pucker AU 18 and lip opener AU 20) which seldom occur in the same expression.</p>
+<p>To minimize this possibility, AU configurations were generated using constrained pseudo randomization. First, we focused on a set of 23 AUs (i.e., 1-2, 4-7, 9-12, 14-18, 20, 22-27 &amp; 43) based on those available in the FACSGen software. For each picture, we randomly chose two AUs to be fully engaged (1), two partially engaged (0.6) and one minimally engaged (0.1), whereas all the others were set to 0. This procedure ensured that all stimuli were matched in terms of total activation (as assigned by the software) while varying its allocation across facial movements. We then discarded the configurations with co-engagement of AUs with opposing effects (e.g., AUs 1-2 &amp; 4, AUs 12 &amp; 15, AUs 18 &amp; 20). The only exception was the co-engagement of AUs 1 &amp; 4, as FACSGen has an ad hoc blend shape which combines the two movements in a plausible fashion. In this specific case, if these AUs were co-engaged under the same parameters (e.g., both at 0.6), the random configuration was not discarded. All discarded images were replaced with a new randomization until the desired 400 stimuli were obtained. All resulting images were then visually inspected to ensure they represented plausible facial expressions.</p>
+<h3>Task &amp; Procedure</h3>
+<p>Participants completed a two-alternative forced-choice task implemented in MATLAB using the Psychtoolbox library. On each trial, two randomly selected facial expressions from the same identity were simultaneously presented side by side on a computer screen. Participants were asked &quot;which face displays the higher degree of pain?&quot; and were instructed to answer by pressing either the left or right arrow key on the keyboard (Figure 2B). Prior to the main task, participants completed a brief training phase to familiarize themselves with the procedure. The main experimental phase consisted of 200 trials in total, corresponding to 10 trials for each of the 20 different identities. Reaction times and selected responses were recorded for each trial. The overall experimental session lasted approximately 15 minutes.</p>
+<h3>Data Analysis</h3>
+<p>While Study 1 included realistic expressions with naturally co-engaged AUs, here each specific facial movement was pseudo-randomly parameterized. Hence, we did not combine those AUs underlying common macro-movements. Instead, each of the 23 AUs was analyzed as independent predictor.</p>
+<h3>Univariate Analysis.</h3>
+<p>Each trial is characterized by the presence of two randomly-selected pictures from the same identity, each associated with a unique facial configuration of AU engagements. In all analyses, AU parameters (originally recorded as a proportion ranging from 0 to 1) were logittransformed following the same procedure as in Study 1. In this framework, to establish whether any of the 23 AUs were predictive of participants&#x27; judgments, we considered right/left choices as a dichotomous dependent variable: specifically, trials where the right picture was deemed more painful were labeled as &quot;1&quot;, whereas trials the left picture was deemed more painful were labeled as &quot;0&quot;. As main predictor of interest, we considered the differential AU parameters obtained by subtracting the values associated with the left stimulus from those associated with the right stimulus. This resulted in a differential facial configuration, with positive values reflecting those AUs more engaged in the right face, and negative values reflecting those AUs more engaged in the left face. We ran Generalized LMMs with a binomial distribution and Laplace approximation, with choice as dependent variable, differential AU, Sex and FaceSex as fixed factors, and the identity of participants and of the displayed person as random factors (see Supplementary Information for full random structure). Significance of fixed effects was established through Type II Analysis of Deviance and Wald 𝜒 2 statistics as for Study 1. This model was repeated for all 23 AUs, and effects were considered significant if associated with an 𝛼 &lt; .05 Bonferroni corrected for multiple comparisons.</p>
+<h3>AU co-engagement analysis.</h3>
+<p>We also assessed potential co-engagement effects, that is, AU combinations that were more likely to trigger pain classification when engaged together. This analysis was carried out through the same Generalized LMM approach described above, except that we did not model only information about one AU. Instead, we modeled simultaneously the differential parameters of two separate AUs, their interaction term (described as the right -left difference of their products) as well as further high-level modulations of Sex/FaceSex (see Supplementary Information for full details). The interaction between the two AUs was the main predictor of interest in the co-engagement analysis. If two AUs contribute to pain judgments in a totally additive fashion, then the interaction term should be = 0. Positive interactions suggest that AUs co-presence further increases the likelihood of pain classifications beyond the contribution of each AU alone. Negative interactions suggest instead a sub-additive integration. The analysis was carried out for every possible AU combination (253 potential pairings), although due to the pseudo-randomization procedure implemented for stimuli generation, some AUs never co-occurred (see above) and only 246 pairings were conducted. Results were considered significant if they survived Bonferroni correction for all repeated tests.</p>
+<h3>Multivariate Pattern Analysis.</h3>
+<p>As for Study 1, we exploited a multivariate Random Forest (RF) algorithm to identify whether participants&#x27; responses could be predicted by combined facial information [34]. Specifically, in this case, we exploited RF classification to distinguish chosen images from unchosen ones. The classification pipeline was identical to that described for Study 1.</p>
+<h3>Results</h3>
+<h3>Univariate Analysis</h3>
+<p>Figure 3A displays significant effects which survive rigorous correction for multiple comparisons. Most notably, faces with stronger engagement in AUs 1, 4, 9-10, 11, 15 and 27 were systematically more likely to be selected as painful. Instead, faces with stronger engagement in AUs 12, 14 and 18 were systematically more likely to be discarded. Figure 3B-C displays effects associated with FaceSex*AU interaction, highlighting AU influences that were more pronounced in male faces at the level of nose wrinkler (AU 9) and lip funneler (AU 22, Figure 3C, left subplot). Instead, female faces were classified as more painful if they displayed engagements of the lip stretcher (AU 20) and eye closure (AU 43, Figure 3C, right subplot). Other facial responses were also implicated (AUs 18, 25 and 26) although in this case effects were interpretable in terms of differences in the facial information associated with lower pain judgments (Figure 3C, middle subplot, see also Supplementary Figure 6 for all AU plots). Finally, no effects of Sex*AU or FaceSex*Sex*AU were found (see Supplementary Table IV for full statistics).</p>
+<h3>Co-engagement Analysis</h3>
+<p>We also ran a co-engagement analysis to assess whether people&#x27;s choices could be best explained by combined information from two AUs. Figure 4A displays the pairs associated with interactions surviving correction for multiple comparisons in network format. Positive effects (green edges) reflect AUs associated with increased classification likelihood when paired together: AUs 7-43 (see Figure 4B, top subplot), 2-22, 6-26, and 1-17 (Supplementary Figure 7). Negative interactions also emerged (Figure 4A, red edges), indicating that some AUs contributed less to pain judgments when accompanied by another AU. For example, the contribution of AU 27 was weaker at higher AU 10 engagement (Figure 4B, middle subplot), as was that of AU4 at higher AU 9 engagement (Figure 4B, bottom subplot). Similar patterns emerged for AU11 paired with AU 16 or AU 20, and for AU 7 or AU 10 paired with AU 12 (Supplementary Figure 8). We also investigated potential modulatory effects of FaceSex, by testing the interaction between this factor and the AUs pairings. Figure 5A reports full results in network format. Although the interpretation of such high-order interactions is often challenging, several AU pairings are clearly associated with increased classification likelihood for male faces: this is the case of AUs 2-6 (see Figure 5B, top subplot), but also AUs 2-17, 6-11, 7-11, 7-18, 10-24 (Supplementary Figure 9). Negative effects were also found: e.g. AU 4 contributions decreased when associated with a female face with strong AU 20 engagement (Figure 5B, bottom red subplot). Likewise, AU 1 effects are attenuated when associated with male faces with strong AU 25 engagement (Figure 5B, bottom green subplot; see Supplementary Figures 9 10for more details about other AU pairings). Overall, the sex of the displayed face changes the degree to which pairs of AU interact with one another, with male faces associated with multiple co-engagement effects, and both male and female faces showing their unique negative patterns. Finally, we tested modulations associated with Sex or Sex*FaceSex interactions, but found no suprathreshold effects.</p>
+<h3>Multivariate Analysis</h3>
+<p>Finally, in line with the retrospective analysis, we trained a Random Forest (RF) classification algorithm to predict participants&#x27; choices from facial information. Cross-validated predictive accuracy was 64.50% [permutation-based cut-off = 51.11, 𝑝 &lt; 0.001], and sensitivity to pain decision was 𝑑 ′ = 0.75 [cut-off = 0.05, 𝑝 &lt; 0.001]. We also repeated the analysis by including FaceSex and Sex, which, however, had a negligible impact on the model predictive proficiency (Accuracy = 64.30% [cut-off = 51.10], 𝑑 ′ = 0.74 [cut-off = 0.05]). The analysis of feature importance (Supplementary Figure 11) argue that FaceSex (but not Sex) contributed to the prediction with higher proficiency than chance, albeit with low ranking compared to many AUs.</p>
+<h3>Discussion</h3>
+<p>This study provides novel, convergent evidence that pain judgments rely on a distributed set of observable facial muscle contractions (Action Units, AUs). Combining a retrospective analysis of spontaneous pain expressions across three different cohorts (Study 1) with a reverse correlation experiment using synthetic facial stimuli (Study 2), we confirmed the key contribution of inner brow raising (AU 1), brow lowering (AU 4), nose wrinkling (AU 9), upper lip raising (AU 10), lip corner depressor (AU 15) and mouth opening (AUs 25-26 in Study 1; AU 27 in Study 2) to pain assessment. Multivariate pattern analysis indicated that pain judgments rely on a distributed set of facial AUs, partially consistent across cohorts (Study 1). Co-engagement analysis (Study 2) suggests that pain classifications are also explainable in terms of AU combinations (e.g., AU 7-43), rather than isolated facial responses, alongside evidence that some AUs interfere with each other&#x27;s contributions (e.g., AUs 4-9, 10-27). To our knowledge this is the first investigation of the mental representation of pain expressions through the lens of the Facial Action Coding System [4], showing that individuals draw on pain-relevant information flexibly, exploiting distinct, partly-redundant patterns of facial responses.</p>
+<p>In Study 2, positive univariate effects of AUs 1, 4, 9-10, 15, and 27 (Figure 3A) mirror those from Study 1 (Figure 1) for AUs 1-2, 9-10, 15, 25-26 (Cohorts 1-2), and 4 (Cohort 3). These data converge with encoding research on pain expressions, as many of these AUs were part of the early model proposed by Prkachin [6] later confirmed by a meta-analysis of experimental and clinical studies [5], as well as in research investigating variations in pain expressions [7, 8]. Study 2 also identified negative associations (not observed in Study 1), with AUs 5, 12, 14, 18, 23-25 systematically more engaged in faces that participants judged as less painful (Figure 3A). These data converge with prior research investigating the mental representation of pain by applying visual degradation to face stimuli [10] [11] [12], showing that participants systematically attend to the brow, nose, and mouth regions when interpreting painful expressions. Most critically, however, our results add interpretative value to this previous research, by shifting the focus from facial regions to the underlying muscle contractions, and disentangling local information that points to higher pain from that pointing to lower pain. Indeed, while we confirm the key role of the mouth region from the literature [10] [11] [12], we distinguish AU 27 (mouth stretch) that increases classification likelihood, from a wide range of alternative mouth movements (AUs 12, 14, 18, 23-25) that instead decrease it. Particular attention should be paid to the case of mouth aperture: in the retrospective analysis, this movement was modeled through the combined information of many AUs (see Methods of Study 1), consistently with prior encoding research that has difficulty separating the effects of lip parter (AU 25), jaw drop (AU 26) and mouth stretch (AU 27) [5, 7, 8]. In Study 2, however, we could build synthetic expressions in which each of these AUs were parameterized pseudo-randomly, and could determine that it is the mouth stretcher (AU 27) that drives the decisions the most. Paradoxically, in Study 2 AU 25 is associated with a negative main effect (opposite to mouth aperture effects in Study 1), suggesting that, when presented alone, lip separation does not contribute to, but rather undermines, pain classification.</p>
+<p>Importantly, the role of many AUs goes beyond that of a simple main effect, but is conditional on the movements of other parts of the face. This was observed in the co-engagement analysis (Study 2) that provides a first mapping of the AU combinations that influence pain classification (Figure 4A). Such an approach could not be done meaningfully in Study 1. Despite their strong ecological relevance, real spontaneous expressions are characterized by systematic AU co-engagement patterns related to pain experience [5, 7, 8]. However, if many facial movements are all part of the same expressions, it becomes difficult to ascertain which are taken into consideration by the observer, and how the different sources of information interact with one another. In this perspective, by devising stimuli that do not match typical pain response patterns but follow pseudo-random configurations, Study 2 allows us to explore the role of each AU in a more reliable fashion. Hence, it is not surprising that, in Study 1, AUs like lid tightener (AUs 6-7) and eye closure were described as main effects (Figure 1), but in Study 2 the role of AUs 7 and 43 is redefined in terms of co-engagement, as it is their combination that increased classification likelihood (Figure 4B, top subplot). Most interestingly, we also found negative co-engagements, such as those between AUs 4 &amp; 9 and AUs 10 &amp; 27. Albeit all these facial movements are reliable signs of pain (as outlined by the main effect in Figure 3A), their combination attenuates classification likelihood in comparison to the sum of their isolated effects (Figure 4B). Other AU pairings also allow for a similar interpretation (e.g., 11 &amp; 16, supplementary Figure 8) underscoring the variability and redundancy of facial information, and observers&#x27; ability to flexibly assess pain from a wide range of face muscles that sometimes interfere with one another in the information they provide.</p>
+<p>Study 2 also provides a comprehensive mapping on the degree to which the sex of the observed person influences the facial information taken into consideration, both in the main univariate model and the follow-up co-engagement analysis. On the one hand, we identified malepreferential (AUs 9 and 22) and female-preferential (AUs 20 and 43) facial responses (Figure 3B-C). On the other hand, we identified several co-engagement patterns that were male-preferential (Figure 5B, top subplot; see also Supplementary Figure 9), as well as both male-and female-preferential negative co-engagement effects (Figure 5B, low subplots; Supplementary Figures 9 10). It has been recently suggested that individuals attribute more masculine traits to pain expressions [37], possibly reflecting the fact that pain representation is male dominant. Our findings are not necessarily incompatible with this interpretation, although the presence of female-preferential AU patterns speaks more in favor of variability and flexibility in the decoding strategy, with partially different facial information considered relevant for male and female expressions. It could be tempting to relate our findings to prior evidence of sex disparities in clinical settings [13] [14] [15] [16], as caregivers might interpret female pain through an ad hoc facial template that makes them more prone to underestimating symptoms. Albeit this is an intriguing possibility, clinical pain assessment is not based exclusively on facial decoding, but on a comprehensive evaluation of behavioral reactions, verbal reports and contextual information. As such, studies focusing exclusively on the assessment of facial expressions yield mixed findings regarding sex disparities [18] [19] [20] [21] [22].</p>
+<p>It is important also to underscore that Study 1 describes AU modulations that were conditional to the sex of the observed face. These, however, were inconsistent between the different cohorts as well as with those observed in Study 2. The variability in Study 1 effects most likely reflects idiosyncratic properties of the three databases, such as orientation and luminosity, as well as the inter-individual differences in pain sensitivity and responsiveness. In this perspective, the synthetic stimuli from Study 2 provide more reliable AU effects, as the software used was optimized to provide clearly recognizable AU engagements regardless of the face to which they are applied [36]. Still, it is important to underscore that multivariate Random Forest classification in Study 2 confirms that the inclusion of FaceSex had trivial impact on the overall prediction of participants&#x27; choices. Likewise, feature importance analysis (Supplementary Figure 11B) confirms that this factor contributes to the classification prediction with higher reliability than chance, but with low ranking compared to the other features. Hence, although Study 2 describes reliable modulations of FaceSex in the GLMMs, its overall impact in participants&#x27; decisions should not be overstated.</p>
+<p>Emotion research has repeatedly debated whether affective inference from facial reactions relies on prototypical template-matching or, alternatively, on decomposing the expression into idiosyncratic and variable combinations of emotion constituents, such as contextual appraisals [38]. Caution is warranted in extending this debate to pain, which previous studies have rarely addressed directly. This being said, our findings point to flexibility and variability in facial decoding strategies, with multiple AUs interfering with one another in the degree to which they convey pain information, and to an extent also sex-preferential facial patterns. Hence, pain decoding appears to rely on multiple, redundant face patterns, something that is more in line with a multicomponential organization of the pain response. Interestingly, multi-componential accounts could offer an explanation as to why participants focus on some facial cues over others. Indeed, prior work links AU 1 engagement and mouth opening to appraisals of novelty, and AUs 4, 9 and 15 engagement to appraisals of unpleasantness and low control [39] [40] [41], suggesting that participants may have read facial signs that are informative of something &quot;bad&quot; or &quot;sudden&quot;. As these assessments are not specific to pain, future studies should test whether these findings generalize to other affective experiences.</p>
+<p>Despite its advantages, the reverse correlation task implemented here has some limitations. First, the FACSGen software [36] used to generate the stimuli was optimized for isolated AU engagements and emotional expressions, rather than random AU parameter assignments. To minimize potential artifacts, we used constrained pseudo-randomization to avoid selected combinations of facial movements with opposing effects and visually checked that each stimulus represented a plausible facial expression (see Methods). However, some AU combinations may appear different on synthetic avatars than on real faces. Second, to minimize the risk that participants&#x27; choices were driven by overall engagement (rather than specific facial configurations), all stimuli in Study 2 were created with matched total AU activation parameters, while varying its allocation across facial movements. However, controlling overall activation during stimulus generation does not necessarily ensure that perceived expressiveness or the magnitude of visible movement is matched. Furthermore, allocating activation to one AU necessarily restricted its allocation to others, introducing dependencies among AUs. Consequently, the contribution of each AU to pain classifications should not be interpreted in absolute terms, but rather in relation to all other available facial information.</p>
+<p>Notwithstanding these limitations, our study provides a first clear mapping of the facial muscle contractions that drive individual pain judgments. These findings provide strong support for the idea that pain decoding is represented flexibly, relying on variable, partly-redundant patterns of facial responses.</p>
+<p>2) Facial Expressions: Cohort 2 participants were exposed to 24 video-clips selected from the UNBC-McMaster Shoulder Pain Expression Archive Database [6]. This database depicts adults suffering from spontaneous shoulder pain due to a wide range of aetiologies (arthritis, bursitis, tendonitis, subluxation, rotator cuff injuries, impingement syndromes, bone spur, capsulitis and dislocation), that were video-recorded in laboratory settings while undergoing active or passive movements of their painful shoulder (abduction, flexion, internal/external rotation). The video-recorded individuals also reported pain experiences associated with the shoulder movement using a VAS ranging from 1 (no pain) to 10 (worst imaginable pain). The 24 selected videos were chosen and adapted to be matched in duration (3 sec each), and were characterized by 3 levels of self-reported pain (8 clips with low pain, corresponding to VAS ≤ 3 ; 8 clips of moderate pain with VAS between 4 -7; 8 clips of high pain with VAS ≥ 8), which were also clearly distinguishable by independent observers (see [5] for more details).</p>
+<p>3) Task: Participants were engaged in a task where they had to quantify the intensity of pain attributed to each of the 24 facial expressions through a VAS ranging from 1 to 10. Subsequently, they were asked to quantify the confidence of their rating, on a similar VAS (where 1 corresponded to &quot;not confident at all&quot;, and 10 to &quot;extremely confident&quot;). The face ratings were carried out following one of two possible tasks: a cognitive exerting task (a 3-back memory task in sub-cohort 2.1, and an inconsistent stroop task in sub-cohorts 2.2-2.3), and a tailored control task. Sessions in which participants processed facial expressions were intermingled with sessions in which participants experienced nociceptive stimulations on their own body at individual pain threshold. Finally, in the original paradigm, participants were sub-selected based on their sensitivity to selfpain and to their susceptibility to the exertion task. As these factors are irrelevant for the present analysis (which focuses exclusively on the assessment of facial expressions), here we included all participants recruited. Importantly, however, as Riontino et al. [5] reported that cognitive exertion had detrimental effects on the sensitivity to painful expressions (in those participants who were susceptible to the task) we decided to include in this analysis only the control condition with no exertion. C. Cohort 3 1) Participants: This cohort was composed of N = 113 individuals (66 females, 46 males, 1 missing value; mean age = 26.33 ± 4.58 years), obtained by combining four experiments part of an ongoing unpublished project, respectively sub-cohort 3.1 (N = 20, 11 females, 9 males; mean age = 25.70 ± 2.05 years, for validating a facial expression database), sub-cohort 3.2 (N = 30, 18 females, 11 males, 1 missing value; mean age = 25.23 ± 2.22 years), sub-cohort 3.3 (N = 33, 23 females; mean age = 26.27 ± 5.21 years; behavioural studies testing the expectancy effects on the assessment of facial expressions) and sub-cohort 3.4 (N = 30, 14 females; mean age = 27.97 ± 6.44 years, replication of a previous task using fMRI). Data from Cohort 3 were acquired at the Center for Mind/Brain Sciences (CIMeC) of the University of Trento, in accordance with the local regulations and the &quot;Comitato Etico per la Ricerca&quot; of the University of Trento.</p>
+<p>2) Facial Expressions: Cohort 3 participants were exposed to video-clips from the Pain E-motion Faces Database (PEMF) [7]. In summary, 68 individuals (aged 18-61) were recorded under standardized laboratory conditions while displaying four types of facial expressions: neutral, simulated pain, and two types of spontaneous pain expressions elicited through distinct nociceptive procedures: tonic pressure stimulation via an algometer and phasic heat stimulation via a CO 2 laser. From these recordings, short dynamic video-clips of 1 sec were extracted to capture the peak of the painful expression, resulting in a database of 272 validated micro-clips, which have been normatively rated for pain intensity, valence, and arousal by over 500 participants from multiple European universities. For the purpose of this analysis, we focused on data from a subsample of 28 video-clips displaying spontaneous pain expressions as induced by either an algometer (11 clips) or CO 2 laser-stimulations (17 clips). All these clips were edited to be 1 sec long and sound free. Participants were exposed also to simulated pain expressions (all sub-cohorts) and neutral expressions (sub-cohort 3.1 &amp; 3.4), although these were not taken into consideration in keeping with Cohorts 1-2.</p>
+<p>3) Task: Participants viewed each video clip and subsequently assessed the facial expression according to two dimensions: pain intensity and authenticity. The first question was: &quot;Rate how much pain you perceive in the expression on a scale from 1 (no pain) to 10 (extreme pain)&quot;. The second question was: &quot;Rate how authentic the expression seems on a scale from 1 (not authentic at all) to 10 (completely authentic)&quot;. In sub-cohort 3.2, 3.3 and 3.4, the videos were presented following a predictive cue of variable intensity and uncertainty. However, the role of this predictive information was not taken into account in the present study. As for the other cohorts, the potential confounding effects in the experimental design were controlled during the analysis.</p>
+<h3>II. Comparison between human and algorithm-based assessment facial Action Units coding for Study 1</h3>
+<p>To establish that OpenFace estimates of AU engagement were indeed comparable to that from certified human FACS scorers, we ran a validation analysis for each database. For cohort 1, two certified FACS scorers evaluated a subgroup of short clips (6 painful, 6 disgusting and 6 neutral) by selecting AU onset/offset time and the intensity (on a scale from 1 to 5). Full details about the human scoring procedure are provided in Dirupo et al. [4]. For cohort 2, full certified human FACS coding was available for the videos of the UNBC-McMaster Shoulder Pain Expression Archive Database [6]. As for the PEMF database video-clip used in cohort 3 [7], these were manually assessed by six independent coders trained to identify AUs commonly associated with pain expressions. Differently from cohorts 1-2 where scoring occurred on a frame-by-frame basis and included both information about engagement and estimated intensity, here coders only assessed AU occurrence. Furthermore, this procedure was conducted at the whole-clip level, meaning coders judged the overall presence of AUs across the entire video, rather than in each isolated frame. Within this framework, an AU was considered as engaged if at least four out of the six coders agreed on its occurrence [7].</p>
+<p>We then compared the human scores with OpenFace output from the same clip subselection. In cohorts 1-2 clips, for each AU, and for each video, we assessed the consistency between the time-course of the human scoring and OpenFace output. Furthermore, we followed studies showing the benefit of combining AUs underlying similar facial movements together, both when assessing the reliability of algorithms for facial feature extraction [8], and in the human coding of the facial expression of pain [9]- [11]. Hence, we decided to treat as equivalent facial AUs related to the eyebrows raising (AUs 1 &amp; 2), eye narrowing (AUs 6 &amp; 7), nose wrinkling (AUs 9 &amp; 10), lips tightening/pressing (AUs 23 &amp; 24), mouth opening (AUs 25, 26 &amp; 27) and eye closing/blinks (AUs 43 &amp; 45). Please note that, whereas human coding provides estimates of any potential AUs, OpenFace output is constrained to an AU subselection, and specifically has no estimates of AUs 24, 27 and 43. Thus, while human coding of mouth opening was based on AUs 25, 26 and 27, OpenFace homologue is based only on AUs 25 &amp; 26 (AU 27 movements are likely classified by the algorithm as either 25 or 26). In a similar vein, whereas human coding of lips tightening is obtained from AUs 23/24, OpenFace homologue is derived on AU23. Finally, whereas human coding of eye closure/blinks is obtained by combining both AUs 43/45, OpenFace homologue is based only on AU 45 (the algorithm most likely does not distinguish between eye closures and blinks).</p>
+<p>In Cohort 3, where human FACS scoring was not carried out at a frame-by-frame level, we took comprehensive measure of each algorithm-based AU across the whole clip (the Area under the curve and, for AU 45, the percentage engagement within the whole clip) and modelled as a function of human-scored engagement from the original study. We then ran a Linear Mixed Model (LMM) with the OpenFace estimates as dependent variable, the intensity of the homologous AUs information from FACS scorers as continuous predictor, and the identity of the participant in the video as random factor (with random intercept and slope for the human score). A simpler random structure (characterised only by random intercept) was chosen in case of nonconvergence. Given that in cohorts 1-2, the prediction of OpenFace estimates of AU 45 was expressed as a dichotomic variable (reflecting engagement vs. non-engagement), we exploited instead a Generalized LMM with a binomial distribution and Laplace approximation. The LMMs were run following the same processing pipeline described in the main text.</p>
+<p>Supplementary Figure 1 reports the results of the analysis in matrix form, with each cell reflecting the prediction of one OpenFace AU from a human scored one. Effects highlighted are considered statistically significant. Predictions from homologous AUs (e.g., Open Face AU 4 estimate predicted by human scored AU 4 engagement) were considered significant if associated with α ≤ 0.05 one-tailed with the hypothesis constrained for positive relationships. All other predictions were considered significant if associated with α ≤ 0.05 two-tailed with no directional hypothesis. Overall, this validation analysis shows good agreement between human FACS coding and OpenFace output for homologous AUs. The only notable exceptions were AUs 1/2, 6/7 and 23 (Cohort 1) and AU 20 (Cohort 3) for which OpenFace estimates could not be predicted by homologous human scores. Additionally, many cross-predictions between dissimilar AUs are observed, with both negative and positive directions (see Dirupo et al., [4] for in-depth commentary on this issue).</p>
+<h3>III. Details on the Univariate Analysis</h3>
+<p>III. Details on the Univariate Analysis</p>
+<h3>A. Study 1</h3>
+<p>We ran linear mixed models (LMMs) where single-trial judgments were assessed as a function of the independent variables. Participants&#x27; identity was specified as random factor (with random intercept and slope for within-subject predictors/interactions). Furthermore, also the identity of the person displayed in the videoclip and the specific sub-cohort were modeled as random factors (with random intercept). This lead, for the main analysis of Study 1 to a linear model with the following lmer syntax:</p>
+<p>Although we always attempted to test the most complex random structures, in one case (Cohort 1, unpleasantess ratings, AU17) this was simplified following of non-convergence. For linear models, significance of the fixed effects was calculated with a Type II Analysis of Variance using the Satterthwaite approximation of degrees of freedom, as implemented in the lmerTest package for R [12]. For pain classification (Cohort 1) Generalized LMMs with binomial distribution and Laplace approximation was selected instead; in this case, significance was assessed through a Type II Analysis of Deviance, using Wald χ 2 statistics. For each cohort, the model was repeated 13 times, each for a different AU estimate. Effects were considered significant at α &lt; .05 Bonferroni-corrected for 13 repeated tests.</p>
+<h3>B. Study 2</h3>
+<p>The differential AU (∆AU ) values were fed into a Generalized Linear Mixed Model, which allowed us to account for two random factors simultaneously, namely the identity of the participants and the identity of the displayed person. Within this framework, we first looked at a model specified through the following lmer syntax:</p>
+<p>This model follows the same pipeline used in the analysis of Study 1 and was repeated for all 23 AUs. Hence effects were considered significant if associated with an α &lt; .05 Bonferroni corrected for 23 repeated tests.</p>
+<p>In addition main analysis testing the unique contribution of each separate AU, we also assessed potential co-engagement effects, that is AU combinations that were more likely to influence pain classification when engaged together. This analysis was carried out using the same Generalized LMM framework, where two ∆AU scores (∆AU 1 &amp; ∆AU 2 ) were modeled together. Critically, we also modeled the differential interaction term, described as the difference between the two AU products (∆AU 1 • AU 2 ). This led to the following model.</p>
+<p>Finally, as we were also interested in potential modulations of Sex/FaceSex in the co-engagement analysis, the model was refined as follows:</p>
+<p>The analysis was carried out for every possible AU combination (253 potential pairings). However, as stimuli were generated following a pseudo-randomization scheme that avoided the co-occurrence of specific aspects of the facial response (see methods in the main test), some specific AU pairings could not be modeled, thus further reducing the amount of repeated tests to 246. Hence, effects were considered significant if surviving α &lt; .05 Bonferroni corrected for 246 repeated tests.</p>
+<h3>IV. Detailed Results from Univariate analysis in Study 1</h3>
+<p>We tested the influence played by AU engagement in pain assessment. This was achieved by running the (G)LMMs each time with a different AU estimate as within-subjects predictor. Supplementary Table I reports full results which differ across cohorts: Cohort 1 and 2 converge in implicating AUs 1-2, 9-10, 15, and 25-26 in stronger ratings and more likely classifications, whereas AU 4 is associated with either null or negative effects. Instead, Cohort 3 showed a positive effect of AU 4 only, although it should be mentioned that AUs 1-2 were also observed at an uncorrected level (F (1,28) = 8.08, uncorrected p = 0.008, corrected p = 0.104).</p>
+<p>We also tested potential interactions between AU and Sex/FaceSex. Supplementary Table I reports detailed results, which were quite idiosyncratic to the specific Cohort. In particular, the analysis of FaceSex*AU interaction revealed that AUs classification effects in Cohort 1 were more pronounced in female faces, and the same was the case for unpleasantess rating, limitedly for AUs 6-7. Instead, in Cohort 2 male faces were the ones associated with stronger AU rating effects, whereas Cohort 3 was not associated with any FaceSex*AU interaction. As for Sex*AU interaction, we found significant effects associated with AU 4 for both Cohort 1 classification (χ 2  (1) = 15.19, corrected p &lt; 0.001) and Cohort 3 ratings (F (1,104) = 8.87, corrected p = 0.042). Likewise, we found and effect of AU 5 only for Cohort 1 classification (χ 2  (1) = 9.42, corrected p = 0.028). In all cases, male participants rely to a lesser extent than females on information from these facial responses (Supplementary Figure 2). Finally, the analysis of the three-way Sex*FaceSex*AU interaction revealed only an effect associated with AU 14 for pain classification in Cohort 1 (χ 2  (1) = 17.92, corrected p &lt; 0.001, reflecting the fact that female participants rely to a larger extent on this facial information when observing an expression of the same sex (Supplementary Figure 3).</p>
+<h3>V. Supplementary Results from Multivariate Pattern Analysis in Study 1</h3>
+<p>The main text describes the results obtained from Random Forest modeling of individual decisions from the overall facial information. As follow-up analysis, we repeated the whole modeling procedure by including also FaceSex and Sex, as additional features, in order to assess whether a better proficiency could be achieved by taking into account these variables, either alone, or in interaction with AUs. The model proficiency was fairly unaffected by the inclusion of these new features, both in the within-cohort (Supplementary Table II) and the cross-cohort prediction (Supplementary Table III). Supplementary Figure 5) displays the feature importance associated with within-cohort predictions. In all models/cohorts, FaceSex was the last (or second to last) ranked feature, whereas the role played by Sex changes widely across models/cohorts. VI. Supplementary Tables Table I. Effect sizes (d = Cohen&#x27;s d; OR = odds ratio), F-&amp; χ 2 scores and associated p-values for (G)LMMs testing the effects of Sex, FaceSex and their interaction in pain assessments across the three cohorts. Significant effects surviving correction for multiple comparisons are highlighted as follows: * p &lt; 0.05; * * p &lt; 0.01; * * * p &lt; 0.001 corrected for multiple comparisons for 13 tests. TABLE II Random forest prediction of participants&#x27; response from facial AU engagement, with or without Sex/FaceSex information. Cohort 1 Cohort 1 Cohort 2 Cohort 3 Unpl. Ratings Pain Class. Pain Ratings Pain Ratings b AUs 0.46 [0.02] -0.64 [0.03] 0.65 [0.02] AUs+Sex 0.46 [0.02] -0.64 [0.03] 0.65 [0.02] MSE AUs 1.34 [1.97] -1.14 [2.19] 1.03 [2.21] AUs+Sex 1.34 [1.98] -1.16 [2.22] 1.02 [2.22] Acc AUs -74% [69%] --AUs+Sex -73% [69%] -d&#x27; AUs -1.10 [0.51] --AUs+Sex -1.07 [0.52] --TABLE III Random forest cross-cohort prediction of participants&#x27; response from facial AU engagement, with or without Sex/FaceSex information. Cohort 1 ↔ 2 Cohort 1 ↔ 3 Cohort 2 ↔ 3 b AUs 0.13 [0.001] 0.12 [0.001] 0.11 [0.001] AUs+Sex 0.13 [0.001] 0.12 [0.001] 0.11 [0.002] MSE AUs 2.99 [3.32] 2.34 [2.80] 2.42 [2.40] AUs+Sex 2.90 [3.47] 2.34 [2.80] 2.44 [2.40]</p>
+<p>TABLE IV Effect size (odds ratio [OR]),χ 2 scores and associated p-values for GLMMs testing the effects of Sex, FaceSex and their interaction in pain assessments in Study 2. Significant effects surviving correction for multiple comparisons are highlighted as follows: * p &lt; 0.05; * * p &lt; 0.01; * * * p &lt; 0.001 corrected for multiple comparisons. AUs AUs*Sex AUs*FaceSex AUs*Sex*FaceSex AU 1 OR = 1.07 χ2 = 47.57 * * * OR = 1.05 χ2 = 7.04 OR = 0.99 χ2 = 0.43 OR = 0.98 χ2 = 0.38 AU 2 OR = 1.01 χ2 = 1.02 OR = 0.99 χ2 = 0.47 OR = 0.96 χ2 = 7.01 OR = 1.03 χ2 = 0.98 AU 4 OR = 1.10 χ2 = 58.62 * * * OR = 0.98 χ2 = 0.60 OR = 0.97 χ2 = 2.14 OR = 0.99 χ 2 &lt; 0.001 AU 5 OR = 0.97 χ2 = 31.61 * * * OR = 1.02 χ2 = 3.98 OR = 1.01 χ2 = 1.85 OR = 0.99 χ2 = 0.08 AU 6 OR = 1.00 χ2 = 0.62 OR = 1.00 χ2 = 0.03 OR = 0.99 χ2 = 1.01 OR = 0.96 χ2 = 2.56 AU 7 OR = 1.00 χ2 = 0.69 OR = 1.00 χ 2 &lt; 0.001 OR = 1.00 χ2 = 0.001 OR = 1.04 χ2 = 2.20 AU 9 OR = 1.19 χ2 = 233.41 * * * OR = 0.99 χ2 = 0.19 OR = 0.95 χ2 = 15.36 * * OR = 1.01 χ2 = 0.34 AU 10 OR = 1.03 χ2 = 20.26 * * * OR = 1.01 χ2 = 0.55 OR = 0.98 χ2 = 2.62 OR = 0.97 χ2 = 2.00 AU 11 OR = 1.02 χ2 = 13.88 * * OR = 1.01 χ2 = 0.40 OR = 1.00 χ 2 &lt; 0.001 OR = 1.02 χ2 = 0.65 AU 12 OR = 0.86 χ2 = 129.11 * * * OR = 1.01 χ2 = 0.11 OR = 1.03 χ2 = 5.50 OR = 1.01 χ2 = 0.18 AU 14 OR = 0.88 χ2 = 243.79 * * * OR = 1.00 χ 2 &lt; 0.001 OR = 0.97 χ2 = 7.41 OR = 0.99 χ2 = 0.19 AU 15 OR = 1.03 χ2 = 9.67 * OR = 0.99 χ2 = 0.50 OR = 1.01 χ2 = 0.69 OR = 0.98 χ2 = 0.31 AU 16 OR = 1.01 χ2 = 0.98 OR = 0.99 χ2 = 0.55 OR = 0.98 χ2 = 3.28 OR = 0.98 χ2 = 0.62 AU 17 OR = 1.01 χ2 = 4.47 OR = 0.99 χ2 = 0.56 OR = 0.99 χ2 = 0.88 OR = 0.98 χ2 = 0.53 AU 18 OR = 0.94 χ2 = 60.78 * * * OR = 1.02 χ2 = 0.82 OR = 1.05 χ2 = 15.68 * * OR = 0.97 χ2 = 0.80 AU 20 OR = 1.00 χ2 = 0.12 OR = 0.99 χ2 = 0.150 OR = 1.05 χ2 = 17.38 * * * OR = 1.04 χ2 = 1.90 AU 22 OR = 1.01 χ2 = 1.29 OR = 0.98 χ2 = 0.67 OR = 0.95 χ2 = 10.72 * OR = 1.04 χ2 = 1.36 AU 23 OR = 0.97 χ2 = 13.41 * * OR = 0.99 χ2 = 0.12 OR = 0.99 χ2 = 0.68 OR = 1.04 χ2 = 2.61 AU 24 OR = 0.97 χ2 = 26.10 * * * OR = 1.01 χ2 = 0.51 OR = 0.97 χ2 = 5.24 OR = 0.96 χ2 = 3.08 AU 25 OR = 0.97 χ2 = 27.43 * * * OR = 0.98 χ2 = 2.53 OR = 1.04 χ2 = 10.07 * OR = 0.97 χ2 = 1.24 AU 26 OR = 1.00 χ 2 &lt; 0.001 OR = 0.99 χ2 = 0.93 OR = 0.96 χ2 = 14.21 * * OR = 0.99 χ2 = 2.89 AU 27 OR = 1.07 χ2 = 13.64 * * OR = 1.02 χ2 = 0.42 OR = 0.95 χ2 = 0.33 OR = 1.06 χ2 = 2.89 AU 43 OR = 1.03 χ2 = 2.84 OR = 0.99 χ2 = 0.24 OR = 1.04 χ2 = 11.30 * OR = 1.06 χ2 = 2.45</p>
+<p>VII. Supplementary Figures</p>
+<p>The project benefited from the financial support of the Center for Mind/Brain Sciences (CIMEC) of the University of Trento. Data from Study 1 were collected with the support of SNSF Grants n. PP00P1_183715 and n. 320030_182589 awarded to CCD.</p>
+<p>De-identified data and code for the analysis are available on Zenodo platform at</p>
+<h3>Supplementary Information</h3>
+<p>Distributed patterns of facial muscle contractions drive pain judgments in both naturalistic and synthetic expression I. Detailed cohort information for Study 1 A. Cohort 1 1) Participants: This cohort was composed of N = 166 individuals (121 females, average age = 25.09 ± 5.92 [sd]) obtained combining five different experiments. These included three experiments from Dirupo et al. [1] respectively a pilot study (sub-cohort 1.1, N = 25, 18 females, age = 23.89 ± 4.31, for validating facial expression database), experiment 1 (sub-cohort 1.2, N = 37, 19 females, age = 24.10 ± 7.63, behavioral study testing the effect of contextual influences of facial processing) and experiment 2 (sub-cohort 1.3, N = 27, 16 females, age = 23.70 ± 3.94, replication of the same task using fMRI). We also included a cohort from Dirupo et al. [2] (sub-cohort 1.4, N = 52, all females, average age = 27.60 ± 4.73). Finally, we included a fifth unpublished group of participants (sub-cohort 1.5, N = 25, 16 females, age = 24.10 ± 7.16) where the same database of facial expressions was exploited to assess effects of social influences, using the same paradigm described in Dirupo et al. [3]. All these sub-cohorts shared the same main task, involving the processing of the same database of facial expressions and the same set of questionnaires (with some minor differences, see below).</p>
+<p>2) Facial Expressions: Cohort 1 participants were exposed to the same database of spontaneous expressions of pain, disgust and neutral events. Full details about how these videos were created and validated are available in previous research [1], [2], [4]. In summary, individuals were video-recorded while undergoing olfactory and thermal stimuli, respectively triggering disgust and pain at comparable levels of self-reported unpleasantness [4]. These recordings were subsequently used to create short video-clips of variable duration (average 7.61 sec) where the same individuals displayed either a painful, disgusting or neutral expression, and the two negative experiences were matched for unpleasantness from the point of view of both the video-recorded person (from self-rating) and an independent sample of observers. Data from sub-cohorts 1.1-1.3 &amp; 1.5 included the same video-clips of 27 painful, 27 disgusting and 27 neutral expressions. Instead, data from sub-cohort 1.4 was characterized by a subselection of video-clips (17 painful, 17 disgusting and 17 neutral). For the purpose of this analysis, we focused exclusively on the painful expressions, disregarding disgusting and neutral ones.</p>
+<p>3) Task: Participants were engaged in two tasks. The first was a classification task, where they had to assess whether each facial expression displayed &quot;pain&quot;, &quot;disgust&quot; or a &quot;neutral&quot; state, by pressing a key associated with the chosen label. The second was a rating task, where they were asked to quantify the degree of unpleasantness experienced by the person in the video. The evaluation happened through a visual analogue scale (VAS) where the two extremities were labeled as &quot;neutral&quot; and &quot;extremely unpleasant&quot;, and a cursor could be moved along the scale by pressing two different keys. In sub-cohorts 1.1 &amp; 1.5 the two tasks were implemented sequentially, namely participants first saw the facial expressions, then classified it and subsequently rated the associated unpleasantness. In sub-cohorts 1.2 &amp; 1.4 the two tasks were administered as separate sessions (balanced in order). In sub-cohort 1.3 only the unpleasantness rating was implemented. Finally, some sub-cohorts were characterized by idiosyncratic manipulation testing for social (sub-cohort 1.5) or contextual (sub-cohorts 1.2 &amp; 1.3) influences. However, these were not taken into account in the present study. The potential confounding effects in the experimental design of each sub-cohort was carefully controlled during the analysis (see more details below). B. Cohort 2 1) Participants: This cohort was composed of N = 119 individuals (73 females, average age = 23.49 ± 4.49) obtained combining three different experiments. These included the two main experiments from Riontino et al. [5] respectively experiment 1 (sub-cohort 2.1 N = 36, 20 females, average age = 25.53 ± 5.28), and experiment 2 (sub-cohort 2.2, N = 30, 18 females, average age = 23.20 ± 4.38). In addition, we included a third unpublished group of participants (sub-cohort 2.3, N = 53, 35 females, average age = 22.26 ± 3.44) where experiment 2 from Riontino et al. [5] was replicated using fMRI.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Parameter estimates (from LMM) and odds ratios (from GLMM). Right-directed bars reflect facial action units predictive of higher ratings or more likely pain classification. Left-directed bars refer to action units predictive of lower ratings and less likely classifications. Colored bars refer to significant effects surviving correction for multiple comparisons. The barplots are associated with computer-based reconstructions of facial reactions significantly influencing participants&#x27; responses. Displayed facial AU engagements (from FACSGEN software) are proportional to the strength of significant positive parameters.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Study 2. (A). Two separate face models (one female and one male) from FACSGen Software. For display purposes, the same AUs (i.e., 1, 9, 10 and 26) are partially engaged in both models. (B). Two-alternative forced-choice task. Participants view two randomly generated expressions from the same person and have to indicate which one appears more painful.</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Odds ratios of Main effect of AU and FaceSex*AU interaction from Study 2. (A) For the Main effect, right/left-directed bars reflect facial action units associated with higher/lower pain classification likelihood. (B) For the interaction, right-directed bars refer to stronger AU effects for Female (vs. Male) faces, whereas left-directed bars refer to stronger AU effects for Male (vs. Female) faces. Colored bars refer to significant effects surviving correction for multiple comparisons. The barplots are associated with computer-based reconstruction of significant facial reactions. (C) Interaction between FaceSex and three representative AUs. For visualization only, trials were grouped so that AU+ reflects stronger engagement in the right image, whereas AU-indicates equal or stronger engagement in the left image. Each condition is represented as participants&#x27; average data (colored data points), overall group mean with bootstrap-based confidence intervals (black dot and associated error bar), interquartile range (boxplot), full data range (whiskers) and overall distribution (vertical density plot). Significance from follow-up GLMMs in which continuous ΔAU values are modeled within a subset of data are indicated as follows: * * 𝑝 &lt; 0.01; * * * 𝑝 &lt; 0.001, * * * * 𝑝 &lt; 1𝑒 -10.</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. AU co-engagement network. (A) AU pairings associated with significant interaction effects. AUs are described as network nodes whose relative distance reflects the interaction strength. Effects surviving Bonferroni&#x27;s correction for multiple comparisons in a Wald 𝜒 2 test are described in terms of network edges with thickness proportional to 𝜒 2 . Edge colour indicates the effect direction, as determined from coefficients of a simplified model excluding higher-order interactions. Positive effects (odds-ratio &gt; 1) are displayed in green, whereas negative effects (odds-ratio &lt; 1) are displayed in red. (B) Co-engagement effects in three representative AU pairings. For visualization only, trials were grouped so that AU+ reflects stronger engagement in the right image, whereas AU-indicates equal or stronger engagement in the left image. Each condition is represented as participants&#x27; average data, overall group mean with bootstrap-based confidence intervals, interquartile and full data ranges, and overall distribution. Significance from follow-up GLMMs in which continuous ΔAU values are modeled within a subset of data are indicated as follows: * * 𝑝 &lt; 0.01; * * * 𝑝 &lt; 0.001, * * * * 𝑝 &lt; 1𝑒 -10.</p>
+<h3>Figure 5.</h3>
+<p>Figure 5. AU co-engagement network: FaceSex modulations. (A) AU pairings significantly interacting with the Sex of the displayed face. AUs are described as network nodes whose relative distance reflects the interaction strength. Effects surviving Bonferroni&#x27;s correction for multiple comparisons in a Wald 𝜒 2 test are described in terms of network edges with thickness proportional to 𝜒 2 . Edge colour indicates the effect direction, as determined from coefficients of a simplified model excluding higher-order interactions. (B) Co-engagement effects in three representative AU pairings. For visualization only, trials were grouped so that AU+ reflects stronger engagement in the right image, whereas AU-indicates equal or stronger engagement in the left image. Each condition is represented as participants&#x27; average data, overall group mean with bootstrap-based confidence intervals, interquartile and full data ranges, and overall distribution. Significance from follow-up GLMMs in which continuous ΔAU values are modeled within a subset of data are indicated as follows: * 𝑝 &lt; 0.05; * * 𝑝 &lt; 0.01; * * * 𝑝 &lt; 0.001, * * * * 𝑝 &lt; 1𝑒 -10.</p>
+<h3>25 F 25 F 4 d 7 d 23 d 11 Continuedχ 2 FaceSex</h3>
+<p>= 88.77 * * * OR = 1.59 χ2 = 9.71 * * d = 0.37 F = 113.64 * * * d = 0.36 F = 3.74 AU 12 d = 0.18 F = 44.45 * * * OR = 0.97 χ2 = 0.77 d = 0.54 F = 103.30 * * * d = -0.07 F = 0.15 AU 14 d = -0.28 F = 1.37 OR = 0.84 χ2 = 1.77 d = 0.04 F = 0.46 d = -0.19 F = 1.11 AU 15 d = 0.50 F = 122.77 * * * OR = 1.72 χ2 = 58.29 * * d = 0.15 F = 20.79 * * * d =0. = -0.01 F = 0.13 OR = 0.52 χ2 = 15.19 * * * d = -0.03 F = 1.30 d = -0.29 F = 8.87 * Sex*AU 5 d = -0.06 F = 1.21 OR = 0.74 χ2 = 9.45 * d = -0.09 F = 1.50 d = -0.02 F = 0.89 Sex*AUs 6-= -0.05 F = 0.36 OR = 1.01 χ2 = 0.04 d = 0.01 F = 0.04 d = -0.05 F = 1.78 Sex*AUs 25-26 d = -0.12 F = 3.52 OR = 0.83 χ2 = 4.04 d = 0.04 F = 0.22 d = 0.01 F = 0.03 Sex*AU 45 d = -0.08 F = 1.08 OR = 1.02 χ2 = 0.03 d = 0.08 F = 4.75 d = 0.07 F =1. = 36.58 * * * d = 0.20 F = 29.55 * * * d = 0.15 F = 0.60 FaceSex*AU 20 d = -0.05 F = 6.87 OR = 0.72 χ2 = 32.50 * * * d = -0.50 F = 77.53 * * * d = -0.27 F = 2.04 FaceSex*AU 23 d = 0.03 F = 0.98 OR = 1.01 χ2 = 14.21 * * d = -0.37 F = 178.31 * * * d = -0.27 F = 2.01 FaceSex*AUs 25-26 d = 0.01 F = 0.12 OR = 0.83 χ2 = 24.06 * * * d = 0.18 F = 41.56 * * * d = 0.13 F = 0.55</p>
+<h3>Fig 1.</h3>
+<p>Fig.1. Matrix describing the degree to which the Open Face output for each AU (vertical axis) can be explainable in terms of AUs intensity from human scorers (horizontal axis). Each cell in the matrix represents -log10(p), with p estimated through a linear mixed model (see main text). Positive and negative modulations are color-coded through blue shading respectively. Some AUs are not listed either because they are not part of those estimated by OpenFace software, or because they were not sufficiently documented by human scorers to allow for a reliable analysis.</p>
+<h3>Fig 2.</h3>
+<p>Fig 2. AU*Sex Interaction in (A) Cohorts 1 and (B) Cohort 3. Average Pain Classifications plotted across AU4 and AU5 engagement and participants&#x27; Sex. For visualization only, trials were grouped based on whether the AU was higher or equal/lower than the average AU score across all videos. Each condition is represented as participants&#x27; average data (colored data points), overall group mean with bootstrap-based confidence intervals (black dot and associated error bar), interquartile range (boxplot), full data range (whiskers) and overall distribution (vertical density plot). Significance from follow-up (G)LMMs in which continuous AU values are modeled within a subset of data are indicated as follows: * * p &lt; 0.01; * * * p &lt; 0.001.</p>
+<h3>Fig 3.</h3>
+<p>Fig 3. AU*FaceSex*Sex Interaction. Average Pain Classifications (Cohort 1) plotted across AU14 engagement and FaceSex, separately for female and male participants. For visualization only, trials were grouped based on whether the AU was higher or equal/lower than the average AU score across all videos. Each condition is represented as participants&#x27; average data (colored data points), overall group mean with bootstrap-based confidence intervals (black dot and associated error bar), interquartile range (boxplot), full data range (whiskers) and overall distribution (vertical density plot). Significance from follow-up GLMMs in which continuous AU values are modeled within a subset of data are indicated as follows: * * p &lt; 0.01; * * * p &lt; 0.001.</p>
+<h3>Fig 4.</h3>
+<p>Fig.4. Feature Importance in Random forest prediction of Unpleasantness Ratings, Pain Classifications (Cohort 1) and Pain Rating (Cohorts 2-3) from on facial AU engagements. For regression models, importance is described as the % increase of prediction error (MSE) resulting from the removal of each specific feature. For classification models, importance is described as the % decrease in prediction accuracy. Colored bars refer to significantly higher than chance importance, under correction for multiple comparisons.</p>
+<h3>Fig 5.</h3>
+<p>Fig 5. Feature Importance in Random forest prediction of Unpleasantness Ratings, Pain Classifications (Cohort 1) and Pain Rating (Cohorts 2-3) from on facial AU engagements, Sex and FaceSex. For regression models, importance is described as the % increase of prediction error (MSE) resulting from the removal of each specific feature. For classification models, importance is described as the % decrease in prediction accuracy. Colored bars refer to significantly higher than chance importance, under correction for multiple comparisons.</p>
+<h3>Fig 6.</h3>
+<p>Fig 6. FaceSex*AU interaction from Study 2: Facial responses whose influence on participants&#x27; choices inmodulated by the sex of the displayed face. (A) Three AUs showing stronger modulation for male &gt; female faces. (B) Four AUs showing stronger modulation for female &gt; male faces. For visualization only, trials were grouped so that AU+ reflects stronger engagement in the right image, whereas AU-indicates equal or stronger engagement in the left image. Each condition is represented as participants&#x27; average data (colored data points), overall group mean with bootstrap-based confidence intervals (black dot and associated error bar), interquartile range (boxplot), full data range (whiskers) and overall distribution (vertical density plot). Significance from follow-up GLMMs in which continuous ∆AU values are modeled within a subset of data are indicated as follows: * * p &lt; 0.01; * * * p &lt; 0.001, * * * * p &lt; 1e -10.</p>
+<h3>Fig 7.</h3>
+<p>Fig 7. AU co-engagement: positive effects. AU pairs that, when concurrently engaged, increase the likelihood of pain classifications. For visualization only, trials were grouped so that AU+ reflects stronger engagement in the right image, whereas AU-indicates equal or stronger engagement in the left image. Each condition is represented as participants&#x27; average data (colored data points), overall group mean with bootstrap-based confidence intervals (black dot and associated error bar), interquartile range (boxplot), full data range (whiskers) and overall distribution (vertical density plot). Significance from follow-up GLMMs in which continuous ∆AU values are modeled within a subset of data are indicated as follows: * p &lt; 0.05; * * p &lt; 0.01; * * * p &lt; 0.001.</p>
+<h3>Fig 8.</h3>
+<p>Fig 8. AU co-engagement: negative effects indicating that some AUs contributed less to pain judgments when accompanied by another AU. For visualization only, trials were grouped so that AU+ reflects stronger engagement in the right image, whereas AU-indicates equal or stronger engagement in the left image. Each condition is represented as participants&#x27; average data (colored data points), overall group mean with bootstrap-based confidence intervals (black dot and associated error bar), interquartile range (boxplot), full data range (whiskers) and overall distribution (vertical density plot). Significance from follow-up GLMMs in which continuous ∆AU values are modeled within a subset of data are indicated as follows: * p &lt; 0.05; * * p &lt; 0.01; * * * p &lt; 0.001; * * * * p &lt; 1e -10.</p>
+<h3>Fig 9.</h3>
+<p>Fig 9. AU co-engagement, FaceSex modulations: negative effects. 9 representative AU pairs that, when concurrently engaged, influence the likelihood of pain classifications conditionally to the sex of the displayed face. For visualization only, trials were grouped so that AU+ reflects stronger engagement in the right image, whereas AU-indicates equal or stronger engagement in the left image. Each condition is represented as participants&#x27; average data (colored data points), overall group mean with bootstrap-based confidence intervals (black dot and associated error bar), interquartile range (boxplot), full data range (whiskers) and overall distribution (vertical density plot). Significance from follow-up GLMMs in which continuous ∆AU values are modeled within a subset of data are indicated as follows: * p &lt; 0.05; * * p &lt; 0.01; * * * p &lt; 0.001; * * * * p &lt; 1e -10.</p>
+<h3>Fig 10.</h3>
+<p>Fig 10. AU co-engagement, FaceSex modulations: positive effects. AU pairs that, when concurrently engaged, influence the likelihood of pain classifications conditionally to the sex of the displayed face. For visualization only, trials were grouped so that AU+ reflects stronger engagement in the right image, whereas AU-indicates equal or stronger engagement in the left image. Each condition is represented as participants&#x27; average data (colored data points), overall group mean with bootstrap-based confidence intervals (black dot and associated error bar), interquartile range (boxplot), full data range (whiskers) and overall distribution (vertical density plot). Significance from follow-up GLMMs in which continuous ∆AU values are modeled within a subset of data are indicated as follows: * p &lt; 0.05; * * p &lt; 0.01; * * * p &lt; 0.001; * * * * p &lt; 1e -10.</p>
+<h3>Fig 11.</h3>
+<p>Fig 11. Feature Importance in Random forest prediction of participants&#x27; choices in Study 2 from on facial AU engagements (A-B), Sex and FaceSex (B). Importance is described as the % decrease in prediction accuracy resulting from the removal of each specific feature. Colored bars refer to significantly higher than chance importance, under correction for multiple comparisons.</p>
+<h3>Table 1.</h3>
+<p>Random forest prediction: Proficiency scores and permutation-based cut-offs associated with each analysis.</p>
+<p>Üzmez-Güler et al. 2026 | Facial muscle contractions driving pain judgments Ψ R X | 5 of 18</p>
+<h3>References</h3>
+<p>M. A. Ruben, D. Blanch-Hartigan, and J. C. Shipherd. &quot;To Know Another&#x27;s Pain: A Meta-Analysis of Caregivers&#x27; and Healthcare Providers&#x27; Pain Assessment Accuracy&quot;. In: Annals of Behavioral Medicine 52.8 (2018), pp. 662-685. DOI: 10.1093/abm/kax036.</p>
+<p>T. Rupp and K. A. Delaney. &quot;Inadequate Analgesia in Emergency Medicine&quot;. In: Annals of Emer- gency Medicine 43.4 (2004), pp. 494-503. DOI: 10.1016/j.annemergmed.2003.11.019.</p>
+<p>S. Lautenbacher and M. Kunz. &quot;Facial Pain Expression in Dementia: A Review of the Experi- mental and Clinical Evidence&quot;. In: Current Alzheimer Research 14.5 (2017), pp. 501-505.</p>
+<p>P. Ekman and W. Friesen. Facial Action Coding System: A Technique for the Measurement of Facial Movement. Palo Alto, CA: Consulting Psychologists Press, 1978.</p>
+<p>M. Kunz, D. Meixner, and S. Lautenbacher. &quot;Facial Muscle Movements Encoding Pain-a Sys- tematic Review&quot;. In: Pain 160.3 (2019), pp. 535-549. DOI: 10.1097/j.pain.0000000000001424.</p>
+<p>K. M. Prkachin. &quot;The Consistency of Facial Expressions of Pain: A Comparison across Modali- ties&quot;. In: Pain 51.3 (1992), pp. 297-306.</p>
+<p>M. Kunz and S. Lautenbacher. &quot;The Faces of Pain: A Cluster Analysis of Individual Differences in Facial Activity Patterns of Pain&quot;. In: European Journal of Pain 18.6 (2014), pp. 813-823. DOI: 10.1002/j.1532-2149.2013.00421.x.</p>
+<p>M. Kunz, K. Prkachin, P. E. Solomon, and S. Lautenbacher. &quot;Faces of Clinical Pain: Inter-Individual Facial Activity Patterns in Shoulder Pain Patients&quot;. In: European Journal of Pain 25.3 (2021), pp. 529-540. DOI: 10.1002/ejp.1691.</p>
+<p>C. J. Patrick, K. D. Craig, and K. M. Prkachin. &quot;Observer Judgments of Acute Pain: Facial Action Determinants&quot;. In: Journal of Personality and Social Psychology 50.6 (1986), pp. 1291-1298. DOI: 10.1037/0022-3514.50.6.1291.</p>
+<p>C. Blais, D. Fiset, H. Furumoto-Deshaies, M. Kunz, D. Seuss, and S. Cormier. &quot;Facial Features Underlying the Decoding of Pain Expressions&quot;. In: The Journal of Pain 20.6 (2019), pp. 728-738. DOI: 10.1016/j.jpain.2019.01.002.</p>
+<p>C. Saumure, M.-P. Plouffe-Demers, D. Fiset, S. Cormier, Y. Zhang, D. Sun, M. Feng, F. Luo, M. Kunz, and C. Blais. &quot;Differences Between East Asians and Westerners in the Mental Represen- tations and Visual Information Extraction Involved in the Decoding of Pain Facial Expression Intensity&quot;. In: Affective Science 4.2 (2023), pp. 332-349. DOI: 10.1007/s42761-023-00186-1.</p>
+<p>C. Roy, C. Blais, D. Fiset, P. Rainville, and F. Gosselin. &quot;Efficient Information for Recognizing Pain in Facial Expressions&quot;. In: European Journal of Pain (London, England) 19.6 (2015), pp. 852- 860. DOI: 10.1002/ejp.676.</p>
+<p>T. Lau, J. Hayward, S. Vatanpour, and G. Innes. &quot;Sex-Related Differences in Opioid Admin- istration in the Emergency Department: A Population-Based Study&quot;. In: Emergency Medicine Journal 38.6 (2021), pp. 467-473. DOI: 10.1136/emermed-2020-210215.</p>
+<p>L. P. Dawson et al. &quot;Sex Differences in Epidemiology, Care, and Outcomes in Patients With Acute Chest Pain&quot;. In: JACC 81.10 (2023), pp. 933-945. DOI: 10.1016/j.jacc.2022.12.025.</p>
+<p>S. Dahoud, P. Simpson, and N. Naidoo. &quot;Influence of Patient Sex on Pain Management Prac- tices in Paramedicine: A Rapid Review&quot;. In: Paramedicine 21.4 (2024), pp. 168-180. DOI: 10.1177/27536386241240286.</p>
+<p>K. F. Wilford, M. J. Mena-Iturriaga, M. Vugrin, M. Wainer, and G. H. Seeber. &quot;International Perspective on Healthcare Provider Gender Bias in Musculoskeletal Pain Management: A Scoping Review&quot;. In: BMJ Open 16.1 (2026), e107766. DOI: 10.1136/bmjopen-2025-107766.</p>
+<p>P. Schneider, S. Lautenbacher, and M. Kunz. &quot;Sex Differences in Facial Expressions of Pain: Results from a Combined Sample&quot;. In: Pain 165.8 (2024), pp. 1784-1792. DOI: 10.1097/j.pain.0000000000003180.</p>
+<p>P. Riva, S. Sacchi, L. Montali, and A. Frigerio. &quot;Gender Effects in Pain Detection: Speed and Accuracy in Decoding Female and Male Pain Expressions&quot;. In: European Journal of Pain 15.9 (2011), 985.e1-985.e11. DOI: 10.1016/j.ejpain.2011.02.006.</p>
+<p>L. Zhang, E. A. R. Losin, Y. K. Ashar, L. Koban, and T. D. Wager. &quot;Gender Biases in Estimation of Others&#x27; Pain&quot;. In: The Journal of Pain 22.9 (2021), pp. 1048-1059. DOI: 10.1016/j.jpain.2021.03.001.</p>
+<p>S. Lautenbacher, B. G. Niewelt, and M. Kunz. &quot;Decoding Pain from the Facial Display of Pa- tients with Dementia: A Comparison of Professional and Nonprofessional Observers&quot;. In: Pain Medicine 14.4 (2013), pp. 469-477. DOI: 10.1111/pme.12050.</p>
+<p>T. C. Dildine, C. M. Amir, J. Parsons, and L. Y. Atlas. &quot;How Pain-Related Facial Expressions Are Evaluated in Relation to Gender, Race, and Emotion&quot;. In: Affective Science 4.2 (2023), pp. 350- 369. DOI: 10.1007/s42761-023-00181-6.</p>
+<p>P. J. Göller, P. Reicherts, S. Lautenbacher, and M. Kunz. &quot;How Gender Affects the Decoding of Facial Expressions of Pain&quot;. In: Scandinavian Journal of Pain 23.2 (2023), pp. 372-381. DOI: 10.1515/sjpain-2022-0063.</p>
+<p>G. Dirupo, V. D. Paolo, E. Lettry, K. Schwab, and C. Corradi-Dell&#x27;Acqua. &quot;Parieto-Frontal Net- works Mediate Contextual Influences in the Appraisal of Pain and Disgust Facial Expressions&quot;. In: Journal of Neuroscience (2024), e2233232024. DOI: 10.1523/JNEUROSCI.2233-23.2024.</p>
+<p>G. Dirupo, C. Corradi-Dell&#x27;Acqua, M. Kashef, M. Debbané, and D. Badoud. &quot;The Role of In- teroception in Understanding Others&#x27; Affect. Dissociation between Superficial and Detailed Appraisal of Facial Expressions&quot;. In: Cortex 130 (2020), pp. 16-31. DOI: 10.1016/j.cortex.2020.05.010.</p>
+<p>L. Riontino, R. Fournier, A. Lapteva, N. Silvestrini, S. Schwartz, and C. Corradi-Dell&#x27;Acqua. &quot;Cog- nitive Exertion Affects the Appraisal of One&#x27;s Own and Other People&#x27;s Pain&quot;. In: Scientific Re- ports 13 (2023), p. 8165. DOI: 10.1038/s41598-023-35103-w.</p>
+<p>G. Dirupo, P. Garlasco, C. Chappuis, G. Sharvit, and C. Corradi-Dell&#x27;Acqua. &quot;State-Specific and Supraordinal Components of Facial Response to Pain&quot;. In: IEEE Transactions on Affective Com- puting 13.2 (2022), pp. 793-804. DOI: 10.1109/TAFFC.2020.2965105.</p>
+<p>P. Lucey, J. Cohn, K. Prkachin, P. Solomon, and I. Matthews. &quot;Painful Data: The UNBC-McMaster Shoulder Pain Expression Archive Database&quot;. In: 2011 IEEE International Conference on Auto- matic Face Gesture Recognition and Workshops (FG 2011). 2011, pp. 57-64. DOI: 10.1109/FG.2011.5771462.</p>
+<p>R. Fernandes-Magalhaes, A. Carpio, D. Ferrera, D. Van Ryckeghem, I. Peláez, P. Barjola, M. E. De Lahoz, M. C. Martín-Buro, J. A. Hinojosa, S. Van Damme, L. Carretié, and F. Mercado. &quot;Pain E-Motion Faces Database (PEMF): Pain-Related Micro-Clips for Emotion Research&quot;. In: Behav- ior Research Methods 55.7 (2023), pp. 3831-3844. DOI: 10.3758/s13428-022-01992-4.</p>
+<p>T. Baltrušaitis, P. Robinson, and L.-P. Morency. &quot;OpenFace: An Open Source Facial Behavior Analysis Toolkit&quot;. In: 2016 IEEE Winter Conference on Applications of Computer Vision (WACV). 2016, pp. 1-10. DOI: 10.1109/WACV.2016.7477553.</p>
+<p>T. Baltrušaitis, M. Mahmoud, and P. Robinson. &quot;Cross-Dataset Learning and Person-Specific Normalisation for Automatic Action Unit Detection&quot;. In: 2015 11th IEEE International Confer- ence and Workshops on Automatic Face and Gesture Recognition (FG). Vol. 06.2015, pp. 1-6. DOI: 10.1109/FG.2015.7284869.</p>
+<p>G. Stratou, J. Van Der Schalk, R. Hoegen, and J. Gratch. &quot;Refactoring Facial Expressions: An Automatic Analysis of Natural Occurring Facial Expressions in Iterative Social Dilemma&quot;. In: 2017 Seventh International Conference on Affective Computing and Intelligent Interaction (ACII). 2017, pp. 427-433. DOI: 10.1109/ACII.2017.8273635.</p>
+<p>C. Corradi-Dell&#x27;Acqua, G. Horisberger, D. Caillet-Bois, A. Toraldo, M. Christ, V. D. Santa, V. Frochaux, P. Mols, A. Penaloza, S. Rezzonico, L. Tagliabue, and O. Hugli. &quot;Perceived Hospital Preparedness Is Negatively Associated With Pandemic-Induced Psychological Vulnerability in Primary Care Employees: A Multicentre Cross-Sectional Observational Study&quot;. In: Clinical Psychology &amp; Psychotherapy 31.2 (2024), e2969. DOI: 10.1002/cpp.2969.</p>
+<p>A. Kuznetsova, P. B. Brockhoff, and R. H. B. Christensen. &quot;lmerTest Package: Tests in Linear Mixed Effects Models&quot;. In: Journal of Statistical Software 82 (2017), pp. 1-26. DOI: 10.18637/jss.v082.i13.</p>
+<p>L. Breiman. &quot;Random Forests&quot;. In: Machine Learning 45.1 (2001), pp. 5-32. DOI: 10.1023/A:1010933404324.</p>
+<p>D. M. Green and J. A. Swets. Signal Detection Theory and Psychophysics. New York, NY: Wiley, 1966. ISBN: 0-932146-23-6.</p>
+<p>E. B. Roesch, L. Tamarit, L. Reveret, D. Grandjean, D. Sander, and K. R. Scherer. &quot;FACSGen: A Tool to Synthesize Emotional Facial Expressions Through Systematic Manipulation of Facial Action Units&quot;. In: Journal of Nonverbal Behavior 35.1 (2011), pp. 1-16. DOI: 10.1007/s10919-010-0095-9.</p>
+<p>C. Saumure, C. Blais, D. Fiset, and R. Caldara. &quot;Which Gender Do We Perceive in a Painful Face?&quot; In: Journal of Vision 23.9 (2023), p. 5605. DOI: 10.1167/jov.23.9.5605.</p>
+<p>K. R. Scherer. &quot;The Dynamic Architecture of Emotion: Evidence for the Component Process Model&quot;. In: Cognition &amp; Emotion 23.7 (2009), pp. 1307-1351. DOI: 10.1080/02699930902928969.</p>
+<p>K. R. Scherer, A. Dieckmann, M. Unfried, H. Ellgring, and M. Mortillaro. &quot;Investigating Appraisal- Driven Facial Expression and Inference in Emotion Communication&quot;. In: Emotion 21.1 (2021), pp. 73-95. DOI: 10.1037/emo0000693.</p>
+<p>D. Seuss, T. Hassan, A. Dieckmann, M. Unfried, K. R. Scherer, M. Mortillaro, and J. Garbas. &quot;Automatic Estimation of Action Unit Intensities and Inference of Emotional Appraisals&quot;. In: IEEE Transactions on Affective Computing 14.2 (2023), pp. 1188-1200. DOI: 10.1109/TAFFC.2021.3077590.</p>
+<p>K. R. Scherer, M. Mortillaro, I. Rotondi, I. Sergi, and S. Trznadel. &quot;Appraisal-Driven Facial Ac- tions as Building Blocks for Emotion Inference.&quot; In: Journal of personality and social psychology 114.3 (2018), p. 358. DOI: 10.1037/pspa0000107.</p>
+<p>References</p>
+<p>G. Dirupo, V. D. Paolo, E. Lettry, K. Schwab, and C. Corradi-Dell&#x27;Acqua, &quot;Parieto-Frontal networks mediate contextual influences in the appraisal of pain and disgust facial expressions,&quot; Journal of Neuroscience, p. e2233232024, Nov. 2024.</p>
+<p>G. Dirupo, C. Corradi-Dell&#x27;Acqua, M. Kashef, M. Debbané, and D. Badoud, &quot;The role of interoception in understanding others&#x27; affect. Dissociation between superficial and detailed appraisal of facial expressions,&quot; Cortex, vol. 130, pp. 16-31, Sep. 2020.</p>
+<p>G. Dirupo, S. Totaro, J. Richard, and C. Corradi-Dell&#x27;Acqua, &quot;Medical education and distrust modulate the response of insular-cingulate network and ventral striatum in pain diagnosis,&quot; eLife, vol. 10, p. e63272, 2021.</p>
+<p>G. Dirupo, P. Garlasco, C. Chappuis, G. Sharvit, and C. Corradi-Dell&#x27;Acqua, &quot;State-specific and supraordinal components of facial response to pain,&quot; IEEE Transactions on Affective Computing, vol. 13, no. 2, pp. 793-804, 2022.</p>
+<p>L. Riontino, R. Fournier, A. Lapteva, N. Silvestrini, S. Schwartz, and C. Corradi-Dell&#x27;Acqua, &quot;Cognitive exertion affects the appraisal of one&#x27;s own and other people&#x27;s pain,&quot; Scientific Reports, no. 13, p. 8165, 2023.</p>
+<p>P. Lucey, J. Cohn, K. Prkachin, P. Solomon, and I. Matthews, &quot;Painful data: The UNBC-McMaster shoulder pain expression archive database,&quot; in 2011 IEEE International Conference on Automatic Face Gesture Recognition and Workshops (FG 2011), 2011, pp. 57-64.</p>
+<p>R. Fernandes-Magalhaes, A. Carpio, D. Ferrera, D. Van Ryckeghem, I. Peláez, P. Barjola, M. E. De Lahoz, M. C. Martín-Buro, J. A. Hinojosa, S. Van Damme, L. Carretié, and F. Mercado, &quot;Pain E-motion Faces Database (PEMF): Pain-related micro-clips for emotion research,&quot; Behavior Research Methods, vol. 55, no. 7, pp. 3831-3844, Oct. 2023.</p>
+<p>G. Stratou, J. Van Der Schalk, R. Hoegen, and J. Gratch, &quot;Refactoring facial expressions: An automatic analysis of natural occurring facial expressions in iterative social dilemma,&quot; in 2017 Seventh International Conference on Affective Computing and Intelligent Interaction (ACII), Oct. 2017, pp. 427-433.</p>
+<p>M. Kunz, D. Meixner, and S. Lautenbacher, &quot;Facial muscle movements encoding pain-a systematic review,&quot; Pain, vol. 160, no. 3, pp. 535-549, 2019.</p>
+<p>M. Kunz and S. Lautenbacher, &quot;The faces of pain: A cluster analysis of individual differences in facial activity patterns of pain,&quot; European Journal of Pain, vol. 18, no. 6, pp. 813-823, 2014.</p>
+<p>M. Kunz, K. Prkachin, P. E. Solomon, and S. Lautenbacher, &quot;Faces of clinical pain: Inter-individual facial activity patterns in shoulder pain patients,&quot; European Journal of Pain, vol. 25, no. 3, pp. 529-540, 2021.</p>
+<p>A. Kuznetsova, P. B. Brockhoff, and R. H. B. Christensen, &quot;lmerTest Package: Tests in Linear Mixed Effects Models,&quot; Journal of Statistical Software, vol. 82, pp. 1-26, Dec. 2017.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
