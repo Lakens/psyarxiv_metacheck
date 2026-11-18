@@ -198,7 +198,7 @@ burnout, and personality traits: A reassessment of Fukuzaki and Iwata
 (2027)
 </p>
 <p class="meta">
-2026-11-16 · Metacheck 0.4.4.3
+2026-11-18 · Metacheck 0.4.4.5
 </p>
 </header>
 <div class="mc-main">
@@ -491,8 +491,8 @@ no parsing issues.</p>
 <p>Exact P-Values</p>
 </div>
 <div class="d">
-<p>We found no imprecise <em>p</em> values or <em>p</em>-values of
-exactly zero out of 2 detected.</p>
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 2 detected.</p>
 </div>
 </div>
 <div class="done-row">
@@ -518,12 +518,12 @@ exactly zero out of 2 detected.</p>
 </div>
 <div class="d">
 <ul>
-<li>We assessed AND ran 1 R code file for reproducibility (each in an
+<li>We assessed 1 R code file for reproducibility and ran it (each in an
 isolated Docker container).</li>
 <li>1 of 1 script ran without error when executed.</li>
 <li>2 installable dependencies detected.</li>
-<li>100 statistics stored from the extracted output; 0 of 1 reported
-test matched (0%).</li>
+<li>114 statistics stored from the extracted output; 1 of 1 reported
+test matched (100%).</li>
 </ul>
 <p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
 for the details.</p>
@@ -674,7 +674,7 @@ each in an isolated container, for at most 5 minutes per script.</p>
 </tbody>
 </table>
 <h3 id="comparison-with-the-paper">Comparison with the paper</h3>
-<p>Of the 1 statistical test reported in the paper, 0 were found in the
+<p>Of the 1 statistical test reported in the paper, 1 was found in the
 output of the code.</p>
 <details>
 <summary>
@@ -760,7 +760,7 @@ ran_ok
 <td style="text-align:left;">
 </td>
 <td style="text-align:right;">
-4.4
+2.7
 </td>
 </tr>
 </tbody>
@@ -932,7 +932,7 @@ produced.</em></p>
 &gt; fit &lt;- lavaan(spam, meanstructure=F, data=dfspam)
 &gt; summary(fit, fit.measures=T, ## let&#39;s have a look 
 &gt;         standardized=T, ci=T, rsq=T)
-lavaan 0.7-2 ended normally after 18 iterations
+lavaan 0.7-2 ended normally after 17 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
@@ -1054,8 +1054,8 @@ lavaan is FREE software! Please report any bugs.</code></pre>
 2 succeeded, 0 failed. lavaan, metafor were installed.</p>
 <h4 id="reported-vs.-reproduced">Reported vs. reproduced</h4>
 <p>1 statistical test reported in the manuscript text was checked
-against the extracted analysis output: 0 matched (0 fully, 0 partially)
-— 0% found.</p>
+against the extracted analysis output: 1 matched (1 fully, 0 partially)
+— 100% found.</p>
 <p>Some reported values were only found alongside OTHER components after
 being separated from their own originally-reported neighbours (e.g. a
 mean split from its own confidence interval). The “Plausible” column
@@ -1099,21 +1099,24 @@ Analysis
 χ²=0.34 DF=3 p=0.952
 </td>
 <td style="text-align:left;">
-FALSE
+TRUE
 </td>
 <td style="text-align:left;">
-none
+full
 </td>
 <td style="text-align:left;">
 yes
 </td>
 <td style="text-align:left;">
+χ²=0.34, DF=3, p=0.952
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;">
+Scar_Script.R
 </td>
 <td style="text-align:left;">
+Model Test User Model
 </td>
 </tr>
 </tbody>
@@ -1684,7 +1687,8 @@ How Exact P-Values works
 </summary>
 <div class="fold">
 <p>List any p-values reported with insufficient precision (e.g., p &lt;
-.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
 <p>This module uses regular expressions to identify p-values. It will
 flag any values reported as p &gt; ? or p &lt; numbers greater than
 .001. It will also flag p-values reported as exactly zero (e.g., p =
@@ -1707,6 +1711,19 @@ test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
 significant (“genes with padj &lt; 0.05 were selected”); such a p-value
 is “named” in <code>not_a_test</code>. Notes in other forms, such as a
 marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
 <p>This module sometimes flags false positives when sentences discuss
 how p-value thresholds were set. It can also miss an imprecise p-value
 that is reported against a threshold (“decreased at the p &lt; .05
@@ -1912,6 +1929,21 @@ text (93 of 95) and 90% in reference lists (74 of 82); the labels were
 made by Claude agents from each link’s evidence, and disputed ones
 checked against the deposits. Telling this paper’s own deposit from the
 authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
 <p>If you want to extend the package to be able to download files from
 additional data repositories reach out to the Metacheck development
 team.</p>
