@@ -16,8 +16,8 @@
   "published": "2026-11-16T10:53:46.290948",
   "file": "PsyArXiv_submission_rev.pdf"
  },
- "checked": "2026-11-16T10:59:13+00:00",
- "metacheck_version": "0.4.4.3",
+ "checked": "2026-11-18T11:35:54+00:00",
+ "metacheck_version": "0.4.4.5",
  "converter": "grobid",
  "run_code": true,
  "modules_run": [
@@ -1308,15 +1308,15 @@
      "paper_id": "input",
      "header": "Sample Characteristics",
      "section_type": "results",
-     "power_type": "sensitivity",
-     "statistical_test": null,
+     "power_type": "posthoc",
+     "statistical_test": "other",
      "sample_size": 23,
      "alpha_level": null,
      "power": 0.8,
      "effect_size": 0.61,
      "effect_size_metric": "Cohen's d",
      "software": null,
-     "statistical_test_other": null,
+     "statistical_test_other": "t-test",
      "effect_size_metric_other": null,
      "software_other": null,
      "complete": false,
@@ -1326,10 +1326,10 @@
    "summary_table": null,
    "section": "method",
    "report": [
-    "We used the LLM model 'vllm/DeepSeek-V41-Flash-1017-FP8' to check the contents of 2 paragraphs that contained words suggesting they might contain power analyses.",
-    "Some essential information could not be detected: statistical_test, alpha_level, software",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(power_id = 1:2, power_type = c(\"apriori\", \"sensitivity\"\n), statistical_test = c(\"paired t-test\", NA), sample_size = c(34, \n23), alpha_level = c(0.05, NA), power = c(0.8, 0.8), effect_size = c(0.5, \n0.61), effect_size_metric = c(\"Cohen's d\", \"Cohen's d\"), software = c(\"G*Power\", \nNA)), row.names = c(NA, -2L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"\n))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
-    "",
+    "We used the LLM model 'vllm/qwen3-8-27b-fp8' to check the contents of 2 paragraphs that contained words suggesting they might contain power analyses.",
+    "Some essential information could not be detected: alpha_level, software",
+    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(power_id = 1:2, power_type = c(\"apriori\", \"posthoc\"\n), statistical_test = c(\"paired t-test\", \"other\"), sample_size = c(34, \n23), alpha_level = c(0.05, NA), power = c(0.8, 0.8), effect_size = c(0.5, \n0.61), effect_size_metric = c(\"Cohen's d\", \"Cohen's d\"), software = c(\"G*Power\", \nNA)), row.names = c(NA, -2L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"\n))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
+    "You reported a power analysis that has been classified as 'post-hoc'. Calculating observed power is [almost never useful](https://lakens.github.io/statistical_inferences/08-samplesizejustification.html#sec-posthocpower). If you actually performed a sensitivity power analysis, label it as such explicitly.",
     "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(power_id = c(\"1\", \"2\"), text = c(\"An <strong>a priori</strong> <strong>power</strong> analysis using G*<strong>Power</strong> 3.1 was used to help determine sample size before enrollment (Faul et al., 2007), resulting in N = 34 for a matched-pairs t test (two-tailed, dz = 0.50, α = .05, <strong>power</strong> = .80). We targeted 40 individuals anticipating a 15% attrition rate.\", \n\"Of the 40 original participants enrolled, 85.0% (n = 34) completed T3. Seventeen participants missed the 6-month assessment window, leaving a sample of 23 (57.5% of baseline); of these 17, 11 had completed T3 and six had completed neither follow-up. Thus, the <strong>power</strong> analysis held for T3, but not for T6 where the 23 remaining participants allow for 80% <strong>power</strong> to detect effects of dz = 0.61 or larger. To test if there were significant differences in any of our outcome measures at T0, Welch's independent-samples t tests were run comparing T3 completers to non-completers on all seven clinical scales. These revealed no significant differences (all ps > .45). The same comparisons at 6 months showed no significant baseline differences (all ps > .06), but completers had higher baseline depression scores (PHQ-9; M = 11.87 vs. 8.24, d = 0.59, p = .065), PTSD severity (PCL-5; M = 39.96 vs. 28.00, d = 0.56, p = .075), anxiety (GAD-7; d = 0.42) and lower life satisfaction (SWLS; d = -0.51) than non-completers. Among participants who completed the 3-month assessment, those lost before 6 months had smaller 3-month improvements than those retained (PCL-5 of -5.2 vs. -13.0; PHQ-9 of -1.8 vs. -3.4) and fewer training sessions by 3 months (M = 23.1 vs. 32.0), although M2CQ change was similar (-5.6 in both groups).\"\n)), row.names = c(NA, -2L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"\n))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
     "::: {.callout-tip title=\"Learn More\" collapse=\"true\"}\n\nPower analyses need to contain the following information to be interpretable: the type of power analysis, the statistical test, the software used, sample size, critical alpha criterion, power level, effect size, and an effect size metric. In addition, it is recommended to make sure the power analysis is reproducible (by sharing the code, or a screenshot, of the power analysis), and to provide good arguments for why the study was designed to detect an effect of this size.\n\nFor an a-priori power analysis, where the sample size is determined, reporting all information would look like:\n\n> An a priori power analysis for an independent samples t-test, conducted using the pwr.t.test function from pwr (Champely, 2020), indicated that for a Cohen's d = 0.5, an alpha level of 0.05, and a desired power level of 80% required at least 64 participants in each group.\n\nFor a sensitivity power analysis, this sentence would look like:\n\n> A sensitivity power analysis for an independent samples t-test, conducted using the pwr.t.test function from pwr (Champely, 2020), indicated that with 64 participants in each group, and an alpha level of 0.05, a desired power level of 80% was reached for an effect size of d = 0.5.\n\n:::\n"
    ]
@@ -1386,7 +1386,8 @@
      "expanded": "These revealed no significant differences (all ps > .45).",
      "imprecise": true,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "ps > .06",
@@ -1404,7 +1405,8 @@
      "expanded": "The same comparisons at 6 months showed no significant baseline differences (all ps > .06), but completers had higher baseline depression scores (PHQ-9; M = 11.87 vs.",
      "imprecise": true,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .065",
@@ -1422,7 +1424,8 @@
      "expanded": "8.24, d = 0.59, p = .065), PTSD severity (PCL-5; M = 39.96 vs.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .075",
@@ -1440,7 +1443,8 @@
      "expanded": "28.00, d = 0.56, p = .075), anxiety (GAD-7; d = 0.42) and lower life satisfaction (SWLS; d = -0.51) than non-completers.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .071",
@@ -1458,7 +1462,8 @@
      "expanded": "With Bonferroni correction across all 14 comparisons, seven of eight primary comparisons remained significant (3-month M2CQ adjusted p = .071), and no secondary comparison did.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p ≤ .003",
@@ -1476,7 +1481,8 @@
      "expanded": "The results were consistent with completeronly analyses, where all four primary outcomes showed significant improvements from baseline to T3 and T6 (all p ≤ .003).",
      "imprecise": true,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "pFDR = .045",
@@ -1494,7 +1500,8 @@
      "expanded": "Two of the three secondary outcomes showed statistically significant differences at T3 compared to baseline (GSE; dz = 0.45, pFDR = .045, SWLS; dz = 0.39, pFDR = .047).",
      "imprecise": false,
      "not_a_test": "named",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "pFDR = .047",
@@ -1512,7 +1519,8 @@
      "expanded": "Two of the three secondary outcomes showed statistically significant differences at T3 compared to baseline (GSE; dz = 0.45, pFDR = .045, SWLS; dz = 0.39, pFDR = .047).",
      "imprecise": false,
      "not_a_test": "named",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "pFDR = .020",
@@ -1530,7 +1538,8 @@
      "expanded": "At T6, SWLS was significantly higher (dz = 0.60, pFDR = .020) and WHODAS was significantly lower (dz = 0.60, pFDR = .020) versus baseline, both indicating improvement.",
      "imprecise": false,
      "not_a_test": "named",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "pFDR = .020",
@@ -1548,7 +1557,8 @@
      "expanded": "At T6, SWLS was significantly higher (dz = 0.60, pFDR = .020) and WHODAS was significantly lower (dz = 0.60, pFDR = .020) versus baseline, both indicating improvement.",
      "imprecise": false,
      "not_a_test": "named",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .002",
@@ -1566,7 +1576,8 @@
      "expanded": "More training sessions were associated with greater improvements from T0 to T3 for PCL-5 (r = .51, 95% CI [0.20, 0.72], p = .002), GAD-7 (r = .49, 95% CI [0.18, 0.71], p = .004), and PHQ-9 scores (r = .39, 95% CI [0.07, 0.65], p = .021), and remained significant after FDR correction (pFDR ≤ .049; Spearman ρ = .39-.45).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .004",
@@ -1584,7 +1595,8 @@
      "expanded": "More training sessions were associated with greater improvements from T0 to T3 for PCL-5 (r = .51, 95% CI [0.20, 0.72], p = .002), GAD-7 (r = .49, 95% CI [0.18, 0.71], p = .004), and PHQ-9 scores (r = .39, 95% CI [0.07, 0.65], p = .021), and remained significant after FDR correction (pFDR ≤ .049; Spearman ρ = .39-.45).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .021",
@@ -1602,7 +1614,8 @@
      "expanded": "More training sessions were associated with greater improvements from T0 to T3 for PCL-5 (r = .51, 95% CI [0.20, 0.72], p = .002), GAD-7 (r = .49, 95% CI [0.18, 0.71], p = .004), and PHQ-9 scores (r = .39, 95% CI [0.07, 0.65], p = .021), and remained significant after FDR correction (pFDR ≤ .049; Spearman ρ = .39-.45).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "pFDR ≤ .049",
@@ -1620,7 +1633,8 @@
      "expanded": "More training sessions were associated with greater improvements from T0 to T3 for PCL-5 (r = .51, 95% CI [0.20, 0.72], p = .002), GAD-7 (r = .49, 95% CI [0.18, 0.71], p = .004), and PHQ-9 scores (r = .39, 95% CI [0.07, 0.65], p = .021), and remained significant after FDR correction (pFDR ≤ .049; Spearman ρ = .39-.45).",
      "imprecise": true,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "pFDR = .021",
@@ -1638,7 +1652,8 @@
      "expanded": "Among the 23 participants with both follow-ups, PHQ, GAD and PCL scores continued to improve from 3 month to 6 month follow-up (dz = 0.55-0.60, 95% CIs from [0.10, 0.98] to [0.15, 1.04], all pFDR = .021), whereas M2CQ scores did not change significantly.",
      "imprecise": false,
      "not_a_test": "named",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1656,7 +1671,8 @@
      "expanded": "Excluding one PCL-5 reduction of 66 points (z = -3.32) at T3 did not remove the effect (dz = 0.64, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .014",
@@ -1674,7 +1690,8 @@
      "expanded": "Excluding one GSE score (z = -3.50) at T6 made the improvement significant (dz = 0.57, p = .014; Table S3).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "pFDR < .05",
@@ -1692,7 +1709,8 @@
      "expanded": "BL = baseline. * pFDR < .05 Table 3b Outcomes at 6 Months (n = 21-23) Measure BL M (SD) † 6-mo M (SD) dz 95% CI d(BL SD) t p pFDR Primary outcomes PHQ-9 11.87 (6.73) 6.39 (3.89) 1.04 [0.52, 1.55] 0.81 t(22) = -5.00 < .001 < .001* GAD-7 11.17 (6.19) 6.09 (4.09) 0.93 [0.43, 1.41] 0.82 t(22) = -4.45 < .001 < .001* PCL-5 39.96 (23.08) 21.13 (17.84) 1.03 [0.52, 1.54] 0.82 t(22) = -4.96 < .001 < .001* M2CQ 32.65 (12.17) 23.55 (13.63) 0.84 [0.33, 1.33] 0.75 t(20) = -3.84 .001 .001* Secondary outcomes GSE 29.04 (6.96) 31.00 (6.88) 0.22 [-0.20, 0.63] 0.28 t(22) = 1.06 .301 .301 WHODAS 43.55 (23.76) 30.95 (20.70) 0.60 [0.14, 1.05] 0.53 t(21) = -2.82 .010 .020* SWLS 19.62 (7.17) 22.95 (7.37) 0.60 [0.12, 1.06] 0.47 t(20) = 2.73 .013 .020* Note.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "pFDR < .05",
@@ -1710,7 +1728,8 @@
      "expanded": "BL = baseline. * pFDR < .05",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     }
    ],
    "summary_table": null,
@@ -2300,7 +2319,8 @@
    "table": null,
    "summary_table": null,
    "section": "results",
-   "report": "We found no links to repositories on the Open Science Framework, Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others), Invenio (Zenodo and others), Dataverse, Figshare, Dryad, 4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data portals."
+   "report": "We found no links to repositories on the Open Science Framework, Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others), Invenio (Zenodo and others), Dataverse, Figshare, Dryad, 4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data portals.",
+   "ownership": []
   },
   "code_check": {
    "module": "code_check",
@@ -2333,7 +2353,7 @@
      "paper_id": "input",
      "power_n": 2,
      "power_complete": 1,
-     "power_statistical_test": 1,
+     "power_statistical_test": 2,
      "power_sample_size": 2,
      "power_alpha_level": 1,
      "power_power": 2,
@@ -2361,6 +2381,7 @@
      "replications": 0,
      "n_imprecise": 4,
      "n_zero": 0,
+     "n_impossible": 0,
      "n_nonsignificant": 5,
      "ttests_with_es": 0,
      "ttests_without_es": 14,
@@ -2436,6 +2457,10 @@
    "section": "reference",
    "report": "We checked 50 references with DOIs. No citations to articles in the FLoRA database were found."
   }
+ },
+ "rerun_of": {
+  "metacheck_version": "0.4.4.3",
+  "checked": "2026-11-16T10:59:13+00:00"
  },
  "paper": {
   "paper_id": "input",
