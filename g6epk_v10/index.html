@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Linearity-preserving scores</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Linearity-preserving scores
+</p>
+<p class="meta">
+2026-11-18 · Metacheck 0.4.4.18
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to fix</span></span><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>15</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fine">Fine <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(15)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>Participants gave their consent for participation and publication at
+the time of data collection.</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>This paper uses openly available and non-sensitive data and was
+therefore declared exempt from ethics review.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 28 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 28 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 28 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>This paper uses openly available and non-sensitive data and was therefore declared exempt from ethics review. Participants gave their consent for participation and publication at the time of data collection.</p>
+<h3>Introduction</h3>
+<p>When we use a measure 𝑋 for some hypothesized variable of the natural world 𝑇 𝑋 that is not directly observable (i.e., latent), then that measure will depend on some function 𝑔 of one or more indicators from that natural world 𝐼 𝑋 . For example, when using an infrared ear thermometer, the goal is to measure core temperature 𝑇 𝑋 as indicated by infrared light 𝐼 𝑋 , which is transformed within the thermometer by a known function 𝑔 to yield the measure of temperature 𝑋. When there is little error, such a procedure may yield measures that are very close to the true values (𝑋 ≈ 𝑇 𝑋 ), and that make it more or less unproblematic to use those measures as if they directly correspond to the true variables. However, if the indicators 𝐼 𝑋 only capture 𝑇 𝑋 imprecisely, so that the measure 𝑋 has some substantial error, then that will bias the estimates of the latent variable, and, in turn, that variable&#x27;s relationship with other variables, unless the measure is defined in a way so that error is accounted for.</p>
+<p>Errors are often unaccounted when psychological researchers take their measurements. For example, if peoples&#x27; perception or cognition, or the measurement instrument itself, only has the precision to report a truly continuous trait (𝑇 𝑋 ) through some discrete categories (e.g., &quot;a lot&quot;, &quot;strongly agree&quot;), then even in the best-case scenario the indicator (𝐼 𝑋 ) can only specify a range of true values to which each indicator value is associated. Therefore, there will be some error, however 𝑔 is specified. Depending on the properties of the errors, this may bias various statistics.</p>
+<p>In contrast, accounting for errors is regularly considered in sciences such as physics. When a measurement is to be made, properties of the measurement situation and the measurement instrument are considered, and the instrument is fine-tuned in each specific situation to ensure errors are small enough for purposes of the measurement.</p>
+<p>There are certainly many statistical methods for handling various errors. However, these methods are often specialized to a particular type of application, which means a more general consideration of errors can be beyond the scope of most applied researchers, beyond the methods in which they have had special training. These methods also often treat measurement and statistical modelling of errors separately, which may explain why measurement without statistical modelling of errors remains common. Contrast this with the procedure above, where it is recognized that modelling and handling errors is required before measurements are taken, and that this is to affect how measurements are scored. Developing a general model of how to define functions 𝑔 from a set of indicators 𝐼 𝑋 , based on an error model, can hopefully aid psychological researchers in incorporating error modelling into their general analysis procedure with greater regularity.</p>
+<p>The goal with this paper is to develop principles for functions 𝑔 and corresponding scorings for 𝑋 that avoid bias in latent linear models for a wide category of errors. In particular, also for errors for which it is not possible to define a measurement decomposition as in Classical Test Theory (CTT): 𝑋 = 𝑇 𝑋 + 𝜀 𝑋 such that 𝐸(𝜀 𝑋 |𝑇 𝑋 = 𝑡) = 0 for all values 𝑡 of 𝑇; and for errors for which the Item Response Theory (IRT) assumption about local independence is not fulfilled. This will lead to a novel way of estimating regression parameters under various error structures through the same general steps. We return to some further advantages of this method in the Discussion. *𝐼 𝑌 , 𝐼 𝑋 : Indicators. The variables we observe that, together with an appropriate measurement model, provide some information about the true variables. By design, we define the indicators very broadly so that they may represent various types of observations and measurement issues. If 𝑇 𝑋 is observed directly, then 𝐼 𝑋 = 𝑇 𝑋 . If data is sometimes missing for 𝑇 𝑋 , then 𝐼 𝑋 = 𝑇 𝑋 when 𝑇 𝑋 is observed, and 𝐼 𝑋 = &quot;𝑁𝐴&quot; otherwise. If 𝑇 𝑋 has been discretized around a threshold 𝑐, then we may for example have 𝐼 𝑋 = &quot;𝑎𝑏𝑠𝑒𝑛𝑡&quot; when 𝑇 𝑋 ≤ 𝑐, and 𝐼 𝑋 = &quot;𝑝𝑟𝑒𝑠𝑒𝑛𝑡&quot; when 𝑇 𝑋 &gt; 𝑐. If 𝑇 𝑋 can only be observed with some random error 𝜀, then 𝐼 𝑋 = 𝑇 𝑋 + 𝜀. If 𝑇 𝑋 is a binary variable where the observations are misclassified with some probability 1 -𝑠 (when 𝑇 𝑋 = 1) and 1 -𝑐 (when 𝑇 𝑋 = 0), then 𝐼 𝑋 = 𝑇 𝑋 𝑆 + (1 -𝑇 𝑋 )(1 -𝐶), where 𝑆, 𝐶 are independent binary variables with probabilities 𝑠 (the sensitivity) and 𝑐 (the specificity). If 𝑇 𝑋 is an ability measured by 𝐽 binary test items, where the probability of correctly answering item 𝑗 given 𝑇 𝑋 is 1 (1 + exp (-𝑎 𝑗 (𝑇 𝑋 -𝑏 𝑗 ))) ⁄ , each item conditionally independent given 𝑇 𝑋 , then we may, for example, write 𝐼 𝑋 = (𝐼 1 , … , 𝐼 𝐽 ), where 𝐼 𝑗 = &quot;𝑖𝑛𝑐𝑜𝑟𝑟𝑒𝑐𝑡&quot; if 𝑇 𝑋 + 𝜀 𝑗 ≤ 𝑏 𝑗 and 𝐼 𝑗 = &quot;𝑐𝑜𝑟𝑟𝑒𝑐𝑡&quot; if 𝑇 𝑋 + 𝜀 𝑗 &gt; 𝑏 𝑗 , where the 𝜀 𝑗 are independent of 𝑇 𝑋 and each other and follow logistic distributions with location parameters 0 and scale parameters 1 𝑎 𝑗 ⁄ .</p>
+<p>If 𝐼 𝑋 is an instrumental variable with a linear relationship to the true variable of interest (with non-zero slope), then 𝐼 𝑋 = (𝐸(𝑇 𝑋 |𝐼 𝑋 ) -𝑏 0 ) 𝑏 1 ⁄ , where 𝐸(𝑇 𝑋 |𝐼 𝑋 ) is assumed to avoid an unwanted correlation with the regression error.</p>
+<p>*𝑌, 𝑋: Measures. Defined by some transformations (𝑔 from the notation in the introduction) of the indicators 𝐼 𝑌 , 𝐼 𝑋 . The goal is to define the transformations so that 𝑌, 𝑋 retain the desired relationship between 𝑇 𝑌 , 𝑇 𝑋 . When errors 𝜀 are random, the classical approach sets 𝑋 = 𝐼 𝑋 = 𝑇 𝑋 + 𝜀, with no errors 𝑋 = 𝐼 𝑋 = 𝑇 𝑋 . There is therefore no distinction between 𝑋 and 𝐼 𝑋 in these approaches (in both cases 𝑔(𝐼 𝑋 ) = 𝐼 𝑋 ). We consider more general 𝐼 𝑋 , so we have to consider other functions from 𝐼 𝑋 to 𝑋. For example, if 𝐼 𝑋 has two states, &quot;present&quot; and &quot;absent&quot;, the function must still produce a numeric value for 𝑋 for it to be part of a linear relationship. As another example, in the instrumental variable approach the goal is to define 𝑋 so 𝑋 = 𝐸(𝑇 𝑋 |𝐼 𝑋 ) = 𝑏 0 + 𝑏 1 𝐼 𝑋 (so 𝑔(𝐼 𝑋 ) = 𝑏 0 + 𝑏 1 𝐼 𝑋 ).</p>
+<h3>Returning Example: Tetrachoric correlations (setup)</h3>
+<p>To illustrate the different steps, we use tetrachoric correlations (see Olsson, 1979) as a returning example throughout the article (we focus on tetrachoric rather than polychoric correlations as we will compare our model against a particularly fast existing method). The tetrachoric model concerns a type of discretization where the true variables (𝑇 𝑋 , 𝑇 𝑌 ), neither of which is observed directly, follow a bivariate normal distribution with some correlation 𝜌 to be estimated. That is, we observe (𝐼 𝑋 , 𝐼 𝑌 ), where each of these variables have two ordered scores (𝑥 0 , 𝑥 1 , 𝑦 0 , 𝑦 1 ), so that 𝐼 𝑋 = 𝑥 0 if 𝑇 𝑋 ≤ 𝑐 𝑋 and 𝐼 𝑋 = 𝑥 1 if 𝑇 𝑋 &gt; 𝑐 𝑋 , and correspondingly for 𝐼 𝑌 , where (𝑐 𝑋 , 𝑐 𝑌 ) are some unknown thresholds. Without loss of generality, we may assume the marginal distributions of (𝑇 𝑋 , 𝑇 𝑌 ) are standard normal, in which case 𝜌 is also the slope when 𝑇 𝑌 is regressed on 𝑇 𝑋 , or vice versa. The most common method to estimate tetrachoric (and polychoric) correlations is to estimate the thresholds in a first step, and then to estimate 𝜌 in a latter step through maximum likelihood (see Olsson, 1979). When we return to this example after Theorem 1, we will illustrate how (𝑋, 𝑌) should be scored to retain the linear relationship from this information. After Theorem 2, we will then show how to apply this information for estimation.</p>
+<h3>The linear model</h3>
+<p>When the true outcome 𝑇 𝑌 has a linear relationship with 𝑝 true predictors 𝑻 𝑿 (𝑇 𝑋,1 to 𝑇 𝑋,𝑝 and a constant 𝑇 𝑋,0 = 1), all variables have defined first and second moments and non-zero variance, and predictors are not perfectly multicollinear, then, denoting the support of 𝑻 𝑿 with Ω 𝑿 : 𝑇 𝑌 = 𝑻 𝑿 𝑇 𝜷 + 𝜖, 𝐸(𝜖|𝑻 𝑿 = 𝒕) = 0 ∀𝒕 ∈ Ω 𝑻 𝑿 (1: 𝐿𝑖𝑛𝑒𝑎𝑟 𝑚𝑜𝑑𝑒𝑙)</p>
+<p>For some intercept and slopes 𝜷. The 𝜷-parameters then fulfill: min 𝒃 𝐸((𝑇 𝑌 -𝑻 𝑿 𝑇 𝒃) 2 ) = 𝜷 (2: 𝐿𝑒𝑎𝑠𝑡 𝑠𝑞𝑢𝑎𝑟𝑒𝑠)</p>
+<p>Note that instead of treating 𝑻 𝑿 as fixed in the least squares solution, we here follow the approach of treating 𝑻 𝑿 as random variables. This is because we will work with errors, and with errors in 𝑻 𝑿 their values will typically not be fixed, nor fully within our control.</p>
+<p>Considering the distribution of 𝑻 𝑿 will thus prove useful (in particular its expectations).</p>
+<p>With a sample of independent identically distributed observations, 𝜷 may therefore be estimated through ordinary least squares (OLS) provided that we can observe 𝑇 𝑌 and 𝑻 𝑿 directly. In terms of covariances and expected values, if we use 𝑻 𝑿,𝟏:𝒑 and 𝜷 𝟏:𝒑 to denote 𝑻 𝑿 and 𝜷 without the intercept, then we can write (see e.g., Johnson &amp; Wichern, 2014, p.402):</p>
+<p>Where 𝐶𝑜𝑣(𝑻 𝑿,𝟏:𝒑 ) is the covariance matrix between all 𝑻 𝑿,𝟏:𝒑 , and 𝐶𝑜𝑣(𝑻 𝑿,𝟏:𝒑 , 𝑇 𝑌 ) is the covariance vector between each 𝑻 𝑿,𝟏:𝒑 and 𝑇 𝑌 . These formulas on the left describe the least-squares solution in (2) more generally, both when the linear model in (1) is fulfilled, but also when the relationship is not truly linear, as applied in Corollary 3.</p>
+<p>When OLS estimation can be conducted, it has several attractive properties such as speed of estimation, unbiasedness, and non-dependence on the exact distribution of the error term 𝜖.</p>
+<p>When errors are independent of the predictors, the OLS estimators also have the minimum variance of all unbiased estimators, by the Gauss-Markov theorem (although this cannot in general be assumed for the measures we will define, meaning weighted least squares may yield increased precision if it can be defined). With errors in the measurements 𝑌 and 𝑿, however, it is typically not true that:</p>
+<p>When ( 5) is not true, the errors have produced biases in the linear relationship. The goal in this article is to specify conditions that allow researchers to define their measures in such a way that biases are avoided as the sample size increases.</p>
+<h3>Random errors and measurement decomposition</h3>
+<p>The perhaps most foundational type of errors are so-called random errors from CTT (Lord &amp; Novick, 1968), which are unbiased and independent of all other sources of variance. Here we discuss the properties of random errors in some detail. We later show how our alternative measurements differ from this setup. With random errors it is possible to define a measurement decomposition (see also e.g., Liu et al., 2025; McDonald, 2011):</p>
+<p>Where 𝜀 𝑀,𝑋 is the measurement error (note that we use 𝜖 for error in the linear relationship and 𝜀 for errors in the variables throughout this paper). With errors that fulfill a measurement decomposition, it is possible to define a reliability for each measurement in terms of the proportion of the variance in the measurement that stems from the true variable: 𝑉𝑎𝑟(𝑇 𝑋 ) 𝑉𝑎𝑟(𝑋) = 𝑉𝑎𝑟(𝑇 𝑋 ) 𝑉𝑎𝑟(𝑇 𝑋 ) + 𝑉𝑎𝑟(𝜀 𝑀,𝑋 ) = 1 -𝑉𝑎𝑟(𝜀 𝑀,𝑋 ) 𝑉𝑎𝑟(𝑋) (7: 𝑅𝑒𝑙𝑖𝑎𝑏𝑖𝑙𝑖𝑡𝑦) These equalities are fulfilled as (6) ensures the true variable and error are uncorrelated, so: 𝑉𝑎𝑟(𝑋) = 𝑉𝑎𝑟(𝑇 𝑋 + 𝜀 𝑀,𝑋 ) = 𝑉𝑎𝑟(𝑇 𝑋 ) + 𝑉𝑎𝑟(𝜀 𝑀,𝑋 )</p>
+<p>With this information, it is possible to define a covariance relation that maintains the latent regression parameters. As all errors are independent of all other variables, the covariances between any two unique measurements (whether predictor or outcome) equals the covariance between the true variables:</p>
+<p>While the variance for a measurement equals the variance of the true variable plus the variance of the error, as expressed in (8). Furthermore, the expected values of the measures are the same as those for the true variables due to the assumption of zero bias. Therefore, if we let 𝝆 𝑿𝑿 be a 𝑝 × 𝑝 matrix with reliabilities on the diagonal and ones for all off-diagonal elements, where we assume all reliabilities are non-zero, and if we let ∘ denote the elementwise product, then:</p>
+<p>In other words, in terms of covariances, the relationship &quot;almost&quot; remains even if we use the measurements instead of the true variables, except that the diagonal elements of 𝐶𝑜𝑣(𝑿 𝟏:𝒑 ) have to be modified by the reliabilities. Note also that if there is only error in the outcome, then the covariance relationship is what we would expect from a linear relationship, as we do not need to account for this variable&#x27;s reliability. In fact, the relationship is then the correct linear one, as the total regression error becomes 𝜀 𝑌 + 𝜖, which is still zero for each value of the predictors by the assumption that 𝜀 𝑌 is completely random.</p>
+<p>The equalities above also mean that if 𝜌 2 is the population explained variance when 𝑇 𝑌 is regressed on 𝑻 𝑿 𝑇 𝜷, then:</p>
+<p>As the nominator equals 𝑉𝑎𝑟(𝑻 𝑿 𝑇 𝜷) and the denominator equals 𝑉𝑎𝑟(𝑇 𝑌 ). Note that when we only have one predictor, this simplifies to the Spearman (1904) correction, but for the explained variance, as this ensures 𝛽1 = 𝐶𝑜𝑣(𝑋, 𝑌) (𝑉𝑎𝑟(𝑋)𝜌 𝑋𝑋 ) ⁄.</p>
+<p>However, the expression in (10) means that we do not have a truly linear relationship if there is error in the predictors, so we cannot directly employ OLS nor methods based on it (e.g., weighted least squares). The assumptions behind random errors are also rather strong.</p>
+<p>In particular, the assumption that errors are independent (or even in a simpler form, uncorrelated) of all other sources of variance (i.e., all other errors and true variables), is a very strong one. Furthermore, as we now show in Lemma 1, there are also errors for which no type of scoring can fulfill the measurement decomposition above.</p>
+<h3>Lemma 1: Existence of unbiased measurement decompositions</h3>
+<p>Suppose the indicator 𝐼 𝑋 has k distinct levels, and that the true variable 𝑇 𝑋 has at least k+1 distinct scores (or if k is infinite, suppose the true variable has a higher cardinality). Then it is in general impossible to find scores for 𝑋 such that the unbiased measurement decomposition in (6) is fulfilled.</p>
+<p>Note that we consider a more lenient case than when scores for the measurement are fixed and defined in advance. Here, we consider the possibility that we have some freedom to score the measure 𝑋 (by applying some measurement model). Lemma 1 shows that we will still not always be able to find scores so that an unbiased measurement decomposition is fulfilled.</p>
+<p>Proof: The unbiased measurement decomposition in (6) implies that 𝑋 must fulfill:</p>
+<p>Where 𝑡 𝑗 is the j:th score for 𝑇 𝑋 (by some arbitrary ordering of these scores). Meanwhile, assuming a discrete distribution for the indicator (the proof for the continuous case will only have to change the sum below to an integral), for all 𝑗 in {1, … , 𝑘 + 1, … }, the expected value on the left can be expanded as:</p>
+<p>Where 𝑥 𝑗 is the j:th score for 𝑋 (by some arbitrary ordering), and we let 𝐼 𝑋 take on the values 1 to k, which correspond to those scores for 𝑋. Therefore, if an unbiased measurement decomposition is fulfilled, then, again for all 𝑗 in {1, … , 𝑘 + 1, … }, we must have:</p>
+<p>This yields a system of 𝑘 unknowns (the 𝑥 𝑗 ) in at least 𝑘 + 1 equations. Thus, the system of equations is overdetermined and is therefore almost always inconsistent by usual properties of systems of equations (the rare exception is when some equations are linear combinations of the others). A proof for the infinite case would proceed by observing that there is no injective function from the scores for 𝑇 𝑋 to those for 𝑋. □</p>
+<p>Example: Suppose we have a sole binary IRT item (the indicator 𝐼 𝑋 ) from a known (or well estimated) 2-parameter logistic model, where the true trait 𝑇 𝑋 follows a standard normal distribution (with an infinite number of possible scores), and suppose the probability that someone with a true trait level 𝑡 answers the item correctly is 1 (1 + exp(-𝑡)) ⁄ . Then, to fulfill an unbiased measurement decomposition, we, for example, require:</p>
+<p>Where 𝑥 0 /𝑥 1 are the scores given to people who answer the item incorrectly/correctly. This implies that 𝑥1 = -𝑥 0 , which in turn implies: 1 = 𝑥 0 exp(-1) -1 1 + exp(-1) ⇔ 𝑥0 = -1 + exp(-1) 1 -exp(-1) ⇒ 𝑥1 = 1 + exp(-1) 1 -exp(-1) Therefore, to fulfill an unbiased measurement decomposition, for any arbitrary score 𝑡 of 𝑇 𝑋 we must have:</p>
+<p>Which is not fulfilled for general 𝑡 in 𝑇 𝑋 . Therefore, we cannot define an unbiased measurement decomposition here (nor would we expect to be able to do so for any finite number of items).</p>
+<p>Examples where Lemma 1 lead to a general lack of unbiased measurement decompositions include discretized and IRT measurements (as above). It also applies to missing data in case we do not want to re-score observed values (and so only have a score for the missing cases to work with). In other words, one cannot have measurements that are unbiased in relation to the true variable, by the measurement decomposition criterion, for all types of errors, and by (10) a bias is also typically produced for the linear relationship. This makes scoring according to a measurement decomposition less attractive for our purposes.</p>
+<p>Next, we therefore consider other ways of assigning scores to preserve the linear relationship.</p>
+<h3>Prediction decomposition</h3>
+<p>An alternative to the measurement decomposition is a so-called prediction decomposition (see also e.g., Liu et al., 2025; McDonald, 2011):</p>
+<p>Where 𝜀 𝑃,𝑋 is the prediction error. Under a prediction decomposition, the measurement is understood as an attempt at predicting the true variable, which can come with some error.</p>
+<p>When the prediction decomposition above holds, then those prediction errors are unbiased for each level of the measurement. Note that this is just a linear model where the measure acts as the predictor while the true variable acts as the outcome. The measurement decomposition was instead a linear model where the measure acted as the outcome and the true variable acted as the predictor (see also discussion in Liu et al., 2025; McDonald, 2011).</p>
+<p>We now discuss how two special methods can be understood as prediction decompositions aimed at preserving the linear relationship. We present these as seeing them can help with understanding the broad applicability of this type of scoring.</p>
+<p>First, Berkson (1950) considered how repeated manipulations of a predictor (measurably) set to the same level may produce random errors around this level when that exact level is not perfectly controlled for.</p>
+<p>As shown by Berkson, when the errors around the measurement values for a single predictor are truly randomand so, when a prediction decomposition for that sole predictor is fulfilledthen the linear relationship will be retained. As an example, say that researchers study the effect of a nutrition compound on plant height using two groups, one not given the nutrition, and one given it. Say there are n plants in each group and that k grams of the nutrition are given to the experimental group. Now, if the effect is linear (for the included range of nutrition), then even if some plants in the experimental condition happen to get more of the nutrition than other plants then this will not bias the estimate of the effect, which is still 𝛽 0 in the control group, and 𝛽 0 + 𝛽 1 * 𝑘 𝑛 ⁄ in the experimental group.</p>
+<p>Second, in typical instrumental variables methods (see Pearl, 2000), the measured predictor of interest (we only consider one predictor) has an unwanted correlation with the regression error term 𝜖 that cannot be handled by including further control variables. Instead, one assumes there exists a so-called instrumental variable, which can linearly predict the predictor of interest in such a way that none of the variation in common with the error term 𝜖 is included in those linear predictions (this works when the instrumental variable has no correlation with the outcome beyond its correlation with the predictor of interest). These linear predictions then (asymptotically) fulfill an unbiased prediction decomposition, where the predicted values from the instrumental variable act as 𝑋, and the part of the predictor of interest that is not correlated with the error term acts as 𝑇 𝑋.</p>
+<p>In Lemma 2, we now show that an unbiased prediction decomposition, in contrast to an unbiased measurement decomposition, is possible to define for any type of measure. As such, it can provide a more general type of scoring for preserving latent linear relationships.</p>
+<h3>Lemma 2: Existence of unbiased prediction decompositions</h3>
+<p>It is always possible to define an unbiased prediction decomposition.</p>
+<p>Proof: By the unbiased prediction decomposition, we require:</p>
+<p>Where 𝑥 𝑗 is the j:th score for 𝑋, which is given when 𝐼 𝑋 = 𝑗 (again, we assume we have some arbitrary ordering). Assuming a discrete distribution in the true variable (again, the proof for the continuous case merely changes this sum to an integral), the expected value can be expanded as:</p>
+<p>Thus, an unbiased prediction decomposition requires that, for all 𝑗 in {1, … , 𝑘}:</p>
+<p>This has exactly one unknown (the 𝑥 𝑗 ) per equation. We therefore at most have a critically determined system of equations, which is always consistent. □</p>
+<h3>Combined measurement and prediction decomposition</h3>
+<p>In the above examples, we focused on a single predictor. In latent factor regression models with continuous measures, Skrondal and Laake (2001) showed how joint regression scores could be used for the predictors, while Bartlett scores could be used for the outcome, to asymptotically retain the linear relationship. In an extension to IRT-model scoring of categorical items (under the usual assumption of conditional independence given the latent trait), Lu and Thomas (2008) in turn showed how the linear population relationship could be retained under an IRT model (so that measures fulfilled the usual local independence assumption conditional on the true/latent variables) when using joint expected-a-posteriori (EAP) scores for the predictors, and &quot;conditionally unbiased&quot; scores for the outcome, together with a further assumption about lack of correlation between errors of the predictors and outcome. In the measurement-and prediction decomposition language, Bartlett scores and the conditional unbiasedness scores of Lu and Thomas (2008) each correspond to an unbiased measurement decomposition, in that the expected value of the measures equal the true values for each value of the true variable. Meanwhile, the regression-and EAP scores correspond to a joint prediction decomposition, in that for each value of the measurement, the expected value of the true variable. The joint structure ensures that errors between predictors are uncorrelated.</p>
+<p>Specifically, Lu and Thomas (2008) make the four assumptions below, which we have translated to our notation. We start with these before presenting the assumptions of Skrondal and Laake (2001), as Lu and Thomas relate their conditions to this earlier paper, which we will do as well.</p>
+<p>1. (L&amp;T.1): The indicators for the outcome 𝐼 𝑌 , and for the predictors 𝑰 𝑿 represent vectors of responses to 𝑞 and 𝑝 test items, respectively. The result of the different test items for 𝐼 𝑌 are locally independent given the true level of the trait 𝑇 𝑌 . Similarly, the result of the different test items for 𝑰 𝑿 are locally independent given the true levels of the traits 𝑻 𝑿 . This assumption comes from the assumed IRT model with local independence. 2. (L&amp;T.2): 𝑰 𝑿 is independent of the error term 𝜖 in the linear relationship. 3. (L&amp;T.3): 𝐼 𝑌 |𝑇 𝑌 and 𝑰 𝑿 |𝑻 𝑿 are independent. 4. (L&amp;T.4): 𝐼 𝑌 |𝑇 𝑌 is independent from 𝑻 𝑿 , and 𝑰 𝑿 |𝑻 𝑿 is independent from 𝑇 𝑌 . This too follows from the IRT model with local independence, although not specified in (L&amp;T.1). Lu and Thomas (2008) then show how joint EAP scores for the predictors and conditionally unbiased scores for the outcome will retain the correct linear relationship on the population level. Skrondal and Laake (2001) do not list their assumptions in the text in a similar way, but they consider only continuous measures and note that they take as their starting point the latent regression model, a special case of the full LISREL model of Jöreskog (1973 Jöreskog ( , 1977)).</p>
+<p>Among these assumptions is one that the measurement errors of all variables are truly &quot;random&quot;, meaning they are independent of all other sources of variance (i.e., other true variables and other errors). These assumptions are used instead of (L&amp;T.1). The assumption about random errors directly implies (L&amp;T.3)-(L&amp;T.4), as the indicators are just equal to the true variables plus such random errors in their case. (L&amp;T.2) is fulfilled by the same assumption plus the assumption that the relationship is truly linear with independent errors (so 𝜖 is independent of 𝑻 𝑿 ). Skrondal and Laake (2001) then showed that under their latent regression model, Bartlett scores for the outcome with joint regression scores for the predictors retained the linear relationship on a population level. See also the comparison in Lu and Thomas (2008, p.474-475) between their assumptions and the derivation in Skrondal and Laake (2001).</p>
+<p>In our derivation, in contrast, other than some general OLS assumptions (which must also be implicitly assumed for estimation in the previous papers), we will only require a weaker version of (L&amp;T.2) (we do not assume strict independence). None of the other (L&amp;T) assumptions, nor the previous ones by Skrondal and Laake (2001) are required for our scoring methods, which, with our assumptions, always allow the linear relationship to be retained. Such scores can in principle be used in all cases allowed by Skrondal and Laake (2001) and Lu and Thomas (2008), but also much more broadly (although, in practice, our ability to apply them will also depend on what information is available in the data). We now turn to some preliminary results in this regard.</p>
+<h3>Structured prediction decomposition for all variables</h3>
+<p>We will base our extensions in part on the results above (Lu &amp; Thomas, 2008; Skrondal &amp; Lake, 2001) and derive conditions that ensure the multivariate linear relationship is retained even beyond continuous measures and IRT models. In the terminology above, this will consist of creating a structured type of joint regression scores both for the predictors and for the outcome (joint because the outcome&#x27;s scores also depend on the predictors). Or, in other words, scores for both predictors and outcome that fulfill a prediction decomposition.</p>
+<p>The utility of deriving a prediction decomposition for the outcome is hinted at by Lu and Thomas (2008). Namely, they say that &quot;there are no IRT predictors available that are exactly conditionally unbiased&quot; (p.473), meaning that the types of conditionally unbiased scores they define for the outcome generally cannot be used for their stated purposes without at least some bias. By our derivation in Lemma 1, which shows that an unbiased measurement decomposition cannot always be fulfilled, this is because each indicator 𝐼 𝑌 has a fixed number of scores while the latent trait 𝑇 𝑌 is continuous. By deriving regression / prediction decomposition scores for the outcome, we can model a greater range of errors.</p>
+<p>Berggren (2020), in a master&#x27;s thesis, previously derived such a structured prediction decomposition that could be used both for predictor and outcome to retain the linear relationship. However, he focused on simple linear regression with only some special generalizations to multivariate linear regression. Additionally, errors were typically assumed to only depend on the variable itself. In particular, Berggren (2020) showed that if the variables follow a simple linear relationship, each error only depends on the corresponding true variable itself, the measured predictor fulfills the prediction decomposition in (13), and if the measured outcome fulfills:</p>
+<p>Then the linear relationship is retained, meaning:</p>
+<p>Where 𝛽 0 and 𝛽 1 are the same as in the linear relationship between the true variables.</p>
+<p>From this Berggren (2020) also derived a formula for the explained variance 𝜌 2 between the true variables, as: 𝜌 𝑋 2 is the explained variance for the measurements.</p>
+<p>𝑉𝑎𝑟(𝑋) 𝑉𝑎𝑟(𝑇 𝑋 ) ⁄ and 𝑉𝑎𝑟(𝑌) 𝑉𝑎𝑟(𝑇 𝑌 ) ⁄ are between zero and one and can be thought of as the amount of true variance that remains in the measurements, or the precision of the prediction decomposition, similar to the reliability of the measurement decomposition. This type of variance ratio has also been called the &quot;proportional reduction in mean squared error&quot;, albeit without being related to the change in magnitude of the explained variance between measures and true variables (see Liu et al., 2025; McDonald, 2011).</p>
+<p>We will follow a similar derivation as in Berggren (2020) but extend it to multivariate linear regression and to a greater variety of errors. This includes that any error can also depend on any predictor, beyond what is explained by the variable itself.</p>
+<p>However, one potential challenge with using a joint prediction decomposition for the outcome should be noted: the proper scores will typically depend on the 𝜷-parameters. In other words, it may seem that we may need to know the 𝜷-parameters beforehand to be able to score the outcome. Meanwhile, the utility of the scoring was that it should retain the linear relationship and therefore allow us to estimate it with the scores. This may be a reason why a regression decomposition like the one we will derive has not previously been derived for the outcome, including by Lu and Thomas (2008) even while noting the limitation of their scores for the outcome. However, as we will show, it is often not required to know the 𝜷-parameters beforehand. Rather, they can often be estimated iteratively, by plugging in an initial guess when scoring the outcome, employ OLS (or related methods) to update the 𝜷-estimates, calculate new scores, and repeat until the estimation converges. This was also previously illustrated by Berggren (2020). Here, after deriving the population model in Theorem 1, we derive requirements for this estimation in Theorem 2 where we also extend it to multivariate regression and a greater variety of errors.</p>
+<h3>Theorem 1: Linearity-preserving scores</h3>
+<p>Theorem 1 deals with defining a population model that retains the correct linear relationship. Estimation is handled in Theorem 2.</p>
+<h3>Assumptions</h3>
+<p>All assumptions for Theorems 1-2 are also presented in Table 1.</p>
+<p>(Assumption 1: OLS): We will suppose a linear relationship between true variables as previously defined, that the measurements, when defined by the latter prediction decompositions, all have non-zero variance, and that the measured predictors are not perfectly multicollinear.</p>
+<p>To be able to define a structured joint prediction decomposition to retain the linear relationship we need one more assumption. When that assumption is fulfilled, we can in principle always define regression decompositions for the predictors and for the outcome so that the linear relationship is retained (per Lemma 2, while, per Lemma 1, this is not always possible for scores by a measurement decomposition). Then Theorem 1 follows.</p>
+<p>(Assumption 2: Error): Suppose:</p>
+<p>The error assumption means that the regression error 𝜖 remains unbiased for each level of the measured predictors 𝑿. This is most straightforwardly fulfilled when:</p>
+<p>So that the distribution of the measured predictors does not depend on the regression errors beyond what is explained by the true predictors. (18) corresponds to assumption (L&amp;T.2) from Lu and Thomas (2008) (as it implies 𝑃(𝜖 = 𝑒|𝑿 = 𝒙, 𝑻 𝑿 = 𝒕) = 𝑃(𝜖 = 𝑒|𝑻 𝑿 = 𝒕)), while (17) is a less strict assumption. A counterexample to ( 17) is provided in Figure 1, where scores are defined by the prediction decompositions below.</p>
+<p>There are two important ways in which the Error assumption (17) may not be fulfilled and that lead to somewhat different consequences. First, it may not be fulfilled because the error of 𝑻 𝑿 depends on 𝑇 𝑌 directly. This is the worst case, and if it is true, Theorem 1 cannot be applied. Researchers may then need to look for other methods, or other ways of measuring so that the error of 𝑻 𝑿 no longer depends on 𝑇 𝑌.</p>
+<p>Alternatively, the Error assumption (17) may not be fulfilled because the errors of 𝑻 𝑿 depend on some unincluded predictors (the difference to the case above is that 𝑿 may now only depend on a subset of the variance in 𝜖, while if 𝑿 depends on 𝑇 𝑌 directly, then it depends on all the variance in 𝜖). We may compare this to having an omitted predictor that is correlated with the included predictors 𝑻 𝑿 . This will lead to biased OLS parameters compared to if it had been included. When we have measures 𝑿 of 𝑻 𝑿 , these could correlate with the error 𝜖 both because 𝑻 𝑿 are correlated with unincluded variables, but also because the error of 𝑻 𝑿 , that causes it to have a certain measure-score for 𝑿, could be correlated with such variables. Consequently, just like we should include such variables amongst our predictors 𝑻 𝑿 without errors, we should include a potentially larger set of such variables amongst our predictors 𝑿 with errors. If we can do so (without including further dependencies on unincluded variables), then the error of the predictors will now be covered by our extended set of predictors 𝑻 𝑿 , and we can apply Theorem 1 again. Note also, although this is rarely fulfilled in practice, that if our set of included true predictors 𝑻 𝑿 perfectly predict 𝑇 𝑌 (so 𝜖 = 0), then Assumption 2 is trivially fulfilled.</p>
+<p>Versions of the Error assumption (Assumption 2) are assumed in various methods, albeit often indirectly, as we further note in Table 1 below. For example, in Berkson errors, errors were assumed to be random and unbiased around the measurements of the predictor. By &quot;random&quot; it is meant that they are not associated with other sources of variance, including 𝜖.</p>
+<p>Therefore, the Error assumption is fulfilled. Similarly, in instrumental variables methods the instrumental variable 𝑍 is assumed to not have any association with the outcome 𝑇 𝑌 beyond what is explained by 𝑇 𝑋 . This is just a statement that the predictions 𝑋 based on 𝑍 (𝑋 = 𝐸(𝑇 𝑋 |𝑍)) are not going to be associated with 𝜖. Thus, again, the Error assumption is fulfilled. Table 1 Assumptions for Theorem 1-2 Assumption Description 1 OLS assumption The true variables have a linear relationship 𝑇 𝑌 = 𝑻 𝑿 𝑇 𝜷 + 𝜖, 𝐸(𝜖|𝑻 𝑿 ) = 0, where all 𝑇 𝑌 , 𝑻 𝑿 have defined first and second moments, non-zero variance, and where 𝑻 𝑿 are not perfectly multicollinear, and the measures, defined by 𝑿 ≔ 𝐸(𝑻 𝑿 |𝑰 𝑿 ), 𝑌 ≔ 𝐸(𝑇 𝑌 |𝐼 𝑋 , 𝑰 𝑿 ), all have non-zero variance, and 𝑿 are not perfectly multicollinear. 2 Error assumption 𝐸(𝜖|𝑿 = 𝒙) = 0 ∀𝒙 ∈ Ω 𝑿 3 Two-step assumption Nuisance parameters 𝜽 and expectations for the predictors 𝑿 𝜽 ≔ 𝐸(𝑻 𝑿 |𝑰 𝑿 ; 𝜽) can be consistently estimated separately from estimating the expectations for the outcome 𝑌 𝜽,𝜷 ≔ 𝐸(𝑇 𝑌 |𝑰 𝑿 ; 𝜽, 𝜷). 4 Direction assumption For any value of the 𝜽-vector and for any estimate 𝜷 ̂ and true value 𝜷, if 𝒙 𝑇 𝜷 ̂&lt; 𝒙 𝑇 𝜷 for some 𝒙 of 𝑿 𝜽 , then 𝐸(𝑌 𝜽,𝜷 ̂|𝑿 𝜽 = 𝒙; 𝜽, 𝜷 ̂) &lt; 𝐸(𝑌 𝜽,𝜷 ̂|𝑿 𝜽 = 𝒙; 𝜽, 𝜷) with corresponding (in)equalities for 𝒙 𝑇 𝜷 ̂&gt; 𝒙 𝑇 𝜷 and 𝒙 𝑇 𝜷 ̂= 𝒙 𝑇 𝜷. Counterexample to the Error assumption Note. By the Error assumption (Assumption 2), the error of the predictors cannot depend on the outcome beyond what is explained by the predictors. A counterexample is provided in the left part of this figure. True variables follow a bivariate normal distribution (grey dots), with true regression line in grey. Here 𝐼 𝑋 has two possible values, one if 𝑇 𝑌 &gt; 𝑇 𝑋 and another if 𝑇 𝑌 ≤ 𝑇 𝑋 . Therefore, the error of the predictor will depend on the outcome, beyond what is explained by the predictor itself, breaking with the Error assumption. 𝐼 𝑌 also has two possible values, one if 𝑇 𝑌 ≤ 0 and another if 𝑇 𝑌 &gt; 0. Thresholds are indicated by dashed lines. Values for X and Y according to the Predictor and Outcome assumptions (Assumption 3-4) are indicated as black dots. Note that we here assume that the correct expectations are known and need not be estimated. Estimation is handled in Theorem 2 and the associated Em algorithm. The resulting regression line is shown as a black line. This does not converge towards the true regression line in grey. On the right we have the same relationship but treat X as the outcome and Y as the predictor (which we can do as the multivariate normal distribution ensures X regressed on Y still has a linear relationship, in line with Assumption 1). Now, scoring according to Assumptions 3-4 leads to a regression line which converges towards the true one. Note therefore that the error of the outcome, in contrast, can depend on the predictors, beyond what is explained by the outcome.</p>
+<h3>Theorem 1</h3>
+<p>Under Assumptions 1-2, based on a set of indicators 𝑰 𝑿 , 𝐼 𝑌 for the predictors and outcome, respectively, let the measurements 𝑿, 𝑌 for the true variables 𝑻 𝑿 , 𝑇 𝑌 be scored so:</p>
+<p>Then:</p>
+<p>Where 𝜷 is the same as for the true variables.</p>
+<p>Proof: In the terms of the introduction the expectations in ( 19)-( 20) take the role of 𝑔, the function of the indicators (i.e., 𝑔 𝑻 𝑿 (𝑰 𝑿 ) = 𝐸(𝑻 𝑿 |𝑰 𝑿 )). This means that each combination of measured predictor scores, as derived from the indicator scores, should equal the expected value of the true variables for the corresponding combination of indicator scores. Expressed differently, the Predictor definition (19) implies:</p>
+<p>We suppress the P subscript in the errors from now on as the errors will exclusively be defined in terms of a prediction decomposition.</p>
+<p>Similarly, the Outcome definition (20) implies:</p>
+<p>In other words, we have a joint prediction decomposition both for the predictors and Theorem 1 means that 𝑌 will have a linear relationship with 𝑿, with the same intercept and slopes as the linear relationship between 𝑇 𝑌 and 𝑻 𝑿 . That is, the linear relationship is preserved. Because the relationship is linear, OLS estimation will be unbiased when we can directly observe the expected values. Of course, typically we cannot, but then we will still converge on the right values if we have consistent estimates of the expected values. In such cases, if the expected values can be derived from some parameter estimates, then when those estimates are close to the true values, the OLS estimation based on the scorings in ( 19)-( 20) will also be approximately unbiased.</p>
+<p>We derive estimation methods in more detail in Theorem 2. Theorem 1 also has some immediate corollaries, as summarized below.</p>
+<h3>Corollary 1 (regression error):</h3>
+<p>Under Assumption 1-2 and the scoring by ( 19)-( 20), the total regression error for the measures 𝑌 and 𝑿 equals:</p>
+<p>With variance:</p>
+<p>The right-hand side is provided we define</p>
+<p>Proof: As utilized in the proof of Theorem 1, we can write the measured outcome 𝑌 as:</p>
+<p>Therefore, the regression error is the one in (24), as stated. We further have: Thus, we see that:</p>
+<p>So, the variance of the linear error term is 𝑉𝑎𝑟(𝜺 𝑿 𝑇 𝜷) + 𝑉𝑎𝑟(𝜖) -𝑉𝑎𝑟(𝜀 𝑌 ), as stated in the left side of ( 25). The right side is just a rewriting the left-hand side using the Outcome and Predictor variance decompositions in ( 26)-( 27). □</p>
+<p>The point of the final rewriting in ( 25) is to show the role of the variance ratios and 𝑉𝑎𝑟(𝑌) 𝑉𝑎𝑟(𝑇 𝑌 ) ⁄ , which are between 0 and 1 by the variance decompositions in ( 26)-( 27).</p>
+<p>We consider these the &quot;precisions&quot; of the measures as they can provide an indication of the severity of the errors, in how much they alter the variance of the regression error. Variance ratios like these have been called &quot;propotional reduction in mean squared error&quot; (see Liu et al., 2025). Although we have not seen them applied to linear regression, as done here. As shown in Corollary 2 they also play a similar role as reliabilities in terms of the change in the explained variance between measures and true variables.</p>
+<p>Corollary 2 (explained variance): Let 𝜌 2 be a non-zero explained variance when regressing 𝑇 𝑌 on 𝜷 𝑇 𝑻 𝑿 , and 𝜌 𝑿 2 the explained variance when regressing 𝑌 on 𝜷 𝑇 𝑿, then, if 𝑉𝑎𝑟(𝑻 𝑿 𝑇 𝜷) ≠ 0: 𝜌 2 ( 𝑉𝑎𝑟(𝑿 𝑇 𝜷) 𝑉𝑎𝑟(𝑻 𝑿 𝑇 𝜷) × 𝑉𝑎𝑟(𝑇 𝑌 ) 𝑉𝑎𝑟(𝑌) ) = 𝜌 𝑿 2 (28: 𝐶ℎ𝑎𝑛𝑔𝑒 𝑖𝑛 𝑒𝑥𝑝𝑙𝑎𝑖𝑛𝑒𝑑 𝑣𝑎𝑟𝑖𝑎𝑛𝑐𝑒)</p>
+<p>This means that if we can divide by the variance terms on the left, then we can correct the estimated explained variance for the errors in the measurements. 1</p>
+<p>Proof: The relationship is linear both for the true variables and for the measurements, so:</p>
+<p>Therefore:</p>
+<p>When there is only one predictor, this can be simplified to ( see also Berggren, 2020):</p>
+<p>As the slope will be the correct one the corresponding correlation correction will also be in the correct direction.</p>
+<p>The Change in explained variance ( 28) is written to be comparable to the Spearman (1904) one. ( 28) is most useful when only parts of the terms are known or possible to estimate (e.g., variance ratios but not individual variances). This is used in Supplemental Example 2 to join variances from different datasets and to evaluate the potential (but small) bias from not modelling error in the original age variable.</p>
+<p>Corollary 3 (covariance conditions): Define the errors 𝜺 𝑿 , 𝜀 𝑌 as in the prediction decompositions ( 22)-( 23), without assuming the expected values of these errors are zero conditional on their measurements. Instead of Assumptions 2, and even if the true 1 When there are multiple predictors and the true explained variance is zero, estimates based on (28) produce a potential instability when sample estimates are plugged in.</p>
+<p>To avoid such instability, 𝑉𝑎𝑟(𝑿 𝑇 𝜷) 𝑉𝑎𝑟(𝑻 𝑿 𝑇 𝜷) ⁄ may be replaced by (𝑉𝑎𝑟(𝑿 𝑇 𝜷) + 𝛿) (𝑉𝑎𝑟(𝑻 𝑿 𝑇 𝜷) + 𝛿) ⁄ for some small value 𝛿, potentially dependent upon the degrees of freedom. relationship is not linear, the least squares slopes from Equation 2 are still retained when 𝑌 is regressed on 𝑿 if: 𝐶𝑜𝑣(𝑿, 𝜖) = 𝟎 (30: 𝐸𝑟𝑟𝑜𝑟 𝑐𝑜𝑣𝑎𝑟𝑖𝑎𝑛𝑐𝑒 𝑎𝑠𝑠𝑢𝑚𝑝𝑡𝑖𝑜𝑛) 𝐶𝑜𝑣(𝑿, 𝜀 𝑋,𝑗 ) = 𝟎 ∀𝑗 ∈ {1, … , 𝑝} (31: 𝑃𝑟𝑒𝑑𝑖𝑐𝑡𝑜𝑟 𝑐𝑜𝑣𝑎𝑟𝑖𝑎𝑛𝑐𝑒 𝑎𝑠𝑠𝑢𝑚𝑝𝑡𝑖𝑜𝑛) 𝐶𝑜𝑣(𝑿, 𝜀 𝑌 ) = 𝟎 (32: 𝑂𝑢𝑡𝑐𝑜𝑚𝑒 𝑐𝑜𝑣𝑎𝑟𝑖𝑎𝑛𝑐𝑒 𝑎𝑠𝑠𝑢𝑚𝑝𝑡𝑖𝑜𝑛)</p>
+<p>The intercept is also correct if, in addition, 𝐸𝑌 = 𝐸𝑇 𝑌 , 𝐸𝑿 = 𝐸𝑻 𝑿 . Note that the relationship need not be linear under these assumptions, neither between the measurements nor between the true variables. In other words, we here do not require that any of 𝐸(𝜖|𝑻 𝑿 = 𝒙), 𝐸(𝜖|𝑿 = 𝒙), 𝐸(𝜀 𝑋,𝑗 |𝑿 = 𝒙) for any 𝑗, nor 𝐸(𝜀 𝑌 |𝑌 = 𝑦, 𝑿 = 𝒙) equal zero for all 𝑦, 𝒙.</p>
+<p>Proof: When the least squares slopes and intercept are defined by Equation 2, we can still write the relationship 𝑇 𝑌 = 𝑻 𝑿 𝑇 𝜷 + 𝜖. If the relationship is not linear, then the expected value of 𝜖 conditional on each value 𝒕 𝑿 of the predictors 𝑻 𝑿 is no longer zero. However, usual properties of least squares ensure that the covariance between 𝜖 and each predictor is still zero (otherwise there would be a choice of 𝜷 that ensures a smaller squared error in Equation 2; see e.g., Johnson &amp; Wichern, 2012). The solution to the least-squares slopes and intercept, even if the relationship is not linear, is then still: The covariance relationship is more flexible than the expected values of Theorem 1 (albeit, will be shown in Theorem 2, the scores of Theorem 1 can be used to estimate parameters iteratively). This means we can still estimate the relationship with scores that ensure the covariance between measurements and their prediction errors (with respect to the true variables) remain zero, even if it is difficult to ensure perfect unbiasedness of the true variables for each level of the measurements. It also means that if the true relationship is not perfectly linear, then we may still get consistent estimates this way.</p>
+<p>Proposition 1 (no-, linear-, and classical errors): Suppose Assumptions 1-2 are fulfilled.</p>
+<p>If there are no errors in some variables, the prediction decompositions of ( 22)-( 23) are still fulfilled for those variables and therefore so is Theorem 1 and all corollaries. If all expected values for a measured variable are linearly scaled (with non-zero slope) compared to the true expected values for which Assumption 1-2 and the decompositions of ( 22)-( 23) hold, then a version of the Linearity preservation (21), Slope covariance relationship (35), and Intercept relationship (36) still hold where the true variables are similarly linearly scaled, as does the Explained variance attenuation (29) without modification. Linear scaling is thus not so consequential. If Assumption 1-2 hold, 𝑿 are defined by ( 19), and there are only &quot;classical errors&quot; in the outcome (unbiased and uncorrelated with all other sources of variance), then the covariance and intercept relationships ( 35)-( 36) hold, as does the explained variance correction (29) by using 𝑉𝑎𝑟(𝑌) = 𝑉𝑎𝑟(𝑇 𝑌 ) + 𝑉𝑎𝑟(𝜀 𝑌,𝑀 ), where 𝜀 𝑌,𝑀 = 𝑌 -𝑇 𝑌 is the classical error (which fulfills a measurement decomposition).</p>
+<h3>Relations to existing methods</h3>
+<p>Table 2 below summarizes how some methods; for thresholding, misclassification, instrumental variables, missing data, poststratification, and restriction of range; relate to the conditions of Theorem 1, and, therefore, how they can be thought of as special cases of this model. For ease of presentation, we only include one predictor. Table 2 shows how measurements can be defined for each method. It is also discussed how common assumptions when employing these methods correspond to ensuring that the Error assumption is fulfilled, albeit sometimes indirectly. Fulfilled as the threshold is assumed to only depend on its own variable.</p>
+<p>Variables are only observed in between some (unknown or known) thresholds 𝑐. Examples include discretization by researchers after data collection (Liu et al., 2002), polychoric correlations (Olsson, 1979), the latent variable interpretation of logistic regression (Bollen, 2002). Also occurs when there is only one (lower or upper) threshold for some observations.</p>
+<p>Where 𝑇, 𝑆, 𝐶, are 0-1 variables. The variable is misclassified if 𝑆 or 𝐶 (depending on the value of 𝑇) is 0, and correctly classified if S or C is 1.</p>
+<p>Fulfilled if misclassification of 𝑇 𝑋 only depends on itself and not on 𝑇 𝑌 (typically assumed). In other words: if 𝑆 𝑋 and 𝐶 𝑋 do not depend on 𝑇 𝑌.</p>
+<p>Two groups scored 0-1. Indicators 𝐼 (also scored 0-1) sometimes record the wrong group (Barron, 1977). The expected values for each combination of indicators therefore equals the proportion that should truly be scored with a one. Typically, the risk of misclassification is either measured prior to data collection when validating the instrument or estimated using a better (but more expensive) measure in part of the sample. Here 𝐼 𝑋 = 𝐼 𝐼𝑉 , an instrumental variable. We also have access to an endogenous predictor 𝐼 𝐸𝑉 . 𝐼 𝐸 includes one part whose effect we are interested in 𝑇 𝑋 , plus one part 𝐸 that is correlated with the regression error: 𝐼 𝐸𝑉 = 𝑇 𝑋 + 𝐸. However, we cannot include a control variable to account for this correlation. Instead, we use an instrumental variable 𝐼 𝐼𝑉 that is independent of the outcome beyond what is explained by 𝑇 𝑋 (and therefore, the regression error), to construct (typically linear) predictions for 𝑇 𝑋 (Pearl, 2000).</p>
+<p>That is, we assume 𝑋 ≔ 𝐸(𝑇 𝑋 |𝐼 𝐼𝑉 ) = 𝐸(𝐼 𝐸𝑉 |𝐼 𝐼𝑉 ), and regress 𝐼 𝐸𝑉 on 𝐼 𝐼𝑉 (after which 𝐼 𝐸𝑉 is discarded). Often formulated in terms of correlations, in which case Corollary 3 should be used. Missing data 𝐼 𝑋 = 𝑇 𝑋 if observed, 𝐼 𝑋 = 𝑁𝐴 if missing. 𝐼 𝑌 = 𝑇 𝑌 if observed, 𝐼 𝑌 = 𝑁𝐴 if missing. 𝑋 = 𝐸(𝑇 𝑋 |𝐼 𝑋 ) 𝑌 = 𝐸(𝑇 𝑌 |𝐼 𝑌 , 𝐼 𝑋 )</p>
+<p>Fulfilled if predictors are MAR conditional only on other predictors.</p>
+<p>It is often assumed that data is missing at random (MAR), meaning the distribution of missing data is the same as observed data when both are conditioned on the values of the observed variables (Rubin, 1976 (Rubin, , 1987)). This is more general than Theorem 1 in that one can also control for missingness if the Error assumption is not fulfilled (this is because we have, by assumption, joint observations with the right distribution, and can apply that also to the missing cases; see Azur et al., 2011). However, if predictors are also MAR conditioned only on other predictors, then Theorem 1 is fulfilled and we can estimate using only the means of the observed data, because then 𝐸(𝑇 𝑋 |𝑇 𝑋 𝑚𝑖𝑠𝑠𝑖𝑛𝑔) = 𝐸(𝑇 𝑋 |𝑇 𝑋 𝑜𝑏𝑠𝑒𝑟𝑣𝑒𝑑), and 𝐸(𝑇 𝑌 |𝑇 𝑌 𝑚𝑖𝑠𝑠𝑖𝑛𝑔, 𝑇 𝑋 = 𝑥) = 𝐸(𝑇 𝑌 |𝑇 𝑌 𝑜𝑏𝑠𝑒𝑟𝑣𝑒𝑑, 𝑇 𝑋 = 𝑥), and the Error assumption is fulfilled. Poststratification Typically, no error in 𝑇 𝑋 is assumed, only distributional incorrectness. Typically, no error in 𝑇 𝑌 is assumed.</p>
+<p>Fulfilled as 𝑇 𝑌 | 𝑇 𝑋 =𝑥 is assumed to have the right distribution, so we only need to correct the distribution of predictors. The distribution of the predictors is incorrect in some known way (true distribution is e.g., known from governmental data), although the distribution of the outcome conditional on the values of the predictors is typically assumed to be correct (Gelman &amp; Little, 1997). Can therefore be controlled for by solely adjusting the distribution of the predictors. This will not affect the linear relationship (we get this directly from Theorem 1), but it can be important for other statistics, such as overall expectations or explained variances. For the explained variance, then in accordance with Corollary 2, we only need to correct for the difference in variance as a result of the incorrectness of the distributions. For example, if our sample has 75% women and 25% men, but we know there is roughly a 50/50 proportion in the population, we may adjust based on this information.</p>
+<p>Restriction of range 𝐼 𝑋 = 𝑇 𝑋 if included, 𝐼 𝑋 = 𝑁𝐴 if not included 𝐼 𝑌 = 𝑇 𝑌 if included, 𝐼 𝑌 = 𝑁𝐴 if not included The number of 𝑁𝐴 should have (approximately) the correct proportions relative to the included data. 𝑋 = 𝐸(𝑇 𝑋 |𝐼 𝑋 ) 𝑌 = 𝐸(𝑇 𝑌 |𝐼 𝑌 , 𝐼 𝑋 )</p>
+<p>Fulfilled if restriction of range of 𝑇 𝑋 only depends on itself and not on 𝑇 𝑌 (typically assumed).</p>
+<p>The probability of inclusion is incorrect. Like poststratification, but can also be driven by the outcome, so we do not assume that the distribution of 𝑇 𝑌 conditional on 𝑇 𝑋 is correct (Sackett &amp; Yang, 2000). Often, the probability of inclusion for a variable is only assumed to depend on that variable itself.</p>
+<p>Note. The expected values show how 𝑋 and 𝑌 should be scored to fulfill Theorem 1. It is also explained how typical assumptions of the methods ensure that the Error assumption is fulfilled.</p>
+<h3>Returning Example: Tetrachoric correlations (specification)</h3>
+<p>Previously, we noted that the tetrachoric correlation model concerns a latent bivariate normal distribution for (𝑇 𝑋 , 𝑇 𝑌 ), while (𝐼 𝑋 , 𝐼 𝑌 ) each had two possible scores, one if its true variable was below a threshold (𝑐 𝑋 , 𝑐 𝑌 ), and one if it was above that threshold. The goal was to estimate the correlation 𝜌 between the true variables, which also is the slope if we treat their marginal distribution as standard normal. This fulfills our Error assumption (17) as 𝐼 𝑋 only depends on 𝑇 𝑋 (and so not on 𝜖 beyond 𝑇 𝑋 ).</p>
+<p>We here derive scores for the more general polychoric case. In this case, we say that when It is easy to derive that the corresponding expected values for the measures (𝑋, 𝑌) become: 𝐸(𝑇 𝑋 |𝐼 𝑋 = 𝑗) = -𝜙(𝑐 𝑋,𝑗 ) -𝜙(𝑐 𝑋,𝑗-1 ) Φ(𝑐 𝑋,𝑗 ) -Φ(𝑐 𝑋,𝑗-1 ) (37) 𝐸(𝑇 𝑌 |𝑐 𝑌,𝑘-1 &lt; 𝑇 𝑌 ≤ 𝑐 𝑌,𝑘 , 𝑐 𝑋,𝑗-1 &lt; 𝑇 𝑋 ≤ 𝑐 𝑋,𝑗 ) = ∫ 𝑦𝜙(𝑦) (Φ ( 𝑟𝑦 -𝑐 𝑋,𝑗 √1 -𝑟 2 ) -Φ ( 𝑟𝑦 -𝑐 𝑋,𝑗-1 √1 -𝑟 2 )) 𝑐 𝑌,𝑘 𝑐 𝑌,𝑘-1 𝑑𝑦 ∫ 𝜙(𝑦) (Φ ( 𝑟𝑦 -𝑐 𝑋,𝑗 √1 -𝑟 2 ) -Φ ( 𝑟𝑦 -𝑐 𝑋,𝑗-1 √1 -𝑟 2 )) 𝑐 𝑌,𝑘 𝑐 𝑌,𝑘-1 𝑑𝑦 (38) (38) needs to be numerically approximated to a desired degree of accuracy, although the numerator can be solved explicitly, and equals: 𝜙(𝑐 𝑌,𝑘 ) (Φ ( 𝑟𝑐 𝑌,𝑘 -𝑐 𝑋,𝑗-1 √1 -𝑟 2 ) -Φ ( 𝑟𝑐 𝑌,𝑘 -𝑐 𝑋,𝑗 √1 -𝑟 2 )) -𝜙(𝑐 𝑌,𝑘-1 ) (Φ ( 𝑟𝑐 𝑌,𝑘-1 -𝑐 𝑋,𝑗-1 √1 -𝑟 2 ) -Φ ( 𝑟𝑐 𝑌,𝑘-1 -𝑐 𝑋,𝑗 √1 -𝑟 2 )) + 𝑟𝜙(𝑐 𝑋,𝑗 ) (Φ ( 𝑐 𝑌,𝑘 -𝑟𝑐 𝑋,𝑗 √1 -𝑟 2 ) -Φ ( 𝑐 𝑌,𝑘-1 -𝑟𝑐 𝑋,𝑗 √1 -𝑟 2 )) -𝑟𝜙(𝑐 𝑋,𝑗-1 ) (Φ ( 𝑐 𝑌,𝑘 -𝑟𝑐 𝑋,𝑗-1</p>
+<p>This was solved through integration by parts (𝑣 ′ (𝑦) = 𝑦𝜙(𝑦), 𝑢(𝑦) = Φ(•) -Φ(•)). The denominator in (38) is the negative value of the probability 𝑃(𝑐 𝑌,𝑘-1 &lt; 𝑇 𝑌 ≤ 𝑐 𝑌,𝑘 , 𝑐 𝑋,𝑗-1 &lt; 𝑇 𝑋 ≤ 𝑐 𝑋,𝑗 ), so if this is plugged in, then the negative value of (39) should be used instead.</p>
+<p>It is not consequential which variable is the outcome and which is the predictor. 𝑌 regressed on 𝑋 has a linear relationship, as does 𝑋 regressed on 𝑌, per usual properties of bivariate normal distributions. If one of the variables is observed without error, as for polyserial correlations (Olsson et al., 1982), we can therefore most easily treat that as 𝑌.</p>
+<p>With scores for 𝑋, 𝑌 according to these equations, we will retain the linear relationship between 𝑇 𝑋 , 𝑇 𝑌 , and so can estimate 𝜌 by regressing 𝑌 on 𝑋. Note that the latter depends on 𝜌, and both depend on the unknown thresholds. Therefore, when we return to this example after Theorem 2, we will use the Em procedure to first estimate the thresholds and then estimate 𝜌 and the expected values for 𝑌 iteratively.</p>
+<h3>Theorem 2: Estimation via an Em algorithm</h3>
+<p>The population-level models of Theorem 1 can for example allow researchers to model the effects of errors and simulate deviations for the scores. As noted, though, a primary purpose of deriving the scores was that the linear relationship should be preserved in such a way that OLS can be used to estimate the true relationship. We then cannot in general rely on the population expected values alone, but have to estimate their scores by using estimates of some nuisance parameters 𝜽 together with an appropriate measurement model. We also noted that the expected values for the outcome would often depend on the 𝜷-parameters, so we often have to base its scores on estimates for these as well. That is, we consider scores:</p>
+<h3>Further assumptions</h3>
+<p>We will derive an iterative estimation under two additional assumptions. These are also provided in Table X together with Assumptions 1-2.</p>
+<p>(Assumption 3: Two-step): Nuisance parameters 𝜽 and expectations for the predictors can be consistently estimated separately from estimating the expectations for the outcome in ( 41).</p>
+<p>Assumption 3 means we focus on cases where the nuisance parameters 𝜽, but not the 𝜷parameters, can be estimated before defining the scores for the outcome. Such cases appear quite common. For example, for polychoric correlations the nuisance threshold parameters can be estimated in a first step, after which the polychoric correlation is estimated (Olsson, 1979). The same is true for various examples from Table 2. In misclassification, if we can estimate the rate by using a better measure on part of the sample, then we can estimate variables&#x27; sensitivity and specificity in that part before regressing in a later step. In instrumental variables, the scores for the predictor are first estimated from a separate regression before regressing the outcome of interest on those predictions. In MAR data, the missing cases can be scored by using the observed cases, after which the regression of interest is conducted. This focus on first estimating nuisance parameters is therefore quite natural. However, future work should examine how some of our assumptions may be relaxed.</p>
+<p>This focus on first estimating nuisance parameters and then estimating the linear relationship with the scores from ( 40)-( 41) means that, as the estimates of the nuisance parameters 𝜽 close in on their true values, the regression will go towards being unbiased. We therefore generally want large enough samples that our estimates of 𝜽 are precise, in which case 𝑿 𝜽 ̂≈ 𝑿 𝜽 = 𝑿 and 𝑌 𝜽 ̂,𝜷 ̂≈ 𝑌 𝜽,𝜷 ̂. Therefore, we also want to employ estimates of 𝜽 with as low standard errors as possible, although our derivation will not depend on the precise method by which 𝜽 are estimated.</p>
+<p>(Assumption 4: Direction): For any value of the 𝜽-vector and for any estimate 𝜷 ̂ and true value 𝜷, if 𝒙 𝑇 𝜷 ̂&lt; 𝒙 𝑇 𝜷 for some score 𝒙 of the predictors 𝑿, then this implies:</p>
+<p>With opposite inequality if 𝒙 𝑇 𝜷 ̂&gt; 𝒙 𝑇 𝜷, and equality if 𝒙 𝑇 𝜷 ̂= 𝒙 𝑇 𝜷.</p>
+<p>The inequality in (42) means that, even as we use the measure 𝑌 𝜽,𝜷 ̂ rather than the &quot;true measure&quot; 𝑌 𝜽,𝜷 , then for any value 𝑿 = 𝒙 so the true expected value of 𝑌 𝜽,𝜷 is higher than predicted by this set of estimates 𝜷 ̂, the expected value of 𝑌 𝜽,𝜷 ̂ is higher as well.</p>
+<p>One special but more restrictive case that ensures (42) is fulfilled is when Theorem 1 is fulfilled, the order between scores for 𝑌|𝑿 is the same no matter the 𝜷-parameters (so the one with the highest expected value always continues to be so, et cetera), and if higher values for 𝑇 𝑌 |𝑻 𝑿 always increases the chance of being in higher-valued scores for 𝑌|𝑿 (i.e., it exhibits strict first-order stochastic dominance). Such &quot;ordinal&quot; conditions appear to be common across models. As an example, in discretized data, as 𝑇 𝑌 |𝑻 𝑿 increases it may cross the threshold and be categorized into a higher-values category.</p>
+<h3>Theorem 2</h3>
+<p>Under Assumptions 1-4 and scores defined by ( 40)-(41), with independent identically distributed observations of (𝐼 𝑌 , 𝑰 𝑿 ) 𝑖 , then, as the sample size increases, if we use 𝑌 𝜽 ̂,𝜷 ̂ as defined in (41) with a current estimate of 𝜷, then the expectations 𝑌 𝜽 ̂,𝜷 ̂|𝑿 𝜽 ̂ will tend to move in the direction of its true values for all values 𝒙.</p>
+<p>Proof: Assumption 3 means we have consistent estimates of 𝜽 before needing to define the outcome, so for large samples, these estimates will move towards the true values, and the same is true for the expectations for 𝑿. Assumption 4, in turn, ensures that when 𝒙 𝑇 𝜷 ̂&lt; 𝒙 𝑇 𝜷, then, for the true 𝜽-parameters: 𝒙 𝑇 𝜷 ̂&lt; 𝐸(𝑌 𝜽,𝜷 ̂|𝑿 𝜽 = 𝒙; 𝜽, 𝜷)</p>
+<p>Because, by the linearity assumption:</p>
+<p>Thus, the expectations will also move towards the true values 𝒙 𝑇 𝜷 for all 𝒙 conditional on the 𝜽-parameters. □</p>
+<p>When Assumption 1-4 are fulfilled, Theorem 2 therefore suggests that as the estimates of 𝜽 close in on their true values, and when we use an initial guess for the 𝜷-parameters 𝜷 ̂ to calculate the expected values 𝑌 𝜽,𝜷 ̂= 𝐸(𝑇 𝑌 |𝐼 𝑌 , 𝑰 𝑿 ; 𝜽, 𝜷 ̂), and then calculate an updated estimate of 𝜷 by OLS estimation, where the true probabilities 𝑃(𝑌 𝜽,𝜷 ̂= 𝑦|𝑿 = 𝒙; 𝜽, 𝜷) are replaced by the empirical probabilities, then as these close in on the true probabilities, the updated 𝜷-estimates will tend to move towards the true values, as the expectations are expected to move in the direction towards 𝒙 𝑇 𝜷 for all values 𝒙. Thus, we can use an iterative procedure to get estimates that close in on the true values. As long as the nuisance parameter estimates 𝜽 ̂ are close enough to their true values, we thus expect the iteration to work well.</p>
+<p>Note that this requires scoring the variables per the expected values in Assumption 3-4 of Theorem 1. Theorem 2 thus further shows the utility of this derivation.</p>
+<p>However, while this updating may yield a direction in which to update parameter estimates, one potential challenge should be noted. We have not yet assumed that the new expectations will always close in on the true values, just that they move in the correct direction. Therefore, if the updating tends to overshoot, one may need to employ iterative methods that take this into account. It is simpler when too great overshooting does not happen. It appears that this will be fulfilled whenever 𝒙 𝑇 𝜷 ̂&lt; 𝒙 𝑇 𝜷 additionally implies: We do not include (43) as an assumption in Theorem 2, as ensuring that values update in the correct direction may be enough to construct iterative procedures that converge on the right values. However, if ( 43) is true the process is simpler, because then even using the ordinary OLS estimates as the new updates after each step (without further modifying the scores), can be enough to close in on the true values (although it will often serve to speed up this updating). This process of initial guess and updating parameters through OLS regression is then repeated iteratively until the estimation converges. The first step most naturally uses 𝜷 ̂= 𝟎 except for the intercept that may be selected based on the data. The next step can be done by using the updated 𝜷-estimates from the previous step to calculate new expected values. If this is slow, a numerical minimization of the (squared) difference between initial and updated values can also be used (this can be especially useful if parameters are inbetween some highest and lowest values, e.g., ±1). One can also use the direction implied by the change between steps while increasing the step-size until the updated direction is switched compared to the original one (we use this approach in Example 1; this is also possible for any number of predictors). Many other numerical alternatives also exist (e.g., weighted least squares, Newton-Raphson). An example of the iterative updating is provided in Figure 2.</p>
+<p>If 𝜽-estimates need to be updated together with 𝜷-estimates, then this could lead to biases as the new expected values might not be sufficiently regular for all parameters even if they are so for the OLS parameters with other parameters fixed. The crucial part to ensure the updating is in the correct direction is that (42) holds, so conditions where it holds or breaks down could be further studied.</p>
+<h3>2x2 Em algorithm</h3>
+<p>Motivated by Theorem 2, we define a 2x2 Em estimation algorithm below. Note that we call this an Em algorithm as it is similar to (and might be possible to incorporate into the framework of) Expectation-Maximization (EM) (see Dempster et al., 1977). But while such algorithms maximize the likelihood, the Em algorithm minimizes the (least) squares.</p>
+<p>Step 1.1: Estimate nuisance parameters 𝜽 outside of the OLS regression that affects the expected values. If it is possible to estimate such parameters without taking into account the OLS relationship, then these parameters can be estimated by any existing method. Step 1.2: Estimate the conditional expectations of the 𝑿-variables through plugging in the related parameters from Step 1.1. This estimation may be done in several ways (as may estimating the expectations for 𝑌 below). If an analytical formula is available, that can be used directly. Alternatively, expectations may be solved numerically, or estimated through simulation by repeated draws from the population model implied by the parameters. Step 2.1: Estimate further nuisance parameters for 𝑌 that need to take into account the predictor 𝑿-variables, if necessary (note that we can do this if needed, as we only required that 𝜽 could be estimated independently of the outcome, not the predictors). Step 2.2: Estimate the conditional expectations and OLS parameters iteratively by plugging in relevant parameters from Steps 1.1 and 2.1, and some initial guess at the 𝜷parameters. Then regress 𝑌 onto the 𝑿-variables from Step 1.2, update the 𝜷-estimates in some appropriate way, calculate new expected values for 𝑌, and repeat until convergence. If (43) is not true, the choice of how values are updated becomes particularly important to avoid divergent estimates across iterations.</p>
+<h3>Sampling error</h3>
+<p>Theorem 2 justifies estimation by the 2x2 Em iterative plugin procedure above. While this may yield asymptotically correct estimates when the assumptions are fulfilled, we should also consider how to estimate the sampling error of the estimation procedure.</p>
+<p>In general, the procedure above contains two sources of increased sampling error compared to if variables could have been measured without any error: (I) the extra residual error from the 𝜀 𝑌 , 𝜺 𝑿 errors themselves, and (II) the extra sampling error from having to estimate the expected values and nuisance parameters.</p>
+<p>The model in Theorem 1 is expressed very generally, so we should also consider general ways to estimate this sampling error. Large-sample errors could be possible to derive, potentially from earlier methods when the methods can be shown to converge. Estimation should also be possible to accomplish by utilizing Bootstrapped standard errors (Efron, 1979), where the Em estimation procedure is resampled with replacement, and where the variation across samples is used to estimate the standard error. Using Bootstrapped standard errors has one advantage related to each point (I)-(II) above. (I) The errors 𝜀 𝑌 , 𝜺 𝑿 are unlikely to be independent and normally distributed, even if this is true for 𝜖, so the total residual error for the measurements will not have a normal distribution. Bootstrapping allows accounting for this non-normality. (II) When the expected values and nuisance parameters need to be estimated in the sample (as they usually need to be), the usual residuals from the OLS regression will not capture this extra uncertainty as it is only applied once those estimates are plugged in. Bootstrapping the full Em estimation procedure allows accounting for the sampling error that comes from this extra uncertainty. Note. Standard normal distribution (latent data in grey; 10% of data is plotted), where 𝑇 𝑌 is assumed standard normally distributed, with threshold 0.5 for Y, meaning 𝐼 𝑌 has two possible values. The threshold can be estimated by Φ -1 (𝑛 0 𝑛 ⁄ ) in Step 1.1, where 𝑛 0 is the number of observations in the lower category of 𝐼 𝑌 , and 𝑛 is the total number of observations. X is observed without error for clarity of illustration (no Step 1.2-2.1 needed). True regression line is shown as black dots. Red dots show scores for X and Y for the first iteration of Step 2.2, where expected values for Y are calculated as if 𝛽1 = 0, with red regression line based on these scores. Purple dots show scores for X and Y at the next iteration where expected values for Y have been calculated from the 𝜷-estimates in the previous step (all later iterations are closer to the final one), with corresponding purple regression line. Blue dots show scores for X and Y at the final iteration with corresponding blue regression line. The iteration stops as the 𝜷-estimates change less than the maximum step-size (=.0001) from the previous iteration. As shown by the correspondence between the blue regression line and the true one (black dots), the iteration has honed in on the true relationship, as implied by Theorem 2.</p>
+<h3>Examples</h3>
+<p>Here we consider three example application of Theorem 1-2: tetrachoric correlations, nonlinear relationships, and an example where the expectations can be calculated using prior/population information (summarized here and detailed in the supplemental materials).</p>
+<h3>Returning Example: Tetrachoric correlations (estimation)</h3>
+<p>We examine the behavior of a fast application of the Em algorithm to the default estimation with the &#x27;tetrachoric&#x27; function in the &#x27;psych&#x27; R-package (Revelle, 2026). The &#x27;tetrachoric&#x27; function is faster for this binary data than both the &#x27;psych&#x27; &#x27;polychoric&#x27; function, and the default &#x27;polychor&#x27; estimation in the &#x27;polycor&#x27; package (Fox, 2025). As in the &#x27;polycor&#x27; package, the default estimation with the &#x27;tetrachoric&#x27; and &#x27;polychoric&#x27; functions in the &#x27;psych&#x27; package are based on a 2-step ML algorithm (Olsson, 1979). However, the &#x27;psych&#x27; functions are more optimized for fast calculations by using fast tabling functions, where the iteration are based on those tables, which avoids having to run through potentially large vectors of observations in each iteration.</p>
+<p>To employ the Em algorithm, we first estimate the thresholds as done in the 2-step ML algorithm (Step 1.1). This means estimating the probabilities 𝑝X ,0 , 𝑝Ŷ ,0 by the proportions in the sample in the lower category of 𝐼 𝑋 , 𝐼 𝑌 , and then estimating the cutoffs by 𝑐X = Φ(𝑝X ,0 ), 𝑐̂𝑌 = Φ(𝑝̂𝑌 ,0 ) (note that our notation works the same whether we consider the 𝑝 or the 𝑐 as the nuisance parameters). Then we calculate expected values using equations ( 37)-(39), these thresholds, and an initial guess for the correlation (these are Steps 1.2 and 2.2; Step 2.1 is not necessary), and then iterate until convergence. To speed up the estimation, the algorithm proceeds in the steps presented in Table 3, starting with two observed binary 0-1 scored indicator-variables 𝐼 𝑋 and 𝐼 𝑌.</p>
+<p>We can easily see that Assumptions 3-4 are fulfilled for tetrachoric correlations.</p>
+<p>Assumption 3 is fulfilled as the expected values only depend on 𝜌 and the thresholds (or, alternatively, the probabilities). We can estimate the latter separately from 𝜌 (the slope/correlation) by the discussion above. Additionally, if 𝑥𝜌 ̂&lt; 𝑥𝜌, then for any such 𝑥, for the true thresholds 𝑐 𝑋 , 𝑐 𝑌 , the probability to be above the threshold (and thus in the highervalued category) is higher than indicated by 𝜌 ̂. Therefore, Assumption 4 is fulfilled (indeed, we are even in the more restrictive special case discussed after Assumption 4). Finally, even equation ( 43 As the normal distribution ensures the spread for 𝑇 𝑌 is pushed upwards on both sides of the threshold for 𝜌 compared to 𝜌 ̂. Following the same steps:</p>
+<p>We will thus not overshoot, in line with (43), when the empirical probabilities converge on the correct ones (we will not even switch sides of the true expected value). This makes estimation particularly simple.</p>
+<p>The first speedup of our application of the Em algorithm in Table 3 is  Table 3 Pseudo R-algorithm for the Tetrachoric example</p>
+<p>Suggested updates 𝑟 𝑢𝑝,𝑜𝑙𝑑 = 𝑟 𝑜𝑙𝑑 and 𝑟 𝑢𝑝,𝑛𝑒𝑤 = 𝑟 𝑛𝑒𝑤.</p>
+<p>Transformations</p>
+<p>Corresponding probabilities 𝑖𝑝 0,1 , 𝑖𝑝 1,0 , and 𝑖𝑝 1,1 using steps 1, 15 (as in Step 5). Expectation-scores 𝑚 𝑌,𝑗,𝑘 using eq. ( 38)-( 39 For the &#x27;psych&#x27; &#x27;tetrachoric&#x27; function, we set &quot;correct=0&quot;, as the simulation otherwise sometimes terminated. We varied the sample size, thresholds, and latent correlation (see Table 4) and used 10,000 samples for each simulation. Results were evaluated by RMSE and total time in seconds. Results are presented in Table 4. The Em algorithm from Table 3 has extremely similar RMSEs as the 2-step ML method, which suggests the estimates are essentially the same. The case with some more difference (still smaller than 1% difference in RMSE), where, 𝑐 𝑋 = 0.5, 𝑐 𝑌 = -0.5, 𝜌 = 0.8, 𝑛 = 100 (and to a lesser extent 𝑛 = 200 and 500), appeared to be a result of differences in when the algorithms terminated. While being extremely similar in its estimates, the Em algorithm, as specified above, was consistently faster than the &#x27;psych&#x27; package&#x27;s 2-step ML algorithm. The latter always took longer to execute and tended to take twice as long or longer.</p>
+<p>Consequently, the Em algorithm above could provide even faster tetrachoric estimates than this fast current algorithm. The basics of the Em algorithm provide a relatively simple way to iteratively update and compare estimates. The additional details of the algorithm here then utilize this to approach the minimum (least squares) point more quickly. This extra speed may be useful when a large number of correlations need to be calculated, such as in IRT and SEM applications with a large number of test items. Future work should extend this comparison to polychoric and polyserial correlations. This example also illustrates how using Theorem 1-2 to estimate OLS parameters works as expected. The ultimate utility lies in the broader applicability. Psych = the original 2-step ML method from the &#x27;psych&#x27; R-package. Em = the Em algorithm. (𝑐 𝑋 , 𝑐 𝑌 ) are the true thresholds. (0,0) corresponds to a 50/50 distribution for each variable, (0.5,0.5) and (0.5,-0.5) correspond to roughly 2:1 odds, either in the same direction for both variables or in opposite directions.</p>
+<h3>Nonlinear relationships</h3>
+<p>Here we consider a simple method to transform some non-linear relationships to linear ones that we can then estimate using Theorem 1-2. Suppose 𝐼 𝑌 = 𝑇 𝑌 , 𝑰 𝑿 = 𝑻 𝑿 , and that 𝐸(𝐼 𝑌 |𝑻 𝑿 ) = 𝑓(𝑻 𝑿 𝑇 𝜷) for some known nonlinear function 𝑓.</p>
+<p>Define a new pseudo-true variable 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 so that 𝐼 𝑌 = 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 + 𝑓(𝑻 𝑿 𝑇 𝜷) -𝑻 𝑿 𝑇 𝜷. Then 𝐸(𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 |𝑻 𝑿 ) = 𝑻 𝑿 𝑇 𝜷, a linear relationship. Therefore, Theorem 1-2 seem to indicate that we can use 𝑌 𝜷 ̂= 𝐼 𝑌 -𝑓(𝑻 𝑿 𝑇 𝜷 ̂) + 𝑻 𝑿 𝑇 𝜷 ̂ to iteratively estimate 𝜷. In particular, Assumption 1-3 are all fulfilled under normal conditions. Assumption 1 is fulfilled if the usual OLS assumptions are for 𝑻 𝑿 and 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 , and if 𝑓 is defined so that 𝑓(𝑻 𝑿 𝑇 𝜷) varies whenever one predictor with non-zero slope varies while the other predictors are kept fixed. Assumption 2 is fulfilled as there are no errors in 𝑰 𝑿 = 𝑻 𝑿 . Assumption 3 is fulfilled as there are no nuisance parameters.</p>
+<p>However, we have to consider further properties of 𝑓 to ensure Assumption 4 is fulfilled.</p>
+<p>In particular, it seems we have to assume that 𝑓 is strictly monotonically increasing.</p>
+<p>Otherwise, we may run into values where 𝐸(𝑌 𝜷 ̂|𝑻 𝑿 = 𝒙; 𝜷 ̂) ≥ 𝐸(𝑌 𝜷 ̂|𝑻 𝑿 = 𝒙; 𝜷) even as 𝒙 𝑇 𝜷 ̂&lt; 𝒙 𝑇 𝜷. If fulfilled, 𝑓(𝒙 𝑇 𝜷 ̂) &lt; 𝑓(𝒙 𝑇 𝜷) if 𝒙 𝑇 𝜷 ̂&lt; 𝒙 𝑇 𝜷. And as 𝐸(𝑌 𝜷 ̂|𝑻 𝑿 = 𝒙; 𝜷 ̂) = 𝒙 𝑇 𝜷 ̂ and 𝐸(𝑌 𝜷 ̂|𝑻 𝑿 = 𝒙; 𝜷) = 𝑓(𝒙 𝑇 𝜷) -𝑓(𝒙 𝑇 𝜷 ̂) + 𝒙 𝑇 𝜷 ̂, Assumption 4 is fulfilled. Even with all assumptions fulfilled, estimation may be more complicated if (43) is not fulfilled, as previously indicated. Consider, for example, 𝑓(𝑻 𝑿 𝑇 𝜷) = exp(𝑻 𝑿 𝑇 𝜷). Say 𝐸(𝑌 𝜷 |𝑻 𝑿 = 𝒙; 𝜷) = 𝒙 𝑇 𝜷 = 2 while 𝐸(𝑌 𝜷 ̂|𝑻 𝑿 = 𝒙; 𝜷 ̂) = 𝒙 𝑇 𝜷 ̂= 1. Then 𝐸(𝑌 𝜷 ̂|𝑻 𝑿 = 𝒙; 𝜷) = exp(2) -exp(1) +1 ≈ 5.67.</p>
+<p>Therefore, the actual expected value 5.67 is further away from the true value 2 than is the expected value 1 indicated by our current guess 𝜷 ̂.</p>
+<p>This indicates that the iteration will explode and move further and further away from the true values if this behavior is not countered (note that we do not include (43) in Assumption 4 as it may be possible to counter, such as by decreasing the step-size until the next update no longer switches direction). We focus on cases where this exploding is avoided, which seems to be fulfilled whenever 𝑓(𝑻 𝑿 𝑇 𝜷) has a lower derivative than 𝑻 𝑿 𝑇 𝜷 throughout its range.</p>
+<p>We will consider three cases: 𝑓(𝑻 𝑿 𝑇 𝜷) = √𝑻 𝑿 𝑇 𝜷, 𝑓(𝑻 𝑿 𝑇 𝜷) = log(𝑻 𝑿 𝑇 𝜷), and 𝑓(𝑻 𝑿 𝑇 𝜷) = (1 + exp(-𝑻 𝑿 𝑇 𝜷)) -1 . In the first cases, we thus require 𝑻 𝑿 𝑇 𝜷 ≥ 1 for all values for 𝑻 𝑿 to ensure 𝑓(𝑻 𝑿 𝑇 𝜷) changes slower than 𝑻 𝑿 𝑇 𝜷. For simplicity, we will therefore focus on a single 𝜒 1 2 -distributed predictor. In the first two cases, we let 𝐼 𝑌 | 𝑻 𝑿 =𝒙 be normally distributed with expected value 𝑓(𝒙 𝑇 𝜷) and variance one. In the third case, we let 𝐼 𝑌 | 𝑻 𝑿 =𝒙 be Bernoulli distributed with probability 𝑓(𝒙 𝑇 𝜷) = (1 + exp(-𝒙 𝑇 𝜷)) -1 (i.e., the setup for logistic regression).</p>
+<p>In the first two cases, we set 𝛽0 = 1, and 𝛽1 = 6. This roughly corresponds to a correlation of .80 between √𝑻 𝑿 𝑇 𝜷 and 𝐼 𝑌 = 𝑇 𝑌 (again, observe that we define a separate pseudo-true variable 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 to set up the estimation). We used a fairly large correlation to ensure the true relationship was distinguishable when plotted. This leads to a slightly lower, but higher than .70, correlation for the second case, so we kept the same parameter settings.</p>
+<p>In the third case, we set 𝛽0 = -7, and 𝛽1 = 1.75 (see reason below). We contend ourselves with showing convergence of the estimates for a single sample of 10,000 observations in Figure 3. The iteration stopped when the maximum change for the 𝜷 estimates was no more than 0.0001 𝛽 ̂0 was initialized at the sample mean of 𝐼 𝑌 . We did not employ any speedup as these setups seemed to converge quite effectively, at least for this sample size and these parameters. We did, however, set 𝛽 ̂0 ≥ 0 as a condition for each iteration in the first two cases (if not fulfilled, 𝛽 ̂0 was changed to zero). Technically, we should restrict 𝛽 ̂1 simultaneously in these cases, but we never ran into any problems under this setup even as we made some variations to the parameters (e.g., to 𝛽0 = 0). As seen in Figure 3, all estimates have converged on the correct nonlinear relationships.</p>
+<p>Finally, we consider an alternative way to estimate the logistic relationship with the Em procedure.</p>
+<p>The standard latent variable model of logistic regression (see e.g., Bollen, 2002), understands a latent variable 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 to equal 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 = 𝑻 𝑿 𝑇 𝜷 + 𝜖, where 𝜖 follows a standard logistic distribution, independent of 𝑻 𝑿 (which is observed without error). The observed indicator 𝐼 𝑌 then fulfills 𝐼 𝑌 = 0 if 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 ≤ 0 and 𝐼 𝑌 = 1 if 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 &gt; 0. The typical logistic regression can then be understood as an estimate of 𝜷 in that relationship, as this will describe the expected values of 𝐼 𝑌 |𝑻 𝑿 through the usual logistic transformation. We can use this to formulate expected values for 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 that we can then employ in the Em procedure. It is easy to derive: 𝐸(𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 |𝐼 𝑌 , 𝑻 𝑿 ; 𝜷) = (2𝐼 𝑌 -1) log (1 + exp((2𝐼 𝑌 -1)𝑻 𝑿 𝑇 𝜷)) (1 + exp(-(2𝐼 𝑌 -1)𝑻 𝑿 𝑇 𝜷))(44) The derivative (w.r.t. 𝑻 𝑿 𝑇 𝜷) is below one throughout its range, so we should not have any overshooting that breaks with (43). We therefore employed these expectations iteratively to estimate the relationship without any other modifications to the algorithm. The slope of 1.75 ensures a correlation of about .80 between 𝑻 𝑿 𝑇 𝜷 and 𝑇 𝑌,𝑝𝑠𝑒𝑢𝑑𝑜 in this case (note that the explained variance between these terms corresponds to the McKelvey &amp; Zavoina, 1975 pseudo-𝑅 2 ).</p>
+<p>The results are at the bottom-right of Figure 3. This illustrates how the Em algorithm is flexible enough that it can be employed in different ways, even for the same problem. In this case, both these formulations allowed us to estimate the relationship, but it is also possible that some formulations are more advantageous than others for other setups.</p>
+<p>We haves only cared about consistency of the nonlinear estimates in this section. Some estimates can likely be improved if, for example, iteratively reweighted least squares is incorporated in the logistic estimation (in the other examples we have the same error everywhere, making it less meaningful). Similarly, the estimation can likely be sped up by utilizing methods like those in the tetrachoric section above. This may also be necessary to converge for more extreme parameter values and/or more predictors.</p>
+<p>The kind of estimation illustrated here may facilitate the modelling of nonlinear functions of the expected values. In particular, note that we did not need to calculate any derivatives by this procedure, nor any weight matrix. The fact that we can model nonlinear relationships with the Em algorithm is particularly useful if we have other errors in the variables, which, if so, can be further incorporated into these expected values. Nonlinear estimation with the Em method Note. Data in grey. Black dots show the true relationship, blue lines the estimated relationship. Top methods and logistic method 1 estimate by removing the implied expected values and then add in corresponding linear expected values. Logistic method 2 uses the standard latent variable formulation of logistic regression.</p>
+<h3>Discussion</h3>
+<p>Here we derived a population model about errors that allowed latent linear relationships to be retained (Theorem 1), and a corresponding estimation method (Theorem 2). We showed how this can be used both to estimate such latent linear relationships, or to estimate nonlinear relationships between observed variables through the use of pseudo-latent variables. We also showed variance ratios that, like reliabilities, can function as measures of the precisions of our measures, and that can be used to quantify the change in explained variance between latent and observed variables, and to evaluate the usefulness of modelling that error.</p>
+<p>The model we derived is also more general than prior models for retaining latent linear relationships (Lu &amp; Thomas, 2008; Skrondal &amp; Laake, 2001), as indicated by Lemma 1-2, as we also score the outcome by an unbiased prediction decomposition. This scoring also meant that we were able to derive these scores under fewer assumptions than in these earlier papers.</p>
+<p>As a result, we can fit a greater range of measurement issues into our population model. In part because some variables cannot fulfill an unbiased measurement decomposition, while variables can always fulfill an unbiased prediction decomposition, in part because of the fewer assumptions required to ensure our scoring retain the linear relationship. In particular, we do not require that the error of the outcome does not depend on the predictors (as is required by the L&amp;T.3-4 assumptions).</p>
+<p>The model and its related Em estimation method also has several practical advantages.</p>
+<p>First, when estimating the 𝜷-parameters the 𝑿 𝑇 𝑿 matrix technically only needs to be inverted once. This may speed up estimation when this matrix is large. The reason for this is that for each OLS iteration, we are estimating with (𝑿 𝜽 T𝑿 𝜽 ̂)-1 𝑿 𝜽 T𝑌 𝜽 ̂,𝜷 ̂, and 𝑌 𝜽 ̂,𝜷 ̂ the is the only part that needs to be updated based on the new estimates of 𝜷. Although it may of course be advantageous to introduce an iterative weight matrix into these estimates, especially when the variance of 𝑌 𝜽 ̂,𝜷 ̂|𝑿 𝜽 ̂=𝒙 varies a lot for different 𝒙.</p>
+<p>The fact that we define the scores for the predictors and the outcome in a corresponding way may also yield certain benefits. Consider if the scores need to be estimated in a chained way. That is, where scores for predictors also depend on other predictors. If those scores can be estimated through the Em algorithm, then we can start with the estimates that need the least predictors. Once we have 𝜷-estimates in that relationship, this gives us a complete expression for the joint distribution of those 𝑿-variables, say for the first 𝑗 predictors. We can then use this directly in a second step, where these variables predict the 𝑗 + 1:th predictor.</p>
+<p>This is then repeated until we arrive at predicting the outcome 𝑌.</p>
+<p>The fact that we can use similar steps (by the Em algorithm) to estimate various types of errors is also advantageous, in that it can aid researchers in considering a larger variety of errors with more regularity. In all cases, we start with a measurement model, consider if, and if so, how nuisance parameters 𝜽 can be estimated separately from the 𝜷-parameters, evaluate and potentially modify the measurement and/or the number of predictors so that the measured predictors should not depend on the regression error term 𝜖 (this concerns dependence both for the true predictors and for their indicators), estimate 𝜽-parameters that do not depend on any joint predictors, calculate the expected values of the predictors (possibly in a chained way) and potential further 𝜽-parameters that require considering the joint distribution of the predictors (including intercepts and slopes between the predictors), and then estimate the expected values for the outcome and the 𝜷-parameters iteratively. The steps always concern ensuring Assumption 1-4 are fulfilled, finding expected values for the predictors, and then using those to estimate expected values and OLS parameters for the outcome.</p>
+<p>As we split up the estimation into parts, this may further enable researchers to derive models for their errors, as they can first consider a model of the nuisance parameters, then the predictors (which itself can be broken up into steps), and then the outcome, which may be simpler than modelling a joint distribution all at once. Additionally, as multiple errors can be considered through the same steps, it can hopefully aid researchers in considering joint types of errors in the same model, as in Example 3.</p>
+<p>The focus on expected-value scores also enables estimating scores by simulation even in cases where deriving those expectations is otherwise difficult. This will not be as quick as otherwise, but it can be utilized as a brute force approach even in complicated models.</p>
+<p>Relatedly, the focus of expected values of the true variables conditional on the indicators, and the fact that each such score leads to no direct requirement for other scores (by the derivation in Lemma 2), means that if we can define a joint distribution of the true variables and indicators, then we can apply that directly to derive the scores without needing to solve an equation of other scores. Specifically, note that:</p>
+<p>So all we need is the joint distribution 𝑓 𝐼,𝑇 (𝑖 𝑗 , 𝑡) (which itself can be split up into marginal and conditional distributions so as to simplify its formulation). This directly yields a formula for 𝑥 𝑗 without involving any other 𝑥 𝑘 . In contrast, for a measurement decomposition:</p>
+<p>Where the 𝑥 indicate that we are integrating over multiple 𝑥 𝑘 , the unknowns that we need to define to fulfill an unbiased measurement decomposition. Consequently, even if we can define the joint distribution 𝑓 𝑇,𝑋 (𝑡 𝑗 , 𝑥), or the conditional distribution 𝑓 𝑋|𝑇 (𝑥|𝑡 𝑗 ), then we still have to solve a system of equations for the 𝑥 𝑗 . This was not necessary for the prediction decomposition. This can make scores according to our prediction decomposition easier to apply in practice, even when both types of scores can be defined, which means that applying them further, such as in the simulations of expected values discussed above, can be easier to do in practice as well. This could potentially also make it simpler to apply in programming packages that calculate such scores under flexible types of distributions.</p>
+<p>The method that has been presented here thus appears highly applicable and flexible.</p>
+<p>However, some limitations of the current treatment should be noted. First, the flexibility of the method means that it can be applied in different ways even for the same problem. This can be an advantage (e.g., one method may be possible to apply under conditions when another cannot), but it also means that new applications should check so that the proposed method has good properties compared to other methods. In the logistic regression part of Example 2, we used two different methods, and showed that they had converged on the right relationship. However, if one of the methods yields estimates with consistently lower standard errors than another, then that first method should clearly be preferred. Both may be versions of the method we apply, so, certainly, checks should also be applied to ensure each particular application works satisfactorily.</p>
+<p>In a similar vein, our Theorem 2 provides conditions to ensure the iterative updating will asymptotically move the conditional expectations in the correct direction for each iteration.</p>
+<p>However, any new application should modify the updating and check so that estimates converge as expected. The updated expectations may differ very little, making the iterative updating very slow unless some speedup is included, or (if (43) is not fulfilled), differ too much unless the updating is slowed down. Theorem 2 provides a flexible result about the direction in which expectations should be updated, how far that each iteration should update in that direction should be tailored to each problem at hand.</p>
+<p>It should also be studied how some of our assumptions could be relaxed. Assumption 1-2 are fairly open, and Assumption 3-4 also holds under many cases, but there are also cases where they do not. Assumption 4 might be relaxed to an assumption that the covariances 𝐶𝑜𝑣(𝑿 1:𝑝,𝜽 ̂, 𝑌 𝜽 ̂,𝜷 ̂) (and, if necessary, the expectations) move in the correct direction when estimates are updated. Again, this is because we are keeping the same 𝐶𝑜𝑣(𝑿 1:𝑝,𝜽 ̂) matrix at each iteration. Therefore, the estimates of the slopes (𝐶𝑜𝑣(𝑿 1:𝑝,𝜽 ̂)) -1 𝐶𝑜𝑣(𝑿 1:𝑝,𝜽 ̂, 𝑌 𝜽 ̂,𝜷 ̂) will move in the right direction. This may also yield a way to soften (43) without needing to account for overshooting. Because even if expectations for some 𝒙 change quicker than indicated by (43), it may be that others change slower, and that this balances out in the covariance as a whole.</p>
+<h3>Conclusions</h3>
+<p>The model of measurement errors presented in Theorem 1 provides a broad analytical model for considering and handling various errors. As shown by Lemma 2, the scores of Theorem 1 can be applied for a wide variety of errors.</p>
+<p>The analytical model derived in Theorem 1 is useful on its own in that it can be used to understand the consequences of errors. Even where expectations are not possible to estimate, or where the estimation procedure suggested here is less efficient, it can provide understanding about the optimal scores that would be required to avoid bias, and how much this could differ from the scores used by researchers. It can also hopefully enable communicating the consequences of a broader set of errors.</p>
+<p>Finally, we derived a novel way to estimate OLS parameters through an Em algorithm in Theorem 2 for the multiple models that fulfill or can be made to fulfill the structure in Theorem 1. Future studies should further examine the general behavior of the algorithm, and how to specify the algorithm to estimate expected values and nuisance parameters most effectively for various measurements. The model also provides the possibility of deriving flexible code for estimating these models using the same general steps under various errors structures and distributions.</p>
+<p>sex and age when predicting political interest, we used linear regression where political interest was predicted only by their main effects. Although there was nonlinearity for the oldest group of men (a small proportion of the sample), overall, the linear model seemed to fit well enough. See Figure S1. Note. Black dots = data. Colored dots = means for ages 18-30, 31-40, 41-50, 51-60, 61-70, 71-80, 81-90.</p>
+<p>Errors: We introduce misclassification, splitting a variable by a threshold, and missing data, one at a time, and treat the dataset as if it was only observed with these errors. We did it one at a time to examine how estimates were affected by each step. As shown in Appendix E2, all these can be modelled with the 2x2 Em algorithm straightforwardly. We introduced a 10% chance to misclassify the sex of participants irrespective of original sex 2 . If sensitivity is the 2 Misclassification may not be such a big issue for sex in general (although some machine learning studies e.g., try to identify the sex of participants through their text, which will introduce some chance of misclassification). However, we only consider misclassification for sex to illustrate the general of the model, as we did not need to define a likelihood for the latent variables, we only required some way to get conditional expectations and variances.</p>
+<p>𝐼 𝑌 = 0/1 indicates whether the outcome is missing/observed, 𝐼 𝑠𝑒𝑥 = 0/1 if classified as male/female, and 𝐼 𝑎𝑔𝑒 = 0/1 if the person is below/above or equal the age threshold.</p>
+<p>Estimation: Step 1.1: The sensitivity s and specificity c are estimated from the 25% proportion of the sample with a better measure, from the proportions that got correctly classified by the original measure. That is, if 𝑛 𝑤 is the number of women in this part of the sample, and 𝑛 𝑤𝑤 is the number of these participants who were also classified as women by the measure used in the full sample, then the sensitivity is estimated as 𝑠̂= 𝑛 𝑤𝑤 𝑛 𝑤 ⁄ . Similarly, 𝑐̂= 𝑛 𝑚𝑚 𝑛 𝑚 ⁄ . The cutoff/threshold for age 𝑎 is estimated by taking the proportion of participants who are in the lower category 𝑝 0 , and using the age in the Statistics Sweden dataset that corresponded to the age above this cumulative proportion (we took the age above this so the cutoff was part of the higher category, but this only affects how we define the expectations and was not required). Step 1.2: Expected values of 𝐸(𝑇 𝑠𝑒𝑥 |𝐼 𝑠𝑒𝑥 = 𝑗), 𝐸(𝑇 𝑠𝑒𝑥 |𝐼 𝑠𝑒𝑥 = 𝑗, 𝐼 𝑎𝑔𝑒 = 𝑘), and 𝐸(𝑇 𝑎𝑔𝑒 |𝐼 𝑠𝑒𝑥 = 𝑗, 𝐼 𝑎𝑔𝑒 = 𝑘), can be calculated and used as scores for out measurements where the parameters from Step 1.1 are plugged in, and where relevant expectations and probabilities are derived from Statistics Sweden. See Appendix E2 for expectation formulas. Step 2.1: -Step 2.2: We assume it is correctly assumed that the expectation value for the outcome is the same between observed and missing data when using the thresholded age of participants while the true sex of participants needs to be accounted for. Expected values and probabilities for the observed data can be directly estimated and then plugged into the expected values for the missing data.</p>
+<p>No iterative updating is needed in this case, as we directly get the right expectations for 𝑇 𝑌 (except for sampling error) no matter the OLS parameters.</p>
+<p>Results: See Table S1 for OLS estimates, plus standard errors for variables without errors.</p>
+<p>Normally we should Bootstrap standard errors for the estimation, although we skip this here as we have the error-free estimates to compare against. The estimated &quot;precision&quot; (or the &quot;proportional reduction in mean squared error&quot;; i.e., the variance ratio in Corollary 2) was very low when both sex and age contained error. Note that as the precision is lower, there is more error variation in the estimates, which is likely why estimates here also move somewhat further away compared to estimates in the model without errors. The explained variances for non-corrected variables with error (0-1 scores for the predictors, missing data excluded, and no precision correction) were .039 (no error), .035, .024, and .025. Discussion: Had we dummy coded the misclassified sex variable with 0 and 1, then the slope (i.e. the difference between men and women), would tend to be underestimated. The slope for age could not even be estimated that way, we required the conditional expected values as scores to do so. With our scoring, we received slopes close to the ones for the true variables (all within one standard error of the error-free variables) and explained variances closer to the one for the true variables compared to uncorrected scores (no expected-value scores, and no error correction). This was even though there are likely some biases in the sample compared to in the population, and even though the relationship was not perfectly linear. We also</p>
+<h3>Acknowledgements</h3>
+<p>Thanks to Silvelyn Zwanzig, Department of Mathematics, Uppsala University, for helpful comments on the original version of the model, and to Jessica Kay Flake and Victoria Savalei, Department of Psychology, University of British Columbia, and Riet van Bork, Department of Psychology, University of Amsterdam, for helpful comments.</p>
+<p>This work was funded by the Swedish Research Council, grant 2024-00326. Open access statement: Original data is available over: European Social Survey: https://ess.sikt.no/en/datafile/242aaa39-3bbb-40f5-98bf-bfb1ce53d8ef. Statistics Sweden: https://www.statistikdatabasen.scb.se/pxweb/en/ssd. R-code for analyses and for constructing figures, and open data from Statistics Sweden for Supplemental Example 3 will be made available over OSF or another open repository.</p>
+<p>The authors have no competing interests to declare that are relevant to the content of this article.</p>
+<h3>Modelling multiple types of errors and utilizing prior information in real data</h3>
+<p>We present this example in detail in the Supplemental Materials and summarize it here.</p>
+<p>Here we evaluate how multiple types of errors can be modelled at once using Theorem 1-2 and the Em algorithm, and how prior/population information can be used to estimate the expected values. Specifically, we predict political interest with the main effects of sex and age (which was fairly linear, and not dependent on the interaction). We introduce errors in all three variables: misclassification in the sex variable (can e.g., be the case if it has been estimated from some online or textual indicators), dichotomization of the age variable, and missing data in the political interest variable, which would be MAR dependent upon the sex of participants if we could observe it without error. We show how to formulate the expected values in our model, and how we can use governmental data about sex and age to estimate the expected values using the proportion of men and women and the age distribution, together with information in the sample about the sensitivity and specificity of the sex indicator and the proportion in the dichotomized age variable. As missingness in political interest is dependent on the true sex of participants, and as we only observe the indicator with a risk of misclassification, we further incorporate this in the expected values for the missing cases.</p>
+<p>Finally, we also use the variance ratios from Corollary 1-2 to evaluate whether it would serve to treat the original age-variable (measured with integers), as an indicator of a latent true age.</p>
+<p>As the corresponding variance ratio (the precision), can be shown to be very close to one, so that the difference in the error due to this lack of precision is very marginal (per Corollary 1), we have a marker that can show us that modelling this is likely not all that necessary, provided bias is avoided. We can therefore focus on modelling more severe types of errors.</p>
+<h3>Supplemental Materials Example 3: Incorporating population information</h3>
+<p>Calculations for the expected values are presented in Appendix E3 at the end of this file.</p>
+<h3>Method illustrations:</h3>
+<p>Here we show how population information, or information from a prior dataset, can be used to estimate the expected values. We also show how misclassified variables, thresholded variables, and variables with missing data can be modelled using Theorem 1 and the 2x2 Em algorithm. This example also illustrates a case where no iterative updating of the outcome is required. Finally, we show how the variance ratios of Corollary 2 can be used to evaluate the (non)importance of modelling certain errors.</p>
+<h3>Nuisance parameters estimated: Sensitivity and specificity (sex), cutoff/threshold (age).</h3>
+<p>Missing data that is MAR conditional on the true sex of participants requires no separate parameter, but affects the expected values.</p>
+<p>Introduction: We use an existing dataset from which political interest is predicted by sex and age, and introduce different types of errors to show how the model can be used to consider multiple types of errors in tandem. Although the political interest and age variables seems to contain error already (if both are truly measuring more continuous variables), introducing our own errors means that we can compare the estimates to known baselines.</p>
+<p>Sample: Swedish participants aged 18 or older were included from the latest, 11 th round of the European Social Survey (ESS, 2023). This resulted in n = 1209 participants. The ESS aims to provide a representative sample of each country for people 15 years or older.</p>
+<p>However, as participants below 18 required their parent&#x27;s approval, there appeared to be an under-sampling of this group, and they were therefore excluded here.</p>
+<p>Measures and Design: Only questions about sex (scored male = 0, female = 1), age, and political interest (reverse-scored so1 = not at all interested,2 = hardly interested,3 = quite interested,4 = very interested) were included. As there was no significant interaction between chance to correctly classify women, and specificity the chance to correctly classify men, this means sensitivity = specificity = .90. When estimating we did not assume equality and therefore estimated these nuisance parameters separately. The usual way to estimate sensitivity and specificity is to include a better (but perhaps more expensive) estimate on a subset of the data (see Enøe, 2000). We therefore assumed that 25% of the data could be tested at a follow-up and their true sex measured without error. Age was split into those above and equal, or below 30 years of age. We treated the cutoff as unknown, and hence as another nuisance parameter when estimating. Political interest was set to be missing at a 10% rate for men, and 20% for women (both unknown but not necessary to estimate directly).</p>
+<p>Note that this means the outcome is not necessarily MAR with respect to the observed predictors (sex-measure with misclassification), but MAR with respect to the latent predictors (true sex). Two participants did not answer the political interest question. These were treated as part of our imposed missing data. The final dataset with errors in all variables therefore consisted of bivariate scores for sex and age, and true political interest when observed, but missing for some participants.</p>
+<p>To model errors in the predictors, per Theorem 1, we used government statistics of sex and age for 2023 from Statistics Sweden (SCB, 2023). As the European Social Survey is meant to be representative, this should provide reasonable conditional expectations. If variables had only been observable with errors in them, then we could not observe latent expected values in these data, so getting them from another reliable source is advantageous. This also illustrates the advantage that could be had by developing validated population databases of precisely measured variables, chances of their misclassification et cetera, as these could then be used to calibrate estimates &quot;in the wild&quot;. This method of correction also further shows the flexibility method by which we can correct for misclassification. The same treatment we use here would apply to any other misclassified categorical variable. accomplished this without assuming likelihoods for variables. We also provided a principled way of correcting for multiple types of errors at once: misclassification, splitting of data, and missing data where the missingness depended on the true predictors. We were also able to provide estimates of the biases/loss of information for the uncorrected variables with the &quot;precisions&quot; (proportional reduction in mean square error). From this we could see that the introduced thresholding of age in particular led to a lot of loss in information, with an estimated precision of the combined model of only .50. This lack of precision also leads to a higher standard error of the estimates, and illustrates the harm of this particular error.</p>
+<h3>Precision of age:</h3>
+<p>Finally, we will consider modelling some of the error already in the variables. Specifically, we do so for the age-variable, assuming it is the continuous true age that predicts political interest. For simplicity, we assume the indicated ages are defined through sharp thresholds, meaning no one is misclassified into the wrong age (misclassification should be fairly rare, so this seems reasonable enough). The indicated ages are then the lower bound on a person&#x27;s true age, which is therefore at least going to introduce bias in the intercept. We could update the scores (or expected value) to the middle of each age threshold to minimize this bias (to entirely remove it we would need the true expectations in each range, per T1.2).</p>
+<p>Next, we consider how much the correlation is affected by not measuring continuous age.</p>
+<p>When we have an ordinally thresholded variable, we can ask either for the maximum precision when the latent distribution is fixed and the thresholds can vary, or, as in this case, for the minimum precision when the thresholds are fixed and the latent distribution is free to vary. 3 If the density is defined and non-zero throughout the variable&#x27;s range, then the former ⁄ for all 𝑐 𝑘 (see Berggren, 2020).</p>
+<p>The latter case can be easily shown to be fulfilled when half of the latent distribution in each range is at the lowest value of that range, and half is at the highest value. In our case, this yields that the precision variance-ratio is at least about 1 -𝑉𝑎𝑟(𝜀 𝑎𝑔𝑒 ) (𝑉𝑎𝑟(𝑋 𝑎𝑔𝑒 ) + 𝑉𝑎𝑟(𝜀 𝑎𝑔𝑒 )) ⁄ ≈ 1 -0.5 2 (373.86 + 0.5 2 ) ⁄ ≈ 0.99933, where 𝑉𝑎𝑟(𝑋 𝑎𝑔𝑒 ) is taken from Statistics Sweden. This is a minimum close enough to one so that any correction to the correlation or explained variance appears unnecessary, and so that updating the age-scores based on its joint distribution with other variables should not lead to much of a difference compared to treating age as being measured without error (provided the overall bias above is accounted for). The probabilities 𝑃(𝑠𝑒𝑥|𝑎𝑔𝑒) are derived from the Statistics Sweden dataset. Note that we are conditioning on both sex and age, by equations (T1.2)-(T1.3), as we have two predictors.</p>
+<p>If sex and age are independent enough this becomes less necessary, but we did not make this assumption (in older ages the proportion who are women increases).</p>
+<p>With errors in both predictors, their expected-value scores are defined as:</p>
+<p>The four terms for 𝑋 𝑎𝑔𝑒 are for the same conditions as the four terms for 𝑋 𝑠𝑒𝑥 , its conditions are merely excluded to shorten the equation. Consider the upper left part of the first term for 𝑋 𝑎𝑔𝑒 : 𝐸(𝑎𝑔𝑒|𝑚𝑎𝑙𝑒, 𝑎𝑔𝑒 &lt; 𝑎)𝑐𝑃(𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 &lt; 𝑎). This is the term for maleclassified participants under the age 𝑎. 𝐸(𝑎𝑔𝑒|𝑚𝑎𝑙𝑒, 𝑎𝑔𝑒 &lt; 𝑎) is taken from the Statistics Sweden dataset after plugging in an estimate of 𝑎. 𝑃(𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 &lt; 𝑎) is the probability that someone below the age of 𝑎 is male, also taken from Statistics Sweden. The probability that they get correctly classified as male is 𝑐 (also to be plugged in). Also note that the same probabilities are used for 𝑋 𝑎𝑔𝑒 and 𝑋 𝑠𝑒𝑥 (this is because we condition on them both at once).</p>
+<h3>Step 2.1: -Step 2.2:</h3>
+<p>We assume it is correctly assumed that the expected value of observed and missing data is the same when conditioning on the thresholded age of participants while the true sex of participants needs to be accounted for. We have: Expected values and probabilities for the observed data on the left can be estimated from the observed data and terms on the right. This can then be plugged into the expected values for the missing data. Note that no iterative updating is needed in this case, as we directly get the right expectations for 𝑇 𝑌 (except for sampling error) no matter the OLS parameters.</p>
+<p>𝑌 , 𝑇 𝑋 : True/latent variables. Some/all cannot be observed directly. The goal is to estimate the relationship between the outcome 𝑇 𝑌 and the predictors 𝑻 𝑿.</p>
+<h3>Figure 1</h3>
+<p>Figure1 outcome, but that decomposition is structured so the outcome is conditioned on all indicators, while the predictors are only conditioned on the predictor indicators.</p>
+<p>By the Outcome decomposition in (23): 𝐸(𝑌|𝑿 = 𝒙) = 𝐸(𝑇 𝑌 -𝜀 𝑌 |𝑿 = 𝒙) Then, by the linearity assumption: 𝐸(𝑇 𝑌 -𝜀 𝑌 |𝑿 = 𝒙) = 𝐸(𝑻 𝑿 𝑇 𝜷 + 𝜖 -𝜀 𝑌 |𝑿 = 𝒙) And by the Predictor decomposition in (22): 𝐸(𝑻 𝑿 𝑇 𝜷 + 𝜖 -𝜀 𝑌 |𝑿 = 𝒙) = 𝐸(𝑿 𝑇 𝜷 + 𝜺 𝑿 𝑇 𝜷 + 𝜖 -𝜀 𝑌 |𝑿 = 𝒙) Therefore: 𝐸(𝑌|𝑿 = 𝒙) = 𝐸(𝑿 𝑇 𝜷 + 𝜺 𝑿 𝑇 𝜷 + 𝜖 -𝜀 𝑌 |𝑿 = 𝒙) = 𝐸(𝑿 𝑇 𝜷|𝑿 = 𝒙) + 𝐸(𝜺 𝑿 𝑇 𝜷|𝑿 = 𝒙) + 𝐸(𝜖|𝑿 = 𝒙) -𝐸(𝜀 𝑌 |𝑿 = 𝒙) = 𝒙 𝑇 𝜷 + 𝟎 𝑇 𝜷 + 0 -0 = 𝒙 𝑇 𝜷 As wanted. In the second to last equality, the zero-expectations for the errors of the predictors 𝜺 𝑿 and for the regression error 𝜖 come directly from the Predictor decomposition (22) and the Error assumption (17). The Outcome decomposition (23), in turn, says that 𝐸(𝜀 𝑌 |𝑌 = 𝑦, 𝑿 = 𝒙) = 0 for all 𝑦, 𝒙. Therefore, 𝐸(𝜀 𝑌 |𝑿 = 𝒙) = 0 as well, after marginalizing over 𝑌. □ 𝑉𝑎𝑟(𝑌) = 𝑉𝑎𝑟(𝑇 𝑌 -𝜀 𝑌 ) = 𝑉𝑎𝑟(𝑇 𝑌 ) -𝑉𝑎𝑟(𝜀 𝑌 ) (26: 𝑂𝑢𝑡𝑐𝑜𝑚𝑒 𝑣𝑎𝑟𝑖𝑎𝑛𝑐𝑒 𝑑𝑒𝑐𝑜𝑚𝑝𝑜𝑠𝑖𝑡𝑖𝑜𝑛) As the Outcome decomposition in (23) ensures that 𝐶𝑜𝑣(𝑌, 𝜀 𝑌 ) = 0.</p>
+<p>Next: 𝑉𝑎𝑟(𝑇 𝑌 ) = 𝑉𝑎𝑟(𝑻 𝑿 𝑇 𝜷 + 𝜖) = 𝑉𝑎𝑟(𝑻 𝑿 𝑇 𝜷) + 𝑉𝑎𝑟(𝜖) By the Linearity Assumption 1. Finally: 𝑉𝑎𝑟(𝑻 𝑿 𝑇 𝜷) = 𝑉𝑎𝑟(𝑿 𝑇 𝜷) + 𝑉𝑎𝑟(𝜺 𝑿 𝑇 𝜷) (27: 𝑃𝑟𝑒𝑑𝑖𝑐𝑡𝑜𝑟 𝑣𝑎𝑟𝑖𝑎𝑛𝑐𝑒 𝑑𝑒𝑐𝑜𝑚𝑝𝑜𝑠𝑖𝑡𝑖𝑜𝑛) As the Predictor decomposition in (22) ensures that 𝐶𝑜𝑣(𝑋 𝑗 , 𝜀 𝑋,𝑘 ) = 0 for any 𝑗 and 𝑘.</p>
+<p>𝑿,𝟏:𝒑 , 𝑇 𝑌 ) = 𝜷 𝟏:𝒑 𝐸𝑇 𝑌 -𝐸𝑻 𝑿,𝟏:𝒑 𝑇 𝜷 𝟏:𝒑 = 𝛽 0 As we can still write 𝑇 𝑌 as a weighted sum of the predictors 𝑻 𝑿 , and as the error 𝜖 in that relationship is going to have a zero covariance with each predictor, we have: 𝐶𝑜𝑣(𝑻 𝑿,𝟏:𝒑 , 𝑇 𝑌 ) = 𝐶𝑜𝑣(𝑻 𝑿,𝟏:𝒑 , 𝛽 0 + 𝑻 𝑿,𝟏:𝒑 𝑇 𝜷 𝟏:𝒑 + 𝜖) = 𝐶𝑜𝑣(𝑻 𝑿,𝟏:𝒑 , 𝑻 𝑿,𝟏:𝒑 𝑇 𝜷 𝟏:𝒑 ) (33) Therefore, if: 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑌) = 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑿 𝟏:𝒑 𝑇 𝜷 𝟏:𝒑 ) (34: 𝐶𝑜𝑣𝑎𝑟𝑖𝑎𝑛𝑐𝑒 𝑟𝑒𝑞𝑢𝑖𝑟𝑒𝑚𝑒𝑛𝑡)Then the slope-covariance relationship for the measurements fulfills: 𝟏:𝒑 , 𝑌) = 𝜷 𝟏:𝒑 (35: 𝑆𝑙𝑜𝑝𝑒 𝑐𝑜𝑣𝑎𝑟𝑖𝑎𝑛𝑐𝑒 𝑟𝑒𝑙𝑎𝑡𝑖𝑜𝑛𝑠ℎ𝑖𝑝) And as (30)-(32) ensure that: 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑌) = 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑻 𝑿 𝑇 𝜷) + 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝜺 𝑿 𝑇 𝜷) + 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝜖) -𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝜀 𝑌 ) = 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑻 𝑿,𝟏:𝒑 𝑇 𝜷) + 𝟎 𝑇 𝜷 + 0 -0 = 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑻 𝑿,𝟏:𝒑 𝑇 𝜷) The slope-covariance relationship (35) is therefore the correct one under our assumptions (30)-(32). With correct expected values, so is the intercept relationship: 𝐸𝑌 -𝐸𝑿 𝟏:𝒑 𝑇 𝜷 𝟏:𝒑 = 𝛽 0 (36: 𝐼𝑛𝑡𝑒𝑟𝑐𝑒𝑝𝑡 𝑟𝑒𝑙𝑎𝑡𝑖𝑜𝑛𝑠ℎ𝑖𝑝) As stated. □ (𝐶𝑜𝑣(𝑿 𝟏:𝒑 )) -1 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑌) and 𝐸𝑌 -𝐸𝑿 𝟏:𝒑 𝑇 𝜷 𝟏:𝒑 express the population least squares solution even if the true relationship is not linear. Therefore, we can still estimate the &quot;correct&quot; latent relationship using OLS and related methods if (30)-(32) are fulfilled. Note here the difference between our Covariance requirement (34) to the covariances for measures with random errors. For random errors, 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑌) = 𝐶𝑜𝑣(𝑻 𝑿,𝟏:𝒑 , 𝑇 𝑌 ). But as we see here, that is not required to get the correct slopes (and, in fact, we do not get the correct least-squares slopes with random errors in the predictors). We only required that 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑌) = 𝐶𝑜𝑣(𝑿 𝟏:𝒑 , 𝑿 𝟏:𝒑 𝑇 𝜷 𝟏:𝒑 ), which need not equal 𝐶𝑜𝑣(𝑻 𝑿,𝟏:𝒑 , 𝑇 𝑌 ).</p>
+<p>Instrumental variables 𝐼 𝑋 = 𝐼 𝐼𝑉 , the instrumental variable, and 𝐼 𝐸𝑉 , the endogenous variable, fulfills 𝐸(𝑇 𝑋 |𝐼 𝐼𝑉 ) = 𝐸(𝐼 𝐸𝑉 |𝐼 𝐼𝑉 ). 𝑋 = 𝐸(𝑇 𝑋 |𝐼 𝐼𝑉 ) = 𝐸(𝐼 𝐸𝑉 |𝐼 𝐼𝑉 ) Typically, no error in 𝑇 𝑌 is assumed. Fulfilled as 𝐼 𝐼𝑉 should not explain 𝑇 𝑌 beyond what is explained by 𝑇 𝑋.</p>
+<p>𝐼 𝑋 = 𝑗 when 𝑐 𝑋,𝑗-1 &lt; 𝑇 𝑋 ≤ 𝑐 𝑋,𝑗 for 𝐽 + 1 thresholds 𝑐 𝑋,0 to 𝑐 𝑋,𝐽 , where 𝑐 𝑋,0 = -∞, and 𝑐 𝑋,𝐽 = ∞, and we take the limit for these thresholds. Similarly, 𝐼 𝑌 = 𝑘 when 𝑐 𝑌,𝑘-1 &lt; 𝑇 𝑌 ≤ 𝑐 𝑌,𝑘 for 𝐾 + 1 thresholds 𝑐 𝑌,0 to 𝑐 𝑌,𝐾 , where, similarly 𝑐 𝑌,0 = -∞, and 𝑐 𝑌,𝐾 = ∞. Tetrachoric correlations is a special case of this where 𝐽 = 𝐾 = 2, and so (𝑐 𝑋 , 𝑐 𝑌 ) = (𝑐 𝑋,1 , 𝑐 𝑌,1 ).</p>
+<p>𝜽 ̂≔ 𝐸(𝑻 𝑿 |𝑰 𝑿 ; 𝜽 ̂) (40: 𝑃𝑟𝑒𝑑𝑖𝑐𝑡𝑜𝑟 𝑒𝑠𝑖𝑚𝑎𝑡𝑒𝑠) 𝑌 𝜽 ̂,𝜷 ̂≔ 𝐸(𝑇 𝑌 |𝐼 𝑌 , 𝑰 𝑿 ; 𝜽 ̂, 𝜷 ̂) (41: 𝑂𝑢𝑡𝑐𝑜𝑚𝑒 𝑒𝑠𝑡𝑖𝑚𝑎𝑡𝑒𝑠) (𝑌 𝜽,𝜷 ̂|𝑿 𝜽 = 𝒙; 𝜽, 𝜷) &lt; 2𝐸(𝑌 𝜽,𝜷 |𝑿 𝜽 = 𝒙; 𝜽, 𝜷) -𝐸(𝑌 𝜽,𝜷 ̂|𝑿 𝜽 = 𝒙; 𝜽, 𝜷 ̂) (43) With corresponding inequality when 𝒙 𝑇 𝜷 ̂&gt; 𝒙 𝑇 𝜷. (43) means that the updated conditional expected value 𝐸(𝑌 𝜽,𝜷 ̂|𝑿 𝜽 = 𝒙; 𝜽, 𝜷) will be closer to the true value 𝒙 𝑇 𝜷 = 𝐸(𝑌 𝜽,𝜷 |𝑿 𝜽 = 𝒙; 𝜽, 𝜷) than is 𝒙 𝑇 𝜷 ̂= 𝐸(𝑌 𝜽,𝜷 ̂|𝑿 𝜽 = 𝒙; 𝜽, 𝜷 ̂).</p>
+<h3>Figure 2</h3>
+<p>Figure 2 Conditioning Y on TX and iterating to estimate the linear relationship ) is fulfilled, as: 𝐸(𝑌 𝑐 𝑋 ,𝑐 𝑋 ,𝜌 ̂|𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌) = 𝐸(𝑌 𝑐 𝑋 ,𝑐 𝑋 ,𝜌 ̂|𝑇 𝑌 ≤ 𝑐 𝑌 , 𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌)𝑃(𝑇 𝑌 ≤ 𝑐 𝑌 |𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌) + 𝐸(𝑌 𝑐 𝑋 ,𝑐 𝑋 ,𝜌 ̂|𝑇 𝑌 &gt; 𝑐 𝑌 , 𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌)𝑃(𝑇 𝑌 &gt; 𝑐 𝑌 |𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌) &lt; 𝐸(𝑌 𝑐 𝑋 ,𝑐 𝑋 ,𝜌 |𝑇 𝑌 ≤ 𝑐 𝑌 , 𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌)𝑃(𝑇 𝑌 ≤ 𝑐 𝑌 |𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌) + 𝐸(𝑌 𝑐 𝑋 ,𝑐 𝑋 ,𝜌 |𝑇 𝑌 &gt; 𝑐 𝑌 , 𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌)𝑃(𝑇 𝑌 &gt; 𝑐 𝑌 |𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌) = 𝐸(𝑌 𝑐 𝑋 ,𝑐 𝑋 ,𝜌 |𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 , 𝑐 𝑌 , 𝜌) = 𝜌𝐸(𝑇 𝑋 |𝑇 𝑋 ≤ 𝑐 𝑋 ; 𝑐 𝑋 ) in Step 5.</p>
+<p>This works as the saved table in the &#x27;psych&#x27; package by calculating the proportion of the sample with each combination of scores. Marginal probabilities are saved in Step 1, so only one probability for the combination of scores needs to be calculated from the observed data, after which others can be derived. Later steps are based solely on these and the previously derived helper functions. The inner iteration from Step 12 increases the distance between the previous and suggested update at each new iteration until the change is in opposite directions between 𝑟 𝑢𝑝,𝑛𝑒𝑤 and 𝑟 𝑢𝑝,𝑜𝑙𝑑 compared to between 𝑟 𝑛𝑒𝑤 and 𝑟 𝑜𝑙𝑑 . Specifically, if the problem is transformed so 𝜖~𝑁(0,1) no matter the slope (transformations calculated in Step 10), then each new inner iteration doubles the distance between slopes. When the updating is in different directions, the new correlation is calculated in Step 20 by a weighted average of 𝑟 𝑛𝑒𝑤 and 𝑟 𝑢𝑝,𝑛𝑒𝑤 , where smaller 1-step updating between old and new value means taking a larger part of that value. This is done by the assumption that the change is smaller closer to the least squares solution.</p>
+<h3>Probabilities</h3>
+<p>𝑝 𝑋,0 = 𝑃(𝐼 𝑋 = 0), 𝑝 𝑌,0 = 𝑃(𝐼 𝑌 = 0) by the means 1 -𝐼 ̅ 𝑋 and 1 -𝐼 ̅ 𝑌 . Thresholds 𝑐̂𝑋 = Φ -1 (𝑝 𝑋,0 ), 𝑐̂𝑌 = Φ -1 (𝑝 𝑌,0 ). Expectation-scores for 𝑋 from equation (3) by 𝑚 𝑋,0 = -𝜙(𝑐̂𝑋) Φ(𝑐̂𝑋) ⁄ and 𝑚 𝑋,1 = 𝜙(𝑐̂𝑋) (1 -Φ(𝑐̂𝑋)) ⁄ , and the 0-step expectation scores for 𝑌 by 𝑚 𝑌,0 = -𝜙(𝑐̂𝑌) Φ(𝑐̂𝑌) ⁄ and 𝑚 𝑌,1 = 𝜙(𝑐̂𝑌) (1 -Φ(𝑐̂𝑌)) ⁄ . Variance of 𝑋 by 𝑣 𝑋 = 𝑚 𝑋,0 2 𝑝 𝑋,0 + 𝑚 𝑋,1 2 (1 -𝑝 𝑋,0 ). Observed probabilities 𝑜𝑝 0,0 = 𝑃(𝐼 𝑋 = 0, 𝐼 𝑌 = 0) by the proportion in the sample. Use this together with the probabilities from step 1, to estimate 𝑜𝑝 0,1 = 𝑝 𝑋,0 -𝑜𝑝 0,0 , 𝑜𝑝 1,0 = 𝑝 𝑌,0 -𝑜𝑝 0,0 , and 𝑜𝑝 1,1 = 1 -(𝑜𝑝 0,0 + 𝑜𝑝 0,1 + 𝑜𝑝 1,0 ). Slopes/correlations for the previous step 𝑟 𝑜𝑙𝑑 = 0, and updated step 𝑟 𝑛𝑒𝑤 = (𝑚 𝑋,0 𝑚 𝑌,0 𝑜𝑝 ), 𝑖𝑝 0,0 , 𝑖𝑝 0,1 , 𝑖𝑝 1,0 , 𝑖𝑝 1,1 and 𝑟 𝑢𝑝,𝑜𝑙𝑑 .</p>
+<p>Set 𝑟 𝑢𝑝,𝑛𝑒𝑤 = (𝑚 𝑌,0,0 𝑚 𝑋,0 𝑜𝑝 0,0 + 𝑚 𝑌,0,1 𝑚 𝑋,0 𝑜𝑝 0,1 + 𝑚 𝑌,1,0 𝑚 𝑋,1 𝑜𝑝 1,0 + 𝑚 𝑌,1,1 𝑚 𝑋,1 𝑜𝑝 1,1 ) 𝑣 𝑋 ⁄ If |𝑟 𝑢𝑝,𝑛𝑒𝑤 | &gt; 0.9999 set 𝑟 𝑢𝑝,𝑛𝑒𝑤 = 0.9999 × 𝑠𝑔𝑛(𝑟 𝑢𝑝,𝑛𝑒𝑤 ) and break iteration. Set 𝑟 𝑜𝑙𝑑 = (|𝑟 𝑛𝑒𝑤 -𝑟 𝑜𝑙𝑑 |𝑟 𝑢𝑝,𝑛𝑒𝑤 + |𝑟 𝑢𝑝,𝑛𝑒𝑤 -𝑟 𝑢𝑝,𝑜𝑙𝑑 |𝑟 𝑛𝑒𝑤 ) (|𝑟 𝑛𝑒𝑤 -𝑟 𝑜𝑙𝑑 | + |𝑟 𝑢𝑝,𝑛𝑒𝑤 -𝑟 𝑢𝑝,𝑜𝑙𝑑 |) ⁄ Repeat steps 15-19 but with 𝑟 𝑛𝑒𝑤 and 𝑟 𝑜𝑙𝑑 instead of 𝑟 𝑢𝑝,𝑛𝑒𝑤 and 𝑟 𝑢𝑝,𝑜𝑙𝑑 . Add 1 to 𝑖𝑡𝑒𝑟. If 𝑖𝑡𝑒𝑟 &gt; 25 break iteration. Return 𝑟 𝑛𝑒𝑤.</p>
+<h3>Figure 3</h3>
+<p>Figure3</p>
+<h3>Figure S1</h3>
+<p>Figure S1Political interest in Sweden by sex and age</p>
+<h3>Table 2</h3>
+<p>Methods related to the conditions of Theorem 1Strict thresholding 𝐼 𝑋 = 𝑗 if 𝑐 𝑋,𝑗-1 &lt; 𝑇 𝑋 ≤ 𝑐 𝑋,𝑗 𝐼 𝑌 = 𝑘 if 𝑐 𝑌,𝑘-1 &lt; 𝑇 𝑌 ≤ 𝑐 𝑌,𝑘 𝑋 = 𝐸(𝑇 𝑋 |𝐼 𝑋 = 𝑗) 𝑌 = 𝐸(𝑇 𝑌 |𝐼 𝑌 = 𝑘, 𝐼 𝑋 = 𝑗)</p>
+<h3>Table 4 Tetrachoric</h3>
+<p>Note. RMSE and total time in seconds (the latter in parentheses). 10,000 samples are used for each simulation.</p>
+<h3>Table 5</h3>
+<p>Estimates when predicting political interest by sex and ageOLS parameters (standard errors). The &quot;precisions&quot; are the variance ratios from Corollary 2.</p>
+<p>Expected values of 𝐸(𝑇 𝑠𝑒𝑥 |𝐼 𝑠𝑒𝑥 = 𝑗), 𝐸(𝑇 𝑠𝑒𝑥 |𝐼 𝑠𝑒𝑥 = 𝑗, 𝐼 𝑎𝑔𝑒 = 𝑘), and 𝐸(𝑇 𝑎𝑔𝑒 |𝐼 𝑠𝑒𝑥 = 𝑗, 𝐼 𝑎𝑔𝑒 = 𝑘), can be calculated and used as scores for out measurements as defined below, where the parameters from Step 1.1 are plugged in. When there is only error in the sex variable, we define it as: 𝑋 𝑠𝑒𝑥 = { 0 × 𝑐𝑃(𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 = 𝑘) + 1 × (1 -𝑠)𝑃(𝑓𝑒𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 = 𝑘) 𝑐𝑃(𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 = 𝑘) + (1 -𝑠)𝑃(𝑓𝑒𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 = 𝑘) , 𝑖𝑓 𝑐𝑙𝑎𝑠𝑠𝑖𝑓𝑖𝑒𝑑 𝑎𝑠 𝑚𝑎𝑙𝑒, 𝑎𝑔𝑒 = 𝑘 0 × (1 -𝑐)𝑃(𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 = 𝑘) + 1 × 𝑠𝑃(𝑓𝑒𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 = 𝑘) (1 -𝑐)𝑃(𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 = 𝑘) + 𝑠𝑃(𝑓𝑒𝑚𝑎𝑙𝑒|𝑎𝑔𝑒 = 𝑘) , 𝑖𝑓 𝑐𝑙𝑎𝑠𝑠𝑖𝑓𝑖𝑒𝑑 𝑎𝑠 𝑓𝑒𝑚𝑎𝑙𝑒, 𝑎𝑔𝑒 = 𝑘 𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) = 𝑐𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) + (1 -𝑠)𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) 𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) = 𝑠𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) + (1 -𝑐)𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) From this, we can derive: 𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) = 𝑠𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) -(1 -𝑠)𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) 𝑠𝑐 -(1 -𝑠)(1 -𝑐) 𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) = (1 -𝑐)𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) -𝑐𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) (1 -𝑠)(1 -𝑐) -𝑠𝑐 We also have: 𝐸(𝑇 𝑌 |𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) = 1 𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) × (𝐸(𝑇 𝑌 |𝐼 𝑌 = 1, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘)𝑐𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) + 𝐸(𝑇 𝑌 |𝐼 𝑌 = 1, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘)(1 -𝑠)𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘)) 𝐸(𝑇 𝑌 |𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) = 1 𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) × (𝐸(𝑇 𝑌 |𝐼 𝑌 = 1, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘)(1 -𝑐)𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) + 𝐸(𝑇 𝑌 |𝐼 𝑌 = 1, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘)𝑠𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘)) The expected values on the right are in terms of 𝐼 𝑌 = 1 no matter the value of 𝑖, which is a result of the equal expected value assumption with respect to the true variables.</p>
+<p>From this we can derive: 𝐸(𝑇 𝑌 |𝐼 𝑌 = 1, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) = 1 (𝑠𝑐 -(1 -𝑠)(1 -𝑐))𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) (𝑠𝐸(𝑇 𝑌 |𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘)𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) -(1 -𝑠)𝐸(𝑇 𝑌 |𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘)𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘)) 𝐸(𝑇 𝑌 |𝐼 𝑌 = 1, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) = 1 ((1 -𝑠)(1 -𝑐) -𝑠𝑐)𝑃(𝐼 𝑌 = 𝑖, 𝑇 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘) ((1 -𝑐)𝐸(𝑇 𝑌 |𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘)𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 0, 𝐼 𝑎𝑔𝑒 = 𝑘) -𝑐𝐸(𝑇 𝑌 |𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘)𝑃(𝐼 𝑌 = 𝑖, 𝐼 𝑠𝑒𝑥 = 1, 𝐼 𝑎𝑔𝑒 = 𝑘))</p>
+<p>The other way around is less interesting, as those minimums and maximums are zero and one. This can be seen by taking the limit as all thresholds move to the lower/upper range of the distribution, or letting the latent distribution equal the observed distribution, respectively.</p>
+<h3>References</h3>
+<p>Adams, R. J., Wilson, M., &amp; Wu, M. (1997). Multilevel item response models: An approach to errors in variables regression. Journal of Educational and Behavioral Statistics, 22(1), 47-76.</p>
+<p>Azur, M. J., Stuart, E. A., Frangakis, C., &amp; Leaf, P. J. (2011). Multiple imputation by chained equations: what is it and how does it work?. International Journal of Methods in Psychiatric Research, 20(1), 40-49.</p>
+<p>Barron, B. A. (1977). The effects of misclassification on the estimation of relative risk. Biometrics, 33(2), 414-418.</p>
+<p>Berggren, M. (2020). Conditional mean variables: A method for estimating latent linear relationships with discretized observations. Master&#x27;s thesis, Department of Mathematics, Uppsala University, Uppsala, Sweden. https://www.diva- portal.org/smash/record.jsf?pid=diva2%3A1443397</p>
+<p>Berkson, J. (1950). Are there two regressions? Journal of the American Statistical Association, 45(250), 164-180.</p>
+<p>Bock, R. D., &amp; Mislevy, R. J. (1982). Adaptive EAP estimation of ability in a microcomputer environment. Applied Psychological Measurement, 6(4), 431-444.</p>
+<p>Bollen, K. A. (2002). Latent variables in psychology and the social sciences. Annual Review of Psychology, 53(1), 605-634.</p>
+<p>Dempster, A. P., Laird, N. M., &amp; Rubin, D. B. (1977). Maximum likelihood from incomplete data via the EM algorithm. Journal of the Royal Statistical Society: Series B (Methodological), 39(1), 1-22.</p>
+<p>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. The Annals of Statistics, 7(1), 1-26.</p>
+<p>Fox, J. (2025). polycor: Polychoric and Polyserial Correlations. https://CRAN.R- project.org/package=polycor</p>
+<p>Gelman, A., &amp; Little, T. C. (1997). Poststratification into many categories using hierarchical logistic regression. Survey Methodology, 23, 127-135.</p>
+<p>Gong, G., &amp; Samaniego, F. J. (1981). Pseudo maximum likelihood estimation: Theory and applications. The Annals of Statistics, 861-869.</p>
+<p>Holland, P. W., &amp; Welsch, R. E. (1977). Robust regression using iteratively reweighted least- squares. Communications in Statistics -Theory and Methods, 6(9), 813-827.</p>
+<p>Johnson, R. A., &amp; Wichern, D. W. (2014). Applied multivariate statistical analysis (6 th international ed.). Pearson Education Limited.</p>
+<p>Jöreskog, K.G. (1973). A general method for estimating a linear structural equation system. In A.S. Goldberger &amp; O.D. Duncan (Eds.), Structural equation models in the social sciences (pp. 85-112). New York, NY: Seminar Press.</p>
+<p>Jöreskog, K.G. (1977). Structural equation models in the social sciences: Specification, estimation and testing. In ER. Krishnaiah (Ed.), Applications of Statistics (pp. 265-286). Amsterdam: North-Holland.</p>
+<p>Liu, H., Hussain, F., Tan, C. L., &amp; Dash, M. (2002). Discretization: An enabling technique. Data Mining and Knowledge Discovery, 6(4), 393-423.</p>
+<p>Liu, Y., Pek, J., &amp; Maydeu-Olivares, A. (2025). Understanding measurement precision from a regression perspective. Psychological Methods. Advance online publication. https://psycnet.apa.org/doi/10.1037/met0000763</p>
+<p>Lord, F.M., &amp; Novick, M.R. (1968). Statistical theories of mental test scores, with contributions by Alan Birnbaum. Reading: Addison-Wesley.</p>
+<p>Lu, I. R., &amp; Thomas, D. R. (2008). Avoiding and correcting bias in score-based latent variable regression with discrete manifest items. Structural Equation Modeling: A Multidisciplinary Journal, 15(3), 462-490.</p>
+<p>Lu, I. R. R., Thomas, R. &amp; Zumbo, B. D. (2005). Embedding IRT in structural equation models: A comparison with regression based on IRT scores. Structural Equation Modeling, 12(2), 263-277.</p>
+<p>McDonald, R. P. (2011). Measuring latent quantities. Psychometrika, 76(4), 511-536.</p>
+<p>McKelvey, R. D., &amp; Zavoina, W. (1975). A statistical model for the analysis of ordinal level dependent variables. Journal of Mathematical Sociology, 4(1), 103-120.</p>
+<p>Mislevy, R. J. (1987). Exploiting auxiliary information about examinees in the estimation of item parameters. Applied Psychological Measurement, 11(1), 81-91.</p>
+<p>Muthén, B. (1983). Latent variable structural equation modeling with categorical data. Journal of Econometrics, 22(1-2), 43-65.</p>
+<p>Muthén, B. (1984). A general structural equation model with dichotomous, ordered categorical, and continuous latent variable indicators. Psychometrika, 49(1), 115-132.</p>
+<p>Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation coefficient. Psychometrika, 44(4), 443-460.</p>
+<p>Olsson, U., Drasgow, F., &amp; Dorans, N. J. (1982). The polyserial correlation coefficient. Psychometrika, 47(3), 337-347.</p>
+<p>Parke, W. R. (1986). Pseudo maximum likelihood estimation: The asymptotic distribution. The Annals of Statistics, 355-357.</p>
+<p>Pearl, J. (2000). Causality: Models, reasoning, and inference. New York: Cambridge University Press.</p>
+<p>Revelle, W. (2026). psych: Procedures for Psychological, Psychometric, and Personality Research. Northwestern University, Evanston, Illinois. R package version 2.6.5, https://CRAN.R-project.org/package=psych</p>
+<p>Rijmen, F., Tuerlinckx, F., De Boeck, P., &amp; Kuppens, P. (2003). A nonlinear mixed model framework for item response theory. Psychological Methods, 8(2), 185-205.</p>
+<p>Rubin, D. B. (1976). Inference and missing data. Biometrika, 63(3), 581-90.</p>
+<p>Rubin, D. B. (1987). Multiple imputation for nonresponse in surveys. New York: Wiley.</p>
+<p>Sackett, P. R., &amp; Yang, H. (2000). Correction for range restriction: an expanded typology. Journal of Applied Psychology, 85(1), 112-118.</p>
+<p>Skrondal, A., &amp; Laake, P. (2001). Regression among factor scores. Psychometrika, 66(4), 563-575.</p>
+<p>Spearman, C. (1904). The proof and measurement of association between two things. The American Journal of Psychology, 15(1), 72-101.</p>
+<p>Enøe, C., Georgiadis, M. P., &amp; Johnson, W. O. (2000). Estimation of sensitivity and specificity of diagnostic tests and disease prevalence when the true disease state is unknown. Preventive veterinary medicine, 45(1-2), 61-81.</p>
+<p>ESS (2023). European Social Survey, Round 11 -2023. https://ess.sikt.no/en/datafile/242aaa39-3bbb-40f5-98bf-bfb1ce53d8ef SCB (2023). Population by age and sex. Year 1860-2024. https://www.statistikdatabasen.scb.se/pxweb/en/ssd</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
