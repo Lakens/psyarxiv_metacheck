@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: RUNNING HEAD: FACTORS IN STUDENT AI USE</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+RUNNING HEAD: FACTORS IN STUDENT AI USE
+</p>
+<p class="meta">
+2026-11-18 · Metacheck 0.4.4.5 · DOI 10.1080/29974100.2026.2763223
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to fix</span></span><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><a class="count fine" href="#fine"><b>2</b><span>fine</span></a><a class="count na" href="#na"><b>14</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fine">Fine <span class="n">(2)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 2 detected.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(14)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, or CKAN data
+portals.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>To address these questions, we designed an experimental task in which
+participants completed 30 trials with free choice to use AI assistance
+(chatbot or automatic answer selection) or respond independently.</p>
+</blockquote>
+<blockquote>
+<p>Three hundred and ninety eight students (ages 18-24 years) were
+recruited from the Clemson University (n = 260) and United States
+Military Academy (USMA; n = 138) research pools.</p>
+</blockquote>
+<blockquote>
+<p>All participants were 18 years of age or older.</p>
+</blockquote>
+<blockquote>
+<p>Written informed consent to participate in the research was obtained
+electronically from every participant before any study procedure began;
+participants were informed of the purpose of the study, the voluntary
+nature of participation, their right to withdraw at any time without
+penalty, and that anonymized data could be reported in scientific
+publications.</p>
+</blockquote>
+<blockquote>
+<p>Participants completed a measure of a personality trait likely to
+affect AI use, Need for Cognition (Cacioppo et al., 1984), and four
+scales assessing attitudes and perceptions toward automation and AI: the
+Artificial Intelligence Attitude Scale (Grassini, 2023), the Negative
+Attitudes toward Robots Scale adapted for AI (Nomura et al., 2006), the
+Perfect Automation Schema Scale (Merritt et al., 2015), and the
+Complacency Potential Rating Scale (Singh et al., 1993).</p>
+</blockquote>
+<blockquote>
+<p>After providing informed consent via Qualtrics, participants
+completed attitude scales (20-30 min), then proceeded to a study
+dashboard for cognitive ability tests (55 min) and the experimental task
+(30-45 min), with self-paced breaks permitted.</p>
+</blockquote>
+<blockquote>
+<p>For the quiz, participants were instructed to maximize their
+on-screen grade and could choose to answer immediately, consult a
+chatbot (and rate its quality), or have the computer answer for
+them.</p>
+</blockquote>
+<blockquote>
+<p>Compared to trials where participants reported no or very little
+expertise, participants were substantially less likely to choose the
+Chatbot option relative to Manual when they reported some expertise
+(Table 5).</p>
+</blockquote>
+<blockquote>
+<p>Fluid intelligence was also negatively associated with reliance; male
+participants were more likely than female participants to choose to
+rely.</p>
+</blockquote>
+<blockquote>
+<p>Participants were substantially less likely to seek AI assistance
+when they reported topic familiarity (58% reduction for chatbot, 70% for
+reliance).</p>
+</blockquote>
+<blockquote>
+<p>The chatbot responses displayed to participants were pre-generated
+using ChatGPT and Claude and were reviewed and verified by the authors
+before use, as described in Section 2.4.</p>
+</blockquote>
+<blockquote>
+<p>Informed consent was obtained from all participants.</p>
+</blockquote>
+<blockquote>
+<p>All participants were 18 years of age or older and provided written
+informed consent electronically, through Qualtrics, before beginning any
+study procedure.</p>
+</blockquote>
+<blockquote>
+<p>Participants were informed of the purpose of the study, the voluntary
+nature of participation, their right to withdraw at any time without
+penalty, and that anonymized data could be reported in scientific
+publications.</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>This study was approved by the Institutional Review Board at Clemson
+University (protocol IRB2024-0483) and by the Institutional Review Board
+at the United States Military Academy (protocol IRBCA2024-30).</p>
+</blockquote>
+<blockquote>
+<p>The research complied with the American Psychological Association
+Code of Ethics and was conducted in accordance with the principles
+stated in the Declaration of Helsinki.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 50 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 50 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 50 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
+it does <strong>not</strong> force the traffic light red. The full
+stdout/stderr of every run is kept in the result’s
+<code>run_results</code> (the report shows it in per-script dropdowns,
+capped for readability). The traffic light reflects the STATIC readiness
+signals by default, but an execution error
+(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
+a script that crashes on its own analysis is a genuine reproduction
+failure. A script that fails with <code>could not find function</code>
+is run once more with the <code>library()</code> calls the project’s
+other scripts make added at its top (or the one package that exports the
+function, or magrittr for <code>%&gt;%</code>), and a script that then
+runs is reported as reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Objective: Research on student AI use typically asks who adopts these tools, treating use as a stable trait. Yet students face a fresh decision at every problem. We examined how much AI use reflects stable individual differences and how much varies within a student across tasks.</p>
+<p>Method: Undergraduates (N = 398) at two institutions completed 30 quiz trials, choosing on each trial to answer independently, consult an AI chatbot, or rely on an AI-generated answer.</p>
+<p>Students rated their topic expertise before each decision; cognitive abilities, AI attitudes, and demographics were also measured. Choices were analyzed with Bayesian multilevel multinomial logistic regression.</p>
+<p>Results: With moderately reliable AI, about half the variance in AI use reflected stable individual differences (intraclass correlations of 41% for chatbot use, 48% for full reliance); the remainder varied within individuals across trials. Self-assessed expertise accounted for this within-person variation: students sought help primarily when they felt unknowledgeable. Fluid intelligence predicted more chatbot consultation but less full delegation. Male students and those with more favorable AI attitudes delegated more readily.</p>
+<p>Conclusions: AI use is better described as adaptive help-seeking than as a fixed trait.</p>
+<p>Interventions targeting metacognitive calibration may prove more effective than blanket policies assuming uniform use.</p>
+<h3>1. Introduction</h3>
+<p>The integration of artificial intelligence systems into educational environments has accelerated dramatically in recent years (Kasneci et al., 2023; Zawacki-Richter et al., 2019). A global study of over 23,000 students across 109 countries found 71% had used ChatGPT (Ravšelj et al., 2025). But this high adoption rate masks substantial variation in how individuals actually engage with these tools. Emerging evidence reveals that even among adopters, trust in AI, which affects reliance, varies across systems and contexts (Glikson &amp; Woolley, 2020). Each time a student encounters a problem, they face a choice: attempt it independently or request AI assistance. This framing draws on classic help-seeking theory, intelligent tutoring systems research, and recent work on generative AI, reviewed below.</p>
+<h3>1.1 Help-Seeking as a Self-Regulated Learning Strategy</h3>
+<p>Early research in help-seeking treated it as a sign of dependence or immaturity. Nelson-Le Gall (1985) reframed it as an adaptive learning strategy, describing a sequence of decisions a learner must make: recognizing that help is needed, deciding to seek it, identifying a suitable source, eliciting the help, and evaluating the results. Ineffective help-seeking could be caused by a failure at any of those steps. Nelson-Le Gall (1985) also distinguished two kinds of help-seeking based on the goal. In instrumental help-seeking, the learner seeks only as much help as is needed, aiming to acquire the understanding needed to solve the problem independently. In executive help-seeking, the learner has little interest in understanding the solution and aims to have the problem solved by someone else. Newman (2002) later described adaptive help-seeking as a component of selfregulated learning that depends on cognitive competencies, including knowing when help is needed, and on motivational resources such as a willingness to acknowledge difficulty. The first of these competencies is metacognitive: learners must monitor their own knowledge accurately to recognize when help is warranted.</p>
+<p>Empirical work in this area has mainly focused on the level of person rather than decision. Karabenick (2003), for example, surveyed 883 college students and used cluster analysis to identify groups with distinct help-seeking profiles. Strategic, adaptive help-seekers, who relied on instructors were more motivated, held stronger mastery goals, and earned higher grades than students who either avoided help or sought it quickly. These person-focused findings show that help-seeking tendencies differ reliably between students, but not how the same student decides, problem-by-problem, whether help is worth seeking.</p>
+<h3>1.2 Help-Seeking in Intelligent Tutoring Systems and Generative AI</h3>
+<p>Intelligent tutoring systems made help-seeking behavior more easily observable, because each request is logged with the problem-solving step that prompted it. In a review of help use in interactive learning environments, Aleven et al. (2003) found that learners frequently used ondemand help ineffectively, avoiding it when it would be useful or overusing it when it is not needed. The review found appropriate help use likely to be an interaction between metacognitive skill, cognitive factors such as prior knowledge, and features of the system itself.</p>
+<p>Regarding overuse, Baker et al. (2004) studied the most extreme form, termed gaming the system, or systematically exploiting a tutor&#x27;s hints and feedback, for example by requesting hints in rapid succession until the answer is revealed. In classroom observations of a cognitive tutor, gaming was associated with reduced learning, and students who gamed frequently scored substantially lower on a post-test even after controlling for prior knowledge. However, effective help-seeking can also be taught. Roll et al. (2011) added a Help Tutor that gave immediate feedback on help-seeking errors. Across two classroom studies it improved students&#x27; help-seeking behavior, and in the second study, which added explicit help-seeking instruction and support for self-assessment, the improved help-seeking skills transferred to new material after the support had been removed.</p>
+<p>Generative AI extends the student&#x27;s help-seeking decision to almost every academic task. Sheese et al. (2024) analyzed more than 2,500 queries that students submitted to a programming assistant, built on a large language model and designed not to reveal complete solutions, and found that students who were more successful in the course tended to use the tool more often. Sung and Thomas (2025) showed that the classic help-seeking framework applies to generative AI: in a survey of university students, general academic help-seeking goals mediated the relationships between achievement goals and ChatGPT-specific help-seeking outcomes, including executive use of ChatGPT, perceived threat, and avoidance.</p>
+<p>The distinction between instrumental and executive help maps onto the choice that generative AI now offers. A student can interactively consult a chatbot, reading and evaluating its explanation, and following up before committing to an answer, or can have the AI simply supply the answer. The first resembles instrumental help-seeking and the second executive helpseeking, and the present study offered both options on every trial. Across this literature, however, help-seeking has been characterized mainly at the person-level. Whether a given student&#x27;s decision to use AI help reflects a stable disposition or a judgment made problem by problem has not been examined.</p>
+<h3>1.3 AI Use as a Within-Person Decision Process</h3>
+<p>Framing AI use as help-seeking implies that it should vary within individuals across tasks. Each use decision is made in response to a specific problem under specific conditions, making within-person variation central to understanding AI use behavior. As a result, classifying students simply as AI &quot;users&quot; or &quot;non-users&quot; provides limited insight into when assistance is actually sought.</p>
+<p>Despite this implication, most empirical work on generative AI in education has operationalized AI use as a between-person phenomenon, focusing on overall adoption rates or average use frequency (Strzelecki, 2024). Such approaches conflate stable individual differences with situational influences and obscure the processes that govern moment-to-moment AI helpseeking. Without explicitly separating within-person and between-person sources of variance, it is unclear whether observed predictors reflect enduring propensities or context-sensitive responses.</p>
+<p>Distinguishing these levels of analysis is essential for both theory and practice. If AI use is primarily trait-driven, interventions should target learner characteristics and attitudes; if it is primarily context-dependent, task design and instructional structure become the primary levers.</p>
+<p>Addressing this distinction requires research designs that capture repeated AI use decisions within individuals and analytic approaches that explicitly partition variance across levels.</p>
+<h3>1.4 Limitations of Current Methodological Approaches</h3>
+<p>Despite growing interest in generative AI use in educational contexts, existing empirical approaches are poorly suited to examining AI use as a within-person decision process. Crosssectional surveys cannot capture how decisions to seek AI assistance vary across tasks, nor can between-person associations be used to infer within-person processes (Curran &amp; Bauer, 2011).</p>
+<p>Field and quasi-experimental studies improve ecological validity but typically manipulate access to AI assistance or assign AI use experimentally (Dell&#x27;Acqua et al., 2026; Noy &amp; Zhang, 2023). These designs are well suited for estimating average treatment effects but eliminate learner choice, thereby obscuring the decision-making process central to help-seeking.</p>
+<p>Research on intelligent tutoring systems and AI assistants has observed help-seeking behavior directly (Aleven et al., 2003; Sheese et al., 2024) but, as reviewed above, has primarily emphasized between-person differences rather than decomposing trial-level fluctuations within individuals. As a result, existing estimates of individual difference effects in AI use may be confounded with situational variation (Curran &amp; Bauer, 2011).</p>
+<p>Addressing these limitations requires a controlled experimental paradigm with repeated decision opportunities in which participants freely choose whether to seek AI assistance. Such designs sacrifice some ecological validity but enable decomposition of within-person and between-person variance while holding task characteristics and AI reliability constant. The present study adopted this approach to address two research questions. From an instructional standpoint, understanding when students seek AI assistance is critical because most AI policies and learning environment practices implicitly assume that AI use is stable across tasks, rather than dynamically regulated in response to task-specific demands.</p>
+<h3>1.5 Predictors of AI Use</h3>
+<p>Treating AI use as a dynamic help-seeking process, we now turn to the specific factors that may shape these decisions. Table 1 summarizes candidate predictors organized by their expected level of operation, though these assignments are tentative given the absence of prior multilevel research on generative AI use.</p>
+<p>Several predictors likely operate primarily at the between-person level, creating stable propensities toward more or less AI use across contexts. Cognitive abilities present competing theoretical predictions: higher fluid intelligence, working memory, and attention control could either increase AI use (by enabling better evaluation and integration of AI outputs) or decrease it (by reducing perceived need for external assistance). Evidence from cognitive offloading research is mixed. Higher short-term memory capacity predicted less offloading in one study (Meyerhoff et al., 2021), whereas working memory capacity was unrelated to offloading in another (Morrison &amp; Richmond, 2020). Gilbert et al. (2020) found that people with poorer unaided memory used reminders more, and that reminder use beyond the optimal level was predicted by underconfidence relative to actual ability. Although help-seeking theory suggests that ability may relate differently to instrumental AI help (consulting a chatbot) than to executive AI help (delegating the answer), none of the prior studies measured fluid intelligence.</p>
+<p>Dispositional attitudes toward AI similarly create baseline adoption propensities, with constructs such as perceived usefulness, AI anxiety, and propensity to trust all linked to technology engagement (Davis, 1989; Grassini, 2023; Russo et al., 2025). Gender differences in AI adoption are well documented, with women showing lower adoption rates even when access is equalized (Humlum &amp; Vestergaard, 2025; Otis et al., 2024). Women also report higher AI anxiety and lower self-assessed AI knowledge (Russo et al., 2025), and self-assessed knowledge explained most of the gap in one large U.S. survey (Aldasoro et al., 2024).</p>
+<p>Other predictors may drive within-person dynamics. Trial-level metacognitive judgments of self-expertise may trigger AI help-seeking on a moment-to-moment basis. When individuals perceive a knowledge gap, they are more likely to seek help (Aleven et al., 2003; Undorf et al., 2021). Thus, we expected more AI use on trials where students judge their expertise insufficient.</p>
+<p>Still other factors may moderate within-person effects: dispositional trust might amplify or attenuate how strongly self-expertise judgments influence use decisions, with miscalibrated trust producing maladaptive patterns of automation bias or algorithm aversion (Dietvorst et al., 2015; Parasuraman &amp; Manzey, 2010).</p>
+<h3>1.6 The Present Study</h3>
+<p>Given these uncertainties about the direction and level of operation of each predictor, and the absence of prior multilevel evidence in generative AI contexts, we adopted an exploratory approach and addressed two research questions. The first asked to what extent students&#x27; AI use was driven by stable individual differences versus factors that vary across tasks (RQ1). The second asked how trial-level contextual factors related to moment-to-moment use decisions after accounting for individual differences (RQ2).</p>
+<p>To address these questions, we designed an experimental task in which participants completed 30 trials with free choice to use AI assistance (chatbot or automatic answer selection) or respond independently. We assessed both stable individual differences and trial-level psychological states across repeated decision contexts. This design enabled multilevel analysis of both stable individual differences reflecting adoption propensities and trial-level decisions reflecting contextual variation within persons.</p>
+<h3>2. Method</h3>
+<p> &gt;Method</p>
+<h3>2.1 Participants</h3>
+<p>Three hundred and ninety eight students (ages 18-24 years) were recruited from the Clemson University (n = 260) and United States Military Academy (USMA; n = 138) research pools. All students received course credit for their participation. All participants were 18 years of age or older. Written informed consent to participate in the research was obtained electronically from every participant before any study procedure began; participants were informed of the purpose of the study, the voluntary nature of participation, their right to withdraw at any time without penalty, and that anonymized data could be reported in scientific publications. No individually identifiable participant information is reported in this article. Data from the two locations were pooled for analysis because the study design, task structure, and AI system behavior were identical across sites. Location was not treated as an analytic factor, as the study was not designed to examine site-specific differences, and all primary analyses focused on within-person variation in AI use.</p>
+<h3>2.2 Measures 2.2.1 Personality and AI Attitude Scales</h3>
+<p>Participants completed a measure of a personality trait likely to affect AI use, Need for Cognition (Cacioppo et al., 1984), and four scales assessing attitudes and perceptions toward automation and AI: the Artificial Intelligence Attitude Scale (Grassini, 2023), the Negative Attitudes toward Robots Scale adapted for AI (Nomura et al., 2006), the Perfect Automation Schema Scale (Merritt et al., 2015), and the Complacency Potential Rating Scale (Singh et al., 1993). See Table 2 for scale details. The 18-item Need for Cognition scale was rated on a 5-point scale from 1 (extremely uncharacteristic of me) to 5 (extremely characteristic of me; e.g., &quot;I would prefer complex to simple problems&quot;) and scored as a total. The four-item Artificial Intelligence Attitude Scale (e.g., &quot;I believe that AI will improve my life&quot;) was rated on a 5-point scale from 1 (strongly disagree) to 5 (strongly agree), modified from the original 10-point format, and scored as a total. The 14-item Negative Attitudes toward Robots Scale was adapted by replacing &quot;robots&quot; with &quot;AI&quot; in each item and was rated on a 5-point scale from 1 (strongly disagree) to 5 (strongly agree). Its three subscales were scored separately as totals: negative attitudes toward situations of interaction with AI (6 items; e.g., &quot;I would feel uneasy if I was given a job where I had to use AI&quot;), social influence of AI (5 items; e.g., &quot;I feel that if I depend on AI too much, something bad might happen&quot;), and emotions in interaction with AI (3 items; e.g., &quot;I would feel relaxed talking with AI,&quot; reverse scored). The 7-item Perfect Automation Schema Scale was rated on a 5-point agreement scale scored 0-4 and summed (e.g., &quot;Automated systems rarely make mistakes&quot;; &quot;If an automated system makes an error, then it is completely useless&quot;). The 16-item Complacency Potential Rating Scale was rated on a 5-point scale from 1 (strongly disagree) to 5 (strongly agree; e.g., &quot;Automated systems used in modern aircraft, such as the automatic landing system, have made air journeys safer&quot;) and scored as a total.</p>
+<h3>2.2.2 Cognitive Ability Measures</h3>
+<p>Three cognitive abilities were measured at the latent level using multiple indicators.</p>
+<p>Attention control was assessed with the Stroop squared, Flanker squared, and Simon squared tasks (Burgoyne et al., 2023). Working memory was assessed with shortened Operation Span (Oswald et al., 2015) and Symmetry Span tasks (Unsworth et al., 2009). Fluid intelligence was assessed with the 18-item Raven&#x27;s Advanced Progressive Matrices (Kane et al., 2004; Raven et al., 1998) and Number Series (Thurstone, 1938). See Table 2 for a summary. These cognitive tasks were designed and validated for individual-differences research with published reliability estimates for each task reported in Table 2.</p>
+<h3>2.3 Design</h3>
+<p>The study used a quasi-experimental design in which response mode was self-selected on every trial. For each question, participants chose to consult an AI chatbot before answering (chatbot), have the AI answer automatically (rely), or answer without AI assistance (manual; Figure 1), and could vary their choice across the 30 trials. Person-level predictors (Table 2) were working memory, attention control, fluid intelligence, Need for Cognition, four AI and automation attitude measures (AI attitudes, negative attitudes toward AI, perfect automation schema, and complacency potential), and gender. The trial-level predictor was self-rated topic expertise, assessed before each choice. Ratings of chatbot responses, collected after chatbot trials, were not analyzed here.</p>
+<h3>2.4 Experimental Task</h3>
+<p>Building on Pak et al.&#x27;s (2025) simulated chatbot paradigm with controlled accuracy, we implemented a 30-item web-based quiz spanning six academic domains (physics, history, chemistry, biology, geography, and psychology), calibrated to undergraduate senior-level difficulty. In an earlier study (at the same research sites), students answering these questions without AI were 39% correct (Pak et al., 2025). Questions were derived from standardized test</p>
+<h3>2.5 Procedure</h3>
+<p>After providing informed consent via Qualtrics, participants completed attitude scales (20-30 min), then proceeded to a study dashboard for cognitive ability tests (55 min) and the experimental task (30-45 min), with self-paced breaks permitted. For the quiz, participants were instructed to maximize their on-screen grade and could choose to answer immediately, consult a chatbot (and rate its quality), or have the computer answer for them.</p>
+<h3>2.6 Study Registration</h3>
+<p>This study was not preregistered.</p>
+<h3>3. Results</h3>
+<p> &gt;Results</p>
+<h3>3.1 Data Preparation and Analytic Approach</h3>
+<p>Of 425 participants with complete ability and individual difference data, 13 were excluded due to software failures and 14 for ability scores 2.5 standard deviations below the sample mean (indicating insufficient effort), yielding 398 participants for analysis. Descriptive statistics are presented in Table 3.</p>
+<p>We used the brms package (Bürkner, 2017) and the brm() function to understand the effect of each predictor on the odds of choosing to answer manually, use the chatbot, or rely on the AI. The brms function relies on a Markov Chain Monte Carlo algorithm and was set to the default of 4 chains of 2,000 iterations each, resulting in 8,000 posterior samples used for estimates. All models included 11,940 observations from 398 participants with no missing data.</p>
+<p>All models included a random intercept for participant. All outcomes were modeled as categorical with a logit link, using manual choice as the reference category. All priors were the default priors implemented in the brms package for categorical outcomes and were weakly informative. Category-specific intercepts and all variance components were assigned the brms defaults of Student-t priors with 3 degrees of freedom, mean 0, and scale 2.5. This Bayesian approach produced 95% credible intervals (CrI) for each main effect. We used a model-building approach similar to multilevel modeling in frequentist approaches, where we first ran an unconditional (null) model to understand the general odds of each AI choice. We followed with a second model that included all within-participant predictors, a third model that included all between-person predictors, and a final model that combined within-and betweenperson predictors. As we built the final model, our criterion for further investigation of any predictor was that the 95% credible interval excluded zero for either comparison (Manual vs.</p>
+<p>Chatbot or Manual vs. Rely). Only predictors meeting this criterion were included in subsequent models. 𝑅 &quot; indicators for each predictor in the models presented were always 1.00-1.01, indicating good convergence. Meaningful predictors are discussed in the text and bolded in Table 5. For interpretation, negative estimates indicate lower odds of choosing that AI option relative to answering manually, while positive estimates indicate higher odds. Odds ratios below 1.0 correspond to negative estimates, and those above 1.0 correspond to positive estimates.</p>
+<h3>3.2 Understanding the Choice to Use AI Assistance</h3>
+<p>Because the outcome was a three-level categorical choice (manual, chatbot, or full reliance), we performed multilevel multinomial logistic regression. Level 1 predictors were trial number and self-rated topic expertise. Level 2 predictors included cognitive abilities (attention control, working memory, fluid intelligence), personality (Need for Cognition), and technology attitudes (AI attitudes, perfect automation schema, complacency potential, and negative attitudes toward AI). Correlations among predictors were examined and none met multicollinearity criteria (|r| &gt; 0.60; Table 4), so all were retained as separate predictors. Ability scores were standardized and combined into latent construct composites; all other predictors were centered.</p>
+<p>Self-expertise ratings, performed for each trial, were highly right skewed with many values at 0-1 (0.938). Thus, this variable was transformed prior to analysis into a binary variable representing either no/very little expertise (values 0-1) or some expertise (values 2-9, Figure 2).</p>
+<h3>3.2.1 Unconditional Model</h3>
+<p>The posterior mean of the log-odds intercept for Manual vs. Chatbot was -0.78 (95% CrI = -0.95, -0.61), and for Manual vs. Rely was -0.08 (95% CrI = -0.27, 0.10). These estimates showed baseline differences in choice propensities: answering manually was chosen more frequently than using the chatbot; however, there was no difference between propensity to rely on the automation or respond manually. To quantify the proportion of variance attributable to stable individual differences, intraclass correlation coefficients (ICCs) were computed on the latent scale. Approximately 41% of the variance in chatbot choice and 48% of the variance in reliance choice were attributable to between-participant differences.</p>
+<h3>3.2.2 Within-Person Predictors</h3>
+<p>Within-person predictors included trial number (Trial) to account for changing behavior as the task progressed and a binary indicator of self-reported expertise.</p>
+<h3>Manual vs Chatbot.</h3>
+<p>Compared to trials where participants reported no or very little expertise, participants were substantially less likely to choose the Chatbot option relative to Manual when they reported some expertise (Table 5). Trial number was also negatively associated with Chatbot choice, suggesting that participants increasingly shifted away from Chatbot use over time relative to Manual (Figure 3). The standard deviation of random intercepts across participants was 1.55 (95% CrI [1.41, 1.71]) for Chatbot vs. Manual meaning participants differed greatly between each other. These standard deviations quantify how much individuals varied from each other in their baseline tendencies; larger values indicate greater between-person variability.</p>
+<h3>Manual vs Rely.</h3>
+<p>Participants with some or high expertise were less likely to rely than to answer manually. Trial showed no association with Rely vs Manual choice. Again, large between-participant variability was observed for Rely vs. Manual (SD = 1.71, 95% CrI [1.56, 1.88]).</p>
+<h3>3.2.3 Between-Person Predictors</h3>
+<p>All between-person predictors were entered into the model as centered averages for each participant (Table 5).</p>
+<h3>Manual vs Chatbot.</h3>
+<p>Higher fluid intelligence was associated with an increased likelihood of choosing the Chatbot over Manual control. The standard deviation of random intercepts was 1.49 (95% CrI [1.35, 1.64]).</p>
+<h3>Manual vs Rely.</h3>
+<p>Higher fluid intelligence was associated with a lower likelihood of choosing Rely relative to Manual. Gender predicted choice to Rely rather than answer manually with male participants more likely than female participants to choose Rely. More favorable AI attitudes predicted a greater likelihood of reliance. The standard deviation of random intercepts was 1.60 (95% CrI [1.46, 1.76]).</p>
+<h3>3.2.4 Final Model</h3>
+<p>Retaining only predictors whose credible intervals excluded zero in previous models, we fit a final Bayesian multilevel multinomial logistic regression model combining both trial-level and person-level predictors. The within-person fixed effects were Trial and Expertise. The between-person fixed effects were fluid intelligence, gender, and AI attitudes. Because predictors compete, any meaningful predictors in this final model represent a unique effect, conditional on the other predictors.</p>
+<h3>Manual vs Chatbot.</h3>
+<p>Expertise was strongly associated with choosing Manual over Chatbot. Higher fluid intelligence was associated with an increased likelihood of choosing the Chatbot over Manual. Gender was not meaningfully related to Chatbot use. AI attitudes were not meaningfully related to Chatbot use. The standard deviation of random intercepts was 1.52 (95% CrI [1.38, 1.68]).</p>
+<p>Manual vs Rely. Participants reporting expertise were much less likely to choose Rely over Manual. Fluid intelligence was also negatively associated with reliance; male participants were more likely than female participants to choose to rely. More favorable AI attitudes were associated with greater reliance. The standard deviation of random intercepts was 1.60 (95% CrI [1.46, 1.76]).</p>
+<h3>4. Discussion</h3>
+<p>Understanding when students seek AI help requires examining both who is predisposed to use these tools and what momentary factors trigger assistance-seeking. We designed an experimental paradigm to disentangle these levels of analysis. Given the exploratory nature of the present analyses, the patterns observed here should be interpreted as hypothesis-generating rather than confirmatory.</p>
+<h3>4.1 Variance Structure and Individual Differences (RQ1)</h3>
+<p>The unconditional model revealed that approximately half of the variance in AI use decisions resided at the between-person level (ICCs of 41% for chatbot choice, 48% for reliance). This finding suggests that AI use should be conceptualized as a dynamic process shaped by both the situation and trait-like characteristics.</p>
+<p>Among between-person predictors, fluid intelligence showed opposing effects across AI use types: higher fluid intelligence predicted increased chatbot consultation but decreased full reliance. This dissociation parallels the distinction between instrumental and executive helpseeking (Nelson-Le Gall, 1985). Consulting the chatbot is most similar to instrumental help, since the student evaluates an explanation and still selects the answer while delegating resembles executive help. Students higher in fluid intelligence appear to favor the instrumental form, perhaps because they are better able to evaluate a chatbot&#x27;s reasoning, a possibility our data cannot test directly.</p>
+<p>Gender differences replicated prior findings (Humlum &amp; Vestergaard, 2025; Otis et al., 2024), with male participants showing greater willingness to delegate to automation specifically, rather than AI use broadly. Favorable AI attitudes similarly predicted reliance but not chatbot use, consistent with technology adoption frameworks (Davis, 1989; Grassini, 2023). The specificity of this gender effect to full delegation rather than interactive use suggests that previously documented gaps may reflect comfort with ceding control rather than reluctance to engage with AI tools.</p>
+<h3>4.2 Trial-Level Dynamics (RQ2)</h3>
+<p>Trial-level self-assessed expertise was a strong predictor across all models. Participants were substantially less likely to seek AI assistance when they reported topic familiarity (58% reduction for chatbot, 70% for reliance). This finding supports conceptualizing AI use as helpseeking behavior (Karabenick, 2003; Nelson-Le Gall, 1985). Students appear to monitor their knowledge before each decision and seek help when they judge a gap, as students do in intelligent tutoring systems (Aleven et al., 2003; Undorf et al., 2021).</p>
+<p>One caveat is that self-rated expertise likely also reflects actual knowledge; students who know more may simply answer manually more often without evaluating each question.</p>
+<p>Separating the two would require controlling for objective knowledge (cf. Gilbert et al., 2020), which our design does not allow because accuracy was observed only on the subset of questions students chose to answer manually. Thus, the expertise effect shows that AI use tracks students&#x27; judgments of their own knowledge, whether those judgments reflect metacognitive monitoring, actual knowledge, or both. Designs with forced unaided trials could separate these accounts.</p>
+<p>Chatbot use declined over trials while automation reliance remained stable. This asymmetry suggests that students may have learned to calibrate their interactive AI use based on experience with the system (Lee &amp; See, 2004), while full reliance reflects a more stable orientation toward automation dependence. This pattern implies that interactive consultation and full reliance may invoke different trust and reliance processes (Parasuraman &amp; Manzey, 2010).</p>
+<p>Alternatively, students may have grown less willing to invest the additional effort required by chatbot interaction, preferring instead to simply delegate. Our data cannot distinguish between these explanations, but the distinction has a practical implication: if chatbot decline reflects appropriate trust calibration, it represents adaptive learning; if it reflects effort minimization, it may signal disengagement. Future work tracking response quality across trials could distinguish these accounts. Alternatively, because questions appeared in the same order for all participants, trial position is confounded with item content, and the decline may partly reflect the questions presented later.</p>
+<p>Several predictors did not emerge as meaningful in our models. Working memory, attention control, and Need for Cognition were unrelated to AI use. Deciding when to seek help may not be cognitively demanding, or these abilities may matter for how well AI is used once sought, which we did not measure. Negative attitudes toward AI and complacency potential also did not predict use. Positive attitudes toward AI mattered but general wariness did not.</p>
+<h3>4.3 Theoretical and Educational Implications</h3>
+<p>These findings extend help-seeking theory (Karabenick, 2003; Newman, 2002) to generative AI contexts. AI assistance removes many social barriers to help-seeking, yet metacognitive processes governing when assistance is needed still apply. Students did not use AI indiscriminately; instead, they sought it on questions they judged unfamiliar, consistent with metacognitively guided help-seeking. The dissociation between interactive chatbot use and full reliance also suggests that the instrumental and executive distinction extends from human helpers to AI. Early evidence suggests that generative AI can improve learning when it supports productive back-and-forth but may impair it when it substitutes for the student&#x27;s own thinking (Weidlich et al., 2025). This pattern has another implication: students were most likely to seek AI help, and especially to delegate, on questions they judged unfamiliar, which are the questions on which they could least evaluate the AI&#x27;s output. Pak et al. (2026) called this undetected delegation failure: errors go unnoticed because users lack the knowledge to verify (in contrast to traditional complacency, which arises from a lapse in vigilance). Seeking help when knowledge is insufficient is adaptive, but with a fallible AI it concentrates reliance where errors are least likely to be caught. The problem is worse for full delegation, which removes even the chance to evaluate the AI&#x27;s reasoning. Thus, interventions should target not only when students seek help but also their ability to evaluate it.</p>
+<p>The substantial within-person variance (52-59%) challenges the premise underlying many institutional AI policies. Blanket bans or universal permissions assume AI use is a stable student characteristic, yet our findings suggest the same student may appropriately avoid AI on familiar material and appropriately seek it on unfamiliar material within a single assignment.</p>
+<p>The strong predictive role of self-expertise judgments points toward a specific intervention target: metacognitive calibration. Rather than focusing on whether students use AI, educators might focus on whether students accurately recognize when they need help.</p>
+<p>Embedding low-stakes knowledge checks or confidence prompts before AI access could promote deliberate decisions rather than habitual use or avoidance. This approach treats AI as analogous to other learning resources where the goal is strategic deployment rather than abstinence.</p>
+<p>Practically, this might involve prompting students to judge their own knowledge before accessing AI assistance, since inaccurate self-evaluations lead students to stop studying prematurely (Dunlosky &amp; Rawson, 2012). Learning management systems could prompt students to rate their confidence before AI access is granted. Such interventions target the judgment of one&#x27;s own knowledge that, in our data, most strongly predicted each use decision.</p>
+<p>The dissociation between chatbot use and full delegation also suggests that these behaviors warrant different pedagogical responses. Interactive chatbot use, which declined over trials and was associated with higher cognitive ability, may represent a form of active learning amenable to instructional scaffolding. Full reliance, which remained stable and was predicted by attitudes rather than ability, may instead require interventions addressing students&#x27; beliefs about automation or their willingness to engage effortfully with difficult material. Policies that prohibit all AI use may sacrifice the learning benefits of strategic help-seeking, while policies that permit unrestricted access provide no guidance for students who default to delegation. Instead, policies could specify the times where AI consultation is permitted. For example, instructors might permit AI use during initial exploration of a topic but require independent work on summative assessments or allow chatbot interaction but not full delegation.</p>
+<p>As AI tools become more capable, the question of when to seek assistance will only grow in importance. Developing students&#x27; capacity to make these judgments wisely may prove more durable than any specific policy governing a particular tool.</p>
+<h3>4.4 Limitations</h3>
+<p>Our controlled paradigm differs from naturalistic AI use, which involves open-ended assignments, iterative dialogue, variable reliability, and social dynamics around appropriate use.</p>
+<p>However, laboratory studies aim to test whether theorized processes can occur under controlled conditions rather than generalize directly to real-world settings (Mook, 1983). Existing observational studies cannot determine when and why individuals freely choose AI assistance because they either assign AI use or confound task characteristics with use decisions. Our paradigm enabled the variance to be partitioned by holding difficulty, domain, and AI accuracy constant and allowing participants to choose the response mode on every trial. Naturalistic research examining whether these predictors operate similarly in graded coursework and extended projects represents the logical next step.</p>
+<p>Additionally, our simulated chatbot with a fixed 70% accuracy rate may not capture how students interact with commercial AI systems whose reliability varies across queries and topical domains. We set accuracy at 70% because automation below roughly this level tends to impair rather than aid performance (Wickens &amp; Dixon, 2007), and because moderate reliability likely reflects what students encounter. Chatbot accuracy varies widely by task: current models exceed 70% on standard multiple-choice benchmarks (OpenAI, 2023), yet GPT-4 fabricated 28.6% of references when replicating systematic review searches (Chelli et al., 2024), and more than half of ChatGPT&#x27;s answers to programming questions contained errors (Kabir et al., 2024). Frontier models answered fewer than 40% of challenging factual questions correctly (Wei et al., 2024), and reliability is uneven across tasks in ways users cannot easily anticipate (Dell&#x27;Acqua et al., 2026). Even at 70%, the AI simulated in this study was far more accurate than unaided students on these questions (39%; Section 2.4), so deferring to AI was beneficial on average but not on questions a student knew. However, our use of 70% reliability places limits on the generalizability of our central result. A current model would likely answer our questions more accurately, and a near-ceiling AI gives little reason to weigh one&#x27;s own knowledge on each trial, making use more uniform and trait-like. The roughly equal split between within-and betweenperson variance is thus specific to a moderately reliable AI (such as the one used here). Future research should vary AI reliability systematically and examine how students adjust their helpseeking as they learn a system&#x27;s strengths and limitations (Lee &amp; See, 2004).</p>
+<p>Finally, the absence of real academic consequences may have also affected behavior; more motivated examinees, such as those facing consequences for their scores, outperform less motivated ones by about 0.6 SD (Wise &amp; DeMars, 2005), and students in classes perceived to emphasize avoiding poor performance more often avoid help or seek expedient help (Karabenick, 2004), an emphasis that grades are likely to strengthen. capacity and attention control, and their relationship to higher-order cognition and real-world performance.</p>
+<p>Tables Table 1. Candidate predictors of AI use: Empirical findings and level of analysis Predictor Level Prior Findings Key Citations Fluid Intelligence Between Not yet examined in AI or offloading contexts None Working Memory Between Mixed; higher short-term memory capacity associated with less offloading in one study, no relationship with working memory capacity in another Meyerhoff et al. (2021); Morrison &amp; Richmond (2020) Attention Control Between Not yet examined in AI/offloading contexts None Need for Cognition Between Mixed; theoretical basis suggests low NFC may prefer effort-saving AI tools Cacioppo et al. (1984) AI Attitudes Between Favorable attitudes associated with greater adoption Strzelecki (2024) Perfect Automation Schema Between Rigidity of thinking about automation may predict trust &amp; use Merritt et al. (2015) Negative Attitudes toward AI Between More negative attitudes and higher AI anxiety associated with lower adoption Russo et al. (2025) Gender (female) Between Women show lower AI adoption even with equal access Humlum &amp; Vestergaard (2025) Self-Assessed Expertise Within Lower confidence triggers helpseeking; lower confidence predicts offloading independently of objective ability Undorf et al. (2021); Aleven et al. (2003); Gilbert et al. (2020) Note. Level indicates expected operation: between-person (stable individual differences) or within-person (trial-level variation). Prior findings are from related domains (cognitive offloading, help-seeking, technology adoption); no prior research has decomposed variance in generative AI use decisions.</p>
+<h3>Note.</h3>
+<p>Values in parentheses are published reliability estimates (Burgoyne et al., 2023; Foster et al., 2015; Kane et al., 2004; Oswald et al., 2015). Estimates for the span tasks are based on partialcredit scoring; the present study used absolute scoring.    metacognitive judgement (1), followed by a choice of response mode (2): interactive chatbot use (3a), automated AI answering (3b), or manual response without AI (3c). All trials concluded with accuracy feedback (4). Cropped inset zooms are for illustrative purposes.  rely on the automation for each of the 30 trials. Every participant saw the same question for each trial.</p>
+<h3>Acknowledgments</h3>
+<p>The authors thank Connie Ku and Khalaeb Richardson for assistance with data collection.</p>
+<h3>Funding</h3>
+<p>This work was supported by a grant from the National Science Foundation (BCS 2421062).</p>
+<h3>Use of Artificial Intelligence</h3>
+<p>Generative AI was used as a research stimulus in this study. The chatbot responses displayed to participants were pre-generated using ChatGPT and Claude and were reviewed and verified by the authors before use, as described in Section 2.4. No generative AI system was used to generate, analyze, or interpret the study data. Generative AI (Claude) was used for final manuscript proofreading.</p>
+<h3>Data Availability</h3>
+<p>Data are available upon reasonable request from the corresponding author.</p>
+<h3>Conflict of Interest</h3>
+<p>The authors report there are no competing interests to declare.</p>
+<p>Author Contributions Richard Pak: Conceptualization, methodology, software, investigation, writing -original draft, project administration, funding acquisition. Anne McLaughlin: Writing -review &amp; editing, formal analysis, data curation. Ericka Rovira: Writing -review &amp; editing, investigation, resources. Randall Engle: Writing -review &amp; editing, funding acquisition.</p>
+<h3>Ethics Approval</h3>
+<p>This study was approved by the Institutional Review Board at Clemson University (protocol IRB2024-0483) and by the Institutional Review Board at the United States Military Academy (protocol IRBCA2024-30). The research complied with the American Psychological Association Code of Ethics and was conducted in accordance with the principles stated in the Declaration of Helsinki.</p>
+<h3>Informed Consent</h3>
+<p>Informed consent was obtained from all participants. All participants were 18 years of age or older and provided written informed consent electronically, through Qualtrics, before beginning any study procedure. Participants were informed of the purpose of the study, the voluntary nature of participation, their right to withdraw at any time without penalty, and that anonymized data could be reported in scientific publications. No participant is identifiable from the data or materials reported in this article, so consent to publish identifiable personal details was not required.</p>
+<p>banks and validated resources, presented in a fixed randomized order. Participants could request AI assistance on any trial. Full task development details are available in Pak et al. Each trial began with a question and four response options (Figure 1). Participants first rated their topic familiarity on a visual analog scale (Step 1), similar to confidence judgments used in metacognitive research on help seeking (Undorf et al., 2021). They then selected a response mode (Step 2): &quot;use AI&quot; to consult a chatbot before answering (Step 3a), &quot;have AI answer for me&quot; for automatic submission (Step 3b), or &quot;answer manually&quot; (Step 3c). The chatbot interface simulated real-time generation by displaying responses word-by-word with variable delays (50-120 ms between words), though responses were pre-generated using ChatGPT and Claude to ensure consistency. AI accuracy was set at 70%, with errors presenting plausible but incorrect information. This level ensured that relying on the AI would not become the predominant strategy (see Section 4.4). Feedback appeared for 1500 ms before the next trial (Step 4).</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Overall study procedure and trial detail. Each trial of the quiz task began with a</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Left panel shows self-expertise ratings prior to transformation to binary (right).</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Percentage of participants choosing to answer manually, access the chatbot, or</p>
+<h3>Table 2.</h3>
+<p>Attitude and cognitive ability measures</p>
+<h3>Table 3.</h3>
+<p>Descriptive</p>
+<h3>Table 4.</h3>
+<p>Correlations between self-rated individual difference measuresNote. * indicates p &lt; .05. ** indicates p &lt; .01.</p>
+<h3>Table 5.</h3>
+<p>Multinomial Logistic Models</p>
+<p>Pak is a Professor in the Department of Psychology at Clemson University. His research focuses on human factors and aging, human-automation interaction, and AI-assisted decision making. He has published extensively on trust in automation and cognitive aspects of technology use. Anne McLaughlin is a Professor in the Department of Psychology at North Carolina State University. Her research examines how individual differences in cognition affect technology adoption and use, with particular emphasis on learning technologies and user experience across the lifespan. Ericka Rovira is a Professor in the Department of Behavioral Sciences &amp; Leadership at the United States Military Academy, West Point. Her research interests include attention, human-automation interaction, and decision making in complex environments. Randall Engle is a Professor in the School of Psychology at Georgia Institute of Technology. His research program investigates individual differences in working memory</p>
+<h3>References</h3>
+<p>Aldasoro, I., Armantier, O., Doerr, S., Gambacorta, L., &amp; Oliviero, T. (2024). The gen AI gender gap. Economics Letters, 241, Article 111814. https://doi.org/10.1016/j.econlet.2024.111814</p>
+<p>Aleven, V., Stahl, E., Schworm, S., Fischer, F., &amp; Wallace, R. (2003). Help seeking and help design in interactive learning environments. Review of Educational Research, 73(3), 277-320. https://doi.org/10.3102/00346543073003277</p>
+<p>Baker, R. S., Corbett, A. T., Koedinger, K. R., &amp; Wagner, A. Z. (2004). Off-task behavior in the cognitive tutor classroom: When students &quot;game the system.&quot; Proceedings of the SIGCHI Conference on Human Factors in Computing Systems, 383-390. https://doi.org/10.1145/985692.985741</p>
+<p>Burgoyne, A. P., Tsukahara, J. S., Mashburn, C. A., Pak, R., &amp; Engle, R. W. (2023). Nature and measurement of attention control. Journal of Experimental Psychology: General, 152(8), 2369-2402. https://doi.org/10.1037/xge0001408</p>
+<p>Bürkner, P.-C. (2017). brms: An R package for Bayesian multilevel models using Stan. Journal of Statistical Software, 80(1), 1-28. https://doi.org/10.18637/jss.v080.i01</p>
+<p>Cacioppo, J. T., Petty, R. E., &amp; Kao, C. F. (1984). The efficient assessment of need for cognition. Journal of Personality Assessment, 48(3), 306-307. https://doi.org/10.1207/s15327752jpa4803_13</p>
+<p>Chelli, M., Descamps, J., Lavoué, V., Trojani, C., Azar, M., Deckert, M., Raynier, J.-L., Clowez, G., Boileau, P., &amp; Ruetsch-Chelli, C. (2024). Hallucination rates and reference accuracy of ChatGPT and Bard for systematic reviews: Comparative analysis. Journal of Medical Internet Research, 26, e53164. https://doi.org/10.2196/53164</p>
+<p>Davis, F. D. (1989). Perceived usefulness, perceived ease of use, and user acceptance of information technology. MIS Quarterly, 13(3), 319-340. https://doi.org/10.2307/249008</p>
+<p>Dell&#x27;Acqua, F., McFowland, E., Mollick, E. R., Lifshitz-Assaf, H., Kellogg, K., Rajendran, S., Krayer, L., Candelon, F., &amp; Lakhani, K. R. (2026). Navigating the jagged technological frontier: Field experimental evidence of the effects of AI on knowledge worker productivity and quality. Organization Science, 37(2), 403-423. https://doi.org/10.1287/orsc.2025.21838</p>
+<p>Dietvorst, B. J., Simmons, J. P., &amp; Massey, C. (2015). Algorithm aversion: People erroneously avoid algorithms after seeing them err. Journal of Experimental Psychology: General, 144(1), 114-126. https://doi.org/10.1037/xge0000033</p>
+<p>Dunlosky, J., &amp; Rawson, K. A. (2012). Overconfidence produces underachievement: Inaccurate self evaluations undermine students&#x27; learning and retention. Learning and Instruction, 22(4), 271-280. https://doi.org/10.1016/j.learninstruc.2011.08.003</p>
+<p>Foster, J. L., Shipstead, Z., Harrison, T. L., Hicks, K. L., Redick, T. S., &amp; Engle, R. W. (2015). Shortened complex span tasks can reliably measure working memory capacity. Memory &amp; Cognition, 43(2), 226-236. https://doi.org/10.3758/s13421-014-0461-7</p>
+<p>Gilbert, S. J., Bird, A., Carpenter, J. M., Fleming, S. M., Sachdeva, C., &amp; Tsai, P.-C. (2020). Optimal use of reminders: Metacognition, effort, and cognitive offloading. Journal of Experimental Psychology: General, 149(3), 501-517. https://doi.org/10.1037/xge0000652</p>
+<p>Glikson, E., &amp; Woolley, A. W. (2020). Human trust in artificial intelligence: Review of empirical research. Academy of Management Annals, 14(2), 627-660. https://doi.org/10.5465/annals.2018.0057</p>
+<p>Grassini, S. (2023). Development and validation of the AI attitude scale (AIAS-4): A brief measure of general attitude toward artificial intelligence. Frontiers in Psychology, 14, 1191628. https://doi.org/10.3389/fpsyg.2023.1191628</p>
+<p>Humlum, A., &amp; Vestergaard, E. (2025). The unequal adoption of ChatGPT exacerbates existing inequalities among workers. Proceedings of the National Academy of Sciences of the United States of America, 122(1), e2414972121. https://doi.org/10.1073/pnas.2414972121</p>
+<p>Kabir, S., Udo-Imeh, D. N., Kou, B., &amp; Zhang, T. (2024). Is Stack Overflow obsolete? An empirical study of the characteristics of ChatGPT answers to Stack Overflow questions. In Proceedings of the CHI Conference on Human Factors in Computing Systems (Article 935, pp. 1-17). Association for Computing Machinery. https://doi.org/10.1145/3613904.3642596</p>
+<p>Kane, M. J., Hambrick, D. Z., Tuholski, S. W., Wilhelm, O., Payne, T. W., &amp; Engle, R. W. (2004). The generality of working memory capacity: A latent-variable approach to verbal and visuospatial memory span and reasoning. Journal of Experimental Psychology: General, 133(2), 189-217. https://doi.org/10.1037/0096-3445.133.2.189</p>
+<p>Karabenick, S. A. (2003). Seeking help in large college classes: A person-centered approach. Contemporary Educational Psychology, 28(1), 37-58. https://doi.org/10.1016/s0361-476x(02)00012-7</p>
+<p>Karabenick, S. A. (2004). Perceived achievement goal structure and college student help seeking. Journal of Educational Psychology, 96(3), 569-581. https://doi.org/10.1037/0022-0663.96.3.569</p>
+<p>Kasneci, E., Sessler, K., Küchemann, S., Bannert, M., Dementieva, D., Fischer, F., Gasser, U., Groh, G., Günnemann, S., Hüllermeier, E., Krusche, S., Kutyniok, G., Michaeli, T., Nerdel, C., Pfeffer, J., Poquet, O., Sailer, M., Schmidt, A., Seidel, T., … Kasneci, G. (2023). ChatGPT for good? On opportunities and challenges of large language models for education. Learning and Individual Differences, 103, Article 102274. https://doi.org/10.1016/j.lindif.2023.102274</p>
+<p>Lee, J. D., &amp; See, K. A. (2004). Trust in automation: Designing for appropriate reliance. Human Factors, 46(1), 50-80. https://doi.org/10.1518/hfes.46.1.50_30392</p>
+<p>Merritt, S. M., Unnerstall, J. L., Lee, D., &amp; Huber, K. (2015). Measuring individual differences in the perfect automation schema. Human Factors, 57(5), 740-753. https://doi.org/10.1177/0018720815581247</p>
+<p>Meyerhoff, H. S., Grinschgl, S., Papenmeier, F., &amp; Gilbert, S. J. (2021). Individual differences in cognitive offloading: A comparison of intention offloading, pattern copy, and short-term memory capacity. Cognitive Research: Principles and Implications, 6(1), 34. https://doi.org/10.1186/s41235-021-00298-x</p>
+<p>Mook, D. G. (1983). In defense of external invalidity. American Psychologist, 38(4), 379-387. https://doi.org/10.1037/0003-066x.38.4.379</p>
+<p>Morrison, A. B., &amp; Richmond, L. L. (2020). Offloading items from memory: Individual differences in cognitive offloading in a short-term memory task. Cognitive Research: Principles and Implications, 5(1), 1. https://doi.org/10.1186/s41235-019-0201-4</p>
+<p>Nelson-Le Gall, S. (1985). Help-seeking behavior in learning. Review of Research in Education, 12(1), 55-90. https://doi.org/10.2307/1167146</p>
+<p>Newman, R. S. (2002). How self-regulated learners cope with academic difficulty: The role of adaptive help seeking. Theory into Practice, 41(2), 132-138. https://doi.org/10.1207/s15430421tip4102_10</p>
+<p>Nomura, T., Suzuki, T., Kanda, T., &amp; Kato, K. (2006). Measurement of negative attitudes toward robots. Interaction Studies, 7(3), 437-454. https://doi.org/10.1075/is.7.3.14nom</p>
+<p>Noy, S., &amp; Zhang, W. (2023). Experimental evidence on the productivity effects of generative artificial intelligence. Science, 381(6654), 187-192. https://doi.org/10.1126/science.adh2586</p>
+<p>OpenAI. (2023). GPT-4 technical report. arXiv. https://doi.org/10.48550/arXiv.2303.08774</p>
+<p>Oswald, F. L., McAbee, S. T., Redick, T. S., &amp; Hambrick, D. Z. (2015). The development of a short domain-general measure of working memory capacity. Behavior Research Methods, 47(4), 1343-1355. https://doi.org/10.3758/s13428-014-0543-2</p>
+<p>Otis, N. G., Cranney, K., Delecourt, S., &amp; Koning, R. (2024). Global evidence on gender gaps and generative AI. OSF Preprints. https://doi.org/10.31219/osf.io/h6a7c</p>
+<p>Pak, R., Rovira, E., &amp; McLaughlin, A. (2025). Polite AI mitigates user susceptibility to AI hallucinations. Ergonomics, 68(10), 1735-1745. https://doi.org/10.1080/00140139.2024.2434604</p>
+<p>Pak, R., Rovira, E., &amp; McLaughlin, A. (2026). GenAI as complete cognitive automation for untrained users at population scale: Implications for human factors and ergonomics. Ergonomics. Advance online publication. https://doi.org/10.1080/00140139.2026.2686284</p>
+<p>Parasuraman, R., &amp; Manzey, D. H. (2010). Complacency and bias in human use of automation: An attentional integration. Human Factors, 52(3), 381-410. https://doi.org/10.1177/0018720810376055</p>
+<p>Raven, J., Raven, J. C., &amp; Court, J. H. (1998). Manual for Raven&#x27;s progressive matrices and vocabulary scales. Oxford Psychologists Press.</p>
+<p>Ravšelj, D., Keržič, D., Tomaževič, N., Umek, L., Brezovar, N., A Iahad, N., Abdulla, A. A., Akopyan, A., Aldana Segura, M. W., AlHumaid, J., Allam, M. F., Alló, M., Andoh, R. P. K., Andronic, O., Arthur, Y. D., Aydın, F., Badran, A., Balbontín-Alvarado, R., Ben Saad, H., … Aristovnik, A. (2025). Higher education students&#x27; perceptions of ChatGPT: A global study of early reactions. PLOS ONE, 20(2), e0315011. https://doi.org/10.1371/journal.pone.0315011</p>
+<p>Roll, I., Aleven, V., McLaren, B. M., &amp; Koedinger, K. R. (2011). Improving students&#x27; help- seeking skills using metacognitive feedback in an intelligent tutoring system. Learning and Instruction, 21(2), 267-280. https://doi.org/10.1016/j.learninstruc.2010.07.004</p>
+<p>Russo, C., Romano, L., Clemente, D., Iacovone, L., Gladwin, T. E., &amp; Panno, A. (2025). Gender differences in artificial intelligence: The role of artificial intelligence anxiety. Frontiers in Psychology, 16, 1559457. https://doi.org/10.3389/fpsyg.2025.1559457</p>
+<p>Sheese, B., Liffiton, M., Savelka, J., &amp; Denny, P. (2024). Patterns of student help-seeking when using a large language model-powered programming assistant. Proceedings of the 26th Australasian Computing Education Conference, 49-57. https://doi.org/10.1145/3636243.3636249</p>
+<p>Singh, I. L., Molloy, R., &amp; Parasuraman, R. (1993). Automation-induced &quot;complacency&quot;: Development of the complacency-potential rating scale. International Journal of Aviation Psychology, 3(2), 111-122. https://doi.org/10.1207/s15327108ijap0302_2</p>
+<p>Strzelecki, A. (2024). To use or not to use ChatGPT in higher education? A study of students&#x27; acceptance and use of technology. Interactive Learning Environments, 32(9), 5142-5155. https://doi.org/10.1080/10494820.2023.2209881</p>
+<p>Sung, W., &amp; Thomas, C. L. (2025). The mediating role of academic help-seeking in the relationship between achievement goals and help-seeking from ChatGPT. Social Psychology of Education, 28(1), Article 155. https://doi.org/10.1007/s11218-025-10108-7</p>
+<p>Thurstone, L. L. (1938). Primary mental abilities. University of Chicago Press.</p>
+<p>Undorf, M., Livneh, I., &amp; Ackerman, R. (2021). Metacognitive control processes in question answering: Help seeking and withholding answers. Metacognition and Learning, 16(2), 431-458. https://doi.org/10.1007/s11409-021-09259-7</p>
+<p>Unsworth, N., Redick, T. S., Heitz, R. P., Broadway, J. M., &amp; Engle, R. W. (2009). Complex working memory span tasks and higher-order cognition: A latent-variable analysis of the relationship between processing and storage. Memory, 17(6), 635-654. https://doi.org/10.1080/09658210902998047</p>
+<p>Wei, J., Karina, N., Chung, H. W., Jiao, Y. J., Papay, S., Glaese, A., Schulman, J., &amp; Fedus, W. (2024). Measuring short-form factuality in large language models. arXiv. https://doi.org/10.48550/arXiv.2411.04368</p>
+<p>Weidlich, J., Gašević, D., Drachsler, H., &amp; Kirschner, P. (2025). ChatGPT in education: An effect in search of a cause. Journal of Computer Assisted Learning, 41(5), e70105. https://doi.org/10.1111/jcal.70105</p>
+<p>Wickens, C. D., &amp; Dixon, S. R. (2007). The benefits of imperfect diagnostic automation: A synthesis of the literature. Theoretical Issues in Ergonomics Science, 8(3), 201-212. https://doi.org/10.1080/14639220500370105</p>
+<p>Wise, S. L., &amp; DeMars, C. E. (2005). Low examinee effort in low-stakes assessment: Problems and potential solutions. Educational Assessment, 10(1), 1-17. https://doi.org/10.1207/s15326977ea1001_1</p>
+<p>Zawacki-Richter, O., Marín, V. I., Bond, M., &amp; Gouverneur, F. (2019). Systematic review of research on artificial intelligence applications in higher education: Where are the educators? International Journal of Educational Technology in Higher Education, 16, Article 39. https://doi.org/10.1186/s41239-019-0171-0</p>
+<p>Note. Gender coded0 = female,1 = male. Baseline odds are odds relative to Manual when all predictors equal zero. CrI = Bayesian credible interval. Bold indicates meaningful predictors as judged by the criterion that the 95% credible interval does not include 0. *Change in odds per 1-unit increase in predictor for the comparison category relative to Manual.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
