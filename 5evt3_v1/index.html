@@ -197,19 +197,19 @@ Correlation-Based, Parameter-Based, or Fixed-Effect? A Comparison of
 One-Stage Meta-Analytic Structural Equation Modeling Approaches
 </p>
 <p class="meta">
-2026-11-15 · Metacheck 0.4.4.1
+2026-11-18 · Metacheck 0.4.4.5
 </p>
 </header>
 <div class="mc-main">
 <nav class="counts" aria-label="Results">
-<a class="count fix" href="#fix"><b>2</b><span>to
-fix</span></a><a class="count improve" href="#improve"><b>2</b><span>to
+<a class="count fix" href="#fix"><b>1</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>3</b><span>to
 check</span></a><span class="count decide zero"><b>0</b><span>to decide
 by
 hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>11</b><span>not
 applicable</span></a>
 </nav>
-<h2 id="fix">To fix <span class="n">(2)</span></h2>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
 <div class="check fix">
 <div class="check-head">
 <p><span class="tag fix">To fix</span> <span class="check-title">Codebook Check</span></p>
@@ -238,35 +238,7 @@ could be matched to variable definitions.</p>
 </div>
 </details>
 </div>
-<div class="check fix">
-<div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Reproducibility Check</span></p>
-</div>
-<div class="rows">
-<div class="label">
-<p>What we found</p>
-</div>
-<div class="text">
-<ul>
-<li>We assessed AND ran 11 R code files for reproducibility (each in an
-isolated Docker container).</li>
-<li>4 of 9 scripts ran without error when executed (2 more are run by
-another script with <code>source()</code>).</li>
-<li>3 installable dependencies detected.</li>
-<li>445 statistics stored from the extracted output; 1 of 13 reported
-tests matched (7.7%).</li>
-</ul>
-</div>
-<div class="label">
-<p>Note</p>
-</div>
-<div class="text">
-<p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
-for the details.</p>
-</div>
-</div>
-</div>
-<h2 id="improve">To check <span class="n">(2)</span></h2>
+<h2 id="improve">To check <span class="n">(3)</span></h2>
 <div class="check improve">
 <div class="check-head">
 <p><span class="tag improve">To check</span> <span class="check-title">Repository Check</span></p>
@@ -289,6 +261,41 @@ match.</li>
 Show details
 </summary>
 <div class="fold">
+<h4 id="whose-deposits">Whose Deposits</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Cited in
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://doi.org/10.6084/m9.figshare.34970254" target="_blank">doi.org/10.6084/m9.figshare.34970254</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+the deposit names this paper (its DOI, its title, or a link to it)
+</td>
+</tr>
+</tbody>
+</table>
 <h4 id="repositories">Repositories</h4>
 <table class="dt-static">
 <thead>
@@ -1223,6 +1230,34 @@ no parsing issues.</p>
 </div>
 </details>
 </div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Reproducibility Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We assessed 11 R code files for reproducibility and ran 6 of them
+(each in an isolated Docker container).</li>
+<li>4 of 6 scripts ran without error when executed (2 more are run by
+another script with <code>source()</code>).</li>
+<li>3 installable dependencies detected.</li>
+<li>484 statistics stored from the extracted output; 0 of 4 reported
+tests matched (0%).</li>
+</ul>
+</div>
+<div class="label">
+<p>Note</p>
+</div>
+<div class="text">
+<p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
+for the details.</p>
+</div>
+</div>
+</div>
 <h2 id="fine">Fine <span class="n">(1)</span></h2>
 <div class="done">
 <div class="done-row">
@@ -1478,7 +1513,7 @@ hours, save their results (such as fitted models) to files, add those to
 the deposit, and let the script read them, so readers can check the rest
 without waiting.</p>
 <h3 id="comparison-with-the-paper">Comparison with the paper</h3>
-<p>Of the 13 statistical tests reported in the paper, 1 was found in the
+<p>Of the 4 statistical tests reported in the paper, 0 were found in the
 output of the code.</p>
 <details>
 <summary>
@@ -1669,7 +1704,13 @@ dependency
 </table>
 </div>
 <h4 id="file-paths">File paths</h4>
-<p>Every data path in the code works in the repository as deposited.</p>
+<p>Every data path in the code works in the repository as deposited. The
+code reads files that are only inside
+<code>Additional Online Materials.zip</code>, and no script unpacks it.
+We unpacked it in its folder before the run. So that others can run the
+code as deposited, start the code with a line that unpacks it (such as
+<code>unzip(&quot;Additional Online Materials.zip&quot;)</code> in R), or upload
+the files unpacked.</p>
 <h4 id="files-not-run-on-their-own">Files not run on their own</h4>
 <p>3 files only define functions, so running them on their own says
 nothing: a function counts when a script uses it. These files are not
@@ -1762,7 +1803,7 @@ ran_ok
 <td style="text-align:left;">
 </td>
 <td style="text-align:right;">
-246.0
+254.9
 </td>
 </tr>
 <tr>
@@ -1788,7 +1829,7 @@ ran_ok
 <td style="text-align:left;">
 </td>
 <td style="text-align:right;">
-227.4
+230.7
 </td>
 </tr>
 <tr>
@@ -1814,7 +1855,7 @@ ran_ok
 <td style="text-align:left;">
 </td>
 <td style="text-align:right;">
-227.6
+230.5
 </td>
 </tr>
 <tr>
@@ -1827,7 +1868,7 @@ ran_ok
 <td style="text-align:left;">
 </td>
 <td style="text-align:right;">
-257.9
+254.4
 </td>
 </tr>
 <tr>
@@ -2990,24 +3031,24 @@ mxOption(NULL, &quot;Gradient iterations&quot;) is set at &quot;2&quot;.</code><
 
 Single RE (psi only):
   Taylor delta_rho: 0 0 0 0 0 0 
-  MC     delta_rho: 0 0 0 0 0 -2.3e-05 
+  MC     delta_rho: 0 0 0 0 0 8.9e-05 
   Target discrepancy: 0 0 0 0 0 0 
 
 Full RE:
   Taylor delta_rho: 0 0.00085 0.001025 0.000975 0.00045 0.002435 
-  MC     delta_rho: 0.000116 0.000978 0.001136 0.001073 0.000515 0.002569 
+  MC     delta_rho: 4.5e-05 0.000935 0.001018 0.000984 0.000439 0.002467 
   Target discrepancy: 0.000613 0.000157 0.000791 0.000978 0 0.001557 
 
 --- Random-effect SD = 0.10 ---
 
 Single RE (psi only):
   Taylor delta_rho: 0 0 0 0 0 0 
-  MC     delta_rho: 0 0 0 0 0 2.7e-05 
+  MC     delta_rho: 0 0 0 0 0 0.00016 
   Target discrepancy: 0 0 0 0 0 0 
 
 Full RE:
   Taylor delta_rho: 0 0.0034 0.0041 0.0039 0.0018 0.00974 
-  MC     delta_rho: -0.000103 0.003464 0.004201 0.003994 0.001828 0.009875 
+  MC     delta_rho: -3e-05 0.003386 0.004135 0.003958 0.001719 0.009601 
   Target discrepancy: 0.002451 0.000626 0.003165 0.003912 0 0.00623 
 &gt; rho_cfa &lt;- function(theta) {
 &gt;   lam &lt;- theta[1:6]
@@ -3102,48 +3143,48 @@ Full RE:
 
 Single RE (phi only):
   Taylor delta_rho: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-  MC     delta_rho: 0 0 1.7e-05 1.6e-05 1.3e-05 0 1.6e-05 1.5e-05 1.3e-05 1.3e-05 1.3e-05 1.1e-05 0 0 0 
+  MC     delta_rho: 0 0 3e-05 2.8e-05 2.4e-05 0 2.8e-05 2.6e-05 2.2e-05 2.4e-05 2.2e-05 1.9e-05 0 0 0 
   Target disc.: 0 0 0 0 0 0 0 
 
 Full RE:
   Taylor delta_rho: 0.000997 0.000342 0.001942 0.001733 0.002041 0.001436 0.00253 0.002549 0.002546 0.001587 0.001356 0.001228 0.001507 0.000922 0.00052 
-  MC     delta_rho: 0.000934 0.000283 0.001887 0.001676 0.001999 0.001328 0.002459 0.002477 0.002493 0.001525 0.001294 0.00118 0.001375 0.000828 0.000416 
+  MC     delta_rho: 0.000954 0.000297 0.001941 0.001734 0.002028 0.001374 0.002519 0.002543 0.002525 0.001578 0.001351 0.001209 0.001522 0.00089 0.000496 
   Target disc.: -0.00038 0.001951 0.000417 0.001126 0.000672 0.000433 0.003539 
 
 --- phi_PB = 0.30, RE SD = 0.10 ---
 
 Single RE (phi only):
   Taylor delta_rho: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-  MC     delta_rho: 0 0 -4.5e-05 -4.2e-05 -3.6e-05 0 -4.2e-05 -3.9e-05 -3.4e-05 -3.6e-05 -3.4e-05 -2.9e-05 0 0 0 
+  MC     delta_rho: 0 0 3.3e-05 3.1e-05 2.7e-05 0 3.1e-05 2.9e-05 2.5e-05 2.7e-05 2.5e-05 2.1e-05 0 0 0 
   Target disc.: 0 0 0 0 0 0 0 
 
 Full RE:
   Taylor delta_rho: 0.003989 0.00137 0.007769 0.00693 0.008164 0.005743 0.010119 0.010196 0.010186 0.006347 0.005424 0.004912 0.006028 0.003689 0.002081 
-  MC     delta_rho: 0.004107 0.001297 0.007812 0.007007 0.008231 0.005642 0.010143 0.010254 0.010239 0.006308 0.005414 0.004912 0.005939 0.003651 0.002127 
+  MC     delta_rho: 0.003937 0.001378 0.007724 0.006879 0.008119 0.005794 0.010092 0.010156 0.01016 0.00635 0.005416 0.004917 0.006017 0.003661 0.002051 
   Target disc.: -0.001519 0.007803 0.001666 0.004503 0.002687 0.00173 0.014158 
 
 --- phi_PB = 0.80, RE SD = 0.05 ---
 
 Single RE (phi only):
   Taylor delta_rho: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-  MC     delta_rho: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  MC     delta_rho: 0 0 2.3e-05 2.1e-05 1.8e-05 0 2.1e-05 2e-05 1.7e-05 1.8e-05 1.7e-05 1.5e-05 0 0 0 
   Target disc.: 0 0 0 0 0 0 0 
 
 Full RE:
   Taylor delta_rho: 0.000997 0.000342 0.002394 0.001979 0.00271 0.001436 0.002944 0.00321 0.003279 0.002254 0.001737 0.00129 0.001507 0.000922 0.00052 
-  MC     delta_rho: 0.000992 0.000344 0.00249 0.002038 0.002773 0.001439 0.00304 0.003274 0.003346 0.002339 0.001794 0.001351 0.00159 0.00101 0.000572 
+  MC     delta_rho: 0.00093 0.000271 0.002293 0.001895 0.00266 0.001344 0.002822 0.003107 0.003209 0.002138 0.001639 0.001222 0.00142 0.00087 0.000481 
   Target disc.: 1e-06 0.001733 0.000256 0.000827 0.000591 0.000817 0.00353 
 
 --- phi_PB = 0.80, RE SD = 0.10 ---
 
 Single RE (phi only):
   Taylor delta_rho: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-  MC     delta_rho: 0 0 -5.6e-05 -5.2e-05 -4.5e-05 0 -5.2e-05 -4.9e-05 -4.2e-05 -4.5e-05 -4.2e-05 -3.6e-05 0 0 0 
+  MC     delta_rho: 0 0 -1.4e-05 -1.3e-05 -1.1e-05 0 -1.3e-05 -1.2e-05 -1e-05 -1.1e-05 -1e-05 -9e-06 0 0 0 
   Target disc.: 0 0 0 0 0 0 0 
 
 Full RE:
   Taylor delta_rho: 0.003989 0.00137 0.009577 0.007915 0.010841 0.005743 0.011778 0.01284 0.013114 0.009017 0.00695 0.00516 0.006028 0.003689 0.002081 
-  MC     delta_rho: 0.003986 0.00138 0.009461 0.007812 0.010785 0.005716 0.011612 0.012683 0.01301 0.008889 0.006838 0.00509 0.005881 0.003624 0.002021 
+  MC     delta_rho: 0.003963 0.001323 0.009369 0.007884 0.010673 0.005744 0.011652 0.01287 0.01302 0.008878 0.006944 0.005055 0.006004 0.003513 0.002076 
   Target disc.: 3e-06 0.006931 0.001022 0.003307 0.002364 0.003268 0.01412 
 &gt; rho_cfa_transformed &lt;- function(theta) {
 &gt;   # theta = (eta_1, ..., eta_6, zeta)
@@ -3268,12 +3309,12 @@ Full RE:
 
 Single RE (zeta only):
   Taylor delta_rho: 0 0 -0.000476 -0.000441 -4e-04 0 -0.000441 -0.000408 -0.00037 -4e-04 -0.00037 -0.000336 0 0 0 
-  MC     delta_rho: 0 0 -0.000481 -0.000445 -0.000404 0 -0.000445 -0.000411 -0.000374 -0.000404 -0.000374 -0.000339 0 0 0 
+  MC     delta_rho: 0 0 -0.000499 -0.000462 -0.000419 0 -0.000462 -0.000427 -0.000388 -0.000419 -0.000388 -0.000352 0 0 0 
   Target disc.: 0 0 0 0 0 0 -0.000881 
 
 Full RE:
   Taylor delta_rho: -0.004045 -0.003958 -0.000261 -8.6e-05 0.000726 -0.001542 0.000779 0.001138 0.0016 0.000177 0.000218 0.000403 -0.003486 -0.00325 -0.002619 
-  MC     delta_rho: -0.003918 -0.003797 -0.00023 -6.7e-05 0.000698 -0.001469 0.000777 0.001119 0.001547 0.000191 0.000226 0.000388 -0.003308 -0.003163 -0.002564 
+  MC     delta_rho: -0.003859 -0.003814 -0.000166 -1e-05 0.000767 -0.00151 0.000828 0.001165 0.001602 0.000217 0.000247 0.000422 -0.003287 -0.003089 -0.002497 
   Target disc.: -0.026216 -0.003161 -0.006862 -0.01712 -0.010037 -0.006691 0.003148 
 
 --- zeta_PB = 0.30, heteroSD = 0.11 ---
@@ -3281,12 +3322,12 @@ Full RE:
 
 Single RE (zeta only):
   Taylor delta_rho: 0 0 -0.001905 -0.001762 -0.001601 0 -0.001762 -0.00163 -0.001481 -0.001601 -0.001481 -0.001345 0 0 0 
-  MC     delta_rho: 0 0 -0.00193 -0.001785 -0.001621 0 -0.001785 -0.001651 -0.0015 -0.001621 -0.0015 -0.001362 0 0 0 
+  MC     delta_rho: 0 0 -0.001848 -0.001709 -0.001552 0 -0.001709 -0.001581 -0.001436 -0.001552 -0.001436 -0.001304 0 0 0 
   Target disc.: 0 0 0 0 0 0 -0.003525 
 
 Full RE:
   Taylor delta_rho: -0.01618 -0.014784 -0.001046 -0.000342 0.002486 -0.005719 0.003116 0.004551 0.005992 0.000752 0.000983 0.001582 -0.013944 -0.012236 -0.009594 
-  MC     delta_rho: -0.014133 -0.013174 -0.000505 1.7e-05 0.002537 -0.004959 0.003234 0.004427 0.005708 0.000908 0.00104 0.001585 -0.012122 -0.010846 -0.008646 
+  MC     delta_rho: -0.014546 -0.013493 -0.000728 -0.000195 0.002355 -0.005142 0.003081 0.004281 0.005585 0.000797 0.000933 0.001499 -0.012456 -0.011089 -0.008872 
   Target disc.: -0.102864 -0.014105 -0.02319 -0.068079 -0.038951 -0.02332 0.012131 
 
   Back-transformed loadings: 0.769, 0.711, 0.646, 0.769, 0.711, 0.646
@@ -3297,12 +3338,12 @@ Full RE:
 
 Single RE (zeta only):
   Taylor delta_rho: 0 0 -0.000514 -0.000475 -0.000432 0 -0.000475 -0.00044 -0.000399 -0.000432 -0.000399 -0.000363 0 0 0 
-  MC     delta_rho: 0 0 -0.000523 -0.000484 -0.000439 0 -0.000484 -0.000448 -0.000406 -0.000439 -0.000406 -0.000369 0 0 0 
+  MC     delta_rho: 0 0 -0.000508 -0.00047 -0.000427 0 -0.00047 -0.000435 -0.000395 -0.000427 -0.000395 -0.000358 0 0 0 
   Target disc.: 0 0 0 0 0 0 -0.002422 
 
 Full RE:
   Taylor delta_rho: -0.004045 -0.003958 -0.004257 -0.003491 -0.001871 -0.001542 -0.002898 -0.001519 -0.000661 -0.002089 -0.001769 -0.001807 -0.003486 -0.00325 -0.002619 
-  MC     delta_rho: -0.003778 -0.00379 -0.004086 -0.003335 -0.001698 -0.001418 -0.002761 -0.001401 -0.000519 -0.002031 -0.001715 -0.001707 -0.003399 -0.003113 -0.002486 
+  MC     delta_rho: -0.003887 -0.003825 -0.004054 -0.003322 -0.001783 -0.001471 -0.002746 -0.001403 -0.000616 -0.00197 -0.001668 -0.001746 -0.003266 -0.003115 -0.002505 
   Target disc.: -0.022918 -0.006023 -0.00683 -0.018489 -0.010165 -0.005509 0.001607 
 
 --- zeta_PB = 1.10, heteroSD = 0.11 ---
@@ -3310,12 +3351,12 @@ Full RE:
 
 Single RE (zeta only):
   Taylor delta_rho: 0 0 -0.002055 -0.001901 -0.001726 0 -0.001901 -0.001759 -0.001597 -0.001726 -0.001597 -0.00145 0 0 0 
-  MC     delta_rho: 0 0 -0.002063 -0.001909 -0.001733 0 -0.001909 -0.001766 -0.001603 -0.001733 -0.001603 -0.001456 0 0 0 
+  MC     delta_rho: 0 0 -0.002078 -0.001922 -0.001746 0 -0.001922 -0.001778 -0.001615 -0.001746 -0.001615 -0.001467 0 0 0 
   Target disc.: 0 0 0 0 0 0 -0.009686 
 
 Full RE:
   Taylor delta_rho: -0.01618 -0.014784 -0.017027 -0.013965 -0.007262 -0.005719 -0.011594 -0.006075 -0.002505 -0.007953 -0.006508 -0.00592 -0.013944 -0.012236 -0.009594 
-  MC     delta_rho: -0.014365 -0.013312 -0.015016 -0.012514 -0.006399 -0.004979 -0.010191 -0.005276 -0.002126 -0.006963 -0.005856 -0.005401 -0.01219 -0.010942 -0.008741 
+  MC     delta_rho: -0.014357 -0.013231 -0.014882 -0.012511 -0.006311 -0.00501 -0.010163 -0.005374 -0.002143 -0.006852 -0.005866 -0.005368 -0.012149 -0.010816 -0.008758 
   Target disc.: -0.091115 -0.024922 -0.022505 -0.073857 -0.039888 -0.017969 0.00581 </code></pre>
 </div>
 <div class="callout-tip" title="Output — run_Hagger_example.R (timed_out)" collapse="true">
@@ -3534,8 +3575,8 @@ Full RE:
 
 SAMPLING FOR MODEL &#39;FE_Hagger&#39; NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 3.3e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.33 seconds.
+Chain 1: Gradient evaluation took 3.4e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.34 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -3552,9 +3593,9 @@ Chain 1: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 1: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 1: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.231 seconds (Warm-up)
-Chain 1:                0.271 seconds (Sampling)
-Chain 1:                0.502 seconds (Total)
+Chain 1:  Elapsed Time: 0.227 seconds (Warm-up)
+Chain 1:                0.266 seconds (Sampling)
+Chain 1:                0.493 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL &#39;FE_Hagger&#39; NOW (CHAIN 2).
@@ -3577,9 +3618,9 @@ Chain 2: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 2: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 2: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 0.243 seconds (Warm-up)
-Chain 2:                0.253 seconds (Sampling)
-Chain 2:                0.496 seconds (Total)
+Chain 2:  Elapsed Time: 0.239 seconds (Warm-up)
+Chain 2:                0.249 seconds (Sampling)
+Chain 2:                0.488 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL &#39;FE_Hagger&#39; NOW (CHAIN 3).
@@ -3602,15 +3643,15 @@ Chain 3: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 3: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 3: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 0.242 seconds (Warm-up)
-Chain 3:                0.216 seconds (Sampling)
-Chain 3:                0.458 seconds (Total)
+Chain 3:  Elapsed Time: 0.237 seconds (Warm-up)
+Chain 3:                0.211 seconds (Sampling)
+Chain 3:                0.448 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL &#39;FE_Hagger&#39; NOW (CHAIN 4).
 Chain 4: 
-Chain 4: Gradient evaluation took 2.2e-05 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.22 seconds.
+Chain 4: Gradient evaluation took 2.1e-05 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
@@ -3627,9 +3668,9 @@ Chain 4: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 4: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 4: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.236 seconds (Warm-up)
-Chain 4:                0.296 seconds (Sampling)
-Chain 4:                0.532 seconds (Total)
+Chain 4:  Elapsed Time: 0.234 seconds (Warm-up)
+Chain 4:                0.292 seconds (Sampling)
+Chain 4:                0.526 seconds (Total)
 Chain 4: 
 Inference for Stan model: FE_Hagger.
 4 chains, each with iter=3000; warmup=1500; thin=1; 
@@ -3642,7 +3683,7 @@ cp_xy           0.40       0 0.01 0.38 0.40  0.42  2876    1
 indirect_effect 0.15       0 0.01 0.14 0.15  0.17  2898    1
 total_effect    0.55       0 0.01 0.54 0.55  0.57  4232    1
 
-Samples were drawn using NUTS(diag_e) at Sun Nov 15 02:34:41 2026.
+Samples were drawn using NUTS(diag_e) at Wed Nov 18 14:50:47 2026.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).
@@ -3652,8 +3693,8 @@ convergence, Rhat=1).
 
 SAMPLING FOR MODEL &#39;CB_Hagger&#39; NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 5.7e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.57 seconds.
+Chain 1: Gradient evaluation took 5.2e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.52 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -3670,15 +3711,15 @@ Chain 1: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 1: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 1: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 4.319 seconds (Warm-up)
-Chain 1:                3.733 seconds (Sampling)
-Chain 1:                8.052 seconds (Total)
+Chain 1:  Elapsed Time: 4.224 seconds (Warm-up)
+Chain 1:                3.646 seconds (Sampling)
+Chain 1:                7.87 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL &#39;CB_Hagger&#39; NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 3.7e-05 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.37 seconds.
+Chain 2: Gradient evaluation took 3.6e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.36 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -3695,9 +3736,9 @@ Chain 2: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 2: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 2: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 4.421 seconds (Warm-up)
-Chain 2:                3.799 seconds (Sampling)
-Chain 2:                8.22 seconds (Total)
+Chain 2:  Elapsed Time: 4.308 seconds (Warm-up)
+Chain 2:                3.709 seconds (Sampling)
+Chain 2:                8.017 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL &#39;CB_Hagger&#39; NOW (CHAIN 3).
@@ -3720,9 +3761,9 @@ Chain 3: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 3: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 3: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 5.621 seconds (Warm-up)
-Chain 3:                3.697 seconds (Sampling)
-Chain 3:                9.318 seconds (Total)
+Chain 3:  Elapsed Time: 5.488 seconds (Warm-up)
+Chain 3:                3.601 seconds (Sampling)
+Chain 3:                9.089 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL &#39;CB_Hagger&#39; NOW (CHAIN 4).
@@ -3745,9 +3786,9 @@ Chain 4: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 4: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 4: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 4.554 seconds (Warm-up)
-Chain 4:                3.741 seconds (Sampling)
-Chain 4:                8.295 seconds (Total)
+Chain 4:  Elapsed Time: 4.465 seconds (Warm-up)
+Chain 4:                3.662 seconds (Sampling)
+Chain 4:                8.127 seconds (Total)
 Chain 4: 
 Inference for Stan model: CB_Hagger.
 4 chains, each with iter=3000; warmup=1500; thin=1; 
@@ -3763,7 +3804,7 @@ Theta_SD[3]     0.18       0 0.03 0.14 0.18  0.24  1675 1.00
 indirect_effect 0.14       0 0.04 0.07 0.14  0.21  1210 1.01
 total_effect    0.52       0 0.04 0.44 0.52  0.61   897 1.01
 
-Samples were drawn using NUTS(diag_e) at Sun Nov 15 02:35:16 2026.
+Samples were drawn using NUTS(diag_e) at Wed Nov 18 14:51:22 2026.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).
@@ -3773,8 +3814,8 @@ convergence, Rhat=1).
 
 SAMPLING FOR MODEL &#39;PB_Hagger&#39; NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 0.000132 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.32 seconds.
+Chain 1: Gradient evaluation took 0.000127 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.27 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -3791,22 +3832,21 @@ Chain 1: Iteration: 2400 / 3000 [ 80%]  (Sampling)
 Chain 1: Iteration: 2700 / 3000 [ 90%]  (Sampling)
 Chain 1: Iteration: 3000 / 3000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 12.193 seconds (Warm-up)
-Chain 1:                7.546 seconds (Sampling)
-Chain 1:                19.739 seconds (Total)
+Chain 1:  Elapsed Time: 12.021 seconds (Warm-up)
+Chain 1:                7.404 seconds (Sampling)
+Chain 1:                19.425 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL &#39;PB_Hagger&#39; NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 0.00011 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.1 seconds.
+Chain 2: Gradient evaluation took 0.000107 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.07 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
 Chain 2: Iteration:    1 / 3000 [  0%]  (Warmup)
 Chain 2: Iteration:  300 / 3000 [ 10%]  (Warmup)
-Chain 2: Iteration:  600 / 3000 [ 20%]  (Warmup)
-Chain 2: Iteration:  900 / 3000 [ 30%]  (Warmup)</code></pre>
+Chain 2: Iteration:  600 / 3000 [ 20%]  (Warmup)</code></pre>
 <p><strong>Messages / errors (stderr):</strong></p>
 <pre><code>Loading required package: Matrix
 Loading required package: rstan
@@ -4091,24 +4131,24 @@ mxOption(NULL, &quot;Gradient iterations&quot;) is set at &quot;2&quot;.</code><
 
 SAMPLING FOR MODEL &#39;FE_Kogar&#39; NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 0.00138 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 13.8 seconds.
+Chain 1: Gradient evaluation took 0.001326 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 13.26 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
 
 SAMPLING FOR MODEL &#39;FE_Kogar&#39; NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 0.001316 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 13.16 seconds.
+Chain 2: Gradient evaluation took 0.001332 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 13.32 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
 
 SAMPLING FOR MODEL &#39;FE_Kogar&#39; NOW (CHAIN 3).
 Chain 3: 
-Chain 3: Gradient evaluation took 0.001329 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 13.29 seconds.
+Chain 3: Gradient evaluation took 0.001326 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 13.26 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
@@ -4116,100 +4156,100 @@ Chain 3:
 SAMPLING FOR MODEL &#39;FE_Kogar&#39; NOW (CHAIN 4).
 Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
 Chain 4: 
-Chain 4: Gradient evaluation took 0.001312 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 13.12 seconds.
+Chain 4: Gradient evaluation took 0.001318 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 13.18 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
 Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
 Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
 Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
 Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
 Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
 Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
 Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
 Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
 Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
 Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
 Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
 Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
 Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
 Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
 Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
 Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
 Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
 Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
 Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 2: 
-Chain 2:  Elapsed Time: 15.334 seconds (Warm-up)
-Chain 2:                10.719 seconds (Sampling)
-Chain 2:                26.053 seconds (Total)
-Chain 2: 
+Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 15.548 seconds (Warm-up)
-Chain 3:                13.867 seconds (Sampling)
-Chain 3:                29.415 seconds (Total)
+Chain 3:  Elapsed Time: 15.324 seconds (Warm-up)
+Chain 3:                13.306 seconds (Sampling)
+Chain 3:                28.63 seconds (Total)
 Chain 3: 
-Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 4: 
-Chain 4:  Elapsed Time: 14.892 seconds (Warm-up)
-Chain 4:                15.31 seconds (Sampling)
-Chain 4:                30.202 seconds (Total)
-Chain 4: 
+Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 14.926 seconds (Warm-up)
-Chain 1:                16.307 seconds (Sampling)
-Chain 1:                31.233 seconds (Total)
+Chain 1:  Elapsed Time: 15.069 seconds (Warm-up)
+Chain 1:                15.12 seconds (Sampling)
+Chain 1:                30.189 seconds (Total)
 Chain 1: 
+Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 15.897 seconds (Warm-up)
+Chain 4:                14.548 seconds (Sampling)
+Chain 4:                30.445 seconds (Total)
+Chain 4: 
+Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 16.134 seconds (Warm-up)
+Chain 2:                15.83 seconds (Sampling)
+Chain 2:                31.964 seconds (Total)
+Chain 2: 
 Inference for Stan model: FE_Kogar.
 4 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=4000.
 
            mean se_mean   sd 2.5%  50% 97.5% n_eff Rhat
-ThetaL[1]  0.79       0 0.00 0.78 0.79  0.80  4080    1
-ThetaL[2]  0.84       0 0.00 0.84 0.84  0.85  5019    1
-ThetaL[3]  0.83       0 0.00 0.83 0.83  0.84  5215    1
-ThetaL[4]  0.87       0 0.00 0.87 0.87  0.88  6232    1
-ThetaL[5]  0.78       0 0.00 0.77 0.78  0.78  4280    1
-ThetaL[6]  0.81       0 0.00 0.80 0.81  0.81  4572    1
-ThetaL[7]  0.81       0 0.00 0.81 0.81  0.82  4432    1
-ThetaL[8]  0.76       0 0.00 0.76 0.76  0.77  4381    1
-ThetaL[9]  0.84       0 0.00 0.83 0.84  0.84  5478    1
-ThetaL[10] 0.78       0 0.00 0.77 0.78  0.79  3904    1
-ThetaL[11] 0.79       0 0.00 0.78 0.79  0.80  4962    1
-ThetaL[12] 0.81       0 0.00 0.80 0.81  0.81  4999    1
-ThetaC[1]  0.50       0 0.01 0.49 0.50  0.52  2319    1
-ThetaC[2]  0.61       0 0.01 0.60 0.61  0.62  2644    1
-ThetaC[3]  0.61       0 0.01 0.60 0.61  0.62  2348    1
+ThetaL[1]  0.79       0 0.00 0.78 0.79  0.80  4035    1
+ThetaL[2]  0.84       0 0.00 0.83 0.84  0.85  4320    1
+ThetaL[3]  0.83       0 0.00 0.83 0.83  0.84  4381    1
+ThetaL[4]  0.87       0 0.00 0.87 0.87  0.88  5374    1
+ThetaL[5]  0.78       0 0.00 0.77 0.78  0.78  4081    1
+ThetaL[6]  0.81       0 0.00 0.80 0.81  0.81  4501    1
+ThetaL[7]  0.81       0 0.00 0.81 0.81  0.82  4197    1
+ThetaL[8]  0.76       0 0.00 0.76 0.76  0.77  3577    1
+ThetaL[9]  0.84       0 0.00 0.83 0.84  0.84  4099    1
+ThetaL[10] 0.78       0 0.00 0.77 0.78  0.79  4157    1
+ThetaL[11] 0.79       0 0.00 0.78 0.79  0.80  3811    1
+ThetaL[12] 0.81       0 0.00 0.80 0.81  0.81  3982    1
+ThetaC[1]  0.50       0 0.01 0.49 0.50  0.52  2464    1
+ThetaC[2]  0.61       0 0.01 0.60 0.61  0.62  2631    1
+ThetaC[3]  0.61       0 0.01 0.60 0.61  0.62  2620    1
 
-Samples were drawn using NUTS(diag_e) at Sun Nov 15 02:40:18 2026.
+Samples were drawn using NUTS(diag_e) at Wed Nov 18 14:56:26 2026.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).
@@ -4224,31 +4264,31 @@ SAMPLING FOR MODEL &#39;CB_Kogar&#39; NOW (CHAIN 3).
 
 SAMPLING FOR MODEL &#39;CB_Kogar&#39; NOW (CHAIN 4).
 Chain 1: 
-Chain 1: Chain Gradient evaluation took 0.002358 seconds
-2: 
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 23.58 seconds.
+Chain 1: Gradient evaluation took 0.002412 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 24.12 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
-Chain 3: 
-Chain 2: Gradient evaluation took 0.002566 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 25.66 seconds.
+Chain 1: Iteration:    1 / 4000 [  0%]  (Warmup)
+Chain 2: 
+Chain 2: Gradient evaluation took 0.002453 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 24.53 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
-Chain 3: Gradient evaluation took 0.002547 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 25.47 seconds.
+Chain 3: 
+Chain 3: Gradient evaluation took 0.002421 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 24.21 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
+Chain 2: Iteration:    1 / 4000 [  0%]  (Warmup)
 Chain 4: 
-Chain 4: Gradient evaluation took 0.002401 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 24.01 seconds.
+Chain 4: Gradient evaluation took 0.002412 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 24.12 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
-Chain 1: Iteration:    1 / 4000 [  0%]  (Warmup)
-Chain 2: Iteration:    1 / 4000 [  0%]  (Warmup)
 Chain 3: Iteration:    1 / 4000 [  0%]  (Warmup)
 Chain 4: Iteration:    1 / 4000 [  0%]  (Warmup)</code></pre>
 <p><strong>Messages / errors (stderr):</strong></p>
@@ -4298,9 +4338,9 @@ mxOption(NULL, &quot;Gradient iterations&quot;) is set at &quot;2&quot;.</code><
 <p>Dependencies were installed into a throwaway library before running:
 3 succeeded, 0 failed. dplyr, metaSEM, rstan were installed.</p>
 <h4 id="reported-vs.-reproduced">Reported vs. reproduced</h4>
-<p>13 statistical tests reported in the manuscript text were checked
-against the extracted analysis output: 1 matched (1 fully, 0 partially)
-— 7.7% found.</p>
+<p>4 statistical tests reported in the manuscript text were checked
+against the extracted analysis output: 0 matched (0 fully, 0 partially)
+— 0% found.</p>
 <table class="dt-static">
 <thead>
 <tr>
@@ -4333,31 +4373,7 @@ Analysis
 <tbody>
 <tr>
 <td style="text-align:left;">
-SD=0.05
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-full
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-SD=0.05
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-SimulationPredictions.R
-</td>
-<td style="text-align:left;">
-SimulationPredictions.R
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SD=0.1
+SD=0.05 SD=0.1
 </td>
 <td style="text-align:left;">
 FALSE
@@ -4399,175 +4415,7 @@ none
 </tr>
 <tr>
 <td style="text-align:left;">
-SD=0.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SD=0.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 SD=0.05 SD=0.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SD=0.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SD=0.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SD=0.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SD=0.05 SD=0.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SD=0.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SD=0.1
 </td>
 <td style="text-align:left;">
 FALSE
@@ -33216,7 +33064,8 @@ How Exact P-Values works
 </summary>
 <div class="fold">
 <p>List any p-values reported with insufficient precision (e.g., p &lt;
-.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
 <p>This module uses regular expressions to identify p-values. It will
 flag any values reported as p &gt; ? or p &lt; numbers greater than
 .001. It will also flag p-values reported as exactly zero (e.g., p =
@@ -33231,9 +33080,27 @@ puts such notes into the running text, so each p-value is judged by the
 words in its own clause (the text up to a “;” or a full stop), and never
 left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
 .05”). The column <code>not_a_test</code> of the table says why a
-p-value was left out (“marker”, “threshold” or “legend”). Notes in other
-forms, such as a marker after the p-value (“p &lt; .05 (*)“), are still
-flagged.</p>
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
 <p>This module sometimes flags false positives when sentences discuss
 how p-value thresholds were set. It can also miss an imprecise p-value
 that is reported against a threshold (“decreased at the p &lt; .05
@@ -33246,13 +33113,16 @@ to exclude — see above).</p>
 <p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
 manual</a>.</p>
 <div class="validation">
-<p>Validation: In a sample of 225 papers containing 405 instances of
-non-exact p-values, the module correctly detected 269 cases (true
-positives) and incorrectly identified 78 (false positives). It missed
-136 instances of imprecisely reported p-values (false negatives) and
-correctly identified 4557 cases of precisely reported p-values (true
-negative). Additionally, 78% of positive detections were correct
-(positive predictive value).</p>
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
 </div>
 </div>
 </details>
@@ -33272,6 +33142,12 @@ p-values.</p>
 learning classifier to only return sentences likely to contain
 misinterpretations. If you want to help to improve the module, reach out
 to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
 <p>This module only checks p-values reported in the running text of the
 manuscript. It cannot (yet) process p-values reported only in
 tables.</p>
@@ -33279,12 +33155,18 @@ tables.</p>
 <p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
 manual</a>.</p>
 <div class="validation">
-<p>Validation: In a sample of 194 papers with 1602 instances of
-non-significant p-values, this module correctly detected 1486 of them,
-and incorrectly identified 153. Additionally, 91% of detections were
-true instances (positive predictive value). That is, when this module
-flags non-significant p-values in a paper, it correctly identifies an
-issue 91% of the time.</p>
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
 </div>
 </div>
 </details>
@@ -33404,6 +33286,41 @@ that project is public its files are listed under its own URL, and if it
 is closed or otherwise inaccessible the report flags it explicitly,
 since some registrations only describe their content rather than
 mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
 <p>If you want to extend the package to be able to download files from
 additional data repositories reach out to the Metacheck development
 team.</p>
