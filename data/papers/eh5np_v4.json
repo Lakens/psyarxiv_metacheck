@@ -14,8 +14,8 @@
   "published": "2026-11-16T16:30:32.702994",
   "file": "reading_prosody_manuscript_version_2.pdf"
  },
- "checked": "2026-11-16T18:10:28+00:00",
- "metacheck_version": "0.4.4.3",
+ "checked": "2026-11-18T07:44:45+00:00",
+ "metacheck_version": "0.4.4.5",
  "converter": "grobid",
  "run_code": true,
  "modules_run": [
@@ -45,7 +45,7 @@
   "files_zip": "files.zip",
   "kept_files": {
    "status": "kept",
-   "size": 85572,
+   "size": 84820,
    "unreadable_left_out": false
   }
  },
@@ -1214,9 +1214,9 @@
      "paper_id": "input",
      "header": "Model Fit.",
      "section_type": "intro",
-     "power_type": "posthoc",
+     "power_type": "unknown",
      "statistical_test": "chi-square",
-     "sample_size": 56,
+     "sample_size": null,
      "alpha_level": 0.05,
      "power": 0.16,
      "effect_size": 0.08,
@@ -1241,7 +1241,7 @@
      "power_type": "sensitivity",
      "statistical_test": "chi-square",
      "sample_size": 56,
-     "alpha_level": 0.05,
+     "alpha_level": null,
      "power": 0.8,
      "effect_size": 0.193,
      "effect_size_metric": "other",
@@ -1306,8 +1306,8 @@
    "report": [
     "We used the LLM model 'vllm/DeepSeek-V41-Flash-1017-FP8' to check the contents of 3 paragraphs that contained words suggesting they might contain power analyses.",
     "Some essential information could not be detected: sample_size, alpha_level, power, effect_size, effect_size_metric, software",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(power_id = 1:4, power_type = c(\"posthoc\", \"sensitivity\", \n\"sensitivity\", \"sensitivity\"), statistical_test = c(\"chi-square\", \n\"chi-square\", \"other\", \"other\"), sample_size = c(56, 56, NA, \n56), alpha_level = c(0.05, 0.05, NA, NA), power = c(0.16, 0.8, \nNA, NA), effect_size = c(0.08, 0.193, NA, NA), effect_size_metric = c(\"other\", \n\"other\", NA, \"other\"), software = c(NA, NA, \"semPower\", NA)), row.names = c(NA, \n-4L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
-    "You reported a power analysis that has been classified as 'post-hoc'. Calculating observed power is [almost never useful](https://lakens.github.io/statistical_inferences/08-samplesizejustification.html#sec-posthocpower). If you actually performed a sensitivity power analysis, label it as such explicitly.",
+    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(power_id = 1:4, power_type = c(\"unknown\", \"sensitivity\", \n\"sensitivity\", \"sensitivity\"), statistical_test = c(\"chi-square\", \n\"chi-square\", \"other\", \"other\"), sample_size = c(NA, 56, NA, \n56), alpha_level = c(0.05, NA, NA, NA), power = c(0.16, 0.8, \nNA, NA), effect_size = c(0.08, 0.193, NA, NA), effect_size_metric = c(\"other\", \n\"other\", NA, \"other\"), software = c(NA, NA, \"semPower\", NA)), row.names = c(NA, \n-4L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
+    "",
     "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(power_id = c(\"1;2\", \"3\", \"4\"), text = c(\"Assuming a standard acceptable misfit (RMSEA = .08) and an alpha level of .05, the statistical <strong>power</strong> to reject a misspecified model with 7 degrees of freedom was low (1 -β = .16). Further <strong>sensitivity</strong> analysis indicated that with N = 56, the current model only achieves adequate <strong>power</strong> (80%) to reliably detect large effect sizes (RMSEA ≥ .193). Consequently, while the descriptive fit indices suggest an excellent model fit, the non-significant chi-square statistic should be interpreted with caution due to limited statistical <strong>power</strong>, which reinforces the exploratory nature of investigating these structural relationships.\", \n\"The path model demonstrated an excellent fit to the data. The chi-square test was non-significant, indicating that the model did not significantly deviate from the observed data structure (χ²(7) = 7.97, p = .335). Furthermore, all indices indicated excellent model fit (CFI = .995, TLI = .985, RMSEA = .050, SRMR = .054). Given the small sample size, a <strong>post-hoc</strong> <strong>power</strong> and <strong>sensitivity</strong> analysis was conducted using the sem<strong>Power</strong> package (Moshagen & Bader, 2024) to evaluate the model's capacity to detect misspecifications.\", \n\"Several limitations should be acknowledged. First, the size of the current sample limits the statistical <strong>power</strong> available for detecting smaller effects, particularly within the path model, and constrains the generalizability of the pathway structure. As confirmed by <strong>sensitivity</strong> analysis, a sample size of 56 children only provides adequate statistical <strong>power</strong> to reliably detect large structural misspecifications (RMSEA ≥ .193). Consequently, the path model may lack the precision needed to capture smaller, yet theoretically meaningful pathways among the multiple cognitive and acoustic predictors. Therefore,conclusions regarding the unique contribution of each prosodic marker and the specific indirect role of phonological awareness should be considered exploratory and require validation in adequately <strong>power</strong>ed future cohorts.\"\n)), row.names = c(NA, -3L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"\n))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
     "::: {.callout-tip title=\"Learn More\" collapse=\"true\"}\n\nPower analyses need to contain the following information to be interpretable: the type of power analysis, the statistical test, the software used, sample size, critical alpha criterion, power level, effect size, and an effect size metric. In addition, it is recommended to make sure the power analysis is reproducible (by sharing the code, or a screenshot, of the power analysis), and to provide good arguments for why the study was designed to detect an effect of this size.\n\nFor an a-priori power analysis, where the sample size is determined, reporting all information would look like:\n\n> An a priori power analysis for an independent samples t-test, conducted using the pwr.t.test function from pwr (Champely, 2020), indicated that for a Cohen's d = 0.5, an alpha level of 0.05, and a desired power level of 80% required at least 64 participants in each group.\n\nFor a sensitivity power analysis, this sentence would look like:\n\n> A sensitivity power analysis for an independent samples t-test, conducted using the pwr.t.test function from pwr (Champely, 2020), indicated that with 64 participants in each group, and an alpha level of 0.05, a desired power level of 80% was reached for an effect size of d = 0.5.\n\n:::\n"
    ]
@@ -1533,7 +1533,8 @@
      "expanded": "While univariate Shapiro-Wilk tests indicated minor deviations from normality for two of the temporal prosodic metrics (Tempo Stability and Pausal Intrusions; ps < .01), a multivariate Shapiro-Wilk test confirmed that the assumption of multivariate normality for the overall dataset was not significantly violated (W = 0.971, p = .065).",
      "imprecise": true,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .065",
@@ -1551,7 +1552,8 @@
      "expanded": "While univariate Shapiro-Wilk tests indicated minor deviations from normality for two of the temporal prosodic metrics (Tempo Stability and Pausal Intrusions; ps < .01), a multivariate Shapiro-Wilk test confirmed that the assumption of multivariate normality for the overall dataset was not significantly violated (W = 0.971, p = .065).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1569,7 +1571,8 @@
      "expanded": "Reading Fluency showed the strongest associations with the temporal prosodic markers, with high negative correlations for Tempo Stability (r = -.73, p < .001) and Pausal Intrusions (r = -.64, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1587,7 +1590,8 @@
      "expanded": "Reading Fluency showed the strongest associations with the temporal prosodic markers, with high negative correlations for Tempo Stability (r = -.73, p < .001) and Pausal Intrusions (r = -.64, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1605,7 +1609,8 @@
      "expanded": "Furthermore, Reading Fluency was significantly associated with both Melody Error (r = -.52, p < .001) and Rhythm Error (r = -.47, p = .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .001",
@@ -1623,7 +1628,8 @@
      "expanded": "Furthermore, Reading Fluency was significantly associated with both Melody Error (r = -.52, p < .001) and Rhythm Error (r = -.47, p = .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1641,7 +1647,8 @@
      "expanded": "Phonological Awareness (PA) correlated significantly with Tempo Stability (r = -.54, p < .001), Rhythm Error (r = -.49, p < .001), Pausal Intrusions (r = -.49, p < .001), and Melody Error (r = -.35, p = .010).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1659,7 +1666,8 @@
      "expanded": "Phonological Awareness (PA) correlated significantly with Tempo Stability (r = -.54, p < .001), Rhythm Error (r = -.49, p < .001), Pausal Intrusions (r = -.49, p < .001), and Melody Error (r = -.35, p = .010).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1677,7 +1685,8 @@
      "expanded": "Phonological Awareness (PA) correlated significantly with Tempo Stability (r = -.54, p < .001), Rhythm Error (r = -.49, p < .001), Pausal Intrusions (r = -.49, p < .001), and Melody Error (r = -.35, p = .010).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .010",
@@ -1695,7 +1704,8 @@
      "expanded": "Phonological Awareness (PA) correlated significantly with Tempo Stability (r = -.54, p < .001), Rhythm Error (r = -.49, p < .001), Pausal Intrusions (r = -.49, p < .001), and Melody Error (r = -.35, p = .010).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "ps < .05",
@@ -1713,7 +1723,8 @@
      "expanded": "Rapid Automatized Naming (RAN) showed negative correlations with all four prosodic competence scores (rs = -.30 to -.42, all ps < .05), indicating that slower naming speed was associated with greater prosodic disruption during reading.",
      "imprecise": true,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1731,7 +1742,8 @@
      "expanded": "Among the prosodic measures, Tempo Stability and Pausal Intrusions were strongly correlated (r = .84, p < .001), suggesting that children who read more slowly also produced more inappropriate pauses.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1749,7 +1761,8 @@
      "expanded": "Rhythm Error showed strong associations with both Tempo Stability (r = .65, p < .001) and Pausal Intrusions (r = .61, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1767,7 +1780,8 @@
      "expanded": "Rhythm Error showed strong associations with both Tempo Stability (r = .65, p < .001) and Pausal Intrusions (r = .61, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .051",
@@ -1785,7 +1799,8 @@
      "expanded": "Melody Error was moderately correlated with the temporal measures (r = .44 and r = .35, respectively) but showed only a marginal association with Rhythm Error (r = .26, p = .051).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "ps > .05",
@@ -1803,7 +1818,8 @@
      "expanded": "Residual normality was confirmed for Pausal Intrusions and Melody Error (Shapiro-Wilk ps > .05), while minor deviations were detected for Tempo Stability (W = 0.951, p = .029) and Rhythm Error (W = 0.946, p = .020).",
      "imprecise": true,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .029",
@@ -1821,7 +1837,8 @@
      "expanded": "Residual normality was confirmed for Pausal Intrusions and Melody Error (Shapiro-Wilk ps > .05), while minor deviations were detected for Tempo Stability (W = 0.951, p = .029) and Rhythm Error (W = 0.946, p = .020).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .020",
@@ -1839,7 +1856,8 @@
      "expanded": "Residual normality was confirmed for Pausal Intrusions and Melody Error (Shapiro-Wilk ps > .05), while minor deviations were detected for Tempo Stability (W = 0.951, p = .029) and Rhythm Error (W = 0.946, p = .020).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .022",
@@ -1857,7 +1875,8 @@
      "expanded": "Homoscedasticity was satisfied for most predictors, with a minor violation observed for Pausal Intrusions (BP = 5.21, p = .022).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1875,7 +1894,8 @@
      "expanded": "The temporal features demonstrated the highest predictive value: Tempo Stability alone accounted for 52.3% of the variance in reading fluency (R² = .523, B = -12.17, p < .001), and Pausal Intrusions explained 40.6% (R² = .406, B = -6.08, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1893,7 +1913,8 @@
      "expanded": "The temporal features demonstrated the highest predictive value: Tempo Stability alone accounted for 52.3% of the variance in reading fluency (R² = .523, B = -12.17, p < .001), and Pausal Intrusions explained 40.6% (R² = .406, B = -6.08, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1911,7 +1932,8 @@
      "expanded": "The DTW-based acoustic features also yielded significant effects: Melody Error predicted 32.3% of the variance (R² = .323, B = -2.97, p < .001), and Rhythm Error accounted for 21.8% (R² = .218, B = -4.20, p < .001) (Figure 1).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -1929,7 +1951,8 @@
      "expanded": "The DTW-based acoustic features also yielded significant effects: Melody Error predicted 32.3% of the variance (R² = .323, B = -2.97, p < .001), and Rhythm Error accounted for 21.8% (R² = .218, B = -4.20, p < .001) (Figure 1).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .881",
@@ -1947,7 +1970,8 @@
      "expanded": "Residual normality (Shapiro-Wilk: W = 0.988, p = .881), and independence of residuals was confirmed (Durbin-Watson: DW = 1.94, p = .421).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .421",
@@ -1965,7 +1989,8 @@
      "expanded": "Residual normality (Shapiro-Wilk: W = 0.988, p = .881), and independence of residuals was confirmed (Durbin-Watson: DW = 1.94, p = .421).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .042",
@@ -1983,7 +2008,8 @@
      "expanded": "A minor violation of homoscedasticity was detected in the final model (Breusch-Pagan: BP = 13.10, p = .042).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2001,7 +2027,8 @@
      "expanded": "Step 1 entered PA and RAN as cognitive predictors, yielding a significant model that accounted for 45.3% of the variance in reading fluency (R² = .453, adjusted R² = .431, F(2, 49) = 20.29, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .001",
@@ -2019,7 +2046,8 @@
      "expanded": "Both PA (β = .43, p = .001) and RAN (β = .34, p = .008) were significant predictors.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .008",
@@ -2037,7 +2065,8 @@
      "expanded": "Both PA (β = .43, p = .001) and RAN (β = .34, p = .008) were significant predictors.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2055,7 +2084,8 @@
      "expanded": "Step 2 added the temporal prosodic markers (Tempo Stability and Pausal Intrusions), producing a significant gain (ΔR² = .182, ΔF(2, 47) = 11.73, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2073,7 +2103,8 @@
      "expanded": "The model explained 63.5% of the variance (R² = .635, adjusted R² = .604, F(4, 47) = 20.47, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .015",
@@ -2091,7 +2122,8 @@
      "expanded": "Tempo Stability emerged as a significant predictor (B = -7.36, β = -.44, t(47) = -2.52, p = .015), while Pausal Intrusions did not reach significance (β = -.09, p = .596).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .596",
@@ -2109,7 +2141,8 @@
      "expanded": "Tempo Stability emerged as a significant predictor (B = -7.36, β = -.44, t(47) = -2.52, p = .015), while Pausal Intrusions did not reach significance (β = -.09, p = .596).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .388",
@@ -2127,7 +2160,8 @@
      "expanded": "This step did not yield a significant increment in explained variance (ΔR² = .015, ΔF(2, 45) = 0.97, p = .388).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2145,7 +2179,8 @@
      "expanded": "The final model accounted for 65.0% of the variance in reading fluency (R² = .650, adjusted R² = .604, F(6, 45) = 13.95, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .025",
@@ -2163,7 +2198,8 @@
      "expanded": "Tempo Stability remained a significant predictor (B = -7.08, 95% CI [-13.24, -0.93], β = -.42, t(45) = -2.32, p = .025).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .141",
@@ -2181,7 +2217,8 @@
      "expanded": "No other predictor reached significance: PA (β = .18, p = .141), RAN (β = .21, p = .056), Pausal Intrusions (β = -.10, p = .563), Melody Error (β = -.14, p = .202), and Rhythm Error (β = .06, p = .641) (Figure 2).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .056",
@@ -2199,7 +2236,8 @@
      "expanded": "No other predictor reached significance: PA (β = .18, p = .141), RAN (β = .21, p = .056), Pausal Intrusions (β = -.10, p = .563), Melody Error (β = -.14, p = .202), and Rhythm Error (β = .06, p = .641) (Figure 2).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .563",
@@ -2217,7 +2255,8 @@
      "expanded": "No other predictor reached significance: PA (β = .18, p = .141), RAN (β = .21, p = .056), Pausal Intrusions (β = -.10, p = .563), Melody Error (β = -.14, p = .202), and Rhythm Error (β = .06, p = .641) (Figure 2).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .202",
@@ -2235,7 +2274,8 @@
      "expanded": "No other predictor reached significance: PA (β = .18, p = .141), RAN (β = .21, p = .056), Pausal Intrusions (β = -.10, p = .563), Melody Error (β = -.14, p = .202), and Rhythm Error (β = .06, p = .641) (Figure 2).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .641",
@@ -2253,7 +2293,8 @@
      "expanded": "No other predictor reached significance: PA (β = .18, p = .141), RAN (β = .21, p = .056), Pausal Intrusions (β = -.10, p = .563), Melody Error (β = -.14, p = .202), and Rhythm Error (β = .06, p = .641) (Figure 2).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .05",
@@ -2271,7 +2312,8 @@
      "expanded": "Only Tempo Stability reached statistical significance. * p < .05.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .335",
@@ -2289,7 +2331,8 @@
      "expanded": "The chi-square test was non-significant, indicating that the model did not significantly deviate from the observed data structure (χ²(7) = 7.97, p = .335).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2307,7 +2350,8 @@
      "expanded": "Phonological Awareness (PA) served as a foundational predictor, showing a significant negative association with Pausal Intrusions (β = -.482, p < .001) and Rhythm Error (β = -.252, p = .032).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .032",
@@ -2325,7 +2369,8 @@
      "expanded": "Phonological Awareness (PA) served as a foundational predictor, showing a significant negative association with Pausal Intrusions (β = -.482, p < .001) and Rhythm Error (β = -.252, p = .032).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2343,7 +2388,8 @@
      "expanded": "Within the prosodic structure, Pausal Intrusions were positively associated with Rhythm Error (β = .486, p < .001).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2361,7 +2407,8 @@
      "expanded": "In turn, both Pausal Intrusions (β = .648, p < .001) and Rhythm Error (β = .169, p = .048) significantly predicted lower Tempo Stability.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .048",
@@ -2379,7 +2426,8 @@
      "expanded": "In turn, both Pausal Intrusions (β = .648, p < .001) and Rhythm Error (β = .169, p = .048) significantly predicted lower Tempo Stability.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2397,7 +2445,8 @@
      "expanded": "Reading Fluency was directly predicted by Tempo Stability (β = -.535, p < .001) and RAN (β = .230, p = .026).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .026",
@@ -2415,7 +2464,8 @@
      "expanded": "Reading Fluency was directly predicted by Tempo Stability (β = -.535, p < .001) and RAN (β = .230, p = .026).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .092",
@@ -2433,7 +2483,8 @@
      "expanded": "Crucially, the inclusion of these prosodic mediators reduced the direct effect of PA on Reading Fluency to non-significance (β = .187, p = .092).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .003",
@@ -2451,7 +2502,8 @@
      "expanded": "Instead, specific mediation analysis confirmed that PA was linked to reading fluency through a highly significant indirect pathway: PA → Pausal Intrusions → Tempo Stability → Reading Fluency (Standardized Indirect Effect = .167, z = 2.95, p = .003).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .05",
@@ -2469,7 +2521,8 @@
      "expanded": "Solid black arrows represent statistically significant paths (p < .05), whereas dashed gray arrows indicate non-significant paths.",
      "imprecise": false,
      "not_a_test": "legend",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = .335",
@@ -2487,7 +2540,8 @@
      "expanded": "Model fit indices: χ²(7) = 7.97, p = .335, CFI = .995, TLI = .985, RMSEA = .050, SRMR = .054.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .05",
@@ -2505,7 +2559,8 @@
      "expanded": "PA = Phonological Awareness; RAN = Rapid Automatized Naming; DTW = Dynamic Time Warping. * p < .05. p < .01. *** p < .001.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .01",
@@ -2523,7 +2578,8 @@
      "expanded": "PA = Phonological Awareness; RAN = Rapid Automatized Naming; DTW = Dynamic Time Warping. * p < .05. p < .01. *** p < .001.",
      "imprecise": true,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < .001",
@@ -2541,7 +2597,8 @@
      "expanded": "PA = Phonological Awareness; RAN = Rapid Automatized Naming; DTW = Dynamic Time Warping. * p < .05. p < .01. *** p < .001.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     }
    ],
    "summary_table": null,
@@ -3863,7 +3920,94 @@
     "::: {.callout-note title=\"See how every file was classified and grouped\" collapse=\"true\"}\n\n**code** (3 files)\n\n\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = c(\"01_extract_prosodic_features.py\", \"02_compute_derived_features.py\", \n\"requirements.txt\"), Group = c(\"ex1\", \"ex1\", \"ex1\"), Path = c(\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/01_extract_prosodic_features.py\", \n\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/02_compute_derived_features.py\", \n\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/requirements.txt\"\n)), row.names = c(NA, -3L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 10, FALSE)\n```\n\n\n**data** (4 files)\n\n\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = c(\"final_analysis_dataset_anonymized.csv\", \n\"imitation_baseline_alignment_table.csv\", \"prosodic_imitation_task_stimuli.csv\", \n\"prosodic_reading_task_stimuli.csv\"), Group = c(\"ex1\", \"ex1\", \n\"ex1\", \"ex1\"), Path = c(\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/final_analysis_dataset_anonymized.csv\", \n\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/imitation_baseline_alignment_table.csv\", \n\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/prosodic_imitation_task_stimuli.csv\", \n\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/prosodic_reading_task_stimuli.csv\"\n)), row.names = c(NA, -4L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 10, FALSE)\n```\n\n\n**documentation** (2 files)\n\n\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = c(\"README.md\", \"codebook.md\"), Group = c(\"—\", \n\"ex1\"), Path = c(\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/README.md\", \n\"petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/codebook.md\"\n)), row.names = c(NA, -2L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 10, FALSE)\n```\n\n\n:::\n"
    ],
    "naming_issues": [],
-   "useless_files": []
+   "useless_files": [],
+   "ownership": [
+    {
+     "paper_id": "input",
+     "source": "text",
+     "repo_url": "https://doi.org/10.5281/zenodo.22810807",
+     "repo_type": "zenodo",
+     "ownership": "own_this",
+     "ownership_group": "own",
+     "ownership_reason": "the deposit names this paper (its DOI, its title, or a link to it)",
+     "dep_title": "petrakrd/Reading-Prosody: Release for peer review",
+     "dep_description": "Pipelines for the paper entitled 'From Phonological Skills to Reading Fluency: The Mediating Role of Reading Prosody '",
+     "dep_creators": "Petra Kóródi",
+     "dep_orcids": null,
+     "dep_type": "Software",
+     "dep_related": "isSupplementTo:https://github.com/petrakrd/Reading-Prosody/tree/v1.0.0",
+     "dep_date": "2026-09-17",
+     "dep_year": "2026",
+     "osf_type": null,
+     "osf_category": null,
+     "osf_contributors": null,
+     "gh_owner_name": null,
+     "gh_stars": null,
+     "gh_forks": null,
+     "n_files": 9,
+     "listed": true,
+     "has_data": true,
+     "has_code": true,
+     "pkg_layout": false,
+     "file_paper_words": 6,
+     "context": "The data, stimulus materials, and acoustic feature-extraction code supporting the findings of this study are openly available on Zenodo at https://doi.org/10.5281/zenodo.22810807.",
+     "sections": "availability:Data Availability Statement",
+     "cites_others": false,
+     "cites_own": false,
+     "ref_text": null,
+     "ref_authors": null,
+     "ref_year": null,
+     "ref_title": null,
+     "citing": null,
+     "citing_sections": null,
+     "cff_dois": null,
+     "listing_cut": false,
+     "bib_id": null
+    },
+    {
+     "paper_id": "input",
+     "source": "reference",
+     "repo_url": "https://github.com/openai/whisper",
+     "repo_type": "github",
+     "ownership": "others_code",
+     "ownership_group": "others",
+     "ownership_reason": "a widely used tool by others",
+     "dep_title": "openai/whisper",
+     "dep_description": "Robust Speech Recognition via Large-Scale Weak Supervision",
+     "dep_creators": null,
+     "dep_orcids": null,
+     "dep_type": null,
+     "dep_related": null,
+     "dep_date": "2022-09-16",
+     "dep_year": "2022",
+     "osf_type": null,
+     "osf_category": null,
+     "osf_contributors": null,
+     "gh_owner_name": "OpenAI",
+     "gh_stars": "113075",
+     "gh_forks": "13723",
+     "n_files": 45,
+     "listed": true,
+     "has_data": true,
+     "has_code": true,
+     "pkg_layout": true,
+     "file_paper_words": 0,
+     "context": null,
+     "sections": null,
+     "cites_others": null,
+     "cites_own": null,
+     "ref_text": "Radford, A., Kim, J. W., Xu, T., Brockman, G., McLeavey, C., & Sutskever, I. (2023). Robust speech recognition via large-scale weak supervision. In International Conference on Machine Learning (pp. 28492-28518). PMLR. https://github.com/openai/whisper",
+     "ref_authors": "Radford, A; Kim, J W; Xu, T; Brockman, G; Mcleavey, C; Sutskever, I",
+     "ref_year": "2023",
+     "ref_title": "Robust speech recognition via large-scale weak supervision",
+     "citing": "First, the recordings were transcribed with timestamps using the OpenAI Whisper neural network model (large-v2; Radford et al., 2023).",
+     "citing_sections": "method:Acoustic Pre-processing and Segmentation",
+     "cff_dois": null,
+     "listing_cut": false,
+     "bib_id": "34"
+    }
+   ],
+   "table_not_checked": []
   },
   "code_check": {
    "module": "code_check",
@@ -3877,7 +4021,7 @@
      "file_name": "01_extract_prosodic_features.py",
      "file_path": "petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/01_extract_prosodic_features.py",
      "file_url": null,
-     "file_location": "/srv/metacheck-sandbox/8da38ec3-aba3-40ab-ae00-3f3badf8620f/tmp/RtmpoXSRzi/metacheck-repo-files/doi.org_10.5281_zenodo.22810807/.archive_members/zenodo.org_api_records_22810807_files_petrakrd_Reading-Prosody-v1.0.0.zip_content.contents/petrakrd-Reading-Prosody-36f9cfb/01_extract_prosodic_features.py",
+     "file_location": "/srv/metacheck-sandbox/31372026-8c26-4e89-b977-3e535f7509b8/tmp/RtmpkXKin8/metacheck-repo-files/doi.org_10.5281_zenodo.22810807/.archive_members/zenodo.org_api_records_22810807_files_petrakrd_Reading-Prosody-v1.0.0.zip_content.contents/petrakrd-Reading-Prosody-36f9cfb/01_extract_prosodic_features.py",
      "file_size": 15003,
      "file_type": "code",
      "archive_url": "https://zenodo.org/api/records/22810807/files/petrakrd/Reading-Prosody-v1.0.0.zip/content",
@@ -3906,6 +4050,7 @@
      "code_lines": 325,
      "percentage_comment": 0.0738636363636364,
      "has_docstring": true,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -3915,7 +4060,7 @@
      "file_name": "02_compute_derived_features.py",
      "file_path": "petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/02_compute_derived_features.py",
      "file_url": null,
-     "file_location": "/srv/metacheck-sandbox/8da38ec3-aba3-40ab-ae00-3f3badf8620f/tmp/RtmpoXSRzi/metacheck-repo-files/doi.org_10.5281_zenodo.22810807/.archive_members/zenodo.org_api_records_22810807_files_petrakrd_Reading-Prosody-v1.0.0.zip_content.contents/petrakrd-Reading-Prosody-36f9cfb/02_compute_derived_features.py",
+     "file_location": "/srv/metacheck-sandbox/31372026-8c26-4e89-b977-3e535f7509b8/tmp/RtmpkXKin8/metacheck-repo-files/doi.org_10.5281_zenodo.22810807/.archive_members/zenodo.org_api_records_22810807_files_petrakrd_Reading-Prosody-v1.0.0.zip_content.contents/petrakrd-Reading-Prosody-36f9cfb/02_compute_derived_features.py",
      "file_size": 2105,
      "file_type": "code",
      "archive_url": "https://zenodo.org/api/records/22810807/files/petrakrd/Reading-Prosody-v1.0.0.zip/content",
@@ -3944,6 +4089,7 @@
      "code_lines": 41,
      "percentage_comment": 0.145833333333333,
      "has_docstring": true,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     }
@@ -3977,7 +4123,20 @@
     "#### Parsable code",
     "All R-type code files (.R, .Rmd, .qmd) could be read in. There were no parsing issues.",
     ""
-   ]
+   ],
+   "version_pin": {
+    "pinned": false,
+    "mechanisms": [],
+    "r_versions": [],
+    "renv_files": [],
+    "renv_packages": [],
+    "sessioninfo_files": [],
+    "session_packages": [],
+    "pin_dates": [],
+    "python_files": "requirements.txt",
+    "python_pinned": true,
+    "file_location": "/srv/metacheck-sandbox/31372026-8c26-4e89-b977-3e535f7509b8/tmp/RtmpkXKin8/metacheck-repo-files/doi.org_10.5281_zenodo.22810807/.archive_members/zenodo.org_api_records_22810807_files_petrakrd_Reading-Prosody-v1.0.0.zip_content.contents/petrakrd-Reading-Prosody-36f9cfb/README.md"
+   }
   },
   "data_check": {
    "module": "data_check",
@@ -5271,12 +5430,12 @@
    "module": "reproducibility_check",
    "title": "Reproducibility Check",
    "traffic_light": "red",
-   "summary_text": "\n-  We assessed AND ran 2 Python code files for reproducibility.\n-  0 of 2 Python scripts ran without error when executed.\n-  7 installable Python dependencies detected.",
+   "summary_text": "\n-  We assessed 2 Python code files for reproducibility and ran 1 of them.\n-  0 of 2 Python scripts ran without error when executed.\n-  7 installable Python dependencies detected.",
    "table": [
     {
      "paper_id": "input",
      "file_name": "01_extract_prosodic_features.py",
-     "file_path": "petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/01_extract_prosodic_features.py",
+     "file_path": "petrakrd/petrakrd-Reading-Prosody-36f9cfb/01_extract_prosodic_features.py",
      "parses": true,
      "run_order": 1,
      "order_basis": "numeric",
@@ -5304,7 +5463,7 @@
     {
      "paper_id": "input",
      "file_name": "02_compute_derived_features.py",
-     "file_path": "petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/02_compute_derived_features.py",
+     "file_path": "petrakrd/petrakrd-Reading-Prosody-36f9cfb/02_compute_derived_features.py",
      "parses": true,
      "run_order": 2,
      "order_basis": "numeric",
@@ -5336,8 +5495,8 @@
      "power_n": 4,
      "power_complete": 0,
      "power_statistical_test": 4,
-     "power_sample_size": 3,
-     "power_alpha_level": 2,
+     "power_sample_size": 2,
+     "power_alpha_level": 1,
      "power_power": 2,
      "power_effect_size": 2,
      "power_effect_size_metric": 3,
@@ -5371,6 +5530,7 @@
      "statcheck_decision_errors": 0,
      "n_imprecise": 4,
      "n_zero": 0,
+     "n_impossible": 0,
      "n_nonsignificant": 15,
      "ttests_with_es": 2,
      "ttests_without_es": 0,
@@ -5437,6 +5597,7 @@
      "repro_fail_undefined": 0,
      "repro_fail_syntax": 0,
      "repro_fail_environment": 0,
+     "repro_fail_settings": 0,
      "repro_fail_internet": 0,
      "repro_fail_download": 0,
      "repro_fail_interactive": 0,
@@ -5453,20 +5614,20 @@
     "The scripts were ordered by their data dependencies (a script writing a file another reads runs first) and numeric filename prefixes. Python has no `source()`-equivalent import-based ordering signal (an `import` loads a module, not the paper's own analysis flow), so that basis never applies here.",
     "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(Order = 1:2, File = c(\"01_extract_prosodic_features.py\", \n\"02_compute_derived_features.py\"), \"Runs after\" = c(\"—\", \"—\"\n), Basis = c(\"numeric\", \"numeric\")), row.names = c(NA, -2L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 10, FALSE)\n```\n",
     "#### File paths",
-    "Every data path in the code works in the repository as deposited.",
+    "Every data path in the code works in the repository as deposited. The code reads files that are only inside `petrakrd/Reading-Prosody-v1.0.0.zip`, and no script unpacks it. We unpacked it in its folder before the run. So that others can run the code as deposited, start the code with a line that unpacks it (such as `zipfile.ZipFile(\"Reading-Prosody-v1.0.0.zip\").extractall()` in Python), or upload the files unpacked.",
     "#### Execution",
     "**The Python code was run.** Each script ran in an isolated Docker container against a throwaway copy of the repository, in the run order above, with a 300-second per-script timeout. Of 2 scripts: 0 ran without error, 1 errored, 0 timed out, 1 could not run because one of its own dependencies is unavailable, 0 did not parse, and 0 are written for Python 2 and not run. Running against current package versions: a break can reflect version drift, which argues for pinning versions (e.g. in a `requirements.txt`).",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = c(\"01_extract_prosodic_features.py\", \"02_compute_derived_features.py\"\n), Outcome = c(\"dependency_unavailable\", \"errored\"), Detail = c(\"dependency_unavailable\", \n\"FileNotFoundError\"), \"Time (s)\" = c(4.6, 1.7)), row.names = c(NA, \n-2L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 15, FALSE)\n```\n",
+    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = c(\"01_extract_prosodic_features.py\", \"02_compute_derived_features.py\"\n), Outcome = c(\"dependency_unavailable\", \"errored\"), Detail = c(\"dependency_unavailable\", \n\"FileNotFoundError\"), \"Time (s)\" = c(1.1, 2.2)), row.names = c(NA, \n-2L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 15, FALSE)\n```\n",
     "**Dependency-unavailable errors**",
     "**1 script could not run because its own dependency is unavailable** — the package failed to `pip install`. This is an infrastructure limitation, not a defect in the paper's code, so it does **not** force the traffic light red.",
     "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = \"01_extract_prosodic_features.py\"), row.names = c(NA, \n-1L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 10, FALSE)\n```\n",
     "*Expand a row below to see the output each script produced.*",
-    "::: {.callout-tip title=\"Output — 01_extract_prosodic_features.py (dependency_unavailable)\" collapse=\"true\"}\n\n**Messages / errors (stderr):**\n````\nTraceback (most recent call last):\n  File \"/sandbox/petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/01_extract_prosodic_features.py\", line 48, in <module>\n    import parselmouth\nModuleNotFoundError: No module named 'parselmouth'\n````\n\n:::\n",
-    "::: {.callout-tip title=\"Output — 02_compute_derived_features.py (errored)\" collapse=\"true\"}\n\n**Messages / errors (stderr):**\n````\nTraceback (most recent call last):\n  File \"/sandbox/petrakrd/Reading-Prosody-v1.0.0.zip/petrakrd-Reading-Prosody-36f9cfb/02_compute_derived_features.py\", line 28, in <module>\n    df = pd.read_csv(INPUT)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/parsers/readers.py\", line 1026, in read_csv\n    return _read(filepath_or_buffer, kwds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/parsers/readers.py\", line 620, in _read\n    parser = TextFileReader(filepath_or_buffer, **kwds)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/parsers/readers.py\", line 1620, in __init__\n    self._engine = self._make_engine(f, self.engine)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/parsers/readers.py\", line 1880, in _make_engine\n    self.handles = get_handle(\n                   ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/common.py\", line 873, in get_handle\n    handle = open(\n             ^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: './prosodic_features_imitation_RAW.csv'\n````\n\n:::\n",
-    "Dependencies were installed into a throwaway library before running (`pip install`): 6 succeeded, 1 failed. librosa, numpy, pandas, parselmouth, scipy, soundfile, tqdm were installed.",
+    "::: {.callout-tip title=\"Output — 01_extract_prosodic_features.py (dependency_unavailable)\" collapse=\"true\"}\n\n**Messages / errors (stderr):**\n````\nTraceback (most recent call last):\n  File \"/sandbox/petrakrd/petrakrd-Reading-Prosody-36f9cfb/01_extract_prosodic_features.py\", line 48, in <module>\n    import parselmouth\nModuleNotFoundError: No module named 'parselmouth'\n````\n\n:::\n",
+    "::: {.callout-tip title=\"Output — 02_compute_derived_features.py (errored)\" collapse=\"true\"}\n\n**Messages / errors (stderr):**\n````\nTraceback (most recent call last):\n  File \"/sandbox/petrakrd/petrakrd-Reading-Prosody-36f9cfb/02_compute_derived_features.py\", line 28, in <module>\n    df = pd.read_csv(INPUT)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/parsers/readers.py\", line 1026, in read_csv\n    return _read(filepath_or_buffer, kwds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/parsers/readers.py\", line 620, in _read\n    parser = TextFileReader(filepath_or_buffer, **kwds)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/parsers/readers.py\", line 1620, in __init__\n    self._engine = self._make_engine(f, self.engine)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/parsers/readers.py\", line 1880, in _make_engine\n    self.handles = get_handle(\n                   ^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/pandas/io/common.py\", line 873, in get_handle\n    handle = open(\n             ^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: './prosodic_features_imitation_RAW.csv'\n````\n\n:::\n",
+    "Dependencies were installed into a throwaway library before running (`pip install`): 6 succeeded, 1 failed. librosa, numpy, pandas, scipy, soundfile, tqdm were installed.",
     "**Failed:** parselmouth (ERROR: Could not find a version that satisfies the requirement parselmouth (from versions: none) ERROR: No matching distribution found for parselmouth)"
    ],
-   "checklist_section": "We ran the paper's 2 Python scripts in the order they depend on each other, each in an isolated container, for at most 5 minutes per script.\n\n**0 of 2 scripts ran to the end**: 1 stopped with an error, 1 could not run on our server.\n\n| Script | Result | What happened |\n|---|---|---|\n| 01&#95;extract&#95;prosodic&#95;features.py | Could not run on our server | It needs the Python package parselmouth, which we could not install. This is not an error in the script. |\n| 02&#95;compute&#95;derived&#95;features.py | Stopped with an error | <code>FileNotFoundError: &#91;Errno 2&#93; No such file or directory: './prosodic&#95;features&#95;imitation&#95;RAW.csv'</code> |\n\n### How to make your code run on another computer\n\nWe ran your code on a clean computer, the way a reader or reviewer would. Below is each problem we found, the scripts it affects, and how to fix it. Fix them in the order given: a problem near the top can cause the ones below it.\n\n**Files are missing from your deposit.**\n\n- <code>02&#95;compute&#95;derived&#95;features.py</code> reads <code>prosodic&#95;features&#95;imitation&#95;RAW.csv</code>.\n\nThe script stops at the line that reads the file.\n\n1. Find the file on your computer.\n2. Add it to the deposit, in the folder where the script looks for it.\n3. If you cannot share it, for example for privacy reasons, say so in the README, and explain where readers can get it and where to put it.\n\n**A package could not be installed.**\n\n- <code>01&#95;extract&#95;prosodic&#95;features.py</code> needs <code>parselmouth</code>.\n\n<code>parselmouth</code> could not be installed with the current version of R, probably because it is old. Record the versions you used (in R, <code>renv::init()</code> writes them to a <code>renv.lock</code> file) and your R version. To be sure the code keeps running, provide a Docker image: a frozen copy of the whole computer setup the code needs, which you can build from <code>rocker/r-ver</code> at your R version.\n\n### Comparison with the paper\n\nWe found no statistical tests in the paper to compare with the output of the code."
+   "checklist_section": "We ran the paper's 2 Python scripts in the order they depend on each other, each in an isolated container, for at most 5 minutes per script.\n\n**0 of 2 scripts ran to the end**: 1 stopped with an error, 1 could not run on our server.\n\n| Script | Result | What happened |\n|---|---|---|\n| 01&#95;extract&#95;prosodic&#95;features.py | Could not run on our server | It needs the Python package parselmouth, which we could not install. This is not an error in the script. |\n| 02&#95;compute&#95;derived&#95;features.py | Stopped with an error | <code>FileNotFoundError: &#91;Errno 2&#93; No such file or directory: './prosodic&#95;features&#95;imitation&#95;RAW.csv'</code> |\n\n### How to make your code run on another computer\n\nWe ran your code on a clean computer, the way a reader or reviewer would. Below is each problem we found, the scripts it affects, and how to fix it. Fix them in the order given: a problem near the top can cause the ones below it.\n\n**Files are missing from your deposit.**\n\n- <code>02&#95;compute&#95;derived&#95;features.py</code> reads <code>prosodic&#95;features&#95;imitation&#95;RAW.csv</code>.\n\nThe script stops at the line that reads the file.\n\n1. Find the file on your computer.\n2. Add it to the deposit, in the folder where the script looks for it.\n3. If you cannot share it, for example for privacy reasons, say so in the README, and explain where readers can get it and where to put it.\n\n**A package could not be installed.**\n\n- <code>01&#95;extract&#95;prosodic&#95;features.py</code> needs <code>parselmouth</code>.\n\n<code>parselmouth</code> could not be installed with <code>pip</code>. List it with its version in <code>requirements.txt</code>. If it is not on PyPI, or its name there differs from the name the code imports, say in the README how to install it.\n\n### Comparison with the paper\n\nWe found no statistical tests in the paper to compare with the output of the code."
   },
   "ref_pubpeer": {
    "module": "ref_pubpeer",
@@ -5498,6 +5659,14 @@
    "section": "reference",
    "report": "We checked 44 references with DOIs. No citations to articles in the FLoRA database were found."
   }
+ },
+ "rerun_of": {
+  "metacheck_version": "0.4.4.3",
+  "checked": "2026-11-16T18:10:28+00:00"
+ },
+ "downloaded": {
+  "status": "used",
+  "files": 9
  },
  "paper": {
   "paper_id": "input",
