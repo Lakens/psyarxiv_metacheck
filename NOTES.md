@@ -83,6 +83,7 @@ Done:
 
 - Work on `main` (this is Daniel's rule for this repository). The local folder `git_repos/surf-research-cloud` is on `main` (checked 7 November 2026).
 
+- Results stored gzipped (Daniel, 18 November 2026): each preprint's result is `data/papers/<id>.json.gz` (before: plain `<id>.json`). Results were up to 80 MB as JSON, close to GitHub's limit of 100 MB per file; gzip makes them about 8 times smaller. `update.py` gzips any plain result at the start of a run, in a commit of its own (`convert_results()`), and every script reads both forms (`load_result()`; when both exist, the one checked last). To read one by hand: `python -c "import gzip,json; print(json.load(gzip.open('data/papers/<id>.json.gz')).keys())"`, or in R `jsonlite::fromJSON(gzfile('data/papers/<id>.json.gz'))`.
 ## How to continue
 
 1. Get the latest version of this repository (`git pull` in its folder).
