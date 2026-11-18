@@ -64,6 +64,12 @@ UA = "psyarxiv_metacheck (github.com/Lakens/psyarxiv_metacheck)"
 # take turns. medrxiv_metacheck's update.py has the same two numbers.
 REST_SECONDS = 60
 POLL_SECONDS = 15
+# A job is sent while fewer than SERVER_PLACES jobs run on the server (and
+# none waits). Each site has at most one job there, so with 2 the two sites
+# can use both of the server's places at once: during the check again of
+# every preprint (18 November 2026, Daniel). Set it back to 1 afterwards, so
+# one place stays free for other people. medrxiv_metacheck has the same.
+SERVER_PLACES = 2
 # the checks the SURF server runs for its regular report; with run_code=true the
 # server adds reproducibility_check, which runs the paper's code in the sandbox
 MODULES = ("power,marginal,prereg_check,ethics_check,ref_pubpeer,ref_retraction,"
@@ -76,15 +82,15 @@ JOB_WAIT_MINUTES = 85           # the server stops a job after 70 minutes (60, a
 MAX_TRIES = 2                   # a preprint whose job fails is tried this often
 BACKFILL_LIMIT = 1000           # older preprints sent to the server, at most
 # A result is current when metacheck CURRENT_FROM or newer made it, after
-# CURRENT_SINCE: the moment the SURF server started to keep repo_check's
-# `ownership` and `table_not_checked` in its results (surf-research-cloud,
+# CURRENT_SINCE: the moment that version was installed on the SURF server
+# (the server keeps repo_check's `ownership` and `table_not_checked` since
 # 17 November 2026). Older results are checked again (`rerun`), from the paper
 # as converted that they hold and with the files their check downloaded (on
 # pCloud), after new preprints and before older days; the page of totals counts
 # only current results. Raise these two to check every preprint again after a
 # later improvement of metacheck.
-CURRENT_FROM = "0.4.4.5"
-CURRENT_SINCE = "2026-11-17T15:27:18+00:00"   # surf-research-cloud 8a5c2bc installed
+CURRENT_FROM = "0.4.4.18"
+CURRENT_SINCE = "2026-11-18T18:31:57+00:00"   # metacheck 0.4.4.18 installed on the server
 MAX_REQUEST = 495 * 1024 ** 2   # the server takes at most 500 MB in one request (api.R)
 FIRST_DAY = dt.date(2016, 9, 1)  # PsyArXiv's first preprints
 # files the report page carries inside it that the site has too
@@ -533,10 +539,10 @@ def store_on_pcloud(osf_id, name, data, kept):
             "files_zip": "files.zip" if zip_path else None, "kept_files": kept}
 
 
-# One preprint at a time on the server, so that one of its two places stays
-# free for other people: the job this script has on the server is kept in
-# <data-dir>/current_job.json (committed with the data, so the next run sees
-# it, even when GitHub stopped this one), and no job is sent while it runs.
+# One preprint of this site at a time on the server (see SERVER_PLACES): the
+# job this script has on the server is kept in <data-dir>/current_job.json
+# (committed with the data, so the next run sees it, even when GitHub stopped
+# this one), and no job is sent while it runs.
 CURRENT_JOB = os.path.join("data", "current_job.json")   # set in main()
 
 
@@ -552,11 +558,11 @@ def remember_job(job_id):
 
 
 def server_idle():
-    # True when the server answers and has no job running or waiting (also
-    # not one of ours left by an earlier run, whose record is cleared once it
-    # has finished); False otherwise, also when it cannot be reached. False
-    # too in the REST_SECONDS after this run's own job ended, so that the
-    # other site's run gets its turn.
+    # True when the server answers, runs fewer than SERVER_PLACES jobs and
+    # has none waiting, and no job of ours left by an earlier run is still
+    # there (its record is cleared once it has finished); False otherwise,
+    # also when it cannot be reached. False too in the REST_SECONDS after this
+    # run's own job ended, so that the other site's run gets its turn.
     if time.time() - LAST_JOB_END < REST_SECONDS:
         return False
     try:
@@ -565,7 +571,7 @@ def server_idle():
         health = get(f"{SERVER}/health", tries=1)
     except (urllib.error.URLError, TimeoutError, ValueError):
         return False
-    return (health.get("status") == "ok" and not health.get("jobs_running")
+    return (health.get("status") == "ok" and (health.get("jobs_running") or 0) < SERVER_PLACES
             and not health.get("jobs_waiting"))
 
 
@@ -1467,8 +1473,8 @@ def main():
                 if not pause(stop_at, 600):
                     break
                 continue
-            # one preprint at a time, and only when the server is otherwise
-            # idle: nothing running or waiting there, ours or anyone's
+            # one preprint at a time, and only when the server has a place
+            # free (SERVER_PLACES) and nothing waiting, ours or anyone's
             if not server_idle():
                 if said != "busy":
                     print("The server is busy or cannot be reached; waiting until it is idle.", flush=True)
