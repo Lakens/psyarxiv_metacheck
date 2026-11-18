@@ -16,8 +16,8 @@
   "published": "2026-11-15T20:40:18.088875",
   "file": "FB Main Manuscript_final.docx"
  },
- "checked": "2026-11-15T23:06:54+00:00",
- "metacheck_version": "0.4.4.3",
+ "checked": "2026-11-18T12:19:07+00:00",
+ "metacheck_version": "0.4.4.5",
  "converter": "word+grobid",
  "run_code": true,
  "modules_run": [
@@ -47,7 +47,7 @@
   "files_zip": "files.zip",
   "kept_files": {
    "status": "kept",
-   "size": 49184107,
+   "size": 194460887,
    "unreadable_left_out": false
   }
  },
@@ -1632,7 +1632,7 @@
   "power": {
    "module": "power",
    "title": "Power Analysis Check",
-   "traffic_light": "green",
+   "traffic_light": "red",
    "summary_text": "We detected 1 potential power analysis.",
    "table": [
     {
@@ -1645,27 +1645,27 @@
      "paper_id": "input-from-word",
      "header": "Participants",
      "section_type": "method",
-     "power_type": "apriori",
+     "power_type": "unknown",
      "statistical_test": "correlation",
-     "sample_size": 55,
+     "sample_size": 70,
      "alpha_level": 0.05,
      "power": 0.8,
-     "effect_size": 0.3,
-     "effect_size_metric": "other",
-     "software": "G*Power",
+     "effect_size": null,
+     "effect_size_metric": null,
+     "software": null,
      "statistical_test_other": null,
-     "effect_size_metric_other": "small expected effect size",
+     "effect_size_metric_other": null,
      "software_other": null,
-     "complete": true,
+     "complete": false,
      "power_id": 1
     }
    ],
    "summary_table": null,
    "section": "method",
    "report": [
-    "We used the LLM model 'vllm/DeepSeek-V41-Flash-1017-FP8' to check the contents of 1 paragraph that contained words suggesting they might contain power analyses.",
-    "All essential information could be detected.",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(power_type = \"apriori\", statistical_test = \"correlation\", \n    sample_size = 55, alpha_level = 0.05, power = 0.8, effect_size = 0.3, \n    effect_size_metric = \"other\", software = \"G*Power\"), row.names = c(NA, \n-1L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
+    "We used the LLM model 'vllm/qwen3-8-27b-fp8' to check the contents of 1 paragraph that contained words suggesting they might contain power analyses.",
+    "Some essential information could not be detected: effect_size, effect_size_metric, software",
+    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(power_type = \"unknown\", statistical_test = \"correlation\", \n    sample_size = 70, alpha_level = 0.05, power = 0.8, effect_size = NA_real_, \n    effect_size_metric = NA_character_, software = NA_character_), row.names = c(NA, \n-1L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
     "",
     "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(text = \"To determine the required sample size, we conducted a <strong>power</strong> analysis (α = 0.05, <strong>power</strong> = 0.8), which yielded N = 55 for the vestibular modality and N = 68 for the visual modality (the limiting factor was the small expected effect size for the correlations with AQ in the second aim). We tested a total of 70 participants (36 females, 34 males; age range: 19-34 years) in both modalities. All the recruited participants were healthy, with no reported behavioral, attention, psychiatric, or neurological disorders. They all had normal or corrected-to-normal vision and normal hearing. Participants were recruited through online forums for students and were compensated with either monetary payment or course credit.\"), row.names = c(NA, \n-1L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"))\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
     "::: {.callout-tip title=\"Learn More\" collapse=\"true\"}\n\nPower analyses need to contain the following information to be interpretable: the type of power analysis, the statistical test, the software used, sample size, critical alpha criterion, power level, effect size, and an effect size metric. In addition, it is recommended to make sure the power analysis is reproducible (by sharing the code, or a screenshot, of the power analysis), and to provide good arguments for why the study was designed to detect an effect of this size.\n\nFor an a-priori power analysis, where the sample size is determined, reporting all information would look like:\n\n> An a priori power analysis for an independent samples t-test, conducted using the pwr.t.test function from pwr (Champely, 2020), indicated that for a Cohen's d = 0.5, an alpha level of 0.05, and a desired power level of 80% required at least 64 participants in each group.\n\nFor a sensitivity power analysis, this sentence would look like:\n\n> A sensitivity power analysis for an independent samples t-test, conducted using the pwr.t.test function from pwr (Champely, 2020), indicated that with 64 participants in each group, and an alpha level of 0.05, a desired power level of 80% was reached for an effect size of d = 0.5.\n\n:::\n"
@@ -1756,7 +1756,7 @@
    "module": "stat_p_exact",
    "title": "Exact P-Values",
    "traffic_light": "green",
-   "summary_text": "We found no imprecise *p* values or *p*-values of exactly zero out of 37 detected.",
+   "summary_text": "We found no imprecise *p* values, *p*-values of exactly zero or impossible *p* values out of 37 detected.",
    "table": [
     {
      "text": "p = 0.79",
@@ -1774,7 +1774,8 @@
      "expanded": "No effect of feedback on these coefficients was observed (F(1,62) = 0.073, p = 0.79), supporting the use of a single previous-stimulus term in the GLMM.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 1.78",
@@ -1792,7 +1793,8 @@
      "expanded": "The fixed effect estimate ± SEM was 0.16 ± 0.05 (p = 1.78•10 -3, z = 3.13; two-tailed z-test) for the vestibular modality, and 0.23 ± 0.04 (p = 5.56•10 -8, z = 5.43; two-tailed z-test) for the visual modality.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 5.56",
@@ -1810,7 +1812,8 @@
      "expanded": "The fixed effect estimate ± SEM was 0.16 ± 0.05 (p = 1.78•10 -3, z = 3.13; two-tailed z-test) for the vestibular modality, and 0.23 ± 0.04 (p = 5.56•10 -8, z = 5.43; two-tailed z-test) for the visual modality.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 1.91",
@@ -1828,7 +1831,8 @@
      "expanded": "The fixed effect estimate ± SEM was 0.24 ± 0.05 ( p = 1.91•10 -6, z = 4.76; two-tailed z-test) for the vestibular modality, and 0.19 ± 0.04 (p = 2.35•10 -6, z = 4.72; two-tailed z-test) for the visual modality.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 2.35",
@@ -1846,7 +1850,8 @@
      "expanded": "The fixed effect estimate ± SEM was 0.24 ± 0.05 ( p = 1.91•10 -6, z = 4.76; two-tailed z-test) for the vestibular modality, and 0.19 ± 0.04 (p = 2.35•10 -6, z = 4.72; two-tailed z-test) for the visual modality.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 2.66",
@@ -1864,7 +1869,8 @@
      "expanded": "The fixed effect estimate ± SEM was -0.43 ± 0.06 (p = 2.66•10 -12, z = -6.99; two-tailed z-test) for the vestibular modality, and -0.19 ± 0.05 (p = 2.10•10 -4, z = -3.71; two-tailed z-test) for the visual modality.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 2.10",
@@ -1882,7 +1888,8 @@
      "expanded": "The fixed effect estimate ± SEM was -0.43 ± 0.06 (p = 2.66•10 -12, z = -6.99; two-tailed z-test) for the vestibular modality, and -0.19 ± 0.05 (p = 2.10•10 -4, z = -3.71; two-tailed z-test) for the visual modality.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < 0.001",
@@ -1900,7 +1907,8 @@
      "expanded": "Statistical details for the GLMM Modality Fixed effect estimate ± SEM z p value βprev_choice_no_FB ves 0.16 ± 0.05 3.13 1.78•10 -3 *** vis 0.23 ± 0.04 5.43 5.56•10 -8 *** βprev_choice_corr ves 0.24 ± 0.05 4.76 1.91•10 -6 *** vis 0.19 ± 0.04 4.72 2.35•10 -6 *** βprev_choice_incorr ves -0.43 ± 0.06 -6.99 2.66•10 -12 *** vis -0.19 ± 0.05 -3.71 2.10•10 -4 *** βcurrent_stimulus ves 1.36 ± 0.05 26.23 <1•10 -16 *** vis 4.24 ± 0.38 10.95 <1•10 -16 *** βprev_stimulus ves -0.26 ± 0.03 -8.75 <1•10 -16 *** vis -0.72 ± 0.12 -5.97 2.33•10 -9 *** β0 ves 0.10 ± 0.07 1.34 0.18 n.s. vis 0.06 ± 0.05 1.10 0.27 n.s. ***p < 0.001; n.s., not significant.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.07",
@@ -1918,7 +1926,8 @@
      "expanded": "The fixed-effect estimate ± SEM for the vestibular modality was 0.07 ± 0.05 (p = 0.07, z = 1.45; one-tailed z-test), and for the visual modality was -0.04 ± 0.05 (p = 0.79, z = -0.81; one-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.79",
@@ -1936,7 +1945,8 @@
      "expanded": "The fixed-effect estimate ± SEM for the vestibular modality was 0.07 ± 0.05 (p = 0.07, z = 1.45; one-tailed z-test), and for the visual modality was -0.04 ± 0.05 (p = 0.79, z = -0.81; one-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 3.30",
@@ -1954,7 +1964,8 @@
      "expanded": "In the vestibular modality, individual differences in choice repetition were positively correlated between the no-feedback and correct-choice feedback conditions (r = 0.69, p = 3.30•10 -10 ; Supplementary Figure 2, left), consistent with an individual trait-like contribution.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.15",
@@ -1972,7 +1983,8 @@
      "expanded": "This relationship was not seen in the visual modality (r = 0.18, p = 0.15; Supplementary Figure 2, right).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.003",
@@ -1990,7 +2002,8 @@
      "expanded": "The resulting across-subject correlations showed the same qualitative pattern as the GLMM analysis, revealing a significant association in the vestibular modality (r = 0.37, p = 0.003) but not in the visual modality (r = 0.05, p = 0.68).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.68",
@@ -2008,7 +2021,8 @@
      "expanded": "The resulting across-subject correlations showed the same qualitative pattern as the GLMM analysis, revealing a significant association in the vestibular modality (r = 0.37, p = 0.003) but not in the visual modality (r = 0.05, p = 0.68).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 2.80",
@@ -2026,7 +2040,8 @@
      "expanded": "The fixed-effect estimate ± SEM for the vestibular modality was -0.60 ± 0.07 (p = 2.80•10 -18, z = -8.64; one-tailed z-test), and for the visual modality, it was -0.42 ± To test whether the feedback-related choice effects were consistent across individuals, we examined whether they generalized across vestibular and visual modalities (Supplementary Figure 3).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.0015",
@@ -2044,7 +2059,8 @@
      "expanded": "A significant correlation between vestibular and visual previous-choice effects was found for incorrect-choice feedback (Pearson's r = 0.39, p = 0.0015).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.059",
@@ -2062,7 +2078,8 @@
      "expanded": "A similar trend was observed for correct-choice feedback (Pearson's r = 0.24, p = 0.059), whereas no correlation was found in the no-feedback condition (Pearson's r = -0.02, p = 0.89).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.89",
@@ -2080,7 +2097,8 @@
      "expanded": "A similar trend was observed for correct-choice feedback (Pearson's r = 0.24, p = 0.059), whereas no correlation was found in the no-feedback condition (Pearson's r = -0.02, p = 0.89).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.02",
@@ -2098,7 +2116,8 @@
      "expanded": "Specifically, it was weaker for correct-choice feedback vs. no-feedback (interaction ± SEM = -0.12 ± 0.05; p = 0.02, z = -2.40, two-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.05",
@@ -2116,7 +2135,8 @@
      "expanded": "Similarly, it was weaker for incorrect-choice feedback vs. no-feedback (interaction ± SEM = -0.13 ± 0.06; p = 0.05, z = -2.00, two-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.34",
@@ -2134,7 +2154,8 @@
      "expanded": "The interaction ± SEM for correct-choice feedback was 0.05 ± 0.05 (p = 0.34, z = 0.96; two-tailed z-test), and for incorrect-choice feedback, it was 0.04 ± 0.05 (p =0.41, z = 0.82; two-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p =0.41",
@@ -2152,7 +2173,8 @@
      "expanded": "The interaction ± SEM for correct-choice feedback was 0.05 ± 0.05 (p = 0.34, z = 0.96; two-tailed z-test), and for incorrect-choice feedback, it was 0.04 ± 0.05 (p =0.41, z = 0.82; two-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.18",
@@ -2170,7 +2192,8 @@
      "expanded": "With this approach, serial dependence was likewise no longer apparent in the feedback condition: In the vestibular modality, the fixed effect estimate ± SEM of β prev_choice in the feedback condition was -0.05 ± 0.04 (z = -1.33, p = 0.18; two-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.30",
@@ -2188,7 +2211,8 @@
      "expanded": "In the visual modality, the fixed effect estimate ± SEM of β prev_choice in the feedback condition was 0.03 ± 0.03 (z = 1.04, p = 0.30; two-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < 0.001",
@@ -2206,7 +2230,8 @@
      "expanded": "See also Supplementary Figures2 and 3. *** p < 0.001; n.s., not significant.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 1.34",
@@ -2224,7 +2249,8 @@
      "expanded": ".06 (p = 1.34•10 -12, z = -6.99; one-tailed z-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 7.93",
@@ -2242,7 +2268,8 @@
      "expanded": "FT )in correct, was indeed more negative in the vestibular modality (mean ± SEM = -0.60 ± 0.05) compared to the visual modality (mean ± SEM = -0.42 ± 0.03; t62 = 3.30, p = 7.93•10 -4, Cohen's d = 0.42; one-tailed t-test).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.002",
@@ -2260,7 +2287,8 @@
      "expanded": "Accordingly, enhanced choice switching was seen in the vestibular relative to the visual modality, consistent with the vestibular enhancement hypothesis.Vestibular choice repetition without feedback correlates with autistic traitsA significant positive correlation was observed between the subject-level estimates of β prev_choice_no_FB and AQ scores in the vestibular modality (Pearson's r = 0.35, p = 0.002, BF01 = 0.06, both one-tailed; Figure3, left), in line with the increased choice repetition in autism hypothesis.",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.33",
@@ -2278,7 +2306,8 @@
      "expanded": "However, no significant correlation was found in the visual modality (Pearson's r = 0.06, p = 0.33, BF01 = 4.29, both one-tailed; Figure3, right).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.006",
@@ -2296,7 +2325,8 @@
      "expanded": "Further exploratory analysis, conducted specifically for the vestibular modality (Figure4), revealed a significant positive correlation between subject-level estimates of β prev_choice_no_FB and specific AQ subscales, particularly Social Skill (Pearson's r = 0.35, p = 0.006) and Communication (Pearson's r = 0.32, p = 0.01).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p = 0.01",
@@ -2314,7 +2344,8 @@
      "expanded": "Further exploratory analysis, conducted specifically for the vestibular modality (Figure4), revealed a significant positive correlation between subject-level estimates of β prev_choice_no_FB and specific AQ subscales, particularly Social Skill (Pearson's r = 0.35, p = 0.006) and Communication (Pearson's r = 0.32, p = 0.01).",
      "imprecise": false,
      "not_a_test": null,
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < 0.01",
@@ -2332,7 +2363,8 @@
      "expanded": "Pearson correlation coefficients (r) and corresponding pvalues are presented on each subplot. ** p < 0.01.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < 0.05",
@@ -2350,7 +2382,8 @@
      "expanded": "Pearson correlation coefficients (r) and corresponding p-values are presented on each subplot. * p < 0.05, ** p < 0.01.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < 0.01",
@@ -2368,7 +2401,8 @@
      "expanded": "Pearson correlation coefficients (r) and corresponding p-values are presented on each subplot. * p < 0.05, ** p < 0.01.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < 0.001",
@@ -2386,7 +2420,8 @@
      "expanded": "Whiskers denote the data ranges beyond the boxes (up to 1.5 times the interquartile range; data beyond this range are plotted using open circles). ***p < 0.001 The influence of the previous choice with correct-choice feedback and without feedback correlates for vestibular cues.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < 0.001",
@@ -2404,7 +2439,8 @@
      "expanded": "Pearson correlation coefficients (r) and corresponding p-values are presented on each subplot. ***p < 0.001.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     },
     {
      "text": "p < 0.01",
@@ -2422,12 +2458,13 @@
      "expanded": "Pearson correlation coefficients (r) and corresponding p-values are presented on each subplot. **p < 0.01.",
      "imprecise": false,
      "not_a_test": "marker",
-     "zero": false
+     "zero": false,
+     "impossible": false
     }
    ],
    "summary_table": null,
    "section": "results",
-   "report": "We found no imprecise *p* values or *p*-values of exactly zero out of 37 detected."
+   "report": "We found no imprecise *p* values, *p*-values of exactly zero or impossible *p* values out of 37 detected."
   },
   "stat_p_nonsig": {
    "module": "stat_p_nonsig",
@@ -9718,7 +9755,94 @@
      "paper_id": "input-from-word"
     }
    ],
-   "useless_files": []
+   "useless_files": [],
+   "ownership": [
+    {
+     "paper_id": "input-from-word",
+     "source": "text",
+     "repo_url": "https://osf.io/5zyex",
+     "repo_type": "osf",
+     "ownership": "own_this",
+     "ownership_group": "own",
+     "ownership_reason": "a link in the main text, not shown to be anyone else's",
+     "dep_title": "feedback experiment",
+     "dep_description": "",
+     "dep_creators": "Shir Angel",
+     "dep_orcids": null,
+     "dep_type": null,
+     "dep_related": null,
+     "dep_date": "2025-09-14",
+     "dep_year": "2025",
+     "osf_type": "nodes",
+     "osf_category": "project",
+     "osf_contributors": "Shir Angel",
+     "gh_owner_name": null,
+     "gh_stars": null,
+     "gh_forks": null,
+     "n_files": 371,
+     "listed": true,
+     "has_data": true,
+     "has_code": true,
+     "pkg_layout": false,
+     "file_paper_words": 3,
+     "context": "The analysis code and data are available via the Open Science Framework at: https://osf.io/5zyex/.",
+     "sections": "method:Data analysis",
+     "cites_others": false,
+     "cites_own": false,
+     "ref_text": null,
+     "ref_authors": null,
+     "ref_year": null,
+     "ref_title": null,
+     "citing": null,
+     "citing_sections": null,
+     "cff_dois": null,
+     "listing_cut": false,
+     "bib_id": null
+    },
+    {
+     "paper_id": "input-from-word",
+     "source": "reference",
+     "repo_url": "https://osf.io/preprints",
+     "repo_type": "osf",
+     "ownership": "not_data",
+     "ownership_group": "not_data",
+     "ownership_reason": "a publication: a preprint, an article or a manuscript, not a deposit",
+     "dep_title": null,
+     "dep_description": null,
+     "dep_creators": null,
+     "dep_orcids": null,
+     "dep_type": null,
+     "dep_related": null,
+     "dep_date": null,
+     "dep_year": null,
+     "osf_type": null,
+     "osf_category": null,
+     "osf_contributors": null,
+     "gh_owner_name": null,
+     "gh_stars": null,
+     "gh_forks": null,
+     "n_files": null,
+     "listed": null,
+     "has_data": null,
+     "has_code": null,
+     "pkg_layout": null,
+     "file_paper_words": null,
+     "context": null,
+     "sections": null,
+     "cites_others": null,
+     "cites_own": null,
+     "ref_text": "Shamir-Bercovich, Y., Menashe, B. A., Chen, A., & Zaidel, A. (2026). Cross-modal adaptation to self-motion stimuli despite diverted attention (84ym5_v1). PsyArXiv. https://osf.io/preprints/psyarxiv/84ym5_v1/",
+     "ref_authors": "Shamir-Bercovich, Y; Menashe, B A; Chen, A; Zaidel, A",
+     "ref_year": "2026",
+     "ref_title": "Cross-modal adaptation to self-motion stimuli despite diverted attention (84ym5_v1)",
+     "citing": "",
+     "citing_sections": ":",
+     "cff_dois": null,
+     "listing_cut": false,
+     "bib_id": "60"
+    }
+   ],
+   "table_not_checked": []
   },
   "code_check": {
    "module": "code_check",
@@ -9731,7 +9855,7 @@
      "file_name": "Mixed_Effect_Model.R",
      "file_path": "Codes/Mixed_Effect_Model.R",
      "file_url": "https://osf.io/download/ep83h/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Mixed_Effect_Model.R",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Mixed_Effect_Model.R",
      "file_size": 5360,
      "file_type": "code",
      "provider": "osfstorage",
@@ -9758,6 +9882,7 @@
      "code_lines": 82,
      "percentage_comment": 0.230088495575221,
      "has_docstring": null,
+     "files_written": "vis_coefs.csv, ves_coefs.csv, all_coefs_for_JASP.csv, all_coefs_for_MATLAB.csv",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -9766,7 +9891,7 @@
      "file_name": "MAIN_ALL_YaelAndShir_no_feedback.m",
      "file_path": "Codes/Main/MAIN_ALL_YaelAndShir_no_feedback.m",
      "file_url": "https://osf.io/download/68c6d1e7981a98dd082d1d8f/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/MAIN_ALL_YaelAndShir_no_feedback.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/MAIN_ALL_YaelAndShir_no_feedback.m",
      "file_size": 4877,
      "file_type": "code",
      "provider": "osfstorage",
@@ -9779,8 +9904,8 @@
      "checked": true,
      "parse_error": null,
      "parse_error_msg": null,
-     "code_abs_path": 3,
-     "absolute_paths": "C:\\Users\\USER\\Documents\\lab\\analyses\\no_feedBack\\ | \\\\All\\All_merged_data | \\\\All\\Results",
+     "code_abs_path": 1,
+     "absolute_paths": "C:\\Users\\USER\\Documents\\lab\\analyses\\no_feedBack\\",
      "code_setwd": 0,
      "setwd_calls": "",
      "code_install_packages": 0,
@@ -9793,6 +9918,7 @@
      "code_lines": 98,
      "percentage_comment": 0.160714285714286,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -9801,7 +9927,7 @@
      "file_name": "MAIN_ALL_YaelAndShir_feedback.m",
      "file_path": "Codes/Main/MAIN_ALL_YaelAndShir_feedback.m",
      "file_url": "https://osf.io/download/dgwhf/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/MAIN_ALL_YaelAndShir_feedback.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/MAIN_ALL_YaelAndShir_feedback.m",
      "file_size": 9628,
      "file_type": "code",
      "provider": "osfstorage",
@@ -9814,8 +9940,8 @@
      "checked": true,
      "parse_error": null,
      "parse_error_msg": null,
-     "code_abs_path": 5,
-     "absolute_paths": "C:\\Users\\USER\\Documents\\lab\\analyses\\feedBack\\ | \\\\All\\All_merged_data | \\\\All\\All_merged_data_cor | \\\\All\\All_merged_data_incor | \\\\All\\Results",
+     "code_abs_path": 1,
+     "absolute_paths": "C:\\Users\\USER\\Documents\\lab\\analyses\\feedBack\\",
      "code_setwd": 0,
      "setwd_calls": "",
      "code_install_packages": 0,
@@ -9828,6 +9954,7 @@
      "code_lines": 188,
      "percentage_comment": 0.107317073170732,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -9836,7 +9963,7 @@
      "file_name": "mixed_effect_no_feedback.m",
      "file_path": "Codes/Tables/mixed_effect_no_feedback.m",
      "file_url": "https://osf.io/download/68c6d33453685ab6c69e1d33/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Tables/mixed_effect_no_feedback.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Tables/mixed_effect_no_feedback.m",
      "file_size": 6625,
      "file_type": "code",
      "provider": "osfstorage",
@@ -9863,6 +9990,7 @@
      "code_lines": 111,
      "percentage_comment": 0.272,
      "has_docstring": null,
+     "files_written": "C:\\Users\\USER\\Documents\\lab\\analyses\\bigTable\\ves\\bigTablenofeedback.csv, C:\\Users\\USER\\Documents\\lab\\analyses\\bigTable\\vis\\bigTablenofeedback.csv",
      "loaded_files_missing": 2,
      "loaded_files_missing_names": "Results.mat, Results.mat"
     },
@@ -9871,7 +9999,7 @@
      "file_name": "mixed_effect_feedback.m",
      "file_path": "Codes/Tables/mixed_effect_feedback.m",
      "file_url": "https://osf.io/download/2brx6/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Tables/mixed_effect_feedback.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Tables/mixed_effect_feedback.m",
      "file_size": 10240,
      "file_type": "code",
      "provider": "osfstorage",
@@ -9898,15 +10026,16 @@
      "code_lines": 158,
      "percentage_comment": 0.299465240641711,
      "has_docstring": null,
-     "loaded_files_missing": 8,
-     "loaded_files_missing_names": "Results.mat, Results.mat, bigTablenofeedback.csv, bigTableIncor.csv, bigTableCor.csv, bigTablenofeedback.csv, bigTableIncor.csv, bigTableCor.csv"
+     "files_written": "/Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableIncor.csv, /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableIncor.csv, /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableCor.csv, /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableAll.csv, /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableCor.csv, /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableAll.csv",
+     "loaded_files_missing": 2,
+     "loaded_files_missing_names": "Results.mat, Results.mat"
     },
     {
      "repo_url": "https://osf.io/5zyex",
      "file_name": "analyze_singleYaelAndShir_feedback.m",
      "file_path": "Codes/Main/Main function/analyze_singleYaelAndShir_feedback.m",
      "file_url": "https://osf.io/download/68c6d208c6d3c47b739e1d61/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/analyze_singleYaelAndShir_feedback.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/analyze_singleYaelAndShir_feedback.m",
      "file_size": 4002,
      "file_type": "code",
      "provider": "osfstorage",
@@ -9933,6 +10062,7 @@
      "code_lines": 68,
      "percentage_comment": 0.219512195121951,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -9941,7 +10071,7 @@
      "file_name": "cell2mat_nan.m",
      "file_path": "Codes/Main/Main function/cell2mat_nan.m",
      "file_url": "https://osf.io/download/68c6d2085eb69751db850b7f/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/cell2mat_nan.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/cell2mat_nan.m",
      "file_size": 170,
      "file_type": "code",
      "provider": "osfstorage",
@@ -9968,6 +10098,7 @@
      "code_lines": 3,
      "percentage_comment": 0,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -9976,7 +10107,7 @@
      "file_name": "cum_gaussfit.m",
      "file_path": "Codes/Main/Main function/cum_gaussfit.m",
      "file_url": "https://osf.io/download/68c6d20cbce81d134bb6012b/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/cum_gaussfit.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/cum_gaussfit.m",
      "file_size": 86,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10003,6 +10134,7 @@
      "code_lines": 4,
      "percentage_comment": 0,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10011,7 +10143,7 @@
      "file_name": "getPfitData.m",
      "file_path": "Codes/Main/Main function/getPfitData.m",
      "file_url": "https://osf.io/download/68c6d20d59079fa41f2d1eaa/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/getPfitData.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/getPfitData.m",
      "file_size": 6843,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10038,6 +10170,7 @@
      "code_lines": 75,
      "percentage_comment": 0.413461538461538,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10046,7 +10179,7 @@
      "file_name": "getRightwardChoices_staircase.m",
      "file_path": "Codes/Main/Main function/getRightwardChoices_staircase.m",
      "file_url": "https://osf.io/download/68c6d20f46bb158fa72d1c77/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/getRightwardChoices_staircase.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/getRightwardChoices_staircase.m",
      "file_size": 50258,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10073,6 +10206,7 @@
      "code_lines": 761,
      "percentage_comment": 0.130490956072351,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10081,7 +10215,7 @@
      "file_name": "oneDataRec.m",
      "file_path": "Codes/Main/Main function/oneDataRec.m",
      "file_url": "https://osf.io/download/68c6d211fdafce9609850ac8/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/oneDataRec.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/oneDataRec.m",
      "file_size": 3305,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10108,6 +10242,7 @@
      "code_lines": 66,
      "percentage_comment": 0.197368421052632,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10116,7 +10251,7 @@
      "file_name": "oneDataRec_choice_feedback.m",
      "file_path": "Codes/Main/Main function/oneDataRec_choice_feedback.m",
      "file_url": "https://osf.io/download/68c6d21253685ab6c69e1d07/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/oneDataRec_choice_feedback.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/oneDataRec_choice_feedback.m",
      "file_size": 3419,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10143,6 +10278,7 @@
      "code_lines": 68,
      "percentage_comment": 0.179487179487179,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10151,7 +10287,7 @@
      "file_name": "oneDataRec_feedback.m",
      "file_path": "Codes/Main/Main function/oneDataRec_feedback.m",
      "file_url": "https://osf.io/download/68c6d2156d0fe59d4c850bc9/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/oneDataRec_feedback.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/oneDataRec_feedback.m",
      "file_size": 3408,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10178,6 +10314,7 @@
      "code_lines": 67,
      "percentage_comment": 0.181818181818182,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10186,7 +10323,7 @@
      "file_name": "biasAna.m",
      "file_path": "Codes/Main/Main function/psignifit-master/biasAna.m",
      "file_url": "https://osf.io/download/68c6d228a17e5c766572103d/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/biasAna.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/biasAna.m",
      "file_size": 2806,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10213,6 +10350,7 @@
      "code_lines": 90,
      "percentage_comment": 0.0918367346938776,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10221,7 +10359,7 @@
      "file_name": "demo_001.m",
      "file_path": "Codes/Main/Main function/psignifit-master/demo_001.m",
      "file_url": "https://osf.io/download/68c6d22ba17e5c766572103f/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_001.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_001.m",
      "file_size": 4544,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10248,6 +10386,7 @@
      "code_lines": 22,
      "percentage_comment": 0.793478260869565,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10256,7 +10395,7 @@
      "file_name": "demo_002.m",
      "file_path": "Codes/Main/Main function/psignifit-master/demo_002.m",
      "file_url": "https://osf.io/download/68c6d22c84c6e36974b60024/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_002.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_002.m",
      "file_size": 10664,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10283,6 +10422,7 @@
      "code_lines": 48,
      "percentage_comment": 0.80184331797235,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10291,7 +10431,7 @@
      "file_name": "demo_003.m",
      "file_path": "Codes/Main/Main function/psignifit-master/demo_003.m",
      "file_url": "https://osf.io/download/68c6d22e60275af36e9e1b76/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_003.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_003.m",
      "file_size": 2842,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10318,6 +10458,7 @@
      "code_lines": 16,
      "percentage_comment": 0.728813559322034,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10326,7 +10467,7 @@
      "file_name": "demo_004.m",
      "file_path": "Codes/Main/Main function/psignifit-master/demo_004.m",
      "file_url": "https://osf.io/download/68c6d22f6d0fe59d4c850bd0/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_004.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_004.m",
      "file_size": 9601,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10353,6 +10494,7 @@
      "code_lines": 89,
      "percentage_comment": 0.586046511627907,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10361,7 +10503,7 @@
      "file_name": "demo_006.m",
      "file_path": "Codes/Main/Main function/psignifit-master/demo_006.m",
      "file_url": "https://osf.io/download/68c6d232c6d3c47b739e1d69/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_006.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_006.m",
      "file_size": 12390,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10388,6 +10530,7 @@
      "code_lines": 113,
      "percentage_comment": 0.575289575289575,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10396,7 +10539,7 @@
      "file_name": "demo_005.m",
      "file_path": "Codes/Main/Main function/psignifit-master/demo_005.m",
      "file_url": "https://osf.io/download/68c6d23259079fa41f2d1eb7/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_005.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_005.m",
      "file_size": 5994,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10423,6 +10566,7 @@
      "code_lines": 59,
      "percentage_comment": 0.722222222222222,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10431,7 +10575,7 @@
      "file_name": "demo_008.m",
      "file_path": "Codes/Main/Main function/psignifit-master/demo_008.m",
      "file_url": "https://osf.io/download/68c6d2345e6517cfe8721056/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_008.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_008.m",
      "file_size": 16769,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10458,6 +10602,7 @@
      "code_lines": 421,
      "percentage_comment": 0.0867678958785249,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10466,7 +10611,7 @@
      "file_name": "demo_007.m",
      "file_path": "Codes/Main/Main function/psignifit-master/demo_007.m",
      "file_url": "https://osf.io/download/68c6d2350e29e83c5a850b39/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_007.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/demo_007.m",
      "file_size": 2906,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10493,6 +10638,7 @@
      "code_lines": 26,
      "percentage_comment": 0.566666666666667,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10501,7 +10647,7 @@
      "file_name": "generateTests.m",
      "file_path": "Codes/Main/Main function/psignifit-master/generateTests.m",
      "file_url": "https://osf.io/download/68c6d2376d0fe59d4c850bd2/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/generateTests.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/generateTests.m",
      "file_size": 1284,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10528,6 +10674,7 @@
      "code_lines": 28,
      "percentage_comment": 0.151515151515152,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10536,7 +10683,7 @@
      "file_name": "getConfRegion.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getConfRegion.m",
      "file_url": "https://osf.io/download/68c6d238981a98dd082d1da0/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getConfRegion.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getConfRegion.m",
      "file_size": 6480,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10563,6 +10710,7 @@
      "code_lines": 104,
      "percentage_comment": 0.278195488721804,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10571,7 +10719,7 @@
      "file_name": "getCor.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getCor.m",
      "file_url": "https://osf.io/download/68c6d23a84c6e36974b6002b/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getCor.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getCor.m",
      "file_size": 392,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10598,6 +10746,7 @@
      "code_lines": 5,
      "percentage_comment": 0.5,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10606,7 +10755,7 @@
      "file_name": "getDeviance.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getDeviance.m",
      "file_url": "https://osf.io/download/68c6d23b23c6e117f272114d/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getDeviance.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getDeviance.m",
      "file_size": 2009,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10633,6 +10782,7 @@
      "code_lines": 26,
      "percentage_comment": 0.235294117647059,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10641,7 +10791,7 @@
      "file_name": "getInformationCriteria.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getInformationCriteria.m",
      "file_url": "https://osf.io/download/68c6d23ee84082483d721148/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getInformationCriteria.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getInformationCriteria.m",
      "file_size": 3442,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10668,6 +10818,7 @@
      "code_lines": 49,
      "percentage_comment": 0.41025641025641,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10676,7 +10827,7 @@
      "file_name": "getSlope.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getSlope.m",
      "file_url": "https://osf.io/download/68c6d23fd1c14f90a27210bf/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getSlope.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getSlope.m",
      "file_size": 3419,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10703,6 +10854,7 @@
      "code_lines": 55,
      "percentage_comment": 0.328767123287671,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10711,7 +10863,7 @@
      "file_name": "getSlopeMarginal.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getSlopeMarginal.m",
      "file_url": "https://osf.io/download/68c6d241a17e5c7665721044/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getSlopeMarginal.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getSlopeMarginal.m",
      "file_size": 2327,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10738,6 +10890,7 @@
      "code_lines": 41,
      "percentage_comment": 0.305084745762712,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10746,7 +10899,7 @@
      "file_name": "getSlopePC.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getSlopePC.m",
      "file_url": "https://osf.io/download/68c6d242981a98dd082d1da4/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getSlopePC.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getSlopePC.m",
      "file_size": 4401,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10773,6 +10926,7 @@
      "code_lines": 69,
      "percentage_comment": 0.32258064516129,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10781,7 +10935,7 @@
      "file_name": "getStandardParameters.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getStandardParameters.m",
      "file_url": "https://osf.io/download/68c6d244d1c14f90a27210c1/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getStandardParameters.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getStandardParameters.m",
      "file_size": 3138,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10808,6 +10962,7 @@
      "code_lines": 46,
      "percentage_comment": 0.430379746835443,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10816,7 +10971,7 @@
      "file_name": "getStandardPriors.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getStandardPriors.m",
      "file_url": "https://osf.io/download/68c6d245d1c14f90a27210c3/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getStandardPriors.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getStandardPriors.m",
      "file_size": 2067,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10843,6 +10998,7 @@
      "code_lines": 17,
      "percentage_comment": 0.540540540540541,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10851,7 +11007,7 @@
      "file_name": "getThreshold.m",
      "file_path": "Codes/Main/Main function/psignifit-master/getThreshold.m",
      "file_url": "https://osf.io/download/68c6d24723c6e117f2721151/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getThreshold.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/getThreshold.m",
      "file_size": 8929,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10878,6 +11034,7 @@
      "code_lines": 115,
      "percentage_comment": 0.360759493670886,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10886,7 +11043,7 @@
      "file_name": "marginalize.m",
      "file_path": "Codes/Main/Main function/psignifit-master/marginalize.m",
      "file_url": "https://osf.io/download/68c6d24a0cf92d9a16b6028e/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/marginalize.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/marginalize.m",
      "file_size": 2465,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10913,6 +11070,7 @@
      "code_lines": 43,
      "percentage_comment": 0.333333333333333,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10921,7 +11079,7 @@
      "file_name": "plot2D.m",
      "file_path": "Codes/Main/Main function/psignifit-master/plot2D.m",
      "file_url": "https://osf.io/download/68c6d24a46bb158fa72d1c7b/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plot2D.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plot2D.m",
      "file_size": 2845,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10948,6 +11106,7 @@
      "code_lines": 73,
      "percentage_comment": 0.217391304347826,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10956,7 +11115,7 @@
      "file_name": "plotBayes.m",
      "file_path": "Codes/Main/Main function/psignifit-master/plotBayes.m",
      "file_url": "https://osf.io/download/68c6d24c53685ab6c69e1d10/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotBayes.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotBayes.m",
      "file_size": 3401,
      "file_type": "code",
      "provider": "osfstorage",
@@ -10983,6 +11142,7 @@
      "code_lines": 100,
      "percentage_comment": 0.145454545454545,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -10991,7 +11151,7 @@
      "file_name": "plotMarginal.m",
      "file_path": "Codes/Main/Main function/psignifit-master/plotMarginal.m",
      "file_url": "https://osf.io/download/68c6d24dfdafce9609850acf/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotMarginal.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotMarginal.m",
      "file_size": 3949,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11018,6 +11178,7 @@
      "code_lines": 91,
      "percentage_comment": 0.133333333333333,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11026,7 +11187,7 @@
      "file_name": "plotPrior.m",
      "file_path": "Codes/Main/Main function/psignifit-master/plotPrior.m",
      "file_url": "https://osf.io/download/68c6d24f42a47479ef9e1d60/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotPrior.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotPrior.m",
      "file_size": 6300,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11053,6 +11214,7 @@
      "code_lines": 178,
      "percentage_comment": 0.0871794871794872,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11061,7 +11223,7 @@
      "file_name": "plotPosteriorScatter.m",
      "file_path": "Codes/Main/Main function/psignifit-master/plotPosteriorScatter.m",
      "file_url": "https://osf.io/download/68c6d2506ea9d2394eb60175/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotPosteriorScatter.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotPosteriorScatter.m",
      "file_size": 2383,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11088,6 +11250,7 @@
      "code_lines": 56,
      "percentage_comment": 0.188405797101449,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11096,7 +11259,7 @@
      "file_name": "plotPsych.m",
      "file_path": "Codes/Main/Main function/psignifit-master/plotPsych.m",
      "file_url": "https://osf.io/download/68c6d251c6d3c47b739e1d70/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotPsych.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotPsych.m",
      "file_size": 8077,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11123,6 +11286,7 @@
      "code_lines": 125,
      "percentage_comment": 0.203821656050955,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11131,7 +11295,7 @@
      "file_name": "plotsModelfit.m",
      "file_path": "Codes/Main/Main function/psignifit-master/plotsModelfit.m",
      "file_url": "https://osf.io/download/68c6d25360275af36e9e1b7e/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotsModelfit.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/plotsModelfit.m",
      "file_size": 3174,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11158,6 +11322,7 @@
      "code_lines": 68,
      "percentage_comment": 0.218390804597701,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11166,7 +11331,7 @@
      "file_name": "psignifit.m",
      "file_path": "Codes/Main/Main function/psignifit-master/psignifit.m",
      "file_url": "https://osf.io/download/68c6d25453685ab6c69e1d14/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/psignifit.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/psignifit.m",
      "file_size": 13342,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11193,6 +11358,7 @@
      "code_lines": 204,
      "percentage_comment": 0.225296442687747,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11201,7 +11367,7 @@
      "file_name": "psignifitFast.m",
      "file_path": "Codes/Main/Main function/psignifit-master/psignifitFast.m",
      "file_url": "https://osf.io/download/68c6d25659079fa41f2d1ec6/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/psignifitFast.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/psignifitFast.m",
      "file_size": 841,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11228,6 +11394,7 @@
      "code_lines": 12,
      "percentage_comment": 0.25,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11236,7 +11403,7 @@
      "file_name": "PsignifitLegacyOptionsConverter.m",
      "file_path": "Codes/Main/Main function/psignifit-master/PsignifitLegacyOptionsConverter.m",
      "file_url": "https://osf.io/download/68c6d257c6d3c47b739e1d73/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/PsignifitLegacyOptionsConverter.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/PsignifitLegacyOptionsConverter.m",
      "file_size": 16404,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11263,6 +11430,7 @@
      "code_lines": 258,
      "percentage_comment": 0.075812274368231,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11271,7 +11439,7 @@
      "file_name": "simulate_data.m",
      "file_path": "Codes/Main/Main function/psignifit-master/simulate_data.m",
      "file_url": "https://osf.io/download/68c6d25984c6e36974b6003c/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/simulate_data.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/simulate_data.m",
      "file_size": 10675,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11298,6 +11466,7 @@
      "code_lines": 257,
      "percentage_comment": 0.208609271523179,
      "has_docstring": null,
+     "files_written": "_data.csv, _opt.json, _res.json",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11306,7 +11475,7 @@
      "file_name": "likelihood.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/likelihood.m",
      "file_url": "https://osf.io/download/68c6d28f5e6517cfe872105b/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/likelihood.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/likelihood.m",
      "file_size": 829,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11333,6 +11502,7 @@
      "code_lines": 5,
      "percentage_comment": 0.666666666666667,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11341,7 +11511,7 @@
      "file_name": "gridSetting.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/gridSetting.m",
      "file_url": "https://osf.io/download/68c6d2916ea9d2394eb60184/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/gridSetting.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/gridSetting.m",
      "file_size": 6891,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11368,6 +11538,7 @@
      "code_lines": 102,
      "percentage_comment": 0.403508771929825,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11376,7 +11547,7 @@
      "file_name": "logLikelihood.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/logLikelihood.m",
      "file_url": "https://osf.io/download/68c6d293d1c14f90a27210d7/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/logLikelihood.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/logLikelihood.m",
      "file_size": 9178,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11403,6 +11574,7 @@
      "code_lines": 173,
      "percentage_comment": 0.319371727748691,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11411,7 +11583,7 @@
      "file_name": "moveBorders.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/moveBorders.m",
      "file_url": "https://osf.io/download/68c6d295d1c14f90a27210da/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/moveBorders.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/moveBorders.m",
      "file_size": 3767,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11438,6 +11610,7 @@
      "code_lines": 24,
      "percentage_comment": 0.820224719101124,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11446,7 +11619,7 @@
      "file_name": "my_betapdf.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/my_betapdf.m",
      "file_url": "https://osf.io/download/68c6d29523c6e117f272115e/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_betapdf.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_betapdf.m",
      "file_size": 847,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11473,6 +11646,7 @@
      "code_lines": 25,
      "percentage_comment": 0.242424242424242,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11481,7 +11655,7 @@
      "file_name": "my_normcdf.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/my_normcdf.m",
      "file_url": "https://osf.io/download/68c6d298c6d3c47b739e1d7f/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_normcdf.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_normcdf.m",
      "file_size": 472,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11508,6 +11682,7 @@
      "code_lines": 4,
      "percentage_comment": 0.777777777777778,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11516,7 +11691,7 @@
      "file_name": "my_norminv.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/my_norminv.m",
      "file_url": "https://osf.io/download/68c6d2986d0fe59d4c850beb/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_norminv.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_norminv.m",
      "file_size": 424,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11543,6 +11718,7 @@
      "code_lines": 3,
      "percentage_comment": 0.8,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11551,7 +11727,7 @@
      "file_name": "my_t1cdf.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/my_t1cdf.m",
      "file_url": "https://osf.io/download/68c6d29bbce81d134bb6013f/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_t1cdf.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_t1cdf.m",
      "file_size": 285,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11578,6 +11754,7 @@
      "code_lines": 4,
      "percentage_comment": 0.666666666666667,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11586,7 +11763,7 @@
      "file_name": "my_normpdf.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/my_normpdf.m",
      "file_url": "https://osf.io/download/68c6d29b60275af36e9e1b95/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_normpdf.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_normpdf.m",
      "file_size": 199,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11613,6 +11790,7 @@
      "code_lines": 2,
      "percentage_comment": 0.6,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11621,7 +11799,7 @@
      "file_name": "my_t1icdf.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/my_t1icdf.m",
      "file_url": "https://osf.io/download/68c6d29c97a10291dab6028e/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_t1icdf.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/my_t1icdf.m",
      "file_size": 241,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11648,6 +11826,7 @@
      "code_lines": 2,
      "percentage_comment": 0.8,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11656,7 +11835,7 @@
      "file_name": "normalizePriors.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/normalizePriors.m",
      "file_url": "https://osf.io/download/68c6d29ea17e5c766572105a/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/normalizePriors.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/normalizePriors.m",
      "file_size": 875,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11683,6 +11862,7 @@
      "code_lines": 13,
      "percentage_comment": 0.458333333333333,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11691,7 +11871,7 @@
      "file_name": "poolData.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/poolData.m",
      "file_url": "https://osf.io/download/68c6d29ec0b28d5f56850b59/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/poolData.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/poolData.m",
      "file_size": 2535,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11718,6 +11898,7 @@
      "code_lines": 40,
      "percentage_comment": 0.625,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11726,7 +11907,7 @@
      "file_name": "setBorders.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/setBorders.m",
      "file_url": "https://osf.io/download/68c6d2a2e84082483d721152/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/setBorders.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/setBorders.m",
      "file_size": 1962,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11753,6 +11934,7 @@
      "code_lines": 16,
      "percentage_comment": 0.657894736842105,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11761,7 +11943,7 @@
      "file_name": "psignifitCore.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/psignifitCore.m",
      "file_url": "https://osf.io/download/68c6d2a284c6e36974b60050/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/psignifitCore.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/psignifitCore.m",
      "file_size": 4724,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11788,6 +11970,7 @@
      "code_lines": 87,
      "percentage_comment": 0.324324324324324,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11796,7 +11979,7 @@
      "file_name": "strToDim.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/strToDim.m",
      "file_url": "https://osf.io/download/68c6d2a4d1c14f90a27210de/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/strToDim.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/strToDim.m",
      "file_size": 594,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11823,6 +12006,7 @@
      "code_lines": 13,
      "percentage_comment": 0.2,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11831,7 +12015,7 @@
      "file_name": "tufteaxis.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/tufteaxis.m",
      "file_url": "https://osf.io/download/68c6d2a584c6e36974b60052/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/tufteaxis.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/tufteaxis.m",
      "file_size": 14077,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11858,6 +12042,7 @@
      "code_lines": 239,
      "percentage_comment": 0.388513513513513,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11866,7 +12051,7 @@
      "file_name": "tufteaxisdemo.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/tufteaxisdemo.m",
      "file_url": "https://osf.io/download/68c6d2a759079fa41f2d1edb/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/tufteaxisdemo.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/tufteaxisdemo.m",
      "file_size": 194,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11893,6 +12078,7 @@
      "code_lines": 6,
      "percentage_comment": 0,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11901,7 +12087,7 @@
      "file_name": "checkPriors.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/checkPriors.m",
      "file_url": "https://osf.io/download/68c6d2a850b70855472d1ca4/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/checkPriors.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/checkPriors.m",
      "file_size": 2694,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11928,6 +12114,7 @@
      "code_lines": 40,
      "percentage_comment": 0.321428571428571,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11936,7 +12123,7 @@
      "file_name": "getColormap.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/getColormap.m",
      "file_url": "https://osf.io/download/68c6d2abe84082483d721156/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getColormap.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getColormap.m",
      "file_size": 519,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11963,6 +12150,7 @@
      "code_lines": 9,
      "percentage_comment": 0.4,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -11971,7 +12159,7 @@
      "file_name": "getCov.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/getCov.m",
      "file_url": "https://osf.io/download/68c6d2ab981a98dd082d1db2/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getCov.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getCov.m",
      "file_size": 1879,
      "file_type": "code",
      "provider": "osfstorage",
@@ -11998,6 +12186,7 @@
      "code_lines": 39,
      "percentage_comment": 0.170212765957447,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -12006,7 +12195,7 @@
      "file_name": "getSigmoidHandle.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/getSigmoidHandle.m",
      "file_url": "https://osf.io/download/68c6d2ad0e29e83c5a850b49/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getSigmoidHandle.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getSigmoidHandle.m",
      "file_size": 4822,
      "file_type": "code",
      "provider": "osfstorage",
@@ -12033,6 +12222,7 @@
      "code_lines": 68,
      "percentage_comment": 0.377777777777778,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -12041,7 +12231,7 @@
      "file_name": "getSeed.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/getSeed.m",
      "file_url": "https://osf.io/download/68c6d2adbce81d134bb60144/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getSeed.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getSeed.m",
      "file_size": 1705,
      "file_type": "code",
      "provider": "osfstorage",
@@ -12068,6 +12258,7 @@
      "code_lines": 22,
      "percentage_comment": 0.534883720930233,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -12076,7 +12267,7 @@
      "file_name": "getWeights.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/getWeights.m",
      "file_url": "https://osf.io/download/68c6d2b059079fa41f2d1edf/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getWeights.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getWeights.m",
      "file_size": 1137,
      "file_type": "code",
      "provider": "osfstorage",
@@ -12103,6 +12294,7 @@
      "code_lines": 20,
      "percentage_comment": 0.40625,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -12111,7 +12303,7 @@
      "file_name": "getSigmoidValue.m",
      "file_path": "Codes/Main/Main function/psignifit-master/private/getSigmoidValue.m",
      "file_url": "https://osf.io/download/68c6d2b060275af36e9e1ba3/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getSigmoidValue.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/private/getSigmoidValue.m",
      "file_size": 356,
      "file_type": "code",
      "provider": "osfstorage",
@@ -12138,6 +12330,7 @@
      "code_lines": 9,
      "percentage_comment": 0.307692307692308,
      "has_docstring": null,
+     "files_written": "",
      "loaded_files_missing": 0,
      "loaded_files_missing_names": ""
     },
@@ -12146,7 +12339,7 @@
      "file_name": "testConsistency.m",
      "file_path": "Codes/Main/Main function/psignifit-master/tests/testConsistency.m",
      "file_url": "https://osf.io/download/68c6d2d3d1c14f90a27210f4/",
-     "file_location": "/srv/metacheck-sandbox/58babb1e-68d4-48dd-bf1b-8359b6a584d5/tmp/RtmpGHY2le/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/tests/testConsistency.m",
+     "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/tests/testConsistency.m",
      "file_size": 2563,
      "file_type": "code",
      "provider": "osfstorage",
@@ -12173,23 +12366,24 @@
      "code_lines": 53,
      "percentage_comment": 0.116666666666667,
      "has_docstring": null,
-     "loaded_files_missing": 1,
-     "loaded_files_missing_names": "_data.csv"
+     "files_written": "",
+     "loaded_files_missing": 0,
+     "loaded_files_missing_names": ""
     }
    ],
    "summary_table": null,
    "section": "results",
    "report": [
     "Below, we describe some best coding practices and give the results of automatic evaluation of these practices in the code files below. This check may miss things or produce false positives if your scripts are less typical.",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(\"File Name\" = c(\"<a href='https://osf.io/download/ep83h/' target='_blank'>Mixed_Effect_Model.R</a>\", \n\"<a href='https://osf.io/download/68c6d1e7981a98dd082d1d8f/' target='_blank'>MAIN_ALL_YaelAndShir_no_feedback.m</a>\", \n\"<a href='https://osf.io/download/dgwhf/' target='_blank'>MAIN_ALL_YaelAndShir_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d33453685ab6c69e1d33/' target='_blank'>mixed_effect_no_feedback.m</a>\", \n\"<a href='https://osf.io/download/2brx6/' target='_blank'>mixed_effect_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d208c6d3c47b739e1d61/' target='_blank'>analyze_singleYaelAndShir_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d2085eb69751db850b7f/' target='_blank'>cell2mat_nan.m</a>\", \n\"<a href='https://osf.io/download/68c6d20cbce81d134bb6012b/' target='_blank'>cum_gaussfit.m</a>\", \n\"<a href='https://osf.io/download/68c6d20d59079fa41f2d1eaa/' target='_blank'>getPfitData.m</a>\", \n\"<a href='https://osf.io/download/68c6d20f46bb158fa72d1c77/' target='_blank'>getRightwardChoices_staircase.m</a>\", \n\"<a href='https://osf.io/download/68c6d211fdafce9609850ac8/' target='_blank'>oneDataRec.m</a>\", \n\"<a href='https://osf.io/download/68c6d21253685ab6c69e1d07/' target='_blank'>oneDataRec_choice_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d2156d0fe59d4c850bc9/' target='_blank'>oneDataRec_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d228a17e5c766572103d/' target='_blank'>biasAna.m</a>\", \n\"<a href='https://osf.io/download/68c6d22ba17e5c766572103f/' target='_blank'>demo_001.m</a>\", \n\"<a href='https://osf.io/download/68c6d22c84c6e36974b60024/' target='_blank'>demo_002.m</a>\", \n\"<a href='https://osf.io/download/68c6d22e60275af36e9e1b76/' target='_blank'>demo_003.m</a>\", \n\"<a href='https://osf.io/download/68c6d22f6d0fe59d4c850bd0/' target='_blank'>demo_004.m</a>\", \n\"<a href='https://osf.io/download/68c6d232c6d3c47b739e1d69/' target='_blank'>demo_006.m</a>\", \n\"<a href='https://osf.io/download/68c6d23259079fa41f2d1eb7/' target='_blank'>demo_005.m</a>\", \n\"<a href='https://osf.io/download/68c6d2345e6517cfe8721056/' target='_blank'>demo_008.m</a>\", \n\"<a href='https://osf.io/download/68c6d2350e29e83c5a850b39/' target='_blank'>demo_007.m</a>\", \n\"<a href='https://osf.io/download/68c6d2376d0fe59d4c850bd2/' target='_blank'>generateTests.m</a>\", \n\"<a href='https://osf.io/download/68c6d238981a98dd082d1da0/' target='_blank'>getConfRegion.m</a>\", \n\"<a href='https://osf.io/download/68c6d23a84c6e36974b6002b/' target='_blank'>getCor.m</a>\", \n\"<a href='https://osf.io/download/68c6d23b23c6e117f272114d/' target='_blank'>getDeviance.m</a>\", \n\"<a href='https://osf.io/download/68c6d23ee84082483d721148/' target='_blank'>getInformationCriteria.m</a>\", \n\"<a href='https://osf.io/download/68c6d23fd1c14f90a27210bf/' target='_blank'>getSlope.m</a>\", \n\"<a href='https://osf.io/download/68c6d241a17e5c7665721044/' target='_blank'>getSlopeMarginal.m</a>\", \n\"<a href='https://osf.io/download/68c6d242981a98dd082d1da4/' target='_blank'>getSlopePC.m</a>\", \n\"<a href='https://osf.io/download/68c6d244d1c14f90a27210c1/' target='_blank'>getStandardParameters.m</a>\", \n\"<a href='https://osf.io/download/68c6d245d1c14f90a27210c3/' target='_blank'>getStandardPriors.m</a>\", \n\"<a href='https://osf.io/download/68c6d24723c6e117f2721151/' target='_blank'>getThreshold.m</a>\", \n\"<a href='https://osf.io/download/68c6d24a0cf92d9a16b6028e/' target='_blank'>marginalize.m</a>\", \n\"<a href='https://osf.io/download/68c6d24a46bb158fa72d1c7b/' target='_blank'>plot2D.m</a>\", \n\"<a href='https://osf.io/download/68c6d24c53685ab6c69e1d10/' target='_blank'>plotBayes.m</a>\", \n\"<a href='https://osf.io/download/68c6d24dfdafce9609850acf/' target='_blank'>plotMarginal.m</a>\", \n\"<a href='https://osf.io/download/68c6d24f42a47479ef9e1d60/' target='_blank'>plotPrior.m</a>\", \n\"<a href='https://osf.io/download/68c6d2506ea9d2394eb60175/' target='_blank'>plotPosteriorScatter.m</a>\", \n\"<a href='https://osf.io/download/68c6d251c6d3c47b739e1d70/' target='_blank'>plotPsych.m</a>\", \n\"<a href='https://osf.io/download/68c6d25360275af36e9e1b7e/' target='_blank'>plotsModelfit.m</a>\", \n\"<a href='https://osf.io/download/68c6d25453685ab6c69e1d14/' target='_blank'>psignifit.m</a>\", \n\"<a href='https://osf.io/download/68c6d25659079fa41f2d1ec6/' target='_blank'>psignifitFast.m</a>\", \n\"<a href='https://osf.io/download/68c6d257c6d3c47b739e1d73/' target='_blank'>PsignifitLegacyOptionsConverter.m</a>\", \n\"<a href='https://osf.io/download/68c6d25984c6e36974b6003c/' target='_blank'>simulate_data.m</a>\", \n\"<a href='https://osf.io/download/68c6d28f5e6517cfe872105b/' target='_blank'>likelihood.m</a>\", \n\"<a href='https://osf.io/download/68c6d2916ea9d2394eb60184/' target='_blank'>gridSetting.m</a>\", \n\"<a href='https://osf.io/download/68c6d293d1c14f90a27210d7/' target='_blank'>logLikelihood.m</a>\", \n\"<a href='https://osf.io/download/68c6d295d1c14f90a27210da/' target='_blank'>moveBorders.m</a>\", \n\"<a href='https://osf.io/download/68c6d29523c6e117f272115e/' target='_blank'>my_betapdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d298c6d3c47b739e1d7f/' target='_blank'>my_normcdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d2986d0fe59d4c850beb/' target='_blank'>my_norminv.m</a>\", \n\"<a href='https://osf.io/download/68c6d29bbce81d134bb6013f/' target='_blank'>my_t1cdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d29b60275af36e9e1b95/' target='_blank'>my_normpdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d29c97a10291dab6028e/' target='_blank'>my_t1icdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d29ea17e5c766572105a/' target='_blank'>normalizePriors.m</a>\", \n\"<a href='https://osf.io/download/68c6d29ec0b28d5f56850b59/' target='_blank'>poolData.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a2e84082483d721152/' target='_blank'>setBorders.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a284c6e36974b60050/' target='_blank'>psignifitCore.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a4d1c14f90a27210de/' target='_blank'>strToDim.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a584c6e36974b60052/' target='_blank'>tufteaxis.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a759079fa41f2d1edb/' target='_blank'>tufteaxisdemo.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a850b70855472d1ca4/' target='_blank'>checkPriors.m</a>\", \n\"<a href='https://osf.io/download/68c6d2abe84082483d721156/' target='_blank'>getColormap.m</a>\", \n\"<a href='https://osf.io/download/68c6d2ab981a98dd082d1db2/' target='_blank'>getCov.m</a>\", \n\"<a href='https://osf.io/download/68c6d2ad0e29e83c5a850b49/' target='_blank'>getSigmoidHandle.m</a>\", \n\"<a href='https://osf.io/download/68c6d2adbce81d134bb60144/' target='_blank'>getSeed.m</a>\", \n\"<a href='https://osf.io/download/68c6d2b059079fa41f2d1edf/' target='_blank'>getWeights.m</a>\", \n\"<a href='https://osf.io/download/68c6d2b060275af36e9e1ba3/' target='_blank'>getSigmoidValue.m</a>\", \n\"<a href='https://osf.io/download/68c6d2d3d1c14f90a27210f4/' target='_blank'>testConsistency.m</a>\"\n), \"% Comments\" = c(\"23%\", \"16%\", \"11%\", \"27%\", \"30%\", \"22%\", \n\"0%\", \"0%\", \"41%\", \"13%\", \"20%\", \"18%\", \"18%\", \"9%\", \"79%\", \"80%\", \n\"73%\", \"59%\", \"58%\", \"72%\", \"9%\", \"57%\", \"15%\", \"28%\", \"50%\", \n\"24%\", \"41%\", \"33%\", \"31%\", \"32%\", \"43%\", \"54%\", \"36%\", \"33%\", \n\"22%\", \"15%\", \"13%\", \"9%\", \"19%\", \"20%\", \"22%\", \"23%\", \"25%\", \n\"8%\", \"21%\", \"67%\", \"40%\", \"32%\", \"82%\", \"24%\", \"78%\", \"80%\", \n\"67%\", \"60%\", \"80%\", \"46%\", \"62%\", \"66%\", \"32%\", \"20%\", \"39%\", \n\"0%\", \"32%\", \"40%\", \"17%\", \"38%\", \"53%\", \"41%\", \"31%\", \"12%\"), \n    \"Missing Files\" = c(0L, 0L, 0L, 2L, 8L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L\n    ), \"Absolute Paths\" = c(3L, 3L, 5L, 5L, 15L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L), \"Code Between Libraries\" = c(1L, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA)), row.names = c(NA, 70L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
+    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(\"File Name\" = c(\"<a href='https://osf.io/download/ep83h/' target='_blank'>Mixed_Effect_Model.R</a>\", \n\"<a href='https://osf.io/download/68c6d1e7981a98dd082d1d8f/' target='_blank'>MAIN_ALL_YaelAndShir_no_feedback.m</a>\", \n\"<a href='https://osf.io/download/dgwhf/' target='_blank'>MAIN_ALL_YaelAndShir_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d33453685ab6c69e1d33/' target='_blank'>mixed_effect_no_feedback.m</a>\", \n\"<a href='https://osf.io/download/2brx6/' target='_blank'>mixed_effect_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d208c6d3c47b739e1d61/' target='_blank'>analyze_singleYaelAndShir_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d2085eb69751db850b7f/' target='_blank'>cell2mat_nan.m</a>\", \n\"<a href='https://osf.io/download/68c6d20cbce81d134bb6012b/' target='_blank'>cum_gaussfit.m</a>\", \n\"<a href='https://osf.io/download/68c6d20d59079fa41f2d1eaa/' target='_blank'>getPfitData.m</a>\", \n\"<a href='https://osf.io/download/68c6d20f46bb158fa72d1c77/' target='_blank'>getRightwardChoices_staircase.m</a>\", \n\"<a href='https://osf.io/download/68c6d211fdafce9609850ac8/' target='_blank'>oneDataRec.m</a>\", \n\"<a href='https://osf.io/download/68c6d21253685ab6c69e1d07/' target='_blank'>oneDataRec_choice_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d2156d0fe59d4c850bc9/' target='_blank'>oneDataRec_feedback.m</a>\", \n\"<a href='https://osf.io/download/68c6d228a17e5c766572103d/' target='_blank'>biasAna.m</a>\", \n\"<a href='https://osf.io/download/68c6d22ba17e5c766572103f/' target='_blank'>demo_001.m</a>\", \n\"<a href='https://osf.io/download/68c6d22c84c6e36974b60024/' target='_blank'>demo_002.m</a>\", \n\"<a href='https://osf.io/download/68c6d22e60275af36e9e1b76/' target='_blank'>demo_003.m</a>\", \n\"<a href='https://osf.io/download/68c6d22f6d0fe59d4c850bd0/' target='_blank'>demo_004.m</a>\", \n\"<a href='https://osf.io/download/68c6d232c6d3c47b739e1d69/' target='_blank'>demo_006.m</a>\", \n\"<a href='https://osf.io/download/68c6d23259079fa41f2d1eb7/' target='_blank'>demo_005.m</a>\", \n\"<a href='https://osf.io/download/68c6d2345e6517cfe8721056/' target='_blank'>demo_008.m</a>\", \n\"<a href='https://osf.io/download/68c6d2350e29e83c5a850b39/' target='_blank'>demo_007.m</a>\", \n\"<a href='https://osf.io/download/68c6d2376d0fe59d4c850bd2/' target='_blank'>generateTests.m</a>\", \n\"<a href='https://osf.io/download/68c6d238981a98dd082d1da0/' target='_blank'>getConfRegion.m</a>\", \n\"<a href='https://osf.io/download/68c6d23a84c6e36974b6002b/' target='_blank'>getCor.m</a>\", \n\"<a href='https://osf.io/download/68c6d23b23c6e117f272114d/' target='_blank'>getDeviance.m</a>\", \n\"<a href='https://osf.io/download/68c6d23ee84082483d721148/' target='_blank'>getInformationCriteria.m</a>\", \n\"<a href='https://osf.io/download/68c6d23fd1c14f90a27210bf/' target='_blank'>getSlope.m</a>\", \n\"<a href='https://osf.io/download/68c6d241a17e5c7665721044/' target='_blank'>getSlopeMarginal.m</a>\", \n\"<a href='https://osf.io/download/68c6d242981a98dd082d1da4/' target='_blank'>getSlopePC.m</a>\", \n\"<a href='https://osf.io/download/68c6d244d1c14f90a27210c1/' target='_blank'>getStandardParameters.m</a>\", \n\"<a href='https://osf.io/download/68c6d245d1c14f90a27210c3/' target='_blank'>getStandardPriors.m</a>\", \n\"<a href='https://osf.io/download/68c6d24723c6e117f2721151/' target='_blank'>getThreshold.m</a>\", \n\"<a href='https://osf.io/download/68c6d24a0cf92d9a16b6028e/' target='_blank'>marginalize.m</a>\", \n\"<a href='https://osf.io/download/68c6d24a46bb158fa72d1c7b/' target='_blank'>plot2D.m</a>\", \n\"<a href='https://osf.io/download/68c6d24c53685ab6c69e1d10/' target='_blank'>plotBayes.m</a>\", \n\"<a href='https://osf.io/download/68c6d24dfdafce9609850acf/' target='_blank'>plotMarginal.m</a>\", \n\"<a href='https://osf.io/download/68c6d24f42a47479ef9e1d60/' target='_blank'>plotPrior.m</a>\", \n\"<a href='https://osf.io/download/68c6d2506ea9d2394eb60175/' target='_blank'>plotPosteriorScatter.m</a>\", \n\"<a href='https://osf.io/download/68c6d251c6d3c47b739e1d70/' target='_blank'>plotPsych.m</a>\", \n\"<a href='https://osf.io/download/68c6d25360275af36e9e1b7e/' target='_blank'>plotsModelfit.m</a>\", \n\"<a href='https://osf.io/download/68c6d25453685ab6c69e1d14/' target='_blank'>psignifit.m</a>\", \n\"<a href='https://osf.io/download/68c6d25659079fa41f2d1ec6/' target='_blank'>psignifitFast.m</a>\", \n\"<a href='https://osf.io/download/68c6d257c6d3c47b739e1d73/' target='_blank'>PsignifitLegacyOptionsConverter.m</a>\", \n\"<a href='https://osf.io/download/68c6d25984c6e36974b6003c/' target='_blank'>simulate_data.m</a>\", \n\"<a href='https://osf.io/download/68c6d28f5e6517cfe872105b/' target='_blank'>likelihood.m</a>\", \n\"<a href='https://osf.io/download/68c6d2916ea9d2394eb60184/' target='_blank'>gridSetting.m</a>\", \n\"<a href='https://osf.io/download/68c6d293d1c14f90a27210d7/' target='_blank'>logLikelihood.m</a>\", \n\"<a href='https://osf.io/download/68c6d295d1c14f90a27210da/' target='_blank'>moveBorders.m</a>\", \n\"<a href='https://osf.io/download/68c6d29523c6e117f272115e/' target='_blank'>my_betapdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d298c6d3c47b739e1d7f/' target='_blank'>my_normcdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d2986d0fe59d4c850beb/' target='_blank'>my_norminv.m</a>\", \n\"<a href='https://osf.io/download/68c6d29bbce81d134bb6013f/' target='_blank'>my_t1cdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d29b60275af36e9e1b95/' target='_blank'>my_normpdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d29c97a10291dab6028e/' target='_blank'>my_t1icdf.m</a>\", \n\"<a href='https://osf.io/download/68c6d29ea17e5c766572105a/' target='_blank'>normalizePriors.m</a>\", \n\"<a href='https://osf.io/download/68c6d29ec0b28d5f56850b59/' target='_blank'>poolData.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a2e84082483d721152/' target='_blank'>setBorders.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a284c6e36974b60050/' target='_blank'>psignifitCore.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a4d1c14f90a27210de/' target='_blank'>strToDim.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a584c6e36974b60052/' target='_blank'>tufteaxis.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a759079fa41f2d1edb/' target='_blank'>tufteaxisdemo.m</a>\", \n\"<a href='https://osf.io/download/68c6d2a850b70855472d1ca4/' target='_blank'>checkPriors.m</a>\", \n\"<a href='https://osf.io/download/68c6d2abe84082483d721156/' target='_blank'>getColormap.m</a>\", \n\"<a href='https://osf.io/download/68c6d2ab981a98dd082d1db2/' target='_blank'>getCov.m</a>\", \n\"<a href='https://osf.io/download/68c6d2ad0e29e83c5a850b49/' target='_blank'>getSigmoidHandle.m</a>\", \n\"<a href='https://osf.io/download/68c6d2adbce81d134bb60144/' target='_blank'>getSeed.m</a>\", \n\"<a href='https://osf.io/download/68c6d2b059079fa41f2d1edf/' target='_blank'>getWeights.m</a>\", \n\"<a href='https://osf.io/download/68c6d2b060275af36e9e1ba3/' target='_blank'>getSigmoidValue.m</a>\", \n\"<a href='https://osf.io/download/68c6d2d3d1c14f90a27210f4/' target='_blank'>testConsistency.m</a>\"\n), \"% Comments\" = c(\"23%\", \"16%\", \"11%\", \"27%\", \"30%\", \"22%\", \n\"0%\", \"0%\", \"41%\", \"13%\", \"20%\", \"18%\", \"18%\", \"9%\", \"79%\", \"80%\", \n\"73%\", \"59%\", \"58%\", \"72%\", \"9%\", \"57%\", \"15%\", \"28%\", \"50%\", \n\"24%\", \"41%\", \"33%\", \"31%\", \"32%\", \"43%\", \"54%\", \"36%\", \"33%\", \n\"22%\", \"15%\", \"13%\", \"9%\", \"19%\", \"20%\", \"22%\", \"23%\", \"25%\", \n\"8%\", \"21%\", \"67%\", \"40%\", \"32%\", \"82%\", \"24%\", \"78%\", \"80%\", \n\"67%\", \"60%\", \"80%\", \"46%\", \"62%\", \"66%\", \"32%\", \"20%\", \"39%\", \n\"0%\", \"32%\", \"40%\", \"17%\", \"38%\", \"53%\", \"41%\", \"31%\", \"12%\"), \n    \"Missing Files\" = c(0L, 0L, 0L, 2L, 2L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L\n    ), \"Absolute Paths\" = c(3L, 1L, 1L, 5L, 15L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, \n    0L, 0L), \"Code Between Libraries\" = c(1L, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, \n    NA, NA, NA, NA, NA)), row.names = c(NA, 70L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
     "#### Code Comments",
     "Best programming practice is to add comments to code, to explain what the code does (to yourself in the future, or peers who want to re-use your code).",
     "#### Missing Files",
-    "The scripts load files, but 3 scripts loaded 11 files that could not be automatically identified in the repository. Check if the following files are made available, so that others can reproduce your code, or that the files are missing:",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(\"File name\" = c(\"mixed_effect_no_feedback.m\", \n\"mixed_effect_feedback.m\", \"testConsistency.m\"), \"Missing Files\" = c(\"Results.mat, Results.mat\", \n\"Results.mat, Results.mat, bigTablenofeedback.csv, bigTableIncor.csv, bigTableCor.csv, bigTablenofeedback.csv, bigTableIncor.csv, bigTableCor.csv\", \n\"_data.csv\")), row.names = c(4L, 5L, 70L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
+    "The scripts load files, but 2 scripts loaded 4 files that could not be automatically identified in the repository. Check if the following files are made available, so that others can reproduce your code, or that the files are missing:",
+    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(\"File name\" = c(\"mixed_effect_no_feedback.m\", \n\"mixed_effect_feedback.m\"), \"Missing Files\" = c(\"Results.mat, Results.mat\", \n\"Results.mat, Results.mat\")), row.names = 4:5, class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
     "#### Absolute Paths",
     "Best programming practice is to use relative file paths (e.g., './files') instead of absolute file paths (e.g., 'C://Lakens/project_dir/files') as these folder names do not exist on other computers. The following absolute file paths were found in 5 code files. However, these may be false positives in code like `paste0(dir, '/file.csv')`. ",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(\"File name\" = c(\"Mixed_Effect_Model.R\", \"MAIN_ALL_YaelAndShir_no_feedback.m\", \n\"MAIN_ALL_YaelAndShir_feedback.m\", \"mixed_effect_no_feedback.m\", \n\"mixed_effect_feedback.m\"), \"Absolute paths found\" = c(\"C:\\\\\\\\Users\\\\\\\\USER\\\\\\\\Documents\\\\\\\\lab\\\\\\\\analyses\\\\\\\\bigTable\\\\\\\\vis\\\\\\\\bigTableAll.csv | C:\\\\\\\\Users\\\\\\\\USER\\\\\\\\Documents\\\\\\\\lab\\\\\\\\analyses\\\\\\\\bigTable\\\\\\\\ves\\\\\\\\bigTableAll.csv | C:\\\\\\\\Users\\\\\\\\USER\\\\\\\\Documents\\\\\\\\lab\\\\\\\\analyses\\\\\\\\bigTable\\\\\\\\\", \n\"C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\no_feedBack\\\\ | \\\\\\\\All\\\\All_merged_data | \\\\\\\\All\\\\Results\", \n\"C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\feedBack\\\\ | \\\\\\\\All\\\\All_merged_data | \\\\\\\\All\\\\All_merged_data_cor | \\\\\\\\All\\\\All_merged_data_incor | \\\\\\\\All\\\\Results\", \n\"C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\no_feedBack\\\\vis-vis\\\\All\\\\Results.mat | C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\no_feedBack\\\\ves-ves\\\\All\\\\Results.mat | C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\no_feedBack | C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\bigTable\\\\ves\\\\bigTablenofeedback.csv | C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\bigTable\\\\vis\\\\bigTablenofeedback.csv\", \n\"/Users/shirhabusha/Downloads/lab/analyses/feedBack/vis-vis/All/Results.mat | /Users/shirhabusha/Downloads/lab/analyses/feedBack/ves-ves/All/Results.mat | /Users/shirhabusha/Downloads/lab/analyses/feedBack | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableIncor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableIncor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableCor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTablenofeedback.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableIncor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableCor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableAll.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableCor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTablenofeedback.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableIncor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableCor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableAll.csv\"\n)), row.names = c(NA, 5L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
+    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(\"File name\" = c(\"Mixed_Effect_Model.R\", \"MAIN_ALL_YaelAndShir_no_feedback.m\", \n\"MAIN_ALL_YaelAndShir_feedback.m\", \"mixed_effect_no_feedback.m\", \n\"mixed_effect_feedback.m\"), \"Absolute paths found\" = c(\"C:\\\\\\\\Users\\\\\\\\USER\\\\\\\\Documents\\\\\\\\lab\\\\\\\\analyses\\\\\\\\bigTable\\\\\\\\vis\\\\\\\\bigTableAll.csv | C:\\\\\\\\Users\\\\\\\\USER\\\\\\\\Documents\\\\\\\\lab\\\\\\\\analyses\\\\\\\\bigTable\\\\\\\\ves\\\\\\\\bigTableAll.csv | C:\\\\\\\\Users\\\\\\\\USER\\\\\\\\Documents\\\\\\\\lab\\\\\\\\analyses\\\\\\\\bigTable\\\\\\\\\", \n\"C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\no_feedBack\\\\\", \"C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\feedBack\\\\\", \n\"C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\no_feedBack\\\\vis-vis\\\\All\\\\Results.mat | C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\no_feedBack\\\\ves-ves\\\\All\\\\Results.mat | C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\no_feedBack | C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\bigTable\\\\ves\\\\bigTablenofeedback.csv | C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\bigTable\\\\vis\\\\bigTablenofeedback.csv\", \n\"/Users/shirhabusha/Downloads/lab/analyses/feedBack/vis-vis/All/Results.mat | /Users/shirhabusha/Downloads/lab/analyses/feedBack/ves-ves/All/Results.mat | /Users/shirhabusha/Downloads/lab/analyses/feedBack | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableIncor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableIncor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableCor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTablenofeedback.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableIncor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableCor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/ves/bigTableAll.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableCor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTablenofeedback.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableIncor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableCor.csv | /Users/shirhabusha/Downloads/lab/analyses/bigTable/vis/bigTableAll.csv\"\n)), row.names = c(NA, 5L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 5, FALSE)\n```\n",
     "#### Working Directory (setwd)",
     "Best programming practice is to avoid `setwd()` in analysis code: it hardcodes an assumption about the working directory (often an absolute path on the author's own machine), so the code breaks when run anywhere else. Keep the working directory as the caller sets it and use relative paths. No `setwd()` calls were found in any of the code files.",
     "",
@@ -12206,7 +12400,20 @@
     "#### Parsable code",
     "All R-type code files (.R, .Rmd, .qmd) could be read in. There were no parsing issues.",
     ""
-   ]
+   ],
+   "version_pin": {
+    "pinned": false,
+    "mechanisms": [],
+    "r_versions": [],
+    "renv_files": [],
+    "renv_packages": [],
+    "sessioninfo_files": [],
+    "session_packages": [],
+    "pin_dates": [],
+    "python_files": [],
+    "python_pinned": false,
+    "file_location": "/srv/metacheck-sandbox/690024e0-8ad9-4f24-bb66-f95fd57bea2c/tmp/RtmpFAVc1M/metacheck-repo-files/osf.io_5zyex/Codes/Main/Main function/psignifit-master/README.md"
+   }
   },
   "data_check": {
    "module": "data_check",
@@ -14804,7 +15011,7 @@
    "module": "reproducibility_check",
    "title": "Reproducibility Check",
    "traffic_light": "red",
-   "summary_text": "\n-  We assessed AND ran 1 R code file for reproducibility (each in an isolated Docker container).\n-  0 of 1 script ran without error when executed.\n-  8 installable dependencies detected.\n- 2 statistics stored from the extracted output; 0 of 44 reported tests matched (0%).",
+   "summary_text": "\n-  We assessed 1 R code file for reproducibility and ran it (each in an isolated Docker container).\n-  0 of 1 script ran without error when executed.\n-  8 installable dependencies detected.",
    "table": [
     {
      "paper_id": "input-from-word",
@@ -14844,14 +15051,14 @@
     {
      "paper_id": "input-from-word",
      "power_n": 1,
-     "power_complete": 1,
+     "power_complete": 0,
      "power_statistical_test": 1,
      "power_sample_size": 1,
      "power_alpha_level": 1,
      "power_power": 1,
-     "power_effect_size": 1,
-     "power_effect_size_metric": 1,
-     "power_software": 1,
+     "power_effect_size": 0,
+     "power_effect_size_metric": 0,
+     "power_software": 0,
      "power_unchecked": 0,
      "marginal": 0,
      "preregistration": 1,
@@ -14884,6 +15091,7 @@
      "statcheck_decision_errors": 0,
      "n_imprecise": 0,
      "n_zero": 0,
+     "n_impossible": 0,
      "n_nonsignificant": 22,
      "ttests_with_es": 0,
      "ttests_without_es": 0,
@@ -14918,10 +15126,10 @@
      "roster_mismatch": false,
      "code_n": 70,
      "code_checked": 70,
-     "code_abs_path": 31,
+     "code_abs_path": 25,
      "code_setwd": 0,
      "code_install_packages": 0,
-     "code_missing_files": 11,
+     "code_missing_files": 4,
      "code_min_comments": 0,
      "code_parse_errors": 0,
      "code_packages_n": 8,
@@ -14941,8 +15149,8 @@
      "repro_missing_inputs": 0,
      "repro_deps": 8,
      "repro_ran_ok": 0,
-     "repro_tests_reported": 44,
-     "repro_tests_matched": 0,
+     "repro_tests_reported": null,
+     "repro_tests_matched": null,
      "repro_scripts_n": 1,
      "repro_not_analysis_n": 0,
      "repro_not_downloaded_n": 0,
@@ -14951,6 +15159,7 @@
      "repro_fail_undefined": 0,
      "repro_fail_syntax": 0,
      "repro_fail_environment": 0,
+     "repro_fail_settings": 0,
      "repro_fail_internet": 0,
      "repro_fail_download": 0,
      "repro_fail_interactive": 0,
@@ -14969,20 +15178,16 @@
     "Every data path in the code works in the repository as deposited.",
     "#### Execution",
     "**The code was run.** Each script ran in an isolated Docker container against a throwaway copy of the repository, in the run order above, with a 300-second per-script timeout. Of 1 script: 0 ran without error, 1 errored, 0 timed out, 0 could not run because one of its own dependencies is unavailable, 0 did not parse. Running against current package versions: a break can reflect version drift, which argues for pinning versions.",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = \"Mixed_Effect_Model.R\", Outcome = \"errored\", \n    Detail = \"runtime\", \"Time (s)\" = 3.3), row.names = c(NA, \n-1L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 15, FALSE)\n```\n",
+    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = \"Mixed_Effect_Model.R\", Outcome = \"errored\", \n    Detail = \"runtime\", \"Time (s)\" = 3.2), row.names = c(NA, \n-1L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 15, FALSE)\n```\n",
     "**1 script uses Windows paths**, with `\\` between folders, which works only on Windows. To run the code we put `/` instead, which works on every system, Windows included.",
     "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(File = c(\"Mixed_Effect_Model.R\", \"Mixed_Effect_Model.R\"\n), \"Path in the code\" = c(\"\\\"C:\\\\\\\\Users\\\\\\\\USER\\\\\\\\Documents\\\\\\\\lab\\\\\\\\analyses\\\\\\\\bigTable\\\\\\\\vis\\\\\\\\bigTableAll.csv\\\"\", \n\"\\\"C:\\\\\\\\Users\\\\\\\\USER\\\\\\\\Documents\\\\\\\\lab\\\\\\\\analyses\\\\\\\\bigTable\\\\\\\\ves\\\\\\\\bigTableAll.csv\\\"\"\n)), row.names = c(NA, -2L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 10, FALSE)\n```\n",
     "*Expand a row below to see the output each script produced.*",
     "::: {.callout-tip title=\"Output — Mixed_Effect_Model.R (errored)\" collapse=\"true\"}\n\n**Output (stdout):**\n````\n> library(readr)\n> library(lme4)\n> library(lmerTest)\n> library(emmeans)\n> library(tidyr)\n> library(dplyr)\n> library(ggplot2)\n> library(see)\n> vis_path <- \"C:/Users/USER/Documents/lab/analyses/bigTable/vis/bigTableAll.csv\"\n> ves_path <- \"C:/Users/USER/Documents/lab/analyses/bigTable/ves/bigTableAll.csv\"\n> output_path <- \"C:\\\\Users\\\\USER\\\\Documents\\\\lab\\\\analyses\\\\bigTable\\\\\"\n> fit_model <- function(data) {\n>   # Fit the model\n>   mdl <- glmer(\n>     Response ~ 1 + CurrStim + PrevStim + PrevChoice + PrevChoice:FeedbackType +\n>       (1 + CurrStim + PrevStim + PrevChoice + PrevChoice:FeedbackType | SubjNum),\n>     data = data, family = \"binomial\", nAGQ = 1, verbose = 1,\n>     control = glmerControl(optimizer = \"bobyqa\")\n>   )\n>   \n>   # Print model summary\n>   summary(mdl)\n>   \n>   # Extract emmeans for PrevChoice per FeedbackType\n>   means <- emtrends(mdl, ~ FeedbackType, var = \"PrevChoice\", nesting = NULL)\n>   print(summary(means))\n>   \n>   # Compute pairwise contrasts with Bonferroni correction\n>   contrast_results <- contrast(means, method = \"pairwise\", adjust = \"bonferroni\")\n>   print(summary(contrast_results))\n>   \n>   # Extract coefficients (random + fixed)\n>   coefs <- coef(mdl)$SubjNum\n>   coefs$SubjNum <- row.names(coefs)\n>   \n>   # Return outputs\n>   list(\n>     mdl = mdl,\n>     means = means,\n>     contrast_results = contrast_results,\n>     coefs = coefs\n>   )\n> }\n> vis_bigTable <- read_csv(vis_path)\n````\n**Messages / errors (stderr):**\n````\nLoading required package: Matrix\n\nAttaching package: ‘lmerTest’\n\nThe following object is masked from ‘package:lme4’:\n\n    lmer\n\nThe following object is masked from ‘package:stats’:\n\n    step\n\nWelcome to emmeans.\nCaution: You lose important information if you filter this package's results.\nSee '? untidy'\n\nAttaching package: ‘tidyr’\n\nThe following objects are masked from ‘package:Matrix’:\n\n    expand, pack, unpack\n\n\nAttaching package: ‘dplyr’\n\nThe following objects are masked from ‘package:stats’:\n\n    filter, lag\n\nThe following objects are masked from ‘package:base’:\n\n    intersect, setdiff, setequal, union\n\nError:\n! 'C:/Users/USER/Documents/lab/analyses/bigTable/vis/bigTableAll.csv'\n  does not exist.\nBacktrace:\n     ▆\n  1. ├─global .repro_docker_run()\n  2. │ ├─base::withVisible(eval(e, envir = env))\n  3. │ └─base::eval(e, envir = env)\n  4. │   └─base::eval(e, envir = env)\n  5. ├─readr::read_csv(vis_path)\n  6. │ └─vroom::vroom(...)\n  7. │   └─vroom:::vroom_(...)\n  8. └─vroom (local) `<fn>`(\"C:/Users/USER/Documents/lab/analyses/bigTable/vis/bigTableAll.csv\")\n  9.   └─vroom:::check_path(path)\n 10.     └─cli::cli_abort(msg, call = call)\n 11.       └─rlang::abort(...)\nExecution halted\n````\n\n:::\n",
     "Dependencies were installed into a throwaway library before running: 8 succeeded, 0 failed. dplyr, emmeans, ggplot2, lme4, lmerTest, readr, see, tidyr were installed.",
-    "#### Reported vs. reproduced",
-    "44 statistical tests reported in the manuscript text were checked against the extracted analysis output: 0 matched (0 fully, 0 partially) — 0% found.",
-    "Some reported values were only found alongside OTHER components after being separated from their own originally-reported neighbours (e.g. a mean split from its own confidence interval). The \"Plausible\" column marks whether that split is well-supported: TRUE when the pieces still trace back to the same underlying variable (via the output's own row labels), FALSE when no such link was found — a FALSE match is not necessarily wrong, but is worth checking against its own Source file/Analysis columns before treating it as confirmed.",
-    "\n```{r}\n#| echo: false\n\n\n# table data --------------------------------------\ntable <- structure(list(Reported = c(\"BF01=>3\", \"BF01=>10\", \"BF01=<1\", \n\"BF01=<1\", \"F=0.073 df1=1 df2=62 p=0.79\", \"z=3.13 p=5.56\", \"z=5.43\", \n\"z=4.76 p=2.35\", \"z=4.72\", \"z=-6.99 p=2.1\", \"z=-3.71\", \"z=1.45 p=0.79\", \n\"z=-0.81\", \"BF01=0.28\", \"BF01=15.27\", \"r=0.69 p=3.3\", \"r=0.18 p=0.15\", \n\"r=0.37 p=0.003\", \"r=0.05 p=0.68\", \"z=-8.64\", \"r=0.39 p=0.0015\", \n\"r=0.24 p=0.059\", \"r=-0.02 p=0.89\", \"BF01=3.38\", \"BF01=2.13\", \n\"BF01=2.78\", \"BF01=3.46\", \"z=-2.4\", \"z=-2\", \"z=0.96 p=0.41\", \n\"z=0.82\", \"z=-1.33 p=0.18\", \"z=1.04 p=0.3\", \"z=-6.99\", \"BF01=4.77\", \n\"BF01=1.5\", \"p=7.93 Cohen's d=0.42\", \"r=0.35 p=0.002\", \"BF01=0.06\", \n\"r=0.06 p=0.33\", \"BF01=4.29\", \"r=0.35 p=0.006\", \"r=0.32 p=0.01\", \n\"α=0.05 N=55 N=68\"), Found = c(FALSE, FALSE, FALSE, FALSE, FALSE, \nFALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, \nFALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, \nFALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, \nFALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, \nFALSE, FALSE, FALSE), Confidence = c(\"none\", \"none\", \"none\", \n\"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \n\"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \n\"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \n\"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \n\"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \"none\", \n\"none\"), Plausible = c(\"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \n\"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \n\"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \n\"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \n\"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \n\"yes\", \"yes\"), \"Matched values\" = c(\"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\"), \"Not matched\" = c(\"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\"), \"Source file\" = c(\"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\"), Analysis = c(\"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \n\"\", \"\", \"\", \"\", \"\", \"\", \"\")), row.names = c(NA, -44L), class = \"data.frame\")\n\n# display table -----------------------------------\nmetacheck::report_table(table, \"auto\", 15, FALSE)\n```\n",
     "#### MATLAB code, no reproducible output",
     "69 MATLAB code files are present, but this module has no way to extract statistics from MATLAB output, and no self-reproducible output (JASP/jamovi, SPSS-Viewer, a Stata output log, or Mplus output) was found to fall back on. Readers without a MATLAB license cannot currently see what the code produced. Consider depositing the results as well, so they are visible without MATLAB installed: run `diary('output.txt')` (or `diary on`) before the analysis and `diary off` after to save a plain-text transcript of everything printed to the Command Window, or use `publish('script.m', 'pdf')` (or the Live Editor's Export/Save As) to generate a single readable document with the code, its output, and any figures together."
    ],
-   "checklist_section": "We ran the paper's 1 R script in the order they depend on each other, each in an isolated container, for at most 5 minutes per script.\n\n**0 of 1 script ran to the end**: 1 stopped with an error.\n\n| Script | Result | What happened |\n|---|---|---|\n| Mixed&#95;Effect&#95;Model.R | Stopped with an error | <code>Error: ! 'C:/Users/USER/Documents/lab/analyses/bigTable/vis/bigTableAll.csv' does not exist.</code> |\n\n### How to make your code run on another computer\n\nWe ran your code on a clean computer, the way a reader or reviewer would. Below is each problem we found, the scripts it affects, and how to fix it. Fix them in the order given: a problem near the top can cause the ones below it.\n\n**A script could not open a file, but the error does not say which.**\n\n- <code>Mixed&#95;Effect&#95;Model.R</code>\n\nCheck every file the script reads. Make sure each one is in the deposit, and that its location is written from the top folder of the project.\n\n### Comparison with the paper\n\nOf the 44 statistical tests reported in the paper, 0 were found in the output of the code. No script ran to the end, so most results were never produced."
+   "checklist_section": "We ran the paper's 1 R script in the order they depend on each other, each in an isolated container, for at most 5 minutes per script.\n\n**0 of 1 script ran to the end**: 1 stopped with an error.\n\n| Script | Result | What happened |\n|---|---|---|\n| Mixed&#95;Effect&#95;Model.R | Stopped with an error | <code>Error: ! 'C:/Users/USER/Documents/lab/analyses/bigTable/vis/bigTableAll.csv' does not exist.</code> |\n\n### How to make your code run on another computer\n\nWe ran your code on a clean computer, the way a reader or reviewer would. Below is each problem we found, the scripts it affects, and how to fix it. Fix them in the order given: a problem near the top can cause the ones below it.\n\n**A script could not open a file, but the error does not say which.**\n\n- <code>Mixed&#95;Effect&#95;Model.R</code>\n\nCheck every file the script reads. Make sure each one is in the deposit, and that its location is written from the top folder of the project.\n\n### Comparison with the paper\n\nWe found no statistical tests in the paper to compare with the output of the code."
   },
   "ref_pubpeer": {
    "module": "ref_pubpeer",
@@ -15036,6 +15241,14 @@
    "section": "reference",
    "report": "We checked 76 references with DOIs. No citations to articles in the FLoRA database were found."
   }
+ },
+ "rerun_of": {
+  "metacheck_version": "0.4.4.3",
+  "checked": "2026-11-15T23:06:54+00:00"
+ },
+ "downloaded": {
+  "status": "used",
+  "files": 171
  },
  "paper": {
   "paper_id": "input-from-word",
