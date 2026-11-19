@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: A Computational Model of Mental Rotation in
+Aphantasia</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+A Computational Model of Mental Rotation in Aphantasia
+</p>
+<p class="meta">
+2026-11-19 · Metacheck 0.4.4.18
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>2</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>11</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(2)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Ethics
+Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to involve live data collection and lacked an
+ethics approval statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, but it was not present:</p>
+<blockquote>
+<p>More capable participants are faster and more accurate, which
+produces a negative RT-accuracy correlation.</p>
+</blockquote>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Effect
+Sizes in t-tests and F-tests</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 t-test and/or F-test where effect sizes are not reported.
+Check these tests in the table below, and consider adding effect
+sizes.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We recommend checking the sentences below, and add any missing effect
+sizes.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Other parameters, bound separation a = 2.4, noise s = 1, ∆t = 3 ms, are
+equal for all participants.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating that effect sizes are often
+not reported:</p>
+<ul>
+<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
+(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
+Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
+</ul>
+<p>For educational material on reporting effect sizes:</p>
+<ul>
+<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
+to Effect Sizes and Confidence Intervals</a></li>
+</ul>
+</div>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Other parameters, bound separation a = 2.4, noise s = 1, ∆t = 3 ms, are
+equal for all participants.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+t = 3
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable t(df)=value found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 4 non-significant p values that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = 0.45
+</td>
+<td style="text-align:left;">
+This is comparable to the empirical data correlation of -0.33 (p =
+0.45).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = 0.078
+</td>
+<td style="text-align:left;">
+This is comparable to the empirical data correlation of 0.36 (p =
+0.078). Kay et al., 2024’s data is around the upper limit of the model’s
+range.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = 0.95
+</td>
+<td style="text-align:left;">
+The model reproduces b in aphantasia (-201 ms for the model, vs. -198 ms
+for people; p = 0.95), but only half of it in the control group (163 ms
+for the model, vs. 307 for people, p = 0.054).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = 0.054
+</td>
+<td style="text-align:left;">
+The model reproduces b in aphantasia (-201 ms for the model, vs. -198 ms
+for people; p = 0.95), but only half of it in the control group (163 ms
+for the model, vs. 307 for people, p = 0.054).
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 2 references with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 18 detected.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(11)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 38 references with DOIs. You cited 2 references with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Kay, L., Keogh, R., Andrillon, T., &amp; Pearson, J. (2022). The
+pupillary light response as a physiological index of aphantasia, sensory
+and phenomenological imagery strength. eLife, 11, Article e72484. <a href="https://doi.org/10.7554/eLife.72484" class="uri">https://doi.org/10.7554/eLife.72484</a>
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/BDD859F803CE49D3C45BEFAD98C267" target="_blank">link</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ratcliff, R., &amp; McKoon, G. (2008). The diffusion decision model:
+Theory and data for two-choice decision tasks. Neural Computation,
+20(4), 873-922. <a href="https://doi.org/10.1162/neco.2008.12-06-420" class="uri">https://doi.org/10.1162/neco.2008.12-06-420</a>
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/153C687DFF3C517B4A2EEA6243FF1C" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 38 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 38 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>People with aphantasia seem unable to create visual imagery, yet they perform mental manipulation of objects in the mind. Different frameworks have different views on how this is possible. Mental rotation is a particularly useful test case for comparing these frameworks, as people with aphantasia show systematic differences and similarities on this task compared to people without aphantasia. Here, we propose a computational model of mental rotation based on the &#x27;broken rendering&#x27; account of aphantasia (Balaban &amp; Ullman, 2025), which separates physical/spatial representations from graphical, picture-like ones. Our model proposes that both people with and without aphantasia are similar in their identification and rotation of objects, but differ in the comparison stage: People with and without aphantasia can use spatial/physical similarity to compare rotated objects, but people with typical imagery can also render a rotated object back into a 2D, pixel-like representation, and carry out a fast-but-less-reliable comparison between such visual depictions. Both sources of comparison (physical and visual) provide evidence to a single drift-diffusion decision process. We used our model to generate simulated experimental data, which we compared to the detailed findings of Kay et al., 2024. We found that our model captures the qualitative and quantitative patterns of behavior in a mental rotation task for people with and without aphantasia, including the canonical increase in response time (and decrease in accuracy) with angle growth, the slower but more accurate responses in aphantasia, and the opposite within-group correlations. This lends support to the broader framework of &#x27;broken rendering&#x27; over &#x27;different strategies&#x27; and &#x27;lack of meta-access&#x27; as approaches to aphantasia. The findings hold across a wide set of parameter settings, and the model makes novel and testable predictions for further study in mental rotation.</p>
+<h3>Introduction</h3>
+<p>We are not passive audience members in the theater of the mind, we are directors. We can manipulate the mental images that come before us, moving them about and changing them. One of the most well-studied mental manipulations of this sort is mental rotation: people seem able to take an imagined item and turn it around in various ways (Shepard &amp; Metzler, 1971). A compelling feature of mental rotation is the linear relationship between the time it takes people to mentally rotate an object, and the real angular distance that same object would travel, were it to exist in reality (Cooper &amp; Shepard, 1973; Shepard &amp; Cooper, 1982 /1986; Shepard &amp; Metzler, 1971). This linear relationship is often taken as evidence that the format of mental imagery resembles that of perception (Kosslyn et al., 2006), and that the manipulation of mental images proceeds through mental simulation (Shepard &amp; Cooper, 1982 /1986). The mental rotation task has been studied in many ways over the decades, including neurally (Tomasino &amp; Gremese, 2016; Zacks, 2008), behaviorally (Just &amp; Carpenter, 1976; Shepard &amp; Cooper, 1982 /1986), developmentally (Frick et al., 2014), and computationally (Khazoum et al., 2026; Provost &amp; Heathcote, 2015). The surrounding claims regarding the format of mental imagery have also been hotly debated (Just &amp; Carpenter, 1976; Kosslyn et al., 2006; Pylyshyn, 2002). The main question for us here is: how can a director manipulate something that they cannot see?</p>
+<p>When we imagine things, many of us seem to see something. But, it seems that some of us cannot see things in the mind&#x27;s eye at all. Over the past decade, there has been a tremendous amount of research and interest in aphantasia, a condition in which people cannot voluntarily create visual mental images (Kay et al., 2022; Keogh &amp; Pearson, 2018; Milton et al., 2021; Wicken et al., 2021; A. Zeman et al., 2015). For people with aphantasia, the stage before the mind&#x27;s eye seems dark or non-existent. And yet, people with aphantasia are apparently able to direct the goings-on in the mental stage: many studies suggest that people with aphantasia are able to carry out a wide range of imagery tasks (Bainbridge et al., 2021; Milton et al., 2021; Pounder et al., 2022; A. Z. Zeman et al., 2010; Zhao et al., 2022). How can this be?</p>
+<p>The views on how people with aphantasia carry out mental imagery tasks can be roughly sorted into 3 camps: (1) Different strategies. In this view, people with aphantasia use non-imagery based strategies to carry out mental imagery tasks (Kay et al., 2024; Reeder et al., 2024). If this were true, it would not be surprising. People use various mental strategies to carry out the same operations. But, such a view needs to account for the cases in which people with and without aphantasia seem to be broadly similar. While it is not unreasonable to suggest that different strategies converge in their final output, it does seem like a suspicious coincidence that different strategies would just-so-happen to produce similar behavioral profiles on the same task (including in mental rotation), and a person who holds this view would need to spell out the specific strategies people with aphantasia supposedly rely on for this to be a testable alternative; (2) Same format, but lack of metaaccess. In this view, people with and without aphantasia both create mental images in the same visual-perceptual format, and operate on them in similar ways. It is just that people with aphantasia lack meta-access to these perceptual images (Michel et al., 2024; Nanay, Figure 1 Schematic of proposed computational model of mental rotation in people with and without aphantasia. According to this proposal (based on Balaban &amp; Ullman, 2025), when tasked with a mental rotation task such as determining whether two images are of the same object (Stimuli), both people with and without aphantasia can &quot;de-render&quot; the objects into a physical/spatial representation, and perform mental operations such as rotation on the physical representations. Physical representations can be compared for alignment and similarity judgements, e.g. by comparing the centers of nodes along a wire-frame representation. In addition, people without aphantasia may &#x27;render&#x27; a physical representation back into a graphical, 2D, picture-like representation. Such pictorial, graphical representations may be compared using similarity functions suitable for pixel-based comparisons. Each of these comparisons (physical and graphical) is combined into the evidence signal in a decision-making model.</p>
+<p>2021). Such a view easily accommodates similar behavioral patterns between people with and without aphantasia, and also finds recent support in neuroscience (Chang et al., 2025; Liu et al., 2025). However, it does not easily account for the experiments that show people with aphantasia truly do not seem to create visual images, including those based on binocular rivalry speed-up (Keogh &amp; Pearson, 2018), skin conductance studies (Wicken et al., 2021), imagery pupillary light response (Kay et al., 2022), or implicit priming (Purkart et al., 2025). Nor does this view account for the fact that even within the similarities between people with and without aphantasia, there are systematic differences between them (Kay et al., 2024; Milton et al., 2021; Pounder et al., 2022), such as the case of mental rotation; (3) Broken rendering. This view (Balaban &amp; Ullman, 2025; Phillips, 2025) be-gins with a separation between physical/spatial imagery and visual/graphical imagery. In this view, when people create mental images, they go through a hierarchical process akin to the process that creates images in computer simulations and animations. First, there is the spatial/physical scaffolding of rough object bodies and their relations to one another. Only later, it is an optional, separate operation to create a 2D representation of what such a scene looks like from a particular perspective (an operation termed rendering in computer graphics). People with aphantasia do not go through the rendering operation, and so do not create a 2D, pixel-like representation of what a scene looks like from a particular view. But, rendering is not necessary for many mental imagery tasks, and most tasks attributed to mental imagery can be carried out through spatial/physical representations. While visual images may be non-functional in many tasks, some downstream processes that rely on &#x27;picture-like&#x27; formats may be affected, e.g. certain emotional responses (Balaban &amp; Ullman, 2026).</p>
+<p>Mental rotation is a particularly useful case study for teasing apart the different proposals for how aphantasia might work. It is particularly well-studied, and research shows that people with aphantasia can generally perform mental rotation tasks (Kay et al., 2024; Milton et al., 2021; Pounder et al., 2022; A. Z. Zeman et al., 2010; Zhao et al., 2022), but their performance shows both similarities and differences compared to people without aphantasia. Models of aphantasia should account for both the similarities and differences. Kay et al., 2024, with the largest sample size to date (N=95 for aphantasia, N=114 for control), found the following 5 characteristics in particular: 1.</p>
+<p>People with and without aphantasia show the canonical pattern: the reaction time grows linearly with the angular distance between two mental objects, and the accuracy drops as this angular distance grows.</p>
+<p>2. People with aphantasia show a longer reaction time on this task.</p>
+<h3>3. People with aphantasia have better accuracy on this task.</h3>
+<p>4. There is a positive correlation between accuracy &amp; reaction time in the control group.</p>
+<p>5. There is a negative correlation between accuracy &amp; reaction time in the aphantasia group.</p>
+<p>These patterns can also be seen in Figure 2 (top panels). Note that while a classic accuracy/reaction-time tradeoff can explain points 2-4, it falls apart at point 5. That is, it is not the case that people with aphantasia are simply taking longer with mental rotation tasks and, therefore, being more accurate.</p>
+<p>How do the different views on aphantasia account for the pattern of similarities and differences in mental rotation? A &#x27;Different Strategies&#x27; view could in principle account for it, but one would need a specific alternative for what different strategy people with aphantasia are using, and to show how it specifically leads to both the suspicious coincidence Comparison of empirical findings and our model. Top panels: A recreation of the results of Kay et al., 2024, testing mental rotation in people with and without aphantasia. Each dot denotes a participant&#x27;s mean RT or accuracy. For the Accuracy/RT comparison (right-most panel), these are averaged over the 100 • and 150 • conditions, and shaded bands show 95% confidence intervals from bootstrap estimation when fitting the least-squares lines. Bottom panels: Example results from one simulated experiment, using our model of mental rotation. The results in the main text refer to 1000 such simulations. The model captures the main patterns of the original study.</p>
+<p>that people with and without aphantasia show the canonical pattern (item #1), but also the differences in items #2-5. A &#x27;Lack of Meta-Access&#x27; view can easily explain the similarity (item #1), but why would &#x27;lack of meta-access&#x27; lead to the particular differences (patterns #2-#5)? A &#x27;Broken Rendering&#x27; view could in principle account for all of these patterns (Balaban &amp; Ullman, 2025), but one would need to put forward a specific, quantitative model based on this proposal to be convincing.</p>
+<p>Here, we put forward a specific, testable, computational model of mental rotation in aphantasia, based on the &#x27;broken rendering&#x27; proposal (see Figure 1). This model modifies the classic information-processing model of mental rotation proposed by Shepard and Cooper, 1982/1986. Specifically, we suggest that people with and without aphantasia are similar in their mental operations when it comes to determining the identity and orientation of the stimuli (Stage 1), that they are similar in rotating the objects (Stage 2), and that they differ when it comes to checking whether the rotated objects are the same (Stage 3). For Stage 3, we suggest that people with and without aphantasia can use spatial/physical alignment to determine whether the physical-representations of the objects match. But, in addition to this, people without aphantasia can &quot;render&quot; a rotated object, and so can use a graphical-similarity comparison as an added source of information for making their final decision. Such an added source of information can potentially lead to faster judgements for people without aphantasia, but also introduce additional errorfoot_0.</p>
+<p>The rest of this paper is organized as follows: We first detail our computational model, including the background assumptions and relation to previous proposals. The aim is to explain the model&#x27;s important details, while not bogging down the readers who prefer a higher-level summary of the model&#x27;s assumptions. To strike a balance, we specify some of the particulars of the model in Appendix A at the end of this paper. We then compare the results of our computational model with those of Kay et al., 2024, since it offers the most detailed and well-powered recent examination of mental rotation in aphantasia. To summarize these results upfront, we found that our model can indeed reproduce patterns #1-5 qualitatively and quantitatively. We end with a discussion of the additional testable predictions that our model makes, which current empirical findings do not speak to (yet), and the ways to test them. We also consider how our model relates to the ongoing debates surrounding aphantasia, and mental imagery more broadly.</p>
+<h3>Computational Model</h3>
+<h3>Theoretical Framework</h3>
+<p>Following Shepard and Cooper, 1982/1986, we focus on three stages of a mental rotation task: stimulus identification, mental rotation, and comparison. Continuing the broken-rendering account (Balaban &amp; Ullman, 2025), we assume the first two stages are the same in people with and without aphantasia. For stimulus identification, this assumption is backed up by evidence that shows similar visual working memory capacity for people with and without aphantasia (Keogh et al., 2021). For the mental rotation stage, the assumption of similarity between people with and without aphantasia is a hypothesis, based on the separation between &quot;physics&quot; and &quot;graphics&quot; and the suggestion that physical scene representation is intact in aphantasia. For the stimulus comparison stage, we propose that people with and without aphantasia can both make similarity judgements on the basis of physical object representations (the same simplified physical/spatial representations that are being rotated in the second stage). However, in addition to this, people without aphantasia can &quot;render&quot; physical/spatial representations in 2D graphical representations, and use those as an additional source of evidence for similarity judgements.</p>
+<p>We model the actual rotation stage of the mental rotation task by aligning the probe figure and the reference figure to the degree that best minimizes the least-square distances in the three-dimensional space. The alignment is only about the vertical axis, as that is the only axis of rotation in the stimulus set (Ganis &amp; Kievit, 2015). We also introduce noise to account for imprecision in people&#x27;s representations or mental operations. Specifically, we add a small random error φ ∼ N (0, s 2 jit ) about the same vertical axis of rotation. We considered four discrete levels of s jit , s jit ∈ {20, 25, 30, 35} •.</p>
+<p>Turning to the comparison stage: The two sources of evidence (physical/spatial and imagistic/graphical) feed into a single drift diffusion model (Ratcliff &amp; McKoon, 2008).</p>
+<p>In what follows, we use the subscript S to denote the spatial/physical similarity route, and the subscript I to denote imagistic/graphical similarity route. We denote the &quot;spatial dissimilarity&quot; function as f S , and &quot;graphical&quot; dissimilarity function as f I . There are various (dis)similarity functions that can be used for either f S or f I , and our proposal is not strictly tied to one particular function. Here, specifically, we used: • f S : The input is the 3D representation of the objects shown in the stimuli (post rotation and alignment, if relevant).</p>
+<p>The output is the spatial/physical dissimilarity between the two objects. To make this concrete, we used the root-mean-square distance between the two arrays of cube centers, but other spatial/physical similarity metrics can be considered.</p>
+<p>• f I : The input is the 2D, pixel-based representation of the objects shown in the stimuli (post rotation, and re-rendering, if relevant). The output is the visual/graphical dissimilarity between the two objects. To make this concrete, we used the root-meansquare difference of pixel intensity between the two pixel images, but other visual similarity metrics can be considered.</p>
+<p>To reiterate, we assume people with and without aphantasia make decisions of &#x27;same&#x27; or &#x27;different&#x27; in mental rotation based on the spatial route through f S , and that in addition to this people without aphantasia have an additional source of information through f I . Since the input to f S and f I rely on the same rotated object, their evidence is correlated, but it is not identical. We weight the additional information of f I by α j ≥ 0, which is specific a person&#x27;s reliance on visual imagery. The aphantasia group has α j = 0.</p>
+<p>In summary, the architecture of our model includes two routes of evidence that feed into a single decision process, modeled via drift-diffusion.</p>
+<p>A hierarchy of populations, people, and trial-by-trial differences Our computational model describes the populations of people performing mental rotation in different trials. It has three levels: • Population.</p>
+<p>We assume there are two sub-populations/groups, people with and without aphantasia. People in the aphantasia group have zero reliance on the visual route described above, but share all the other population-level distributions.</p>
+<p>• Person. Each simulated participant has individual-level characteristics describing their degree of reliance and proficiency with spatial and visual comparison (Appendix A). In line with standard drift-diffusion models for decision making, participants also have individual differences when it comes to non-decision time, and overall speed.</p>
+<p>• Trial. Each trial presents a participant with a new pair of objects in a mental rotation task. The model draws read-outs for this pair, and then runs a simulation of a driftdiffusion decision with this participant&#x27;s specific characteristics.</p>
+<p>The available data from Kay et al., 2024 include per-participant summaries, mean correct RT, and accuracy for each angle × {mirror versus same} combination. Given this, we simulate the whole experiment, and compute these same summaries for each simulated participant. We then compare the summary statistics from our model with the experimental data.</p>
+<p>Relationship to previous models. We note that ours is certainly not the first model of mental rotation. As mentioned, our overall framework builds on and modifies the model of Shepard and Cooper, 1982/1986. That model did not provide a process-level account connecting to a decision-making process, with differences between the comparison functions available to people with and without aphantasia in a way that can account for the data we consider. A more recent process-level model of mental rotation by Provost and Heathcote, 2015 fit the rate of evidence accumulation from behavioral data, but does not specify how the evidence is collected, nor relate to aphantasia. An even more recent model, by Khazoum et al., 2026, proposed a deep-learning model of mental rotation, which showed behavioral results comparable to those of humans. However, this model too did not consider varying similarity functions that split between graphics and physics, nor try to account for mental rotation in aphantasia.</p>
+<h3>Further model details.</h3>
+<p>A full technical specification of the model includes further details on how evidence is computed from the stimuli, specific choices of parameters regarding the drift-diffusion, and how individual (simulated) participants differ. We give these full details in Appendix A.</p>
+<h3>Experiment: Simulating mental rotation in aphantasia Stimuli</h3>
+<p>We use the custom rendition of three-dimensional cube objects made by Ganis and Kievit, 2015, to match the same stimulus set used in Kay et al., 2024. An example is shown in Figure 3. The objects were built in Python for our purpose of obtaining their 3D structure (cube centers), while the rendering choices, such as lighting and view point, remain as close to Ganis and Kievit, 2015 as possible. To err on the side of caution, we excluded 6 stimuli pairs from the original 48 due to them being either achiral, or not mirrors of each other. This leaves us with a set of 42 image pairs. We computed 1000 same and 1000 mirror trials for each pair of figures, and at each level of imprecision, s jit ∈ {20, 25, 30, 35} • . These samples are the model&#x27;s &quot;readout bank&quot;, and all following simulated experiments draw from them.</p>
+<p>The two routes already differ in their discriminability before setting any parameters (Figure A1). At s jit = 25 • , physical/spatial comparison separates same and mirror pairs better than imagistic/graphical comparison for all 42 figures, with a median discriminability of 2.90 against 1.06 (Figure B1; Appendix B). Example stimuli. One example used in our simulated experiments, to match the set used in Kay et al., 2024. Note that in comparing these two objects, the answer should be &#x27;different&#x27;.</p>
+<h3>Method</h3>
+<p>We simulated 1000 experiments at a representative parameter setting, chosen from a fixed rule (Appendix E). Each simulated experiment reuses the original experimental design of Kay et al., 2024, including 91 participants with aphantasia, and 107 controls. A simulated participant in either group was tested on 12 randomly drawn figures out of the set of 42. Each of the figures was presented with a same pair and a mirror pair, crossed with four angle disparity values, θ ∈ {0, 50, 100, 150} • , which totals 96 trials per participant. In each trial, a readout pair is sampled from the bank of the figure at the predetermined imprecision level, s jit = 25 •.</p>
+<p>We analyzed our simulated experiments following the same procedure as in Kay et al., 2024. The accuracy of a participant at each angle is the proportion of their correct responses. A participant&#x27;s RT is counted for analysis when the response is correct, consistent with Kay et al., 2024 , though we note Shepard and Cooper, 1982 /1986 further excluded the mirror trials. The between-subject correlations are calculated on each participant&#x27;s means in the 100 • and 150 • conditions. Following Kay et al., 2024, we use Spearman&#x27;s correlation to measure the correlation between RT and accuracy in the aphantasia group, and Pearson&#x27;s correlation for the control group, with both tested at α = 0.0125.</p>
+<p>We relied on the data in Kay et al., 2024 to inform our model in two ways. First, the shared rotation stage used the group-level summary statistics from Kay et al., 2024&#x27;s data (including the mean RT, accuracy at each angle, and the spread of RT across participants, see Appendix A). We assume that this stage is the same for the two groups, and it can only attenuate the within-group correlations but not alter the specific difference between the two groups. Second, our choice of representative parameter settings favored parameter settings with similar size in effect to Kay et al., 2024. We emphasize however that the resulting patterns do not come simply from taking the original data. The main findings we describe below (increase of RT with angle, decrease of accuracy with angle, aphantasia group is slower but more accurate, and the opposite signs in within-group correlations) hold in 96.9% of a broad region of parameter settings (Appendix D).</p>
+<h3>Results</h3>
+<p>Figure 2 shows the data from Kay et al., 2024 compared to a typical simulated experiment. As can be seen, the two agree with one another on the main patterns. Moving to a more formal comparison: we compared our model&#x27;s results to human data in two ways, which are not necessarily consistent. The first analysis examined where the empirical data fell in the distribution of our 1000 simulated experiments (Palminteri et al., 2017). For each statistic, we estimate p by taking the 1000 simulated values of the statistic as the (approximate) distribution the model predicts, (Table 1). In the second analysis (summarized in Table 2), we examined whether applying the same statistical tests on our experiments gives the same results as the human data (Wilson &amp; Collins, 2019). The model values below are medians, with 2.5% to 97.5% of the 1000 simulated experiments shown in brackets.</p>
+<p>People with aphantasia are slower but more accurate. Our model showed the same pattern that both groups are slower and less accurate at larger angles, which is from the built-in shared rotation stage. Kay et al., 2024 found that people with aphantasia were slower than controls by 351 ms, and more accurate by 8.7%, across all angles. Our model shows a slowdown of 549 ms ([374, 711]) and increase in accuracy of 10.9% ([8.8%, 12.9%]). We note that this accuracy difference between the two groups is ever-so-slightly larger than observed (p = 0.036), but we do not take this to be meaningful.</p>
+<p>We note a main difference in RT between our model and people, at small angles (0 • and 50 • ). Specifically, our model predicts an RT difference between people with and without aphantasia throughout, whereas the empirical findings show an increase in the RT difference, due to a very small (or possibly non-existent) RT difference at small angles. Such a difference is easily accounted for in principle: For small angles (or even no rotation, 0 • ), mental-rotation may not be necessary. Since both images are still available to the participants perceptually, it is possible in principle for people with aphantasia to make use of graphical similarity functions to compare the two images. Our model is more similar to a situation in which one (or both) of the original images are removed from perception. We can easily amend our model to account for this, but preferred to keep things simpler in the main analysis. We discuss this further in the Discussion.</p>
+<h3>Opposite speed-accuracy correlations between the two groups.</h3>
+<p>With betweenparticipant speed spread matching the data, the aphantasia group&#x27;s RT-accuracy Spearman&#x27;s correlation is -0.25, with 95% of experiments showing a correlation going from -0.43 to -0.06. This is comparable to the empirical data correlation of -0.33 (p = 0.45). The Pearson&#x27;s correlation for the simulated control group is 0.20, with 95% of experiments showing a correlation that ranges from 0.00 to 0.38. This is comparable to the empirical data correlation of 0.36 (p = 0.078). Kay et al., 2024&#x27;s data is around the upper limit of the model&#x27;s range.</p>
+<p>From the comparison stage alone, without the added speed spread from the shared rotation stage, the correlations are stronger than observed, -0.72 for the aphantasia group ([-0.80, -0.60]) and +0.53 for the control group ([0.37, 0.65]). As the shared rotation stage cannot adjust the RT spread differentially in the two groups, we use b = r • SD(RT ), the standard deviation of RT that is related to accuracy within the two groups, which the rotation stage leaves unchanged (see Appendix E). The model reproduces b in aphantasia (-201 ms for the model, vs. -198 ms for people; p = 0.95), but only half of it in the control group (163 ms for the model, vs. 307 for people, p = 0.054).</p>
+<p>Applying Kay&#x27;s statistical tests on our simulated data matches most of their conclusions. We run the same statistical tests on each of our simulated experiments, to see whether the conclusions agree (Table 2). Overall, the model achieved 10 of 14 conclusions in Kay et al., 2024&#x27;s results regarding group and angle in at least 96% of the experiments. The four non-matched conclusions all concern small angles, which can be explained as discussed above. For RT, all of the simulated experiments replicate the main effects of group and angle, but not their interaction, where only 5% of the simulated experiments are significant. Multiple comparisons show larger RT for aphantasia at larger angles, 100 • and 150 • , for almost all experiments. However, our model does not reproduce the nonsignificant RT differences at 0 • and 50 • (only showing in less than 1% of the simulations). For accuracy, all of the simulated experiments replicate the main effects of groups, that of angles, their interaction, and multiple comparison except at 0 • (only 2% of the simulated experiments are non-significant at 0 • ).</p>
+<p>For the within-group correlations, 47% of the simulated experiments with Kay et al., 2024&#x27;s sample size find significance in the aphantasia group, 34% in the control group, and both 16% (Type I error rate = 0.0125). A bootstrap analysis using Kay et al., 2024&#x27;s original participants with replacement finds 74% for aphantasia, 92% for controls, and 68% for both, but this could be over-optimistic. At conventional Type I error = 0.05, our simulated experiments give 70%, 55%, and 39%, against 86%, 98%, and 84% in bootstrap sampling.</p>
+<h3>Discussion</h3>
+<p>Mental rotation is just one example of a mental operation that people can carry out on objects of the mind (Shepard &amp; Cooper, 1982 /1986). But it is a particularly important one, and one that has been studied, turned over, and examined from many angles. It is also a particularly useful case-study for comparing different frameworks that try to account for the phenomena of aphantasia. What framework can account for the fact that people with aphantasia show systematic similarities and differences in mental rotation, when compared to people who can create visual imagery? Here, we proposed a process-level account of mental rotation that can account for how it is carried out in aphantasia. Our model was based on the more general proposal of &#x27;Broken rendering&#x27; (Balaban &amp; Ullman, 2025), which itself is based on a basic separation in the mind between &quot;physics&quot; and &quot;graphics&quot;. Our model suggests that people with and without aphantasia share many of the same operations of mental rotation: both types of people recognize and de-render the stimuli into physical/spatial representations, both rotate it using physical-based operations, and both can compare the results using physics/spatialbased similarity functions. However, in addition to this, people without aphantasia can &#x27;render&#x27; the rotated object in a 2D graphical representation, which allows for an additional comparison route via similarity functions that expect pixel-like, 2D visual input. We further operationalized these two routes (physics and graphics) as sources of evidence for a driftdiffusion decision model.</p>
+<p>We found that our model reproduced the main behavioral characteristics shown by people with and without aphantasia when doing a mental rotation task (Kay et al., 2024), including both the similarities and the differences. The model, like people, shows increased overall RT and lower accuracy with rotation angle, a higher RT and higher accuracy for aphantasia, and a speed-accuracy tradeoff for control, but not aphantasia. While the model</p>
+<p>Test Kay et al. Model Same conclusion RT group F = 13.5, p &lt; .001 F = 39.9 [19.0, 70.7] 100% angle F = 506.7, p &lt; .001 F = 415 [336, 502] 100% group × angle F = 14.6, p &lt; .001 F = 0.5 [0.0, 4.6] 5% at 0 • d = .22, n.s. d = .79 [.59, 1.01] &lt; 1% at 50 • d = .29, n.s. d = .80 [.56, 1.03] &lt; 1% at 100 • d = .62, p &lt; .001 d = .80 [.51, 1.10] 99% at 150 • d = .77, p &lt; .001 d = .80 [.42, 1.17] 96% Accuracy group F = 22.8, p &lt; .001 F = 111 [66, 178] 100% angle F = 144.9, p &lt; .001 F = 242 [201, 291] 100% group × angle F = 4.9, p = .002 F = 24.9 [13.6, 40.5] 100% at 0 • d = .32, n.s. d = .62 [.46, .77] 2% at 50 • d = .58, p = .002 d = 1.00 [.75, 1.28] 100% at 100 • d = .72, p &lt; .001 d = 1.39 [1.04, 1.75] 100% at 150 • d = .71, p &lt; .001 d = 1.77 [1.34, 2.22] 100% Correlation aphantasia, r &lt; 0 r s = -.33, p = .001 r s = -.25 [-.43, -.06] 47% controls, r &gt; 0 r = +.36, p &lt; .001 r = +.20 [.00, +.38] 34% both yes (68%) a -16%</p>
+<p>Table 2 Results of running the same statistical tests on Kay et al., 2024&#x27;s and model data from 1000 simulated experiments.For RT and accuracy, mixed ANOVAs of group as between-participant variable and angle as within-participant variable was used. Bonferroni corrections are applied to comparisons of the groups at each angle (Cohen&#x27;s d, aphantasia minus controls). The within-group correlation is also tested. The table shows the median and the central 95% of all simulated experiments. Same conclusion column shows the percentage of experiments that reach Kay et al.&#x27;s conclusion, with type I error level at 0.0125 for the correlations, and 0.05 for the others. a Percentage of 5000 bootstrap drawn from Kay et al.&#x27;s own participants in which both correlations are significant.</p>
+<p>needs to specify a diverse set of parameters to account for various things from the speed of rotation to the noise and variance in each route, we found similar conclusions in 97% of a wide-yet-reasonable parameter space (Appendix D). This suggests that the conclusions are based on the overall model structure, rather than a hyper-specific choice of parameters.</p>
+<p>We take the ability of our model to capture diverse findings in mental rotation to be more generally supportive of the &#x27;broken rendering&#x27; account. The general notion is that people with and without aphantasia can carry out spatial/physical operations supported by mental simulation, akin to how a game/physics engine can be used to run a simulated world forward without necessarily rendering it graphically (Balaban &amp; Ullman, 2025; Ullman et al., 2017). How does this &#x27;broken rendering&#x27; account fare against the other two main alternatives, roughly categorized as &#x27;lack of meta-access&#x27; and &#x27;different strategies&#x27;? The &#x27;lack of meta-access&#x27; account can explain the similarities in performance between people with and without aphantasia, but we are hard-pressed to see how it accounts for the specific differences. The &#x27;different strategies&#x27; account could perhaps come up with dual strategies that can account for the similarities and differences, but if so it would be less parsimonious: our view does not require an entirely different strategy, but merely one reasonable difference in an additional available representation. Further, we ourselves could not come up with a truly alternative, reasonable &#x27;dual strategy&#x27; model that just-so-happens to fit the similarities and differences in the empirical data. This does not mean such models/strategies don&#x27;t exist, but we believe the onus is now on supporters of that view to come up with them and put them to a rigorous comparison with the data and our model.</p>
+<p>While our model is generally in line with the findings of Kay et al., 2024, we do recognize that it diverges from it for small angles, and most especially for cases where there is no angle-difference between the two objects that are shown for comparison. For example, our model predicts that people with aphantasia will be slower to respond when the difference between the two objects is 0 • , but empirically it appears that there is no RT difference in such cases. However, this difference can be easily accounted for: When the two stimuli images do not differ in angle, the information is already in 2D visual format and is available to people with and without aphantasia, without the need for a &#x27;rendering&#x27; process. In such a case, people with aphantasia could use the same similarity functions as people without aphantasia, and we should expect little to no difference between them. This is in line with other studies, which show that for perceptual tasks people with and without aphantasia perform equally well (Bainbridge et al., 2021). Our model in its current form assumes that objects are de-rendered into a physical representation and then (for people without aphantasia) rendered back. This is more akin to an experimental set-up in which the two objects are not presented simultaneously, and one has to be kept in memory. We could simply augment our model with the additional assumption that for small angles no re-rendering is necessary for either group, but opted to keep the model specification cleaner and simpler for our present purposes.</p>
+<p>Beyond broadly matching the available data, our model makes specific predictions that can be examined with further behavioral studies. A first such prediction continues the point above: if stimuli were presented to the participants such that the first object was removed from direct perception, followed by a delay prior to the presentation of the second object, we would expect a bigger RT difference between the aphantasia and control groups even in small angles. A different prediction relates to the fact that our model suggests that the difference in RT between people with and without aphantasia is due to the comparison stage, rather than the recognition or rotation stages. The current data clumps all of these stages together, but it is possible to design experiments that tease these stages apart. Indeed, Shepard and Cooper, 1982/1986 introduced such studies. We would propose then to run equivalent studies that separate the different stages of mental rotation, and the response of people with and without aphantasia for each stage. We expect to find that much of the RT difference between the groups is due to the comparison stage rather than the rotation stage.</p>
+<p>While the bulk of our studies here have focused on the comparison between aphan-tasia and control groups, we note that our model is also a model of mental rotation in people without aphantasia, and is interesting to consider on its own as such. In particular, while our current model is set up to &#x27;render&#x27; an object at the end of the rotation, it is interesting to consider whether such a description matches people&#x27;s reports and behavior, and how rotation can be modified to render objects at intermediate outputs.</p>
+<p>To explain what we mean by this, consider first that it is possible for a game/physics-engine to rotate a body stepby-step, but either with or without rendering what the body looks like visually at different sub-steps. Rendering at different sub-steps is possible, but slows the process down (we note as an aside that we did not account for the processing time of rendering in the model here, which could introduce an added constant on top of the results). Now, consider the visual imagery associated with mental rotation in people. Consider for example an image with a high level of internal visual detail, such as a zebra or a birthday cake with many colored candles. Next, try to mentally rotate that image by an unconventional angle (e.g. 60 degrees, or 150 degrees). Based on anecdotal examination, it seems even many people without aphantasia might agree with the suggestion that they do not &#x27;see&#x27; the internal details of the object being rotated but rather have only the impression of the bulk shape, outline, or axis rotating, and it is only once the rotation is finished that they picture the individual features. Such an impression is in line with our model here. One could then go further and have people try to render the image at sub-steps of the rotation, which we then expect to lead to specific, predictable slowdowns, akin to those of a physics/game-engine tasked in a similar way. Our model has focused on mental rotation and aphantasia. It accounts for both the similarities and differences between people with and without aphantasia in this task, and suggests novel studies to test this framework further. Because the model was based on the &#x27;broken rendering&#x27; proposal, we also see it applying more broadly. The broader suggestion is that people with and without aphantasia create and manipulate objects of the mind in a similar, hierarchical way, with much of the work being done by spatial/physical operations. It is a separate operation to then &#x27;render&#x27; what a scene or object looks like from a particular perspective. This operation may not be available to all of us, but also may not be terribly crucial. When we wonder how a director can move around the scenery on the mind&#x27;s stage without seeing it, we should remember that even for those of us who can see the set, it was we who set it up before the curtains lifted.</p>
+<h3>Appendix A Further details on formal model specification Dissimilarity Distributions</h3>
+<p>For each figure, imprecision level, and route r ∈ {S, I}, there is one readout bank. Each readout bank gives the separation of the two trial types and a decision criterion: d r is the discriminability of the route, the equivalent of d a in signal detection theory, when the signal distribution and noise distribution have unequal variances (Green &amp; Swets, 1966; Macmillan &amp; Creelman, 2005).</p>
+<p>The criterion c r is the threshold that maximizes accuracy when same and mirror trials are equally likely. It is estimated by sweeping the threshold over the bank, due to the heteroscedasticity of the distributions. The underlying rationale of the readout bank is the assumption that people have a self-model of these quantities for the figures they see. Therefore, these constants reflect the properties of the stimuli and rotation imprecision.</p>
+<h3>Visual-route unreliability κ</h3>
+<p>A factor κ ≥ 1 scales the visual route&#x27;s intrinsic noise relative to its algorithmic readout f I , i.e., the readout using 160 × 160 pixels, for each participant. The effective discriminability is d I /κ j , so κ j spreads out the visual readout&#x27;s distributions. κ = 1 means the reliability is the same as algorithmic readout. fI = f I + ε with ε ∼ N (0, σ 2 I (κ 2 j -1)), which gives the degraded readout fI a standard deviation of σ I κ j . The effective discriminabilities are:</p>
+<h3>Evidence to decision</h3>
+<p>For each simulated trial, three quantities are passed sequentially: the readout, the evidence, and the drift. The readout fr is the dissimilarity measurement. The evidence z r links the readout value to the drift. The drift v r is the rate that evidence drives the decision.</p>
+<p>Each readout bank has different signal and noise (mirror and same) distributions. The raw value of the readout in each trial is only meaningful if considering the bank distributions. We define the evidence of a route as its readout relative to the criterion, divided by 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 Dissimilarity x 22 12 24 21 9 2 16 10 7 5 18 1 15 13 3 37 33 34 6 48 31 14 46 44 8 35 45 23 32 4 41 28 30 26 43 27 38 40 36 42 11 39 All 42 pooled Stimulus ID (sorted by state d&#x27;, lowest at top) Physical/Spatial route f S same mirror 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 Dissimilarity x 22 12 24 21 9 2 16 10 7 5 18 1 15 13 3 37 33 34 6 48 31 14 46 44 8 35 45 23 32 4 41 28 30 26 43 27 38 40 36 42 11 39 All 42 pooled Probability density p(x j same), p(x j mirror) density 20 Graphical/Visual route f I same mirror same mirror Same versus mirror dissimilarity for every stimulus.</p>
+<p>Each row shows the probability density of dissimilarity on same and mirror trials of one stimulus figure, s jit = 25 • . Left. The physical/spatial route. The median d ′ across the stimuli is 2.90. Right. The graphical/visual route. The median d ′ across the stimuli is 1.06.</p>
+<p>the separation (mean difference) between the two trial types:</p>
+<p>The sign indicates which response the evidence favors, positive for mirror and negative for same. The magnitude shows the strength of the evidence. The evidence averages to + 1 2 on mirror trials and -1 2 on same trials. The standard deviation of each route is 1/ dr . We set the drift to be derived by evidence in the following form:</p>
+<p>This definition connotes the core assumption of the model: a speed-accuracy tradeoff between comparison routes. A comparison route that discriminates the trial types better contributes to a smaller drift on average, but varies less from trial to trial. The mean drift is 1 2 d and the trial-level standard deviation is 1 d2 . The signal-to-noise ratio is d 2 (see Appendix A). A more reliable comparison route thus drives slower, but more accurate decisions; a less reliable one drives faster, but more erroneous decisions. This implies the visual comparison route is faster but less reliable, and the spatial, structural comparison route is slower and more reliable. This is how the model expresses the trade-off. Appendix F shows that the resulting patterns depend on this division rather than the exact form formulated.</p>
+<p>We model people&#x27;s ability of spatial comparison as a gain g j on the signal in the spatial evidence. The ability is applied in the same direction as the evidence:</p>
+<p>When g j = 1, there is no gain in ability in the spatial route. A large gain value drives the decision faster to the direction of the evidence. As the direction is usually correct, a more capable person would be both faster and more accurate. The ability gain follows the direction of the evidence, not of the correct answer, so that the generative model does not act as an oracle. This also adds occasional error, and Appendix A shows that the gain can therefore only raise accuracy up to that of the spatial route evidence itself, Φ( dS 2 ), the probability that the evidence has the correct sign.</p>
+<p>We combine the drifts of the two routes by the following:</p>
+<p>Note that v S is the same for both groups. Only people without aphantasia have the additional source of information from the visual comparison route. This route makes the responses faster but less accurate. For people with aphantasia,</p>
+<p>Adding different drifts into a single diffusion is standard practice (Drugowitsch et al., 2014; Ulrich et al., 2015).</p>
+<p>The decision is a drift-diffusion process (Ratcliff &amp; McKoon, 2008). A decision variable X starts in the middle of the two bounds, 0 and a. For each small time step ∆t, the variable X accumulates:</p>
+<p>X moves by the drift v times the step length, plus the diffusion of independent Gaussian noise. The drift, v, varies across trials, as each trial draws a new pair of readouts from the bank. The response is mirror when reaching a and same for reaching 0. The maximum decision time is 8 seconds. If this is exceeded, the process responds with the bound that X is closer to. The decision time T dec is then N∆t.</p>
+<p>There is also a non-decision time τ 0, j , for the part of response not accumulating evidence:</p>
+<p>Each participant j has their own non-decision time τ 0, j , with population mean t0 = 520 ms and standard deviation t 0,sd = 65 ms. Other parameters, bound separation a = 2.4, noise s = 1, ∆t = 3 ms, are equal for all participants.</p>
+<h3>Individual differences</h3>
+<p>Each simulated participant j draws from three characteristic distributions that contribute to group-level correlation between RT and accuracy: both groups,</p>
+<p>Each variable has a characteristic effect on the within-group RT-accuracy correlation: • Ability g j is a difference in how well one can exploit the information from evidence.</p>
+<p>More capable participants are faster and more accurate, which produces a negative RT-accuracy correlation.</p>
+<p>• Visual reliance α j and visual route unreliability κ j both trade accuracy for speed. The higher reliance on the visual route or the less reliable the visual route, the faster, the less accurate one is. This produces a positive RT-accuracy correlation.</p>
+<p>Participants in the aphantasia group differ only in spatial route ability. Participants in the control group differ in all three variables, while visual reliance and visual route unreliability dominate the variation. These differences among individuals are what produce the opposite signs of the two correlations (Table D3).</p>
+<h3>The shared rotation stage</h3>
+<p>The model so far only concerns the comparison stage, which creates the group differences. The shared rotation stage, which we hypothesize to involve only 3D spatial representation, also contributes to the overall performance and reaction time pattern while exerting no group difference. Therefore, for the rotation stage, we describe rather than model the reaction time and accuracy pattern. We use a few shared constants that are fitted to Kay et al. (2024)&#x27;s group level data. This helps to produce the canonical RT-angle linear relationship, and also the increased error as angle disparity rises (Shepard &amp; Cooper, 1982 / 1986; Shepard &amp; Metzler, 1971). We add them to each participant&#x27;s mean correct RT, RT j (θ ), and accuracy at each angle: where: • ρ is the mean rotation rate (ms/degree), and φ j is the participant&#x27;s rotation rate relative to the mean, • ρ 0 is the mean time spent not on the comparison stage, and ψ j is the participant&#x27;s time on it relative to the mean, • k(θ ) is an error correction factor that shrinks the error and scales linearly with angle,</p>
+<p>The factors φ j and ψ j are drawn independently, each from a normal distribution truncated at 0 and rescaled to a mean of 1. σ φ and σ ψ denote their standard deviations.</p>
+<h3>Speed</h3>
+<p>People differ in how fast they rotate (Provost &amp; Heathcote, 2015; Shepard &amp; Cooper, 1982 /1986). Factor φ j sets the rotation rate for participant j, and ψ j sets the time they spend outside the comparison stage. These two factors are drawn independently, which is supported by Kay et al. (2024)&#x27;s data, where a participant&#x27;s RT at 0 • is not correlated with the slope of RT over angles (r = 0.03 in aphantasia and r &lt; 0.01 in controls), although Provost and Heathcote (2015) found r = 0.82.</p>
+<h3>Errors</h3>
+<p>The comparison stage reproduces the reaction time-accuracy correlations, but two error patterns are absent: First, the participants from Kay et al. (2024)&#x27;s data have higher accuracy than the comparison stage model implies. Second, the errors do not scale with angle disparities in the comparison stage as the participants do. An error factor, k(θ ), addresses both. The factor shrinks the error when smaller than 1. Though this is a descriptive choice, it could be justified by the literature (Burle et al., 2002).</p>
+<p>We set the six constants from Kay et al. (2024)&#x27;s group-level data. The fitted values are ρ = 8.5 ms/deg, ρ0 = 815 ms, k0 = 0.33, k1 = 0.0042/deg, σ φ = 0.61, and σ ψ = 0.46. The error factor increases from 0.33 at 0 • to 0.96 at 150 • ; error is most corrected when the angle disparity is small.</p>
+<p>As stated above, the rotation stage is shared for everyone, so it does not drive the group difference. However, the rotation stage attenuates the correlation between RT and accuracy, because the speed factor ψ j injects differences in speed that are independent of performance. The observed correlation is therefore smaller than the comparison stage alone. The error factor k(θ ) only slightly changes the correlations as it weights 100 • and 150 • a little differently. This change is about 0.004 on average and at most 0.02, with no sign change in 1000 simulated experiments.</p>
+<p>Although it has been suggested that there is trial-to-trial within-participant variability (Provost &amp; Heathcote, 2015), this is inconsequential to our between-participant level behavioral pattern. With the variability magnitude previously found, it would only increase the between-participant standard deviation of mean RT by less than 2%. Discriminability ratio between two routes. Left. Physical/spatial versus graphical/visual discriminability at s jit = 20 • , 25 • , 30 • , 35 • . All figures lie above the diagonal, meaning physical/spatial route always discriminates better than the graphical/visual route. Right.</p>
+<p>The discriminability at each imprecision level. Each dot represents one figure. The median d ′ ratio stays between 2.8 and 2.9 across the imprecision levels.</p>
+<p>Imprecision of alignment as the source of uncertainty We argue that rotation errors of this size (s jit = 25 • and 30 • ) are plausible, and that it is plausible that the imprecision does not depend on angle disparity (Table C1). In a study where participants rotate one of the two Shepard-Metzler figures about a vertical axis in virtual reality, the median angle misalignment when they stopped the rotation was 15 • , with 92% within ±45 • , regardless of the initial presented angle disparity (Khazoum et al., 2026). At our main reported imprecision level, s jit = 25 • , the misalignment angle has a nearly identical distribution, with a median of 17 • and 93% within ±45 •.</p>
+<h3>Appendix D Parameter space partitioning Four sign criteria</h3>
+<p>Setting aside the pattern both groups share, slower and less accurate responses at larger angles, which belongs to the shared rotation stage, the specific differences between the two groups are as follows: 1.</p>
+<p>People with aphantasia are slower; 2. they are more accurate; 3. their RT and accuracy correlate negatively; 4. controls&#x27; RT and accuracy correlate positively.</p>
+<p>Parameter Meaning Range or status Representative ∆µ r , σ r , c r , d r route calibration from the stimuli per figure s jit rotation imprecision {20, 25, 30, 35} • 25 • ḡ, g sd state ability [0.5, 6], [0, 5] 4.63, 3.51 ᾱ, α sd imagery reliance (controls) [0, 3], [0, 5] 0.30, 0.74 κ, κ sd image unreliability (controls) [1, 10], [0, 5] 1.29, 3.47 a, s, ∆t diffusion fixed 2.4, 1, 3 ms t 0 ,t 0,sd non-decision time fixed 520, 65 ms ρ, ρ 0 rotation and other time Kay et al.&#x27;s RT means 8.5 ms/deg, 815 ms k 0 , k 1 error factor Kay et al.&#x27;s accuracy 0.33, 0.0042/deg σ φ , σ ψ spread of ρ, of ρ 0 Kay et al.&#x27;s RT spread 0.61, 0.46</p>
+<h3>Table D1</h3>
+<p>Model parameters, their ranges, and representative values. RT = response time; sd = standard deviation. Values for ρ, ρ 0 , k 0 , k 1 , σ φ , and σ ψ were derived from Kay et al. (2024).</p>
+<h3>Results</h3>
+<p>The four sign criteria hold almost everywhere in the parameter space box (Table D2). They hold for 96.9% (95% CI[95.6, 97.8]) of the parameter settings tested at s jit = 25 • (992 out of 1024). They hold for 96.3% (95% CI[94.9, 97.3]) at s jit = 30 •.</p>
+<p>The parameter space partition also shows that the model always predicts slower responses for aphantasia, and only 0.2% of parameter settings do not produce higher accuracy in aphantasia, at s jit = 25 • . The two exceptions have the lowest mean spatial ability in the tested range ( ḡ ≃ 0.5, which makes the spatial evidence weaker than visual evidence), and the reversed accuracy differences are only 0.014 and 0.002. The other parameter settings that fail the sign criteria are those that fail to show the RT-accuracy correlation in either group. At s jit = 25 • , the 20 cases that failed the correlation in the aphantasia group all have little variation in spatial state ability, and the 10 cases without a positive correlation in the control group all have a very unreliable visual route ( κ &gt; 6).</p>
+<p>Individual differences determine the correlation of RT-accuracy within the groups. We see this when ablating each individual-difference variable, that is, setting it to the population average for all individuals (Table D3). When ablating spatial ability differences, the negative correlation in the aphantasia group vanishes, with the median across parameter settings going from -0.58 to -0.02. For the control group, either kind of visual route difference contributes to their positive correlation. When both are removed, the median correlation drops from 0.36 to 0.01. Ablating either one still leaves the positive correlation intact: the median correlation is 0.31 when removing the visual route reliance differences, and 0.18 when removing the visual route unreliability.</p>
+<h3>Appendix E</h3>
+<p>Aph. slower Aph. more accurate Aph. r &lt; 0 Ctl. r &gt; 0 Share at 25 • (30 • ) yes yes yes yes 96.9% (96.3%) yes yes no yes 2.0% (2.4%) yes yes yes no 1.0% (1.2%) yes no yes yes 0.2% (0%) yes yes no no 0% (0.1%) any other pattern (11 of 16) 0% (0%)</p>
+<p>Table D2 Parameter space partition: percentage of 1024 parameter settings showing each pattern of sign criteria. Aph. = aphantasia; Ctl. = controls; r = within-group RT-accuracy correlation. Individual differences included Aphantasia r Controls&#x27; r all (g, κ, α) -.58 [-.72, -.11] +.36 [+.13, +.53] without visual route reliance variation (α sd = 0) -+.31 [+.01, +.51] without visual route unreliability variation (κ sd = 0) -+.18 [+.04, +.33] without either visual route variation (α sd = 0 &amp; κ sd = 0) -+.01 [-.05, +.07] without spatial ability variation (g sd = 0) -.02 [-.08, +.04] +.39 [+.14, +.59]</p>
+<p>Table D3 Within-group correlations come from individual differences across parameter space. This shows the comparison stage&#x27;s RT-accuracy correlation (Pearson&#x27;s r, 100 • -150 • ) when ablating one source of individual differences. It is tested across all 1024 settings at s jit = 25 • , with 500 simulated participants per group. An ablated characteristic is set to its population average. Medians across settings are shown, with the 10th and 90th percentiles. Visual route reliance and unreliability exist only in controls.</p>
+<p>Representative parameter setting selection This section describes how we chose the parameter setting used for the detailed comparison with the behavioral results of Kay et al. (2024).</p>
+<h3>Magnitude targets</h3>
+<p>We set four magnitude targets from Kay et al. (2024)&#x27;s effect sizes, measured over 100 • -150 • , to achieve better quantitative mapping: 1. the RT difference between the two groups, 513 ms from Kay et al. (2024); 2. the accuracy difference between the two groups, 0.107; 3-4. b, how many milliseconds a group&#x27;s RT changes per one standard deviation difference in accuracy (b = r × SD(RT ) = Cov(RT,accuracy) SD( accuracy)).</p>
+<p>This quantifies the portion of RT spread that scales with accuracy. While r is attenuated when the shared rotation stage is added on top, b stays the same: -198 ms for aphantasia and 307 ms for controls.</p>
+<p>A setting reaches a target if it lies within two standard errors of Kay et al. (2024)&#x27;s estimate (for accuracy difference, ±0.05, about 2.5 standard errors).</p>
+<h3>Selection</h3>
+<p>The selection is done in two stages, separately at each imprecision level.</p>
+<p>In stage 1, we tested 8192 parameter settings from a scrambled Sobol sequence (with a different random seed from the parameter space partitioning above), with 30 simulated participants per group, at each imprecision level s jit . Among the settings for which the four sign criteria hold, we keep the 50 parameter settings per imprecision level that best match the magnitude targets. For each of these 50 settings, we run 100 simulated experiments at the sample sizes of Kay et al. (2024), and one with 1500 participants per group. The 100 simulated experiments give the probability that a single experiment of the sample size shows all four sign criteria. The n = 1500 check verifies that all four sign criteria hold.</p>
+<p>In stage 2, we choose one of the 50 with a scoring rule that weighs two items: (1) with weight 0.6, the probability that a single experiment of Kay et al. (2024)&#x27;s sample size shows both within-group correlations as significant, which we estimate for each parameter setting from its b divided by SD(RT ) in Kay et al. (2024)&#x27;s data; and (2) with weight 0.4, how close the comparison stage gets to the magnitude targets. We report the parameter setting at s jit = 25 • , while s jit = 30 • gives similar results.</p>
+<h3>The typical simulated experiment</h3>
+<p>One of the 1000 simulated experiments at the chosen representative setting is plotted in Figure 2. We kept the experiments whose means and group differences lie within the central 80% at every angle, and whose RT and accuracy differences over 100 • and 150 • lie within the central 50%. Among those, the one shown has the within-group correlations closest to the medians across the 1000 simulated experiments.</p>
+<h3>Appendix F Robustness The axis of rotation imprecision</h3>
+<p>Our current model uses vertical-axis perturbations. If the perturbation is about a random axis, at matched d S , the results are essentially the same. At matched difficulty (the median d ′ of the vertical axis at s jit = 25 • ), the four sign criteria hold in 97.0% of the parameter space with a random axis, against 96.9% with the vertical axis; at s jit = 30 • , the figures are 96.1% and 96.3%. The correlation between the two sensitivity matrices is r = 0.998.</p>
+<h3>The drift form</h3>
+<p>The critical assumption of the model is the mapping from evidence to drift (Equation A3), that the more cleanly a route separates trial types, the smaller the drift. To check how much the characteristics depend on this assumption, we replaced it with a family of mappings: d re f is a constant that is the same for every route, figure, and participant.</p>
+<p>The spatial route&#x27;s evidence includes the same ability gain, z S + (g j -1) sign(z S )/2, as in Equation A4. The exponent k determines how drift depends on discriminability. When k &gt; 1, the dependence is steeper: at k = 2, drift scales with 1/ d2 r . At k = 1, the mapping is exactly v r = z r / dr . At k = 0, drift does not depend on discriminability at all. At k = -1, drift is proportional to discriminability. This is the usual case for drift-diffusion models (Ratcliff &amp; McKoon, 2008). At k = -2, drift is proportional to the log-likelihood ratio of the route. For normally distributed readouts with equal variances, it would be d2 r z r , and the combination would be optimal if the routes were independent (Drugowitsch et al., 2014).</p>
+<p>k changes how drift differs between routes (also figures and participants), therefore how much the two routes contribute relative to each other. A figure&#x27;s image route contributes dS / dI times as much drift as its spatial route at k = 1, the same amount at k = 0, and ( dI /d S ) 2 times as much at k = -2. We fix the constant d re f = 2.90, the median discriminability of the spatial route at s jit = 25 • . This choice is arbitrary, but it should not matter, as it is the same for all forms (the constant effectively acts as the caution level in the drift-diffusion model).</p>
+<p>With the setting described in the notes of Table F1, we found that the qualitative pattern holds as long as drift does not grow with discriminability. For k ≥ 0, all four sign criteria were satisfied in at least 90% of the parameter settings. The pattern fails at k = -1 and k = -2, satisfying only 3.9% and 0%, respectively.</p>
+<p>The model&#x27;s pattern, therefore, does not depend on the exact form of the mapping. It only requires that the less reliable route does not lose its influence. The inverse mapping is one way of doing so.</p>
+<p>Share with each sign (%) Median k All four (%) Slower More acc. r aph &lt; 0 r ctl &gt; 0 RT (ms) Acc. r aph r ctl -2.0 0.0 [0.0, 1.5] 58.2 45.3 100.0 0.4 4 -.001 -.56 -.56 -1.5 0.0 [0.0, 1.5] 77.7 41.4 98.8 0.8 12 -.002 -.57 -.55 -1.0 3.9 [2.1, 7.0] 97.7 71.5 98.4 6.2 61 .008 -.56 -.50 -0.5 51.6 [45.5, 57.6] 100.0 94.9 97.7 54.7 284 .068 -.58 .03 0.0 90.2 [86.0, 93.3] 100.0 99.6 96.1 94.5 615 .146 -.59 .37 0.5 95.3 [92.0, 97.3] 100.0 99.6 97.3 98.4 852 .198 -.59 .40 1.0 98.8 [96.6, 99.6] 100.0 100.0 99.6 99.2 964 .213 -.59 .36 1.5 95.7 [92.5, 97.6] 100.0 100.0 98.8 96.5 990 .222 -.57 .30 2.0 94.5 [91.0, 96.7] 100.0 100.0 100.0 94.5 988 .222 -.54 .26</p>
+<h3>Table F1</h3>
+<p>The pattern under different mappings from evidence to drift (Equation F1). 256 parameter settings at s jit = 25 • , 500 simulated participants per group. Left: percentage of settings showing all four signs (95% interval in brackets) and each sign. Right: medians across settings of the group differences (aphantasia minus controls) and of the within-group correlations between RT and accuracy (Pearson). All values are from the comparison stage at 100 • and 150 • , so the sizes are not comparable with the data. The model is k = 1; at k = -2 each route is weighted by its reliability.</p>
+<h3>Implied moments and interpretation</h3>
+<p>On mirror trials, let β j = (g j -1)/2, ζ = dS /2, p = Φ(ζ ) (the probability the evidence lands on the correct side of the criterion).</p>
+<p>Visual/graphical route.</p>
+<p>Spatial/physical route, with ability gain.</p>
+<p>, the same form as the visual route. For g j &gt; 1 the boost raises the mean drift. Because the sign flips across the criterion, raising spatial ability increases the across-trial SD; consequently, as g j increases, SNR S first rises and then falls towards (2p -1)/ (︁ 2 √︁ p(1p) )︁ , set by the route&#x27;s discriminability. (This limit is the cost of using the evidence sign rather than the ground truth. A boost that used the ground truth would raise SNR indefinitely.) Note that with this spatial ability gain, the upper bound for accuracy is determined by what the spatial evidence gives, towards p = Φ( dS /2).</p>
+<p>In the control group, the total</p>
+<p>The covariance is positive as both routes read the same rotated and aligned objects.</p>
+<h3>Appendix B Discriminability difference in the two comparisons</h3>
+<p>At an image size of 160 × 160 pixels, the discriminability of 3D spatial/physical route comparison is higher than that of the 2D visual/graphical route, at s jit = 25 • . This holds for all 42 figures (Figure B1). The median discriminability of spatial/physical route is d S = 2.90 against d I = 1.06 in visual/graphical route, which means a median ratio of 2.8. This ratio stays about the same at all imprecision levels (2.8-2.9 for s jit = 20 • to 35 • ). The lower reliability in the visual/graphical route is a property of the stimuli and comparison. For the representative setting, the visual/graphical route is less reliable still ( κ = 1.29, κ sd = 3.47).</p>
+<h3>Appendix C</h3>
+<p>Khazoum et al. Model (measured) s jit = 25 • s jit = 30 • Within ±45 • 92% 93% 87% Mean absolute 21 • 20 • 24 • Median absolute 15 • 17 • 20 • 90th percentile, absolute 40 • 41 • 49 • Table C1 Misalignment between two objects at the end of the rotation stage. Khazoum et al. (2026)&#x27;s data are from the 412 correct same trials with at least one rotation action, at 60 • , 120 • and 180 • angle disparities. This is computed from their published trial data. For our model, the rotation error, N (0, s 2 jit ), is about the vertical axis. These are the four main criteria for our model in the comparison stage. They are qualitative claims, so we care only about their signs. The shared rotation stage cannot produce or reverse these characteristics; it can only attenuate them. Pearson&#x27;s and Spearman&#x27;s correlations give the same sign in more than 99% of the simulated experiments from the model. Thus, the partition and selection use Pearson&#x27;s for both groups.</p>
+<h3>Procedure</h3>
+<p>We explore the qualitative patterns produced by the model in the whole region of plausible parameter values by partitioning parameter space (Pitt et al., 2006), to see whether the characteristics are produced by the structural commitment of the model. We sampled 1024 parameter settings from a scrambled Sobol sequence over the parameter box in Table D1. We simulate 500 participants for both groups in each setting. The parameter range is as follows: • each individual difference has a standard deviation from 0 to 5; • state ability ranges from 0.5, below neutral, to 6 ( ḡ = 1 is neutral, below 1 weakens the signal evidence); • mean reliance on the visual comparison ( ᾱ) from 0 to 3 times the spatial comparison weight; • mean visual comparison unreliability ( κ) from 1 (none) to 10 times the discriminability of the algorithmic outputs.</p>
+<p>This analysis gives us the percentage of the parameter box in which all four signs hold, the frequency of all 24 = 16 combinations of sign patterns, and the percentage of the parameter box in which they still hold when individual differences are removed (g sd , α sd , or κ sd ), which are crucial for the RT-accuracy correlation pattern.</p>
+<p>Figure2</p>
+<h3>Figure 3</h3>
+<p>Figure3</p>
+<h3>Figure A1 Same</h3>
+<p>FigureA1</p>
+<p>FigureB1</p>
+<h3>Table 1</h3>
+<p>ComparingKay et al., 2024&#x27;s data to the null distribution from simulated experiments of our model. We tested the statisticsKay et al., 2024 reported against the null distribution from our model. The table lists the median and central 95% of 1000 simulated experiments of their size, with between-participant speed differences estimated from their data (comparison stage alone in parentheses for correlations). All differences are aphantasia minus controls. Both correlations and bs are over 100</p>
+<p>Our proposal relies on a simplified version of the Shepard and Cooper 7-step model of mental rotation, which includes parts that are not relevant for our purposes. For example, we do not model the motor execution of the decision, and assume it is shared between people with and without aphantasia.</p>
+<h3>References</h3>
+<p>Bainbridge, W. A., Pounder, Z., Eardley, A. F., &amp; Baker, C. I. (2021). Quantifying aphan- tasia through drawing: Those without visual imagery show deficits in object but not spatial memory. Cortex, 135, 159-172. https://doi.org/10.1016/j.cortex.2020.11.014</p>
+<p>Balaban, H., &amp; Ullman, T. D. (2025). Physics versus graphics as an organizing dichotomy in cognition. Trends in Cognitive Sciences, 29(11), 985-996. https://doi.org/10.1016/j.tics.2025.05.003</p>
+<p>Balaban, H., &amp; Ullman, T. D. (2026). Emotion may indirectly link rendering and social reasoning. Trends in Cognitive Sciences.</p>
+<p>Burle, B., Possamaï, C.-A., Vidal, F., Bonnet, M., &amp; Hasbroucq, T. (2002). Executive con- trol in the Simon effect: An electromyographic and distributional analysis. Psycho- logical Research, 66(4), 324-336. https://doi.org/10.1007/s00426-002-0105-6</p>
+<p>Chang, S., Zhang, X., Cao, Y., Pearson, J., &amp; Meng, M. (2025). Imageless imagery in aphantasia revealed by early visual cortex decoding. Current Biology, 35(3), P591- 599. https://doi.org/10.1016/j.cub.2024.12.012</p>
+<p>Cooper, L. A., &amp; Shepard, R. N. (1973). Chronometric studies of the rotation of mental images. In Visual information processing (pp. 75-176). Elsevier.</p>
+<p>Drugowitsch, J., DeAngelis, G. C., Klier, E. M., Angelaki, D. E., &amp; Pouget, A. (2014). Optimal multisensory decision-making in a reaction-time task. eLife, 3, e03005. https://doi.org/10.7554/eLife.03005</p>
+<p>Frick, A., Möhring, W., &amp; Newcombe, N. S. (2014). Development of mental transformation abilities. Trends in Cognitive Sciences, 18(10), 536-542. https://doi.org/10.1016/j.tics.2014.05.011</p>
+<p>Ganis, G., &amp; Kievit, R. A. (2015). A new set of three-dimensional shapes for investigat- ing mental rotation processes: Validation data and stimulus set. Journal of Open Psychology Data, 3(1), e3. https://doi.org/10.5334/jopd.ai</p>
+<p>Green, D. M., &amp; Swets, J. A. (1966). Signal detection theory and psychophysics. John Wiley.</p>
+<p>Just, M. A., &amp; Carpenter, P. A. (1976). Eye fixations and cognitive processes. Cognitive Psychology, 8(4), 441-480. https://doi.org/10.1016/0010-0285(76)90015-3</p>
+<p>Kay, L., Keogh, R., Andrillon, T., &amp; Pearson, J. (2022). The pupillary light response as a physiological index of aphantasia, sensory and phenomenological imagery strength. eLife, 11, Article e72484. https://doi.org/10.7554/eLife.72484</p>
+<p>Kay, L., Keogh, R., &amp; Pearson, J. (2024). Slower but more accurate mental rotation per- formance in aphantasia linked to differences in cognitive strategies. Consciousness and Cognition, 121, 103694. https://doi.org/10.1016/j.concog.2024.103694</p>
+<p>Keogh, R., &amp; Pearson, J. (2018). The blind mind: No sensory visual imagery in aphantasia. Cortex, 105, 53-60. https://doi.org/10.1016/j.cortex.2017.10.012</p>
+<p>Keogh, R., Wicken, M., &amp; Pearson, J. (2021). Visual working memory in aphantasia: Re- tained accuracy and capacity with a different strategy. Cortex, 143, 237-253. https://doi.org/10.1016/j.cortex.2021.07.012</p>
+<p>Khazoum, R., Fernandes, D., Krylov, A., Li, Q., &amp; Deny, S. (2026). A deep learning model of mental rotation informed by interactive VR experiments. Proceedings of the 43rd International Conference on Machine Learning, 306.</p>
+<p>Kosslyn, S. M., Thompson, W. L., &amp; Ganis, G. (2006). The Case for Mental Imagery. Oxford Psychology Series. https://doi.org/10.1093/acprof:oso/9780195179088.001.0001</p>
+<p>Liu, J., Zhan, M., Hajhajate, D., Spagna, A., Dehaene, S., Cohen, L., &amp; Bartolomeo, P. (2025). Visual mental imagery in typical imagers and in aphantasia: A millimeter- scale 7-t fmri study. Cortex, 185, 113-132. https://doi.org/10.1016/j.cortex.2025.01.013</p>
+<p>Macmillan, N. A., &amp; Creelman, C. D. (2005). Detection theory: A user&#x27;s guide, 2nd ed. Lawrence Erlbaum Associates Publishers.</p>
+<p>Michel, M., Morales, J., Block, N., &amp; Lau, H. (2024). Aphantasia as imagery blindsight. Trends in Cognitive Sciences, 29(1), 8-9. https://doi.org/10.1016/j.tics.2024.11.002</p>
+<p>Milton, F., Fulford, J., Dance, C., Gaddum, J., Heuerman-Williamson, B., Jones, K., Knight, K. F., MacKisack, M., Winlove, C., &amp; Zeman, A. (2021). Behavioral and neural signatures of visual imagery vividness extremes: Aphantasia versus hyper- phantasia. Cerebral Cortex Communications, 2(2), tgab035. https : / / doi.org / 10.1093/texcom/tgab035</p>
+<p>Nanay, B. (2021). Unconscious mental imagery. Philosophical Transactions of the Royal Society B: Biological Sciences, 376(1817), Article 20190689. https://doi.org/10.1098/rstb.2019.0689</p>
+<p>Palminteri, S., Wyart, V., &amp; Koechlin, E. (2017). The importance of falsification in compu- tational cognitive modeling. Trends in Cognitive Sciences, 21(6), 425-433. https://doi.org/10.1016/j.tics.2017.03.011</p>
+<p>Phillips, I. (2025). Spared spatial imagery solves the puzzle of aphantasia. Trends in Cog- nitive Sciences, 29(11), 961-962. https://doi.org/10.1016/j.tics.2025.05.004</p>
+<p>Pitt, M. A., Kim, w., Navarro, N. J., &amp; Myung, J. I. (2006). Global model analysis by parameter space partitioning. Psychological Review, 113(1), 57-83. https://doi.org/10.1037/0033-295X.113.1.57</p>
+<p>Pounder, Z., Jacob, J., Evans, S., Loveday, C., Eardley, A. F., &amp; Silvanto, J. (2022). Only minimal differences between individuals with congenital aphantasia and those with typical imagery on neuropsychological tasks that involve imagery. Cortex, 148, 180-192. https://doi.org/10.1016/j.cortex.2021.12.010</p>
+<p>Provost, A., &amp; Heathcote, A. (2015). Titrating decision processes in the mental rotation task. Psychological Review, 122(4), 735-754. https://doi.org/10.1037/a0039706</p>
+<p>Purkart, R., Delem, M., Ranson, V., Andrey, C., Versace, R., Cavalli, E., &amp; Plancher, G. (2025). Are there unconscious visual images in aphantasia? development of an implicit priming paradigm. Cognition, 256, 106059. https : / / doi.org / 10.1016/j.cognition.2024.106059</p>
+<p>Pylyshyn, Z. W. (2002). Mental imagery: In search of a theory. Behavioral and Brain Sci- ences, 25(2), 157-182. https://doi.org/10.1017/S0140525X02000043</p>
+<p>Ratcliff, R., &amp; McKoon, G. (2008). The diffusion decision model: Theory and data for two-choice decision tasks. Neural Computation, 20(4), 873-922. https://doi.org/10.1162/neco.2008.12-06-420</p>
+<p>Reeder, R. R., Pounder, Z., Figueroa, A., Jüllig, A., &amp; Azañón, E. (2024). An example reference for a single author article. Cognition, 251(1), 105907. https://doi.org/10.1016/j.cognition.2024.105907</p>
+<p>Shepard, R. N., &amp; Cooper, L. A. (1986). Mental images and their transformations. The MIT Press. (Original work published 1982)</p>
+<p>Shepard, R. N., &amp; Metzler, J. (1971). Mental rotation of three-dimensional objects. Science, 171(3972), 701-703. https://doi.org/10.1126/science.171.3972.701</p>
+<p>Tomasino, B., &amp; Gremese, M. (2016). Effects of stimulus type and strategy on mental rotation network: An activation likelihood estimation meta-analysis. Frontiers in Human Neuroscience, 9(693). https://doi.org/10.3389/fnhum.2015.00693</p>
+<p>Ullman, T. D., Spelke, E., Battaglia, P., &amp; Tenenbaum, J. B. (2017). Mind Games: Game Engines as an Architecture for Intuitive Physics. Trends in Cognitive Sciences, 21(9), 649-665. https://doi.org/10.1016/j.tics.2017.05.012</p>
+<p>Ulrich, R., Schröter, H., Leuthold, H., &amp; Birngruber, T. (2015). Automatic and controlled stimulus processing in conflict tasks: Superimposed diffusion processes and delta functions. Cognitive Psychology, 78, 148-174. https://doi.org/10.1016/j.cogpsych.2015.02.005</p>
+<p>Wicken, M., Keogh, R., &amp; Pearson, J. (2021). The critical role of mental imagery in hu- man emotion: Insights from fear-based imagery and aphantasia. Proceedings of the Royal Society B: Biological Sciences, 288(1946), Article 20210267. https://doi.org/10.1098/rspb.2021.0267</p>
+<p>Wilson, R. C., &amp; Collins, A. G. (2019). Ten simple rules for the computational modeling of behavioral data. eLife, 8, Article e49547. https://doi.org/10.7554/eLife.49547</p>
+<p>Zacks, J. M. (2008). Neuroimaging studies of mental rotation: A meta-analysis and review. Journal of cognitive neuroscience, 20(1), 1-19. https://doi.org/10.1162/jocn.2008.20013</p>
+<p>Zeman, A., Dewar, M., &amp; Sala, S. D. (2015). Lives without imagery -congenital aphanta- sia.</p>
+<p>Cortex, 73, 378-380. https://doi.org/10.1016/j.cortex.2015.05.019</p>
+<p>Zeman, A. Z., Della Sala, S., Torrens, L. A., Gountouna, V.-E., McGonigle, D. J., &amp; Lo- gie, R. H. (2010). Loss of imagery phenomenology with intact visuo-spatial task performance: A case of &#x27;blind imagination&#x27;. Neuropsychologia, 48(1), 145-155. https://doi.org/10.1016/j.neuropsychologia.2009.08.024</p>
+<p>Zhao, B., Della Sala, S., Zeman, A., &amp; Gherri, E. (2022). Spatial transformation in mental rotation tasks in aphantasia. Psychonomic Bulletin &amp; Review, 29(6), 2096-2107. https://doi.org/10.3758/s13423-022-02126-9</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
