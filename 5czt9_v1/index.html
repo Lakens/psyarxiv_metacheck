@@ -1,0 +1,2685 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Who Agrees With Whom About What? A Tutorial on
+Multilevel Profile Analysis of Person Judgments With the R Package
+profilemlm</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Who Agrees With Whom About What? A Tutorial on Multilevel Profile
+Analysis of Person Judgments With the R Package profilemlm
+</p>
+<p class="meta">
+2026-11-19 · Metacheck 0.4.4.18
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>3</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>3</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>9</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(3)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Power
+Analysis Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We detected 1 potential power analysis.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We used the LLM model ‘vllm/qwen3-8-27b-fp8’ to check the contents of
+1 paragraph that contained words suggesting they might contain power
+analyses.</p>
+<p>Some essential information could not be detected: sample_size,
+alpha_level, power</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+power_<wbr>type
+</th>
+<th style="text-align:left;">
+statistical_<wbr>test
+</th>
+<th style="text-align:right;">
+sample_<wbr>size
+</th>
+<th style="text-align:right;">
+alpha_<wbr>level
+</th>
+<th style="text-align:right;">
+power
+</th>
+<th style="text-align:right;">
+effect_<wbr>size
+</th>
+<th style="text-align:left;">
+effect_<wbr>size_<wbr>metric
+</th>
+<th style="text-align:left;">
+software
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+unknown
+</td>
+<td style="text-align:left;">
+other
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:left;">
+other
+</td>
+<td style="text-align:left;">
+simulation
+</td>
+</tr>
+</tbody>
+</table>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+The example had eight targets per perceiver, eight perceivers per
+target, and 30 items, and it recovered most of the slope variances.
+Smaller crossed designs recover them less reliably. This includes the
+perceiver-level variance in distinctive agreement, Var(u₂₀), the central
+quantity of the SAM, which is hard to estimate when perceivers judge few
+targets. The reason is structural. The variance of a unit’s slopes is
+identified only through the covariance among that unit’s dyad-specific
+slopes. A perceiver who judges four targets contributes four noisy
+slopes, from whose covariance a perceiver component is hard to separate
+from the dyad component. The same logic applies to stimuli in
+experiments, where <strong>power</strong> depends on the numbers of
+participants and of stimuli and on how they are crossed (Westfall et
+al., 2014). How many perceivers, targets, and items a planned study
+needs is therefore best answered by simulation. mpa_simulate() makes
+this a short script. Generate data from the expected parameters for a
+candidate design, fit the intended model, record the result, and repeat.
+The following code estimates the <strong>power</strong> to detect a
+moderation of distinctive agreement by acquaintance of the size of the
+example (γ₂₃ = .08) with 48 perceivers and 30 items, for four and for
+eight targets per perceiver. The data are generated with the standard
+deviations that the example used for the random intercepts and agreement
+slopes (Table 4), including the item-level variation in distinctive
+agreement, and the fitted model is the one planned for the analysis,
+with the item slope: sd_example &lt;-list(perceiver = c(intercept = 8,
+norm = 0.25, dist = 0.08), target = c(intercept = 2, norm = 0.05, dist =
+0.06), dyad = c(intercept = 5, norm = 0.15, dist = 0.08), item =
+c(intercept = 3, dist = 0.04)) one_run &lt;-function(seed, targets) {
+dat &lt;-mpa_simulate(n_perceiver = 48, n_item = 30, group_size =
+targets, # targets per perceiver (= perceivers per target) norm_sd = 12,
+dist_sd = 10, targets, relationships, and items make agreement higher or
+lower, can then be addressed with the structure the data actually have.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Reproducibility Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We assessed 1 R code file for reproducibility and ran it (each in an
+isolated Docker container).</li>
+<li>0 of 1 script ran without error when executed.</li>
+<li>Of the others, 1 did not reproduce.</li>
+<li>0 installable dependencies detected.</li>
+</ul>
+</div>
+<div class="label">
+<p>Note</p>
+</div>
+<div class="text">
+<p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
+for the details.</p>
+</div>
+</div>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">codebook_check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>This module failed to run: Running the module ‘codebook_check’
+produced errors: Running the module ‘data_check’ produced errors:
+arguments imply differing number of rows: 0, 1</p>
+</div>
+</div>
+</div>
+<h2 id="improve">To check <span class="n">(3)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 2 non-significant p values that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = .58
+</td>
+<td style="text-align:left;">
+Rule 3 does not require this here, but the uncorrelated model fits
+several times faster and not worse, χ²(10) = 8.5, p = .58.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .55
+</td>
+<td style="text-align:left;">
+In the simulated data, acquaintance had the same effect at every level,
+and the decomposition did not improve fit, χ²(9) = 7.8, p = .55.
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Repository Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We found 9 files in 2 repositories.</li>
+<li>We found 1 README file and 1 repository without READMEs.</li>
+<li>We found 2 files with a naming suggestion.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<h4 id="whose-deposits">Whose Deposits</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Cited in
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/s5e6m" target="_blank">osf.io/s5e6m</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" target="_blank">github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+the deposit names this paper (its DOI, its title, or a link to it)
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="repositories">Repositories</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Platform
+</th>
+<th style="text-align:right;">
+All Files
+</th>
+<th style="text-align:right;">
+Data Files
+</th>
+<th style="text-align:right;">
+Code Files
+</th>
+<th style="text-align:right;">
+READMEs
+</th>
+<th style="text-align:right;">
+Archives
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/s5e6m" target="_blank">osf.io/s5e6m</a>
+</td>
+<td style="text-align:left;">
+osf
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" target="_blank">github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+github
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="files">Files</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Size
+</th>
+<th style="text-align:left;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/s5e6m" class="uri">https://osf.io/s5e6m</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/5ws97/" target="_blank">Replication_recipe_effects_of_knowing_and_liking_on_accuracy_july_2017.pdf</a>
+</td>
+<td style="text-align:left;">
+882.3 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/s5e6m" class="uri">https://osf.io/s5e6m</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/qv69a/" target="_blank">Accuracy_and_Bias_in_Person_Perception_Additional_Analyses.pdf</a>
+</td>
+<td style="text-align:left;">
+684.1 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" class="uri">https://github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/jzpsych/profilemlm/main/.Rbuildignore" target="_blank">.Rbuildignore</a>
+</td>
+<td style="text-align:left;">
+194 B
+</td>
+<td style="text-align:left;">
+file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" class="uri">https://github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/jzpsych/profilemlm/main/.gitignore" target="_blank">.gitignore</a>
+</td>
+<td style="text-align:left;">
+74 B
+</td>
+<td style="text-align:left;">
+file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" class="uri">https://github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/jzpsych/profilemlm/main/LICENSE.md" target="_blank">LICENSE.md</a>
+</td>
+<td style="text-align:left;">
+35.1 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" class="uri">https://github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/jzpsych/profilemlm/main/NEWS.md" target="_blank">NEWS.md</a>
+</td>
+<td style="text-align:left;">
+1.6 kB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" class="uri">https://github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/jzpsych/profilemlm/main/README.md" target="_blank">README.md</a>
+</td>
+<td style="text-align:left;">
+5.1 kB
+</td>
+<td style="text-align:left;">
+readme
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" class="uri">https://github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/jzpsych/profilemlm/main/_pkgdown.yml" target="_blank">_pkgdown.yml</a>
+</td>
+<td style="text-align:left;">
+750 B
+</td>
+<td style="text-align:left;">
+config
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/jzpsych/profilemlm" class="uri">https://github.com/jzpsych/profilemlm</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/jzpsych/profilemlm/main/data-raw/wessels.R" target="_blank">wessels.R</a>
+</td>
+<td style="text-align:left;">
+1.7 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="readme-files">README Files</h4>
+<p>README files are a way to document the contents and structure of a
+folder, helping users locate the information they need. You can use a
+README to document changes to a repository, and explain how files are
+named. Please consider adding a README to each repository or including
+‘README’ in the name of your overview document.</p>
+<h4 id="file-naming">File Naming</h4>
+<p>File names are broadly machine-parseable. We found 0 naming problems
+that should be fixed, and 2 files with a naming suggestion (not
+required, but a good habit).</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Rule
+</th>
+<th style="text-align:left;">
+Severity
+</th>
+<th style="text-align:left;">
+Detail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Replication_recipe_effects_of_knowing_and_liking_on_accuracy_july_2017.pdf
+</td>
+<td style="text-align:left;">
+filename-length-50
+</td>
+<td style="text-align:left;">
+Suggestion
+</td>
+<td style="text-align:left;">
+The file name is 74 characters, over the recommended 50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accuracy_and_Bias_in_Person_Perception_Additional_Analyses.pdf
+</td>
+<td style="text-align:left;">
+filename-length-50
+</td>
+<td style="text-align:left;">
+Suggestion
+</td>
+<td style="text-align:left;">
+The file name is 62 characters, over the recommended 50
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-classification">File Classification</h4>
+<div class="callout-note" title="See how every file was classified and grouped" collapse="true">
+<p><strong>code</strong> (2 files)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+_pkgdown.yml
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+_pkgdown.yml
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wessels.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+data-raw/wessels.R
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>documentation</strong> (5 files)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Replication_recipe_effects_of_knowing_and_liking_on_accuracy_july_2017.pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+Replication_recipe_effects_of_knowing_and_liking_on_accuracy_july_2017.pdf
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accuracy_and_Bias_in_Person_Perception_Additional_Analyses.pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+Accuracy_and_Bias_in_Person_Perception_Additional_Analyses.pdf
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LICENSE.md
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+LICENSE.md
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NEWS.md
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+NEWS.md
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+README.md
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+README.md
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>materials</strong> (1 file)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+.gitignore
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+.gitignore
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>unknown</strong> (1 file)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+.Rbuildignore
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+.Rbuildignore
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Code Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We found 1 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code file.</li>
+<li>All your code files had comments.</li>
+<li>All libraries/imports were loaded in one block.</li>
+<li>No pinned R/package environment (renv.lock, sessionInfo(), or
+groundhog/checkpoint) was found. Consider adding a solution to improve
+computational reproducibility.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Below, we describe some best coding practices and give the results of
+automatic evaluation of these practices in the code files below. This
+check may miss things or produce false positives if your scripts are
+less typical.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File Name
+</th>
+<th style="text-align:left;">
+% Comments
+</th>
+<th style="text-align:right;">
+Missing Files
+</th>
+<th style="text-align:right;">
+Absolute Paths
+</th>
+<th style="text-align:right;">
+Code Between Libraries
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/jzpsych/profilemlm/main/data-raw/wessels.R" target="_blank">wessels.R</a>
+</td>
+<td style="text-align:left;">
+29%
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="code-comments">Code Comments</h4>
+<p>Best programming practice is to add comments to code, to explain what
+the code does (to yourself in the future, or peers who want to re-use
+your code). All your code files had comments.</p>
+<h4 id="missing-files">Missing Files</h4>
+<p>The scripts load files, but 1 script loaded 2 files that could not be
+automatically identified in the repository. Check if the following files
+are made available, so that others can reproduce your code, or that the
+files are missing:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File name
+</th>
+<th style="text-align:left;">
+Missing Files
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+wessels.R
+</td>
+<td style="text-align:left;">
+datatwo_selfasval.csv, S2_data_raw_agreement_itemwise.csv
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="absolute-paths">Absolute Paths</h4>
+<p>Best programming practice is to use relative file paths (e.g.,
+‘./files’) instead of absolute file paths (e.g.,
+‘C://Lakens/project_dir/files’) as these folder names do not exist on
+other computers. No absolute file paths were found in any of the code
+files.</p>
+<h4 id="working-directory-setwd">Working Directory (setwd)</h4>
+<p>Best programming practice is to avoid <code>setwd()</code> in
+analysis code: it hardcodes an assumption about the working directory
+(often an absolute path on the author’s own machine), so the code breaks
+when run anywhere else. Keep the working directory as the caller sets it
+and use relative paths. No <code>setwd()</code> calls were found in any
+of the code files.</p>
+<h4 id="package-installation-install.packages">Package Installation
+(install.packages)</h4>
+<p>Best programming practice is to avoid <code>install.packages()</code>
+in analysis code: it installs software on whoever runs the script
+without asking, which is at minimum disruptive (an unexpected install,
+network access, a package version the author never tested against) and
+at worst a security risk if it points at an untrusted repository.
+Document required packages instead (a README, or a list of them: an
+<code>renv.lock</code>/<code>DESCRIPTION</code> for R, a
+<code>requirements.txt</code> for Python). No
+<code>install.packages()</code> calls were found in any of the code
+files.</p>
+<h4 id="libraries-imports">Libraries / Imports</h4>
+<p>Best programming practice is to load all required libraries/imports
+in one block near the top of the code. In all code files,
+libraries/imports were loaded in one block.</p>
+<h4 id="packages-dependencies">Packages / Dependencies</h4>
+<p>No packages/libraries were detected as loaded in the code files.
+(This check reads R and Python imports; other languages are not scanned
+for packages.) Even when no imports are detected, it is good practice to
+record the exact package versions the analysis depended on — see
+“Reproducible Environment” below.</p>
+<h4 id="reproducible-environment">Reproducible Environment</h4>
+<p>No <code>renv.lock</code> file,
+<code>sessionInfo()</code>/<code>session_info()</code> record, or
+<code>groundhog</code>/<code>checkpoint</code> date-pin call was found
+anywhere in the repository. Without one of these, the exact R and
+package versions used for the analysis are not recoverable, and package
+versions may drift between when this analysis was run and any later
+reproduction attempt. Consider depositing an <code>renv.lock</code> (via
+the <code>renv</code> package), a <code>sessionInfo()</code> text dump,
+or a <code>groundhog</code>/<code>checkpoint</code> date-pin alongside
+the code.</p>
+<h4 id="parsable-code">Parsable code</h4>
+<p>All R-type code files (.R, .Rmd, .qmd) could be read in. There were
+no parsing issues.</p>
+</div>
+</details>
+</div>
+<h2 id="fine">Fine <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 4 detected.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(9)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>No papers appeared to involve live data collection requiring an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>We found 1 OSF link, but no registrations.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We classified 9 files: 2 code, 5 documentation, 1 materials, 1
+unknown.</li>
+<li>We found 0 tabular data files and extracted 0 columns from 0 of
+them.</li>
+<li>We grouped the files into 2 study groups (ex1, ex2), plus 1
+collection-level file (README/ro-crate metadata). We found no readable
+tabular data files to validate.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="section-reproducibility_check">Reproducibility Check</h2>
+<p>We ran the paper’s 1 R script in the order they depend on each other,
+each in an isolated container, for at most 5 minutes per script.</p>
+<p><strong>0 of 1 script ran to the end</strong>: 1 did not
+reproduce.</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Script</th>
+<th>Result</th>
+<th>What happened</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>wessels.R</td>
+<td>Stopped with an error</td>
+<td><code>Error in file(file, “rt”, encoding = fileEncoding) : cannot
+open the connection</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-make-your-code-run-on-another-computer">How to make your
+code run on another computer</h3>
+<p>We ran your code on a clean computer, the way a reader or reviewer
+would. Below is each problem we found, the scripts it affects, and how
+to fix it. Fix them in the order given: a problem near the top can cause
+the ones below it.</p>
+<p><strong>Files are missing from your deposit.</strong></p>
+<ul>
+<li><code>wessels.R</code> reads
+<code>datatwo_selfasval.csv</code>.</li>
+</ul>
+<p>The script stops at the line that reads the file.</p>
+<ol style="list-style-type: decimal">
+<li>Find the file on your computer.</li>
+<li>Add it to the deposit, in the folder where the script looks for
+it.</li>
+<li>If you cannot share it, for example for privacy reasons, say so in
+the README, and explain where readers can get it and where to put
+it.</li>
+</ol>
+<h3 id="comparison-with-the-paper">Comparison with the paper</h3>
+<p>We found no statistical tests in the paper to compare with the output
+of the code.</p>
+<details>
+<summary>
+All details of the Reproducibility Check
+</summary>
+<div class="fold">
+<p>This module assesses whether the paper’s code could be run on its
+data, and — because <code>execute = TRUE</code> — <strong>actually ran
+it</strong>. We examined 1 R code file.</p>
+<h4 id="run-order">Run order</h4>
+<p>The scripts were ordered by their data dependencies (a script writing
+a file another reads runs first), <code>source()</code> calls, and
+numeric filename prefixes.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:right;">
+Order
+</th>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Runs after
+</th>
+<th style="text-align:left;">
+Basis
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+wessels.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-paths">File paths</h4>
+<p>The data paths in the code to files the repository holds work as
+deposited, but 2 paths name a file the repository does not hold:
+<code>datatwo_selfasval.csv</code>,
+<code>s2_data_raw_agreement_itemwise.csv</code>.</p>
+<h4 id="files-the-deposit-does-not-hold">Files the deposit does not
+hold</h4>
+<p>The scripts that did not run through read 2 data files that are not
+in the deposit, and no script of the deposit writes:
+<code>datatwo_selfasval.csv</code>,
+<code>s2_data_raw_agreement_itemwise.csv</code>.</p>
+<h4 id="execution">Execution</h4>
+<p><strong>The code was run.</strong> Each script ran in an isolated
+Docker container against a throwaway copy of the repository, in the run
+order above, with a 300-second per-script timeout. Of 1 script: 0 ran
+without error, 1 errored, 0 timed out, 0 could not run because one of
+its own dependencies is unavailable, 0 did not parse. Running against
+current package versions: a break can reflect version drift, which
+argues for pinning versions.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Outcome
+</th>
+<th style="text-align:left;">
+Detail
+</th>
+<th style="text-align:right;">
+Time (s)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+wessels.R
+</td>
+<td style="text-align:left;">
+errored
+</td>
+<td style="text-align:left;">
+runtime
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Expand a row below to see the output each script
+produced.</em></p>
+<div class="callout-tip" title="Output — wessels.R (errored)" collapse="true">
+<p><strong>Output (stdout):</strong></p>
+<pre><code>&gt; path &lt;- &quot;data-raw/wessels_src/&quot;
+&gt; w &lt;- read.csv2(file.path(path, &quot;datatwo_selfasval.csv&quot;), fileEncoding = &quot;UTF-8-BOM&quot;)</code></pre>
+<p><strong>Messages / errors (stderr):</strong></p>
+<pre><code>Error in file(file, &quot;rt&quot;, encoding = fileEncoding) : 
+  cannot open the connection
+Calls: .repro_docker_run ... withVisible -&gt; eval -&gt; eval -&gt; read.csv2 -&gt; read.table -&gt; file
+In addition: Warning message:
+In file(file, &quot;rt&quot;, encoding = fileEncoding) :
+  cannot open file &#39;data-raw/wessels_src//datatwo_selfasval.csv&#39;: No such file or directory
+Execution halted</code></pre>
+</div>
+</div>
+</details>
+<h2 id="files">Files in the repository</h2>
+<p>Where the files sit within each repository. Each file is followed by
+how it was classified, which study it belongs to, and any file-naming
+issue found by repo_check; junk files, hidden files and empty folders
+are marked.</p>
+<p><strong>Repository: <a href="https://osf.io/s5e6m" class="uri">https://osf.io/s5e6m</a></strong></p>
+<div style="max-height: 40em; overflow: auto;">
+<pre><code>├── Accuracy_and_Bias_in_Person_Perception_Additional_Analyses.pdf              📖 documentation ex1  The file name is 62 characters, over the recommended 50
+└── Replication_recipe_effects_of_knowing_and_liking_on_accuracy_july_2017.pdf  📖 documentation ex1  The file name is 74 characters, over the recommended 50</code></pre>
+</div>
+<p><strong>Repository: <a href="https://github.com/jzpsych/profilemlm" class="uri">https://github.com/jzpsych/profilemlm</a></strong></p>
+<div style="max-height: 40em; overflow: auto;">
+<pre><code>├── data-raw/
+│   └── wessels.R  💻 code          ex2
+├── _pkgdown.yml   💻 code          ex2
+├── .gitignore     📁 materials     ex2
+├── .Rbuildignore  ❓ unknown       ex2
+├── LICENSE.md     📖 documentation
+├── NEWS.md        📖 documentation ex2
+└── README.md      📄 readme</code></pre>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>We did not detect an ethics approval statement, and this paper does
+not appear to involve live data collection from human or animal
+participants. Ethics approval is typically not required for theoretical
+work, simulations, reviews, meta-analyses, or secondary analyses of
+published data.</p>
+</div>
+</details>
+<details>
+<summary>
+Data Check
+</summary>
+<div class="fold">
+<p>This module classifies repository files and, for tabular data files
+available locally, extracts each column’s type and summary
+statistics.</p>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 44 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 44 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 44 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). Statcheck might
+miss one-sided tests, and falsely assume the p-value is incorrect. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How codebook_check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Johannes Zimmermann developed the R package profilemlm described in this tutorial (see Use of Generative Artificial Intelligence). The package, the simulated example data, the analysis scripts, and the vignettes are available at https://github.com/jzpsych/profilemlm. The data used in the replication vignette of the package were collected by N.M.W. (Wessels et al., 2020) and are available at https://osf.io/s5e6m and, reduced to the variables used there, as data sets in the package. Preparation of this article was supported by the German Research Foundation&#x27;s grants ZI1533/1-1 to Johannes Zimmermann and LE2151/5-1 to Daniel Leising.</p>
+<h3>Who Agrees With Whom About What? A Tutorial on Multilevel Profile Analysis of Person</h3>
+<p>Who Agrees With Whom About What? A Tutorial on Multilevel Profile Analysis of Person</p>
+<h3>Judgments With the R Package profilemlm</h3>
+<p>Judgments of persons on many items at once are ubiquitous in psychological research and practice. Perceivers describe targets on trait adjectives, informants rate a patient&#x27;s symptoms, teachers rate pupils on competencies. A recurring question about such judgments is how well they agree with some criterion, such as the target&#x27;s self-ratings, the ratings of other informants, or behavioral measures. Take a simple study as an example. Several people who know Anna describe her on a list of trait adjectives, and Anna describes herself. Other groups do the same for Ben, Clara, and a dozen further targets. The descriptions of each target will resemble that target&#x27;s self-description to some degree. The degree will vary with who is judging (some perceivers are better judges than others), with who is judged (some targets are easier to read than others), with the relationship between the two (some perceivers know some targets particularly well), and with what is being judged (some traits are easier to observe than others; Funder &amp; Dobroth, 1987; John &amp; Robins, 1993; for an overview, see Letzring et al., 2021).</p>
+<p>Multilevel profile analysis (MPA) studies these sources of agreement together. For every perceiver-target pair, which we call a dyad, there is a vector of judgments across items, and for every target a corresponding vector of criterion values. Two such profiles about different targets are likely to correlate positively even for targets picked at random, simply because some items are endorsed more readily than others by everybody. Profile analysis therefore distinguishes agreement with this general pattern from agreement with what is specific to a target (Cronbach, 1955; Furr, 2008;  for a review, see Borkenau &amp; Leising, 2016). The Social Accuracy Model (SAM; Biesanz, 2010) casts this distinction as a multilevel regression. Each judgment profile is regressed on two components of the criterion profile, the average profile across targets and the target&#x27;s deviation from it. The two agreement slopes are random coefficients that vary across perceivers, targets, and dyads, the sources of variance of Kenny&#x27;s (1994) Social Relations Model (SRM). The SAM has become a standard tool of person perception research and has shown when, why, and for whom judgments agree more or less with a criterion (e.g., Human &amp; Biesanz, 2011b; Rogers &amp; Biesanz, 2015; Wessels et al., 2020).</p>
+<p>The SAM as it is commonly applied treats items as fixed. This tutorial presents an MPA framework in which items are a random factor. Three things follow from this step. First, conclusions are meant to hold for person judgment in general, not for the set of items that happened to be used in a given study, and that inference requires treating items as a random factor (Judd et al., 2012). Second, the SAM assumes that distinctive agreement is the same for every item. With items as a random factor, this assumption becomes a variance that the model estimates.</p>
+<p>Third, item properties can be tested as predictors of agreement within the same model.</p>
+<p>Agreement depends on properties of the items such as their desirability and observability (John &amp; Robins, 1993; Kenny &amp; West, 2010; Wessels et al., 2025). Such effects have been tested in two ways. In the first, the item property moderates the agreement slopes of a SAM with fixed items (Human &amp; Biesanz, 2011a). The test then rests on the number of judgments rather than on the number of items, and it assumes that items differ in agreement only through this property. In the second, agreement is estimated for each item, and the estimates are then related to item properties (Rau et al., 2026; Wessels et al., 2025). This second stage ignores the uncertainty of the first and no longer distinguishes perceivers, targets, and dyads. With items as a random factor, neither compromise is needed. The item property is tested in one step, the item is the unit of the test, and the model estimates how much items still differ in agreement beyond the property.</p>
+<p>In sum, the framework keeps the SAM and adds items as a fourth source of variation next to perceivers, targets, and dyads. Researchers can then generalize beyond the items of their study, see how much agreement differs from item to item, and test which item properties account for these differences.</p>
+<p>The framework is implemented in the R package profilemlm. Beyond items, the package brings together what applications of the SAM have so far set up one study at a time. These are predictors at the perceiver, target, and dyad level (e.g., Human &amp; Biesanz, 2011b; Wessels et al., 2020), the decomposition of dyadic variables into perceiver, target, and relationship components (cf. Biesanz et al., 2011), a second profile next to the criterion, such as the perceiver&#x27;s selfratings (Human &amp; Biesanz, 2011b), and standardized effect sizes. We build the analysis in five steps on simulated data with known parameters, from the files a study produces to a full model with predictors at every level. We assume a reader who has fitted a mixed-effects model before but has no experience with profile analysis. The complete code and output of every step are in the package vignette, which is opened with vignette(&quot;mpa-tutorial&quot;, package = &quot;profilemlm&quot;) and can be read alongside the text (see Data and Code Availability).</p>
+<h3>The Framework Terminology</h3>
+<p>This section fixes the terms used throughout. Judgments are made by perceivers about targets on items. A perceiver-target pair is a dyad, and the judgments of one dyad across the items form its judgment profile. For each target there is a criterion profile, for example the target&#x27;s self-ratings on the same items. The judgments are the dependent variable. Each target has one criterion profile but several perceivers, so only the judgments vary between perceivers and dyads. The criterion profile is a predictor, and its slope is the quantity of interest, the agreement of the dyad with the criterion. The mean of a profile across items is its elevation (Cronbach, 1955).</p>
+<p>We speak of a criterion and of agreement rather than of truth and accuracy. Whether a criterion can be taken to measure the truth about a target, and agreement with it to indicate accuracy, is a validity question that needs its own argument (Funder, 1995), and the argument differs for self-ratings, informant ratings, and behavioral measures. Where it can be made, the criterion becomes a truth variable in the sense of West and Kenny (2011) and agreement becomes accuracy. The analysis is unchanged.</p>
+<p>Variables at the item, perceiver, target, or dyad level enter the model as predictors. A predictor can affect the judgments in two ways. A main effect shifts the judgments up or down the rating scale, whatever the criterion says. 1 For instance, informants recruited by the targets typically describe them more favorably than the targets describe themselves (Leising et al., 2010). Their judgments on desirable items are then higher, and their judgments on undesirable items lower, than the criterion predicts. This is a main effect of item desirability. A moderating effect changes how strongly the judgments follow the criterion profile. For instance, distinctive agreement may be higher in dyads in which the perceiver knows the target well, because such perceivers have seen more of what sets this target apart from others. In the model, desirability and acquaintance enter both as main effects on the judgments and as interactions with the two components of the criterion profile, its normative and its distinctive part (see The Models below). 1 In a model with interactions, a lower-order coefficient is the effect of its predictor when the variables it interacts with are zero, a conditional rather than a marginal effect. Because the two criterion components are centered, the main effect of a predictor is its effect for an item of average normativeness on which the target is not distinctive, which equals its average effect across the items of the study. We therefore keep the familiar term.</p>
+<p>Only the interactions make them moderators of agreement. We say moderation when we speak of agreement and interaction when we speak of the model term.</p>
+<p>We call variables measured for each perceiver-target pair, such as acquaintance or liking, dyadic variables. The relationship component of a dyadic variable is the part that is unique to the dyad once the perceiver&#x27;s and the target&#x27;s means of that variable have been removed (see Step 4 below).</p>
+<h3>The Models</h3>
+<p>MPA is a family of nested models. We first present the base model, which contains no predictors besides the criterion profile, and then show how predictors extend it. Let Jₚₜᵢ be the judgment of perceiver p about target t on item i, and let Cₜᵢ be the corresponding criterion value, for example target t&#x27;s self-rating on item i. 2 Each equation below is written for a single judgment and holds for every combination of p, t, and i. In line with common practice (Biesanz, 2010; Furr, 2008), the criterion profile of a target is split into a normative profile Nᵢ, the mean of Cₜᵢ across the targets of the sample, and a distinctive profile Dₜᵢ = Cₜᵢ -Nᵢ, the target&#x27;s deviation from the average target. 3 The normative profile thus depends on who was sampled. Normative is meant in the statistical sense of typical, not in the sense of a social norm. The model has two levels. At the first level, each judgment Jₚₜᵢ is regressed on the two criterion components: (</p>
+<p>The subscripts show where a coefficient can vary. All three coefficients vary between dyads. The intercept and the distinctive slope also vary between items, and the normative slope 2 The indices p and t correspond to the perceiver π and the target τ in the formal model of person judgment by Leising and Schilling (2025). 3 By default, the package computes this mean leave-one-out, so that N differs slightly between targets, which the notation ignores (see Designs, Data, and the Package). The vignette explains why D rather than the raw criterion C enters the model alongside N.</p>
+<p>does not (see below). In the text, we drop the subscripts where the meaning is clear. The intercept b₀ is the dyad&#x27;s expected judgment on an item of average normativeness. The slope b₁ is the normative agreement of the dyad, that is, how strongly the perceiver&#x27;s judgments follow the normative profile. The slope b₂ is the distinctive agreement. It shows how strongly the judgments follow the target&#x27;s distinctive criterion profile, the ways in which the criterion describes this target as different from the average target. These slopes are regression coefficients, not correlations, because judgment and criterion profiles may differ in variance. Within a dyad, p and t are fixed and only i varies. Equation 1 is thus a regression across the items of one dyad&#x27;s profile, which is what makes the approach a profile analysis. Figure 1 shows the quantities of Equation 1 for one dyad of the simulated example introduced below, together with the design of that example. At the second level, each coefficient is the sum of a fixed effect γ and random deviations for the perceiver (u), the target (v), the dyad (w), and the item (z). Following Raudenbush and Bryk (2002), Greek letters denote parameters, which the model estimates, and Latin letters denote random deviations, of which the model estimates only the variances and covariances: Design and Model of the Simulated Example Note. (A) Half-block design: two of the six groups, with four of the eight perceivers (rows) and four of the eight targets (columns) of each group. Perceivers judge only the targets of their partner group (grey cells), and every cell shows one dyad&#x27;s profile of judgments across the first eight items. A perceiver deviation (u) of Equation 2 is shared by all cells of a row, a target deviation (v) by all cells of a column, a dyad deviation (w) belongs to one cell, and an item deviation (z) to one position along every profile. (B) The dyad outlined in Panel A, with all 30 items, ordered by the normative profile N (thick grey line): the criterion profile C, here the target&#x27;s self-ratings (dashed), the distinctive profile D = C -N (grey segments), and the perceiver&#x27;s judgments J (points).</p>
+<p>(C, D) The same dyad&#x27;s judgments plotted against N and against D. The lines have the slopes b₁ (normative agreement) and b₂ (distinctive agreement) of Equation 1, estimated here by an ordinary regression within this one dyad. In the multilevel model, each such slope is the sum of a fixed effect and the deviations u, v, and w of Equation 2.</p>
+<p>The first subscript of γ, u, v, w, and z names the coefficient (0 for the intercept, 1 for normative, 2 for distinctive agreement), and the second subscript names the predictor k (0 for none, predictors are added below). γ₁₀ and γ₂₀ are the average normative and distinctive agreement, and the variances of the random deviations describe how agreement differs between units. Perceiver variance in b₂, Var(u₂₀), is individual differences in distinctive agreement. If the criterion is accepted as the truth, perceivers with high values are the more competent judges.</p>
+<p>Target variance, Var(v₂₀), is differences in how judgable targets are, and dyad variance, Var(w₂₀), is differences in agreement between relationships. Items enter as a fourth, crossed random factor.</p>
+<p>Every item is judged by every perceiver about every target, so item effects are crossed with (not nested in) the other three units. The item intercept z₀₀ is the extent to which an item is judged higher or lower, across all perceivers and targets, than the normative profile predicts. For instance, if perceivers describe targets in general as friendlier than the targets&#x27; average self-rating suggests, the item friendly has a positive intercept. The item slope z₂₀ is the extent to which distinctive agreement on an item is higher or lower than on the average item. Some items are simply judged with more agreement than others. Both are needed if conclusions are to generalize beyond the items used (see Judd et al., 2012, for an accessible introduction to stimuli as a random factor). The normative slope b₁ has no item deviation. Because Nᵢ takes one value per item, such a deviation could not be distinguished from the item intercept. Item properties can still moderate normative agreement as fixed effects (see Step 3 below). Equations 1 and 2 are Biesanz&#x27;s (2010) SAM with items as a random factor. We call them the base model (Model 1 of the tutorial). Statistically, the base model is a cross-classified linear mixed-effects model (Baayen et al., 2008).</p>
+<p>We call the approach multilevel profile analysis because the name places the model in the general framework of profile analysis (Borkenau &amp; Leising, 2016; Furr, 2008 Furr, , 2009) ) and makes no claim about accuracy. It is unrelated to latent profile analysis, which sorts persons into classes. Profile analysis is often contrasted with trait-wise (variable-centered) analysis, in which agreement is a correlation across targets for each item (Back &amp; Nestler, 2016; Borkenau &amp; Leising, 2016). Given judgments on many items, the two rest on the same data and differ in the orientation of the analysis, that is, in whether judgments are compared across the items of one person or across the persons judged on one item (Kuper et al., 2025). For distinctive agreement, the two orientations converge. Given homogeneous item variances, the average distinctive agreement is the same in both orientations as the numbers of targets and items grow (Biesanz, 2010, pp. 870-871). MPA takes both orientations. The distinctive slope represents average agreement, its item random effects describe how agreement differs between items, and its perceiver, target, and dyad random effects describe how agreement differs between people and relationships. Borkenau and Leising (2016) recommend profile analysis for two aims that this tutorial shares, conclusions that generalize across items and predictors of agreement at the perceiver, target, and dyad level.</p>
+<p>Substantive predictors such as item desirability or acquaintance extend the base model at the second level, and each extension is a new model. Predictors are numbered k = 1, 2, … in the order in which they appear in the model equations. In the simulated example, we use five: item desirability (DES, k = 1), its square (DES², k = 2, a measure of how evaluative an item is in either direction), the acquaintance of the dyad (KNOW, k = 3), perceiver training (TRAIN, k = 4), and target talkativeness (TALK, k = 5). A predictor Pₖ enters the intercept equation with a main effect γ₀ₖ and the slope equations with moderating effects γ₁ₖ and γ₂ₖ:</p>
+<p>The level at which a predictor varies is not part of its symbol. It is shown in the equations of the individual models by the subscript of the named predictor (e.g., DESᵢ, KNOWₚₜ), and it determines at which units the predictor can have random slopes and explain variance (see below). Substituting Equation 3c into Equation 1 shows that a moderating effect is an interaction with a criterion component. The term γ₂ₖPₖDₜᵢ appears in the equation for the judgment, and γ₂ₖ is the change in distinctive agreement per unit of the predictor. A quadratic term allows the moderation to be nonlinear (see Step 3 below). A main effect can itself vary across units (a random slope of the predictor, e.g., u₀ₖₚ for perceiver differences in the effect of desirability).</p>
+<p>Table 1 lists all parameters of the model with their meaning and their name in the package output. Agreement slopes are in judgment points per criterion point, main effects in judgment points per unit of the predictor, and moderating effects in agreement slope per unit of the predictor. Explaining Variance in Agreement. The random-effect variances describe how much the intercepts and the agreement slopes differ between perceivers, targets, dyads, and items. Predictors are added to explain these differences, and what a predictor explains is read by comparing the model with it to the model without it. A predictor can explain variance only at the levels at which it varies. A perceiver variable such as training can explain perceiver variance in normative and distinctive agreement, Var(u₁₀) and Var(u₂₀), but not target or dyad variance, and a target variable such as talkativeness can explain target variance, Var(v₁₀) and Var(v₂₀). A dyadic variable such as acquaintance can explain variance at all three person levels, because it has perceiver and target components of its own. Some perceivers know all their targets well, and some targets are well known to all their perceivers (see Step 4 below). Only its relationship component is confined to the dyad level. An item property can explain item variance in the intercepts, Var(z₀₀), as the normative profile does (see Step 1 below), and in distinctive agreement, Var(z₂₀). How much a predictor explains is expressed as the proportional reduction of a variance component when the predictor is added (Raudenbush &amp; Bryk, 2002), that is, the component in the model without the predictor minus the component in the model with it, divided by the former. mpa_compare() reports these reductions as prop_reduced for every component.</p>
+<p>The reduction is a descriptive effect size and has no significance test of its own. Whether a predictor explains variance in agreement beyond chance is tested by the z test of its moderating effect, γ₁ₖ or γ₂ₖ, when the moderator was specified in advance, and for a set of moderators by a likelihood-ratio test of the two models. A comparison with the previous model shows what the newly added predictors explain, and a comparison with the base model in its final form (m_base in the code below) shows what all predictors explain together.</p>
+<h3>Designs, Data, and the Package</h3>
+<p>Three designs are common (Kenny, 1994; Table 2). In the one-with-many design, each perceiver judges one target and each target is judged by several perceivers. This is the typical informant study. In the half-block design, groups of perceivers judge groups of targets, and perceivers and targets are different people.</p>
+<p>In the round-robin design, everyone in a group judges everyone else. The designs differ in what can be estimated. Dyad-level random effects can be separated from perceiver and target effects only when perceivers judge several targets and targets are judged by several perceivers, which excludes the one-with-many design, where each perceiver judges a single target. For the same reason, a dyadic variable such as acquaintance can be decomposed into perceiver, target, and relationship components (see Step 4 below) only in the two crossed designs. In a one-with-many design it is a perceiver variable. Separating dyad effects from residual error additionally requires several observations per dyad. In profile data these are the items.foot_0 The residual is therefore not measurement error in the psychometric sense. Besides error, it contains the item-specific part of a dyad&#x27;s judgments. Round-robin data contain further dependencies that the models in this tutorial do not address (see Limitations and Outlook).</p>
+<p>Table 2 What Can Be Estimated in the Three Designs Design Who judges whom Perceiver and target random effects Dyad random effects Dyadic variables Typical use Onewithmany Each perceiver judges one target; several perceivers per target Yes Not separable from perceiver effects (omitted) Constant within perceivers: perceiver variables Informant studies Halfblock Groups of perceivers judge groups of targets; perceivers and targets are different people Yes Separable, given several items per dyad Decomposable into group, perceiver, target, and relationship components Studies of acquaintance in existing groups Design Who judges whom Perceiver and target random effects Dyad random effects Dyadic variables Typical use Roundrobin Everyone in a group judges everyone else Yes Separable, given several items per dyad Decomposable, as in the half-block design Social Relations Model studies; reciprocity dependencies not modeled here Note. Item random effects (intercept and distinctive slope) can be estimated in every design in which each perceiver judges each target on several items. The simulated example of this tutorial has a half-block design.</p>
+<p>The package works from data as a study produces them. A perceiver survey exported from survey software typically has one row per perceiver with the questions about each target repeated in blocks (&quot;loops&quot;). A target survey has one row per target with the self-ratings. Item properties come from a separate norming study, in which the items are rated by human judges or by a large language model. mpa_data() reads these files as they are. It accepts three layouts of the judgments, and none of them has to be reshaped beforehand: one row per perceiver with target loops (format = &quot;loop&quot;), one row per dyad (&quot;wide&quot;), and one row per judgment (&quot;long&quot;). It then computes the normative and distinctive profiles, centers and, on request, rescales, detects at which level each variable varies, and detects the design. The criterion source is named by the user (in the example, the self-ratings are called self), and the output names follow (self.norm.c, self.dist). A criterion from another source, for instance the ratings of parents as the criterion for the judgments of teachers, is named accordingly and analyzed with the same models (for criteria formed from the perceivers&#x27; own judgments, see Limitations and Outlook).</p>
+<p>Three decisions are made at this stage. First, the normative profile is computed leaveone-out (norm = &quot;loo&quot;). With the plain sample mean, each target&#x27;s own criterion values enter the norm with weight 1/n, so that part of what is distinctive about the target would be counted as normative. With many targets the two options hardly differ. With few targets, or with norms computed within subgroups, leave-one-out is preferable. Alternatively, the normative profile can be taken from an external norm sample (norm = &lt;data frame&gt;), which fixes it independently of who was sampled. Second, the normative profile is centered at its mean across items (center_norm = &quot;grand_mean&quot;). The intercept γ₀₀ is then the expected judgment of an average item, and perceiver differences in intercepts, Var(u₀₀), reflect differences in elevation, a general tendency to use the upper or the lower end of the scale (with an agree-disagree format, acquiescence). What elevation means depends on how the items are keyed (see Extensions).</p>
+<p>Third, predictors can be rescaled to -1…+1 with 0 at the theoretical scale midpoint (rescale).</p>
+<p>All of them then share one unit, half the scale range, and 0 is a point with a meaning of its own rather than a sample mean. We rescale rather than standardize because the predictors are rating scales with a fixed range. 5 The common zero point matters once interactions enter the model, because each lower-order effect then refers to the point where the predictors it interacts with are zero. In Step 4 below, the distinctive-agreement slope γ₂₀ is the slope at the midpoints of the acquaintance and training scales. All agreement slopes are reported per criterion point.</p>
+<p>mpa_formula() turns arguments into the model formula: which criterion source is used (criterion), which predictors have main effects (predictors), which moderating effects to include (interactions), which predictors receive random slopes in addition to their fixed effect (random_slopes), and which units get random effects (random_units). The last two arguments define the random part of the model. random_units names the units that get random effects, by default perceivers, targets, dyads, and items. The value &quot;group&quot; adds a random intercept for the groups of a half-block design. random_slopes names the predictors whose main effects vary across these units, in addition to the criterion components, which always do. Random slopes follow one rule. A predictor can have a random slope at a unit only if it varies within that unit.</p>
+<p>Desirability, for example, varies within each perceiver (across items) and can have a perceiver slope, but it takes one value per item and cannot have an item slope. Likewise, a perceiver variable has no perceiver slope, and in a one-with-many design no variable has a dyad slope.</p>
+<p>Printing the formula lists the slopes that were dropped for this reason.</p>
+<p>mpa_fit() estimates the model and returns tables of fixed effects and variance components. By default it uses maximum likelihood with lme4 (Bates et al., 2015). With engine = &quot;brms&quot;, the same formula is estimated by Bayesian sampling in Stan via brms (Bürkner, 2017), with the default priors of brms unless others are given (prior). 6 The tables then report posterior medians, posterior standard deviations, and credible intervals. mpa_compare() compares two models, mpa_effect_size() expresses main and moderating effects as standardized effect sizes, mpa_plots() draws the moderating effects, and mpa_simulate() generates data from the model.</p>
+<p>Table S2 in the Supplemental Material lists the functions and their main arguments.</p>
+<h3>Five Steps on Simulated Data</h3>
+<p>We build the analysis in five steps, numbered 0 to 4 because the first one fits no predictors at all. Each step is built around one model, Model 0 to Model 4, and Table 3 gives for each the question it answers, its equations, and the package call. The vignette mpa-tutorial runs the same analysis with every call and its complete output. Steps 0 and 1 establish the base model (Model 1). Steps 2 to 4 add predictors, ordered by the level at which they reside. Item properties take two steps because their main effect has to be in the model before their moderating effect can be read (Step 2 shows why). One can study perceiver variables without item properties, and a confirmatory study would preregister which steps and which predictors it commits to and treat the rest as exploratory. Equation 7: for each further predictor k, a main effect γ₀ₖ and moderating effects γ₁ₖ and γ₂ₖ mpa_formula(dat, criterion = &quot;self&quot;, random_slopes = &quot;des&quot;, poly = &quot;des&quot;, predictors = c(&quot;know&quot;, &quot;training&quot;, &quot;talkativeness&quot;), interactions = &quot;criterion&quot;, random_structure = f_base)</p>
+<p>Note. dat is the data set built by mpa_data(), and f_base is the random-effects structure settled in Steps 1 and 2. criterion, random_slopes, poly, predictors, interactions, and random_structure are arguments of mpa_formula(). &quot;self&quot;, &quot;des&quot;, &quot;know&quot;, &quot;training&quot;, and &quot;talkativeness&quot; are names of variables in the example data and are replaced by the names in one&#x27;s own data.</p>
+<h3>The Example Data</h3>
+<p>Imagine a study of acquaintance in existing groups. Students from six seminar groups, each of size n = 8, describe the eight members of a partner group, with whom they have worked on a joint project for one term, on 30 trait adjectives. The members of the partner group are judged but do not judge in return. The rating scale runs from 1 to 101. We chose this fine-grained scale so that the simulated judgments are approximately continuous, as the linear mixed model assumes (for coarser scales, see Limitations and Outlook). The targets describe themselves on the same adjectives. For each target, a perceiver also rates how well they know this person (acquaintance, a dyadic variable). Perceivers report how much training in personality assessment they have had (training, a perceiver variable), and the targets&#x27; talkativeness is rated by the project supervisor (a target variable). The adjectives&#x27; desirability comes from a norming study.</p>
+<p>We simulated such a study, a half-block design with 48 perceivers, 48 targets, and 30 items (Figure 1A). As the section Planning a Study shows, eight targets per perceiver is roughly the minimum at which perceiver differences in agreement can be estimated reliably, whereas dyad differences benefit from more items. We wrote the data to the three files such a study would produce. The file perceiver_survey.csv has one row per perceiver with the group ID (group) and training. Each of the eight target loops holds the target&#x27;s ID, the acquaintance rating (know), and the 30 judgments. The file target_survey.csv holds the self-ratings and talkativeness, and items.csv holds the items&#x27; desirability (des). The four predictors are stored on a -1…+1 scale, so rescale is not needed here (the square of desirability is formed from these values).</p>
+<p>The generating values were chosen to resemble published informant studies. Average normative agreement was set to .60 and distinctive agreement to .15 per criterion point, close to the .57 and .13 that Wessels et al. (2020) estimated for informants of varying acquaintance (for an overview of published values, see Letzring et al., 2021). The main effect of desirability was 6 judgment points per scale half, that is, judgments on a maximally desirable item were 6 points higher than on a neutral item with the same criterion value. The moderating effects on distinctive agreement were -.10 for desirability, .08 for acquaintance, and .08 for training. The first of these means that, per criterion point, judgments followed the distinctive profile by .15 points on a neutral item but by only .05 points on a maximally desirable item. Target talkativeness had a main effect of 3 points. Perceivers rated talkative targets higher on all adjectives, desirable and undesirable alike, as if, having more behavior to go on, they endorsed more of every description.</p>
+<p>Talkativeness did not moderate agreement. Independently of the predictors, random effects were present for perceivers, targets, dyads, and items, among them item-level variation in distinctive agreement (SD = .04).</p>
+<p>Table 4 lists all generating values and compares them with the estimates of Model 4 at the end of this section. In Steps 0 to 3 the model is still incomplete, so deviations from these values show what the predictors that are added later absorb. The three files were generated with mpa_simulate() and are installed with the package. The vignette shows the generating call. Reading them and building the analysis data set takes four calls: library(profilemlm) path &lt;-system.file(&quot;extdata&quot;, package = &quot;profilemlm&quot;) perceiver_survey &lt;-read.csv(file.path(path, &quot;perceiver_survey.csv&quot;)) target_survey &lt;-read.csv(file.path(path, &quot;target_survey.csv&quot;)) items &lt;-read.csv(file.path(path, &quot;items.csv&quot;)) dat &lt;-mpa_data(judgments = perceiver_survey, format = &quot;loop&quot;, loop_id = &quot;id&quot;, targets = target_survey, items = items, item_cols = &quot;^item_&quot;, criterion = list(self = &quot;targets&quot;), group = &quot;group&quot;, rating_scale = c(1, 101)) mpa_data() reports the level at which each predictor was registered (des item, know dyad, training perceiver, talkativeness target).</p>
+<p>Printing dat shows the design (half-block, fully crossed within groups, dyad-level random effects separable), which variable serves as the criterion (the self-ratings, under the name self), and how the normative profile was computed (leave-one-out mean across the other targets, centered at its mean across items). summary(dat) adds descriptive statistics and the item-level correlation between the normative profile and the item properties, here .58 between the normative profile and desirability, which matters in Step 2.</p>
+<h3>Step 0: Where Is the Variance?</h3>
+<p>Step 0 asks how the judgment variance is distributed across perceivers, targets, dyads, and items before any predictor is entered. It is the reference for everything that follows, because what the criterion profile and the predictors explain is read as a reduction of these components.</p>
+<p>The model (Model 0) contains only the intercept and its random deviations: f0 &lt;-mpa_formula(dat, criterion = NULL) m0 &lt;-mpa_fit(f0, dat)</p>
+<p>The intercept-only model attributes 26% of the judgment variance to items, Var(z₀₀), 16% to perceivers, Var(u₀₀), 2% to targets, Var(v₀₀), 8% to dyads, Var(w₀₀), and 48% to the residual.</p>
+<p>In real adjective data the item share is often larger still, because items differ greatly in how people are described, on average. That item variance is what the normative profile will explain in</p>
+<p>Step 1. The perceiver, target, and dyad variances in the intercepts, that is, in elevation, are what main effects of perceiver, target, and dyadic variables can explain.</p>
+<h3>Step 1: How Strong Are Normative and Distinctive Agreement, and How Much Do They</h3>
+<p>Vary?</p>
+<p>Step 1 fits the base model of Equations 1 and 2 (Model 1). It asks how strongly the judgments follow the normative and the distinctive profile on average (γ₁₀, γ₂₀), and how much these two agreement slopes vary across perceivers, targets, dyads, and items.</p>
+<p>f1 &lt;-mpa_formula(dat, criterion = &quot;self&quot;) m1 &lt;-mpa_fit(f1, dat) mpa_compare(m0, m1)</p>
+<p>Items are part of the default random_units, so the formula contains the item intercept z₀₀ and the item slope z₂₀ for the distinctive component, and printing f1 shows that no item slope was formed for the normative profile, which takes one value per item. The classical SAM without item effects is obtained with random_units = c(&quot;perceiver&quot;, &quot;target&quot;, &quot;dyad&quot;). 7The item slope deserves a comment, because leaving it out is easy and costly. Distinctive agreement varies between items over and above what any measured item property explains. If that variation is not in the model, the standard errors of every item property × criterion term in</p>
+<p>Step 3 are computed as though the judgments, not the items, were the units of that inference.</p>
+<p>Because there are many more judgments than items, these standard errors are too small. In the example, the standard error of the moderation of distinctive agreement by desirability (Step 3) is .023 without the item slope and .029 with it. With more variation between items, as in typical adjective data, the difference is larger.</p>
+<p>The average agreement slopes are γ₁₀ = .65 (SE = .06) for normative and γ₂₀ = .14 (SE = .02) for distinctive agreement, close to the generating values of .60 and .15. The variance components describe how much they vary. Variances of intercepts and slopes are on different metrics and should not be compared with each other. Slope variances are best read through their standard deviations relative to the fixed effect, which takes a line of arithmetic that the output does not provide. With an average distinctive slope of .14 and a perceiver SD(u₂₀) of .09, roughly 95% of perceivers have slopes between -.04 and .32 (the mean ± 2 SD). Some perceivers thus show hardly any distinctive agreement. The dyad-level SD(w₂₀) is also .09. This is the spread of the distinctive slopes across the dyads of one and the same perceiver and target, after the perceiver&#x27;s and the target&#x27;s average slopes have been taken into account. Given these averages, the slope of a particular dyad still varies by about ±.18 (2 × .09). Relationships thus differ in distinctive agreement about as much as perceivers do. Part of these differences reflects acquaintance, which was simulated as a dyadic moderator and enters the model in Step 4.</p>
+<p>The comparison with Model 0 shows that adding the criterion profile reduces the itemintercept variance by 84%, which is attributable to the normative profile, the only component that varies between items, and the residual variance by 10%, to which both components contribute. What remains of the item variance is what item properties will address. Besides these reductions, mpa_compare() reports the likelihood-ratio test of the added terms, ΔAIC, and ΔBIC. We report the information criteria but do not use them as a decision rule. 8</p>
+<p>Deciding on the Random-Effects Structure. The base model as fitted above, m1, is already the maximal model the design allows (Barr et al., 2013). Every coefficient varies over every unit for which it is identifiable, and all random effects within a unit are correlated. In real data this often asks for more than the data contain. The model then cannot estimate some variance and returns it as exactly zero, or estimates a correlation as exactly ±1, which lme4 calls a singular fit. A singular fit is not wrong, but it signals that the random structure is larger than the data support, and an oversized random structure costs power (Matuschek et al., 2017). We recommend a fixed sequence of decisions: 1.</p>
+<p>Fit the maximal model.</p>
+<p>2. If a variance is estimated as zero, remove that term (mpa_prune(m1) does this from the fit).</p>
+<p>3. If a correlation is estimated as ±1, or the model does not converge, in this or in a later step, estimate the random effects without correlations (correlated = FALSE). If both occur, do both.</p>
+<p>4. Carry the resulting structure through all later steps (random_structure), adding only the random slopes of newly introduced predictors and pruning again if a step becomes singular.</p>
+<p>With Bayesian estimation (engine = &quot;brms&quot;), variances are not estimated as exactly zero, and one inspects the credible intervals of the random-effect SDs instead of pruning.</p>
+<p>In the example, m1 lies at the boundary. The target-level SD(v₁₀) of the normative slopes is .02, almost 8 The information criteria also compare models that are not nested. With many observations they can disagree with each other, because the BIC charges ln(n) per parameter instead of 2 (see Vrieze, 2012, for the trade-off between them). In Step 3, for instance, the AIC favors the model with the desirability moderators (ΔAIC = -10), whereas the BIC favors the model without them (ΔBIC = +27).</p>
+<p>zero (the generating value was .05), and depending on the lme4 version and the numerical libraries, the fit is or is not flagged as singular. We first drop all correlations among the random effects. Rule 3 does not require this here, but the uncorrelated model fits several times faster and not worse, χ²(10) = 8.5, p = .58. The uncorrelated model estimates that target variance as exactly zero and is singular, so Rule 2 applies and we prune it: f_base &lt;-mpa_update(f1, correlated = FALSE) m_base &lt;-mpa_fit(f_base, dat) if (m_base$singular) { f_base &lt;-mpa_prune(m_base); m_base &lt;-mpa_fit(f_base, dat) } mpa_update() changes the random part of a formula and leaves the fixed part as it is.</p>
+<p>f_base is thus the complete formula of Model 1, with uncorrelated random effects and, after pruning, without the target-level variance of the normative slopes. Pruning is not automatic, because a singular model is not wrong and some analysts prefer to keep the maximal structure (Barr et al., 2013). The if() line requests it explicitly, and the same line recurs in Step 2. The pruned model differs from m1 in that term and in a slightly higher normative slope (γ₁₀ = .67 instead of .65), because the dropped correlation between the target intercept and the target normative slope, .92, had absorbed part of it. The other estimates are unchanged to two decimals.</p>
+<p>m_base is Model 1 with this structure. In Steps 2 to 4, random_structure = f_base takes the random part from f_base, and the fixed part is built from the other arguments.</p>
+<h3>Step 2: Do Item Properties Have Main Effects on the Judgments?</h3>
+<p>Step 2 asks whether a property of the items affects the judgments over and above the criterion profile (Model 2). The classic case is desirability (see Terminology). In profile data, the more favorable description of liked targets appears as a main effect of item desirability on the judgments, holding the criterion profile constant (the positivity effect; Wessels et al., 2020). If the criterion is accepted as the truth, this effect is the directional bias of the Truth and Bias model (West &amp; Kenny, 2011). Desirability (DES, k = 1) enters the intercept equation, with a fixed effect γ₀₁ for the average tendency and random slopes for differences between perceivers, targets, and dyads: b₀ₚₜᵢ = γ₀₀ + (γ₀₁ + u₀₁ₚ + v₀₁ₜ + w₀₁ₚₜ)DESᵢ + u₀₀ₚ + v₀₀ₜ + w₀₀ₚₜ + z₀₀ᵢ.</p>
+<p>( f2 &lt;-mpa_formula(dat, criterion = &quot;self&quot;, random_slopes = &quot;des&quot;, random_structure = f_base) m2 &lt;-mpa_fit(f2, dat) if (m2$singular) { f_base &lt;-mpa_prune(m2); m2 &lt;-mpa_fit(f_base, dat) } mpa_compare(m_base, m2) random_slopes = &quot;des&quot; gives desirability random slopes for perceivers, targets, and dyads, but not for items, because an item property does not vary within an item (printing f2 lists the dropped slope).</p>
+<p>A positive γ₀₁ (here 4.8, SE = 1.5) means that judgments increase with desirability over and above what the criterion predicts. Like any main effect in a model with random slopes, γ₀₁ is an average over the perceivers, targets, and dyads of the study. In the simulated data it is the positivity of 6 points built into the generating model. In a sample of informants recruited by the targets, it reflects their liking (Leising et al., 2010), and whether it holds for other perceivers and relationships is a question of generalization that requires sampling them. The random slopes show how much the effect varies across the units sampled. At the perceiver level, the SD(u₀₁) of 3.2 means large individual differences. The effect ranges from none, or a slight reversal, in some perceivers to more than twice the average in others, and Desirability also explains 30% of the item-intercept variance Var(z₀₀) that the normative profile had left, which is the part of the item differences that is evaluative. Note how the normative slope changes when desirability enters (γ₁₀ from .67 to .56). The normative profile and desirability are correlated across items, because the average selfdescription is favorable. This can mean that people are, on average, more like desirable than undesirable descriptions, or simply that raters, here the targets describing themselves, tend to hold a positive attitude toward the person they describe (Leising et al., 2015). Either way, part of the normative agreement in Step 1 was agreement with what is desirable. We therefore distinguish two quantities. Overall normative agreement is γ₁₀ in a model without desirability (Step 1). Desirability-adjusted normative agreement is γ₁₀ in a model with desirability (from Step 2 on), that is, agreement with the part of the normative profile that desirability does not predict. The second corresponds to normative knowledge in the sense of Rogers and Biesanz (2015), who introduced this decomposition, and to what Wessels et al. (2020) called &quot;pure&quot; normative accuracy.</p>
+<h3>Step 3: Do Item Properties Moderate Agreement?</h3>
+<p>Step 3 asks whether agreement depends on the item property (Model 3). Are desirable items, or evaluatively extreme items, judged with more or less distinctive agreement than neutral ones? Lower agreement for evaluative items has been found with trait adjectives (John &amp; Robins, 1993; Wessels et al., 2025) but not, or even reversed, with concrete behavioral statements judged by strangers (Rau et al., 2026), so the answer may depend on the item pool.</p>
+<p>Desirability now enters the two slope equations, linearly (k = 1) and quadratically (DES², k = 2), and DES² also enters the intercept equation with a main effect γ₀₂. The quadratic term lets agreement be lowest, or highest, for items at both evaluative extremes rather than change steadily from undesirable to desirable items: f3 &lt;-mpa_formula(dat, criterion = &quot;self&quot;, random_slopes = &quot;des&quot;, poly = &quot;des&quot;, interactions = &quot;criterion&quot;, random_structure = f_base) m3 &lt;-mpa_fit(f3, dat, start_from = m2) interactions = &quot;criterion&quot; adds the products of every predictor with the normative and the distinctive component. poly adds a quadratic term for the predictors it names (any predictor can be named, and none is the default), as a main effect and in its products with the two components.</p>
+<p>It is a separate argument because a quadratic term is treated differently from a predictor. It is formed from the rescaled predictor and has a fixed effect only, without random slopes. start_from = m2 reuses the variance estimates of the previous model as starting values, which shortens estimation and helps convergence. In the example, distinctive agreement decreased with desirability, γ₂₁ = -.125 (SE = .029, z = -4.4), the generating value being -.10.</p>
+<p>Because desirability runs from -1 to +1, this means that distinctive agreement is about .13 lower for the most desirable than for neutral items, and .13 higher for the most undesirable ones. Figure 2A shows the fitted line, drawn with mpa_plots(). For a quadratic moderation, such a plot is the easiest way to read the estimate. The quadratic moderation γ₂₂ (self.dist:I(des^2), -.01, SE = .05) was, as simulated, indistinguishable from zero. Moderating Effects in the Simulated Example Note. Fitted distinctive-agreement slope (per criterion point, with 95% confidence band) as a function of (A) item desirability, (B) acquaintance, (C) perceiver training, and (D) target talkativeness, from Model 4. Other predictors are held at 0, their scale midpoint. Panels share the y-axis. The figure was drawn with mpa_plots(m4).</p>
+<p>In this example, the moderation of normative agreement by desirability, γ₁₁, was estimated much less precisely than the moderation of distinctive agreement, γ₂₁. The standard errors were .17 and .03, although both coefficients were estimated from the same data. Both estimates lie within sampling error of their generating values, γ₁₁ = -.26 within 1.5 standard errors of 0 and γ₂₁ = -.125 within one standard error of -.10. The difference in precision comes from how much the items scatter, not from the number of judgments. Both moderators are properties of items and rest on the 30 items of the study. For γ₁₁, the question is whether the 30 item means, after the normative profile, desirability, and its square have been accounted for, still vary with the product of N and desirability. Item means scatter widely (the item-intercept SD is about 3 points), N and desirability are correlated (.58), and five item-level terms now compete for 30 values, so the estimate is imprecise. For γ₂₁, the question is whether the 30 item-specific distinctive slopes vary with desirability. Each of these slopes is estimated from many judgments, and they scatter little around their mean (SD(z₂₀) = .05). The effective sample size for a moderator is the number of units at the level at which it varies, 30 items for any item property and 48 perceivers for a perceiver variable.</p>
+<p>The likelihood-ratio test of the five added terms is significant, χ²(5) = 19.6, p = .001.</p>
+<p>Having specified desirability as a moderator in advance, we rely on its own test and on this test of the set. Desirability is a moderator of distinctive agreement, and the terms stay in the model. This includes the quadratic terms, which are not significant. We keep them because they were specified in advance as part of the question this step asks. A term that was added for exploration could be removed at this point, just as a random term is removed when the data do not support it.</p>
+<h3>Step 4: Do Perceiver, Target, or Dyad-Level Predictors Have Main and/or Moderating Effects?</h3>
+<p>Step 4 asks whether predictors of the perceiver (e.g., does agreement depend on the perceiver&#x27;s training?), of the target (e.g., are talkative targets judged higher on every item, or with more agreement?), and of the dyad (e.g., does acquaintance promote agreement?) affect the judgments and agreement (Model 4). Acquaintance (KNOW, k = 3), training (TRAIN, k = 4), and talkativeness (TALK, k = 5) enter all three coefficient equations. For distinctive agreement, b₂ₚₜᵢ = γ₂₀ + γ₂₁DESᵢ + γ₂₂DESᵢ² + γ₂₃KNOWₚₜ + γ₂₄TRAINₚ + γ₂₅TALKₜ + u₂₀ₚ + v₂₀ₜ + w₂₀ₚₜ + z₂₀ᵢ, (7) and correspondingly with main effects γ₀₃ to γ₀₅ in the intercept equation and moderating effects γ₁₃ to γ₁₅ in the normative equation.</p>
+<p>f4 &lt;-mpa_formula(dat, criterion = &quot;self&quot;, random_slopes = &quot;des&quot;, poly = &quot;des&quot;, predictors = c(&quot;know&quot;, &quot;training&quot;, &quot;talkativeness&quot;), interactions = &quot;criterion&quot;, random_structure = f_base) m4 &lt;-mpa_fit(f4, dat, start_from = m3) mpa_compare(m3, m4) mpa_compare(m_base, m4) mpa_effect_size(m4) mpa_plots(m4) # Figure 2 predictors adds the three predictors without random slopes. As for desirability in Step 2, random_slopes would give their main effects random slopes wherever a predictor varies within a unit. We omit them because the data were generated without such variation.</p>
+<p>interactions = &quot;all&quot; would additionally let the new predictors moderate the main effect of desirability (does acquaintance change the evaluative tendency?). Distinctive agreement was moderated by acquaintance, γ₂₃ = .118 (SE = .023). At the midpoint of the acquaintance scale it is .14, at the lowest level (-1) about .02, and at the highest level (+1) about .26. The moderation by training, γ₂₄ = .063 (SE = .036), did not reach significance. Its interval covered both zero and the generating value of .08, and its precision is limited by the 48 perceivers, the only units at which training varies. Talkativeness had the main effect that was simulated, γ₀₅ = 3.7 (SE = 0.8, generating value 3). That is, perceivers rated talkative targets about 4 points higher on every item, whatever the criterion said. The shift affects desirable and undesirable items alike, so it is a higher elevation of the judgment profile, not a more favorable description, which the desirability term would have captured. In the generating model, talkative targets simply gave perceivers more behavior to go on, and perceivers endorsed more of every description. None of the three predictors moderated normative agreement. All of these estimates lie within sampling error of the generating values.</p>
+<p>The two comparisons express the step as explained variance. Against Model 3, the new terms improved fit, χ²(9) = 48.5, p &lt; .001, and reduced the variance components at the levels at which they vary: the dyad-level variance of the distinctive slopes, Var(w₂₀), by 52%, the targetlevel intercept variance, Var(v₀₀), by 50% (talkativeness), and the target-level variance of the distinctive slopes, Var(v₂₀), by 22%. The perceiver-level slope variance, Var(u₂₀), rose slightly (prop_reduced = -.03), in line with the nonsignificant training effect. Because the reductions are computed from estimates, a component can grow slightly when a predictor is added.</p>
+<p>Against the base model, all predictors together account for 49% of the dyad-level, 35% of the targetlevel, and 65% of the item-level variance in distinctive agreement, but for none of the perceiverlevel variance. The reduction of the item variance was already achieved in Step 3 by desirability, which is why both comparisons are useful. Part of the dyad-level reduction reflects the shift of variance to the desirability slopes noted in Table 4 below. Figures 2B to 2D show the moderating effects, drawn with mpa_plots(m4).</p>
+<p>Main and moderating effects can also be expressed as standardized effect sizes.</p>
+<p>Following a convention of SAM studies (e.g., Human &amp; Biesanz, 2011b; Wessels et al., 2020; Zimmermann et al., 2018), mpa_effect_size() divides the change in a slope across two standard deviations of the moderator (Gelman, 2008) by the standard deviation of that slope across the units on which the moderator is measured. The result reads like Cohen&#x27;s d for two equally large groups of units. For acquaintance, d = 1.08, 95% CI [0.68, 1.49]. That is, dyads two standard deviations apart in acquaintance differed in distinctive agreement by 1.08 standard deviations of that slope across dyads. For training, d = 0.70, 95% CI [-0.09, 1.49], relative to the standard deviation of the slope across perceivers. The value for acquaintance is large because acquaintance accounts for about a quarter of the variance of this slope across dyads. 10 Main effects are treated in the same way, with the standard deviation of the intercepts in place of that 10 With this denominator, d = 2r / √(1 -r²), where r² is the proportion of the slope variance at that level that the moderator explains. When a slope variance is estimated as zero, d is not defined, and when it is underestimated, as in small designs (Table S1), d is too large. denominator = &quot;total&quot; then relates the change to the standard deviation of the slope across all judgments (cf. Westfall et al., 2014).</p>
+<p>of the slope. For talkativeness, d = 2.05, 95% CI [1.20, 2.90], relative to the standard deviation of the intercepts across targets.</p>
+<p>Decomposing a Dyadic Variable. Acquaintance as measured is a dyadic variable, and its effect in the model above is a weighted mixture of three effects: of perceivers who generally report more acquaintance, of targets who are generally better known, and of dyads in which acquaintance is higher than either would suggest. Biesanz et al. (2011) made such a distinction for perceivers&#x27; ratings of how valid their impressions were. The part that varied within perceivers, from one target to the next, was related to distinctive agreement. The perceivers&#x27; average level was not. decompose = &quot;know&quot; in mpa_data() creates the three components from the perceiver and target IDs in the data, in the manner of the SRM: the perceiver&#x27;s mean across their targets (know.p), the target&#x27;s mean across their perceivers (know.t), and what remains of the dyad&#x27;s value after both means have been removed, the relationship component (know.r). In a half-block design, these means are taken relative to the group mean, and a fourth, group component (know.g) is split off, because otherwise a group difference would masquerade as perceiver, target, and relationship effects at once. 11 The model with the components nests the model with the undecomposed variable, so the two can be compared by a likelihood-ratio test. In the simulated data, acquaintance had the same effect at every level, and the decomposition did not improve fit, χ²(9) = 7.8, p = .55. The moderating effects of the components, .111 (SE = .024) for the relationship, .217 (SE = .072) for the target, and .040 (SE = .110) for the perceiver component, all lie within two standard errors of the common generating value of .08. The relationship component is estimated most precisely because it rests on 384 dyads, the others on 11 The components are plain means, relative to the group mean in a half-block design (the vignette gives the details).</p>
+<p>In round-robin data, where each person judges all others but not themselves, the SRM corrects these means for the missing self-dyad (Kenny, 1994). The package does not apply this correction, which matters little for groups of the usual size.</p>
+<p>48 targets and 48 perceivers. In real data, a significant difference between the components would indicate that acquaintance works differently depending on the level, for instance, that being well known in general helps others judge a target more than knowing a particular target well does.</p>
+<h3>Did We Recover the Generating Parameters?</h3>
+<p>Because the example data were simulated, every estimate of Model 4 can be compared with its generating value, which mpa_recovery() does (Table 4). The generating parameters travel with the simulated objects, so they are attached to the analysis data set first: sim_objects &lt;-mpa_simulate(...) # the call that generated the files (vignette, Section 2.1) dat_sim &lt;-mpa_sim_attach(dat, sim_objects) mpa_recovery(mpa_fit(f4, dat_sim, start_from = m4))</p>
+<p>All 18 confidence intervals of the fixed effects covered the true values. The randomeffect standard deviations were recovered within sampling error, with three exceptions worth noting. The perceiver-level SD of the normative slopes was underestimated (.20 vs. .25), the dyad-level SD of the distinctive slopes as well (.06 vs. .08), and the dyad-level SD of the desirability slopes was estimated as 1.7 although the data were generated without such variation.</p>
+<p>The last two go together. With 30 items per dyad, a dyad&#x27;s distinctive slope and its desirability slope are not well separated from each other and from the residual. Slope variances are the quantities a single study estimates least precisely, and whether they can be recovered at all is a property of the design, to which we turn next.</p>
+<h3>Planning a Study</h3>
+<p>fixed = c(intercept = 51, norm = 0.6, dist = 0.15, know_dist = 0.08), sd = sd_example, resid_sd = 12, rating_scale = c(1, 101), seed = seed) f &lt;-mpa_formula(dat, criterion = &quot;self&quot;, predictors = &quot;know&quot;, interactions = &quot;criterion&quot;, correlated = FALSE) m &lt;-mpa_fit(f, dat) m$fixed$p[m$fixed$term == &quot;self.dist:know&quot;] } p4 &lt;-sapply(1:100, one_run, targets = 4) mean(p4 &lt; .05)</p>
+<p>With 100 replications, the moderation was detected in 61% of the replications with four targets per perceiver and, with targets = 8, in 93%. The average estimate (.075 in both designs) was close to the true value. A dyadic moderator of this size thus calls for about eight targets per perceiver. Each fit takes 6 to 12 seconds, so 100 replications run in 10 to 20 minutes.</p>
+<p>For a planned study, fixed and sd are set to the values expected for it, for instance from published SAM studies (Letzring et al., 2021) or from a pilot study. For a final design analysis, more replications and the full intended model are advisable. The same loop answers a second question, whether the variance components are recoverable, by recording the estimated SDs instead of the p value. We ran such a simulation for half-block designs of varying size (Supplemental Material S1, Table S1, and Figure 3). Its results suggest the following rules of thumb. The perceiver-level SD of distinctive agreement depends on the number of targets per perceiver. With four targets and 30 items it was underestimated and estimated as exactly zero in up to 13% of the replications. With eight targets it was close to the generating value. The dyadlevel SD depends mainly on the number of items per dyad. With 30 items and four or eight targets per perceiver it was estimated as zero in up to 17% of the replications, with 60 items rarely. The target-level SD depends on the number of perceivers per target and on the total number of targets. The item-level SD was recovered in the larger designs and was estimated as zero in up to 27% of the replications in the smallest ones. Across all designs, the slope SDs were, if anything, underestimated, never overestimated (Table S1), as is expected when a variance lands on the boundary of zero in some replications. Studies that aim at individual differences in agreement should therefore plan for at least eight targets per perceiver, for at least eight perceivers per target if target differences are of interest, and for more than 30 items. With 30 replications per cell these numbers are rough guides rather than precise thresholds, and a systematic simulation is beyond the scope of this tutorial. Identifiability of Slope Variances in Half-Block Designs Note. Estimated standard deviations of the distinctive-agreement slopes at the perceiver, dyad,</p>
+<h3>Summary, Extensions, and Limitations</h3>
+<p>Multilevel profile analysis lets researchers ask, in one model, how perceivers, targets, relationships, and items shape person judgments and their agreement with a criterion. The framework presented here keeps the logic of the Social Accuracy Model and treats items as a random factor. Because all judgments enter one analysis, item properties are tested as moderators within the model, with the uncertainty of the item-level estimates carried along, rather than in a second stage. Because items are a random factor, conclusions refer to typical items rather than to the items that happened to be used, provided the items were drawn from a broad item population (Leising et al., 2014; Leistner et al., 2025; Rau et al., 2025). The package makes the resulting models specifiable from a few arguments and brings together the analyses that SAM studies have set up one at a time, among them predictors at every level, the decomposition of dyadic variables, and standardized effect sizes. It constructs the normative and distinctive profiles, checks the identifiability of random slopes, and keeps the bookkeeping across steps, the parts of the analysis that are error-prone by hand.</p>
+<p>The parameters have substantive interpretations that suggest which predictors to examine. In Funder&#x27;s (1995) Realistic Accuracy Model, agreement requires that relevant information is available to the perceiver, detected, and correctly used. Acquaintance should raise distinctive agreement mainly through availability, because perceivers who know a target better have seen more of the target&#x27;s behavior, and observable items because relevant behavior is more often available and detected. Liking should affect the main effect of desirability more than agreement, because it shifts the evaluative component of judgments rather than their substance (Leising et al., 2015).</p>
+<p>Extensions. The package fits three kinds of models that go beyond the five steps. First, further item properties enter in the same way as desirability. Item keys are one such property, +1 for items that indicate a construct (for neuroticism, gets irritated easily), -1 for reversed indicators (remains calm in tense situations), and 0 for unrelated items (enjoys going to the opera). Their main effect is a construct-specific bias, and their moderating effect a constructspecific difference in agreement. The interaction of an item key with a perceiver variable would test, for instance, whether well-acquainted informants describe targets as more neurotic, as Leising et al. (2010) found with scale scores when liking was controlled. Keying also decides what the intercept means. When all items are keyed toward the desirable pole, the intercept mixes scale use with favorability, and the main effect of desirability is hard to separate from it.</p>
+<p>When items are keyed in both directions, favorability cancels out of the intercept and is carried by the desirability term. The agreement slopes do not depend on keying, because reversing an item reverses judgment and criterion alike, so that b₁ and b₂ are unchanged. The spread of an item across targets is another property, which de Vries et al. (2016) found to predict self-other agreement across whole inventories. It is available as the item-level standard deviation of the criterion (self.sd).</p>
+<p>Second, a model can contain more than one predictor profile (see the vignette predictor-profiles). Human and Biesanz (2011b) added the perceiver&#x27;s own distinctive profile to the SAM. Its slope shows whether perceivers ascribe to targets what is distinctive about themselves. Because the normative profile and the target&#x27;s distinctive profile are in the same model, this is assumed similarity beyond actual similarity (Kenny &amp; Acitelli, 2001). It differs from the classical index, which compares the judgments with the perceiver&#x27;s selfdescription without these controls (Cronbach, 1955). The same structure applies to profiles that are not judgments. Park and MacDonald (2019) regressed the self-reported profile of a person&#x27;s current partner on the normative profile, the distinctive profile of the person&#x27;s former partner, and the person&#x27;s own distinctive profile. Current partners resembled former partners beyond the norm and beyond their resemblance to the person. In the package, a further profile is passed to mpa_data(), for instance with profiles = list(pself = &quot;perceivers&quot;) for the perceivers&#x27; self-ratings, and named in mpa_formula() with profiles = &quot;pself&quot;. Its distinctive component then receives a slope, random slopes, and moderators like the distinctive component of the criterion. Data such as Park and MacDonald&#x27;s form unconnected pairs, for which the package keeps a single person-level unit. The vignette shows both cases on simulated data.</p>
+<p>Third, perceivers and targets can have effects that are specific to an item. What the perceivers of a target share in their judgment of an item beyond the criterion profile is a target × item component. For instance, everyone who judges Anna may describe her as more punctual than she describes herself. Its counterpart is a perceiver × item component, what a perceiver&#x27;s judgments of an item share across targets beyond the normative profile, the item-specific part of the perceiver effect (Rau et al., 2021; Wood et al., 2010). For instance, a perceiver may describe all targets as more ambitious than other perceivers do. The SAM has neither, because its perceiver and target effects are the same for all items. The package adds both as random effects for the cells (random_units = &quot;target:item&quot; or &quot;perceiver:item&quot;), which leaves Equation 1 unchanged. The target × item component is a random intercept and needs several perceivers per target. The perceiver × item component needs several targets per perceiver and also carries a slope for the distinctive profile, so that perceivers can differ in distinctive agreement item by item, Funder&#x27;s (1995) judge × trait interaction. 12 The tutorial models omit both components, as the SAM does. Real data probably contain them, because informants share views of a target that the self-ratings do not capture (Wiedenroth et al., 2025) and perceiver effects are partly itemspecific. 13   Limitations and Outlook. The following points mark the limits of the models and of the package. Where an extension of the models would help, we name it. First, the choice of criterion remains the substantive limitation of every profile analysis. Self-ratings and informant ratings are themselves judgments, and their normative profiles are steeped in desirability, so that overall Second, the criterion profile can be decomposed further than into N and D. When the level of the criterion profile is itself of interest, as in research on self-enhancement, where the question is whether a target&#x27;s self-view is more favorable overall than the criterion, D can be split into the target&#x27;s mean deviation from the normative profile (the level) and the item-by-item deviations around that mean (the pattern), and each part then receives its own slope. The package does not yet make this split.</p>
+<p>Third, the models are linear mixed models. Bayesian estimation with engine = &quot;brms&quot; would allow three further extensions that are not yet built into the package: ordinal or censored response distributions for bounded rating scales, distributional models in which the residual 12 Funder&#x27;s (1995) trait × target interaction, palpability, is not a separate component. It is not separable from the target&#x27;s distinctive profile, which already varies by item. 13 When the components are omitted, they are absorbed by the residual and by neighboring slope variances, the target × item component by the item-level variance of the distinctive slopes and the perceiver × item component by the perceiver-level variances of the slopes of item properties. Items or perceivers then appear to differ more than they do. The fixed effects and their standard errors are affected little (vignette, Section 9.2). variance depends on predictors or varies across units, 14 and nonlinear moderation estimated as smooth functions.</p>
+<p>Fourth, round-robin designs contain dependencies the present models ignore. A person&#x27;s perceiver and target effects may be correlated (generalized reciprocity, a limitation of the SAM noted by Biesanz, 2010), and the two directional judgments within a dyad share a relationship component (dyadic reciprocity). Both can be accommodated with multi-membership random effects and random effects for undirected dyads, an extension for brms rather than for lme4.</p>
+<p>Fifth, the models require a criterion that is distinct from the judgments. Agreement with the ratings of another group of raters, such as parents as the criterion for teachers, is analyzed exactly as self-other agreement. Agreement among exchangeable informants, often called consensus (Kenny, 1994), is a different quantity. It is symmetric, and regressing one informant&#x27;s judgments on the mean of the others would make the slope depend on how many others there are and would use every judgment twice, as criterion and as outcome. In the present framework, consensus appears as the variance of the target × item component described above. That component is a first step toward modeling consensus and its moderators, such as whether two perceivers share their liking of a target (Leising et al., 2013), which requires models of perceiver pairs beyond this tutorial.</p>
+<p>Profile analyses of person judgments have so far been set up anew in every study, with different conventions for the criterion profile, the predictors, and the random structure. We hope that the framework and the package make such analyses comparable across studies and easy to use in empirical projects. Long-standing questions of person perception, which perceivers, profiles covers further predictor profiles, pairs designs, and the effect sizes. All analyses reported here were run with R 4.6.2, lme4 2.1-0, and profilemlm 1.0.0, with bobyqa as optimizer.</p>
+<h3>Supplemental Material S1. Design Simulation</h3>
+<p>We simulated half-block designs with 64 perceivers, with 4, 8, or 16 targets per perceiver, 4 or 8 perceivers per target, and 30 or 60 items (30 replications per cell). The data were generated with the standard deviations that the example used for the random intercepts and agreement slopes (Table 4) and without predictors. The true SDs of the distinctive slopes were thus .08 for perceivers and dyads, .06 for targets, and .04 for items. We fitted the base model, including the item slope, with uncorrelated random effects. Because the number of perceivers was held constant, the number of targets, and with it the number of judgments, grows with the number of targets per perceiver (from 32 to 256 targets), so the design factors are confounded with sample size, as they are in practice when the perceiver sample is the fixed resource. With 30 replications per cell, the percentages carry a Monte Carlo error of several points.</p>
+<h3>Table S1</h3>
+<h3>Recovery of the Standard Deviations of Distinctive-Agreement Slopes as a Function of Design</h3>
+<p>Targets per perceiver Perceivers per target Items Perceiver SD Dyad SD Target SD Item SD 4 4 30 .068 (.027) [7] .070 (.042) [17] .038 (.035) [40] .029 (.023) [27] 8 4 30 .077 (.018) [0] .070 (.038) [13] .053 (.025) [10] .036 (.017) [10] 16 4 30 .079 (.010) [0] .073 (.019) [0] .060 (.011) [0] .035 (.012) [3] 4 8 30 .068 (.037) [13] .073 (.046) [17] .046 (.030) [20] .036 (.025) [20] 8 8 30 .073 (.016) [0] .080 (.022) [0] .054 (.023) [0] .031 (.018) [13] 16 8 30 .076 (.010) [0] .079 (.016) [0] .057 (.013) [0] .037 (.010) [0] 4 4 60 .078 (.017) [0] .068 (.030) [10] .050 (.029) [13] .035 (.017) [10] Targets per perceiver Perceivers per target Items Perceiver SD Dyad SD Target SD Item SD 8 4 60 .075 (.012) [0] .078 (.014) [0] .059 (.011) [0] .036 (.015) [10] 16 4 60 .078 (.010) [0] .077 (.012) [0] .056 (.008) [0] .040 (.006) [0] 4 8 60 .071 (.025) [3] .078 (.025) [0] .053 (.015) [0] .037 (.020) [13] 8 8 60 .073 (.012) [0] .080 (.012) [0] .057 (.010) [0] .039 (.010) [0] 16 8 60 .078 (.011) [0] .075 (.007) [0] .061 (.008) [0] .036 (.007) [0] Note. Mean (SD) of the estimates across 30 replications. In brackets, the percentage of replications in which the variance was estimated as zero. Generating values: perceiver .08, dyad .08, target .06, item .04. Every cell has 64 perceivers.</p>
+<h3>S2. Functions of the Package</h3>
+<p>Table S2 Main Functions of the profilemlm Package</p>
+<p>Function What it does Main arguments mpa_data() Reads judgments, criterion, and predictors as a study produces them, builds the normative and distinctive profiles, registers the level of each predictor, and detects the design judgments, format, targets, perceivers, items, criterion, norm, center_norm, rescale, decompose, profiles mpa_formula() Builds the model formula from arguments criterion, predictors, random_slopes, interactions, poly, random_units, correlated, random_structure, profiles mpa_update() Changes the random part of a formula by adding or dropping random terms or by switching the correlations on or off drop, add, correlated mpa_fit()</p>
+<p>Estimates a model with lme4 or brms and returns the tables of fixed effects and variance components engine, start_from</p>
+<h3>Declaration of Conflicting Interests</h3>
+<p>The authors declare that there were no conflicts of interest with respect to the authorship or the publication of this article.</p>
+<p>The example had eight targets per perceiver, eight perceivers per target, and 30 items, and it recovered most of the slope variances. Smaller crossed designs recover them less reliably. This includes the perceiver-level variance in distinctive agreement, Var(u₂₀), the central quantity of the SAM, which is hard to estimate when perceivers judge few targets. The reason is structural. The variance of a unit&#x27;s slopes is identified only through the covariance among that unit&#x27;s dyad-specific slopes. A perceiver who judges four targets contributes four noisy slopes, from whose covariance a perceiver component is hard to separate from the dyad component. The same logic applies to stimuli in experiments, where power depends on the numbers of participants and of stimuli and on how they are crossed (Westfall et al., 2014). How many perceivers, targets, and items a planned study needs is therefore best answered by simulation. mpa_simulate() makes this a short script. Generate data from the expected parameters for a candidate design, fit the intended model, record the result, and repeat. The following code estimates the power to detect a moderation of distinctive agreement by acquaintance of the size of the example (γ₂₃ = .08) with 48 perceivers and 30 items, for four and for eight targets per perceiver. The data are generated with the standard deviations that the example used for the random intercepts and agreement slopes (Table 4), including the item-level variation in distinctive agreement, and the fitted model is the one planned for the analysis, with the item slope: sd_example &lt;-list(perceiver = c(intercept = 8, norm = 0.25, dist = 0.08), target = c(intercept = 2, norm = 0.05, dist = 0.06), dyad = c(intercept = 5, norm = 0.15, dist = 0.08), item = c(intercept = 3, dist = 0.04)) one_run &lt;-function(seed, targets) { dat &lt;-mpa_simulate(n_perceiver = 48, n_item = 30, group_size = targets, # targets per perceiver (= perceivers per target) norm_sd = 12, dist_sd = 10, targets, relationships, and items make agreement higher or lower, can then be addressed with the structure the data actually have.</p>
+<h3>Use of Generative Artificial Intelligence</h3>
+<p>The first author used the large language model Claude (Anthropic; Claude Fable 5.1) to draft and revise R code, simulations, and parts of the text. All output was checked by the authors, who take full responsibility for the content.</p>
+<h3>Data and Code Availability</h3>
+<p>The R package profilemlm, the simulated example data (three input files), all analysis scripts, and the vignettes are available at https://github.com/jzpsych/profilemlm. The package is installed from R with remotes::install_github(&quot;jzpsych/profilemlm&quot;, build_vignettes = TRUE). It requires lme4, for the figures ggplot2 and patchwork, and for Bayesian estimation brms (with cmdstanr or rstan). vignette(&quot;mpa-tutorial&quot;, package = &quot;profilemlm&quot;) opens the example of this article with the complete code and output of every step. The three files of the example are installed with the package (system.file(&quot;extdata&quot;, package = &quot;profilemlm&quot;)). In system.file(&quot;scripts&quot;, package = &quot;profilemlm&quot;), template_own_data.R is a commented template for running the five steps on one&#x27;s own data, Removes random terms whose variance was estimated as zero or, with mpa_random_test(), by deletion tests A fit, or a formula and a test mpa_random_test() Tests the random effects by single-term deletion (lme4 only) cores mpa_compare() Compares two models by a likelihoodratio test, ΔAIC, ΔBIC, and the proportional reduction of every variance component Two fits mpa_effect_size() Expresses main and moderating effects as standardized effect sizes d denominator mpa_plots(), mpa_plot() Draw agreement slopes as functions of the moderators hold, labels mpa_simulate() Generates data from the model, for examples and for planning a study n_perceiver, n_item, group_size, design, fixed, sd mpa_recovery() Compares the estimates of a model fitted to simulated data with the generating values A fit to data from mpa_simulate()</p>
+<p>Note. The help pages (e.g., ? mpa_formula) describe all arguments, and the vignette mpatutorial shows the functions in use.</p>
+<h3>Figure 1</h3>
+<p>Figure1 interactions = &quot;all&quot; in Step 4 would let measured variables such as acquaintance or liking explain this variation.</p>
+<p>The target-level variance Var(v₀₁) was estimated as zero, which makes the fit singular, so Rule 2 applies. The term is pruned, and the reduced structure is carried on. 99 The equations of Steps 3 and 4 omit the pruned terms.</p>
+<h3>Figure 2 Moderating</h3>
+<p>Figure2</p>
+<h3>Figure 3</h3>
+<p>Figure3 normative agreement is largely agreement about what is good.</p>
+<p>Entering desirability, as Rogers and Biesanz (2015) proposed and as Step 2 does, is the minimal remedy.</p>
+<h3>Table 1</h3>
+<p>Parameters of the Model</p>
+<h3>Table 3</h3>
+<p>The Five Steps and Their Models</p>
+<h3>Table 4</h3>
+<p>Generating Values and Estimates of Model 4 in the Simulated Example Note. Agreement slopes and their moderators are per criterion point, main effects in judgment points per half scale range of the predictor. The estimate of γ₂₁ differs in the third decimal from sim_identifiability.R reproduces the design simulation, make_figures.R draws Figures1 and 2and, from the output of the simulation, Figure3, and wessels_study2.</p>
+<p>R replicatesWessels et al. (2020) as shown in the vignette wessels-application. The vignette predictor-</p>
+<p>The classical SRM needs repeated measurements of one variable to separate relationship effects from error. Profile data provide this replication through the items, at the price that the dyad effect is defined for the profile as a whole, not for a particular item.</p>
+<p>A rescaled coefficient means the change over half the scale range, the same quantity in every study that uses the scale, whereas a standardized coefficient depends on the spread of the particular sample.</p>
+<p>The brms defaults are flat priors for the fixed effects and weakly informative priors for the random-effect standard deviations and correlations.</p>
+<p>The package vignette wessels-application fits this classical model to the informant data ofWessels et al. (2020) and reproduces their published estimates to three decimals.</p>
+<h3>References</h3>
+<p>Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. Journal of Memory and Language, 59(4), 390- 412. https://doi.org/10.1016/j.jml.2007.12.005</p>
+<p>Back, M. D., &amp; Nestler, S. (2016). Accuracy of judging personality. In J. A. Hall, M. Schmid Mast, &amp; T. V. West (Eds.), The social psychology of perceiving others accurately (pp. 98-124). Cambridge University Press. https://doi.org/10.1017/CBO9781316181959.005</p>
+<p>Barr, D. J., Levy, R., Scheepers, C., &amp; Tily, H. J. (2013). Random effects structure for confirmatory hypothesis testing: Keep it maximal. Journal of Memory and Language, 68(3), 255-278. https://doi.org/10.1016/j.jml.2012.11.001</p>
+<p>Bates, D., Mächler, M., Bolker, B., &amp; Walker, S. (2015). Fitting linear mixed-effects models using lme4. Journal of Statistical Software, 67(1), 1-48. https://doi.org/10.18637/jss.v067.i01</p>
+<p>Biesanz, J. C. (2010). The Social Accuracy Model of interpersonal perception: Assessing individual differences in perceptive and expressive accuracy. Multivariate Behavioral Research, 45(5), 853-885. https://doi.org/10.1080/00273171.2010.519262</p>
+<p>Biesanz, J. C., Human, L. J., Paquin, A.-C., Chan, M., Parisotto, K. L., Sarracino, J., &amp; Gillis, R. L. (2011). Do we know when our impressions of others are valid? Evidence for realistic accuracy awareness in first impressions of personality. Social Psychological and Personality Science, 2(5), 452-459. https://doi.org/10.1177/1948550610397211</p>
+<p>Borkenau, P., &amp; Leising, D. (2016). A more complete picture of personality: What analyses of trait profiles have told us about personality judgment-so far. Current Directions in Psychological Science, 25(4), 228-232. https://doi.org/10.1177/0963721416651960</p>
+<p>Bürkner, P.-C. (2017). brms: An R package for Bayesian multilevel models using Stan. Journal of Statistical Software, 80(1), 1-28. https://doi.org/10.18637/jss.v080.i01</p>
+<p>Cronbach, L. J. (1955). Processes affecting scores on &quot;understanding of others&quot; and &quot;assumed similarity.&quot; Psychological Bulletin, 52(3), 177-193. https://doi.org/10.1037/h0044919</p>
+<p>de Vries, R. E., Realo, A., &amp; Allik, J. (2016). Using personality item characteristics to predict single-item internal reliability, retest reliability, and self-other agreement. European Journal of Personality, 30(6), 618-636. https://doi.org/10.1002/per.2083</p>
+<p>Funder, D. C. (1995). On the accuracy of personality judgment: A realistic approach. Psychological Review, 102(4), 652-670. https://doi.org/10.1037/0033-295X.102.4.652</p>
+<p>Funder, D. C., &amp; Dobroth, K. M. (1987). Differences between traits: Properties associated with interjudge agreement. Journal of Personality and Social Psychology, 52(2), 409-418. https://doi.org/10.1037/0022-3514.52.2.409</p>
+<p>Furr, R. M. (2008). A framework for profile similarity: Integrating similarity, normativeness, and distinctiveness. Journal of Personality, 76(5), 1267-1316. https://doi.org/10.1111/j.1467-6494.2008.00521.x</p>
+<p>Furr, R. M. (2009). Profile analysis in person-situation integration. Journal of Research in Personality, 43(2), 196-207. https://doi.org/10.1016/j.jrp.2008.08.002</p>
+<p>Gelman, A. (2008). Scaling regression inputs by dividing by two standard deviations. Statistics in Medicine, 27(15), 2865-2873. https://doi.org/10.1002/sim.3107</p>
+<p>Human, L. J., &amp; Biesanz, J. C. (2011a). Target adjustment and self-other agreement: Utilizing trait observability to disentangle judgeability and self-knowledge. Journal of Personality and Social Psychology, 101(1), 202-216. https://doi.org/10.1037/a0023782</p>
+<p>Human, L. J., &amp; Biesanz, J. C. (2011b). Through the looking glass clearly: Accuracy and assumed similarity in well-adjusted individuals&#x27; first impressions. Journal of Personality and Social Psychology, 100(2), 349-364. https://doi.org/10.1037/a0021850</p>
+<p>John, O. P., &amp; Robins, R. W. (1993). Determinants of interjudge agreement on personality traits: The Big Five domains, observability, evaluativeness, and the unique perspective of the self. Journal of Personality, 61(4), 521-551. https://doi.org/10.1111/j.1467-6494.1993.tb00781.x</p>
+<p>Judd, C. M., Westfall, J., &amp; Kenny, D. A. (2012). Treating stimuli as a random factor in social psychology: A new and comprehensive solution to a pervasive but largely ignored problem. Journal of Personality and Social Psychology, 103(1), 54-69. https://doi.org/10.1037/a0028347</p>
+<p>Kenny, D. A. (1994). Interpersonal perception: A social relations analysis. Guilford Press.</p>
+<p>Kenny, D. A., &amp; Acitelli, L. K. (2001). Accuracy and bias in the perception of the partner in a close relationship. Journal of Personality and Social Psychology, 80(3), 439-448. https://doi.org/10.1037/0022-3514.80.3.439</p>
+<p>Kenny, D. A., Goldring, M. R., &amp; Jung, T. (2023). The extended Social Relations Model: Understanding dissimilation and dissensus in the judgment of others. European Journal of Personality, 37(1), 57-71. https://doi.org/10.1177/08902070211044552</p>
+<p>Kenny, D. A., &amp; West, T. V. (2010). Similarity and agreement in self-and other perception: A meta-analysis. Personality and Social Psychology Review, 14(2), 196-213. https://doi.org/10.1177/1088868309353414</p>
+<p>Kuper, N., Andresen, P. K., Beck, E. D., Costantini, G., Hamaker, E. L., Wright, A. G. C., &amp; Zimmermann, J. (2025). From persons to general principles: Methodological decisions for idiographic and nomothetic research. European Journal of Personality, 39(4), 635- 661. https://doi.org/10.1177/08902070241278020</p>
+<p>Leising, D., Erbs, J., &amp; Fritz, U. (2010). The letter of recommendation effect in informant ratings of personality. Journal of Personality and Social Psychology, 98(4), 668-682. https://doi.org/10.1037/a0018771</p>
+<p>Leising, D., Ostrovski, O., &amp; Zimmermann, J. (2013). &quot;Are we talking about the same person here?&quot; Interrater agreement in judgments of personality varies dramatically with how much the perceivers like the targets. Social Psychological and Personality Science, 4(4), 468-474. https://doi.org/10.1177/1948550612462414</p>
+<p>Leising, D., Scharloth, J., Lohse, O., &amp; Wood, D. (2014). What types of terms do people use when describing an individual&#x27;s personality? Psychological Science, 25(9), 1787-1794. https://doi.org/10.1177/0956797614541285</p>
+<p>Leising, D., Scherbaum, S., Locke, K. D., &amp; Zimmermann, J. (2015). A model of &quot;substance&quot; and &quot;evaluation&quot; in person judgments. Journal of Research in Personality, 57, 61-71. https://doi.org/10.1016/j.jrp.2015.04.002</p>
+<p>Leising, D., &amp; Schilling, R. L. (2025). A mathematical model of person judgment part 1: Cue emergence. Personality Science, 6, Article 27000710241291543. https://doi.org/10.1177/27000710241291543</p>
+<p>Leistner, M., Hommel, B. E., Wendt, L. P., &amp; Leising, D. (2025). Properties of person descriptors in the natural German language: A preregistered replication and extension. Personality Science, 6, Article 27000710251391608. https://doi.org/10.1177/27000710251391608</p>
+<p>Letzring, T. D., Murphy, N. A., Allik, J., Beer, A., Zimmermann, J., &amp; Leising, D. (2021). The judgment of personality: An overview of current empirical research findings. Personality Science, 2, Article e6043. https://doi.org/10.5964/ps.6043</p>
+<p>Matuschek, H., Kliegl, R., Vasishth, S., Baayen, H., &amp; Bates, D. (2017). Balancing Type I error and power in linear mixed models. Journal of Memory and Language, 94, 305-315. https://doi.org/10.1016/j.jml.2017.01.001</p>
+<p>Park, Y., &amp; MacDonald, G. (2019). Consistency between individuals&#x27; past and current romantic partners&#x27; own reports of their personalities. Proceedings of the National Academy of Sciences, 116(26), 12793-12797. https://doi.org/10.1073/pnas.1902937116</p>
+<p>Rau, R., Carlson, E. N., Back, M. D., Barranti, M., Gebauer, J. E., Human, L. J., Leising, D., &amp; Nestler, S. (2021). What is the structure of perceiver effects? On the importance of global positivity and trait-specificity across personality domains and judgment contexts. Journal of Personality and Social Psychology, 120(3), 745-764. https://doi.org/10.1037/pspp0000278</p>
+<p>Rau, R., Grosz, M. P., &amp; Back, M. D. (2025). A large-scale, gamified online assessment of first impressions: The Who Knows project. Behavior Research Methods, 57(3), Article 83. https://doi.org/10.3758/s13428-025-02601-w</p>
+<p>Rau, R., Kueppers, S., Back, M. D., &amp; Grosz, M. P. (2026). Item features affect how well people can predict self-reported personality traces of strangers. European Journal of Personality. Advance online publication. https://doi.org/10.1177/08902070261467481</p>
+<p>Raudenbush, S. W., &amp; Bryk, A. S. (2002). Hierarchical linear models: Applications and data analysis methods (2nd ed.). Sage.</p>
+<p>Rogers, K. H., &amp; Biesanz, J. C. (2015). Knowing versus liking: Separating normative knowledge from social desirability in first impressions of personality. Journal of Personality and Social Psychology, 109(6), 1105-1116. https://doi.org/10.1037/a0039587</p>
+<p>Vrieze, S. I. (2012). Model selection and psychological theory: A discussion of the differences between the Akaike information criterion (AIC) and the Bayesian information criterion (BIC). Psychological Methods, 17(2), 228-243. https://doi.org/10.1037/a0027127</p>
+<p>Wessels, N. M., Leising, D., &amp; Zimmermann, J. (2025). A nuanced perspective on how item features are associated with different forms of agreement. Collabra: Psychology, 11(1), Article 127423. https://doi.org/10.1525/collabra.127423</p>
+<p>Wessels, N. M., Zimmermann, J., Biesanz, J. C., &amp; Leising, D. (2020). Differential associations of knowing and liking with accuracy and positivity bias in person perception. Journal of Personality and Social Psychology, 118(1), 149-171. https://doi.org/10.1037/pspp0000218</p>
+<p>West, T. V., &amp; Kenny, D. A. (2011). The truth and bias model of judgment. Psychological Review, 118(2), 357-378. https://doi.org/10.1037/a0022936</p>
+<p>Westfall, J., Kenny, D. A., &amp; Judd, C. M. (2014). Statistical power and optimal design in experiments in which samples of participants respond to samples of stimuli. Journal of Experimental Psychology: General, 143(5), 2020-2045. https://doi.org/10.1037/xge0000014</p>
+<p>Wiedenroth, A., Connelly, B. S., McAbee, S. T., &amp; Fang, R. T. (2025). What defines traits, reputations, and identity? Personality item content in multi-rater judgments. European Journal of Personality, 39(1), 70-89. https://doi.org/10.1177/08902070241236865</p>
+<p>Wood, D., Harms, P., &amp; Vazire, S. (2010). Perceiver effects as projective tests: What your perceptions of others say about you. Journal of Personality and Social Psychology, 99(1), 174-190. https://doi.org/10.1037/a0019390</p>
+<p>Zimmermann, J., Schindler, S., Klaus, G., &amp; Leising, D. (2018). The effect of dislike on accuracy and bias in person perception. Social Psychological and Personality Science, 9(1), 80-88. https://doi.org/10.1177/1948550617703167</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
