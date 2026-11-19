@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: (no title found in the PDF)</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+(no title found in the PDF)
+</p>
+<p class="meta">
+2026-11-19 · Metacheck 0.4.4.27
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>3</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>13</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(3)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Repository Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We could not check 1 repository: <a href="https://doi.org/10.17605/OSF.IO" class="uri">https://doi.org/10.17605/OSF.IO</a> (not a valid OSF
+link).</li>
+<li>We found 0 files in 1 repository.</li>
+<li>We found 0 README files and 0 repositories without READMEs.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<h4 id="repositories-that-could-not-be-checked">Repositories that could
+not be checked</h4>
+<p>These repositories are linked in the paper, but their contents could
+not be retrieved, so nothing below describes them. When the reason is
+that the platform did not answer, running the check again later may
+work.</p>
+<ul>
+<li><a href="https://doi.org/10.17605/OSF.IO" class="uri">https://doi.org/10.17605/OSF.IO</a>: not a valid OSF
+link</li>
+</ul>
+<h4 id="whose-deposits">Whose Deposits</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Cited in
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://doi.org/10.17605/OSF.IO" target="_blank">doi.org/10.17605/OSF.IO</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="repositories">Repositories</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Platform
+</th>
+<th style="text-align:left;">
+Error
+</th>
+<th style="text-align:right;">
+All Files
+</th>
+<th style="text-align:right;">
+Data Files
+</th>
+<th style="text-align:right;">
+Code Files
+</th>
+<th style="text-align:right;">
+READMEs
+</th>
+<th style="text-align:right;">
+Archives
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://doi.org/10.17605/OSF.IO" target="_blank">doi.org/10.17605/OSF.IO</a>
+</td>
+<td style="text-align:left;">
+osf
+</td>
+<td style="text-align:left;">
+not a valid OSF link
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<p>README files were found in all repositories.</p>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Code Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</li>
+<li>We could not list every file of 1 repository, so the checks did not
+see all its files: <a href="https://doi.org/10.17605/OSF.IO" class="uri">https://doi.org/10.17605/OSF.IO</a> (could not be listed:
+not a valid OSF link).</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div id="repositories-not-listed-in-full" class="fold">
+<h4>Repositories not listed in full</h4>
+<p>The checks below did not see every file of this repository, because
+it could not be listed in full:</p>
+<ul>
+<li><a href="https://doi.org/10.17605/OSF.IO" class="uri">https://doi.org/10.17605/OSF.IO</a>: could not be listed
+(not a valid OSF link), so none of its files were checked.</li>
+</ul>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Data Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We found no files to analyse.</li>
+<li>We could not list every file of 1 repository, so the checks did not
+see all its files: <a href="https://doi.org/10.17605/OSF.IO" class="uri">https://doi.org/10.17605/OSF.IO</a> (could not be listed:
+not a valid OSF link).</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div id="repositories-not-listed-in-full-1" class="fold">
+<h4>Repositories not listed in full</h4>
+<p>The checks below did not see every file of this repository, because
+it could not be listed in full:</p>
+<ul>
+<li><a href="https://doi.org/10.17605/OSF.IO" class="uri">https://doi.org/10.17605/OSF.IO</a>: could not be listed
+(not a valid OSF link), so none of its files were checked.</li>
+</ul>
+</div>
+</details>
+</div>
+<h2 id="na">Not applicable <span class="n">(13)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>No papers appeared to involve live data collection requiring an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>We found 1 OSF link, but no registrations.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>We did not detect an ethics approval statement, and this paper does
+not appear to involve live data collection from human or animal
+participants. Ethics approval is typically not required for theoretical
+work, simulations, reviews, meta-analyses, or secondary analyses of
+published data.</p>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 45 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 45 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 45 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695).
+Statcheck might still miss one-sided tests that are described in another
+sentence, and falsely assume the p-value is incorrect. For more
+information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>[div-01]</h3>
+<p>. 사회적 참사 피해자에게 안전의 원천이어야 할 기관이 동시에 불신의 대상이 되는 구조가 여기서 생긴다. 둘째, 피해자는 참사 이후 사회적 공격에 노출된다. 세월호 참사 유가족 부모 12 명을 참사 2 년과 5 년 시점에 면담한 연구는 이들이 고정관념, 편견, 차별의 형태로 공적 낙인과 자기 낙인을 함께 경험하였음을 보고하였다 (Heo et al., 2024). 이태원 참사 관련 온라인 댓글 약 19 만 건을 분석한 연구에서는 공인의 발언 이후 유가족을 금전적•정치적 이익을 추구하는 존재로 재정의하는 혐오 담론이 급증한 것으로 보고되었다 (경향신문, 2026). 이는 사회적 참사의 2 차 피해가 개별 가해 행위를 넘어 공론장의 구조로 작동함을 보여준다. 셋째, 사회적 참사는 공동체가 사건의 의미를 함께 구성하는 집단적 외상이며, 이 과정에서 기억과 추모의 방식 자체가 피해자의 안전과 직결된다 (Hirschberger, 2018).</p>
+<p>외상 회복 모형에서 안전의 확립은 기억과 애도, 일상과의 재연결에 앞서는 첫 단계로 제시된다 (Herman, 1992).</p>
+<h3>2. 개념 혼용과 측정의 공백</h3>
+<p>이러한 개념들은 연구 분야에 따라 혼용되어 왔다. 디지털 헬스케어 맥락의 주제범위 고찰은 정서적 안전이 주로 환자 등 돌봄 수혜자에게, 심리적 안전이 주로 의료 제공자에게 귀속되어 왔다고 정리하였다 (Minartz et al., 2024). 측정 측면에서도 공백이 의심된다. 외상 연구에서 안전감은 오랫동안 연구자가 구성한 소수의 문항으로 측정되어 왔으며 (Bleich et al., 2003; Solomon et al., 2005), 다요인 구조와 심리측정적 근거를 갖춘 안전감 척도는 최근에야 등장하기 시작하였다 (Morton et al., 2024).</p>
+<p>정서적 안전을 명시적으로 측정한 도구는 학교, 아동, 의료 환경에 흩어져 있는 것으로 보이지만, 이를 체계적으로 수집해 개념 정의, 하위차원, 측정속성, 적용 맥락을 비교한 고찰은 확인되지 않는다. 사회적 참사 맥락에서 정서적 안전을 측정할 도구가 존재하는지, 존재하지 않는다면 기존 도구의 어떤 차원이 차용 가능하고 어떤 차원이 새로 개발되어야 하는지에 대한 근거 역시 부족하다. 측정 공백은 실무와 정책의 공백으로 이어진다. 재난 정신건강 연구의 결과 지표는 주로 외상후스트레스장애, 우울, 불안 같은 증상의 유병률에 집중되어 왔다(Goldmann &amp; Galea, 2014). 증상 지표는 위험군 선별에는 유용하지만, 심리사회적 지지나 트라우마 인지 정책이 피해자에게 실제로 안전하게 경험되었는지를 보여주지는 못한다. 예를 들어 피해자 지원 창구, 추모 공간 운영, 2 차 피해 대응 체계가 정서적 안전을 높였는지 확인할 지표가 없다면, 이러한 제도는 개선의 근거를 갖기 어렵다. 따라서 정서적 안전을 측정할 수 있는 도구는 증상 중심 평가를 보완하는 과정 지표이자, 트라우마 인지 원칙이 현장에서 구현되었는지를 확인하는 근거로서 의미를 가진다. 주제범위 문헌고찰은 개념의 경계가 불분명하고 문헌이 여러 학문 분야에 흩어져 있을 때 핵심 개념, 근거의 유형, 연구 공백을 지도화하는 데 적합한 방법이다(Arksey &amp; O&#x27;Malley, 2005; Peters et al., 2020). 따라서 본 연구는 정서적 안전과 근접 개념의 측정도구를 포괄적으로 지도화하고, 이를 트라우마 인지 관점의 안전 원칙에 비추어 사회적 참사 맥락의 측정 공백을 규명하고자 한다. 본 연구는 측정도구를 중심으로 정서적 안전 관련 문헌을 지도화한 첫 고찰이라는 점, 국내 문헌에서 정서적 안정과의 용어 혼용을 실증적으로 확인한다는 점, 그리고 기존 도구의 공백을 사회적 참사 피해자의 요구에 비추어 분석함으로써 후속 도구개발의 구체적인 차원을 제안한다는 점에서 학문적•실무적 의의를 가진다. 3. 연구목적 및 연구질문 본 연구의 목적은 정서적 안전 및 근접 개념 측정도구의 현황을 파악하고, 사회적 참사 맥락의 정서적 안전 도구개발을 위한 개념적 기초를 제시하는 것이다. 구체적인 연구질문은 다음과 같다. 1. 정서적 안전 및 근접 개념을 측정하는 도구는 어떤 대상과 맥락에서 개발•타당화되었는가? 2. 각 도구는 정서적 안전을 어떻게 정의하고, 어떤 하위차원으로 구성하는가? 3. 각 도구가 보고한 측정속성은 어떠한가? 4. 기존 도구의 구성 차원은 사회적 참사 피해자의 정서적 안전 요구와 비교할 때 어떤 공백을 보이는가? Ⅱ. 연구방법 1. 연구설계 본 연구는 JBI 주제범위 문헌고찰 방법론(Peters et al., 2020)과 Arksey 와 O&#x27;Malley(2005)의 5 단계 틀을 따른 주제범위 문헌고찰이며, 보고는 PRISMA-ScR 지침(Tricco et al., 2018)을 준수하였다. 연구 프로토콜은 원문 선별과 자료추출을 시작하기 전인 2026 년 11 월 [ ]일 Open Science Framework(OSF) Registries 에 Generalized Systematic Review Registration 양식으로 등록하였으며(https://doi.org/10.17605/OSF.IO/[등록코드]), 등록 이후의 변경 사항은 OSF 에 수정 이력과 사유를 함께 기록하였다. 2. 선정기준(PCC) 대상(Population)은 연령, 임상 상태, 직업을 제한하지 않았다. 개념(Concept)은 정서적 안전 및 근접 개념, 즉 정서적 안정감(emotional security), 안전감(sense of safety, feeling safe, felt safety), 개인 수준의 심리적 안전감을 전체 척도 또는 명명된 하위척도로 측정하는 도구로 정의하였다. 맥락(Context)은 학교, 가족, 의료, 조직, 지역사회, 재난 등 제한을 두지 않았다. 포함기준은 ① 위 개념을 측정하는 도구의 개발, 타당화, 번안 연구이고, ② 신뢰도 또는 타당도 등 심리측정적 근거를 1 개 이상 보고하며, ③ 영어 또는 한국어로 출판된 학술지 논문 또는 학위논문인 경우로 하였다. 배제기준은 ① 기존 도구를 사용만 하고 심리측정 자료를 새로 보고하지 않은 연구, ② 연구자가 구성한 단일 문항이나 비표준 문항만 사용한 연구, ③ 범죄 두려움, 교통•산업 안전처럼 물리적•환경적 안전 지각만 측정한 연구, ④ 팀 수준의 공유된 믿음으로서의 조직 심리적 안전 척도로 하였다. 출판연도는 제한하지 않았다. 3. 정보원 및 검색전략 검색은 소속 기관에서 이용 가능한 전자자료와 공개 데이터베이스를 함께 활용하였다. 국외 데이터베이스는 PubMed, SocINDEX with Full Text, ERIC, PTSDpubs 와 [CINAHL, APA PsycInfo, Scopus 중 이용한 데이터베이스]를, 국내 데이터베이스는 KCI, RISS, KISS, DBpia, e-article 을 사용하였다. Google Scholar 는 검색어별 관련도순 상위 200 편을 보조적으로 검토하였다(Haddaway et al., 2015). 최종 검색일은 2026 년 [ ]월 [ ]일이다. 검색어는 ① 정서적 안전 핵심어(emotional safety, emotionally safe, affective safety 등), ② 근접 개념어(emotional security, sense of safety, feeling safe, felt safety, psychological safety 등), ③ 측정 관련어(scale, questionnaire, instrument, psychometric, validation 등), ④ 재난•집단적 외상 맥락어(disaster, mass trauma, collective trauma, terrorism, bereavement 등)의 4 개 블록으로 구성하였다. 핵심어는 제목•초록•주제어에서 측정 관련어와 결합하였고, 근접 개념어는 검색 결과가 과도해지는 것을 막기 위해 제목에서만 검색하여 측정 관련어와 결합하였다. 또한 재난 맥락의 측정 공백을 확인하기 위해 핵심어와 근접 개념어를 재난 맥락어와 결합한 검색을 측정 관련어 없이 별도로 수행하였다. 국내 데이터베이스는 불리언 연산자와 구문 검색의 처리 방식이 서로 달라, 검색 필드를 논문명•주제어•초록으로 제한하고 검색어를 하나씩 검색한 뒤 결과 내 재검색으로 측정 관련어를 결합하였다. 검색전략은 PRESS 지침(McGowan et al., 2016)에 따라 [검토자]가 검토하였으며, 데이터베이스별 전체 검색식은 부록 1 에 제시하였다. 포함 문헌의 참고문헌 역추적, 주요 도구의 후속 타당화 연구 순추적, 주요 학술지 확인 검색(부록 2)을 병행하였다. 데이터베이스별 검색 결과는 표 2 와 같다. 표 2. 데이터베이스별 검색 결과 데이터베이스 검색 필드 검색일 검색 결과(편) 예비검색(편) PubMed 제목•초록, MeSH [ ] [ ] 238 CINAHL* 제목•초록•주제어 [ ] [ ] -APA PsycInfo* 제목•초록•주제어•검사도구 [ ] [ ] -Scopus* 제목•초록•키워드 [ ] [ ] -SocINDEX with Full Text 제목•초록•주제어 [ ] [ ] 243 ERIC 제목•초록•디스크립터 [ ] [ ] -PTSDpubs 전체(본문 제외) [ ] [ ] -데이터베이스 검색 필드 검색일 검색 결과(편) 예비검색(편) KCI 논문명•키워드•초록 [ ] [ ] -RISS 논문명•키워드•초록 [ ] [ ] 8 KISS 논문명•키워드•초록 [ ] [ ] 0 DBpia 논문명•키워드•초록 [ ] [ ] 0 e-article 논문명•키워드•초록 [ ] [ ] 0 Google Scholar 제목(allintitle) [ ] [ ] 200 인용추적•학술지 확인 검색 역추적•순추적 [ ] [ ] 2 합계 [ ] 691 주. *이용 가능한 경우 포함. 예비검색은 2026 년 11 월 12 일 수행. 데이터베이스별 검색식은 부록 1 참조. 4. 문헌 선별 검색된 문헌은 Zotero 로 통합하여 중복을 제거하였다. 연구자 2 인이 독립적으로 제목과 초록을 검토한 후 원문을 검토하였으며, 불일치는 논의를 통해 합의하였다. 본 선별 전에 무작위로 추출한 50 편으로 2 인의 선별 일치도를 점검하고(Cohen&#x27;s κ = [ ]) 선정기준의 해석을 조정하였다. 8 개 차원과 각 차원의 도출 근거는 표 3 과 같다. 이 틀은 자료를 해석하기 위한 선험적 분석 틀이며, 확정된 구성개념이 아니다. 표 3. 사회적 참사 맥락 정서적 안전의 예비 분석 차원과 도출 근거 차원 정의 트라우마 인지 원칙(SAMHSA, 2014) 대규모 외상 개입 요소(Hobfoll et al., 2007) 사회적 참사 관련 근거 D1 신체•정서적 안정 위협 상황에서 몸과 마음이 진정된다는 감각 안전 안전감, 진정 참사 후 장기간 지속되는 복합 애도와 외상 증상(Huh et al., 2017) D2 관계적 수용 감정과 애도를 드러내도 판단받지 않는다는 감각 동료 지지 연결감 타인을 신뢰하기 어려운 유가족의 경험(Lee et al., 2024) D3 기관 신뢰 정부와 공공기관이 보호하고 책임질 것이라는 신뢰 신뢰성과 투명성 공동체 효능감 제도적 배신(Smith &amp; Freyd, 2014), 부식된 공동체(Picou et al., 2004) D4 정보 접근 참사의 원인과 진행에 관한 정확한 정보에 접근할 수 있다는 감각 신뢰성과 투명성 자기효능감 정부 대응과 발표에 대한 유가족의 불신(Lee et al., 2024) D5 목소리•선택권 회복, 추모, 진상규명에 관한 결정에 참여할 수 있다는 감각 역량 강화•목소리•선택, 협력과 상호성 자기•공동체 효능감 트라우마 인지 원칙에서 도출 D6 애도•기억 존중 고인을 애도하고 기억하는 방식이 존중되고 보호된다는 감각 문화•역사•성별 고려 희망 집단적 외상의 의미 구성(Hirschberger, 2018) D7 2 차 피해 보호 비난, 혐오, 낙인으로부터 보호된다는 감각 안전 안전감 유가족의 공적 낙인과 자기 낙인(Heo et al., 2024) D8 집단적 안전감 공동체와 사회가 다시 안전해질 것이라는 감각 안전, 신뢰성과 투명성 공동체 효능감, 희망 인간 유발 재난의 신뢰•응집 손상(Sederer, 2012) Ⅲ. 연구결과 1. 문헌 선별 결과 데이터베이스 검색으로 689 편이 확인되었고, SocINDEX 반출 파일 내 중복 100 편과 데이터베이스 간 중복 2 편을 제거한 587 편의 제목과 초록을 검토하였다. 이 중 559 편을 제외하고 28 편의 적격성을 평가하였으며, 15 편을 제외하여 13 편이 선정되었다. 제외 사유는 기존 도구 사용만 하고 심리측정 자료를 보고하지 않은 연구 7 편, 단일 문항 또는 비표준 문항만 사용한 연구 5 편, 영어•한국어 외 언어 2 편, 물리적•환경적 안전만 측정한 연구 1 편이었다. 국내 신경지 기반 심리적 안전감 척도 연구의 참고문헌 역추적과 원척도의 순추적으로 2 편을 추가하여 최종 15 편, 12 개 도구를 분석하였다(그림 1). 도구 개발의 이론적 근거는 정서적 안정감 이론(4 편), 다미주신경이론(3 편), 혼종모형 개념분석(1 편), 환자 공동구성과 델파이(1 편), 생태학적 학교 풍토론(1 편) 등으로 다양했으며, 트라우마 인지 접근의 원칙을 명시적으로 개발 근거로 삼은 도구는 확인되지 않았다. 4. 측정속성 구조타당도는 15 편 중 12 편에서 요인분석으로 검증되었고, 내적 일관성은 대부분의 연구에서 보고되었다. 반면 검사-재검사 신뢰도 또는 시간 안정성은 5 편, 측정 불변성은 1 편(Hoegler Dennis et al., 2025), 반응성은 1 편(Dabaghi et al., 2023)에서만 보고되었다. 대상자 참여를 통한 내용타당도 확보는 질적 연구나 초점집단을 거친 2 편(Dabaghi et al., 2023; Bodet-Contentin et al., 2026)에 그쳤다. 5. 국내 문헌의 특성 국내 학술 데이터베이스인 KISS, DBpia, e-article 에서는 검색 결과가 없었고, RISS 의 학위논문 8 편은 모두 선정기준과 무관하였다. Google Scholar 에서 반출된 국내 문헌 200 편 중 65 편(32.5%)은 제목에 정서적 안정 또는 정서안정을 포함하였으나 정서적 안전을 측정한 문헌은 없었다. 국내에서 확인된 유일한 관련 도구는 NPSS 한국어판 예비 타당화 연구(전지혜, 신현희, 2025)였으며, 이 도구 역시 재난 경험자를 대상으로 검증되지는 않았다. 6. 사회적 참사 맥락에서의 적용 공백 재난과 집단적 외상 맥락의 문헌은 모두 선정기준을 충족하지 못하였다. 테러에 노출된 이스라엘 성인 연구는 안전감을 구조화된 설문 내 소수 문항으로 측정하였고(Bleich et al., 2003; Solomon et al., 2005), 남아프리카 청소년의 폭력 노출 연구는 기존 Safety Index 를 사용하였다(Padmanabhanunni et al., 2017). 튀르키예 지진 피해 청소년 대상 집단 EMDR 연구는 정서적 안전을 회복의 핵심 기제로 보고했으나 이를 질적으로만 기술하였다(Filazoglu Cokluk, 2025; Cokluk, 2026). 8 개 예비 분석 차원에 따라 12 개 도구를 매핑한 결과, 위협 상황에서의 신체•정서적 안정 차원은 모든 도구가 부분 이상 포착하였다. 그러나 애도와 기억의 존중, 2 차 피해로부터의 보호를 포착한 도구는 없었고, 정보 접근과 투명성, 목소리와 선택권은 각각 1 개 도구만 포착하였다(표 5). 표 5. 사회적 참사 맥락의 정서적 안전 예비 차원에 대한 기존 도구의 포착 정도 도구 D1 신체•정 서적 안정 D2 관계적 수용 D3 기관 신뢰 D4 정보 접근 D5 목소리• 선택권 D6 애도•기 억 존중 D7 2 차 피해 보호 D8 집단적 안전감 YDAD ◐ ◐ ○ ○ ◐ ○ ○ ○ ICV 지각된 안전 ◐ ○ ○ ○ ○ ○ ○ ○ 도구 D1 신체•정 서적 안정 +◐ ) 12 5 3 1 1 0 0 4 주.</p>
+<p>•=하위차원으로 명시적 포착, ◐ =부분적•간접적 포착, ○=미포착. 하위차원명과 초록에 근거한 예비 매핑으로, 문항 수준 검토 후 확정이 필요함. FSDS 와 PESS 는 하위차원이 보고되지 않아 총점 수준에서 판단함. Ⅳ. 논의 1. 정서적 안전 측정의 분절성 본 연구는 정서적 안전이 다양한 분야에서 중요한 개념으로 언급되지만 측정 수준에서는 독립된 구성개념으로 정립되지 못했음을 확인하였다. 검색된 문헌 상당수가 정서적 안전을 연구 결과의 해석이나 실무 권고에서 언급하였을 뿐 측정하지 않았고, 측정한 경우에도 다차원 척도의 하위척도로 다루었다. 이는 정서적 안전이 그 자체로 결과 변수이기보다 학습, 돌봄, 관계가 잘 작동하기 위한 전제 조건으로 취급되어 왔음을 시사한다. 사회적 참사 이후의 회복에서는 안전이 전제 조건인 동시에 개입의 일차 목표이므로(Hobfoll et al., 2007; SAMHSA, 2014), 이를 독립적으로 측정할 수 있는 도구가 필요하다. 포함 연구의 60%가 2024 년 이후 출판되었다는 점은 안전감 측정에 대한 관심이 빠르게 커지고 있음을 보여준다. 특히 NPSS 가 원척도 개발 후 2 년 이내에 보건의료 종사자와 한국 성인에게 연이어 타당화된 것은 외상 이후의 안전감을 개인의 신체적•관계적 경험으로 측정하려는 흐름을 반영한다(Morton et al., 2024; Cogan et al., 2024; 전지혜, 신현희, 2025). 그러나 이 흐름은 아직 재난 피해 집단으로 확장되지 않았다. 선행 고찰과 비교하면 본 연구의 위치가 분명해진다. 디지털 헬스케어 맥락의 주제범위 고찰은 정서적•심리적 안전의 정의와 영향요인을 질적으로 정리했으나 측정도구는 다루지 않았다(Minartz et al., 2024). 본 연구는 도구 수준에서 개념의 구성 차원과 측정속성을 비교함으로써, 정서적 안전 연구가 개념 논의에서 측정과 검증의 단계로 넘어가기 위한 근거를 제공한다. 2. 개념 혼용과 용어 정립의 필요성 정서적 안전, 정서적 안정감, 안전감, 심리적 안전은 이론적 전통이 서로 다르다. 정서적 안정감은 가족 체계 내 아동의 조절 전략을, 심리적 안전은 팀 내 대인관계 위험 감수에 대한 공유된 믿음을, 안전감은 전인적 돌봄의 목표를 지칭한다 (Davies &amp; Cummings, 1994; Edmondson, 1999; Lynch et al., 2024). 국내에서는 여기에 정서적 안정이라는 성격•정서 상태 개념이 더해져, 검색 단계에서부터 관련 문헌을 식별하기 어려웠다. 국내 검색 결과의 3 분의 1 이 정서적 안정을 다루었다는 결과는 향후 국내 연구에서 정서적 안전(emotional safety)을 영문 병기와 함께 명확히 정의하고 정서적 안정과 구별해 사용해야 함을 시사한다. 본 연구는 사회적 참사 맥락의 정서적 안전을 &quot;참사 피해자가 자신의 감정, 애도, 경험을 드러내고 기억하는 과정에서 거부, 비난, 처벌, 재외상으로부터 보호받으며, 관계와 제도가 이를 지지할 것이라고 느끼는 주관적 확신&quot;으로 잠정 정의할 것을 제안한다. 이 정의는 개인의 내적 상태에 머무는 기존 안전감 개념에 관계적•제도적 조건을 결합한 것이다. 3. 기존 도구에서 차용 가능한 차원 기존 도구 중 일부 차원은 사회적 참사 맥락의 도구개발에 차용할 수 있다. NPSS 의 신체감각과 공감 차원은 위협 상황에서의 생리적•정서적 진정(D1)과 판단 없는 수용(D2)을 포착하며, 이미 한국어판이 존재해 수렴타당도 검증 도구로 활용 가능하다. 온두라스 청소년 연구는 안정감을 지역사회, 경찰, 갱이라는 출처별로 나누어 측정함으로써, 국가 기관이 보호자이자 위협이 될 수 있는 상황을 측정에 반영하였다(Hoegler Dennis et al., 2025). 이는 진상규명 과정에서 제도에 대한 불신을 경험하는 사회적 참사 피해자의 기관 신뢰(D3)와 집단적 안전감(D8)을 측정하는 구조로 응용할 수 있다. 중환자실 척도의 정보와 신뢰 문항(Bodet-Contentin et al., 2026), 입원 환자 안전감 척도의 의료팀 신뢰 차원(Dabaghi et al., 2023)도 정보 접근(D4)과 기관 신뢰(D3)의 문항 개발에 참고할 수 있다. 방법론 측면에서도 시사점이 있다. 입원 환자 안전감 척도는 혼종모형 개념분석으로 문항을 개발하였고(Dabaghi et al., 2023), 중환자실 척도는 체계적 고찰, 환자•가족 초점집단, 환자-전문가 델파이를 결합하였다(Bodet-Contentin et al., 2026). 당사자의 경험을 문항에 직접 반영한 이 두 접근은 참사 유가족과 생존자의 목소리가 도구에 담겨야 하는 사회적 참사 맥락에 특히 적합하다. 4. 새로 개발해야 할 차원 애도와 기억의 존중(D6)과 2 차 피해로부터의 보호(D7)는 어떤 도구에서도 포착되지 않았다. 이 두 차원은 사회적 참사를 개인 외상과 구별하는 핵심 특성과 맞닿아 있다. 사회적 참사에서는 피해의 원인이 제도와 관리의 실패에 있기 때문에, 피해자의 애도와 추모가 정치적 논쟁의 대상이 되고 피해자에 대한 비난과 혐오 표현이 2 차 피해로 이어지기 쉽다. 코로나 19 시기 보건의료 종사자가 기관과 관련된 정서적 고통 속에서 신체적•정서적 안전을 핵심 변화 영역으로 보고한 결과(Sherman &amp; Petros, 2024)는 기관의 대응 방식 자체가 정서적 안전을 훼손할 수 있음을 보여준다. 이 두 차원이 기존 도구에서 빠진 이유는 기존 도구가 대부분 가족, 학교, 병원처럼 보호자와 피보호자의 관계가 비교적 명확한 환경에서 개발되었기 때문으로 해석된다. 이런 환경에서 위협은 주로 개인 간 관계에서 발생한다. 반면 사회적 참사에서는 위협이 제도적 배신(Smith &amp; Freyd, 2014)과 공론장의 혐오(경향신문, 2026)처럼 구조적이고 비대면적인 경로로도 발생한다. 따라서 2 차 피해 차원은 대면 관계에서의 비난뿐 아니라 온라인 공간, 언론 보도, 공적 발언에서 경험하는 위협을 포함해야 하며, 애도와 기억 차원은 추모 공간과 기억 실천이 존중되고 보호된다는 감각을 포함해야 한다. 집단적 외상에서 기억이 공동체의 의미 구성과 정체성 회복의 핵심 과정이라는 관점(Hirschberger, 2018)은 애도와 기억의 존중을 정서적 안전의 독립 차원으로 설정할 이론적 근거가 된다. 정서적 안전은 사회적 지지와도 구별되어야 한다. 세월호 참사 유가족 연구에서 사회적 지지가 외상후스트레스 증상과 관련되지 않았다는 결과(Lee et al., 2024)는 지지의 양보다 그 관계가 안전하게 경험되는지가 중요할 수 있음을 보여준다. 최근 개발된 재난 맥락의 지각된 사회적 지지 척도(PSSDS-28)는 가족, 사회적 환경, 공공기관이라는 지지의 출처와 정서적•도구적 기능을 측정하지만(Oruç &amp; Cengiz, 2026), 지지를 구하고 받는 과정에서 비난이나 2 차 피해를 겪지 않는다는 안전의 측면은 다루지 않는다. 따라서 사회적 참사 맥락의 정서적 안전 도구는 사회적 지지 척도와의 변별타당도를 입증해야 한다. 목소리와 선택권(D5)과 정보 접근(D4) 역시 거의 다루어지지 않았다. 트라우마 인지 접근은 신뢰와 투명성, 협력, 역량 강화와 선택을 안전과 함께 핵심 원칙으로 제시한다(SAMHSA, 2014). 사회적 참사 피해자에게 진실에 대한 접근과 의사결정 참여는 정서적 안전의 조건이므로, 이를 포함한 도구가 필요하다. 이상의 결과를 종합하여 본 연구는 사회적 참사 맥락의 정서적 안전을 개인, 관계, 제도•공동체의 세 수준과 8 개 차원으로 구성하는 예비 개념틀을 제안한다(그림 2). 개인 수준은 신체•정서적 안정(D1), 관계 수준은 관계적 수용(D2), 목소리와 선택권(D5), 2 차 피해로부터의 보호(D7), 제도•공동체 수준은 기관 신뢰(D3), 정보 접근(D4), 애도와 기억의 존중(D6), 집단적 안전감(D8)으로 구성된다. 도구의 설계 방식에 대해서도 몇 가지를 제안할 수 있다. 첫째, 온두라스 청소년 연구처럼 위협과 보호의 출처를 구분하는 구조(Hoegler Dennis et al., 2025)를 차용하여 가족•지인, 지역사회, 정부•공공기관, 언론•온라인 공간별로 정서적 안전을 측정하면, 개입이 필요한 영역을 구체적으로 식별할 수 있다. 둘째, 참사 피해자는 장문의 설문 자체가 부담이 될 수 있으므로, 중환자실 척도처럼 핵심 문항으로 구성된 단축형(Bodet-Contentin et al., 2026)을 함께 개발해 현장 선별과 반복 측정에 활용할 필요가 있다. 셋째, 설문 시행 과정에서도 응답 중단의 자유, 지지 자원 안내 같은 트라우마 인지 절차를 표준화해야 한다. 넷째, 소송과 진상규명이 장기화되는 인간 유발 재난에서는 공동체의 피해가 시간이 지나며 누적될 수 있으므로(Picou et al., 2004), 단면 측정보다 참사 주기나 조사 결과 발표 같은 주요 시점에 반복 측정하는 종단 설계가 필요하다. 5. 간호 실무 및 연구에 대한 함의 재난 정신건강 현장에서 간호사는 심리적 응급처치와 심리사회적 지지의 일선 제공자이다. 정서적 안전을 측정할 도구가 없으면 지지 개입이 피해자에게 실제로 안전하게 경험되었는지를 확인하기 어렵고, 개입의 효과를 증상 감소로만 평가하게 된다. 본 연구가 제시한 8 개 차원은 도구개발 이전에도 재난 정신건강 간호의 사정 영역과 교육 내용을 구성하는 체크리스트로 활용될 수 있다. 정책 측면에서도 활용 가치가 있다. 사회적 참사 이후 피해자 지원, 추모 사업, 2 차 피해 대응 체계가 마련되고 있으나, 이들 제도가 피해자의 정서적 안전을 실제로 높였는지 평가할 지표는 부족하다. 사회적 참사 맥락의 정서적 안전 도구는 이러한 제도의 효과를 피해자의 관점에서 평가하는 성과 지표로 활용될 수 있으며, 증상 중심 지표만으로는 드러나지 않는 제도적 회복의 정도를 보여줄 수 있다. 후속 연구는 다음과 같이 진행될 필요가 있다. 첫째, 유가족, 생존자, 지역주민, 대응인력을 대상으로 혼종모형 개념분석을 수행하여 예비 차원을 검증해야 한다. 둘째, 이를 바탕으로 문항을 개발하고 내용타당도, 구조타당도, 수렴타당도(K-NPSS 등)와 사회적 지지 척도와의 변별타당도를 검증해야 하며, 피해자 집단 간 측정 불변성을 확인해야 한다. 셋째, 참사 피해자를 대상으로 하는 자료수집은 그 자체로 재외상의 위험이 있으므로, 연구 참여자와 연구자의 정서적 안전을 보호하는 절차를 연구설계에 포함해야 한다(Kennedy et al., 2025). 6. 연구의 제한점 본 연구는 공개 등록된 프로토콜과 PRISMA-ScR 지침에 따라 국내외 문헌을 함께 검토하였고, 사회과학 데이터베이스(SocINDEX)를 포함해 간호•의학 분야 밖의 정서적 안정감 도구까지 포착했다는 강점이 있다. 그럼에도 다음의 제한점이 있다. 첫째, [이용하지 못한 데이터베이스]를 검색하지 못해 간호학과 심리학 분야의 도구가 일부 누락되었을 가능성이 있으며, 이를 보완하기 위해 공개 데이터베이스인 ERIC 과 PTSDpubs, 인용추적을 추가하였다. 둘째, Google Scholar 는 관련도순 상위 200 편만 검토하였다. 셋째, 국내 데이터베이스는 구문 검색을 지원하지 않는 경우가 있어 검색 필드 제한과 개별 검색으로 대응하였으나, 데이터베이스 간 검색 기능의 차이로 검색의 민감도가 달랐을 수 있다. 넷째, 영어와 한국어 문헌만 포함하였고 회색문헌은 검색하지 않았다. 다섯째, 표 5 의 차원 매핑은 하위차원명과 초록 수준의 정보에 근거한 예비 매핑이므로 문항 수준의 분석으로 보완되어야 한다. 여섯째, 8 개 예비 차원은 문헌과 이론에 근거해 도출되었으며, 참사 피해 당사자나 재난 정신건강 전문가의 자문 단계(Levac et al., 2010)를 거치지 않았다. Ⅴ. 결론 본 주제범위 문헌고찰은 정서적 안전 및 근접 개념을 측정하는 15 편, 12 개 도구를 확인하였으나 재난이나 사회적 참사 맥락에서 개발•타당화된 도구는 없음을 밝혔다. 정서적 안전을 독립 척도로 측정한 도구는 1 개뿐이었고, 대부분의 도구는 아동•가족•학교•의료 맥락에 머물렀으며, 국내에서는 정서적 안정과의 용어 혼용으로 관련 연구의 식별 자체가 어려웠다. 기존 도구는 개인 수준의 신체•정서적 안정을 비교적 잘 포착했지만, 애도와 기억의 존중, 2 차 피해로부터의 보호, 정보 접근, 목소리와 선택권처럼 사회적 참사를 개인 외상과 구별 짓는 관계적•제도적 차원은 거의 다루지 않았다. 따라서 사회적 참사 피해자의 정서적 안전을 측정하기 위해서는 기존 도구의 번안만으로는 부족하며, 당사자의 경험에 근거한 개념분석과 새로운 도구개발이 필요하다. 본 연구가 제안한 개인, 관계, 제도•공동체의 3 수준 8 개 차원 예비 개념틀은 이러한 후속 연구와 재난 정신건강 간호 실무의 사정 기준으로 활용될 수 있다. 검색일: [ ] 검색 결과: [ ]편 #1 &quot;emotional safety&quot;[tiab] OR &quot;emotionally safe&quot;[tiab] OR &quot;emotional safeness&quot;[tiab] OR &quot;affective safety&quot;[tiab] #2 &quot;emotional security&quot;[ti] OR &quot;emotional insecurity&quot;[ti] OR &quot;sense of safety&quot;[ti] OR &quot;sense of security&quot;[ti] OR &quot;feeling safe&quot;[ti] OR &quot;feel safe&quot;[ti] OR &quot;felt safety&quot;[ti] OR &quot;perceived safety&quot;[ti] OR &quot;psychological safety&quot;[ti] #3 Psychometrics[mh] OR &quot;Surveys and Questionnaires&quot;[mh] OR &quot;Reproducibility of Results&quot;[mh] OR &quot;Validation Study&quot;[pt] OR scale*[tiab] OR questionnaire*[tiab] OR instrument*[tiab] OR inventor*[tiab] OR checklist*[tiab] OR screener*[tiab] OR psychometric*[tiab] OR validat*[tiab] OR reliab*[tiab] OR &quot;factor analysis&quot;[tiab] OR &quot;measurement properties&quot;[tiab] #4 Disasters[mh] OR &quot;Mass Casualty Incidents&quot;[mh] OR Terrorism[mh] OR Bereavement[mh] OR disaster*[tiab] OR &quot;mass trauma&quot;[tiab] OR &quot;collective trauma&quot;[tiab] OR terror*[tiab] OR &quot;mass casualty&quot;[tiab] OR &quot;crowd crush&quot;[tiab] OR bereave*[tiab] #5 (#1 AND #3) OR (#2 AND #3) OR ((#1 OR #2) AND #4) #6 #5 AND (English[la] OR Korean[la]) 2) CINAHL (EBSCOhost) 검색일: [ ] 검색 결과: [ ]편 검색일: [ ] 검색 결과: [ ]편</p>
+<h3>How Can Emotional Safety Be Measured after Social Disasters? A Scoping Review of Instruments for</h3>
+<p>Emotional Safety and Related Constructs 최재은/jae eun Choi/세한대학교 간호학과 조교수/jechoi@sehan.ac.kr/010-4009-0449 본 연구는 정서적 안전(emotional safety)과 그 근접 개념인 정서적 안정감(emotional security), 안전감(sense of safety)을 측정하는 도구를 체계적으로 지도화하고, 사회적 참사 피해자와 지역사회에 적용할 때의 개념적•측정적 공백을 규명하고자 하였다.</p>
+<p>방법: JBI 주제범위 문헌고찰 방법론과 PRISMA-ScR 지침을 따랐다. 국외 데이터베이스(PubMed, SocINDEX, ERIC, PTSDpubs 등)와 국내 데이터베이스(KCI, RISS 등), Google Scholar 를 2026 년 [ ]월 [ ]일에 검색하고 인용추적을 병행하였다. 정서적 안전 및 근접 개념을 전체 척도 또는 명명된 하위척도로 측정하고 심리측정적 근거를 보고한 개발•타당화•번안 연구를 포함하였다.</p>
+<p>PQDT: noft(&quot;emotional safety&quot; OR &quot;emotionally safe&quot; OR &quot;emotional security&quot; OR &quot;sense of safety&quot; OR &quot;feeling safe&quot; OR &quot;felt safety&quot;</p>
+<p>) AND noft(scale* OR questionnaire* OR instrument* OR inventor* OR psychometric* OR validat* OR reliab*) 주: PTSDpubs 는 외상 문헌만 수록하므로 측정 관련어 없이 검색해 전수 선별한다. noft 는 본문을 제외한 모든 필드. 9) Google Scholar (검색어별 관련도순 상위 200 편) 검색일: [ ] 검색 결과: [ ]편 allintitle: &quot;emotional safety&quot; scale OR questionnaire OR inventory OR validation allintitle: &quot;emotionally safe&quot; scale OR questionnaire OR validation allintitle: &quot;emotional security&quot; scale OR questionnaire OR validation allintitle: &quot;sense of safety&quot; scale OR questionnaire OR validation allintitle: &quot;feeling safe&quot; scale OR questionnaire OR validation allintitle: &quot;felt safety&quot; scale OR questionnaire OR validation allintitle: 정서적 안전 척도 주: OR 가 적용되지 않으면 측정 관련어별로 나누어 검색한다. 10) 국내 데이터베이스(KCI, RISS, KISS, DBpia, e-article) 상세검색에서 검색 필드를 논문명•키워드•초록으로 지정하고, 아래 검색어를 하나씩 검색한다. 결합 조건이 있는 검색은 상세검색의 AND 줄 또는 결과 내 재검색으로 수행한다. 데이터베이스마다 검색 조건 화면과 결과 건수 화면을 저장한다. 번호 검색어 결합 조건 목적 K1 정서적 안전 없음 핵심어 K2 정서적 안전감 없음 핵심어 K3 정서 안전 없음 핵심어 K4 emotional safety 없음 핵심어(영문 초록) K5 emotionally safe 없음 핵심어(영문 초록) E1 안전감 AND 척도 근접 개념 E2 심리적 안전감 AND 척도 근접 개념(팀 수준 척도는 선별에서 제외) E3 정서적 안정감 AND 척도 근접 개념, 정서적 안정 혼용 확인 E4 sense of safety AND scale 근접 개념(영문 초록) D1 K1, E1, E2 각각 AND 재난 / AND 참사 재난 맥락 공백 확인 부록 2. 주요 학술지 확인 검색 데이터베이스 검색의 누락을 점검하기 위해 아래 학술지를 학술지명으로 한정하여 부록 1 의 핵심어와 근접 개념어로 다시 검색하였다. 학회 학술지 검색 위치 확인 내용 한국심리학회 한국심리학회지 분과 학술지(임상, 상담 및 심리치료, 건강, 발달) KCI 상세검색(학술지명), accesson 정서적 안정감•안전감 척도 한국상담학회 상담학연구 KCI 상세검색(학술지명) 정서적 안전•안전감 척도 한국교육심리학 회 교육심리연구 KCI 상세검색(학술지명) 학습환경의 정서적 안전 한국정신간호학 회 정신간호학회지 KCI, KoreaMed 간호 맥락의 안전감 도구 한국트라우마스 트레스학회 학회 자체 학술지는 확인되지 않음 학회 누리집 자료실 재난 정신건강 지침 등 회색문헌 ISTSS Journal of Traumatic Stress PubMed &quot;J Trauma Stress&quot;[ta] 외상 맥락 안전감 도구 APA Psychological Trauma: Theory, Research, Practice, and Policy PubMed &quot;Psychol Trauma&quot;[ta] 외상 맥락 안전감 도구 -European Journal of Psychotraumatology PubMed &quot;Eur J Psychotraumatol&quot;[ta] 집단적 외상•재난 연구 그러나 사회적 참사 피해자에게 필요한 안전은 물리적 위험의 부재만으로 설명되지 않는다.</p>
+<p>피해자와 유가족은 참사 이후 진상규명 과정에서 제도에 대한 불신, 혐오 표현과 낙인 같은 2 차 피해, 애도와 추모의 제약을 함께 경험한다. 이처럼 자신의 감정과 경험을 드러내도 거부, 비난, 처벌을 받지 않으리라는 주관적 확신을 본 연구에서는 정서적 안전(emotional safety)으로 정의한다. 정서적 안전은 물리적 안전과 구분되는 동시에, 조직 내 대인관계 위험 감수에 대한 공유된 믿음으로 정의되는 심리적 안전(psychological safety; Edmondson, 1999), 가족 갈등 맥락에서 아동이 유지하려는 정서적 안정감(emotional security; Davies &amp; Cummings, 1994), 전인적 돌봄의 목표로 제시된 안전감(sense of safety; Lynch et al., 2024)과 의미가 겹치면서도 서로 다른 이론적 전통에 속한다. 사회적 참사에서 정서적 안전이 특히 쉽게 훼손되는 이유는 세 가지로 정리할 수 있다. 첫째, 피해의 원인에 국가와 기관의 책임이 개입되어 있다. 개인이 의지하고 신뢰하던 기관이 위해를 막지 못하거나 사후 대응에서 피해자를 보호하지 않을 때 발생하는 제도적 배신(institutional betrayal)은 외상 증상을 독립적으로 악화시킨다 그러나 위의 세 조건은 사회적 참사 피해자가 이 첫 단계를 개인의 노력만으로 통과할 수 없게 만든다.</p>
+<p>즉 사회적 참사 맥락의 정서적 안전은 개인의 내적 상태이면서 동시에 관계와 제도, 공론장이 함께 만들어 내는 조건이며, 이를 측정하려면 기존 안전감 개념보다 넓은 틀이 필요하다.</p>
+<p>국내에서는 정서적 안전과 발음과 표기가 유사한 정서적 안정(emotional stability)이 성격 특성이나 프로그램 효과 지표로 폭넓게 사용되어, 두 개념의 경계가 더욱 불분명하다. 이들 근접 개념의 이론적 기원, 분석 수준, 정의를 비교하면 표 1 과 같다. 본 연구는 이 가운데 팀 수준의 조직 심리적 안전과 성격 특성으로서의 정서적 안정을 제외하고, 개인이 주관적으로 경험하는 안전을 측정하는 도구를 고찰 대상으로 삼았다. 표 1. 정서적 안전과 근접 개념의 비교 ) 고통 속에 있는 사람을 돌보는 치유 목표로서의 안전 경험(Lynch et al., 2024) 양식에 따라 서지정보(저자, 연도, 국가), 도구 정보(도구명, 문항 수, 응답 형식), 개념 정보(정의, 하위차원, 이론적 근거), 적용 정보(대상, 연령, 맥락), 측정속성(내용타당도, 구조타당도, 내적 일관성, 검사-재검사 신뢰도, 수렴•준거타당도, 측정 불변성, 반응성)을 추출하였다.</p>
+<p>측정속성은 COSMIN 분류체계(Mokkink et al., 2010)에 따라 범주화하되, 주제범위 고찰의 목적에 따라 방법론적 질 평가는 수행하지 않았다. 추출 양식은 포함 문헌 3 편에 예비 적용하여 수정하였으며, 1 인이 추출한 자료를 다른 1 인이 원문과 대조하여 검토하였다. 6. 자료분석 도구의 일반적 특성은 빈도로 기술하였고, 개념 정의와 하위차원은 내용분석으로 범주화하였다. 이후 트라우마 인지 접근의 안전 원칙(SAMHSA, 2014)과 대규모 외상 개입의 핵심 요소(Hobfoll et al., 2007), 사회적 참사 피해자의 경험에서 제기되는 요구를 종합하여 8 개의 예비 분석 차원을 구성하고, 각 도구의 하위차원이 해당 차원을 포착하는 정도를 충족(•), 부분 충족(◐ ), 미충족(○)으로 매핑하였다.</p>
+<h3>2.</h3>
+<p>포함 연구의 일반적 특성 포함 연구는 2002 년부터 2026 년까지 출판되었으며, 15 편 중 9 편(60.0%)이 2024 년 이후에 출판되어 최근 관심이 급증하고 있음을 보여주었다. 대상은 아동•청소년 7 편, 성인 8 편이었다. 맥락은 의료 4 편(소아 환자, 입원 환자, 수술 환자, 중환자실 환자), 일반 성인•보건의료 종사자 4 편, 가족 3 편, 학교•청소년 프로그램 2 편, 지역사회 폭력 1 편, 기술 수용 1 편이었다. 국가는 미국, 영국, 칠레, 포르투갈, 온두라스, 튀르키예, 프랑스, 케냐, 중국, 한국 등으로 다양했으나, 재난이나 사회적 참사 피해자를 대상으로 개발되거나 타당화된 도구는 한 편도 없었다(표 4). †는 초록에 국가가 명시되지 않아 원문 확인이 필요함. EFA=탐색적 요인분석, CFA=확인적 요인분석, EGA=탐색적 그래프 분석, AVE=평균분산추출, CVI=내용타당도지수. 3. 개념 정의와 하위차원 포함된 도구는 세 개념군으로 구분되었다. 첫째, 정서적 안전을 명시적으로 측정한 도구는 4 편이었으나, 독립 척도는 소아 환자의 심리사회적 고통을 선별하는 PESS(Staab et al., 2026) 1 개뿐이었다. 나머지 3 개는 청소년 프로그램 경험(Sabatelli et al., 2009), 학교 사회적 풍토(Bravo-Sanzana et al., 2025), 자율주행 기술에 대한 지각(Cao et al., 2021)을 측정하는 다차원 척도의 하위척도였다. 이들 도구에서 정서적 안전은 판단이나 위협 없이 감정을 드러낼 수 있는 환경 특성으로 다루어졌으나, 대부분 독립된 개념 정의를 제시하지 않았다. 둘째, 정서적 안정감 도구 4 편은 모두 정서적 안정감 이론(Davies &amp; Cummings, 1994)에 근거하였다. 이 계열은 부모 간 갈등에 노출된 아동이 안정감을 유지하기 위해 보이는 정서적 반응성, 노출 조절, 내적 표상을 측정하였고(Davies et al., 2002; Silva et al., 2016), 최근에는 그 적용 대상을 가족에서 지역사회, 경찰, 갱으로 확장하였다(Hoegler Dennis et al., 2025). 이 확장은 국가 기관이 안전의 원천이자 위협의 원천이 될 수 있음을 측정에 반영했다는 점에서 사회적 참사 맥락과 가장 가까운 시도였다. 셋째, 안전감 및 개인 수준 심리적 안전감 도구 7 편은 의료 환경의 환자 경험(Dabaghi et al., 2023; Katran et al., 2025; Bodet-Contentin et al., 2026)과 생애 전반 또는 외상 이후의 안전 경험(Blackmon et al., 2026; Morton et al., 2024)을 측정하였다. NPSS 는 다미주신경이론에 근거하여 공감, 사회적 관여, 신체감각의 세 차원으로 안전감을 측정하였고, 영국 보건의료 종사자와 한국 성인을 대상으로 타당화되었다(Cogan et al., 2024; 전지혜, 신현희, 2025). 의료 맥락의 도구는 의료팀에 대한 신뢰, 정보 제공처럼 관계적•제도적 요소를 하위차원에 포함하였다.</p>
+<h3>그림 그림 1.</h3>
+<p>PRISMA-ScR 문헌 선별 흐름도 그림 1. PRISMA-ScR 문헌 선별 흐름도 주. KISS, DBpia, e-article 의 0 건은 재검색 후 갱신 예정. 그림 2. 사회적 참사 맥락 정서적 안전의 예비 개념틀과 기존 도구의 포착 수 그림 2. 사회적 참사 맥락 정서적 안전의 예비 개념틀 주. 숫자는 표 5 에서 해당 차원을 충족(•) 또는 부분 충족(◐ )한 도구 수(총 12 개).</p>
+<h3>부록 1.</h3>
+<p>데이터베이스별 검색식 검색어 블록: A=정서적 안전 핵심어, B=근접 개념어(제목 한정), C=측정 관련어, D=재난•집단적 외상 맥락어. 최종 검색 = (A AND C) OR (B AND C) OR ((A OR B) AND D). 주제어(MeSH, CINAHL Headings, APA Thesaurus, ERIC Descriptors)는 각 데이터베이스의 시소러스에서 존재 여부를 확인한 뒤 사용한다. 언어는 영어와 한국어로 제한한다.</p>
+<p>S1 TI ( emotional* N3 safe* OR &quot;affective safety&quot; ) OR AB ( emotional* N3 safe* OR &quot;affective safety&quot; ) OR SU &quot;emotional safety&quot; S2 TI ( &quot;emotional security&quot; OR &quot;emotional insecurity&quot; OR &quot;sense of safety&quot; OR &quot;sense of security&quot; OR &quot;feeling safe&quot; OR &quot;feel safe&quot; OR &quot;felt safety&quot; OR &quot;perceived safety&quot; OR &quot;psychological safety&quot; )S3(MH &quot;Psychometrics&quot;) OR (MH &quot;Instrument Validation&quot;) OR (MH &quot;Reliability and Validity+&quot;) OR TI ( scale* OR questionnaire* OR instrument* OR inventor* OR checklist* OR screener* OR psychometric* OR validat* OR reliab* ) OR AB ( scale* OR questionnaire* OR instrument* OR inventor* OR psychometric* OR validat* OR reliab* OR factor N1 analys* OR measurement N1 propert* ) S4 (MH &quot;Disasters+&quot;) OR (MH &quot;Terrorism&quot;) OR (MH &quot;Bereavement&quot;) OR TI ( disaster* OR &quot;mass trauma&quot; OR &quot;collective trauma&quot; OR terror* OR mass N1 casualt* OR &quot;crowd crush&quot; OR bereave* ) OR AB ( disaster* OR &quot;mass trauma&quot; OR &quot;collective trauma&quot; OR terror* OR mass N1 casualt* OR &quot;crowd crush&quot; OR bereave* ) S5 (S1 AND S3) OR (S2 AND S3) OR ((S1 OR S2) AND S4) 3) SocINDEX with Full Text (EBSCOhost) 검색일: [ ] 검색 결과: [ ]편 CINAHL 의 S1-S5 와 같되, MH(CINAHL 주제명) 항목을 삭제하고 SU 필드의 자유어로 대체한다. 예: S3 SU ( psychometric* OR &quot;scale development&quot; OR validation ) OR TI ( scale* OR questionnaire* OR ... ) OR AB ( ... )</p>
+<h3>References</h3>
+<p>참고문헌 경향신문. (2026, 4 월 7 일). &quot;종북&quot; &quot;자식 팔아 한몫&quot;…이태원 참사 후 정치인의 말, &#x27;지령&#x27;처럼 반복됐다. https://www.khan.co.kr/article/202604070600021</p>
+<p>재난 및 안전관리 기본법. 국가법령정보센터. [시행일 및 법률 번호 기재] 사회적 참사의 진상규명 및 안전사회 건설 등을 위한 특별법. (2017). 국가법령정보센터. [법률 번호 기재]</p>
+<p>전지혜, 신현희. (2025). 신경지(neuroception) 기반 심리적 안전감 척도의 타당화 예비연구. 상담심리교육복지, 12(3), 169-189. https://doi.org/10.20496/cpew.2025.12.3.169</p>
+<p>Arksey, H., &amp; O&#x27;Malley, L. (2005). Scoping studies: Towards a methodological framework. International Journal of Social Research Methodology, 8(1), 19-32. https://doi.org/10.1080/1364557032000119616</p>
+<p>Blackmon, K., Nyambura, A. N., Gitere, A., Muyela, L. A., Bikeri, C., Muchungi, K., Ajalo, C., Musili, L. M., Abdalla, D., Maina, R., Bosire, E., Atwoli, L., Merali, Z., &amp; Udeh-Momoh, C. (2026). Development and validation of the lifetime sense of safety scale in Kenyan adults. Communications Medicine, 6(1). https://doi.org/10.1038/s43856-026-01715-2</p>
+<p>Bleich, A., Gelkopf, M., &amp; Solomon, Z. (2003). Exposure to terrorism, stress-related mental health symptoms, and coping behaviors among a nationally representative sample in Israel. JAMA, 290(5), 612-620. https://doi.org/10.1001/jama.290.5.612</p>
+<p>Bodet-Contentin, L., Lecompte, H., Lociciro, A., Kentish Barnes, N., Messet, H., Bouaoud, M., Cibron, J., Chudeau, N., Barbier, F., Haubertin, C., Poiroux, L., Sautenet, B., El Hage, W., Le Gouge, A., Leger, J., Hardouin, J. B., &amp; Ehrmann, S. (2026). Well-being and sense of security of intubated patients in intensive care units: A patient co-constructed dedicated scale. Critical Care, 30(1). https://doi.org/10.1186/s13054-026-05923-z</p>
+<p>Bravo-Sanzana, M., Terán-Mendoza, O., Miranda, R., Oriol, X., Varela, J., &amp; Mieres-Chacaltana, M. (2025). Design and validation of the Multidimensional School Social Climate Inventory for Adolescents (MSSCI-A) in Chile. Behavioral Sciences, 15(11), 1588. https://doi.org/10.3390/bs15111588</p>
+<p>Cao, J., Lin, L., Zhang, J., Zhang, L., Wang, Y., &amp; Wang, J. (2021). The development and validation of the perceived safety of intelligent connected vehicles scale. Accident Analysis &amp; Prevention, 154, 106092. https://doi.org/10.1016/j.aap.2021.106092</p>
+<p>Cogan, N., Campbell, J., Morton, L., Young, D., &amp; Porges, S. (2024). Validation of the Neuroception of Psychological Safety Scale (NPSS) among health and social care workers in the UK. International Journal of Environmental Research and Public Health, 21(12), 1551. https://doi.org/10.3390/ijerph21121551</p>
+<p>Cokluk, G. F. (2026). Perceived feasibility of group EMDR therapy among disaster-affected adolescents in Turkey: A convergent mixed-methods study. BMC Psychiatry, 26(1). https://doi.org/10.1186/s12888-026-08163-1</p>
+<p>Dabaghi, S., Zandi, M., Ebadi, A., Abbaszadeh, A., &amp; Rohani, C. (2023). Development and psychometric evaluation of the safety feeling scale in adult patients at hospital: Exploratory sequential mixed method. Nursing Open, 10(9), 6165-6174. https://doi.org/10.1002/nop2.1850</p>
+<p>Davies, P. T., &amp; Cummings, E. M. (1994). Marital conflict and child adjustment: An emotional security hypothesis. Psychological Bulletin, 116(3), 387-411. https://doi.org/10.1037/0033-2909.116.3.387</p>
+<p>Davies, P. T., Forman, E. M., Rasi, J. A., &amp; Stevens, K. I. (2002). Assessing children&#x27;s emotional security in the interparental relationship: The Security in the Interparental Subsystem Scales. Child Development, 73(2), 544-562. https://doi.org/10.1111/1467-8624.00423</p>
+<p>Edmondson, A. (1999). Psychological safety and learning behavior in work teams. Administrative Science Quarterly, 44(2), 350-383. https://doi.org/10.2307/2666999</p>
+<p>Filazoglu Cokluk, G. (2025). Group EMDR therapy for disaster-affected adolescents: Evaluating effectiveness and navigating implementation challenges in PTSD, depression, and anxiety. Frontiers in Psychiatry, 16, 1691529. https://doi.org/10.3389/fpsyt.2025.1691529</p>
+<p>Goldmann, E., &amp; Galea, S. (2014). Mental health consequences of disasters. Annual Review of Public Health, 35, 169- 183. https://doi.org/10.1146/annurev-publhealth-032013-182435</p>
+<p>Haddaway, N. R., Collins, A. M., Coughlin, D., &amp; Kirk, S. (2015). The role of Google Scholar in evidence reviews and its applicability to grey literature searching. PLoS ONE, 10(9), e0138237. https://doi.org/10.1371/journal.pone.0138237</p>
+<p>Heo, S. J., Kim, Y. A., Lee, D. H., &amp; Shin, J. Y. (2024). How bereaved parents experience public, self stigma years after a child&#x27;s death. Omega: Journal of Death and Dying, 90(1), 194-224. https://doi.org/10.1177/00302228221100902</p>
+<p>Herman, J. L. (1992). Trauma and recovery. Basic Books.</p>
+<p>Hirschberger, G. (2018). Collective trauma and the social construction of meaning. Frontiers in Psychology, 9, 1441. https://doi.org/10.3389/fpsyg.2018.01441</p>
+<p>Hobfoll, S. E., Watson, P., Bell, C. C., Bryant, R. A., Brymer, M. J., Friedman, M. J., ... Ursano, R. J. (2007). Five essential elements of immediate and mid-term mass trauma intervention: Empirical evidence. Psychiatry, 70(4), 283-315. https://doi.org/10.1521/psyc.2007.70.4.283</p>
+<p>Hoegler Dennis, S., Moreno, F., Boxer, P., &amp; Cummings, E. M. (2025). Measures of adolescents&#x27; emotional security and exposure to violence in relation to the community, police, and gangs: Evidence for validity in a sample of Honduran youth. Peace and Conflict: Journal of Peace Psychology, 31(3), 339-360. https://doi.org/10.1037/pac0000798</p>
+<p>Huh, H. J., Huh, S., Lee, S. H., &amp; Chae, J. H. (2017). Unresolved bereavement and other mental health problems in parents of the Sewol ferry accident after 18 months. Psychiatry Investigation, 14(3), 231-239. https://doi.org/10.4306/pi.2017.14.3.231</p>
+<p>Katran, H. B., Arpag, N., Eti Aslan, F., &amp; Gül, F. (2025). Turkish validity and reliability study of the Feeling Safe During Surgery Scale. Ulusal Travma ve Acil Cerrahi Dergisi, 31(3), 226-232. https://doi.org/10.14744/tjtes.2024.73814</p>
+<p>Kennedy, S. L., Jack, S. M., Johnson, N., Couturier, J., Rae, C., &amp; Klassen, A. F. (2025). Prioritizing participant and research team emotional safety during data generation and analysis in qualitative patient-reported outcome measure research: Development of a framework informed by the GENDER-Q Youth Study. The Patient, 18(6), 597-608. https://doi.org/10.1007/s40271-025-00756-4</p>
+<p>Lee, S. H., Noh, J.-W., Kim, K.-B., &amp; Chae, J.-H. (2024). The impact of coping strategies and positive resources on post- traumatic stress symptoms among bereaved families of the Sewol ferry disaster. Frontiers in Psychiatry, 15, 1367976. https://doi.org/10.3389/fpsyt.2024.1367976</p>
+<p>Levac, D., Colquhoun, H., &amp; O&#x27;Brien, K. K. (2010). Scoping studies: Advancing the methodology. Implementation Science, 5, 69. https://doi.org/10.1186/1748-5908-5-69</p>
+<p>Lynch, J. M., Stange, K. C., Dowrick, C., Getz, L., Meredith, P. J., Van Driel, M. L., Harris, M. G., Tillack, K., &amp; Tapp, C. (2024). The sense of safety theoretical framework: A trauma-informed and healing-oriented approach for whole person care. Frontiers in Psychology, 15, 1441493. https://doi.org/10.3389/fpsyg.2024.1441493</p>
+<p>McGowan, J., Sampson, M., Salzwedel, D. M., Cogo, E., Foerster, V., &amp; Lefebvre, C. (2016). PRESS Peer Review of Electronic Search Strategies: 2015 guideline statement. Journal of Clinical Epidemiology, 75, 40-46. https://doi.org/10.1016/j.jclinepi.2016.01.021</p>
+<p>Minartz, P., Aumann, C. M., Vondeberg, C., &amp; Kuske, S. (2024). Feeling safe in the context of digitalization in healthcare: A scoping review. Systematic Reviews, 13(1), 62. https://doi.org/10.1186/s13643-024-02465-9</p>
+<p>Mokkink, L. B., Terwee, C. B., Patrick, D. L., Alonso, J., Stratford, P. W., Knol, D. L., Bouter, L. M., &amp; de Vet, H. C. W. (2010). The COSMIN study reached international consensus on taxonomy, terminology, and definitions of measurement properties for health-related patient-reported outcomes. Journal of Clinical Epidemiology, 63(7), 737-745. https://doi.org/10.1016/j.jclinepi.2010.02.006</p>
+<p>Morton, L., Cogan, N., Kolacz, J., Calderwood, C., Nikolic, M., Bacon, T., Pathe, E., Williams, D., &amp; Porges, S. W. (2024). A new measure of feeling safe: Developing psychometric properties of the Neuroception of Psychological Safety Scale (NPSS). Psychological Trauma: Theory, Research, Practice, and Policy, 16(4), 701-708. https://doi.org/10.1037/tra0001313</p>
+<p>Norris, F. H., Friedman, M. J., Watson, P. J., Byrne, C. M., Diaz, E., &amp; Kaniasty, K. (2002). 60,000 disaster victims speak: Part I. An empirical review of the empirical literature, 1981-2001. Psychiatry, 65(3), 207-239. https://doi.org/10.1521/psyc.65.3.207.20173</p>
+<p>Oruç, A., &amp; Cengiz, E. (2026). Measuring perceived social support after disaster: Development and validation of the Perceived Social Support in Disasters Scale (PSSDS-28). Healthcare, 14(16), 2573. https://doi.org/10.3390/healthcare14162573</p>
+<p>Padmanabhanunni, A., Campbell, J., &amp; Pretorius, T. B. (2017). Gendered role of appraisals of safety in psychological outcome in relation to trauma. Psychological Trauma: Theory, Research, Practice, and Policy, 9(5), 518-525. https://doi.org/10.1037/tra0000167</p>
+<p>Peters, M. D. J., Marnie, C., Tricco, A. C., Pollock, D., Munn, Z., Alexander, L., McInerney, P., Godfrey, C. M., &amp; Khalil, H. (2020). Updated methodological guidance for the conduct of scoping reviews. JBI Evidence Synthesis, 18(10), 2119-2126. https://doi.org/10.11124/JBIES-20-00167</p>
+<p>Picou, J. S., Marshall, B. K., &amp; Gill, D. A. (2004). Disaster, litigation, and the corrosive community. Social Forces, 82(4), 1493-1522. https://doi.org/10.1353/sof.2004.0091</p>
+<p>Sabatelli, R. M., Anderson, S. A., Kosutic, I., Sanderson, J., &amp; Rubinfeld, S. (2009). A validation study of the Youth Development Assessment Device. Family Relations, 58(3), 361-372. https://doi.org/10.1111/j.1741-3729.2009.00558.x Sederer, L. I. (2012). Are human made disasters different? Epidemiology and Psychiatric Sciences, 21(1), 23-25. https://doi.org/10.1017/S2045796011000710</p>
+<p>Sherman, J., &amp; Petros, S. (2024). Disbelief, distress, &amp; distrust: Trending institution related emotional distress during COVID-19. Journal of Social Work in End-of-Life &amp; Palliative Care, 20(4), 352-373. https://doi.org/10.1080/15524256.2024.2404461</p>
+<p>Silva, C., Calheiros, M., &amp; Carvalho, H. (2016). Security in the Interparental Subsystem (SIS) Scale: Psychometric characteristics in a sample of Portuguese adolescents. Journal of Family Violence, 31(2), 147-159. https://doi.org/10.1007/s10896-015-9767-x</p>
+<p>Smith, C. P., &amp; Freyd, J. J. (2014). Institutional betrayal. American Psychologist, 69(6), 575-587. https://doi.org/10.1037/a0037564</p>
+<p>Solomon, Z., Gelkopf, M., &amp; Bleich, A. (2005). Is terror gender-blind? Gender differences in reaction to terror events. Social Psychiatry and Psychiatric Epidemiology, 40(12), 947-954. https://doi.org/10.1007/s00127-005-0973-3</p>
+<p>Staab, J. H., Tong, S., Gerson, J. S., &amp; Simonsen, C. E. (2026). Screening pediatric patients to determine need for child life services using the pediatric emotional safety screener. Journal of Child Health Care, 30(1), 94-108. https://doi.org/10.1177/13674935241312989</p>
+<p>Strachan, A., Lund, M., &amp; Garcia, J. (2010). Assessing children&#x27;s perceptions of family relationships: An interactive instrument for use in custody disputes. Journal of Child Custody, 7(3), 192-216. https://doi.org/10.1080/15379418.2010.512236</p>
+<p>Substance Abuse and Mental Health Services Administration. (2014). SAMHSA&#x27;s concept of trauma and guidance for a trauma-informed approach (HHS Publication No. SMA 14-4884). Substance Abuse and Mental Health Services Administration.</p>
+<p>Tricco, A. C., Lillie, E., Zarin, W., O&#x27;Brien, K. K., Colquhoun, H., Levac, D., ... Straus, S. E. (2018). PRISMA extension for scoping reviews (PRISMA-ScR): Checklist and explanation. Annals of Internal Medicine, 169(7), 467-473. https://doi.org/10.7326/M18-0850</p>
+<p>Williams, R., Alexander, D. A., Bolsover, D., &amp; Bakke, F. K. (2008). Children, resilience and disasters: Recent evidence that should influence a model of psychosocial care. Current Opinion in Psychiatry, 21(4), 338-344. https://doi.org/10.1097/YCO.0b013e328305b6e4 S1 TI ( emotional* N3 safe* OR &quot;affective safety&quot; ) OR AB ( emotional* N3 safe* OR &quot;affective safety&quot; ) OR KW &quot;emotional safety&quot; OR TM ( &quot;emotional safety&quot; OR &quot;emotionally safe&quot; )</p>
+<p>S2 TI ( &quot;emotional security&quot; OR &quot;emotional insecurity&quot; OR &quot;sense of safety&quot; OR &quot;sense of security&quot; OR &quot;feeling safe&quot; OR &quot;feel safe&quot; OR &quot;felt safety&quot; OR &quot;perceived safety&quot; OR &quot;psychological safety&quot; ) OR DE &quot;Emotional Security&quot; S3 DE &quot;Psychometrics&quot; OR DE &quot;Test Construction&quot; OR DE &quot;Test Validity&quot; OR DE &quot;Test Reliability&quot; OR TI ( scale* OR questionnaire* OR instrument* OR inventor* OR psychometric* OR validat* OR reliab* ) OR AB ( scale* OR questionnaire* OR instrument* OR inventor* OR psychometric* OR validat* OR reliab* OR factor N1 analys* )</p>
+<p>S4 DE &quot;Disasters&quot; OR DE &quot;Natural Disasters&quot; OR DE &quot;Terrorism&quot; OR DE &quot;Grief&quot; OR TI ( disaster* OR &quot;mass trauma&quot; OR &quot;collective trauma&quot; OR terror* OR bereave* ) OR AB ( disaster* OR &quot;mass trauma&quot; OR &quot;collective trauma&quot; OR terror* OR bereave* ) S5 (S1 AND S3) OR (S2 AND S3) OR ((S1 OR S2) AND S4) 주: TM 은 Tests &amp; Measures(사용된 검사도구명) 필드.</p>
+<p>Scopus 검색일: [ ] 검색 결과: [ ]편 ( TITLE-ABS-KEY ( emotional* W/3 safe* OR &quot;affective safety&quot; ) AND TITLE-ABS-KEY ( scale* OR questionnaire* OR instrument* OR inventor* OR checklist* OR screener* OR psychometric* OR validat* OR reliab* OR ( factor W/1 analys* ) OR ( measurement W/1 propert* ) ) )</p>
+<p>OR ( TITLE ( &quot;emotional security&quot; OR &quot;emotional insecurity&quot; OR &quot;sense of safety&quot; OR &quot;sense of security&quot; OR &quot;feeling safe&quot; OR &quot;feel safe&quot; OR &quot;felt safety&quot; OR &quot;perceived safety&quot; OR &quot;psychological safety&quot; ) AND TITLE-ABS- KEY ( scale* OR questionnaire* OR instrument* OR inventor* OR psychometric* OR validat* OR reliab* OR ( factor W/1 analys* ) ) )</p>
+<p>OR ( ( TITLE-ABS-KEY ( emotional* W/3 safe* OR &quot;affective safety&quot; ) OR TITLE ( &quot;emotional security&quot; OR &quot;sense of safety&quot; OR &quot;feeling safe&quot; OR &quot;felt safety&quot; OR &quot;psychological safety&quot; ) ) AND TITLE-ABS-KEY ( disaster* OR &quot;mass trauma&quot; OR &quot;collective trauma&quot; OR terror* OR ( mass W/1 casualt* ) OR &quot;crowd crush&quot; OR bereave* ) )</p>
+<p>AND ( LIMIT-TO ( LANGUAGE , &quot;English&quot; ) OR LIMIT-TO ( LANGUAGE , &quot;Korean&quot; ) )</p>
+<p>Web of Science Core Collection 검색일: [ ] 검색 결과: [ ]편 #1 TS=(emotional* NEAR/3 safe* OR &quot;affective safety&quot;)</p>
+<p>#2 TI=(&quot;emotional security&quot; OR &quot;emotional insecurity&quot; OR &quot;sense of safety&quot; OR &quot;sense of security&quot; OR &quot;feeling safe&quot; OR &quot;feel safe&quot; OR &quot;felt safety&quot; OR &quot;perceived safety&quot; OR &quot;psychological safety&quot;)</p>
+<p>#3 TS=(scale* OR questionnaire* OR instrument* OR inventor* OR checklist* OR screener* OR psychometric* OR validat* OR reliab* OR (factor NEAR/1 analys*) OR (measurement NEAR/1 propert*))</p>
+<p>#4 TS=(disaster* OR &quot;mass trauma&quot; OR &quot;collective trauma&quot; OR terror* OR (mass NEAR/1 casualt*) OR &quot;crowd crush&quot; OR bereave*)</p>
+<p>#5 (#1 AND #3) OR (#2 AND #3) OR ((#1 OR #2) AND #4)</p>
+<p>ERIC (eric.ed.gov) 검색일: [ ] 검색 결과: [ ]편 (&quot;emotional safety&quot; OR &quot;emotionally safe&quot; OR &quot;emotional security&quot; OR &quot;sense of safety&quot; OR &quot;feeling safe&quot; OR &quot;felt safety&quot; OR &quot;psychological safety&quot;) AND (scale OR questionnaire OR instrument OR inventory OR psychometrics OR validity OR reliability)</p>
+<p>주: 결과가 많으면 descriptor:&quot;Test Validity&quot;, descriptor:&quot;Psychometrics&quot; 등 ERIC 디스크립터로 좁힌다.</p>
+<p>PTSDpubs, ProQuest Dissertations &amp; Theses (ProQuest 플랫폼) 검색일: [ ] 검색 결과: [ ]편 PTSDpubs: noft(&quot;emotional safety&quot; OR &quot;emotionally safe&quot; OR &quot;affective safety&quot; OR &quot;felt safety&quot; OR &quot;sense of safety&quot; OR &quot;feeling safe&quot; OR &quot;emotional security&quot; OR &quot;psychological safety&quot;)</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
