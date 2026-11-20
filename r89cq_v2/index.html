@@ -197,7 +197,7 @@ Knowing You Seeing Me: The Role of Visual Contact During
 Video-Conferencing for Emotion Recognition and Mimicry
 </p>
 <p class="meta">
-2026-11-19 · Metacheck 0.4.4.24 · DOI 10.1177/21522715261505925
+2026-11-20 · Metacheck 0.4.4.28 · DOI 10.1177/21522715261505925
 </p>
 </header>
 <div class="mc-main">
@@ -2393,7 +2393,7 @@ errored
 runtime
 </td>
 <td style="text-align:right;">
-4.9
+3.6
 </td>
 </tr>
 </tbody>
@@ -2427,6 +2427,12 @@ produced.</em></p>
 &gt; contrasts(MOS01b$Self_camera) &lt;- contr.sum(nlevels(MOS01b$Self_camera))
 &gt; Correct_recognition &lt;- glmer(
 &gt;   Correct_rec ~ 1 + Display * Modality * Self_camera + (1+Display+Modality+Self_camera|Id) + (1+Display+Modality|Actor), 
+&gt;   data = MOS01b, 
+&gt;   family = binomial,
+&gt;   control = glmerControl(optimizer = &quot;bobyqa&quot;, optCtrl = list(maxfun = 20000))
+&gt; )
+&gt; Correct_recognition &lt;- glmer(
+&gt;   Correct_rec ~ 1 + Display * Modality * Self_camera + (1+Display+Modality+Self_camera|Id) + (1+Display|Actor), 
 &gt;   data = MOS01b, 
 &gt;   family = binomial,
 &gt;   control = glmerControl(optimizer = &quot;bobyqa&quot;, optCtrl = list(maxfun = 20000))
@@ -38189,9 +38195,13 @@ tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/
 <p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
 <p>Statcheck considers p = 0.000 an error, as you should report p &lt;
 0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
-and one should simply report exact p-values (p = 0.031). Statcheck might
-miss one-sided tests, and falsely assume the p-value is incorrect. For
-more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695).
+Statcheck might still miss one-sided tests that are described in another
+sentence, and falsely assume the p-value is incorrect. For more
+information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
 <p>This module only checks statistical results reported in the running
 text of the manuscript. It cannot (yet) process statistics reported only
 in tables.</p>
