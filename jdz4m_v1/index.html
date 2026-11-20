@@ -1,0 +1,3709 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Temporal Dynamics of Reaction Time Variability
+Predict Mind-Wandering in ADHD but not Controls</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Temporal Dynamics of Reaction Time Variability Predict Mind-Wandering in
+ADHD but not Controls
+</p>
+<p class="meta">
+2026-11-20 · Metacheck 0.4.4.28
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>1</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>3</b><span>fine</span></a><a class="count na" href="#na"><b>10</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Effect
+Sizes in t-tests and F-tests</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 6 t-tests and/or F-tests where effect sizes are not
+reported. Check these tests in the table below, and consider adding
+effect sizes.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We recommend checking the sentences below, and add any missing effect
+sizes.</p>
+<p>For t-tests with a reported d, coherence checks yielded 6 matches
+under assumptions, 1 no match.</p>
+<p>For F-tests with a reported eta-squared effect size, coherence checks
+yielded 19 indeterminate cases.</p>
+<div style="max-height:8em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Unsurprisingly given that objective states are defined based on RT
+deviance, participants showed significantly higher variability during
+out-of-the-zone periods (M = 0.345, SE = 0.012) compared to in-the-zone
+periods (M = 0.078, SE = 0.003), F(1,44) = 752.58, p &lt; .001, η²ₚ =
+.945.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A significant main effect of subjective states was also observed,
+F(1,44) = 4.49, p = .040, η² = ₚ .093, with increased variability during
+mind-wandering episodes (M = 0.216, SE = 0.0079) compared to on-task
+episodes (M = 0.208, SE = 0.0067).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Post-hoc ₚ t-tests revealed that the ADHD group had significantly
+greater variability than the control group during out-of-the-zone
+periods ,t(44) = 2.45, p = .018, but this effect did not survive
+correction for multiple comparisons (p ᵤ ₑᵧ = .082).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The between-group difference during in-theₜ ₖ zone periods was not
+significant, t(44) = 1.52, p = .136, p ᵤ ₑᵧ = .436.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Both groups showed significantly ₜ ₖ greater variability out-of-the-zone
+compared to in-the-zone: ADHD group t(44) = 21.19, p &lt; .001, p ᵤ ₑᵧ ₜ
+ₖ &lt; .001, control group t(44) = 13.68, p &lt; .001, p ᵤ ₑᵧ &lt; .001.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Both groups showed significantly ₜ ₖ greater variability out-of-the-zone
+compared to in-the-zone: ADHD group t(44) = 21.19, p &lt; .001, p ᵤ ₑᵧ ₜ
+ₖ &lt; .001, control group t(44) = 13.68, p &lt; .001, p ᵤ ₑᵧ &lt; .001.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating that effect sizes are often
+not reported:</p>
+<ul>
+<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
+(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
+Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
+</ul>
+<p>For educational material on reporting effect sizes:</p>
+<ul>
+<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
+to Effect Sizes and Confidence Intervals</a></li>
+</ul>
+</div>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<div style="max-height:15em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+The t-test revealed that ADHD participants mind-wander more (M = 60.9%,
+SE = 4.60) than controls (M = 34.8%, SE = 3.43), t(44) = 4.55, p &lt;
+.001, d = 1.34 (Figure 1B).
+</td>
+<td style="text-align:left;">
+d = 1.34
+</td>
+<td style="text-align:left;">
+t(44) = 4.55
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+independent_equal_n
+</td>
+<td style="text-align:left;">
+Match under independent-samples equal-n assumption (n1 = n2 = 23, N =
+46).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The t-tests also showed that ADHD participants were less motivated (M =
+55.9, SE = 5.17) than controls (M = 70.5, SE = 4.17), t(44) = -2.19, p =
+.034, d = -0.65; more bored (M = 49.1, SE = 5.16) than controls (M =
+34.0, SE = 5.05), t(44) = 2.09, p = .042, d = 0.62 and felt more
+fatigued (M = 55.6, SE = 4.31) than controls (M = 42.1, SE = 4.30),
+t(44) = 2.21, p = .032, d = 0.65.
+</td>
+<td style="text-align:left;">
+d = -0.65
+</td>
+<td style="text-align:left;">
+t(44) = -2.19
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+independent_equal_n
+</td>
+<td style="text-align:left;">
+Match under independent-samples equal-n assumption (n1 = n2 = 23, N =
+46).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The t-tests also showed that ADHD participants were less motivated (M =
+55.9, SE = 5.17) than controls (M = 70.5, SE = 4.17), t(44) = -2.19, p =
+.034, d = -0.65; more bored (M = 49.1, SE = 5.16) than controls (M =
+34.0, SE = 5.05), t(44) = 2.09, p = .042, d = 0.62 and felt more
+fatigued (M = 55.6, SE = 4.31) than controls (M = 42.1, SE = 4.30),
+t(44) = 2.21, p = .032, d = 0.65.
+</td>
+<td style="text-align:left;">
+d = 0.62
+</td>
+<td style="text-align:left;">
+t(44) = 2.09
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+independent_equal_n
+</td>
+<td style="text-align:left;">
+Match under independent-samples equal-n assumption (n1 = n2 = 23, N =
+46).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The t-tests also showed that ADHD participants were less motivated (M =
+55.9, SE = 5.17) than controls (M = 70.5, SE = 4.17), t(44) = -2.19, p =
+.034, d = -0.65; more bored (M = 49.1, SE = 5.16) than controls (M =
+34.0, SE = 5.05), t(44) = 2.09, p = .042, d = 0.62 and felt more
+fatigued (M = 55.6, SE = 4.31) than controls (M = 42.1, SE = 4.30),
+t(44) = 2.21, p = .032, d = 0.65.
+</td>
+<td style="text-align:left;">
+d = 0.65
+</td>
+<td style="text-align:left;">
+t(44) = 2.21
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+independent_equal_n
+</td>
+<td style="text-align:left;">
+Match under independent-samples equal-n assumption (n1 = n2 = 23, N =
+46).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+On difficulty, there was no significant group difference between ADHD
+participants (M = 33.3, SE = 4.51) and controls (M = 24.7, SE = 3.19),
+t(44) = 1.56, p = . 126, d = 0.46.
+</td>
+<td style="text-align:left;">
+d = 0.46
+</td>
+<td style="text-align:left;">
+t(44) = 1.56
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+independent_equal_n
+</td>
+<td style="text-align:left;">
+Match under independent-samples equal-n assumption (n1 = n2 = 23, N =
+46).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The ANOVA performed on the rate of no-go errors revealed significant
+main effects of both objective states, F(1,44) = 9.13, p = .004, η² =
+.172, and subjective states, F(1,44) = 9.19, p = .004, ₚ η² = .173.
+</td>
+<td style="text-align:left;">
+η² = .172
+</td>
+<td style="text-align:left;">
+F(1,44) = 9.13
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The ANOVA performed on the rate of no-go errors revealed significant
+main effects of both objective states, F(1,44) = 9.13, p = .004, η² =
+.172, and subjective states, F(1,44) = 9.19, p = .004, ₚ η² = .173.
+</td>
+<td style="text-align:left;">
+η² = .173
+</td>
+<td style="text-align:left;">
+F(1,44) = 9.19
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No significant interaction was observed between objective and subjective
+states, F(1,44) = 0.10, p = .751, η² = .002, ₚ nor between objective
+states and group, F(1,44) = 0.29, p = .593, η² = .007, or subjective
+states and ₚ group, F(1,44) = 1.83, p = .183, η² = .040.
+</td>
+<td style="text-align:left;">
+η² = .002
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.10
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No significant interaction was observed between objective and subjective
+states, F(1,44) = 0.10, p = .751, η² = .002, ₚ nor between objective
+states and group, F(1,44) = 0.29, p = .593, η² = .007, or subjective
+states and ₚ group, F(1,44) = 1.83, p = .183, η² = .040.
+</td>
+<td style="text-align:left;">
+η² = .007
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.29
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No significant interaction was observed between objective and subjective
+states, F(1,44) = 0.10, p = .751, η² = .002, ₚ nor between objective
+states and group, F(1,44) = 0.29, p = .593, η² = .007, or subjective
+states and ₚ group, F(1,44) = 1.83, p = .183, η² = .040.
+</td>
+<td style="text-align:left;">
+η² = .040
+</td>
+<td style="text-align:left;">
+F(1,44) = 1.83
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The three-way interaction between group × objective states ₚ ×
+subjective states was also non-significant, F(1,44) = 0.49, p = .487, η²
+= .011.
+</td>
+<td style="text-align:left;">
+η² = .011
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.49
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+At the betweenₚ subjects level, there was no significant main effect of
+group, F(1,44) = 3.79, p = .058, η² = .079 ( ₚ Figure 1C).
+</td>
+<td style="text-align:left;">
+η² = .079
+</td>
+<td style="text-align:left;">
+F(1,44) = 3.79
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The ANOVA performed on reaction times on correct go trials revealed a
+significant main effect of objective states, F(1,44) = 80.53, p &lt;
+.001, η² = .647.
+</td>
+<td style="text-align:left;">
+η² = .647
+</td>
+<td style="text-align:left;">
+F(1,44) = 80.53
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No significant main effect of subjective states was found, F(1,44) =
+0.29, p = .593, η² = .007, ₚ nor were there significant interactions
+between subjective states and group, F(1,44) = 0.56, p = .459, η² =
+.013, or between objective states and group, ₚ F(1,44) = 1.02, p = .317,
+η² = .023.
+</td>
+<td style="text-align:left;">
+η² = .007
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.29
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No significant main effect of subjective states was found, F(1,44) =
+0.29, p = .593, η² = .007, ₚ nor were there significant interactions
+between subjective states and group, F(1,44) = 0.56, p = .459, η² =
+.013, or between objective states and group, ₚ F(1,44) = 1.02, p = .317,
+η² = .023.
+</td>
+<td style="text-align:left;">
+η² = .013
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.56
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No significant main effect of subjective states was found, F(1,44) =
+0.29, p = .593, η² = .007, ₚ nor were there significant interactions
+between subjective states and group, F(1,44) = 0.56, p = .459, η² =
+.013, or between objective states and group, ₚ F(1,44) = 1.02, p = .317,
+η² = .023.
+</td>
+<td style="text-align:left;">
+η² = .023
+</td>
+<td style="text-align:left;">
+F(1,44) = 1.02
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The interaction ₚ between subjective and objective states was also not
+significant, F(1,44) = 0.65, p = .425, η² = .015, ₚ nor was the
+three-way interaction between group × objective states × subjective
+states, F(1,44) = 0.10, p = .752, η² = .002.
+</td>
+<td style="text-align:left;">
+η² = .015
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.65
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The interaction ₚ between subjective and objective states was also not
+significant, F(1,44) = 0.65, p = .425, η² = .015, ₚ nor was the
+three-way interaction between group × objective states × subjective
+states, F(1,44) = 0.10, p = .752, η² = .002.
+</td>
+<td style="text-align:left;">
+η² = .002
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.10
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Finally, there was no significant main effect of group at the
+between-subjects level, ₚ F(1,44) = 0.02, p = .889, η² = .00 ( ₚ Figure
+1D).
+</td>
+<td style="text-align:left;">
+η² = .00
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.02
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Unsurprisingly given that objective states are defined based on RT
+deviance, participants showed significantly higher variability during
+out-of-the-zone periods (M = 0.345, SE = 0.012) compared to in-the-zone
+periods (M = 0.078, SE = 0.003), F(1,44) = 752.58, p &lt; .001, η²ₚ =
+.945.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(1,44) = 752.58
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A significant main effect of subjective states was also observed,
+F(1,44) = 4.49, p = .040, η² = ₚ .093, with increased variability during
+mind-wandering episodes (M = 0.216, SE = 0.0079) compared to on-task
+episodes (M = 0.208, SE = 0.0067).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(1,44) = 4.49
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A main effect of the group was also observed with higher CV in ADHD (M =
+0.22, SE = 0.0099) compared to control (M = 0.20, SE = 0.0099), F(1,44)
+= 5.55, p = .023, η² = .11.
+</td>
+<td style="text-align:left;">
+η² = .11
+</td>
+<td style="text-align:left;">
+F(1,44) = 5.55
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The interaction between objective states and group was also significant,
+ₚ F(1,44) = 6.39, p = .015, η² = .127.
+</td>
+<td style="text-align:left;">
+η² = .127
+</td>
+<td style="text-align:left;">
+F(1,44) = 6.39
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Post-hoc ₚ t-tests revealed that the ADHD group had significantly
+greater variability than the control group during out-of-the-zone
+periods ,t(44) = 2.45, p = .018, but this effect did not survive
+correction for multiple comparisons (p ᵤ ₑᵧ = .082).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+t(44) = 2.45
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The between-group difference during in-theₜ ₖ zone periods was not
+significant, t(44) = 1.52, p = .136, p ᵤ ₑᵧ = .436.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+t(44) = 1.52
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Both groups showed significantly ₜ ₖ greater variability out-of-the-zone
+compared to in-the-zone: ADHD group t(44) = 21.19, p &lt; .001, p ᵤ ₑᵧ ₜ
+ₖ &lt; .001, control group t(44) = 13.68, p &lt; .001, p ᵤ ₑᵧ &lt; .001.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+t(44) = 21.19
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Both groups showed significantly ₜ ₖ greater variability out-of-the-zone
+compared to in-the-zone: ADHD group t(44) = 21.19, p &lt; .001, p ᵤ ₑᵧ ₜ
+ₖ &lt; .001, control group t(44) = 13.68, p &lt; .001, p ᵤ ₑᵧ &lt; .001.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+t(44) = 13.68
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable d effect size found.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No other interactions reached significance: ₜ ₖ subjective × objective,
+F(1,44) = 3.56, p = .066, η² = .075; subjective × group, ₚ F(1,44) =
+0.85, p = .362, η² = .019; and the three-way interaction between group ×
+subjective × objective, ₚ F(1,44) = 0.37, p = .546, η² = .008. ₚ
+</td>
+<td style="text-align:left;">
+η² = .075
+</td>
+<td style="text-align:left;">
+F(1,44) = 3.56
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No other interactions reached significance: ₜ ₖ subjective × objective,
+F(1,44) = 3.56, p = .066, η² = .075; subjective × group, ₚ F(1,44) =
+0.85, p = .362, η² = .019; and the three-way interaction between group ×
+subjective × objective, ₚ F(1,44) = 0.37, p = .546, η² = .008. ₚ
+</td>
+<td style="text-align:left;">
+η² = .019
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.85
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No other interactions reached significance: ₜ ₖ subjective × objective,
+F(1,44) = 3.56, p = .066, η² = .075; subjective × group, ₚ F(1,44) =
+0.85, p = .362, η² = .019; and the three-way interaction between group ×
+subjective × objective, ₚ F(1,44) = 0.37, p = .546, η² = .008. ₚ
+</td>
+<td style="text-align:left;">
+η² = .008
+</td>
+<td style="text-align:left;">
+F(1,44) = 0.37
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+eta_squared
+</td>
+<td style="text-align:left;">
+Eta-squared reported; cannot be reconstructed from F and dfs in
+factorial or repeated-measures designs.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+This difference was not statistically significant, t(22) = 0.237, p =
+.815, d = .03, replicating Chidharom and colleagues (2025).
+</td>
+<td style="text-align:left;">
+d = .03
+</td>
+<td style="text-align:left;">
+t(22) = 0.237
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+no_match
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No match under tested assumptions (paired dz, independent equal-n,
+independent unequal-n range). Tolerance = 0.01. A no-match can occur
+when fewer than 2 decimal places are reported.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+In contrast, individuals with ADHD spent 47.6% (SE = 0.79) of the time
+out-of-the-zone prior to an on-task report, whereas this proportion rose
+to 50.9% (SE = 0.69) before mind-wandering reports and was statistically
+significant, t(22) = 2.09, p = .048, d = .44.
+</td>
+<td style="text-align:left;">
+d = .44
+</td>
+<td style="text-align:left;">
+t(22) = 2.09
+</td>
+<td style="text-align:left;">
+t-test
+</td>
+<td style="text-align:left;">
+match_under_assumptions
+</td>
+<td style="text-align:left;">
+paired_dz
+</td>
+<td style="text-align:left;">
+Match under paired-samples dz assumption.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</details>
+</div>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 62 non-significant p values that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<div style="max-height:28em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = .751
+</td>
+<td style="text-align:left;">
+No significant interaction was observed between objective and subjective
+states, F(1,44) = 0.10, p = .751, η² = .002, ₚ nor between objective
+states and group, F(1,44) = 0.29, p = .593, η² = .007, or subjective
+states and ₚ group, F(1,44) = 1.83, p = .183, η² = .040.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .593
+</td>
+<td style="text-align:left;">
+No significant interaction was observed between objective and subjective
+states, F(1,44) = 0.10, p = .751, η² = .002, ₚ nor between objective
+states and group, F(1,44) = 0.29, p = .593, η² = .007, or subjective
+states and ₚ group, F(1,44) = 1.83, p = .183, η² = .040.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .183
+</td>
+<td style="text-align:left;">
+No significant interaction was observed between objective and subjective
+states, F(1,44) = 0.10, p = .751, η² = .002, ₚ nor between objective
+states and group, F(1,44) = 0.29, p = .593, η² = .007, or subjective
+states and ₚ group, F(1,44) = 1.83, p = .183, η² = .040.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .487
+</td>
+<td style="text-align:left;">
+The three-way interaction between group × objective states ₚ ×
+subjective states was also non-significant, F(1,44) = 0.49, p = .487, η²
+= .011.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .058
+</td>
+<td style="text-align:left;">
+At the betweenₚ subjects level, there was no significant main effect of
+group, F(1,44) = 3.79, p = .058, η² = .079 ( ₚ Figure 1C).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .593
+</td>
+<td style="text-align:left;">
+No significant main effect of subjective states was found, F(1,44) =
+0.29, p = .593, η² = .007, ₚ nor were there significant interactions
+between subjective states and group, F(1,44) = 0.56, p = .459, η² =
+.013, or between objective states and group, ₚ F(1,44) = 1.02, p = .317,
+η² = .023.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .459
+</td>
+<td style="text-align:left;">
+No significant main effect of subjective states was found, F(1,44) =
+0.29, p = .593, η² = .007, ₚ nor were there significant interactions
+between subjective states and group, F(1,44) = 0.56, p = .459, η² =
+.013, or between objective states and group, ₚ F(1,44) = 1.02, p = .317,
+η² = .023.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .317
+</td>
+<td style="text-align:left;">
+No significant main effect of subjective states was found, F(1,44) =
+0.29, p = .593, η² = .007, ₚ nor were there significant interactions
+between subjective states and group, F(1,44) = 0.56, p = .459, η² =
+.013, or between objective states and group, ₚ F(1,44) = 1.02, p = .317,
+η² = .023.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .425
+</td>
+<td style="text-align:left;">
+The interaction ₚ between subjective and objective states was also not
+significant, F(1,44) = 0.65, p = .425, η² = .015, ₚ nor was the
+three-way interaction between group × objective states × subjective
+states, F(1,44) = 0.10, p = .752, η² = .002.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .752
+</td>
+<td style="text-align:left;">
+The interaction ₚ between subjective and objective states was also not
+significant, F(1,44) = 0.65, p = .425, η² = .015, ₚ nor was the
+three-way interaction between group × objective states × subjective
+states, F(1,44) = 0.10, p = .752, η² = .002.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .889
+</td>
+<td style="text-align:left;">
+Finally, there was no significant main effect of group at the
+between-subjects level, ₚ F(1,44) = 0.02, p = .889, η² = .00 ( ₚ Figure
+1D).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .136
+</td>
+<td style="text-align:left;">
+The between-group difference during in-theₜ ₖ zone periods was not
+significant, t(44) = 1.52, p = .136, p ᵤ ₑᵧ = .436.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .066
+</td>
+<td style="text-align:left;">
+No other interactions reached significance: ₜ ₖ subjective × objective,
+F(1,44) = 3.56, p = .066, η² = .075; subjective × group, ₚ F(1,44) =
+0.85, p = .362, η² = .019; and the three-way interaction between group ×
+subjective × objective, ₚ F(1,44) = 0.37, p = .546, η² = .008. ₚ
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .362
+</td>
+<td style="text-align:left;">
+No other interactions reached significance: ₜ ₖ subjective × objective,
+F(1,44) = 3.56, p = .066, η² = .075; subjective × group, ₚ F(1,44) =
+0.85, p = .362, η² = .019; and the three-way interaction between group ×
+subjective × objective, ₚ F(1,44) = 0.37, p = .546, η² = .008. ₚ
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .546
+</td>
+<td style="text-align:left;">
+No other interactions reached significance: ₜ ₖ subjective × objective,
+F(1,44) = 3.56, p = .066, η² = .075; subjective × group, ₚ F(1,44) =
+0.85, p = .362, η² = .019; and the three-way interaction between group ×
+subjective × objective, ₚ F(1,44) = 0.37, p = .546, η² = .008. ₚ
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .815
+</td>
+<td style="text-align:left;">
+This difference was not statistically significant, t(22) = 0.237, p =
+.815, d = .03, replicating Chidharom and colleagues (2025).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .828
+</td>
+<td style="text-align:left;">
+No significant main effects of trials, χ²(1) = 0.05, p = .828 or group
+were found, χ²(1) = 0.02, p = .876.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .876
+</td>
+<td style="text-align:left;">
+No significant main effects of trials, χ²(1) = 0.05, p = .828 or group
+were found, χ²(1) = 0.02, p = .876.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .427
+</td>
+<td style="text-align:left;">
+In contrast, the same relationship was not significant in the control
+group (B = 0.00555, SE = 0.00699, z = 0.795, p = .427), indicating that,
+for control participants, variations in out-of-the-zone time did not
+reliably predict mind-wandering.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .480
+</td>
+<td style="text-align:left;">
+However, in earlier trials (Mean -1 SD), the association was not
+significant (B = -0.00618, SE = 0.00875, p = .480).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .500
+</td>
+<td style="text-align:left;">
+The control group did not reach levels of significance at any time
+point: neither in early trials (Mean -1 SD; B = -0.00652, SE = 0.00965,
+p = .500), nor at middle trial position (B = 0.00555, SE = 0.00699, p =
+.427), nor even in the trials closest to the probe (Mean +1 SD; B =
+0.01762, SE = 0.00992, p = .076).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .427
+</td>
+<td style="text-align:left;">
+The control group did not reach levels of significance at any time
+point: neither in early trials (Mean -1 SD; B = -0.00652, SE = 0.00965,
+p = .500), nor at middle trial position (B = 0.00555, SE = 0.00699, p =
+.427), nor even in the trials closest to the probe (Mean +1 SD; B =
+0.01762, SE = 0.00992, p = .076).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .076
+</td>
+<td style="text-align:left;">
+The control group did not reach levels of significance at any time
+point: neither in early trials (Mean -1 SD; B = -0.00652, SE = 0.00965,
+p = .500), nor at middle trial position (B = 0.00555, SE = 0.00699, p =
+.427), nor even in the trials closest to the probe (Mean +1 SD; B =
+0.01762, SE = 0.00992, p = .076).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .676
+</td>
+<td style="text-align:left;">
+No significant interactions were observed between group and trial, χ²(1)
+= 0.17, p = .676 or between trial and out-of-the-zone time, χ²(1) =
+1.78, p = .183.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .183
+</td>
+<td style="text-align:left;">
+No significant interactions were observed between group and trial, χ²(1)
+= 0.17, p = .676 or between trial and out-of-the-zone time, χ²(1) =
+1.78, p = .183.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .927
+</td>
+<td style="text-align:left;">
+However, no significant main effects were observed for trial, χ²(1) =
+0.01, p = .927; or group, χ²(1) &lt; 0.01, p = .978; and these factors
+also did not significantly interact with each other (group × trial:
+χ²(1) &lt; 0.01, p = .997; trial × out-of-the-zone time: χ²(1) = 0.15, p
+= .700).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .978
+</td>
+<td style="text-align:left;">
+However, no significant main effects were observed for trial, χ²(1) =
+0.01, p = .927; or group, χ²(1) &lt; 0.01, p = .978; and these factors
+also did not significantly interact with each other (group × trial:
+χ²(1) &lt; 0.01, p = .997; trial × out-of-the-zone time: χ²(1) = 0.15, p
+= .700).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .997
+</td>
+<td style="text-align:left;">
+However, no significant main effects were observed for trial, χ²(1) =
+0.01, p = .927; or group, χ²(1) &lt; 0.01, p = .978; and these factors
+also did not significantly interact with each other (group × trial:
+χ²(1) &lt; 0.01, p = .997; trial × out-of-the-zone time: χ²(1) = 0.15, p
+= .700).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .700
+</td>
+<td style="text-align:left;">
+However, no significant main effects were observed for trial, χ²(1) =
+0.01, p = .927; or group, χ²(1) &lt; 0.01, p = .978; and these factors
+also did not significantly interact with each other (group × trial:
+χ²(1) &lt; 0.01, p = .997; trial × out-of-the-zone time: χ²(1) = 0.15, p
+= .700).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .177
+</td>
+<td style="text-align:left;">
+Finally, the three-way interaction between group, trial, and
+out-of-the-zone time did not reach significance, χ²(1) = 1.83, p = .177.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .965
+</td>
+<td style="text-align:left;">
+There were no significant main effects of group, χ²(1) = 0.002, p =
+.965, trial, χ²(1) = 0.137, p = .712, or out-of-the-zone time, χ²(1)
+&lt; 0.001, p = .977.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .712
+</td>
+<td style="text-align:left;">
+There were no significant main effects of group, χ²(1) = 0.002, p =
+.965, trial, χ²(1) = 0.137, p = .712, or out-of-the-zone time, χ²(1)
+&lt; 0.001, p = .977.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .977
+</td>
+<td style="text-align:left;">
+There were no significant main effects of group, χ²(1) = 0.002, p =
+.965, trial, χ²(1) = 0.137, p = .712, or out-of-the-zone time, χ²(1)
+&lt; 0.001, p = .977.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .784
+</td>
+<td style="text-align:left;">
+The three-way interaction between group, trial, and out-ofthe-zone time
+was not significant, χ²(1) = 0.07, p = .784.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .980
+</td>
+<td style="text-align:left;">
+No significant main effects were found for the group, χ²(1) &lt; 0.01, p
+= .980; or trial, χ²(1) = 0.044, p = .834.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .834
+</td>
+<td style="text-align:left;">
+No significant main effects were found for the group, χ²(1) &lt; 0.01, p
+= .980; or trial, χ²(1) = 0.044, p = .834.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .814
+</td>
+<td style="text-align:left;">
+In the control group, the effect of out-of-the-zone time was not
+statistically significant (B = -0.00186, SE = 0.00789, z = -0.235, p =
+.814).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .527
+</td>
+<td style="text-align:left;">
+The effect was non-significant in early trials (B = -0.00718, SE =
+0.01135, p = .527), at the middle trial position (B = -0.00186, SE =
+0.00789, p = .814), and near the probe (B = 0.00347, SE = 0.01036, p =
+.738).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .814
+</td>
+<td style="text-align:left;">
+The effect was non-significant in early trials (B = -0.00718, SE =
+0.01135, p = .527), at the middle trial position (B = -0.00186, SE =
+0.00789, p = .814), and near the probe (B = 0.00347, SE = 0.01036, p =
+.738).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .738
+</td>
+<td style="text-align:left;">
+The effect was non-significant in early trials (B = -0.00718, SE =
+0.01135, p = .527), at the middle trial position (B = -0.00186, SE =
+0.00789, p = .814), and near the probe (B = 0.00347, SE = 0.01036, p =
+.738).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .747
+</td>
+<td style="text-align:left;">
+No significant effects were observed for the group × trial, χ²(1) =
+0.10, p = .747; or trial × out-of-the-zone interactions, χ²(1) = 1.62, p
+= .203.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .203
+</td>
+<td style="text-align:left;">
+No significant effects were observed for the group × trial, χ²(1) =
+0.10, p = .747; or trial × out-of-the-zone interactions, χ²(1) = 1.62, p
+= .203.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .877
+</td>
+<td style="text-align:left;">
+No significant main effects were observed for the group, χ²(1) = 0.02, p
+= .877; or trial, χ²(1) = 0.10, p = .748.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .748
+</td>
+<td style="text-align:left;">
+No significant main effects were observed for the group, χ²(1) = 0.02, p
+= .877; or trial, χ²(1) = 0.10, p = .748.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .820
+</td>
+<td style="text-align:left;">
+In the control group, the effect of out-of-the-zone time was not
+statistically significant (B = -0.00170, SE = 0.00747, z = -0.228, p =
+.820).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .625
+</td>
+<td style="text-align:left;">
+The effect was not statistically significant in earlier trials (Mean -1
+SD; B = -0.00482, SE = 0.00988, p = .625).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .820
+</td>
+<td style="text-align:left;">
+The effect did not reach significance at the middle trial position (B =
+-0.00170, SE = 0.00747, p = .820), nor in later trials (Mean +1 SD; B =
+0.01761, SE = 0.00961, p = .067).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .067
+</td>
+<td style="text-align:left;">
+The effect did not reach significance at the middle trial position (B =
+-0.00170, SE = 0.00747, p = .820), nor in later trials (Mean +1 SD; B =
+0.01761, SE = 0.00961, p = .067).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .104
+</td>
+<td style="text-align:left;">
+To better understand the relationship between the lapses rate and the
+ADHD symptoms, Pearson correlation analysis was performed across control
+and ADHD participants, and revealed that individuals with higher ASRS
+scores exhibit higher lapses rate, r(44) = .34, p = .021. lapses rate
+was associated with the hyperactivity/impulsivity score, r(44) = .40, p
+= .006; and not with the inattention score, r(44) = .24, p = .104.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .189
+</td>
+<td style="text-align:left;">
+The lapses rate positively correlated with the difficulty rating, r(44)
+= .60, p = &lt; .001; but were not significantly related to
+mind-wandering report, r(44) = .20, p = .189; motivation, r(44) = .01, p
+= .925; boredom, r(44) = .16, p = .289; or fatigue, r(44) = .24, p =
+.115.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .925
+</td>
+<td style="text-align:left;">
+The lapses rate positively correlated with the difficulty rating, r(44)
+= .60, p = &lt; .001; but were not significantly related to
+mind-wandering report, r(44) = .20, p = .189; motivation, r(44) = .01, p
+= .925; boredom, r(44) = .16, p = .289; or fatigue, r(44) = .24, p =
+.115.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .289
+</td>
+<td style="text-align:left;">
+The lapses rate positively correlated with the difficulty rating, r(44)
+= .60, p = &lt; .001; but were not significantly related to
+mind-wandering report, r(44) = .20, p = .189; motivation, r(44) = .01, p
+= .925; boredom, r(44) = .16, p = .289; or fatigue, r(44) = .24, p =
+.115.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .115
+</td>
+<td style="text-align:left;">
+The lapses rate positively correlated with the difficulty rating, r(44)
+= .60, p = &lt; .001; but were not significantly related to
+mind-wandering report, r(44) = .20, p = .189; motivation, r(44) = .01, p
+= .925; boredom, r(44) = .16, p = .289; or fatigue, r(44) = .24, p =
+.115.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .227
+</td>
+<td style="text-align:left;">
+Perceived difficulty was not significantly related to mind-wandering,
+r(44) = .18, p = .227; motivation, r(44) = -.14, p = .364; boredom,
+r(44) = .15, p = .330; or fatigue, r(44) = .24, p = .114.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .364
+</td>
+<td style="text-align:left;">
+Perceived difficulty was not significantly related to mind-wandering,
+r(44) = .18, p = .227; motivation, r(44) = -.14, p = .364; boredom,
+r(44) = .15, p = .330; or fatigue, r(44) = .24, p = .114.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .330
+</td>
+<td style="text-align:left;">
+Perceived difficulty was not significantly related to mind-wandering,
+r(44) = .18, p = .227; motivation, r(44) = -.14, p = .364; boredom,
+r(44) = .15, p = .330; or fatigue, r(44) = .24, p = .114.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .114
+</td>
+<td style="text-align:left;">
+Perceived difficulty was not significantly related to mind-wandering,
+r(44) = .18, p = .227; motivation, r(44) = -.14, p = .364; boredom,
+r(44) = .15, p = .330; or fatigue, r(44) = .24, p = .114.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .065
+</td>
+<td style="text-align:left;">
+Motivation showed a small negative association with ASRS total scores,
+r(44) = -.35, p = .018, and with hyperactivity/impulsivity, r(44) =
+-.39, p = .008, but was not significantly related to inattention, r(44)
+= -.27, p = .065.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .068
+</td>
+<td style="text-align:left;">
+Boredom was not associated with ASRS total scores, r(44) = .27, p =
+.068, nor with inattention, r(44) = .28, p = .064, nor
+hyperactivity/impulsivity, r(44) = .24, p = .110.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .064
+</td>
+<td style="text-align:left;">
+Boredom was not associated with ASRS total scores, r(44) = .27, p =
+.068, nor with inattention, r(44) = .28, p = .064, nor
+hyperactivity/impulsivity, r(44) = .24, p = .110.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .110
+</td>
+<td style="text-align:left;">
+Boredom was not associated with ASRS total scores, r(44) = .27, p =
+.068, nor with inattention, r(44) = .28, p = .064, nor
+hyperactivity/impulsivity, r(44) = .24, p = .110.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .080
+</td>
+<td style="text-align:left;">
+Perceived task difficulty correlated positively with ASRS total scores,
+r(44) = .32, p = .032, and hyperactivity/impulsivity, r(44) = .34, p =
+.022; but not inattention, r(44) = .26, p = .080.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 1 reference with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(3)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>We detected no errors in t-tests or F-tests.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 130 detected.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(10)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>In these tasks, participants are instructed to press a response
+button when frequent go stimuli appear, and to inhibit their response
+when infrequent no-go stimuli are presented (Robertson et al.,
+1997).</p>
+</blockquote>
+<blockquote>
+<p>To this end, participants completed a SART interspersed with probes
+at the end of each block.</p>
+</blockquote>
+<blockquote>
+<p>Participants were between 18 and 59 years old (mean ± SD: 31.4 ± 10.6
+years), and the two groups of the final sample were comparable in terms
+of age, sex, and educational background.</p>
+</blockquote>
+<blockquote>
+<p>Inclusion criteria required participants to have no history of
+neurological or other psychiatric disorders, no previous treatment with
+psychostimulants, and no incidents of head injury involving loss of
+consciousness.</p>
+</blockquote>
+<blockquote>
+<p>All participants gave written informed consent and were financially
+compensated for taking part in the study.</p>
+</blockquote>
+<blockquote>
+<p>Participants completed the Sustained Attention to Response Task
+(SART), a go/no-go task using single digits from 1 to 9, shown in random
+order with equal frequency.</p>
+</blockquote>
+<blockquote>
+<p>The digit “3” appeared in approximately 10% of the trials and acted
+as the no-go signal, meaning participants had to withhold their response
+when it appeared.</p>
+</blockquote>
+<blockquote>
+<p>Before starting the actual task, participants were given detailed
+instructions and completed a 3-minute of practice trials (Figure
+1A).</p>
+</blockquote>
+<blockquote>
+<p>Finally, to see how often participants were out-of-the-zone during
+different subjective states, we calculated the percentage of
+high-variability trials that occurred during either on-task or
+mind-wandering periods, based on the total number of trials in each
+subjective state.</p>
+</blockquote>
+<blockquote>
+<p>The t-tests also showed that ADHD participants were less motivated (M
+= 55.9, SE = 5.17) than controls (M = 70.5, SE = 4.17), t(44) = -2.19, p
+= .034, d = -0.65; more bored (M = 49.1, SE = 5.16) than controls (M =
+34.0, SE = 5.05), t(44) = 2.09, p = .042, d = 0.62 and felt more
+fatigued (M = 55.6, SE = 4.31) than controls (M = 42.1, SE = 4.30),
+t(44) = 2.21, p = .032, d = 0.65.</p>
+</blockquote>
+<blockquote>
+<p>Specifically, post-error slowing, a mechanism thought to support the
+reallocation of attention following a lapse, was disrupted only when
+participants were simultaneously mind-wandering and out of the zone.</p>
+</blockquote>
+<blockquote>
+<p>(A.) In the Sustained Attention to Response Task (SART), the
+participants are instructed to press a response button for every number
+(go trials), except for the number 3 (nogo trials) that only appears in
+10% of the trials.</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>The study ‘Etude des mécanismes neuronaux sous-tendant les lapses
+attentionnels dans le trouble déficit de l’attention de l’adulte : vers
+un meilleur diagnostic clinique -AttLapse-TDA’ was approved by a local
+ethics committee under the protocol number : API 2017 -HUS N°7248.</p>
+</blockquote>
+<blockquote>
+<p>Written informed consent was secured from each participant before
+their involvement in the study, which adhered to the ethical guidelines
+of the Helsinki Declaration.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 39 references with DOIs. You cited 1 reference with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Baumeister, R. F., Bratslavsky, E., Muraven, M., &amp; Tice, D. M.
+(1998). Ego depletion: Is the active self a limited resource? Journal of
+Personality and Social Psychology, 74(5), 1252-1265. <a href="https://doi.org/10.1037/0022-3514.74.5.1252" class="uri">https://doi.org/10.1037/0022-3514.74.5.1252</a>
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/6BD0A25AD183B6A575CDE364B67977" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 39 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 39 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695).
+Statcheck might still miss one-sided tests that are described in another
+sentence, and falsely assume the p-value is incorrect. For more
+information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Sustained attention is a central deficit in individuals with Attention Deficit Hyperactivity Disorder (ADHD), but how their attention fluctuates-alternating between periods of good and poor attentionremains poorly characterized. In non-clinical samples, two main methods are used to study attentional fluctuations: an objective method, based on reaction time variability distinguishing between stable &quot;inthe-zone&quot; periods and erratic &quot;out-of-the-zone&quot; periods, and a subjective method, based on selfreported experiences of being focused versus mind-wandering. The goal of the current study is to investigate the subjective experiences associated with objectively defined out-of-the-zone periods, by combining performance data with self-reported measures of mind-wandering (MW), motivation, boredom, fatigue, and perceived task difficulty. Participants with ADHD (N = 23) matched with control participants (N = 23) completed a Sustained Attention to Response Task, which included probes at the end of each block to assess subjective states. Our first results replicated previous findings in controls; out-of-the-zone periods did not predict increased mind-wandering. In contrast, out-of-the-zone periods predicted mind-wandering in ADHD, as well as lower motivation, higher boredom, and greater fatigue, suggesting that RT variability is more strongly associated with a negative experience in ADHD participants. These findings revealed that individuals with ADHD exhibit a greater overlap between objectively defined out-of-the-zone periods and subjectively reported attentional disengagement, which might explain their increased frequency of attentional lapses. Together, these results highlight the importance of jointly considering both objective and subjective measures of attentional fluctuations to better characterize sustained attention in psychiatric conditions.</p>
+<h3>1. INTRODUCTION</h3>
+<p>Who has never been distracted by their thoughts while performing everyday tasks such as driving a car or reading a book? Maintaining focus over time-referred to as sustained attention-is challenging for everyone, but especially for individuals with Attention Deficit Hyperactivity Disorder (ADHD). This psychiatric condition is characterized by a triad of symptoms: inattention, hyperactivity, and impulsivity, and affects approximately 3-5% of the adult population (Kessler et al., 2005). Although several studies have attempted to better characterize sustained attention deficits in participants with ADHD, a number of important advances made in recent years in neurotypical populations have yet to be explored in this clinical group. Among these, the characterization of sustained attention fluctuations -between periods of high and low attentional engagement-has been scarcely explored in patients, limiting our understanding of sustained attention deficits in ADHD.</p>
+<p>To investigate sustained attention in experimental settings, researchers typically use go/no-go or Continuous Performance Tasks (CPTs). In these tasks, participants are instructed to press a response button when frequent go stimuli appear, and to inhibit their response when infrequent no-go stimuli are presented (Robertson et al., 1997). Lapses in sustained attention are commonly indexed by commission errors-failures to withhold a response on no-go trials.</p>
+<p>To better understand when and why attentional lapses occur, researchers have proposed two main theoretical accounts. The overload theory posits that sustained attention relies on limited cognitive resources that become depleted over time, leading to increased errors, mental fatigue, and disengagement (Baumeister et al., 1998; Grier et al., 2003; Parasuraman et al., 1998). In contrast, the underload theory suggests that attentional failures arise from low task engagement due to boredom and insufficient stimulation, resulting in a mindless mode of processing (Manly et al., 1999; Robertson et al., 1997). While both theories account for important aspects of attentional decline, neither fully explains the diversity of empirical findings. For example, if attentional lapses were solely due to resource depletion, motivational factors such as reward should have little impact-yet rewards often improve performance (Chidharom, Vogel, et al., 2025; Chidharom et al., 2026; Esterman et al., 2016 Esterman et al., , 2017;; Esterman &amp; Rothlein, 2019; Massar et al., 2016; Seli, Cheyne, et al., 2015). Conversely, if boredom were the primary cause, making the task less boring by increasing task difficulty should reduce lapses-yet it frequently exacerbates them (Helton &amp; Russell, 2011 , 2013; Helton &amp; Warm, 2008).</p>
+<p>Although these studies have identified motivation, fatigue, boredom, and perceived task difficulty as factors associated with sustained attention performance, the contradictions between existing theories prevent accurate prediction of when lapses will occur.</p>
+<p>These theories are largely based on the study of vigilance decline-that is, the increase in attentional lapses over the course of a task. However, recent advances have shown that attention does not only change gradually over time but also fluctuates from moment to moment, alternating between periods of high and low attentional engagement. These moment-to-moment fluctuations in sustained attention, reflected in transitions between different mental states, have proven to be strong predictors of attentional lapses with greater temporal precision than overall vigilance decline.</p>
+<p>Two main methodological approaches have been developed to assess these fluctuations in sustained attention. One commonly used method relies on subjective self-reports, typically using thought-probes. These probes interrupt the task at random intervals and ask participants to reflect on the content of their thoughts. Responses generally fall into two categories: on-task, where attention is focused on the task, and off-task or mind-wandering, where thoughts drift away from task-related goals.</p>
+<p>A growing body of evidence shows that people tend to make more commission errors-lapses of attention-during mind-wandering moments than when they are fully engaged (Andrillon et al., 2021; Bertschi et al., 2025; Chidharom, Bonnefond, et al., 2025; Horáková et al., 2026). These findings support the use of thought-probe methods as a valid tool for identifying different attentional states (Kane et al., 2021; Welhaf et al., 2023).</p>
+<p>In contrast, an objective approach focuses on behavioral performance-specifically, momentto-moment changes in reaction times during sustained attention tasks. Attentional stability is assessed using the Variance Time Course (VTC), which quantifies the deviation of each correct response time from the participant&#x27;s mean RT. A median split of these VTC values identifies stable, consistent response periods (in-the-zone) versus periods marked by greater variability (out-of-the-zone). The latter are associated with increased lapses rate. This pattern has been reliably observed across a variety of tasks and replicated in both neurotypical and schizophrenia samples (Chidharom, Krieg, &amp; Bonnefond, 2021; Chidharom, Krieg, Pham, et al., 2021; Esterman et al., 2013 Esterman et al., , 2015)), establishing the VTC as a robust and objective marker of attentional state fluctuations.</p>
+<p>Although both methods have been effective in isolating fluctuations in sustained attention, recent findings suggest that they may capture distinct types of attentional variability in some tasks, which could jointly contribute to attentional deficits (Bertschi et al., 2025; Chidharom, Bonnefond, et al., 2025). For instance, Chidharom et al. (2025) found that out-of-the-zone periods were not more frequent prior to self-reports of mind-wandering compared to on-task reports, suggesting that subjective and objective fluctuations in attention do not systematically overlap. Moreover, the negative effects of poor attention -whether subjectively or objectively defined-appeared to be cumulative, particularly in relation to cognitive control mechanisms. Specifically, post-error slowing, an adaptive response aimed at preventing future lapses, was preserved during objectively defined out-of-the-zone periods when participants reported being on task, indicating intact performance adaptation. However, the same objective state was associated with disrupted post-error slowing when participants reported being in a mind-wandering state, highlighting the additional burden of concurrent subjective disengagement. Above all, this study revealed that out-of-the-zone periods are not always driven by mind-wandering, and the subjective experience underlying these objective periods remains an open question.</p>
+<p>In individuals with ADHD, sustained attention deficits and the increased frequency of attentional lapses have been explained through frameworks aligned with both overload and underload theories. Barkley (1997) was among the first to attribute sustained attention impairments in ADHD to deficits in cognitive control, aligning with overload accounts (Barkley, 1997). In this view, failures in inhibitory control disrupt resource allocations to other executive functions, such as working memory and selfregulation of motivation, thereby increasing the likelihood of attentional lapses. In contrast, Sonuga-Barke (2005) proposed a theoretical account more consistent with underload theories. According to his perspective, individuals with ADHD struggle to maintain attention on tasks that are unrewarding, lack immediate incentives, or are perceived as boring (Sonuga-Barke, 2005).</p>
+<p>Although theoretical debates continue regarding the mechanisms underlying attentional lapses in ADHD, subjective and objective approaches to measuring sustained attention fluctuations have rarely been applied to this population-despite their strong predictive value for lapses in neurotypical individuals. Yet, evidence suggests that ADHD subjects exhibit stronger markers of attentional variability on both fronts. Objectively, they show greater reaction time variability compared to neurotypical individuals (Epstein et al., 2011; Kofler et al., 2013; Tamm et al., 2012), and subjectively, they report more frequent episodes of mind-wandering (Arabacı &amp; Parris, 2018; Lanier et al., 2021; Seli, Smallwood, et al., 2015; Van den Driessche et al., 2017). However, to our knowledge, no study has combined both objective and subjective approaches to examine attentional fluctuations in this population.</p>
+<p>The aim of this study is to better characterize the subjective experience underlying objectively defined out-of-the-zone periods, in order to improve our understanding of sustained attention lapses in both neurotypical individuals and individuals with ADHD. To this end, participants completed a SART interspersed with probes at the end of each block. These subjective probes assessed mind-wandering episodes, as well as four additional subjective factors linked to sustained attention theories: motivation and boredom (underload), and fatigue and task difficulty (overload). In neurotypical individuals, we hypothesize a replication of previous findings, showing no overlap between objectively defined out-ofthe-zone periods and reported mind-wandering, suggesting a greater influence of other subjective states such as reduced motivation or increased difficulty. In individuals with ADHD, two hypotheses may account for the greater deficits in sustained attention observed in patients. In the first hypothesis, we posit that individuals with ADHD experience a greater temporal overlap between objective and subjective attentional fluctuations, resulting in a cumulative effect of both impaired objective performance and degraded subjective attentional states. This convergence may lead to a higher frequency of attentional lapses. A second hypothesis suggests that individuals with ADHD exhibit reduced overlap between these two types of fluctuations. This increased dissociation between objective and subjective attentional periods may result in prolonged time spent in suboptimal attentional states, thereby contributing to sustained attention deficits.</p>
+<h3>2. METHOD</h3>
+<p> &gt;METHOD</p>
+<h3>2.1 Participants</h3>
+<p>This study reanalyzes a subset of the data reported in Horáková et al. (2026), comprising 26 medication-naïve individuals with ADHD and 25 controls. Five participants (three with ADHD and two controls) were excluded because they did not report at least one on-task or one mind-wandering episode during the task. Because the present study represents a secondary analysis of an existing dataset, the sample size was determined by the original study rather than by an a priori power analysis specifically designed to test the present hypotheses. Participants were between 18 and 59 years old (mean ± SD: 31.4 ± 10.6 years), and the two groups of the final sample were comparable in terms of age, sex, and educational background. Inclusion criteria required participants to have no history of neurological or other psychiatric disorders, no previous treatment with psychostimulants, and no incidents of head injury involving loss of consciousness. Participants in the ADHD group had been diagnosed prior to study inclusion by psychiatrists specializing in adult ADHD in the Strasbourg University Hospitals, France. Diagnoses were established through a comprehensive clinical assessment based on DSM-5 criteria, supported by the semi-structured Diagnostic Interview for ADHD in Adults (DIVA). Whenever available, retrospective information on childhood symptoms was corroborated by collateral reports and/or documentary evidence, such as school reports. A comprehensive psychiatric evaluation was also conducted to assess psychiatric comorbidities and alternative explanations for ADHD symptoms. All participants gave written informed consent and were financially compensated for taking part in the study.</p>
+<h3>2.2 Stimuli and Procedure</h3>
+<p>Participants completed the Sustained Attention to Response Task (SART), a go/no-go task using single digits from 1 to 9, shown in random order with equal frequency. The digit &quot;3&quot; appeared in approximately 10% of the trials and acted as the no-go signal, meaning participants had to withhold their response when it appeared. All other digits were go signals that required a button press. Digits were presented in black Arial font, with sizes ranging from 100 to 180 points, and appeared slightly above a yellow fixation cross on a gray background. Each digit remained visible for 167 ms, followed by a randomly selected interval of 1500, 1700, 2100, 2300, or 2500 ms. The task was displayed on a standard 17-inch computer monitor. The full task included 810 trials, made up of 720 go trials and 90 no-go trials. The design is thus a replication of Chidharom and colleagues (2025), with the main exception that the probe appeared not every 30 trials but either every 27, 54, or 81 trials, for a total of 15 blocks per participant. The entire session took around 40 minutes. Before starting the actual task, participants were given detailed instructions and completed a 3-minute of practice trials (Figure 1A).</p>
+<h3>2.3 Measuring the fluctuations of sustained attention.</h3>
+<p>Measure of the subjective attentional states. The thought-probe method was used to measure the subjective states. At the end of every block, participants responded to a short thought probe consisting of five questions. The first question asked them to indicate whether their attention was on the task or if their mind had wandered just before the probe. This question appeared once per block, totaling 15 times. The remaining four questions asked participants to rate their motivation, boredom, fatigue, and how difficult they found the task, using visual analog scales from 0 (&quot;Lowest level&quot;) to 100 (&quot;Highest level&quot;).</p>
+<h3>Measure of the objective attentional states.</h3>
+<p>Objective in-the-zone and out-of-the-zone states were defined following the method described by Esterman et al. (2013). We measured how consistent each participant&#x27;s reaction times were by calculating the variance time course (VTC). To standardize the data, we first normalized each participant&#x27;s RTs, allowing comparisons on the same scale. The VTC was based only on correct responses during go trials, where each trial&#x27;s score represented how much that reaction time differed from the participant&#x27;s average RT. For trials with no responses or errorssuch as missed go trials or correctly withheld no-go trials-RT values were estimated using linear interpolation from the surrounding trials. We then split performance into two categories using the median VTC value across blocks: &quot;in-the-zone&quot; (low RT variability) and &quot;out-of-the-zone&quot; (high RT variability).</p>
+<h3>2.4 Behavioral analysis</h3>
+<p>To evaluate how well both subjective and objective methods captured changes in sustained attention, we calculated standard performance measures for the entire block before each probe, similar to the approach used by Chidharom et al. (2025). We measured the average reaction time (RT) for correct responses during go trials to assess how quickly participants reacted. The RT variability of correct responses was analyzed through the coefficient of variation (CV) by dividing the standard deviation of reaction times by the mean of reaction times. To assess accuracy, we calculated the percentage of lapses in attention, defined as commission errors-pressing the button when they shouldn&#x27;t during no-go trials. The commission error rate was calculated by dividing the number of errors on no-go trials by the total number of no-go trials within each attentional state. Omission errors, which are missed responses to go trials, were rare (only 0.54%) and therefore not included in the analysis.</p>
+<p>Finally, to see how often participants were out-of-the-zone during different subjective states, we calculated the percentage of high-variability trials that occurred during either on-task or mind-wandering periods, based on the total number of trials in each subjective state.</p>
+<h3>2.5 Statistical analysis.</h3>
+<p>Performance measures were analyzed using a repeated-measures ANOVA with two withinsubjects factors, Objective State (in-the-zone vs. out-of-the-zone) and Subjective State (on-task vs. mind-wandering), as well as a between-subjects factor Group (ADHD vs. Control). When significant interactions were found, post hoc paired t-tests were conducted. A Tukey test was also performed to control for multiple comparisons. To examine whether out-of-the-zone periods predicted the selfreported subjective state, we used a generalized mixed-effects model specified as follows:</p>
+<p>The subjective states focused on task-related thoughts (on-task; coded as 1) versus taskunrelated thoughts (mind-wandering; coded as 0). This model allowed us to compute the percentage of out-of-the-zone trials that preceded each type of probe (on-task and mind-wandering) separately. To smooth the data, a sliding window approach was applied, averaging the percentage of out-of-the-zone states across three trials before and after each trial, similar to Chidharom et al., 2025. The trial factor included the 20 trials preceding each probe. This window was chosen because the minimum number of trials between probes was 27, allowing us to avoid including post-probe trials in the analysis. To maintain consistency in the analytical structure, the median scores for motivation, boredom, fatigue, and perceived difficulty were computed for each participant. These scores were then used to categorize trials into high (coded as 0) or low (coded as 1) subjective experience groups for further comparison.</p>
+<h3>3. RESULTS</h3>
+<p> &gt;RESULTS</p>
+<h3>3.1 Subjective reports</h3>
+<p>The t-test revealed that ADHD participants mind-wander more (M = 60.9%, SE = 4.60) than controls (M = 34.8%, SE = 3.43), t(44) = 4.55, p &lt; .001, d = 1.34 (Figure 1B). The t-tests also showed that ADHD participants were less motivated (M = 55.9, SE = 5.17) than controls (M = 70.5, SE = 4.17), t(44) = -2.19, p = .034, d = -0.65; more bored (M = 49.1, SE = 5.16) than controls (M = 34.0, SE = 5.05), t(44) = 2.09, p = .042, d = 0.62 and felt more fatigued (M = 55.6, SE = 4.31) than controls (M = 42.1, SE = 4.30), t(44) = 2.21, p = .032, d = 0.65. On difficulty, there was no significant group difference between ADHD participants (M = 33.3, SE = 4.51) and controls (M = 24.7, SE = 3.19), t(44) = 1.56, p = . 126, d = 0.46.</p>
+<h3>3.2 Objective performance</h3>
+<h3>3.2.1 Lapses rate: Errors on nogo trials</h3>
+<p>The ANOVA performed on the rate of no-go errors revealed significant main effects of both objective states, F(1,44) = 9.13, p = .004, η² = .172, and subjective states, F(1,44) = 9.19, p = .004, ₚ η² = .173. Participants made more errors during out-of-the-zone periods (M = 29.7, SE = 2.99) ₚ compared to in-the-zone periods (M = 23.5, SE = 2.29), and more errors during mind-wandering episodes (M = 29.5, SE = 2.90) compared to on-task episodes (M = 23.7, SE = 2.34). No significant interaction was observed between objective and subjective states, F(1,44) = 0.10, p = .751, η² = .002, ₚ nor between objective states and group, F(1,44) = 0.29, p = .593, η² = .007, or subjective states and ₚ group, F(1,44) = 1.83, p = .183, η² = .040. The three-way interaction between group × objective states ₚ × subjective states was also non-significant, F(1,44) = 0.49, p = .487, η² = .011. At the betweenₚ subjects level, there was no significant main effect of group, F(1,44) = 3.79, p = .058, η² = .079 ( ₚ Figure 1C).</p>
+<h3>3.2.2 Reaction Times</h3>
+<p>The ANOVA performed on reaction times on correct go trials revealed a significant main effect of objective states, F(1,44) = 80.53, p &lt; .001, η² = .647. Participants responded more slowly during ₚ out-of-the-zone periods (M = 413 ms, SE = 10.30) compared to in-the-zone periods (M = 394 ms, SE = 9.84). No significant main effect of subjective states was found, F(1,44) = 0.29, p = .593, η² = .007, ₚ nor were there significant interactions between subjective states and group, F(1,44) = 0.56, p = .459, η² = .013, or between objective states and group, ₚ F(1,44) = 1.02, p = .317, η² = .023. The interaction ₚ between subjective and objective states was also not significant, F(1,44) = 0.65, p = .425, η² = .015, ₚ nor was the three-way interaction between group × objective states × subjective states, F(1,44) = 0.10, p = .752, η² = .002. Finally, there was no significant main effect of group at the between-subjects level, ₚ F(1,44) = 0.02, p = .889, η² = .00 ( ₚ Figure 1D).</p>
+<h3>3.2.3 Coefficient of Variation</h3>
+<p>The ANOVA performed on the coefficient of variation revealed significant main effects of both objective and subjective states. Unsurprisingly given that objective states are defined based on RT deviance, participants showed significantly higher variability during out-of-the-zone periods (M = 0.345, SE = 0.012) compared to in-the-zone periods (M = 0.078, SE = 0.003), F(1,44) = 752.58, p &lt; .001, η²ₚ = .945. A significant main effect of subjective states was also observed, F(1,44) = 4.49, p = .040, η² = ₚ .093, with increased variability during mind-wandering episodes (M = 0.216, SE = 0.0079) compared to on-task episodes (M = 0.208, SE = 0.0067). A main effect of the group was also observed with higher CV in ADHD (M = 0.22, SE = 0.0099) compared to control (M = 0.20, SE = 0.0099) , F(1,44) = 5.55, p = .023, η² = .11. The interaction between objective states and group was also significant, ₚ F(1,44) = 6.39, p = .015, η² = .127. Post-hoc ₚ t-tests revealed that the ADHD group had significantly greater variability than the control group during out-of-the-zone periods ,t(44) = 2.45, p = .018, but this effect did not survive correction for multiple comparisons (p ᵤ ₑᵧ = .082). The between-group difference during in-theₜ ₖ zone periods was not significant, t(44) = 1.52, p = .136, p ᵤ ₑᵧ = .436. Both groups showed significantly ₜ ₖ greater variability out-of-the-zone compared to in-the-zone: ADHD group t(44) = 21.19, p &lt; .001, p ᵤ ₑᵧ ₜ ₖ &lt; .001, control group t(44) = 13.68, p &lt; .001, p ᵤ ₑᵧ &lt; .001. No other interactions reached significance: ₜ ₖ subjective × objective, F(1,44) = 3.56, p = .066, η² = .075; subjective × group, ₚ F(1,44) = 0.85, p = .362, η² = .019; and the three-way interaction between group × subjective × objective, ₚ F(1,44) = 0.37, p = .546, η² = .008. ₚ</p>
+<h3>3.2.4 Time spent out-of-the-zone during mind-wandering</h3>
+<p>In a previous study, no significant difference in the time spent out-of-the-zone were found prior to on-task versus mind-wandering reports. To replicate and clarify this effect, we conducted a planned comparison separately for individuals with and without ADHD. Among those without ADHD, the time spent out-of-the-zone before on-task reports averaged 49.8% (SE = 0.79), while it was 49.9% (SE = 0.69) before mind-wandering reports. This difference was not statistically significant, t(22) = 0.237, p = .815, d = .03, replicating Chidharom and colleagues (2025). In contrast, individuals with ADHD spent 47.6% (SE = 0.79) of the time out-of-the-zone prior to an on-task report, whereas this proportion rose to 50.9% (SE = 0.69) before mind-wandering reports and was statistically significant, t(22) = 2.09, p = .048, d = .44.</p>
+<h3>3.3 Out-of-the-zone states predicting subjective reports</h3>
+<h3>3.3.1 Mind-wandering</h3>
+<p>A generalized mixed model was conducted to predict the likelihood of reporting a mindwandering state based on group (ADHD vs. control), time spent out-of-the-zone, and trial (relative position before the probe), including all two-way and three-way interactions. A significant main effect of time spent out-of-the-zone was observed, χ²(1) = 6.44, p = .011, with greater out-of-the-zone time significantly increasing the likelihood of reporting a mind-wandering state (B = -0.01287, SE = 0.00507, z = -2.54, p = .011). No significant main effects of trials, χ²(1) = 0.05, p = .828 or group were found, χ²(1) = 0.02, p = .876. However, a significant interaction between group and out-of-the-zone time was observed, χ²(1) = 13.20, p &lt; .001. In the ADHD group, greater out-of-the-zone time significantly increased the likelihood of reporting a mind-wandering state (B = -0.03130, SE = 0.00735, z = -4.257, p &lt; .001). In contrast, the same relationship was not significant in the control group (B = 0.00555, SE = 0.00699, z = 0.795, p = .427), indicating that, for control participants, variations in out-of-the-zone time did not reliably predict mind-wandering. A significant three-way interaction between group, trial, and out-of-the-zone time was also observed, χ²(1) = 14.43, p &lt; .001. In the ADHD group, greater outof-the-zone time significantly increased the likelihood of reporting a mind-wandering state when trials occurred closer to the probe (Mean +1 SD; B = -0.05641, SE = 0.01137, z = -4.961, p &lt; .001), and this relationship remained significant at the middle trial position (B = -0.03130, SE = 0.00735, z = -4.257, p &lt; .001). However, in earlier trials (Mean -1 SD), the association was not significant (B = -0.00618, SE = 0.00875, p = .480). The control group did not reach levels of significance at any time point: neither in early trials (Mean -1 SD; B = -0.00652, SE = 0.00965, p = .500), nor at middle trial position (B = 0.00555, SE = 0.00699, p = .427), nor even in the trials closest to the probe (Mean +1 SD; B = 0.01762, SE = 0.00992, p = .076). No significant interactions were observed between group and trial, χ²(1) = 0.17, p = .676 or between trial and out-of-the-zone time, χ²(1) = 1.78, p = .183.</p>
+<h3>3.3.2. Motivation</h3>
+<p>A generalized mixed model was conducted to predict the likelihood of reporting a high motivation state based on group (ADHD vs. control), time spent out-of-the-zone, and trial (relative position before the probe), including all two-way and three-way interactions.</p>
+<p>There was a significant main effect of out-of-the-zone time, χ²(1) = 4.38, p = .036, with greater out-ofthe-zone time significantly predicting high motivation states (B = -0.01107, SE = 0.00529, z = -2.09, p = .036). However, no significant main effects were observed for trial, χ²(1) = 0.01, p = .927; or group, χ²(1) &lt; 0.01, p = .978; and these factors also did not significantly interact with each other (group × trial: χ²(1) &lt; 0.01, p = .997; trial × out-of-the-zone time: χ²(1) = 0.15, p = .700). A significant interaction emerged between group and out-of-the-zone time, χ²(1) = 25.65, p &lt; .001. In the control group, greater out-of-the-zone time significantly predicted high motivation states (B = -0.0379, SE = 0.00800, z = -4.74, p &lt; .001). By contrast, in the ADHD group, the effect was statistically significant but in the opposite direction: greater out-of-the-zone time was associated with a decrease in the likelihood of reporting high motivation (B = 0.0157, SE = 0.00694, z = 2.27, p = .023). Finally, the three-way interaction between group, trial, and out-of-the-zone time did not reach significance, χ²(1) = 1.83, p = .177.</p>
+<h3>3.3.3. Boredom</h3>
+<p>A generalized mixed model was conducted to predict the likelihood of reporting a high boredom state based on group (ADHD vs. control), time spent out-of-the-zone, and trial (relative position before the probe), including all two-way and three-way interactions. There were no significant main effects of group, χ²(1) = 0.002, p = .965, trial, χ²(1) = 0.137, p = .712, or out-of-the-zone time, χ²(1) &lt; 0.001, p = .977. However, a significant interaction between group and out-of-the-zone time was found, χ²(1) = 37.00, p &lt; .001. In the ADHD group, greater time spent out-of-the-zone significantly predicted high boredom states (B = -0.0344, SE = 0.00814, z = -4.23, p &lt; .001). In contrast, the control group showed the opposite pattern: greater out-of-the-zone time significantly predicted low boredom states (B = 0.0348, SE = 0.00794, z = 4.38, p &lt; .001). The three-way interaction between group, trial, and out-ofthe-zone time was not significant, χ²(1) = 0.07, p = .784.</p>
+<h3>3.3.4. Fatigue</h3>
+<p>A generalized mixed model was conducted to predict the likelihood of reporting a high fatigue state based on group (ADHD vs. control), time spent out-of-the-zone, and trial (relative position before the probe), including all two-way and three-way interactions. There was a significant main effect of outof-the-zone time, χ²(1) = 14.25, p &lt; .001, with greater out-of-the-zone time significantly predicting high fatigue states (B = -0.02143, SE = 0.00568, z = -3.77, p &lt; .001). No significant main effects were found for the group, χ²(1) &lt; 0.01, p = .980; or trial, χ²(1) = 0.044, p = .834. A significant interaction was found between group and out-of-the-zone time, χ²(1) = 11.89, p &lt; .001, with the group × out-of-the-zone parameter estimate (B = 0.03915, SE = 0.01136, z = 3.45, p &lt; .001). In the ADHD group, greater outof-the-zone time significantly predicted high fatigue states (B = -0.04101, SE = 0.00817, z = -5.022, p &lt; .001). In the control group, the effect of out-of-the-zone time was not statistically significant (B = -0.00186, SE = 0.00789, z = -0.235, p = .814). The three-way interaction between group, trial, and outof-the-zone time was also significant, χ²(1) = 5.02, p = .025, with a corresponding parameter estimate of B = 0.00427 (SE = 0.00191, z = 2.24, p = .025). In the ADHD group, greater out-of-the-zone time significantly predicted high fatigue states across all trial positions. This effect was significant both early in the pre-probe window (Mean -1 SD; B = -0.02170, SE = 0.01022, z = -2.13, p = .034), at the middle trial position (B = -0.04101, SE = 0.00817, z = -5.02, p &lt; .001), and close to the probe (Mean +1 SD; B = -0.06032, SE = 0.01261, z = -4.78, p &lt; .001). In contrast, in the control group, out-of-the-zone time did not significantly predict high fatigue states at any time point. The effect was non-significant in early trials (B = -0.00718, SE = 0.01135, p = .527), at the middle trial position (B = -0.00186, SE = 0.00789, p = .814), and near the probe (B = 0.00347, SE = 0.01036, p = .738). No significant effects were observed for the group × trial, χ²(1) = 0.10, p = .747; or trial × out-of-the-zone interactions, χ²(1) = 1.62, p = .203.</p>
+<h3>3.3.5. Difficulty</h3>
+<p>A generalized mixed model was conducted to predict the likelihood of reporting a high difficulty state based on group (ADHD vs. control), time spent out-of-the-zone, and trial (relative position before the probe), including all two-way and three-way interactions. There was a significant main effect of outof-the-zone time, χ²(1) = 13.51, p &lt; .001, with greater out-of-the-zone time significantly predicting high difficulty states (B = -0.02014, SE = 0.00548, z = -3.675, p &lt; .001). No significant main effects were observed for the group, χ²(1) = 0.02, p = .877; or trial, χ²(1) = 0.10, p = .748. A significant interaction was found between group and out-of-the-zone time, χ²(1) = 11.32, p &lt; .001; with a parameter estimate of B = 0.03688 (SE = 0.01096, z = 3.37, p &lt; .001). In the ADHD group, greater out-of-the-zone time significantly predicted high difficulty states (B = -0.03858, SE = 0.00802, z = -4.813, p &lt; .001). In the control group, the effect of out-of-the-zone time was not statistically significant (B = -0.00170, SE = 0.00747, z = -0.228, p = .820).</p>
+<p>The three-way interaction between group, trial, and out-of-the-zone time was also significant, χ²(1) = 26.23, p &lt; .001; with a corresponding parameter estimate of B = 0.00920 (SE = 0.00180, z = 5.12, p &lt; .001). In the ADHD group, greater out-of-the-zone time significantly predicted high difficulty states at the middle trial position (B = -0.03858, SE = 0.00802, z = -4.813, p &lt; .001), and even more strongly in later trials closer to the probe (Mean +1 SD; B = -0.07233, SE = 0.01248, z = -5.794, p &lt; .001). The effect was not statistically significant in earlier trials (Mean -1 SD; B = -0.00482, SE = 0.00988, p = .625). In the control group, greater out-of-the-zone time significantly predicted higher difficulty states only in early trials (Mean -1 SD; B = -0.02102, SE = 0.01045, z = -2.011, p = .044). The effect did not reach significance at the middle trial position (B = -0.00170, SE = 0.00747, p = .820), nor in later trials (Mean +1 SD; B = 0.01761, SE = 0.00961, p = .067). No other interactions reached significance.</p>
+<h3>3.4 Associations between task performance, subjective measures and ADHD symptoms</h3>
+<h3>3.4.1 Relationship between lapses rate and ADHD symptoms</h3>
+<p>To better understand the relationship between the lapses rate and the ADHD symptoms, Pearson correlation analysis was performed across control and ADHD participants, and revealed that individuals with higher ASRS scores exhibit higher lapses rate, r(44) = .34, p = .021. lapses rate was associated with the hyperactivity/impulsivity score, r(44) = .40, p = .006; and not with the inattention score, r(44) = .24, p = .104.</p>
+<h3>3.4.2 Relationship between lapses rate and subjective reports</h3>
+<p>The lapses rate positively correlated with the difficulty rating, r(44) = .60, p = &lt; .001; but were not significantly related to mind-wandering report, r(44) = .20, p = .189; motivation, r(44) = .01, p = .925; boredom, r(44) = .16, p = .289; or fatigue, r(44) = .24, p = .115.</p>
+<h3>3.4.3 Relationship between subjective reports</h3>
+<p>Mind-wandering was negatively associated with motivation, r(44) = -.49, p &lt; .001, and positively associated with boredom, r(44) = .58, p &lt; .001, and fatigue, r(44) = .40, p = .006. Motivation was strongly negatively correlated with boredom, r(44) = -.70, p &lt; .001, and with fatigue, r(44) = -.59, p &lt; .001. Boredom showed a strong positive association with fatigue, r(44) = .77, p &lt; .001. Perceived difficulty was not significantly related to mind-wandering, r(44) = .18, p = .227; motivation, r(44) = -.14, p = .364; boredom, r(44) = .15, p = .330; or fatigue, r(44) = .24, p = .114.</p>
+<h3>3.4.4 Relationship between subjective reports and ADHD symptoms</h3>
+<p>Mind-wandering was strongly and positively related to ASRS total scores, r(44) = .56, p &lt; .001, as well as to ASRS inattention, r(44) = .50, p &lt; .001, and ASRS hyperactivity/impulsivity, r(44) = .56, p &lt; .001.</p>
+<p>Motivation showed a small negative association with ASRS total scores, r(44) = -.35, p = .018, and with hyperactivity/impulsivity, r(44) = -.39, p = .008, but was not significantly related to inattention, r(44) = -.27, p = .065. Boredom was not associated with ASRS total scores, r(44) = .27, p = .068, nor with inattention, r(44) = .28, p = .064, nor hyperactivity/impulsivity, r(44) = .24, p = .110. Fatigue correlated positively with ASRS total scores, r(44) = .33, p = .026, with inattention, r(44) = .32, p = .033, and with hyperactivity/impulsivity, r(44) = .31, p = .037. Perceived task difficulty correlated positively with ASRS total scores, r(44) = .32, p = .032, and hyperactivity/impulsivity, r(44) = .34, p = .022; but not inattention, r(44) = .26, p = .080.</p>
+<h3>4. DISCUSSION</h3>
+<p>The aim of this study was to better characterize the subjective experience associated with outof-the-zone states, indexed by high reaction time variability, in ADHD participants and control participants. Our results revealed a clear dissociation between the two groups. In ADHD, out-of-thezone periods were associated with increased mind-wandering, along with lower motivation, greater boredom, higher fatigue, and increased perceived difficulty. In control participants, the same objective state was instead associated with higher motivation and lower boredom, without increased reports of mind-wandering, indicating a dissociation between objective and subjective attentional fluctuations in control participants. Together, these findings replicate previous results observed in healthy participants and extend them by providing a more precise characterization of the subjective experience accompanying high reaction time variability in ADHD participants.</p>
+<p>In the current study, we found converging evidence of sustained attention deficits in ADHD participants. First, ADHD participants reported significantly more mind-wandering than control participants. This effect was observed both in the higher proportion of task-unrelated thoughts during the SART (61% in ADHD participants vs. 35% in control participants) and in Pearson correlation analyses showing a positive association between mind-wandering reports and ASRS scores, for both the inattention and hyperactivity/impulsivity subscales.</p>
+<p>These subjective alterations in sustained attention were also associated with objective impairments. ASRS scores were positively correlated with no-go errors, with a particularly strong relationship for the hyperactivity/impulsivity subscale, suggesting a close link between attentional lapses and motor-related symptoms. In addition, ADHD participants showed greater reaction time variability than controls, replicating previous findings (Buzy et al., 2009; Kofler et al., 2013; Moses et al., 2022).</p>
+<p>Beyond performance measures, sustained attention deficits in ADHD were accompanied by more negative subjective experiences during the task. Compared to control participants, ADHD participants reported lower motivation, greater fatigue, and higher levels of boredom during the SART.</p>
+<p>Taken together, these results indicate a clear difficulty in sustaining attention in ADHD participants.</p>
+<p>While these findings largely replicate previous work, the present study extends the literature by characterizing sustained attention deficits through the subjective experience associated with objective fluctuations in attention.</p>
+<p>The analysis of the objective and subjective attentional fluctuations showed a successful replication of the capture of these attentional states in our go/nogo task. Indeed, both ADHD and control participants exhibit higher lapses rate (errors on nogo) during out-of-the-zone compared to in-the-zone states, objectively defined as high vs. low RT variability, respectively. Similarly, participants exhibit higher lapses rate during subjectively reported mind-wandering compared to on-task periods, also replicating previous findings (Chidharom, Bonnefond, et al., 2025; Chidharom, Krieg, &amp; Bonnefond, 2021; Chidharom, Krieg, Pham, et al., 2021; Chidharom &amp; Bonnefond, 2023; Esterman et al., 2013).</p>
+<p>In control participants, out-of-the-zone states did not overlap with mind-wandering reports.</p>
+<p>Specifically, participants did not spend more time in an out-of-the-zone state during mind-wandering than during on-task reports. Consistently, logistic regression analyses showed that time spent out of the zone immediately preceding the probe did not predict mind-wandering. These findings are in line with Chidharom et al. (2025), who used a similar task and showed that time spent out of the zone did not differ between mind-wandering and on-task reports. Converging evidence is also provided by Bertschi et al. (PsyArXiv), who demonstrated a dissociation between subjective and objective attentional states in a bilateral CPT. In that study, mind-wandering was associated with faster reaction times and lower arousal, whereas objective out-of-the-zone states were characterized by slower reaction times and no modulation of arousal (Bertschi et al., 2025).</p>
+<p>In ADHD, out-of-the-zone states overlap with mind-wandering reports. Specifically, ADHD participants spent more time in an out-of-the-zone state during mind-wandering reports than during ontask reports. In addition, regression analyses focusing on the period immediately preceding the probe revealed a stronger predictive effect of out-of-the-zone states, indexed by higher reaction time variability, on the report of task-unrelated thoughts. These findings suggest that two impairing attentional states, an objectively defined out-of-the-zone state and a subjectively reported mindwandering state, are more likely to co-occur in ADHD participants, which might result in more frequent disruptions of sustained attention. This cumulative detrimental effect of converging objective and subjective attentional impairments on performance has been reported previously (Chidharom et al., 2025). Specifically, post-error slowing, a mechanism thought to support the reallocation of attention following a lapse, was disrupted only when participants were simultaneously mind-wandering and out of the zone. This pattern could indicate that the alignment of mind-wandering and out-of-the-zone states leads to a greater breakdown of cognitive control mechanisms in ADHD.</p>
+<p>The present study therefore shows that out-of-the-zone states predict mind-wandering in ADHD but not in control participants. Importantly, this difference in predictive relationships extends beyond mind-wandering to other types of subjective reports. In ADHD, regression analyses focusing on the period immediately preceding the probe revealed that high RT variability predicted reduced motivation, greater fatigue, increased boredom, and higher perceived difficulty. This pattern suggests that elevated RT variability is systematically associated with negative subjective experiences in ADHD participants.</p>
+<p>In control participants, by contrast, out-of-the-zone states unexpectedly predicted higher motivation and lower boredom. While this clearly distinguishes controls from ADHD participants, the direction of this effect is surprising, as motivation is typically associated with improved sustained attention performance. For instance, increasing motivation through monetary reward in CPT paradigms reliably reduces lapses rates compared to unrewarded conditions (Chidharom et al., 2026; Chidharom, Vogel, et al., 2025; Esterman et al., 2017). One possible interpretation is that, in control participants, out-of-the-zone states may reflect a transient re-engagement of cognitive control rather than a sustained attentional failure. Supporting this interpretation, fMRI results have shown increased engagement of cognitive control regions during out-of-the-zone states, particularly prior to correct nogo inhibitions. Thus, in neurotypical individuals, these states may capture moments of attentional reengagement, leading to higher reported motivation and reduced boredom. However, this interpretation remains speculative and should be replicated in future studies.</p>
+<h3>5. CONCLUSION</h3>
+<p>To conclude, this study shows a more frequent overlap between objectively and subjectively impaired attentional states in ADHD compared to control participants, which may contribute to sustained attention deficits in ADHD participants. In addition, ADHD participants reported a more negative subjective experience during the SART than controls, highlighting the genuine difficulty they face in maintaining attention during a monotonous task. Although this work advances our understanding of sustained attention fluctuations, further studies are needed to replicate these findings across different sustained attention paradigms. For example, in tasks such as the Metronome Response Task or CPTs with fixed stimulus presentation intervals, reaction time variability appears to be a stronger predictor of mind-wandering (Bertschi et al., 2025; Godwin et al., 2023; Seli et al., 2013). Such paradigms may be particularly informative in ADHD and could help further refine the characterization of sustained attention fluctuations in this population.</p>
+<p>Acknowledgement. We thank the staff at Unit 1329 of the French National Institute for Health and Medical Research and at the University of Strasbourg for sharing the data.</p>
+<p>Funding statement. This research was supported by the Office of Naval Research Multidisciplinary University Research Initiatives (MURI) N00014-23-1-2768.</p>
+<h3>Data Availability statement.</h3>
+<p>Data and code are available from the corresponding author upon request.</p>
+<h3>Conflicts of interest.</h3>
+<p>The authors declare no conflict of interest.</p>
+<p>Author Contribution Statement. M.C. contributed to conceptualization, formal analysis, methodology, investigation, project administration, software, validation, supervision, visualization, writing-original draft, and writing-review and editing. A.B and S.W were involved in data curation, writing-review and editing. E.K.V. and M.D.R were involved in conceptualization, resources, funding acquisition, supervision and writing-review and editing.</p>
+<h3>STATEMENTS AND DECLARATIONS.</h3>
+<p>Ethical considerations. The study &#x27;Etude des mécanismes neuronaux sous-tendant les lapses attentionnels dans le trouble déficit de l&#x27;attention de l&#x27;adulte : vers un meilleur diagnostic clinique -AttLapse-TDA&#x27; was approved by a local ethics committee under the protocol number : API 2017 -HUS N°7248.</p>
+<p>Consent to participate. Written informed consent was secured from each participant before their involvement in the study, which adhered to the ethical guidelines of the Helsinki Declaration.</p>
+<h3>Consent for publication.</h3>
+<p>All authors consent for publication.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Task design and performance. (A.) In the Sustained Attention to Response Task (SART), the participants are instructed to press a response button for every number (go trials), except for the number 3 (nogo trials) that only appears in 10% of the trials. Thought-probes were used to detect on-task and mind-wandering periods, as well as the subjective report on motivation, fatigue, boredom and difficulty on a scale from 0 (low) to 100 (high). (B.) ADHD participants report mind-wandering more than control. (C.) lapses rate and (D.) reaction times on the SART, split by subjective (on-task vs. mind-wandering) and objective (in-the-zone vs out-of-thezone) attentional fluctuations in control subjects and ADHD participants.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Time spent out-of-the-zone predicts mind-wandering in ADHD participants, but not in control subjects. (A.) In control participants, the time spent out-of-the-zone was similar during on-task and mindwandering reports. (B.) ADHD participants spent more time out-of-the-zone during mind-wandering compared to on-task reports.</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Time spent out-of-the-zone predicting the subjective reports in ADHD participants. The regression analysis revealed that time spent out-of-the-zone predicts (A.) low motivation, (B.) high boredom, (C.) high fatigue and (D.) difficulty during the go-nogo task.</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. Time spent out-of-the-zone predicting the subjective reports in control participants. The regression analysis revealed that time spent out-of-the-zone predicts (A.) high motivation and (B.) low boredom, but not (C.) fatigue or (D.) difficulty during the go-nogo task.</p>
+<h3>References</h3>
+<p>Andrillon, T., Burns, A., Mackay, T., Windt, J., &amp; Tsuchiya, N. (2021). Predicting lapses of attention with sleep-like slow waves. Nature Communications, 12(1), 3657. https://doi.org/10.1038/s41467-021-23890-7</p>
+<p>Arabacı, G., &amp; Parris, B. A. (2018). Probe-caught spontaneous and deliberate mind wandering in relation to self-reported inattentive, hyperactive and impulsive traits in adults. Scientific Reports, 8(1), 4113. https://doi.org/10.1038/s41598-018-22390-x</p>
+<p>Barkley, R. A. (1997). Behavioral inhibition, sustained attention, and executive functions: Constructing a unifying theory of ADHD. Psychological Bulletin, 121(1), 65-94. https://doi.org/10.1037/0033-2909.121.1.65</p>
+<p>Baumeister, R. F., Bratslavsky, E., Muraven, M., &amp; Tice, D. M. (1998). Ego depletion: Is the active self a limited resource? Journal of Personality and Social Psychology, 74(5), 1252-1265. https://doi.org/10.1037/0022-3514.74.5.1252</p>
+<p>Bertschi, S., Rosenberg, M., Vogel, E., &amp; Chidharom, M. (2025). The Subjective Experience of Being Out-of-the-Zone: Investigating Objective and Subjective Attention Fluctuations. OSF. https://doi.org/10.31234/osf.io/fzqug_v1</p>
+<p>Buzy, W. M., Medoff, D. R., &amp; Schweitzer, J. B. (2009). Intra-Individual Variability Among Children with ADHD on a Working Memory Task: An Ex-Gaussian Approach. Child Neuropsychology, 15(5), 441-459. https://doi.org/10.1080/09297040802646991</p>
+<p>Chidharom, M., &amp; Bonnefond, A. (2023). Mind-wandering does not always rhyme with proactive functioning! Changes in the temporal dynamics of the mPFC-mediated theta oscillations during moments of mind-wandering. Biological Psychology, 181, 108598. https://doi.org/10.1016/j.biopsycho.2023.108598</p>
+<p>Chidharom, M., Bonnefond, A., Vogel, E. K., &amp; Rosenberg, M. D. (2025). Objective markers of sustained attention fluctuate independently of mind-wandering reports. Psychonomic Bulletin &amp; Review. https://doi.org/10.3758/s13423-025-02640-6</p>
+<p>Chidharom, M., Krieg, J., &amp; Bonnefond, A. (2021). Impaired Frontal Midline Theta During Periods of High Reaction Time Variability in Schizophrenia. Biological Psychiatry: Cognitive Neuroscience and Neuroimaging, 6(4), Article 4. https://doi.org/10.1016/j.bpsc.2020.10.005</p>
+<p>Chidharom, M., Krieg, J., Pham, B.-T., &amp; Bonnefond, A. (2021). Conjoint fluctuations of PFC- mediated processes and behavior: An investigation of error-related neural mechanisms in relation to sustained attention. Cortex. https://doi.org/10.1016/j.cortex.2021.07.009</p>
+<p>Chidharom, M., Vogel, E. K., &amp; Rosenberg, M. D. (2026). Not all benefits are equal: Incentives to seek reward and avoid penalty improve sustained attention in continuous performance tasks. Attention, Perception, &amp; Psychophysics, 88(6), 162. https://doi.org/10.3758/s13414-026-03308-6</p>
+<p>Chidharom, M., Vogel, E., &amp; Rosenberg, M. (2025). Lapses of sustained attention occur when goals compete: Evidences from the switch CPT. OSF. https://doi.org/10.31234/osf.io/ebhng_v1</p>
+<p>Epstein, J. N., Langberg, J. M., Rosen, P. J., Graham, A., Narad, M. E., Antonini, T. N., Brinkman, W. B., Froehlich, T., Simon, J. O., &amp; Altaye, M. (2011). Evidence for higher reaction time variability for children with ADHD on a range of cognitive tasks including reward and event rate manipulations. Neuropsychology, 25(4), 427-441. https://doi.org/10.1037/a0022155</p>
+<p>Esterman, M., Grosso, M., Liu, G., Mitko, A., Morris, R., &amp; DeGutis, J. (2016). Anticipation of monetary reward can attenuate the vigilance decrement. PloS One, 11(7), Article 7.</p>
+<p>Esterman, M., Liu, G., Okabe, H., Reagan, A., Thai, M., &amp; DeGutis, J. (2015). Frontal eye field involvement in sustaining visual attention: Evidence from transcranial magnetic stimulation. NeuroImage, 111, 542-548. https://doi.org/10.1016/j.neuroimage.2015.01.044</p>
+<p>Esterman, M., Noonan, S. K., Rosenberg, M., &amp; Degutis, J. (2013). In the zone or zoning out? Tracking behavioral and neural fluctuations during sustained attention. Cerebral Cortex (New York, N.Y.: 1991), 23(11), Article 11. https://doi.org/10.1093/cercor/bhs261</p>
+<p>Esterman, M., Poole, V., Liu, G., &amp; DeGutis, J. (2017). Modulating Reward Induces Differential Neurocognitive Approaches to Sustained Attention. Cerebral Cortex (New York, N.Y.: 1991), 27(8), Article 8. https://doi.org/10.1093/cercor/bhw214</p>
+<p>Esterman, M., &amp; Rothlein, D. (2019). Models of sustained attention. Current Opinion in Psychology, 29, 174-180. https://doi.org/10.1016/j.copsyc.2019.03.005</p>
+<p>Godwin, C. A., Smith, D. M., &amp; Schumacher, E. H. (2023). Beyond mind wandering: Performance variability and neural activity during off-task thought and other attention lapses. Consciousness and Cognition, 108, 103459. https://doi.org/10.1016/j.concog.2022.103459</p>
+<p>Grier, R. A., Warm, J. S., Dember, W. N., Matthews, G., Galinsky, T. L., Szalma, J. L., &amp; Parasuraman, R. (2003). The vigilance decrement reflects limitations in effortful attention, not mindlessness. Human Factors, 45(3), Article 3.</p>
+<p>Helton, W. S., &amp; Russell, P. N. (2011). Working memory load and the vigilance decrement. Experimental Brain Research, 212(3), 429-437. https://doi.org/10.1007/s00221-011-2749-1</p>
+<p>Helton, W. S., &amp; Russell, P. N. (2013). Visuospatial and verbal working memory load: Effects on visuospatial vigilance. Experimental Brain Research, 224(3), 429-436. https://doi.org/10.1007/s00221-012-3322-2</p>
+<p>Helton, W. S., &amp; Warm, J. S. (2008). Signal salience and the mindlessness theory of vigilance. Acta Psychologica, 129(1), 18-25. https://doi.org/10.1016/j.actpsy.2008.04.002</p>
+<p>Horáková, G., Weibel, S., Tissot, U., Pham, B.-T., Costache, M. E., &amp; Bonnefond, A. (2026). Effects of mind-wandering on cognitive and neural processes: Identifying specific impairments in adults with attention-deficit/hyperactivity disorder. Cortex, 204, 85-96. https://doi.org/10.1016/j.cortex.2026.07.005</p>
+<p>Kane, M. J., Smeekens, B. A., Meier, M. E., Welhaf, M. S., &amp; Phillips, N. E. (2021). Testing the construct validity of competing measurement approaches to probed mind-wandering reports. Behavior Research Methods, 53(6), 2372-2411. https://doi.org/10.3758/s13428-021-01557-x</p>
+<p>Kessler, R. C., Adler, L., Ames, M., Barkley, R. A., Birnbaum, H., Greenberg, P., Johnston, J. A., Spencer, T., &amp; Ustün, T. B. (2005). The prevalence and effects of adult attention deficit/hyperactivity disorder on work performance in a nationally representative sample of workers. Journal of Occupational and Environmental Medicine, 47(6), 565-572. https://doi.org/10.1097/01.jom.0000166863.33541.39</p>
+<p>Kofler, M. J., Rapport, M. D., Sarver, D. E., Raiker, J. S., Orban, S. A., Friedman, L. M., &amp; Kolomeyer, E. G. (2013). Reaction time variability in ADHD: A meta-analytic review of 319 studies. Clinical Psychology Review, 33(6), Article 6.</p>
+<p>Lanier, J., Noyes, E., &amp; Biederman, J. (2021). Mind Wandering (Internal Distractibility) in ADHD: A Literature Review. Journal of Attention Disorders, 25(6), 885-890. https://doi.org/10.1177/1087054719865781</p>
+<p>Manly, T., Robertson, I. H., Galloway, M., &amp; Hawkins, K. (1999). The absent mind: Further investigations of sustained attention to response. Neuropsychologia, 37(6), 661-670. https://doi.org/10.1016/S0028-3932(98)00127-4</p>
+<p>Massar, S. A. A., Lim, J., Sasmita, K., &amp; Chee, M. W. L. (2016). Rewards boost sustained attention through higher effort: A value-based decision making approach. Biological Psychology, 120, 21-27. https://doi.org/10.1016/j.biopsycho.2016.07.019</p>
+<p>Moses, M., Tiego, J., Demontis, D., Bragi Walters, G., Stefansson, H., Stefansson, K., Børglum, A. D., Arnatkeviciute, A., &amp; Bellgrove, M. A. (2022). Working memory and reaction time variability mediate the relationship between polygenic risk and ADHD traits in a general population sample. Molecular Psychiatry, 27(12), Article 12.</p>
+<p>Parasuraman, R., Warm, J. S., &amp; See, J. E. (1998). Brain systems of vigilance.</p>
+<p>Robertson, I. H., Manly, T., Andrade, J., Baddeley, B. T., &amp; Yiend, J. (1997). Oops!&#x27;: Performance correlates of everyday attentional failures in traumatic brain injured and normal subjects. Neuropsychologia, 35(6), Article 6.</p>
+<p>Seli, P., Cheyne, J. A., &amp; Smilek, D. (2013). Wandering minds and wavering rhythms: Linking mind wandering and behavioral variability. Journal of Experimental Psychology: Human Perception and Performance, 39(1), Article 1.</p>
+<p>Seli, P., Cheyne, J. A., Xu, M., Purdon, C., &amp; Smilek, D. (2015). Motivation, intentionality, and mind wandering: Implications for assessments of task-unrelated thought. Journal of Experimental Psychology: Learning, Memory, and Cognition, 41(5), 1417-1425. https://doi.org/10.1037/xlm0000116</p>
+<p>Seli, P., Smallwood, J., Cheyne, J. A., &amp; Smilek, D. (2015). On the relation of mind wandering and ADHD symptomatology. Psychonomic Bulletin &amp; Review, 22(3), 629-636. https://doi.org/10.3758/s13423-014-0793-0</p>
+<p>Sonuga-Barke, E. J. S. (2005). Causal Models of Attention-Deficit/Hyperactivity Disorder: From Common Simple Deficits to Multiple Developmental Pathways. Biological Psychiatry, 57(11), 1231-1238. https://doi.org/10.1016/j.biopsych.2004.09.008</p>
+<p>Tamm, L., Narad, M. E., Antonini, T. N., O&#x27;Brien, K. M., Hawk, L. W., &amp; Epstein, J. N. (2012). Reaction Time Variability in ADHD: A Review. Neurotherapeutics, 9(3), 500-508. https://doi.org/10.1007/s13311-012-0138-5</p>
+<p>Van den Driessche, C., Bastian, M., Peyre, H., Stordeur, C., Acquaviva, É., Bahadori, S., Delorme, R., &amp; Sackur, J. (2017). Attentional Lapses in Attention-Deficit/Hyperactivity Disorder: Blank Rather Than Wandering Thoughts. Psychological Science, 28(10), 1375-1386. https://doi.org/10.1177/0956797617708234</p>
+<p>Welhaf, M. S., Meier, M. E., Smeekens, B. A., Silvia, P. J., Kwapil, T. R., &amp; Kane, M. J. (2023). A &quot;Goldilocks zone&quot; for mind-wandering reports? A secondary data analysis of how few thought probes are enough for reliable and valid measurement. Behavior Research Methods, 55(1), 327-347. https://doi.org/10.3758/s13428-021-01766-4</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
