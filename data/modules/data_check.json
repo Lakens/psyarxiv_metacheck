@@ -86457,7 +86457,7 @@
    "published": "2026-11-14T05:30:12.505758",
    "report_page": true,
    "light": "yellow",
-   "summary": "-  We classified 27 files: 4 data, 3 code, 13 documentation, 7 materials.\n-  We found 4 tabular data files and extracted 29 columns from 3 of them.\n-  We grouped the files into 3 study groups (ex2, pilot1, pilot2).\n-  1 R workspace file (`.RData`/`.rda`) contains no reusable tabular data — only fitted models or saved session objects. Such files need R (and the exact packages used) to open and are not machine-readable. Share the underlying data as CSV (or a documented `.sav`/`.dta`) with a codebook so it can be reused without R: Forecasting Proficiency Test R Environment.RData. We ran automated data-quality checks on 29 columns; 3 columns have at least one potential issue (2 columns of free text that may contain personal detail; 1 column with inconsistent category casing). 2 of 2 spreadsheet files have at least one formatting issue (colour coding, merged cells, empty rows/columns, or an offset header).",
+   "summary": "-  We classified 5077 files: 3198 data, 95 code, 46 documentation, 1737 materials, 1 unknown.\n-  We found 2693 tabular data files and extracted 1602 columns from 52 of them.\n-  We grouped the files into 7 study groups (ex1, ex2, ex3, ex8, pilot1, pilot1a, pilot2), plus 4 collection-level files (README/ro-crate metadata).\n-  2638 tabular data files could not be read because they were not downloaded. This can happen for private repositories or failed downloads; you can also pass `local_path` to point at a local copy.\n-  Repository https://github.com/forecastingresearch/fpt exceeds the 500 MB per-repository budget: downloaded the smallest files up to the cap, 2643 files omitted. Raise `max_download_size` to include more.\n-  1 R workspace file (`.RData`/`.rda`) contains no reusable tabular data — only fitted models or saved session objects. Such files need R (and the exact packages used) to open and are not machine-readable. Share the underlying data as CSV (or a documented `.sav`/`.dta`) with a codebook so it can be reused without R: Forecasting Proficiency Test R Environment.RData.\n-  2 files read as a table but are not a usable rectangular dataset (data_cognitive_tasks/cache/session_info.RData: the file has no data rows or columns; data_pilot_cognitive_tasks/cache/session_info.RData: the file has no data rows or columns). No columns were extracted and they were not sent to the LLM. Share the underlying data as a plain rectangular table (one header row, one column per variable) with a codebook: data_cognitive_tasks/cache/session_info.RData, data_pilot_cognitive_tasks/cache/session_info.RData.\n-  505 trial-level data files (E-Prime / Inquisit / jsPsych / Behaverse) were recognised. These are per-participant records of a behavioural task, so they are not listed as separate datasets. Nothing is deleted. We ran automated data-quality checks on 1602 columns; 26 columns have at least one potential issue (17 columns with numeric values stored as text; 8 columns with no observed values (entirely empty); 6 columns whose name suggests personal information; 1 column with inconsistent category casing). 2 files are a Qualtrics survey export (696 rows look like previews/unfinished responses to review). 2 of 2 spreadsheet files have at least one formatting issue (colour coding, merged cells, empty rows/columns, or an offset header).",
    "findings": [
     {
      "file": "Supplement - Forecasting Question List.xlsx",
@@ -86466,16 +86466,190 @@
      "detail": "Categories differing only by case: PIlot/Pilot"
     },
     {
-     "file": "Supplement - Forecasting Question List.xlsx",
-     "column": "Question",
-     "label": "Free-text (may hold PII)",
-     "detail": "Free-text column (median 144 characters, 100% distinct) may contain names or other personal detail. Review before sharing."
+     "file": "data_pilot_cognitive_tasks/task_datasets/data_admc_raw.csv",
+     "column": "admc_response",
+     "label": "Numeric as text",
+     "detail": "Column is 95% numeric but 332 values cannot be parsed: \"['24', '1', '9', '30', '49', '10', '1', '50', '10', '79']\", \"['20', '24', '29', '29', '50', '9', '1', '49', '79', '80']\", \"['59', '57', '63', '63', '66', '64', '63', '67', '68', '59']\", \"['60', '53', '53', '53', '54', '54', '50', '55', '54', '…"
     },
     {
-     "file": "Psychometric properties of probability and quantile forecasts_Supplementary materials section A (1).xlsx",
-     "column": "Question",
-     "label": "Free-text (may hold PII)",
-     "detail": "Free-text column (median 144 characters, 100% distinct) may contain names or other personal detail. Review before sharing."
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "RecipientLastName",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column is empty: all 461 values are missing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "RecipientLastName",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column name suggests personal information (matched: lastname). Review before sharing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "RecipientFirstName",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column is empty: all 461 values are missing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "RecipientFirstName",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column name suggests personal information (matched: firstname). Review before sharing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "RecipientEmail",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column is empty: all 461 values are missing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "RecipientEmail",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column name suggests personal information (matched: email). Review before sharing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "ExternalReference",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column is empty: all 461 values are missing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1210_p1",
+     "label": "It em ${e://Field/itct} of ${e://Field/itall} What will be the closing value for the U.S. Dollar against the Russian Ruble (converting 1 USD to RUB) on ${e://Field/date_end}? This question will be resolved using the Yahoo Finance website . You can view the current exchange rate and its historical data by clicking the link. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 97% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1210_p2",
+     "label": "It em ${e://Field/itct} of ${e://Field/itall} What will be the closing value for the U.S. Dollar against the Russian Ruble (converting 1 USD to RUB) on ${e://Field/date_end}? This question will be resolved using the Yahoo Finance website . You can view the current exchange rate and its historical data by clicking the link. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 97% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1210_p3",
+     "label": "It em ${e://Field/itct} of ${e://Field/itall} What will be the closing value for the U.S. Dollar against the Russian Ruble (converting 1 USD to RUB) on ${e://Field/date_end}? This question will be resolved using the Yahoo Finance website . You can view the current exchange rate and its historical data by clicking the link. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 97% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1210_p4",
+     "label": "It em ${e://Field/itct} of ${e://Field/itall} What will be the closing value for the U.S. Dollar against the Russian Ruble (converting 1 USD to RUB) on ${e://Field/date_end}? This question will be resolved using the Yahoo Finance website . You can view the current exchange rate and its historical data by clicking the link. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 96% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1461_p1",
+     "label": "Numeric as text",
+     "detail": "Column is 99% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1461_p2",
+     "label": "Numeric as text",
+     "detail": "Column is 99% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1461_p3",
+     "label": "Numeric as text",
+     "detail": "Column is 99% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1461_p4",
+     "label": "Numeric as text",
+     "detail": "Column is 99% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1190_p1",
+     "label": "What will be the price of regular gasoline in the U.S. (dollars per gallon) on ${e://Field/date_end} or the most recent date prior to ${e://Field/date_end} when the price is recorded? This question will be resolved using the U.S. Energy Information Administration database . You can view the latest gasoline prices in the U.S. and historical data by clicking the link. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 97% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1190_p2",
+     "label": "What will be the price of regular gasoline in the U.S. (dollars per gallon) on ${e://Field/date_end} or the most recent date prior to ${e://Field/date_end} when the price is recorded? This question will be resolved using the U.S. Energy Information Administration database . You can view the latest gasoline prices in the U.S. and historical data by clicking the link. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 95% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1190_p3",
+     "label": "What will be the price of regular gasoline in the U.S. (dollars per gallon) on ${e://Field/date_end} or the most recent date prior to ${e://Field/date_end} when the price is recorded? This question will be resolved using the U.S. Energy Information Administration database . You can view the latest gasoline prices in the U.S. and historical data by clicking the link. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 95% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "G1190_p4",
+     "label": "What will be the price of regular gasoline in the U.S. (dollars per gallon) on ${e://Field/date_end} or the most recent date prior to ${e://Field/date_end} when the price is recorded? This question will be resolved using the U.S. Energy Information Administration database . You can view the latest gasoline prices in the U.S. and historical data by clicking the link. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 95% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "M811_p1",
+     "label": "It em ${e://Field/itct} of ${e://Field/itall} How many earthquakes of magnitude 5 or stronger will occur worldwide between ${e://Field/date_start} and ${e://Field/date_end}? This question will be resolved using the EMSC database . You can view a full list of recent earthquakes by clicking the link, and under the &quot;Earthquakes&quot; menu selecting &quot;Latest earthquakes.&quot; You can perform searches based on magnitude and time period at the top of the page. The total number of earthquakes meeting your criteria is displayed in red above the table on the left. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 95% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "M811_p2",
+     "label": "It em ${e://Field/itct} of ${e://Field/itall} How many earthquakes of magnitude 5 or stronger will occur worldwide between ${e://Field/date_start} and ${e://Field/date_end}? This question will be resolved using the EMSC database . You can view a full list of recent earthquakes by clicking the link, and under the &quot;Earthquakes&quot; menu selecting &quot;Latest earthquakes.&quot; You can perform searches based on magnitude and time period at the top of the page. The total number of earthquakes meeting your criteria is displayed in red above the table on the left. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 95% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "M811_p3",
+     "label": "It em ${e://Field/itct} of ${e://Field/itall} How many earthquakes of magnitude 5 or stronger will occur worldwide between ${e://Field/date_start} and ${e://Field/date_end}? This question will be resolved using the EMSC database . You can view a full list of recent earthquakes by clicking the link, and under the &quot;Earthquakes&quot; menu selecting &quot;Latest earthquakes.&quot; You can perform searches based on magnitude and time period at the top of the page. The total number of earthquakes meeting your criteria is displayed in red above the table on the left. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 95% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 0 Final.csv",
+     "column": "M811_p4",
+     "label": "It em ${e://Field/itct} of ${e://Field/itall} How many earthquakes of magnitude 5 or stronger will occur worldwide between ${e://Field/date_start} and ${e://Field/date_end}? This question will be resolved using the EMSC database . You can view a full list of recent earthquakes by clicking the link, and under the &quot;Earthquakes&quot; menu selecting &quot;Latest earthquakes.&quot; You can perform searches based on magnitude and time period at the top of the page. The total number of earthquakes meeting your criteria is displayed in red above the table on the left. For each percentage listed below, your answer should indicate you believe there is that percent chance the outcome will be ___ or less.",
+     "detail": "Column is 95% numeric but 1 value cannot be parsed: \"{Invalid Expression}\""
+    },
+    {
+     "file": "Study 2 Pilot Wave 1 Final.csv",
+     "column": "RecipientLastName",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column is empty: all 858 values are missing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 1 Final.csv",
+     "column": "RecipientLastName",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column name suggests personal information (matched: lastname). Review before sharing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 1 Final.csv",
+     "column": "RecipientFirstName",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column is empty: all 858 values are missing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 1 Final.csv",
+     "column": "RecipientFirstName",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column name suggests personal information (matched: firstname). Review before sharing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 1 Final.csv",
+     "column": "RecipientEmail",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column is empty: all 858 values are missing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 1 Final.csv",
+     "column": "RecipientEmail",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column name suggests personal information (matched: email). Review before sharing."
+    },
+    {
+     "file": "Study 2 Pilot Wave 1 Final.csv",
+     "column": "ExternalReference",
+     "label": "Export machinery / paradata column (not a measured variable).",
+     "detail": "Column is empty: all 858 values are missing."
     },
     {
      "file": "Supplement - Forecasting Question List.xlsx",
