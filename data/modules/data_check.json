@@ -203597,12 +203597,12 @@
    "published": "2026-11-06T00:49:10.243479",
    "report_page": true,
    "light": "yellow",
-   "summary": "-  We classified 246 files: 74 data, 86 code, 22 documentation, 61 materials, 3 unknown.\n-  We found 27 tabular data files and extracted 308 columns from 26 of them.\n-  We grouped the files into 5 study groups (ex1, ex2, ex3, ex4, pilot00), plus 6 collection-level files (README/ro-crate metadata).\n-  1 file read as a table but is not a usable rectangular dataset (filelist.txt: 100% of columns are free text, not variables). No columns were extracted and they were not sent to the LLM. Share the underlying data as a plain rectangular table (one header row, one column per variable) with a codebook: filelist.txt. We ran automated data-quality checks on 308 columns; 10 columns have at least one potential issue (4 columns of free text that may contain personal detail; 4 columns whose name suggests personal information; 4 columns with leading/trailing whitespace; 1 column with no observed values (entirely empty); 1 column with numeric values stored as text). We detected demographic column for Age.",
+   "summary": "-  We could not list every file of 1 repository, so the checks did not see all its files: https://osf.io/mr5ek (could not be listed: closed registration source).\n-  We classified 246 files: 74 data, 88 code, 22 documentation, 59 materials, 3 unknown.\n-  We found 27 tabular data files and extracted 308 columns from 26 of them.\n-  We grouped the files into 5 study groups (ex1, ex2, ex3, ex4, pilot00), plus 6 collection-level files (README/ro-crate metadata).\n-  1 file read as a table but is not a usable rectangular dataset (filelist.txt: 100% of columns are free text, not variables). No columns were extracted and they were not sent to the LLM. Share the underlying data as a plain rectangular table (one header row, one column per variable) with a codebook: filelist.txt. We ran automated data-quality checks on 308 columns; 8 columns have at least one potential issue (4 columns with leading/trailing whitespace; 2 columns whose name suggests personal information; 1 column with no observed values (entirely empty); 1 column with numeric values stored as text). We detected demographic column for Age.",
    "findings": [
     {
      "file": "ai_agents/data/participants.csv",
      "column": "birth_year",
-     "label": "Personally Identifying Information",
+     "label": "Personal info (column name)",
      "detail": "Column name suggests personal information (matched: birthyear). Review before sharing."
     },
     {
@@ -203612,76 +203612,40 @@
      "detail": "Column is empty: all 14 values are missing."
     },
     {
-     "file": "ai_agents/data/trials.csv",
-     "column": "birth_year",
-     "label": "Personally Identifying Information",
-     "detail": "Column name suggests personal information (matched: birthyear). Review before sharing."
-    },
-    {
-     "file": "data/study_1/data/exclusion_flow.csv",
-     "column": "stage",
-     "label": "Personally Identifying Information",
-     "detail": "Free-text column (median 41 characters, 100% distinct) may contain names or other personal detail. Review before sharing."
-    },
-    {
-     "file": "data/study_1/data/exclusion_flow.csv",
-     "column": "stage",
-     "label": "Whitespace",
-     "detail": "3 values with leading/trailing whitespace: \" main sample, completed all 100 trials\", \" main sample, at least one missed trial\", \" main sample, largest number of missed trials of a participant\""
-    },
-    {
-     "file": "data/study_2/data/exclusion_flow.csv",
-     "column": "stage",
-     "label": "Personally Identifying Information",
-     "detail": "Free-text column (median 41 characters, 100% distinct) may contain names or other personal detail. Review before sharing."
-    },
-    {
-     "file": "data/study_2/data/exclusion_flow.csv",
-     "column": "stage",
-     "label": "Whitespace",
-     "detail": "3 values with leading/trailing whitespace: \" main sample, completed all 100 trials\", \" main sample, at least one missed trial\", \" main sample, largest number of missed trials of a participant\""
-    },
-    {
-     "file": "data/study_3/data/exclusion_flow.csv",
-     "column": "stage",
-     "label": "Personally Identifying Information",
-     "detail": "Free-text column (median 42 characters, 92% distinct) may contain names or other personal detail. Review before sharing."
-    },
-    {
-     "file": "data/study_3/data/exclusion_flow.csv",
-     "column": "stage",
-     "label": "Whitespace",
-     "detail": "3 values with leading/trailing whitespace: \" main sample, completed all 100 trials\", \" main sample, at least one missed trial\", \" main sample, largest number of missed trials of a participant\""
-    },
-    {
-     "file": "data/study_3/data/participants.csv",
-     "column": "age_birthyear_discrepancy",
-     "label": "Personally Identifying Information",
-     "detail": "Column name suggests personal information (matched: birthyear). Review before sharing."
-    },
-    {
-     "file": "data/study_4/data/exclusion_flow.csv",
-     "column": "stage",
-     "label": "Personally Identifying Information",
-     "detail": "Free-text column (median 42 characters, 92% distinct) may contain names or other personal detail. Review before sharing."
-    },
-    {
-     "file": "data/study_4/data/exclusion_flow.csv",
-     "column": "stage",
-     "label": "Whitespace",
-     "detail": "3 values with leading/trailing whitespace: \" main sample, completed all 100 trials\", \" main sample, at least one missed trial\", \" main sample, largest number of missed trials of a participant\""
-    },
-    {
-     "file": "data/study_4/data/participants.csv",
-     "column": "age_birthyear_discrepancy",
-     "label": "Personally Identifying Information",
-     "detail": "Column name suggests personal information (matched: birthyear). Review before sharing."
-    },
-    {
      "file": "questionnaires.csv",
      "column": "item_id",
      "label": "Numeric as text",
      "detail": "Column is 88% numeric but 2 values cannot be parsed: \"attention\", \"total\""
+    },
+    {
+     "file": "ai_agents/data/trials.csv",
+     "column": "birth_year",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: birthyear). Review before sharing."
+    },
+    {
+     "file": "data/study_1/data/exclusion_flow.csv",
+     "column": "stage",
+     "label": "Whitespace",
+     "detail": "3 values with leading/trailing whitespace: \" main sample, completed all 100 trials\", \" main sample, at least one missed trial\", \" main sample, largest number of missed trials of a participant\""
+    },
+    {
+     "file": "data/study_2/data/exclusion_flow.csv",
+     "column": "stage",
+     "label": "Whitespace",
+     "detail": "3 values with leading/trailing whitespace: \" main sample, completed all 100 trials\", \" main sample, at least one missed trial\", \" main sample, largest number of missed trials of a participant\""
+    },
+    {
+     "file": "data/study_3/data/exclusion_flow.csv",
+     "column": "stage",
+     "label": "Whitespace",
+     "detail": "3 values with leading/trailing whitespace: \" main sample, completed all 100 trials\", \" main sample, at least one missed trial\", \" main sample, largest number of missed trials of a participant\""
+    },
+    {
+     "file": "data/study_4/data/exclusion_flow.csv",
+     "column": "stage",
+     "label": "Whitespace",
+     "detail": "3 values with leading/trailing whitespace: \" main sample, completed all 100 trials\", \" main sample, at least one missed trial\", \" main sample, largest number of missed trials of a participant\""
     }
    ]
   },
