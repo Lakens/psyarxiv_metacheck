@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Artificial observers and real individual
+differences: A roadmap for a computational psychometrics of
+vision</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Artificial observers and real individual differences: A roadmap for a
+computational psychometrics of vision
+</p>
+<p class="meta">
+2026-11-23 · Metacheck 0.4.4.35 · DOI 10.1177/20416695261507517
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>14</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Ethics Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to involve live data collection and lacked an
+ethics approval statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, but it was not present:</p>
+<blockquote>
+<p>When 25 visual and auditory measures from over a thousand
+participants are factoranalyzed, the general factor explains only about
+a fifth of the variance.</p>
+</blockquote>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 2 references with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(14)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 81 references with DOIs. You cited 2 references with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+Commenters
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Bowers, J. S., Malhotra, G., Dujmovic ́, M., Llera Montero, M.,
+Tsvetkov, C., Biscione, V., Puebla, G., Adolfi, F., Hummel, J. E.,
+Heaton, R. F., Evans, B. D., Mitchell, J., &amp; Blything, R. (2023).
+Deep problems with neural network models of human vision. Behavioral and
+Brain Sciences, 46, e385. <a href="https://doi.org/10.1017/S0140525X22002813" class="uri">https://doi.org/10.1017/S0140525X22002813</a>
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Atelopus limosus
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/723E1887E9B51D008736BE08C4382A" target="_blank">link</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yamins, D. L. K., &amp; DiCarlo, J. J. (2016). Using goal-driven deep
+learning models to understand sensory cor- tex. Nature Neuroscience,
+19(3), 356-365. <a href="https://doi.org/10.1038/nn.4244" class="uri">https://doi.org/10.1038/nn.4244</a>
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Curcuma candida, Lydia M. Maniatis
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/3259D9DF4FA8F78DBB975F559186F7" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 81 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 81 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>spatial frequency orientation color motion / depth gestalt illusions stimulus dimension → stimulus dimension → one psychophysical battery, both observers HUMAN OBSERVERS differ in optics, opsins, cone ratios, development latent factor structure ARTIFICIAL OBSERVERS differ in seed, architecture, front end, training diet latent factor structure</p>
+<p>Run both through the same psychophysical battery and compare their latent factor structures</p>
+<p>Matching the average observer is necessary but not sufficient. A match in covariance structure is the more diagnostic test of mechanism.</p>
+<h3>Terminology</h3>
+<p>Throughout this article, artificial observer is the general term, and it is deliberately broader than deep neural network. An artificial observer is any computational system that can be administered the same psychophysical battery as a human observer and can return a comparable measurement. That includes explicit mechanistic models of the kind long used in spatial and spatiotemporal vision, such as filter banks with a handful of interpretable parameters; it includes artificial neural networks, shallow or deep; and it includes hybrids in which a network is given a simulated optical or retinal front end. I use network for an artificial neural network specifically, deep network when depth is the relevant property, mechanistic model for the low-parameter, explicitly parameterized class, and model as the neutral term covering any of these where the distinction does not matter. The qualifying condition is methodological rather than architectural, and it has two parts. The system must admit a population of instances that differ from one another along generators the investigator can name, and it must yield per-observer measurements from which a covariance structure can be computed. A single model fitted to group-averaged data does not qualify, however sophisticated; neither does a collection of instances differing in ways that cannot be specified. &quot;The Proposal: A Computational Psychometrics of Vision&quot; section returns to what mechanistic and network-based populations respectively contribute, and argues that the program needs both.</p>
+<h3>Individual Differences Are Evidence, Not Noise</h3>
+<p>For most of a century, most vision scientists treated variation among observers as a blemish to be scrubbed away, a nuisance standing between the experimenter and the &quot;true&quot; mean. Generation after generation discarded exactly the structure that was most diagnostic of mechanism. The differences were never the noise; the assumption that they were noise was the noise. The neglect was not benign. By averaging individual differences away, the field did not remove noise from its measurements; it removed signal and called it rigor.</p>
+<p>The empirical foundation for this proposal is the body of psychophysical and electrophysiological work demonstrating that stable individual differences carry information about visual mechanisms. The core method, sometimes called the individual-differences or covariance paradigm, exploits the fact that if two stimulus conditions are detected by the same underlying channel, observers who are sensitive in one condition will tend to be sensitive in the other, whereas conditions served by independent channels will show uncorrelated sensitivities across observers. Submitting a battery of measurements to correlational and factor-analytic analysis therefore recovers the number of independent sources of variation and, through the pattern of loadings, their tuning.</p>
+<p>A clear demonstration comes from the contrast-sensitivity function (CSF). Across infant and adult samples, and across psychophysical, electrophysiological, photopic, and scotopic measurements, factor analyses of contrast sensitivity measured at many spatial frequencies recover a few frequency-tuned factors rather than a single global dimension (Peterzell, 1991 (Peterzell, /1992;; Peterzell et al., 1993 Peterzell et al., , 1995;; Peterzell &amp; Teller, 1996; Peterzell &amp; Kelly, 1997; Peterzell et al., 2000; Peterzell, 2016; Peterzell &amp; Elliott, 2026; Peterzell, in press; Min &amp; Reynaud, 2024 , 2026). That the same frequency-tuned structure appears whether sensitivity is measured behaviorally or from the visual evoked potential, and under photopic or scotopic adaptation, is itself part of the evidence: a factor that survives a change of measurement modality is unlikely to be an artifact of one. The case runs the method end-to-end. Peterzell and Teller (1996) measured low-spatial-frequency CSFs in just seven extensively tested adults at seven frequencies (0.27-2.16 c/deg) and submitted them to correlational and factor analyses; two sources of variance emerged: one governing sensitivities below about 1 c/deg, the second governing those above. Converting each factor&#x27;s loadings into a sensitivity profile, through a probabilitysummation rule relating loadings to channel gain, yielded two factor-channels peaking near 0.8 and 1.4 c/deg that fell almost exactly on the two coarsest spatial-frequency channels of a computational model derived from entirely separate masking data (Wilson &amp; Gelb, 1984; Wilson et al., 1983). The latent structure of a population thereby recovered the mechanisms of the individual and matched a model built by other means: population to factors to estimated tuning to an external model, which is the loop the present proposal asks us to run on networks. The same two-channel luminance structure was later recovered in a larger, repeated-measures sample of 12 adults (Peterzell &amp; Teller, 2000), which also showed that the low-frequency chromatic and luminance channels were statistically independent (see also Min &amp; Reynaud, 2024 , 2026). The picture has since been revised, and revised by the same method. Removing the optical component of individual variation by adaptive-optics correction eliminates an optical factor and leaves a simpler retinal-neural structure behind (Peterzell &amp; Elliott, 2026), and treating orientation as a variable in its own right rather than collapsing across it again resolves contrast sensitivity into a small number of factors (Peterzell et al., 2025). Once optical and orientation variance are accounted for, the recovered structure converges on two or three broad frequency-tuned factors rather than the larger set of narrowly tuned channels posited by the classical masking-derived models. This is worth saying plainly, because it is the method correcting a model it had earlier appeared to confirm. The original convergence held for the two coarsest channels and still does; what individual differences do not support, once nuisance variance is removed, is the full narrow-channel architecture. It is also a preview of Stage 4 below, where excluding mundane sources of variance before a factor structure is read mechanistically becomes a requirement of the program rather than a courtesy. The same machinery discriminates among models rather than merely fitting one. Applied to forty 4-month-olds (with reanalyzed 1-to 3-month data), it again recovered at least two frequency-tuned factors. Monte Carlo simulation then showed that only a developmental model whose channels shift toward higher frequencies with age reproduced that factor structure, whereas an adultlike, nonshifting model did not (Peterzell et al., 1993).</p>
+<p>The same approach dissociates chromatic from luminance sources of variability (Dobkins et al., 2000; Peterzell &amp; Teller, 2000; Peterzell et al., 2000), and extends to orientation, where factor analysis across 10 orientations reveals multiple orientation-tuned mechanisms consistent with cortical processing (Peterzell et al., 2025). The same logic extends to stereopsis, where factor analysis of disparity sensitivity recovers spatial-frequency-tuned disparity channels much like those found for luminance contrast and color (Peterzell et al., 2017; Serrano-Pedraza et al., 2018). Applied to the same domain, the method has since resolved orientation-tuned stereoscopic mechanisms (Llamas-Cornejo et al., 2025) and temporally tuned mechanisms for frontoparallel stereomotion (Llamas-Cornejo et al., 2024), so that disparity processing fractionates along spatial frequency, orientation, and time much as luminance contrast does. Individual differences in the stereoscopic anisotropy point the same way (Hibbard et al., 2002). The method can even adjudicate the metric in which a mechanism is tuned: varying retinal spatial frequency (cycles per degree) and relative spatial frequency (cycles per object) independently, and asking which one the recovered factors track, turns a question about the coordinate system of stereoscopic channels into an empirical one (Peterzell, Ewane Enongue, et al., 2026). The approach reaches motion as well, where duration thresholds for moving patterns, analyzed the same way, dissociate distinct spatiotemporal mechanisms (Luna &amp; Serrano-Pedraza, 2020). Peterzell (2016) frames covariance analysis as a way to discover sensory processes without adaptation or masking. Comprehensive reviews of this individual-differences and factor-analytic literature are available elsewhere (Mollon et al., 2017; Peterzell, 2016), and the color case in particular has been reviewed repeatedly and from several angles (Bosten, 2022; Emery &amp; Webster, 2019; Webster, 2015); the aim here is not to review it but to use its structure as a benchmark.</p>
+<p>The same approach reshaped the understanding of color appearance. When observers scale or name hues around the hue circle, their individual differences do not collapse onto the two cardinal opponent axes a simple red-green/blue-yellow model would predict; factor analysis of hue-scaling data recovers a larger set of narrowly tuned chromatic factors, implying a population code of multiple broadly distributed mechanisms (Emery et al., 2017a). Naming follows the same structure: the factors that govern hue scaling also govern how observers name hues (Emery et al., 2017b), and the mapping from appearance to words appears to require a nonuniform perceptual prior rather than a uniform one (Peterzell, 2026a). That the chromatic mechanisms are multiple and narrowly tuned had already emerged from detection thresholds: factor analysis of sensitivity along cardinal and noncardinal axes of color space recovers mechanisms selective for directions intermediate between the cardinal axes (Gunther &amp; Dobkins, 2003). This structure also constrains what color can support downstream, where numerosity adaptation is tuned to chromatic distance in observers whose discrimination is good enough to support it, with factor analysis again separating fine from coarse chromatic mechanisms (Peterzell, Arrighi, et al., 2026). Steady-state visual evoked potentials reach the same conclusion at the cortical level (Kaneko et al., 2025), and applied to simultaneous contrast, the method separates induction processes operating at short and long flash durations (Kaneko et al., 2018). And the structure of individual differences is itself diagnostic of representational format: hue and motion direction, analyzed identically, yield qualitatively different geometries: hue with no privileged axes, motion structured by visual space (Emery et al., 2023).</p>
+<p>Two properties of this literature are essential for what follows, and together they constitute the first premise of the argument developed here. The first is that individual differences are heritable and specific, not generic. The standard case is face recognition. In a twin study using the Cambridge Face Memory Test, monozygotic twins correlated at r ≈ 0.70, essentially at the test&#x27;s own reliability ceiling, while dizygotic twins correlated at only r ≈ 0.29. This heritable ability was statistically dissociable from general intelligence and from object recognition (Wilmer et al., 2010). The same signature appears in high-level vision: a domain-general object-recognition ability (&quot;o&quot;) recurs as a replicable latent factor, distinct from general intelligence, that generalizes across object categories and even across sensory modalities (Chow et al., 2023; Richler et al., 2017; reviewed in Smithson &amp; Gauthier, 2026). Individual differences in vision are stable traits of the observer with their own biological substrate, exactly the kind of quantity a mechanistic model ought to explain (Wilmer, 2008 (Wilmer, , 2017)).</p>
+<p>The second property should directly shape the benchmark we set for models: vision has no strong general factor. When 25 visual and auditory measures from over a thousand participants are factoranalyzed, the general factor explains only about a fifth of the variance. The reliable structure instead resolves into roughly eight independent, task-specific factors (spatial-frequency sensitivity, stereo acuity, oculomotor control, flicker sensitivity), replicating across split halves (Bosten et al., 2017). Eye movements in the same population carry a comparably stable, individuating oculomotor signature (Bargary et al., 2017). Reviews reach the same verdict: the search for a general visual ability analogous to g has largely failed, and perception fractionates into many narrow factors (Tulver, 2019). A converging line of evidence sharpens the point from the other direction. Across batteries of qualitatively different visual tasks, performance is reliable within each task yet only weakly correlated between tasks, and it is stable across years rather than reducible to measurement noise. Visual abilities therefore behave as largely independent traits rather than as expressions of a common factor (Cappe et al., 2014; Garobbio et al., 2024; Herzog et al., 2025). Those correlations are weakest across functions, whereas covariation within a single function, the regime this proposal exploits, remains robust. This sets the target. A model population need not reproduce a single dominant dimension; it must reproduce a structured, multifactor pattern in which visual functions vary partly independently, a far more stringent and informative demand.</p>
+<h3>Networks Already Vary: We Have Simply Been Averaging It Away</h3>
+<p>The second premise is that artificial networks are not single fixed observers but samples from a distribution. This is no longer speculative. Training a fixed architecture on fixed data, varying only the random seed, produces networks that classify with near-identical accuracy yet develop measurably different internal representations, with the divergence concentrated in intermediate and higher layers (Mehrer et al., 2020). The source is an underconstrained alignment of exemplars within categories rather than a shift in centroids, and the seed-induced difference is comparable in magnitude to that from training on different input statistics. The authors&#x27; own conclusion is the one I build on: inferences may need to rest on groups of network instances rather than any single model.</p>
+<p>Architecture adds a second axis of variation. A range of architectures can all predict the human inferior-temporal representational geometry well once they are trained, and their representations are fit to the data, which means architectural diversity is partly, but only partly, absorbed by alignment procedures (Storrs et al., 2021). And the machine-learning literature has independently documented seed and initialization variability as a first-order phenomenon, large enough that benchmark comparisons between methods can be dominated by it (Bouthillier et al., 2021; Madhyastha &amp; Jain, 2019; Picard, 2021). A program in high-level vision has begun to characterize this variation deliberately rather than merely report it: Chow and Palmeri (2024) constructed populations of networks differing in initialization, training diet, and architecture and measured their representational variation against a principled baseline, asking which manipulations move representations beyond what random initialization alone produces. Preliminary extensions report that architecture is the dominant axis, accounting for roughly 96% of the variance in between-network representational distances (Chow, 2024; Peng et al., 2026). The crucial point is that this entire literature treats between-network variation as a nuisance, something to be controlled, reported as an error bar, or averaged out. The conceptual move this article proposes is to treat it instead as the object of study: the artificial analog of the very individual differences that, on the human side, turned out to be the most informative thing in the data.</p>
+<p>If random initialization is the artificial analog of the genetic and developmental lottery that makes human observers differ, then we already have, sitting unused inside standard training pipelines, a generator of artificial observer populations. The question is whether the differences among those artificial observers are organized like the differences among humans.</p>
+<h3>Why Current Model-Brain Comparison Misses This</h3>
+<p>The road to scientific hell is paved with excellent model fits. Deep learning algorithms can learn almost any pattern you ask them to learn, including patterns generated by bad assumptions. A model that perfectly fits the average observer tells us nothing if its underlying premises are biologically or psychologically absurd. When false assumptions are fed into sufficiently powerful fitting procedures, the result is not scientific insight. It is highly optimized self-deception.</p>
+<p>It is worth being explicit about why the dominant frameworks do not already answer this question. Representational similarity analysis (RSA), the workhorse method, compares the representational geometry of two systems by correlating their dissimilarity matrices (Kriegeskorte et al., 2008). The goal-driven program that established deep networks as the leading models of the ventral stream evaluates how well a single trained network predicts pooled neural responses (Yamins et al., 2014; Yamins &amp; DiCarlo, 2016). The large-scale benchmarks that now organize the field score models against an aggregate primate (Kubilius et al., 2019; Schrimpf et al., 2018). In every case, the comparison is to a central tendency (an average geometry, a pooled population, a representative behavioral signature) and is by construction silent about whether models reproduce the structure of variation across observers.</p>
+<p>The behavioral-consistency literature comes closest and is the most instructive foil. Comparing image-by-image error patterns of networks, humans, and monkeys, two findings stand out (Rajalingham et al., 2018). First, current networks match object-level patterns but diverge from primates at the finer image level, failing to enter the zone of primate-to-primate consistency even extrapolated to infinite subjects. Second, and directly relevant here, the behavioral signatures of different architectures were highly correlated with one another. The field has been treating the model&#x27;s behavioral pattern as essentially singular. The same conclusion follows from an independent measure. Error consistency, which corrects trial-by-trial agreement between two observers for the agreement expected from their accuracies alone, finds that networks agree with one another substantially more than they agree with humans (Geirhos et al., 2020b). Today&#x27;s models thus underproduce human-like between-observer variation: they are too similar to each other, in the wrong ways, relative to how humans differ. That is exactly the deficiency a population-level, covariance-structure benchmark would expose and an average-alignment score cannot.</p>
+<p>The most recent alignment work, deriving interpretable dimensions along which networks and humans agree, moves toward a richer comparison but still typically aligns models to an aggregate human embedding (e.g., Mahner et al., 2025; Muttenthaler et al., 2023). One influential conjecture even runs the opposite way, holding that large models converge toward a single shared representation (Huh et al., 2024); an individual-differences benchmark is the natural test of how far that convergence really goes. Related work finds that networks differing in architecture, objective, and training data nonetheless share a set of representational dimensions, and that these shared dimensions are the ones that best predict brain responses (Chen &amp; Bonner, 2025). Such findings characterize what networks have in common; the present proposal targets what remains once that shared structure is accounted for, so the relationship between the two is quantitative rather than oppositional. And the standard metrics (centered kernel alignment, canonical correlation analysis) are summaries of average correspondence; common metrics can even fail to recognize that two seedvaried networks are the same kind of system (Kornblith et al., 2019), precisely the regime where individual-difference structure lives.</p>
+<p>This vulnerability is an instance of a general problem that long predates deep learning: a good fit to the data is necessary but not sufficient evidence for a mechanism. A model can fit well not only because it captures the process of interest but also because it is flexible enough to accommodate almost any result, because the data are too weak to rule out the alternatives, or because a quite different mechanism mimics the same average curve (Pitt &amp; Myung, 2002; Roberts &amp; Pashler, 2000). When two models mimic each other in this way, fitting the mean cannot adjudicate between them, and that is precisely the regime current model-brain comparison occupies, with architecturally distinct networks predicting pooled neural and behavioral data about equally well (Storrs et al., 2021).</p>
+<p>The most cautionary cases are false alarms manufactured by averaging itself. Estes (1956) showed that averaging across individuals can change the form of a function, not merely its parameters, so that the group curve resembles no single observer and implies a process that none of them instantiate. The textbook example is the law of practice: the smooth power-law speed-up long read from averaged learning curves proved to be an averaging artifact, because the underlying individual curves are exponential with idiosyncratic rates (Heathcote et al., 2000). The hazard reaches perception directly. Ashby et al. (1994) showed that averaging similarity and identification data increases their symmetry and regularity, so that multidimensional-scaling and similarity-choice models fit the averaged data well even when they fit no individual observer, and a good fit to the average therefore reveals little about the psychological structure of anyone. A model that recovers the mean is consistent with many mechanisms; a model that recovers the right structure of differences among observers is consistent with far fewer.</p>
+<p>There is a formal reason to expect these failures. Only for ergodic processes does the structure of variation across individuals coincide with the structure of variation within an individual, and perceptual and psychological processes are seldom ergodic (Fisher et al., 2018; Molenaar, 2004). A group average can even reverse within subgroups or individuals, the ecological trap known as Simpson&#x27;s paradox (Kievit et al., 2013). The average observer can therefore misrepresent every real one. The implication for artificial models is not that benchmarks are worthless but that aggregate benchmarks are weak. Networks can reach high benchmark scores while classifying by texture or other shortcuts that no human uses (Geirhos et al., 2020a), and strong predictions of pooled brain and behavioral data need not reflect human-like mechanisms at all (Bowers et al., 2023). Reproducing the between-observer covariance and latent-factor structure is far harder to satisfy by accident, which is why it is a more diagnostic and more falsifiable test than reproducing the average.</p>
+<h3>The Proposal: A Computational Psychometrics of Vision</h3>
+<p>Putting the pieces together yields a single, testable proposal (Figure 1). Treat a collection of artificial networks as a population of observers. Generate that population deliberately, by varying the generators of variation we have reason to think produce human variation: random initialization (the developmental lottery), architecture (gross neuroanatomy), training history and data diet (visual experience), and, for models with explicit front ends, simulated optics, cone sampling, and retinal sampling (the peripheral hardware that differs measurably across people). Run that population through the same psychophysical battery administered to humans. Then analyze the artificial data exactly as we analyze the human data: compute the interobserver covariance structure, submit it to factor analysis or structural equation modeling, and recover the latent factors of the artificial population. The benchmark is a comparison of latent structures, not of averages.</p>
+<p>These generators are not all of a kind, and it is useful to sort them by level of analysis (Marr, 1982). Initialization, architecture, and front-end sampling vary how a given visual computation is carried out, and so belong to the algorithmic and implementational levels. A change of training objective varies what is being computed and belongs to the computational level. Training diet sits awkwardly between the two, since a different visual environment can be described either as the same goal pursued over different input statistics or as a different problem posed to the learner, and I do not think the question should be legislated in advance. The distinction earns its place because it yields a prediction. If a computational goal admits many algorithmic realizations, as it usually does, then variation at the algorithmic level should be the more plentiful, and manipulations of objective should change the factor structure more coarsely than manipulations of initialization or architecture, altering which factors exist rather than how they are tuned. A mismatch in the number of factors therefore implicates the computational level, whereas a mismatch in tuning with the right number of factors implicates the algorithmic one. This gives the diagnostic step of the program a direction to search in, which it would otherwise lack.</p>
+<p>Nothing in this framework requires the artificial observers to be deep networks. As set out in the terminology note in &quot;The Average Observer Is a Convenient Fiction&quot; section, the term covers mechanistic models and neural networks alike. A population can equally be built from an explicit mechanistic model of the kind that has long served spatiotemporal vision: a bank of linear filters with a handful of parameters per observer, perturbed across the population in peak sensitivity, bandwidth, and gain. Such models sit at the opposite end of a continuum from deep networks, trading scope for transparency. They are interpretable by construction, parameterized in units that correspond directly to hypothesized mechanisms, and cheap enough to simulate in large numbers; but they are confined to the domain they were written for, and can express only the variation the modeler thought to build in. Deep networks reverse every term of that trade. They extend to tasks no filter model can perform and can generate variation nobody anticipated, but their parameters correspond to nothing nameable and their populations are expensive to produce. A program built only on networks could not interpret its own results; a program built only on filter models could recover only the mechanisms it had already assumed. The computational psychometrics of vision needs both, and the cheapest first demonstrations of the full loop will run on filter-model populations.</p>
+<p>Concretely, a model population should be asked to reproduce, in increasing order of stringency: 1. Human mean performance, the conventional target, which remains necessary but is no longer sufficient. 2. Human variances and error patterns, the spread and the characteristic mistakes, not just the central value. 3. The human covariance matrix, which conditions covary across observers and which dissociate. 4. The human latent factor structure, the number of factors, their tuning, and their relative independence; for vision, the multifactor, weak-general-factor structure documented above (Bosten et al., 2017; Tulver, 2019) rather than a single dominant dimension.</p>
+<p>This is the sense in which the proposal is psychometric. Its unit of analysis is the latent variable recovered from a pattern of individual variation, and its criterion of success is structural correspondence between two factor solutions. It is also computational. The artificial population is generated and probed in silico, which lets us do something we can never do with humans. We can intervene on the generators of variation one at a time and watch the factor structure change.</p>
+<p>That last point is what turns the benchmark into a discovery tool. With humans, we can only observe the factor structure; we cannot manipulate the cone ratios or developmental histories that produce it. With a model population, we can. If varying simulated cone ratios produces a chromatic factor structure matching the human one while varying initialization alone does not, that is evidence about where in the system the relevant variation originates. The inference is strengthened by a known anchor on the human side. Red/green chromatic sensitivity is constrained by the relative numbers of long-and middle-wavelength cones across observers (Gunther &amp; Dobkins, 2002). Convergence under a specific manipulation becomes an argument about mechanism; divergence becomes a diagnostic of what the model is missing.</p>
+<p>There is already an existence proof for the behavioral core of this idea, arrived at independently and concurrently. Training many instances of several architectures on a noisy perceptual-decision task, varying only the random initialization, produces networks whose behavior varies across instances and, crucially, aligns consistently with specific individual humans. An instance that matches a given person on accuracy tends to match that same person on confidence and reaction time, and exploiting these alignments improves prediction of held-out human responses (Fung et al., 2025; see also Rafiei et al., 2024). That establishes that artificial individual differences can be human-like at the level of individual matching, on a single task. The present program generalizes it along three dimensions at once: from one task to a battery, from initialization alone to the full set of generators of variation, and from instance-to-individual matching to the comparison of latent factor structures across populations. Where Fung et al. show that artificial observers can resemble particular people, the computational psychometrics of vision asks whether a population of artificial observers is organized (factored) the way the human population is. The two programs are complementary rather than competing: Fung et al. establish that the raw material (human-like individual differences among artificial observers) exists, while the program proposed here supplies the framework, the benchmark, and the latent-variable analyses that turn that material into a test of visual mechanisms. Their result is thus the strongest available motivation for the present proposal rather than a preemption of it.</p>
+<h3>A Roadmap</h3>
+<p>The program can be pursued in stages, each individually publishable. I set them out as a sequence of design decisions rather than as a list of topics, because the questions that determine whether the comparison is interpretable at all arise before any factor is extracted.</p>
+<p>Stage 0. Admit the model to the comparison: A candidate architecture must first reach roughly human-like mean performance on the battery. A model that cannot do the task is not a worse observer but a different one, and its covariance structure is not interpretable. This is an entry criterion and nothing more. It is worth stating explicitly, because the argument of this article is that passing it settles nothing: two populations can match the average observer equally well and differ entirely in latent structure (Figure 2), and a program that treated mean-matching as evidence of mechanism would have reproduced the very practice it is meant to replace.</p>
+<p>Stage 1. Build the human reference batteries: The comparison is only as good as the human factor structure it targets, which must come from many conditions measured in the same observers with enough reliability to support stable solutions. This is the most expensive stage, but much of it need not be paid again: large-sample batteries and, in several domains, the target solutions themselves already exist in the published record (Bosten et al., 2017), as do the contrast, chromatic, orientation, and disparity structures reviewed in &quot;Individual Differences Are Evidence, Not Noise&quot; section. Stage 1 is therefore in large part a matter of harmonizing existing data rather than collecting it anew. Where a battery must be built from scratch, its design is itself consequential, because which conditions are included determines which factors can be recovered at all; the one-stimulus-per-factor principle offers a practical rule for choosing them efficiently (Peterzell, in press). Stage 2. Generate designed artificial populations: Rather than harvesting incidental seed variation, cross the generators in a controlled design: initialization × architecture × data diet × simulated optics × cone sampling. This makes the population a factorial experiment whose subject variables are known by construction, which is what licenses causal claims about the origin of any factor structure that emerges, and it allows the interactions among generators to be estimated rather than assumed away. Four design decisions follow, none of which has a default answer.</p>
+<h3>How Many Observers</h3>
+<p>The required number is not fixed. What determines whether a factor solution is stable is the communality of the measures and how well each factor is overdetermined by multiple indicators, rather than any ratio of observers to variables (MacCallum et al., 1999). In the regime this program occupies-batteries of many related psychophysical conditions, with high communalities and several strongly loading conditions per factor-stable solutions are recoverable from populations far smaller than psychometric folklore suggests. An indicative design might cross five architectures, four data diets, and three front ends with 10 initialization replicates per cell, yielding 600 artificial observers; but the defensible practice is to report communalities and demonstrate that the solution is stable under resampling, not to satisfy a rule of thumb. It is worth noting that the artificial side is where observers are cheap. In almost every application, it will be the human battery, not the model population, that bounds the achievable sample size.</p>
+<h3>How Much Variation</h3>
+<p>The quantities this benchmark targets-the number of factors, the pattern of loadings, the pattern of independence-are scale-invariant, so the artificial population&#x27;s variance need not equal the human population&#x27;s for the comparison to be meaningful. A model population whose observers differ by half as much as humans do can still exhibit the same structure, and congruence coefficients and correlation-matrix comparisons are insensitive to the difference (Lorenzo-Seva &amp; ten Berge, 2006). Magnitude matters, however, for any claim that a model population is a realistic cohort rather than merely a structured one, and where it matters, the generators should be sampled from measured human distributions rather than arbitrary ones. Relative numbers of long-and middle-wavelength cones vary substantially among color-normal observers (Roorda &amp; Williams, 1999) and constrain red/green chromatic sensitivity across people (Gunther &amp; Dobkins, 2002); sampling simulated cone ratios from that measured distribution converts the model population from a set of perturbed networks into a simulated cohort. For generators with no measured human counterpartinitialization being the obvious case-no principled calibration is available, and the honest procedure is to treat the induced variance as a free parameter, report it, and verify that the recovered structure is stable across a range of its values.</p>
+<h3>How the Manipulation Is Applied</h3>
+<p>A generator must be sampled across the population, not applied at a single strength to a subset of it. A fixed-strength manipulation applied to half the networks produces a group difference: it shifts a mean and contributes little to the covariance structure the analysis operates on. To generate individual differences, the generator must vary continuously across observers, which means specifying a sampling distribution for it. This is not only a constraint but it is also the program&#x27;s main methodological advantage: because the investigator sets that distribution, the variance each generator contributes is itself a manipulable quantity, which is precisely what cannot be done with a human sample.</p>
+<h3>Where the Population Comes From</h3>
+<p>Pretrained model zoos offer scale at the price of confounded generators: their architectures, objectives, diets, and training regimes covary in ways the investigator did not choose and often cannot reconstruct. They are therefore suitable for establishing that a factor structure is recoverable at all, but not for attributing one to a generator, and any claim about the origin of a structure requires a purpose-trained factorial population. This is where the expense of the program is concentrated, and two considerations keep it tractable. The batteries with the best-established human factor structures are built from parametrically simple stimuli-gratings varying in spatial frequency, orientation, disparity, or hue-which do not require networks trained at the scale of natural-image classification. And a filter-model population, as described in &quot;The Proposal: A Computational Psychometrics of Vision&quot; section, runs the entire loop at negligible cost, which makes it the natural first instantiation rather than a lesser substitute.</p>
+<p>Stage 3. Equate the task, then apply identical analysis to both populations: The same battery, preprocessing, and factor-extraction and rotation decisions must be applied to both, so that any difference in structure is attributable to the systems rather than the analysis. Before that can be done, the tasks must be made comparable, which is less straightforward than it appears and has its own literature of cautionary cases (Funke et al., 2021). Two requirements are specific to this program. The first is that the model must be given an explicit threshold-estimation procedure, so that sensitivity denotes the same operation on both sides: a network&#x27;s classification confidence and a human&#x27;s psychometric-function threshold are not interchangeable, and a covariance structure computed over one cannot be compared with a covariance structure computed over the other. The readout procedure is part of the matched protocol, not an implementation detail. The second is that not every measure in a human battery has a machine counterpart. Physiological and affective measures earn their place on the human side as external validators-evidence that a recovered factor is a stable trait of the observer with a biological substrate (&quot;Individual Differences Are Evidence, Not Noise&quot; section)-but they are not administered to networks, and the matched battery is restricted to tasks with a well-defined machine analog. The human literature&#x27;s cautions (about response bias inflating spurious general factors, about reliability bounding the solution) apply with full force, because artificial observers have their own analogs of criterion and noise.</p>
+<p>Stage 4. Compare factor structures, ruling out the mundane first: Do the numbers of factors match, do the loadings (tuning) match, is the pattern of independence the same? Tools for comparing factor solutions already exist: congruence coefficients, with conventional thresholds for structural correspondence (Lorenzo-Seva &amp; ten Berge, 2006), confirmatory factor analysis and tests of measurement invariance once a target structure is established, and covariance-structure modeling more generally.</p>
+<p>A mismatch is informative only once the dull explanations have been excluded. Many of the reasons a model population might fail to reproduce a human covariance structure have nothing to do with mechanism. The clearest example is sampling: human foveal vision resolves spatial frequencies far above those represented in standard training images, so a battery probing contrast sensitivity near the human acuity limit, administered to networks whose input cannot represent those frequencies, will produce a mismatch that is an artifact of resolution. The requirement is therefore an ordering. Low-level input and sampling confounds must be excluded by construction before any mismatch is read mechanistically, which means the population&#x27;s input resolution and spectral content must span the range the battery probes, or the affected conditions must be dropped. Which of these nuisance factors actually matters should not be settled by intuition, and the factorial design already supplies the means to settle it: include the suspect factor as a generator rather than fixing it at a plausible value. If varying input resolution changes the recovered structure, resolution was crucial; if the structure is invariant across a wide range of it, it can be set aside with evidence rather than by assumption. This is a respect in which the artificial population is more informative than the human one. We cannot vary the Nyquist limit of a human observer.</p>
+<p>A match yields a candidate account of a human mechanism that can then be probed by intervention; a mismatch, say, a single contrast factor where humans show several frequency-tuned ones, localizes the model&#x27;s inadequacy and motivates the next change. Because the generators are crossed, that localization is specific: if no setting of the front-end generator produces the missing lowfrequency factor while diet manipulations move it substantially, that is an argument about where the relevant variation originates, and a directed next experiment rather than an undirected search.</p>
+<p>Stage 5. Read the structure back to a mechanism: A recovered factor is a statistical object until it is given a mechanistic interpretation, and the route to one does not run through the network&#x27;s weights. It runs through the loadings, by the procedure already demonstrated on the human side. Peterzell and Teller (1996) converted factor loadings into sensitivity profiles through a probabilitysummation rule relating loadings to channel gain, and the resulting factor-channels fell on spatialfrequency channels derived independently from masking data (Wilson &amp; Gelb, 1984). The claim this licenses is functional-how many mechanisms, with what tuning, how independent-rather than an attribution to particular units, and it is therefore unaffected by the number of parameters the model contains. This is where an explicit mechanistic model earns its second role: a factor recovered from a network population becomes interpretable when its tuning can be compared against a model whose parameters mean something.</p>
+<p>Attribution to a generator likewise runs through the design rather than through the internals. A factor that appears when simulated cone sampling is varied and disappears when it is held constant is attributable to that generator whatever units implement it-the same inferential logic by which the human literature attributes an optical factor to the eye&#x27;s optics, by intervening on the generator and observing which factor moves.</p>
+<p>This loop is not new in kind; it generalizes a parametric method with a long track record. Earlier work simulated populations of model observers from hand-specified mechanisms (spatial-frequency channels, or opponent and multimechanism color models) and retained whichever generative model reproduced the human factor structure (Emery et al., 2017a (Emery et al., , 2023;; Peterzell, 1991 Peterzell, /1992;; Peterzell et al., 1993; Sekuler et al., 1984). The artificial-observer proposal differs in one respect that is also its advantage: the generators of individual variation are not imposed by hand but emerge from initialization, architecture, training history, and simulated optics, so the mechanisms no longer have to be hypothesized in advance. What this delivers is weaker than mechanism discovery in the strong sense-the networks do not hand us an interpretation, and Stage 5 is required to obtain onebut it is the removal of a real constraint. The space of mechanisms the method can reach is no longer bounded by those the modeler thought to write down.</p>
+<h3>Guarding Against a Leaderboard</h3>
+<p>A quantitative target that is cheap to evaluate and easy to optimize against will eventually be optimized against, and the history of machine-learning benchmarks gives little reason to expect this one to be exempt. The failure mode is specific and worth naming. A sufficiently large search over architectures, diets, and hyperparameters could produce a model population whose latent structure matches a human target in one setting, not because any principle of visual organization had been discovered but because the population had been fitted to that setting. The resulting match would carry no more mechanistic import than a high score on any other benchmark, and the program would have reproduced, at the level of covariance structure, precisely the vulnerability it diagnoses in average-based alignment scores (&quot;Why Current Model-Brain Comparison Misses This&quot; section).</p>
+<p>Three safeguards are therefore constitutive of the proposal rather than refinements of it.</p>
+<p>The first is preregistration of the analytic decisions. Factor solutions are analysis-dependent: extraction method, rotation, and the number of factors retained can be chosen so as to force agreement or disagreement. These decisions, and the human target structure itself, must be fixed before model populations are generated or searched.</p>
+<p>The second is a held-out battery that plays no part in selecting or tuning the population, and that is analyzed only once the population is fixed.</p>
+<p>The third, and the one that does most of the work, is a transfer requirement. Matching a population to the human factor structure in a single domain is cheap enough to be achieved by search. Producing one population that simultaneously reproduces the contrast, chromatic, and disparity structures, having been tuned on none of them, is not. A structure that transfers across domains is evidence of a shared generator; a structure that must be refitted for each domain is evidence of overfitting, and the program should say so. The same logic has a per-stimulus analog in controversial stimuli, synthesized to maximize disagreement between models that agree on aggregate measures (Golan et al., 2020). Both methods work by forcing models that agree on a summary to disagree somewhere measurable.</p>
+<p>If populations matched in one domain routinely fail to transfer, the matching was overfitting, and that outcome should be reported as a failure of the program rather than absorbed as a limitation of a particular model.</p>
+<h3>Where the Program Could Pay Off</h3>
+<p>Contrast sensitivity is a natural target, because the human factor structure is well established and maps onto an explicit set of spatial-frequency channels: a model population that recovers the same frequency-tuned factors would be strong evidence that it has built the right early filters, and one that does not would tell us which channels are missing. Crucially, two model populations can match the average observer equally well yet differ entirely in latent structure, so that only the factor-level benchmark distinguishes them (Figure 2). Color appearance is a natural target: the human individual-difference structure has already overturned the simple two-axis opponent model in favor of a multimechanism population code (Emery et al., 2017a (Emery et al., , 2023;; Kaneko et al., 2025). The discriminating step has, in fact, already been carried out by hand on the human side. Emery et al. (2023) simulated three candidate generators of hue variation, each perturbed observer-to-observer in peak and magnitude with realistic noise: cardinal opponent processes (red-green and blue-yellow), broadband processes, and narrowband, locally tuned processes. Of these, only the narrowband model reproduced the measured interobserver correlation structure, recovering the narrow, localized factors of real hue scaling, in which nearby hues covary while distant ones do not. The opponent and broadband models instead predict broad, circle-spanning correlations that the data reject. Applied identically to motion direction, the same method instead recovers periodic factors tied to the cardinal axes of visual space, so the generator that matches is narrowband for hue but cardinal for motion. This is exactly the simulate-and-discriminate logic the present program would run on network populations, except that the competing model classes need no longer be hand-specified: they would emerge from architecture, training diet, and front-end sampling. There is already an effort to ask whether networks reproduce individual variation in color appearance (Kuriki et al., 2025). Stereopsis and motion are domains where the human structure is partly mapped but far from settled, so the artificial population and the remaining human battery can be developed together. Indeed, some of these factors may reflect individual differences in priors rather than in hardware: the cardinal-axis weighting that structures motion judgments plausibly encodes a prior about visual space, whereas hue exhibits no comparable privileged frame (Emery et al., 2023). On this reading the training diet is the generator that instills such priors, which makes them a hypothesis the model population is positioned to test. And development, aging, and clinical vision are the most ambitious: each is a systematic perturbation of the population&#x27;s generators (immature optics, age-related change, disease-specific lesions) so that a model population perturbed in the matching way provides a computational account of how a clinical or developmental factor structure arises from its causes.</p>
+<p>Across all of these, the through-line is the same. We stop asking whether a network resembles a canonical human and ask whether a population of networks differs the way a population of humans differs, using the answer to localize mechanism.</p>
+<h3>What Would Complicate or Falsify the Program</h3>
+<p>A proposal like this should say what would make it wrong. First, artificial individual differences might be real but not human-like in structure: networks could vary along axes with no counterpart in the human factor solution. This is an empirical possibility, not a fatal one; it would mean the current generators of variation are the wrong ones, and the mismatch is itself diagnostic. But if no plausible generator ever produces the human structure, the mechanism-discovery ambition would be undercut. Second, factor solutions are analysis-dependent: extraction, rotation, and the number of factors retained can be tuned to force agreement or disagreement. The program&#x27;s credibility therefore depends on fixing these decisions in advance, applying them identically to both populations, and using confirmatory methods once target structures are established. A complementary safeguard is to make otherwise-equivalent models diverge by construction. When rival models fit existing data equally well, controversial stimuli synthesized to maximize their disagreement let human responses adjudicate between them (Golan et al., 2020). The covariance benchmark proposed here does the same work at the level of populations, converting agreement on the mean into a test on the structure of individual differences.</p>
+<p>Third, the target may move. Current networks underproduce human-like between-observer variation (Rajalingham et al., 2018), and at scale they may converge rather than diversify (Huh et al., 2024), which could dry up the supply of artificial individual differences. The sharpest version of this worry is empirical and recent. Networks differing widely in architecture and training objective turn out to represent natural images using a largely shared set of latent dimensions; the most brain-aligned representations are precisely the ones that are universal rather than idiosyncratic, and each network can be reduced to fewer than 10 of its most universal dimensions with little cost to its similarity to human brain representations (Chen &amp; Bonner, 2025). If artificial observers are that nearly interchangeable, a psychometrics of their differences would have little to work with.</p>
+<p>Four things qualify that conclusion, and all of them are empirical rather than rhetorical. One is that the two literatures measure different quantities. Universality is defined over representational dimensions, and a dimension counts as brain-aligned to the extent that it can be predicted by linear regression from a person&#x27;s visual-cortex responses to the same images. The present proposal measures behavior: thresholds, sensitivities, and the covariance among them across a battery. A representational dimension that is idiosyncratic to one network and poorly predicted from cortical activity may still contribute to how that network performs a discrimination, and nothing in the universality result speaks to whether it does. Another is that the authors are explicit that their findings do not show an absence of meaningful differences among networks. Most of the dimensions they measured are idiosyncratic rather than universal; many occupy intermediate levels of universality while still showing non-negligible brain alignment; and representational similarity to the visual cortex varies substantially across networks within every set they examined. Universality is a property of a subspace, not of a network&#x27;s representation as a whole.</p>
+<p>A third qualification, and the most directly relevant here, is that their networks shared a visual diet. The universality result is obtained across variation in architecture and task objective with training data essentially fixed, and the authors identify training-data variation as an open question, reporting only a preliminary analysis of networks trained on different sets of natural images. Diet is one of the generators this proposal asks to be crossed, and on the reading developed in &quot;The Proposal: A Computational Psychometrics of Vision&quot; section it is the generator most likely to operate at the computational level. The regime this program occupies is therefore close to the one their design holds constant. The last is that the reduction to fewer than 10 dimensions is a claim about what drives representational similarity analysis against the visual cortex, and read carefully, it supports the argument of &quot;Why Current Model-Brain Comparison Misses This&quot; section rather than opposing it. If a handful of universal dimensions accounts for essentially all of a conventional RSA score, then RSA is insensitive to almost everything that distinguishes one network from another, which is the complaint this article makes about aggregate alignment measures and not a refutation of it. The convergence literature asks what is shared; this proposal asks whether what is not shared is structured. Which matters more is exactly the sort of question a population-level benchmark can settle, and if a designed population of artificial observers turns out to have no reliable latent structure beyond a few universal dimensions, that would be an important negative result about artificial vision rather than a failed study.</p>
+<p>Finally, the program&#x27;s central promise, that intervening on a generator changes the recovered factor structure in a predictable way, is itself testable, and has a parametric precedent: adding a single mechanism to the generative system, an extra cone photopigment in transgenic mice, produced a correspondingly new factor in the individual-difference structure (reviewed in Peterzell, 2016; analyzed in full in Peterzell, 2026c). That case is as close to a ground truth as this method has. Because the animals&#x27; photopigments were set genetically, the mechanisms were known independently of the analysis that was meant to recover them, and factor analysis of spectral sensitivities across 125 animals returned one factor per pigment, with pigment peaks estimated from the pattern of individual differences alone falling within a few nanometers of the directly measured values. The converse intervention points the same way on the human side: correcting the eye&#x27;s optics with adaptive optics removes an optical factor from the contrast-sensitivity individual-difference structure while leaving the retinal-neural factors in place (Peterzell &amp; Elliott, 2026), showing that intervening on a single generator can selectively change one recovered factor. If adding or ablating a network component were to leave the recovered factors untouched, that would count against the method&#x27;s central assumption, not merely against a particular model.</p>
+<h3>Conclusion: Variation Is Data</h3>
+<p>Vision science eventually learned, through a small and stubborn tradition, that the differences among observers are a window onto the mechanisms of sight. The models that now serve as our most explicit theories of vision are at the earlier stage, still treating the differences among network instances as a nuisance to control. This article argues that the second field is poised to rediscover what the first already learned: variation is data, not noise, and its structure is a fingerprint of mechanism.</p>
+<p>A mature computational vision science will model not only what observers have in common but why they differ, judging a model not only by where it sits in performance space but by whether a population of such models is factored the way the human population is. The tools for both halves of that comparison already exist, developed in isolation in psychophysics and machine learning. A computational psychometrics of vision is the proposal to use them together.</p>
+<p>A factor recovered from the covariance of individual differences is not a correlation dressed up as something deeper. Correlation is not causation, the textbooks insist, and they are right. But a factor that appears only when a specific mechanism is present, shifts when that mechanism is altered, and vanishes when it is removed is not merely correlating. It is behaving exactly as a cause behaves. These factors are not statistical curiosities. They are the fault lines of perception, the seams along which the system comes apart, and they are where its mechanisms break cleanly enough to be read.</p>
+<h3>Acknowledgements</h3>
+<p>Use of AI-assisted technologies in manuscript preparation. During the preparation of this work, the author used Claude.ai (Anthropic) to assist with literature mapping and to refine wording and improve clarity of expression. All original research, arguments, interpretations, and intellectual content were developed by the author. The author reviewed and edited all AI-assisted revisions and takes full responsibility for the content of this publication.</p>
+<h3>Funding</h3>
+<p>The author received no financial support for the research, authorship, and/or publication of this article.</p>
+<h3>Declaration of Conflicting Interests</h3>
+<p>The author declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.</p>
+<h3>Author Contribution(s)</h3>
+<p>David Henry Peterzell: Conceptualization; Methodology; Project administration; Visualization; Writingoriginal draft; Writingreview &amp; editing.</p>
+<h3>Ethical Considerations</h3>
+<p>Not applicable. This article reports no new studies involving human participants or animals.</p>
+<h3>Consent to Participate</h3>
+<p>Not applicable.</p>
+<h3>Consent for Publication</h3>
+<p>Not applicable.</p>
+<h3>Data Availability Statement</h3>
+<p>Not applicable. No new datasets were generated or analyzed. Figures 1 and 2 are schematic illustrations; the code used to generate them is available from the author on reasonable request.</p>
+<h3>Note</h3>
+<p>1. The term computational psychometrics already has an established usage in educational and large-scale assessment, where it names a blend of psychometric theory with machine-learning and data-science methods for measuring latent abilities from rich behavioral data (Polyak et al., 2017; von Davier et al., 2021). I borrow the phrase deliberately, but with a distinct referent: the analysis of latent perceptual mechanisms across populations of biological and artificial observers. Where confusion is possible I use the fuller phrase computational psychometrics of vision, and readers who prefer to avoid the collision entirely may read it as a proposal for factor-aligned model populations or second-order representational alignment.</p>
+<h3>Figure 1.</h3>
+<p>Figure1. The proposed computational psychometrics of vision. A population of human observers and a designed population of artificial observers (networks varying in seed, architecture, simulated optics, cone sampling, and training diet) are run through the same psychophysical battery. The matched battery is restricted to tasks with a well-defined machine analog; physiological and affective measures appear on the human side only, as external validators of the human factor structure rather than as items administered to networks. For each population, the interobserver covariance structure is submitted to identical latent-variable analysis (factor analysis or structural equation modeling) to recover its latent factors. The benchmark is a comparison of the two latent structures, their number of factors, their tuning (loadings), and their pattern of independence, rather than a comparison of average performance. A match identifies a candidate mechanism; a mismatch is diagnostic of what the model lacks.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Why mean performance is not enough, illustrated for contrast sensitivity (schematic). Top: a human population and two model populations have essentially identical mean contrast-sensitivity functions, so any average-based alignment score ranks all three as equally good models. Bottom: their latent factor structures differ. The human population (left) resolves into three frequency-tuned factors, the spatial-frequency channels recovered by factor analysis of human individual differences. Model population A (center) reproduces this structure; Model population B (right) collapses to a single global factor. The proposed benchmark credits A over B; an average-alignment score cannot.</p>
+<p>i-Perception 17(6)</p>
+<h3>References</h3>
+<p>Ashby, F. G., Maddox, W. T., &amp; Lee, W. W. (1994). On the dangers of averaging across subjects when using multidimensional scaling or the similarity-choice model. Psychological Science, 5(3), 144-151. https://doi.org/10.1111/j.1467-9280.1994.tb00651.x</p>
+<p>Bargary, G., Bosten, J. M., Goodbourn, P. T., Lawrance-Owen, A. J., Hogg, R. E., &amp; Mollon, J. D. (2017). Individual differences in human eye movements: An oculomotor signature? Vision Research, 141, 157-169. https://doi.org/10.1016/j.visres.2017.03.001</p>
+<p>Bosten, J. M. (2022). Do you see what I see? Diversity in human color perception. Annual Review of Vision Science, 8, 101-133. https://doi.org/10.1146/annurev-vision-093020-112820</p>
+<p>Bosten, J. M., Goodbourn, P. T., Bargary, G., Verhallen, R. J., Lawrance-Owen, A. J., Hogg, R. E., &amp; Mollon, J. D. (2017). An exploratory factor analysis of visual performance in a large population. Vision Research, 141, 303-316. https://doi.org/10.1016/j.visres.2017.02.005</p>
+<p>Bouthillier, X., Delaunay, P., Bronzi, M., Trofimov, A., Nichyporuk, B., Szeto, J., Sepah, N., Raff, E., Madan, K., Voleti, V., Kahou, S. E., Michalski, V., Arbel, T., Pal, C., Varoquaux, G., &amp; Vincent, P. (2021). Accounting for variance in machine learning benchmarks. Proceedings of Machine Learning and Systems (MLSys), 3, 747-769.</p>
+<p>Bowers, J. S., Malhotra, G., Dujmovic ́, M., Llera Montero, M., Tsvetkov, C., Biscione, V., Puebla, G., Adolfi, F., Hummel, J. E., Heaton, R. F., Evans, B. D., Mitchell, J., &amp; Blything, R. (2023). Deep problems with neural network models of human vision. Behavioral and Brain Sciences, 46, e385. https://doi.org/10.1017/S0140525X22002813</p>
+<p>Cappe, C., Clarke, A., Mohr, C., &amp; Herzog, M. H. (2014). Is there a common factor for vision? Journal of Vision, 14(8), 4. https://doi.org/10.1167/14.8.4</p>
+<p>Chen, Z., &amp; Bonner, M. F. (2025). Universal dimensions of visual representation. Science Advances, 11(27), eadw7697. https://doi.org/10.1126/sciadv.adw7697</p>
+<p>Chow, J. K. (2024). Modeling individual differences in high-level visual cognition using deep neural networks. Doctoral dissertation, Vanderbilt University, ProQuest Dissertations and Theses Global.</p>
+<p>Chow, J. K., &amp; Palmeri, T. J. (2024). Manipulating and measuring variation in deep neural network (DNN) representations of objects. Cognition, 252, 105920. https://doi.org/10.1016/j.cognition.2024.105920</p>
+<p>Chow, J. K., Palmeri, T. J., Pluck, G., &amp; Gauthier, I. (2023). Evidence for an amodal domain-general object recognition ability. Cognition, 238, 105542. https://doi.org/10.1016/j.cognition.2023.105542</p>
+<p>Dobkins, K. R., Gunther, K. L., &amp; Peterzell, D. H. (2000). What covariance mechanisms underlie green/red equiluminance, luminance contrast sensitivity and chromatic (green/red) contrast sensitivity? Vision Research, 40(6), 613-628. https://doi.org/10.1016/S0042-6989(99)00211-4</p>
+<p>Emery, K. J., Volbrecht, V. J., Peterzell, D. H., &amp; Webster, M. A. (2017a). Variations in normal color vision. VI. Factors underlying individual differences in hue scaling and their implications for models of color appearance. Vision Research, 141, 51-65. https://doi.org/10.1016/j.visres.2016.12.006</p>
+<p>Emery, K. J., Volbrecht, V. J., Peterzell, D. H., &amp; Webster, M. A. (2017b). Variations in normal color vision. VII. Relationships between color naming and hue scaling. Vision Research, 141, 66-75. https://doi.org/10.1016/j.visres.2016.12.007</p>
+<p>Emery, K. J., Volbrecht, V. J., Peterzell, D. H., &amp; Webster, M. A. (2023). Fundamentally different representa- tions of color and motion revealed by individual differences in perceptual scaling. Proceedings of the National Academy of Sciences of the U.S.A., 120(4), e2202262120. https://doi.org/10.1073/pnas.2202262120</p>
+<p>Emery, K. J., &amp; Webster, M. A. (2019). Individual differences and their implications for color perception. Current Opinion in Behavioral Sciences, 30, 28-33. https://doi.org/10.1016/j.cobeha.2019.05.002</p>
+<p>Estes, W. K. (1956). The problem of inference from curves based on group data. Psychological Bulletin, 53(2), 134-140. https://doi.org/10.1037/h0045156</p>
+<p>Fisher, A. J., Medaglia, J. D., &amp; Jeronimus, B. F. (2018). Lack of group-to-individual generalizability is a threat to human subjects research. Proceedings of the National Academy of Sciences, 115(27), E6106-E6115. https://doi.org/10.1073/pnas.1711978115</p>
+<p>Fung, K., Murty, N. A. R., &amp; Rahnev, D. (2025). Human-like individual differences emerge from random weight initializations in neural networks [Preprint]. bioRxiv. https://doi.org/10.1101/2025.10.25.684448</p>
+<p>Funke, C. M., Borowski, J., Stosio, K., Brendel, W., Wallis, T. S. A., &amp; Bethge, M. (2021). Five points to check when comparing visual perception in humans and machines. Journal of Vision, 21(3), 16. https://doi.org/10.1167/jov.21.3.16</p>
+<p>Garobbio, S., Kunchulia, M., &amp; Herzog, M. H. (2024). Weak correlations between visual abilities in healthy older adults, despite long-term performance stability. Vision Research, 215, 108355. https://doi.org/10.1016/j.visres.2023.108355</p>
+<p>Geirhos, R., Jacobsen, J.-H., Michaelis, C., Zemel, R., Brendel, W., Bethge, M., &amp; Wichmann, F. A. (2020a). Shortcut learning in deep neural networks. Nature Machine Intelligence, 2(11), 665-673. https://doi.org/10.1038/s42256-020-00257-z</p>
+<p>Geirhos, R., Meding, K., &amp; Wichmann, F. A. (2020b). Beyond accuracy: Quantifying trial-by-trial behaviour of CNNs and humans by measuring error consistency. Advances in Neural Information Processing Systems, 33, 13890-13902.</p>
+<p>Golan, T., Raju, P. C., &amp; Kriegeskorte, N. (2020). Controversial stimuli: Pitting neural networks against each other as models of human cognition. Proceedings of the National Academy of Sciences, 117(47), 29330-- 29337. https://doi.org/10.1073/pnas.1912334117</p>
+<p>Gunther, K. L., &amp; Dobkins, K. R. (2002). Individual differences in chromatic (red/green) contrast sensitivity are constrained by the relative number of L-versus M-cones in the eye. Vision Research, 42(11), 1367-1378. https://doi.org/10.1016/S0042-6989(02)00043-3</p>
+<p>Gunther, K. L., &amp; Dobkins, K. R. (2003). Independence of mechanisms tuned along cardinal and non-cardinal axes of color space: Evidence from factor analysis. Vision Research, 43(6), 683-696. https://doi.org/10.1016/S0042-6989(02)00689-2</p>
+<p>Heathcote, A., Brown, S., &amp; Mewhort, D. J. K. (2000). The power law repealed: The case for an exponential law of practice. Psychonomic Bulletin &amp; Review, 7(2), 185-207. https://doi.org/10.3758/BF03212979</p>
+<p>Herzog, M. H., Garobbio, S., Pfau, M., &amp; Scholl, H. (2025). Is there a common factor for vision? Acta Ophthalmologica, 103, e295-e303. https://doi.org/10.1111/aos.16974</p>
+<p>Hibbard, P. B., Bradshaw, M. F., Langley, K., &amp; Rogers, B. J. (2002). The stereoscopic anisotropy: Individual differences and underlying mechanisms. Journal of Experimental Psychology: Human Perception and Performance, 28(2), 469-476. https://doi.org/10.1037/0096-1523.28.2.469</p>
+<p>Huh, M., Cheung, B., Wang, T., &amp; Isola, P. (2024). The Platonic representation hypothesis. Proceedings of the 41st International Conference on Machine Learning (ICML). arXiv:2405.07987.</p>
+<p>Kaneko, S., Kuriki, I., Andersen, S. K., &amp; Peterzell, D. H. (2025). Individual variability in steady-state VEP responses for hues sweeping around cardinal color axes: Clues to cortical color coding? Journal of Vision, 25(12), 2. https://doi.org/10.1167/jov.25.12.2</p>
+<p>Kaneko, S., Murakami, I., Kuriki, I., &amp; Peterzell, D. H. (2018). Individual variability in simultaneous contrast for color and brightness: Small sample factor analyses reveal separate induction processes for short and long flashes. i-Perception, 9(5), 2041669518800507. https://doi.org/10.1177/2041669518800507</p>
+<p>Kievit, R. A., Frankenhuis, W. E., Waldorp, L. J., &amp; Borsboom, D. (2013). Simpson&#x27;s paradox in psychological science: A practical guide. Frontiers in Psychology, 4, 513. https://doi.org/10.3389/fpsyg.2013.00513</p>
+<p>Kornblith, S., Norouzi, M., Lee, H., &amp; Hinton, G. (2019). Similarity of neural network representations revisited. Proceedings of the 36th International Conference on Machine Learning (ICML), PMLR, 97, 3519-3529.</p>
+<p>Kriegeskorte, N., Mur, M., &amp; Bandettini, P. (2008). Representational similarity analysis-connecting the branches of systems neuroscience. Frontiers in Systems Neuroscience, 2, 4. https://doi.org/10.3389/neuro.06.004.2008</p>
+<p>Kubilius, J., Schrimpf, M., Kar, K., Rajalingham, R., Hong, H., Majaj, N. J., Issa, E. B., Bashivan, P., Prescott-Roy, J., Schmidt, K., Nayebi, A., Bear, D., Yamins, D. L. K., &amp; DiCarlo, J. J. (2019). Brain-like object recognition with high-performing shallow recurrent ANNs. Advances in Neural Information Processing Systems (NeurIPS), 32.</p>
+<p>Kuriki, I., Saito, H., Okubo, R., Kiyokawa, H., &amp; Shinozaki, T. (2025). Can DNN models simulate appearance var- iations of #TheDress? i-Perception, 16(6), 20416695251388577. https://doi.org/10.1177/20416695251388577</p>
+<p>Llamas-Cornejo, I., Peterzell, D. H., &amp; Serrano-Pedraza, I. (2024). Temporal mechanisms in frontoparallel stereomotion revealed by individual differences analysis. European Journal of Neuroscience, 59(11), 3117-3133. https://doi.org/10.1111/ejn.16342</p>
+<p>Llamas-Cornejo, I., Peterzell, D. H., &amp; Serrano-Pedraza, I. (2025). Orientation mechanisms in stereoscopic vision: An individual differences approach. Vision Research, 237, 108709. https://doi.org/10.1016/j.visres.2025.108709</p>
+<p>Lorenzo-Seva, U., &amp; ten Berge, J. M. F. (2006). Tucker&#x27;s congruence coefficient as a meaningful index of fac- tor similarity. Methodology, 2(2), 57-64. https://doi.org/10.1027/1614-2241.2.2.57</p>
+<p>Luna, R., &amp; Serrano-Pedraza, I. (2020). Evidence for different spatiotemporal mechanisms using duration thresholds: An individual differences approach. Vision Research, 175, 58-74. https://doi.org/10.1016/j.visres.2020.07.002</p>
+<p>MacCallum, R. C., Widaman, K. F., Zhang, S., &amp; Hong, S. (1999). Sample size in factor analysis. Psychological Methods, 4(1), 84-99. https://doi.org/10.1037/1082-989X.4.1.84</p>
+<p>Madhyastha, P., &amp; Jain, R. (2019). On model stability as a function of random seed. Proceedings of the 23rd Conference on Computational Natural Language Learning (CoNLL) (pp. 929-939).</p>
+<p>Mahner, F. P., Muttenthaler, L., Güçlü, U., &amp; Hebart, M. N. (2025). Dimensions underlying the representational alignment of deep neural networks with humans. Nature Machine Intelligence. https://doi.org/10.1038/s42256-025-01041-7</p>
+<p>Marr, D. (1982). Vision: A computational investigation into the human representation and processing of visual information. W. H. Freeman.</p>
+<p>Mehrer, J., Spoerer, C. J., Kriegeskorte, N., &amp; Kietzmann, T. C. (2020). Individual differences among deep neural network models. Nature Communications, 11(1), 5725. https://doi.org/10.1038/s41467-020-19632-w</p>
+<p>Min, S. H., &amp; Reynaud, A. (2024). Applying resampling and visualization methods in factor analysis to model human spatial vision. Investigative Ophthalmology &amp; Visual Science, 65(1), 17. https://doi.org/10.1167/iovs.65.1.17</p>
+<p>Min, S. H., &amp; Reynaud, A. (2026). Individual differences reveal distinct age-related reorganizations in spatial channels for luminance and texture processing. NPJ Aging. Advance online publication. https://doi.org/10.1038/s41514-026-00374-w</p>
+<p>Molenaar, P. C. M. (2004). A manifesto on psychology as idiographic science: Bringing the person back into scientific psychology, this time forever. Measurement: Interdisciplinary Research and Perspectives, 2(4), 201-218. https://doi.org/10.1207/s15366359mea0204_1</p>
+<p>Mollon, J. D., Bosten, J. M., Peterzell, D. H., &amp; Webster, M. A. (2017). Individual differences in visual science: What can be learned and what is good experimental practice? Vision Research, 141, 4-15. https://doi.org/10.1016/j.visres.2017.11.001</p>
+<p>Muttenthaler, L., Dippel, J., Linhardt, L., Vandermeulen, R. A., &amp; Kornblith, S. (2023). Human alignment of neural network representations. International Conference on Learning Representations (ICLR).</p>
+<p>Peng, Y., Chow, J., &amp; Palmeri, T. J. (2026). Exploring individual differences in DNN representations [Abstract]. Journal of Vision (Vision Sciences Society annual meeting abstract).</p>
+<p>Peterzell, D. H. (1991/1992). A longitudinal study of individual differences in the contrast sensitivity functions of 4-, 6-, and 8-month-old human infants (Doctoral dissertation, University of Colorado, Boulder, 1991). Dissertation Abstracts International, 53, 1084B. (University Microfilms No. 9220443), (Chair: Prof. John S. Werner).</p>
+<p>Peterzell, D. H. (2016). Discovering sensory processes using individual differences: A review and factor ana- lytic manifesto. Electronic Imaging (Human Vision and Electronic Imaging), 2016(16), 1-11. https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-112</p>
+<p>Peterzell, D. H. (2026a). Color naming needs a non-uniform perceptual prior: Individual differences in hue scal- ing and the vision-language interface [Preprint]. PsyArXiv. https://osf.io/preprints/psyarxiv/u69mg</p>
+<p>Peterzell, D. H. (2026b). Latent visual mechanisms as computational phenotypes: Toward a precision science of vision [Manuscript submitted for publication].</p>
+<p>Peterzell, D. H. (2026c). Photopigment mechanisms recovered from individual differences in the spectral sen- sitivity of wild-type and genetically engineered mice [Manuscript submitted for publication].</p>
+<p>Peterzell, D. H. (in press). Choosing stimuli wisely by using individual differences: The one-stimulus-per-factor principle for vision science and optometric assessment, with a step-by-step tutorial. Journal of Vision. Preprint: https://doi.org/10.31234/osf.io/m59tk_v3</p>
+<p>Peterzell, D. H., Arrighi, R., Di Cesare, C., Gurioli, M., Farini, A., &amp; Grasso, P. A. (2026). Cognitive color coding: Chromatic tuning underlying numerosity adaptation-Experimental and factor-analytic evidence from individual differences [Preprint]. bioRxiv. https://doi.org/10.64898/2026.06.27.734875</p>
+<p>Peterzell, D. H., Bachtoula, O., Llamas-Cornejo, I., &amp; Serrano-Pedraza, I. (2025). Orientation tuning of contrast-sensitive mechanisms: Insights from individual differences. Journal of Vision, 25(9), 1589. https://doi.org/10.1167/jov.25.9.1589</p>
+<p>Peterzell, D. H., Chang, S. K., &amp; Teller, D. Y. (2000). Spatial frequency tuned covariance channels for red- green and luminance-modulated gratings: Psychophysical data from human infants. Vision Research, 40(4), 431-444. https://doi.org/10.1016/S0042-6989(99)00188-1</p>
+<p>Peterzell, D. H., &amp; Elliott, S. (2026). Optical and neural contributions to contrast sensitivity: A factor analysis of individual differences with and without adaptive optics. Journal of Vision, 26(5), 6. https://doi.org/10.1167/jov.26.5.6</p>
+<p>Peterzell, D. H., Ewane Enongue, J., Read, J. C. A., &amp; Serrano-Pedraza, I. (2026). Retinal versus relative spatial frequency in stereoscopic vision: Evidence from individual differences [Manuscript submitted for publication].</p>
+<p>Peterzell, D. H., &amp; Kelly, J. P. (1997). Development of spatial frequency tuned &quot;covariance&quot; channels: Individual differences in the electrophysiological (VEP) contrast sensitivity function. Optometry and Vision Science, 74(10), 800-807. https://doi.org/10.1097/00006324-199710000-00019</p>
+<p>Peterzell, D. H., Schefrin, B. E., Tregear, S. J., &amp; Werner, J. S. (2000). Spatial frequency tuned covariance chan- nels underlying scotopic contrast sensitivity. In Vision Science and its Applications, OSA Technical Digest (paper FC2). Optica Publishing Group. https://doi.org/10.1364/VSIA.2000.FC2</p>
+<p>Peterzell, D. H., Serrano-Pedraza, I., Widdall, M., &amp; Read, J. C. A. (2017). Thresholds for sine-wave corruga- tions defined by binocular disparity in random dot stereograms: Factor analysis of individual differences reveals two stereoscopic mechanisms tuned for spatial frequency. Vision Research, 141, 127-135. https://doi.org/10.1016/j.visres.2017.11.002</p>
+<p>Peterzell, D. H., &amp; Teller, D. Y. (1996). Individual differences in contrast sensitivity functions: The lowest spa- tial frequency channels. Vision Research, 36(19), 3077-3085. https://doi.org/10.1016/0042-6989(96)00061-2</p>
+<p>Peterzell, D. H., &amp; Teller, D. Y. (2000). Spatial frequency tuned covariance channels for red-green and luminance-modulated gratings: Psychophysical data from human adults. Vision Research, 40(4), 417-430. https://doi.org/10.1016/S0042-6989(99)00187-X</p>
+<p>Peterzell, D. H., Werner, J. S., &amp; Kaplan, P. S. (1993). Individual differences in contrast sensitivity functions: The first four months of life in humans. Vision Research, 33(3), 381-396. https://doi.org/10.1016/0042-6989(93)90093-C</p>
+<p>Peterzell, D. H., Werner, J. S., &amp; Kaplan, P. S. (1995). Individual differences in contrast sensitivity functions: Longitudinal study of 4-, 6-and 8-month-old human infants. Vision Research, 35(7), 961-979. https://doi.org/10.1016/0042-6989(94)00117-5</p>
+<p>Picard, D. (2021). torch.manual_seed(3407) is all you need: On the influence of random seeds in deep learning architectures for computer vision [Preprint]. arXiv:2109.08203.</p>
+<p>Pitt, M. A., &amp; Myung, I. J. (2002). When a good fit can be bad. Trends in Cognitive Sciences, 6(10), 421-425. https://doi.org/10.1016/S1364-6613(02)01964-2</p>
+<p>Polyak, S. T., von Davier, A. A., &amp; Peterschmidt, K. (2017). Computational psychometrics for the measure- ment of collaborative problem solving skills. Frontiers in Psychology, 8, 2029. https://doi.org/10.3389/fpsyg.2017.02029</p>
+<p>Rafiei, F., Shekhar, M., &amp; Rahnev, D. (2024). The neural network RTNet exhibits the signatures of human per- ceptual decision-making. Nature Human Behaviour, 8, 1752-1770. https://doi.org/10.1038/s41562-024-01914-8</p>
+<p>Rajalingham, R., Issa, E. B., Bashivan, P., Kar, K., Schmidt, K., &amp; DiCarlo, J. J. (2018). Large-scale, high- resolution comparison of the core visual object recognition behavior of humans, monkeys, and state-of-the-art deep artificial neural networks. Journal of Neuroscience, 38(33), 7255-7269. https://doi.org/10.1523/JNEUROSCI.0388-18.2018</p>
+<p>Richler, J. J., Wilmer, J. B., &amp; Gauthier, I. (2017). General object recognition is specific: Evidence from novel and familiar objects. Cognition, 166, 42-55. https://doi.org/10.1016/j.cognition.2017.05.019</p>
+<p>Roberts, S., &amp; Pashler, H. (2000). How persuasive is a good fit? A comment on theory testing. Psychological Review, 107(2), 358-367. https://doi.org/10.1037/0033-295X.107.2.358</p>
+<p>Roorda, A., &amp; Williams, D. R. (1999). The arrangement of the three cone classes in the living human eye. Nature, 397(6719), 520-522. https://doi.org/10.1038/17383</p>
+<p>Schrimpf, M., Kubilius, J., Hong, H., Majaj, N. J., Rajalingham, R., Issa, E. B., Kar, K., Bashivan, P., Prescott-Roy, J., Geiger, F., Schmidt, K., Yamins, D. L. K., &amp; DiCarlo, J. J. (2018). Brain-Score: Which artificial neural network for object recognition is most brain-like? [Preprint]. bioRxiv. https://doi.org/10.1101/407007</p>
+<p>Sekuler, R., Wilson, H. R., &amp; Owsley, C. (1984). Structural modeling of spatial vision. Vision Research, 24(7), 689-700. https://doi.org/10.1016/0042-6989(84)90210-4</p>
+<p>Serrano-Pedraza, I., Boegaerts, D., Read, J. C. A., &amp; Peterzell, D. H. (2018). Orientation tuning for spatial vision and stereopsis: Factor analysis of individual differences in contrast and disparity thresholds. Journal of Vision, 18(10), 126. https://doi.org/10.1167/18.10.126</p>
+<p>Smithson, C. J. R., &amp; Gauthier, I. (2026). Is domain-general object recognition ability a novel construct? Annual Review of Psychology, 77, 139-168. https://doi.org/10.1146/annurev-psych-020325-034053</p>
+<p>Storrs, K. R., Kietzmann, T. C., Walther, A., Mehrer, J., &amp; Kriegeskorte, N. (2021). Diverse deep neural net- works all predict human inferior temporal cortex well, after training and fitting. Journal of Cognitive Neuroscience, 33(10), 2044-2064. https://doi.org/10.1162/jocn_a_01755</p>
+<p>Tulver, K. (2019). The factorial structure of individual differences in visual perception. Consciousness and Cognition, 73, 102762. https://doi.org/10.1016/j.concog.2019.102762</p>
+<p>von Davier, A. A. (2017). Computational psychometrics in support of collaborative educational assessments. Journal of Educational Measurement, 54(1), 3-11. https://doi.org/10.1111/jedm.12129</p>
+<p>von Davier, A. A., Mislevy, R. J., &amp; Hao, J. (Eds.). (2021). Computational psychometrics: New methodologies for a new generation of digital learning and assessment. Springer. https://doi.org/10.1007/978-3-030-74394-9</p>
+<p>Webster, M. A. (2015). Individual differences in color vision. In A. J. Elliot, M. D. Fairchild, &amp; A. Franklin (Eds.), Handbook of color psychology (pp. 197-215). Cambridge University Press.</p>
+<p>Wilmer, J. B. (2008). How to use individual differences to isolate functional organization, biology, and utility of visual functions; with illustrative proposals for stereopsis. Spatial Vision, 21(6), 561-579. https://doi.org/10.1163/156856808786451408</p>
+<p>Wilmer, J. B. (2017). Individual differences in face recognition: A decade of discovery. Current Directions in Psychological Science, 26(3), 225-230. https://doi.org/10.1177/0963721417710693</p>
+<p>Wilmer, J. B., Germine, L., Chabris, C. F., Chatterjee, G., Williams, M., Loken, E., Nakayama, K., &amp; Duchaine, B. (2010). Human face recognition ability is specific and highly heritable. Proceedings of the National Academy of Sciences of the U.S.A., 107(11), 5238-5241. https://doi.org/10.1073/pnas.0913053107</p>
+<p>Wilson, H. R., &amp; Gelb, D. J. (1984). Modified line-element theory for spatial-frequency and width discrimin- ation. Journal of the Optical Society of America A, 1(1), 124-131. https://doi.org/10.1364/JOSAA.1.000124</p>
+<p>Wilson, H. R., McFarlane, D. K., &amp; Phillips, G. C. (1983). Spatial frequency tuning of orientation selective units estimated by oblique masking. Vision Research, 23(9), 873-882. https://doi.org/10.1016/0042-6989(83)90055-X</p>
+<p>Yamins, D. L. K., &amp; DiCarlo, J. J. (2016). Using goal-driven deep learning models to understand sensory cor- tex. Nature Neuroscience, 19(3), 356-365. https://doi.org/10.1038/nn.4244</p>
+<p>Yamins, D. L. K., Hong, H., Cadieu, C. F., Solomon, E. A., Seibert, D., &amp; DiCarlo, J. J. (2014). Performance-optimized hierarchical models predict neural responses in higher visual cortex. Proceedings of the National Academy of Sciences of the U.S.A., 111(23), 8619-8624. https://doi.org/10.1073/pnas.1403112111</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
