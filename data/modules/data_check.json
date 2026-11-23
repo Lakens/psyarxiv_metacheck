@@ -216763,8 +216763,26 @@
    "published": "2026-11-02T22:32:06.772934",
    "report_page": true,
    "light": "yellow",
-   "summary": "-  We classified 332 files: 329 data, 3 documentation.\n-  We found 41 tabular data files and extracted 249 columns from 40 of them.\n-  We grouped the files into 1 study group (ex1), plus 2 collection-level files (README/ro-crate metadata).\n-  An archive in repository https://doi.org/10.26180/23306054.v3 exceeds the 500 MB per-repository budget: fetched the smallest members up to the cap, 7 members omitted. Raise `max_download_size` to include more.\n-  1 file read as a table but is not a usable rectangular dataset (AdditionalData.csv: 40% of columns are free text and 40% are mostly empty -- this looks like a coding worksheet, not a rectangular dataset). No columns were extracted and they were not sent to the LLM. Share the underlying data as a plain rectangular table (one header row, one column per variable) with a codebook: AdditionalData.csv. We ran automated data-quality checks on 249 columns; 34 columns have at least one potential issue (28 columns with no observed values (entirely empty); 6 columns with numeric values stored as text). We detected demographic columns for Age, Gender. 25 of 39 spreadsheet files have at least one formatting issue (colour coding, merged cells, empty rows/columns, or an offset header).",
+   "summary": "-  We classified 332 files: 329 data, 3 documentation.\n-  We found 41 tabular data files and extracted 253 columns from 41 of them.\n-  We grouped the files into 1 study group (ex1), plus 2 collection-level files (README/ro-crate metadata).\n-  Repository https://doi.org/10.26180/23306054.v3 exceeds the 500 MB per-repository budget: fetched the smallest archive members up to the cap, 271 members omitted. Raise `max_download_size` to include more. We ran automated data-quality checks on 253 columns; 36 columns have at least one potential issue (26 columns with no observed values (entirely empty); 6 columns with numeric values stored as text; 4 columns whose name contains file-illegal characters or is excessively long). We detected demographic columns for Age, Gender. 25 of 39 spreadsheet files have at least one formatting issue (colour coding, merged cells, empty rows/columns, or an offset header).",
    "findings": [
+    {
+     "file": "AdditionalData.csv",
+     "column": "Perception (0: no perception, 5: maximum perception)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\":\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "AdditionalData.csv",
+     "column": "Thought (0:no thought, 5: maximum thought)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\":\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "AdditionalData.csv",
+     "column": "Subjective duration of experience 0-5s=1, >5-10s=2, >10s-1min=3,>1-10min=4,>10min-1h=5, >1h=6",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\">\"); a length of 93 characters (SPSS allows at most 64, SAS and Stata 32, so this name cannot be imported there without renaming). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A n…"
+    },
     {
      "file": "Reports_S01.xlsx [SA]",
      "column": "Date...3",
@@ -216953,19 +216971,13 @@
     },
     {
      "file": "Records.csv",
-     "column": "Treatment group",
-     "label": "Empty column",
-     "detail": "Column is empty: all 287 values are missing."
+     "column": "Experience (NE:0,CEWR:1,CE:2)  ",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\":\"); leading/trailing whitespace. Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
     },
     {
      "file": "Records.csv",
      "column": "Proportion artifacts",
-     "label": "Empty column",
-     "detail": "Column is empty: all 287 values are missing."
-    },
-    {
-     "file": "Records.csv",
-     "column": "Remarks",
      "label": "Empty column",
      "detail": "Column is empty: all 287 values are missing."
     },
