@@ -72,10 +72,12 @@ POLL_SECONDS = 15
 # has the same.
 SERVER_PLACES = 3
 # the checks the SURF server runs for its regular report; with run_code=true the
-# server adds reproducibility_check, which runs the paper's code in the sandbox
-MODULES = ("power,marginal,prereg_check,ethics_check,ref_pubpeer,ref_retraction,"
+# server adds reproducibility_check, which runs the paper's code in the sandbox.
+# ethics_check comes last: it reads the results of power, stat_p_exact,
+# stat_check, repo_check, data_check and prereg_check (metacheck #695, point 18)
+MODULES = ("power,marginal,prereg_check,ref_pubpeer,ref_retraction,"
            "ref_replication,stat_check,stat_p_exact,stat_p_nonsig,stat_effect_size,"
-           "repo_check,code_check,data_check,codebook_check")
+           "repo_check,code_check,data_check,codebook_check,ethics_check")
 FILE_TYPES = {"pdf": "application/pdf",
               "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"}
 MAX_BYTES = 50 * 1024 ** 2      # the server refuses larger files (api.R MAX_UPLOAD_BYTES)
