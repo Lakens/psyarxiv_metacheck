@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: A Clinician-Informed Framework for Precision
+Psychotherapy in Psychosis</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+A Clinician-Informed Framework for Precision Psychotherapy in Psychosis
+</p>
+<p class="meta">
+2026-11-23 · Metacheck 0.4.4.35
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to fix</span></span><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>15</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fine">Fine <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to involve live data collection contained an
+ethics approval statement.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(15)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>Based on the following text, we would expect an ethics approval
+statement, and it was present:</p>
+<blockquote>
+<p>Participants were qualified Clinical Psychologists with expertise in
+delivering CBTp.</p>
+</blockquote>
+<blockquote>
+<p>They were recruited through NHS partner services affiliated with
+King’s College London’s psychosis clinical-academic network.</p>
+</blockquote>
+<blockquote>
+<p>All participants provided informed consent and were compensated for
+their time.</p>
+</blockquote>
+<blockquote>
+<p>e.g. personal goals, reasons for doing the research Participants were
+informed that SL was an MSc student at King’s College London conducting
+the study as part of her MSc in Early Intervention in Psychosis.</p>
+</blockquote>
+<blockquote>
+<p>e.g. purposive, convenience, consecutive, snowball Participants were
+recruited through network-based sampling.</p>
+</blockquote>
+<blockquote>
+<p>e.g. face-to-face, telephone, mail, email Participants were recruited
+via email through the professional and clinicalacademic networks of the
+Principal Psychologist (AG), who circulated study information to
+relevant NHS colleagues and professional contacts.</p>
+</blockquote>
+<blockquote>
+<p>Sample size How many participants were in the study?</p>
+</blockquote>
+<p>Ethics approval statement:</p>
+<blockquote>
+<p>Ethical approval was granted by the King’s College London PNM Ethics
+Committee Panel (reference LRS/DP-24/25-47765; 23 April 2025).</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 31 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 31 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 31 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term) - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
+- <code>Research Ethics Committee/Board/Panel</code>
+(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee on (Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code></p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p>Live data collection is detected by the internal helper
+<code>.detect_live_data()</code>, which searches for sentences
+indicating that data were collected directly from human or animal
+participants. Papers without any live-data signal are not flagged as
+missing ethics approval. The helper uses conservative patterns to avoid
+flagging secondary data analyses, computational experiments, or
+economics papers that analyse existing survey data. See
+<code>.detect_live_data()</code> for the full list of patterns and
+intentional exclusions.</p>
+<p>A paper that states that no human or animal subjects took part (“no
+human subjects were involved”, “did not involve human participants”, or
+people taking part “not as subjects”) is not expected to have an ethics
+statement, whatever participant phrase it also has (see
+<code>.detect_no_participants()</code>). A negation near a participant
+phrase alone (“No participants were excluded”) does not count: it
+reports a study with participants.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Cognitive Behavioural Therapy (CBT) is the recommended psychosocial intervention for early psychosis; however, treatment response remains heterogeneous. Precision psychotherapy aims to personalise treatment by identifying individual characteristics that may predict differential treatment response and inform treatment selection. However, most precision psychotherapy studies rely on retrospective data collected using assessment protocols not designed to identify predictors of treatment response and may therefore fail to capture the full range of characteristics relevant to treatment personalisation. We aimed to review and expand the current set of predictors used in the literature in CBT from the perspective of clinicians.</p>
+<p>Twenty Clinical Psychologists participated in semi-structured interviews. Clinician-informed predictors were identified through inductive analysis of unprompted accounts. Clinicians subsequently rated the perceived importance of these and 32 literature-derived factors on a 10-point scale. Mean ratings and variability were examined to characterise clinician agreement. Findings were integrated into a candidate predictor framework linked to available measurement instruments.</p>
+<p>Clinicians spontaneously identified 38 factors, of which 16 were absent from the literature-derived list.</p>
+<p>Factors considered important for engagement with, and benefit from CBTp included cognitive processes, symptom characteristics, illness history, psychosocial functioning, and migrant status. Clinicians also identified several under-investigated therapy-related and clinical factors, such as expectations and understanding of therapy, readiness and motivation for treatment, medication use, level of risk, and substance misuse. Demographic characteristics more broadly, and basic neurocognitive performance, were generally considered less important.</p>
+<p>The resulting clinician-informed framework provides a broader, clinically grounded set of candidate predictors to inform prospective research into personalised CBTp.</p>
+<h3>1. INTRODUCTION</h3>
+<p>Psychosis is characterised by hallucinations and delusions that disrupt an individual&#x27;s perception of reality, alongside negative symptoms, disorganised behaviour, and disturbances in thought and speech (American Psychiatric Association, 2022; Arciniegas, 2015). It is associated with substantial distress, functional impairment, high rates of hospitalisation, and increased mortality (Fusar-Poli et al., 2017). Cognitive Behavioural Therapy for psychosis (CBTp) is recommended psychosocial intervention in addition to antipsychotic medication (NICE Guidelines, Psychosis and Schizophrenia, 2014), yet treatment response is heterogeneous: 44.5% of individuals achieve at least a 20% reduction in overall symptom severity (Bighelli et al., 2018). Poor engagement is also a major barrier to improvement (Dunn et al., 2012). A substantial proportion of individuals do not attend CBTp or do not progress beyond the engagement and assessment phase, whereas those who receive the full therapeutic intervention are more likely to experience clinical benefit (Freeman et al., 2013).</p>
+<p>Previous studies have examined a range of baseline factors associated with CBTp engagement. A biopsychosocial explanatory model and a stronger sense of personal agency has been associated with greater engagement (Freeman et al., 2013). In contrast, poorer insight and decreased social functioning (Lincoln et al., 2014), greater hostility and lower perceived responsibility for change (Myhr et al., 2013), lower educational attainment, more severe negative symptoms, and poorer cognitive functioning (Kukla et al., 2014) have all been associated with reduced engagement. A systematic review found that female gender, older age, higher clinical insight, shorter illness duration, and higher educational attainment were the most consistent predictors of favourable response to CBTp (O&#x27;Keeffe et al., 2017), while a more recent review found no robust predictor (Gorina et al., 2026). Most of the studies included in these reviews used traditional analytical approaches to estimate average effects or examined predictors either in isolation or within relatively simple multivariable models. Although useful, these approaches are less suited to identifying individual characteristics that could inform treatment selection and support the personalisation of CBTp (Arbabshirani et al., 2017). Machine-learning approaches can model complex relationships among multiple pre-treatment variables to predict individual therapy outcomes and have shown promise in predicting psychotherapy outcomes (Vieira et al., 2022). However, many studies examining predictors have relied on secondary analyses of datasets collected for other purposes. As a result, the predictors examined are often constrained by the original study aims and the variables collected, rather than informed by a comprehensive understanding of the factors that may influence engagement with and benefit from CBTp.</p>
+<p>Advancing precision psychotherapy therefore requires a broader, empirical-and clinical practiceinformed pool of candidate predictors. Methodologically sophisticated models can only detect patterns among the variables available to them; their clinical value depends on the relevance and breadth of those inputs. Experienced CBTp clinicians can help address this upstream limitation by identifying general CBT and psychosis-specific aspects overlooked in conventional datasets. Clinicians can therefore help assist in expanding and refining the set of clinically plausible predictors for prospective studies, ensuring that future prediction tools are clinically relevant and feasible for use in routine care (Mechelli &amp; Vieira, 2019).</p>
+<p>Thus, this study aimed to identify additional candidate predictors of engagement with and benefit from CBTp, drawing on the perspectives of experienced clinical psychologists to inform future prospective prediction studies. Specifically, we aimed to: (1) identify factors raised spontaneously by experienced CBTp clinicians that extend beyond those reported in the existing literature; (2) examine clinicians&#x27; perceived importance of, and level of agreement on, factors identified by clinicians and derived from the literature; and (3) map the integrated set of candidate factors onto available measurement instruments to inform prospective data collection and subsequent predictive modelling.</p>
+<h3>2. METHODS</h3>
+<p> &gt;METHODS</p>
+<h3>2.1 Participants</h3>
+<p>Participants were qualified Clinical Psychologists with expertise in delivering CBTp. They were recruited through NHS partner services affiliated with King&#x27;s College London&#x27;s psychosis clinical-academic network.</p>
+<p>Thirty-one clinicians were initially invited to participate by email. Recruitment was then extended through snowball sampling, with invited clinicians forwarding the study invitation to other clinicians within their professional networks. Eligibility criteria were: (i) qualification as a clinical psychologist; (ii) at least two years&#x27; experience delivering CBTp; (iii) English-language proficiency; no exclusion criteria were applied. All participants provided informed consent and were compensated for their time. Ethical approval was granted by the King&#x27;s College London PNM Ethics Committee Panel (reference LRS/DP-24/25-47765; 23 April 2025).</p>
+<p>The reporting of this study follows the COREQ guidelines (Tong et al., 2007); (the full checklist is available in the Supplementary Material).</p>
+<h3>2.2 Study design and analysis</h3>
+<p>This study used a mixed-methods approach in which qualitative and quantitative data were collected during the same interviews and integrated through a staged analysis (Fetters et al., 2013). Data were collected through one-to-one semi-structured interviews conducted online by a psychologist research assistant (SML).</p>
+<p>The wider research team included researchers and health professionals-clinical psychologists and a psychiatric rehabilitation practitioner-with research and clinical experience of working with people experiencing first-episode psychosis. Furthermore, a person with lived experience of psychosis provided feedback on the interview script and study documents prior to data collection. This feedback informed the refinement of the study materials and interview process. Interviews were audio-recorded, transcribed, deidentified, and manually reviewed for accuracy before being imported into NVivo 15. The interview comprised two parts: Part 1 (A &amp; B) and Part 2. The complete interview script is provided in the Supplementary Material. Analysis proceeded in three linked stages: (1) inductive identification of candidate factors from clinicians&#x27; unprompted accounts; (2) descriptive assessment of clinicians perceived importance of, and agreement about, inductively and deductively derived factors; and (3) integration of the two factor sets and mapping onto available measurement instruments to produce the Candidate Predictor Measurement Framework (Figure 1). Stage 1: Inductive factors</p>
+<p>In Part 1A of the interview, clinicians responded to open-ended questions about factors they perceived to influence engagement with and benefit from CBTp, drawing on their clinical experience and judgement. The qualitative analysis was informed by a realist orientation (Putri et al., 2023), and data were analysed inductively using the framework method (Gale et al., 2013). Two researchers (SML and MCDP) independently conducted the initial coding and met regularly to discuss discrepancies and reach agreement. The resulting framework was applied to all transcripts and refined iteratively. Coded data were then charted into a matrix to support comparison across participants and identification of patterns. Inductive coding captured candidate factors arising from clinicians&#x27; unprompted accounts, some of which have not been previously considered in predictor research. This section examines these clinician-identified factors that extend beyond the existing literature.</p>
+<h3>Stage 2: Consensus of inductive and deductive factors</h3>
+<p>In Part 1B, participants rated the importance of each factor they had identified in Part 1A from 1 (least important) to 10 (most important). Part 2 presented 32 factors derived from the literature and asked participants to rate their perceived importance for engagement with, and outcomes of CBTp on the same 10-point scale. These 32 deductive factors were derived from previous literature on predictors of CBTp engagement and response (Granholm et al., 2008; Jenner et al., 2024; Morrison et al., 2019; Nelson et al., 2018; Nowak et al., 2020; O&#x27;Keeffe et al., 2017; Premkumar et al., 2011 Premkumar et al., , 2015)). All ratings were analysed descriptively. For clinician-informed factors, calculations included only participants who had identified and rated the factor. For literature-derived factors, all participants rated the predefined factor set. Consensus plots were used to organise factors and their respective ratings in terms of importance (means) and agreement between clinicians (standard deviations). Median values for each indicator across all factors were used as thresholds to distinguish between higher and lower importance and levels of agreement. These thresholds divided the plots into four descriptive quadrants: higher importance/higher agreement, higher importance/lower agreement, lower importance/higher agreement, and lower importance/lower agreement (Table 3 and Table 4).</p>
+<h3>Stage 3: Candidate Predictors Framework</h3>
+<p>The clinician-informed and literature-derived factor sets were then integrated. The classification was informed by three indicators: the frequency with which a factor was mentioned, its median importance rating, and the dispersion of ratings (standard deviation). A targeted review of the literature was subsequently conducted to identify representative instruments through which each construct could be operationalised. The resulting framework and measurement examples were then reviewed by the wider research team.</p>
+<h3>3. RESULTS</h3>
+<p> &gt;RESULTS</p>
+<h3>3.1 Participant characteristics</h3>
+<p>The final sample comprised 20 clinicians. Socio-demographic characteristics are reported in Table 1.</p>
+<p>Interviews lasted between 24 and 59 minutes, with an average duration of 42 minutes.</p>
+<p>Table 1: Socio-Demographic Characteristics and Professional Qualifications (n=20) Sex N (%) Female 13 (65) Male 7 (35) BABCP accredited Yes 5 (25) No 15 (75) Years of experience with CBTp 2-5 years 4 (20) 6-10 5 (25) 11-15 3 (15) 16+ 8 (40) Current Service Setting a Early Intervention Service 11 (55) Community Mental Health Team 9 (45) Rehabilitation Service 5 (25) Inpatient Mental Health Services 6 (30) Other 3 (15) a Multiple responses permitted; BABCP (British Association for Behavioural and Cognitive Psychotherapies).</p>
+<h3>3.2 Stage 1: Clinician-identified candidate factors</h3>
+<p>Analysis of clinicians&#x27; unprompted accounts identified 38 factors. Of these, 22 overlapped with the literaturederived factors, leaving 16 clinician-only factors (Figure 2). Factors spontaneously mentioned by at least 70% of clinicians were readiness and motivation (90%), cognitive flexibility (85%), social support and isolation (80%), previous experiences of care and therapy (70%), and socioeconomic and environmental stability (70%). Conversely, factors mentioned by fewer than 25% of clinicians primarily concerned demographic, cognitive, and functioning characteristics, and all were included in the literature-derived list. Part 1A: Open-ended, unprompted clinicians&#x27; accounts</p>
+<p>This section examines the 16 factors identified only in clinicians&#x27; unprompted accounts. These factors were organised into six themes: (i) willingness to sit in a room and engage, (ii) navigating relationships, (iii) healthrelated factors, (iv) culture and spiritual beliefs, (v) context, and (vi) language proficiency. Table 2 presents the thematic framework, codes (factors), and representative clinician quotes.</p>
+<p>Table 2: Thematic framework and representative quotes of the 16 factors identified in clinicians&#x27; unprompted accounts. THEME CODE QUOTE Willingness to sit in a room and engage Clients&#x27; readiness &amp; motivation Clinician 05: &quot;Not necessarily to have a clear understanding of what exactly is going to happen, […] you can do that as time goes on. But if they&#x27;re at least willing to sit in a room and engage. How much motivation is there? They don&#x27;t have to be 100% motivated, but there need to be some element of motivation to engage in therapy.&quot; Expectations and understanding of therapy Clinician 09: &quot;Some clients come hoping to maybe vent or use it as more of an unstructured counselling space. So, I guess having some buy in from the client as well, maybe like you could call it contracting or explicit agreement as to what it is and what it isn&#x27;t&quot;</p>
+<p>&quot;Commit to coming, so they need to understand this is not a one-off thing, this is going to be regular attendance.&quot; Willingness to sit in a room and engage. Motivation to participate, feeling that this is a moment to try and make a change, was linked to having a therapeutic goal and wanting to understand what had happened. Perceived benefit was also associated with patients&#x27; openness to therapy, realistic expectations, and recognition that change is gradual and requires consistent attendance and between-session work, such as behavioural experiments or testing coping strategies. By contrast, secondary motivation, including courtmandated therapy or participation primarily to obtain housing, was perceived as a potential barrier to sustained engagement and benefit.</p>
+<h3>Navigating relationships.</h3>
+<p>Clinicians recognised that for some clients it is easier to naturally engage in a therapeutic relationship. Oppositional traits, avoidant attachment, or broader difficulties forming and maintaining relationships were described as potential barriers to both engagement and benefit. Adverse early experiences, trauma, and previous difficult encounters with authority figures, including family members, schools, or the police, could affect clients&#x27; sense of safety and mean that therapists require more time to establish trust. Across interviews, clinicians suggested that clients&#x27; engagement with therapy can also be shaped by prior experiences of psychological treatment, whether their own or those of family members, as well as by interactions with mental health services and hospital care more broadly. Trust in therapy, the therapist, and the service, together with comfort and perceived relatability, were considered relevant to engagement and benefit.</p>
+<p>Health-related factors. Physical wellbeing was identified as an important and often overlooked candidate factor. Hearing or visual impairments, neurodiversity, and high levels of risk were perceived as potential barriers when not adequately assessed and accommodated. Several clinicians considered negative symptoms particularly important for motivation and engagement, sometimes more so than positive symptoms. Substance misuse, medication non-adherence, suboptimal dosing, adverse effects, poor sleep, and poor overall health were also thought to affect cognitive functioning, concentration, participation in sessions, and ultimately treatment benefit.</p>
+<h3>Culture &amp; spiritual beliefs. Some clinicians identified cultural and spiritual beliefs as candidate</h3>
+<p>influences on how therapy is understood and experienced. Clients, families, and communities may hold spiritual or religious explanations that differ from psychological formulations and may not view therapy as the appropriate response. One clinician characterised psychological therapy as a &#x27;very Western&#x27; and potentially individualistic approach, particularly for people whose cultures or family systems emphasise community and collective values.</p>
+<h3>Context.</h3>
+<p>Clients&#x27; ability to engage was described as contingent partly on their environment and social context. Support from family, friends, and the healthcare team could provide appointment reminders and help with between-session work, as well as emotional encouragement and sustained interest in therapy.</p>
+<p>Relationships, employment, and other valued roles or activities could also provide meaning and motivation for recovery. Conversely, unstable housing, limited social or material resources, isolation, and poverty were perceived as barriers to engagement and benefit.</p>
+<h3>Language proficiency.</h3>
+<p>Access to interpreters was identified as a further service-level resource.</p>
+<p>Limited proficiency in the language used for treatment could create a substantial barrier to participation when appropriate language support was unavailable.</p>
+<h3>3.3 Stage 2: Ratings of clinician-and literature-derived factors</h3>
+<p>Consensus plots revealed distinct patterns in the perceived importance and variability of factors across both clinician-identified (Figure 3) and literature-derived (Figure 4) factors. For clinician-identified factors, the median importance rating was 7.00 and the median standard deviation was 1.69. For literature-derived, the median importance rating was 6.74 and the median the standard deviation was 2.04.</p>
+<h3>Part 1B: Clinician-identified factors. Clinician-identified factors.</h3>
+<p>Expectations and understanding of therapy (n = 12) attracted relatively high importance ratings, with variability close to the panel median. Medication, current level of risk, and migrant status were rated as highly important, with relatively little variability in clinicians&#x27; judgements; however, these factors were identified by relatively few clinicians (n = 7, n = 5, and n = 3, respectively). Socioeconomic status and environmental stability (n = 14) was widely recognised but received a below-median importance rating, with greater variability.</p>
+<p>Clients&#x27; readiness and motivation (n = 18) was the most frequently identified factor, followed by cognitive flexibility (n = 17) and substance misuse (n = 12). Although, all three were frequently mentioned, their importance ratings differed: readiness and motivation and substance misuse received above-median importance ratings, albeit with greater variability, whereas cognitive flexibility received a below-median importance rating and also showed greater variability.</p>
+<p>Language proficiency (n = 6) and negative symptoms (n = 6) were rated as relatively important, although variability in ratings was greater. In contrast, delusional and hallucinatory conviction (n = 12) received a below-median importance rating alongside greater variability. Personality and attachment style were frequently identified but received below-median importance ratings, with greater variability in clinicians&#x27; judgements. Past and present experiences with healthcare and therapy (n = 14) also received a below-median importance rating, but showed relatively little variability.</p>
+<p>Insight (n = 10) was rated as highly important, with relatively little variability. Duration of untreated psychosis (n = 6) and attention (n = 4) also received particularly high importance ratings and showed minimal variability, indicating convergence among the clinicians who identified these factors, despite their relatively low frequency of mention. Finally, neurodiversity (n = 9) received a below-median importance rating alongside considerable variability, suggesting divergent views despite being identified by a relatively larger number of clinicians. Part 2: Literature-derived factors.</p>
+<p>Cognitive flexibility, delusional and hallucinatory conviction, duration of illness, hopelessness, insight, memory, migrant status, social and occupational functioning, and social cognition (Theory of Mind) attracted above-median importance ratings with relatively little variability, indicating consistent recognition of their potential relevance to CBTp outcomes. A further group, including attribution biases, delusional flexibility, emotional decision-making, jumping-to-conclusions bias, and probabilistic reasoning, also received abovemedian importance ratings but exhibited greater variability. Duration of untreated psychosis and total number of hospital admissions were also rated above the importance median, although their variability was close to the panel median. Demographic characteristics were generally perceived as less central to outcomes, with migrant status emerging as a notable exception. Other factors, including attention and executive functioning, received below-median importance ratings despite relatively little variability.</p>
+<h3>3.4 Stage 3: Clinician-informed Framework</h3>
+<p>The ratings from Stage 2 were integrated and used to classify each factor into 5 categories: 1) High agreement on importance; 2) Moderate agreement on importance; 3) Mixed or uncertain views; 4) Moderate agreement on lower importance; 5) High agreement on lower importance (Table 3 and Table 4).</p>
+<p>For the 32 literature-derived factors, classifications were based on deductive importance ratings completed by all 20 clinicians. For clinician-identified factors that were not represented in the literature-derived list, classifications were based on inductive ratings.</p>
+<p>Table 3: Categories of importance and agreement for clinicians-only factors. Median importance Median SD ≥50% mentions &lt;50% mentions ≥7.00 ≤1.69 High agreement on importance Moderate agreement on importance ≥7.00 &gt;1.69 Moderate agreement on importance Mixed or uncertain views &lt;7.00 ≤1.69 High agreement on lower importance Moderate agreement on lower importance &lt;7.00 &gt;1.69 Mixed or uncertain views Mixed or uncertain views</p>
+<p>Table 4: Categories of importance and agreement for literature-only factors. Median importance Median SD Literature-derived and shared factors ≥6.74 ≤2.04 High agreement on importance ≥6.74 &gt;2.04 Moderate agreement on importance &lt;6.74 ≤2.04 High agreement on lower importance &lt;6.74 &gt;2.04 Moderate agreement on lower importance only, or both), and suggested instruments to provide a clinician-informed pool of candidate predictors that can be used to inform the design of future precision psychotherapy studies. This information was combined to make suggestions for future prediction models in precision psychotherapy. Full descriptive statistics and a comprehensive description of the measures used to assess each factor is provided in the Supplementary Materials (Table S4, S5 and S6).</p>
+<h3>3.5 Suggestions for precision psychotherapy predictive models</h3>
+<p>1. Retain previously studied factors supported by clinicians&#x27; ratings. The following candidate predictors domains should continue to be prioritised: cognitive processes (cognitive flexibility, memory, social cognition/theory of mind, probabilistic reasoning, jumping-to-conclusions bias, attribution biases, and emotional decision-making); clinical characteristics (delusional/hallucinatory conviction, insight, hopelessness, and delusional flexibility); illness history (duration of illness, duration of untreated psychosis, and total number of hospital admissions); and psychosocial characteristics (social and occupational functioning and migrant status).</p>
+<h3>2. Expand candidate sets to include therapy-related and clinical factors.</h3>
+<p>Expectations and understanding of therapy, readiness and motivation, medication, current level of risk, and substance misuse are not currently used or are under-investigated in the literature and should be prioritised in future studies.</p>
+<h3>3. Give lower priority to sociodemographic characteristics.</h3>
+<p>Age, gender, marital status, ethnicity, and educational attainment should receive lower priority, with migrant status as an exception. Retaining these variables may still add value if their interaction with other predictors improves outcome prediction.</p>
+<h3>4. Prioritise memory, social cognition, cognitive bias and cognitive flexibility over other cognitive measures.</h3>
+<p>Where assessment resources are limited, prioritise these constructs over intellectual ability, attention, executive functioning, processing speed, and verbal fluency.</p>
+<h3>4. DISCUSSION</h3>
+<p>In this study, we sought to address this gap by reviewing the predictors used in the literature in CBTp and expanding the pool of candidate predictors to be investigated from the perspective of clinicians. We explored the degree of convergence between clinician views and existing research and used these findings to develop a framework linking candidate predictors to available measurement instruments. Clinicians identified 16 additional potential predictors of CBTp engagement and outcomes. Of these, expectations and understanding of therapy received high agreement on importance, while readiness and motivation, medication (non-adherence/suboptimal dosing), current level of risk, and substance misuse received moderate agreement. Clinicians also endorsed 16 literature-derived factors spanning cognitive processes, clinical characteristics, illness history, and psychosocial characteristics, while assigning relatively lower importance to most sociodemographic characteristics and selected cognitive and clinical measures.</p>
+<p>Clinicians&#x27; perspectives were broadly consistent with the existing literature, particularly regarding the importance of insight and functioning as predictors of CBT outcome (O&#x27; Keeffe et al., 2017). Clinicians also identified several additional factors as important predictors of CBT outcomes, including symptom conviction, migrant status, hopelessness, cognitive flexibility, emotional decision-making, memory, and illness history variables. While there is some empirical evidence supporting the relevance of these factors, findings have been heterogeneous and remain insufficient to draw firm conclusions regarding their predictive value (Gorina et al., 2026). The prominence of these factors in clinicians&#x27; ratings suggests they may represent promising areas for future investigation. However, their predictive value cannot be inferred from our results alone and requires empirical validation.</p>
+<p>Although treatment-related variables are rarely included in outcome prediction models (Jacobs et al., PRE-PRINT), clinicians consistently identified motivation and realistic expectations and understanding of CBT, as important influences on treatment outcomes. Their consistent emphasis suggests that treatmentrelated processes may represent an important area for future outcome prediction research, as outcome prediction studies typically prioritise demographic, clinical, and illness-related factors, whereas more therapeutic factors such as these remain largely overlooked.</p>
+<p>When discussing barriers, clinicians identified a variety of health-related factors and individual characteristics that have previously been reported in the literature as negatively affecting therapy uptake and engagement. These included substance misuse, medication non-adherence, and severe medication side effects, all of which may impair cognitive functioning and reduce an individual&#x27;s ability to focus and actively engage in therapy (Mohr et al., 2010; Omylinska-Thurston et al., 2019; Priester et al., 2016; Williams, 2008).</p>
+<p>Current levels of risk and hopelessness were also identified as important barriers to engagement. While these factors were consistently emphasised by clinicians, there is limited evidence examining their influence on CBT uptake, engagement, or outcomes, highlighting a potential area for future research.</p>
+<p>In contrast, demographic characteristics, including marital status, education, gender, age, ethnicity, and employment status, were generally rated as less important, broadly consistent with the limited and inconsistent evidence reported in the literature and the latest participant level meta-analysis (Gorina et al., 2026; Jenner et al., 2024; Morrison et al., 2019; Nowak et al., 2020; Paulik et al., 2018; Varese et al., 2025).</p>
+<p>For some cognitive and psychological factors, as well as affective symptoms, relatively high standard deviations indicated less agreement among clinicians regarding their lower importance. By contrast, neurocognitive factors, including executive functioning, attention, verbal fluency, processing speed, and premorbid IQ, were consistently rated as less important. This pattern is broadly consistent with the existing literature, which suggests that the predictive value of neurocognitive factors remains limited and somewhat inconsistent across studies (Gorina et al., 2026).</p>
+<p>Social-contextual factors, including socioeconomic status, supportive networks versus social isolation, cultural and spiritual beliefs, and personality and attachment style, were frequently identified by clinicians but did not consistently receive high importance ratings. One possible explanation for these mixed views is that clinicians consider these factors important to understand and assess at the outset of therapy, while also recognising that their influence may be moderated through therapeutic support or changes in an individual&#x27;s circumstances over time. As a result, these factors may be viewed as important in shaping engagement with therapy and the broader therapeutic process, but not necessarily as fixed determinants of outcome.</p>
+<p>Other factors, including adverse childhood experiences or trauma, neurodiversity, language proficiency, and negative symptoms were mentioned less frequently by clinicians and received varied ratings regarding their importance. These factors may influence engagement, communication, and the development of a therapeutic alliance, potentially affecting an individual&#x27;s response to therapy. However, their impact is likely to vary considerably across individuals and contexts and may often be accommodated or addressed within treatment, which may help explain the greater variability in clinicians&#x27; ratings.</p>
+<h3>Strengths and Limitations</h3>
+<p>While quantitative approaches have frequently been used to investigate predictors of CBT outcomes, to our knowledge this is the first mixed-methods study to explore clinicians&#x27; perspectives on the individual pretreatment factors that predict successful engagement with CBT and positive treatment outcomes. Using a mixed inductive-deductive approach to data analysis, this study helps bridge the gap between the limited predictor sets typically examined in research and the complexity of routine clinical practice.</p>
+<p>The study has several limitations. First, although the qualitative data were double-coded and the analysis were regularly reviewed in group supervisory meetings, a degree of subjectivity remains in the findings, as is inherent in qualitative research. Second, we described factors as more or less important based on the combination of clinicians&#x27; ratings and the level of agreement among clinicians (low to high). The cutoffs were derived from the clinicians&#x27; median ratings and should not be considered absolute thresholds.</p>
+<p>Third, clinicians mentioned a wide variety of factors, which were subsequently grouped by the researcher into broader categories to facilitate comparison. Although this process was cross-checked, a degree of qualitative subjectivity remains. Finally, the study included clinicians with a diverse range of professional backgrounds and experiences; however, findings may not generalise to settings outside the UK.</p>
+<h3>Conclusion</h3>
+<p>By integrating experienced clinicians&#x27; perspectives with the existing literature, this study identified a broader set of candidate factors that may influence engagement with, and benefit from CBTp. This framework provides a clinically grounded foundation for prospective research to investigate these factors and their potential to inform personalised treatment. Further qualitative research is needed to explore patients&#x27; perspectives on the factors influencing engagement and response to CBTp, and how clinicians&#x27; beliefs shape treatment expectations and clinical decision-making.</p>
+<p>Supplementary material</p>
+<p>TABLE S1: Clinicians&#x27; ratings of clinicians-identified factors (inductive factors) N (%) Min Max Mean SD Clients&#x27; readiness &amp; motivation 18 (90) 1 10 7.28 2.26 Supportive network / lack of support and isolation 16 (80) 2 10 6.76 1.99 Past and present experiences of care and therapy 14 (70) 4 10 6.5 1.67 Socioeconomic status and environment stability 14 (70) 4 10 6.91 1.85 Substance misuse 12 (60) 3 10 7.33 2.23 Expectations and understanding of therapy 12 (60) 4 10 7.69 1.69 Culture and spiritual beliefs 12 (60) 2 8 6.37 1.7 Personality and attachment style 12 (60) 2 10 6.12 2.47 Neurodiversity 9 (45) 3 10 6.33 2.12 Medication 7 (35) 5 9 7.33 1.22 Negative symptoms 6 (30) 4 10 7.17 2.23 Language proficiency 6 (30) 4 9 7.06 1.91 Current level of risk 5 (25) 5 9 7.58 1.43 Physical health and wellbeing 5 (25) 5 10 6.5 1.51 Early years experiences 5 (25) 3 8 6.83 1.94 Secondary motivation 5 (25) 1 10 6.12 3.64</p>
+<p>TABLE S2: Clinicians&#x27; ratings of literature-derived factors (deductive factors). N (%) Min Max Mean SD Age 20 (100) 1 10 5.03 2.44 Gender 20 (100) 1 10 3.87 2.59 Ethnicity 20 (100) 1 10 5.38 2.21 Marital status 20 (100) 1 7 3.6 2.04 Migrant status 20 (100) 4 10 6.93 1.66 Education 20 (100) 3 10 5.60 2.01 Employment/work status 20 (100) 1 10 5.68 2.51 Age of illness onset 20 (100) 1 10 6.73 2.34 Duration of illness 20 (100) 2 10 6.95 1.92 Duration of untreated psychosis 20 (100) 3 10 7.38 2.03 Total number of hospital admissions 20 (100) 2 10 7.10 2.04 Delusional/Hallucinatory conviction (PDI) 20 (100) 4 10 7.33 1.86 General psychopathology (anxiety, depression) 20 (100) 2 9 6.43 2.09 Hopelessness 20 (100) 4 10 7.15 1.57 Self-esteem 20 (100) 2 10 6.33 2.09 Social and occupational functioning 20 (100) 3 10 6.90 1.85 Premorbid IQ 20 (100) 2 10 5.95 2.01 IQ 20 (100) 2 10 6.53 2.25 Insight (awareness of the illness &amp; need for treatment) 20 (100) 4 10 6.83 1.98 Cognitive flexibility 20 (100) 4 10 7.38 1.79 Probabilistic reasoning 20 (100) 2 10 7.00 2.11 Memory 20 (100) 4 8 6.75 1.43 Executive functioning 20 (100) 3 10 6.55 1.6 Processing speed 20 (100) 2 9 4.95 1.67 Verbal fluency 20 (100) 2 9 5.50 1.88 Emotional decision-making 20 (100) 2 10 6.95 2.20 Attention 20 (100) 4 10 6.53 1.44 Coping ability 20 (100) 1 10 6.48 2.43 Jumping-to-conclusions bias 20 (100) 3 10 7.33 2.25 Attribution biases 20 (100) 1 10 6.98 2.45 Social cognition -Theory of Mind 20 (100) 4 10 6.88 1.66 Delusional flexibility 20 (100) 2 10 7.53 2.11</p>
+<p>TABLE S3: Factors independently identified by clinicians prior to presentation of the literature-derived list also represented in the literature. N (%) Min Max Mean SD Cognitive flexibility 17 (85) 3 10 6.86 1.91 Delusional/Hallucinatory conviction (PDI) 12 (60) 3 10 6.24 2.15 Insight 10 (50) 5 10 7.67 1.45 Duration of illness 10 (50) 4 8 6.73 1.42 General psychopathology 9 (45) 5 9.5 7.54 1.49 Executive functioning 7 (35) 5 10 7.22 1.39 Duration of untreated psychosis 6 (30) 8 9 8.17 0.41 Hopelessness 6 (30) 5 10 8 1.73 Delusional flexibility 5 (25) 5 10 7.6 2.07 Employment/work status 5 (25) 6 10 7.3 1.57 Education 5 (25) 4 7 5.25 1.41 Memory 4 (20) 6 10 8 1.63 Attention 4 (20) 7 8 7.6 0.55 Coping ability 4 (20) 5 10 7 1.87 Age 4 (20) 5 8 6.83 1.17 Ethnicity 4 (20) 5 8 6.75 1.26 Migrant status 3 (15) 7 10 8.67 1.53 Social and occupational functioning 3 (15) 4.5 8 6.43 1.1 IQ 3 (15) 2 8 5.67 3.21 Gender* 1 (5) 9 10 9.5 0.71 Emotional decision-making 1 (5) 6 6 6 Age of illness onset 1 (5) 5 5 5 * Gender reports two values but one source only because it was mentioned twice by the same clinician.</p>
+<p>TABLE S4: Clinician-informed rating of importance (clinician-identified) N (%) min max mean SD Rating of importance Expectations and understanding of therapy 12 (60) 4 10 7.69 1.69 High agreement on importance Substance misuse 12 (60) 3 10 7.33 2.23 Moderate agreement on importance Clients&#x27; readiness &amp; motivation 18 (90) 1 10 7.28 2.26 Current level of risk 5 (25) 5 9 7.58 1.43 Medication 7 (35) 5 9 7.33 1.22 Socioeconomic status and environment stability 14 (70) 4 10 6.91 1.85 Mixed or uncertain views Personality and attachment style 12 (60) 2 10 6.12 2.47 Supportive network / lack of support and isolation 16 (80) 2 10 6.76 1.99 Culture and spiritual beliefs 12 (60) 2 8 6.37 1.7 Neurodiversity 9 (45) 3 10 6.33 2.12 Early years experiences 5 (25) 3 8 6.83 1.94 Secondary motivation 5 (25) 1 10 6.12 3.64 Language proficiency 6 (30) 4 9 7.06 1.91 Negative symptoms 6 (30) 4 10 7.17 2.23 Physical health and wellbeing 5 (25) 5 10 6.5 1.51 Moderate agreement on lower importance Past and present experiences of care and therapy 14 (70) 4 10 6.5 1.67 High agreement on lower importance TABLE S5: Clinician-informed rating of importance (literature-derived) N (%) min max mean SD Rating of importance Cognitive flexibility 20 (100) 4 10 7.38 1.79 High agreement on importance Total number of hospital admissions 20 (100) 2 10 7.1 2.04 Duration of untreated psychosis 20 (100) 3 10 7.38 2.03 Delusional/Hallucinatory conviction (PDI) 20 (100) 4 10 7.33 1.86 Duration of illness 20 (100) 2 10 6.95 1.92 Hopelessness 20 (100) 4 10 7.15 1.57 Insight 20 (100) 4 10 6.83 1.98 Memory 20 (100) 4 8 6.75 1.43 Migrant status 20 (100) 4 10 6.93 1.66 Social and occupational functioning 20 (100) 3 10 6.9 1.85 Social cognition -Theory of Mind 20 (100) 4 10 6.88 1.66 Attribution biases 20 (100) 1 10 6.98 2.45 Moderate agreement on importance Delusional flexibility 20 (100) 2 10 7.53 2.11 Emotional decision-making 20 (100) 2 10 6.95 2.2 Jumping-to-conclusions bias 20 (100) 3 10 7.33 2.25 Probabilistic reasoning 20 (100) 2 10 7 2.11 Age 20 (100) 1 10 5.03 2.44 Moderate agreement on lower importance Employment/work status 20 (100) 1 10 5.68 2.51 Ethnicity 20 (100) 1 10 5.38 2.21 Gender 20 (100) 1 10 3.87 2.59 Age of illness onset 20 (100) 1 10 6.73 2.34 Coping ability 20 (100) 1 10 6.48 2.43 General psychopathology (anxiety/depression) 20 (100) 2 9 6.43 2.09 IQ 20 (100) 2 10 6.53 2.25 Self-esteem 20 (100) 2 10 6.33 2.09 Executive functioning 20 (100) 3 10 6.55 1.6 High agreement on lower importance Attention 20 (100) 4 10 6.53 1.44 Premorbid IQ 20 (100) 2 10 5.95 2.01 Education 20 (100) 3 10 5.6 2.01 Verbal fluency 20 (100) 2 9 5.5 1.88 Processing speed 20 (100) 2 9 4.95 1.67 Marital status 20 (100) 1 7 3.6 2.04</p>
+<p>TABLE S6: Instruments table (Tool) FACTORS MEASURE INSTRUMENT Clients&#x27; readiness &amp; motivation Readiness to Change Questionnaire (RTQ), Readiness for Psychotherapy Index (RPI), Client Motivation for Therapy Scale (CMOTS), Treatment Motivation Questionnaire (TMQ) Expectations and understanding of therapy, including recognition of the need for regular attendance Therapy Attitudes and Process Questionnaire (TAP), The CEQ (Credibility/Expectancy Questionnaire), Illness Perception Questionnaire (Freeman 2013) Personality and attachment style NEO Five-Factor Inventory (NEO-FFI), Relationship Scales Questionnaire (RSQ), Adult Attachment Scale (AAS) Effect of medication Medication Adherence Rating Scale (MARS), Subjective Well-Being Under Neuroleptics scale and the Subjective Deficit Syndrome Scale, Liverpool University Neuroleptic Side Effect Rating Scale (LUNSERS), Glasgow Antipsychotic Side-effect Scale (GASS) Neurodiversity Autism Spectrum Quotient (AQ-10), Adult ADHD Self-Report Scale (ASRS) Secondary motivation Client Motivation for Therapy Scale (CMOTS), Treatment Self-Regulation Questionnaire (TSRQ), Treatment Motivation Questionnaire (TMQ) Early year experiences Adverse Childhood Experiences Questionnaire (ACE), Childhood Trauma Questionnaire (CTQ) Physical health and general wellbeing EuroQol 5-Dimension (EQ-5D), SF-36 Health Survey Current level of risk Beck Scale for Suicide Ideation (BSS), COLUMBIA-SUICIDE SEVERITY RATING SCALE (C-SSRS) Past and present experiences of care and therapy Positive and Negative Experiences of Psychotherapy (PNEP) Supportive network/lack of support and isolation Multidimensional Scale of Perceived Social Support (MSPSS), Therapy Attitudes and Process Questionnaire (TAP) Socioeconomic status and environmental instability The Index of Multiple Deprivation (IMD), Case Report Form (CRF) Language proficiency/lack of interpreters Case Report Form (CRF) Conviction and symptom severity Positive and Negative Syndrome Scale (PANSS), Psychotic Symptom Rating Scales (PSYRATS), Scale for the Assessment of Positive Symptoms (SAPS), and Brief Psychiatric Rating Scale (BPRS) General psychopathology Brief Symptom Inventory (BSI-18) Hopelessness Beck Hopelessness Scale (BHS), PHQ-9 Self-esteem Rosenberg Self-Esteem Scale (RSES) Negative Symptoms Positive and Negative Syndrome Scale (PANSS), Scale for the Assessment of Negative Symptoms (SANS), and Brief Psychiatric Rating Scale (BPRS), Brief Negative Symptom Scale (BNSS). Substance Misuse Drug Abuse Screening Test (DAST-10), Alcohol Use Disorders Identification Test (AUDIT), Maudsley Addiction Profile (MAP) Delusional flexibility Maudsley Assessment of Delusions Schedule (MADS) with participants through the psychosis clinical-academic network. 7. Participant knowledge of the interviewer What did the participants know about the researcher? e.g. personal goals, reasons for doing the research Participants were informed that SL was an MSc student at King&#x27;s College London conducting the study as part of her MSc in Early Intervention in Psychosis. They were provided with information about the study&#x27;s aims and the interviewer&#x27;s role in conducting the interviews. 8. Interviewer characteristics What characteristics were reported about the interviewer/facilitator? e.g. Bias, assumptions, reasons and interests in the research topic The primary interviewer (SL) was female and held a BSc in Psychology. At the time of data collection, SL was undertaking an MSc in Early Intervention in Psychosis at King&#x27;s College London. SL had no prior experience conducting research interviews and received interview training from AG before commencing data collection. SL&#x27;s interest in psychosis research and psychological interventions informed her involvement in the study. The study formed part of SL&#x27;s MSc dissertation, with the intention of building on the existing research through further data collection, analysis and manuscript preparation in collaboration with SV (primary investigator) and AG. DOMAIN 2: STUDY DESIGN Theoretical framework 9. Methodological orientation and Theory What methodological orientation was stated to underpin the study? e.g. grounded theory, discourse analysis, ethnography, phenomenology, content analysis. The study adopted a mixed-methods approach, underpinned by a realist orientation for the qualitative component. Qualitative data were analysed inductively using the the primary interviewer (SL). All remaining interviews were conducted between SL and the participant only. 16. Description of sample What are the important characteristics of the sample? e.g. demographic data, date The sample comprised 20 clinicians with experience delivering CBTp. Participants included 13 females (65%) and 7 males (35%). Five participants (25%) were BABCP accredited. Experience delivering CBTp ranged from 2-5 years (n=4, 20%) to 16 or more years (n=8, 40%). Participants worked across a range of clinical settings, including Early Intervention Services (n=11, 55%), Community Mental Health Teams (n=9, 45%), Rehabilitation Services (n=5, 25%), Inpatient Mental Health Services (n=6, 30%) and other services (n=3, 15%). Data collection 17. Interview guide Were questions, prompts, guides provided by the authors? Was it pilot tested? A researcher-developed semistructured interview guide was used, comprising three sections. Part 1A included open-ended questions exploring clinicians&#x27; perceptions of individual characteristics that may increase or decrease a client&#x27;s likelihood of engaging with and benefiting from CBTp. Part 1B asked participants to rate the importance of the factors they had identified on a 0-10 scale. Part 2 presented 32 factors derived from previous literature on predictors of CBTp engagement and outcomes, which participants rated using the same scale. The interview guide was informed by existing literature. The interview script and</p>
+<h3>Acknowledgements</h3>
+<p>We are grateful to all clinicians for their time and valuable contributions.</p>
+<h3>Funding statement</h3>
+<p>This work was supported by a Sir Henry Wellcome postdoctoral fellowship from the Wellcome Trust to SV (Grant number 221638/B/20/Z). The funding source did not have any direct involvement with this study.</p>
+<p>Premorbid IQ Wechsler Test of Adult Reading (WTAR) IQ Wechsler Adult Intelligence Scale-Fourth Edition (WAIS-IV) Insight Beck Cognitive Insight Scale (BCIS), Birchwood Insight Scale (BIS) Cognitive flexibility Wisconsin Card Sorting Test (WCST), Cognitive Flexibility Scale (CFS) Probabilistic reasoning Beads Task Memory Wechsler Memory Scale (WMS), The Brief Visuospatial Memory Test-Revised (BVMT-R) Executive functioning Wisconsin Card Sorting Test (WCST) Processing speed Digit Symbol Coding (WAIS) Verbal fluency Verbal fluency test (Milner, 1975) / Verbal Fluency Test (D-KEFS) [check this last one] Emotional decision-making IGT-Iowa Gambling Task, Cambridge Gambling Task (CGT), Delay Discounting Task Attention The CPT-IP (Continuous Performance Test -Identical Pairs) discriminability index, The Attention Control Scale (ACS) Coping ability Coping Self-Efficacy Scale (CSES), Brief COPE Jumping to conclusion bias Beads Task Attribution biases The Attributional Style Questionnaire (ASQ) Social cognition (Theory of Mind) Reading the Mind in the Eyes Test (RMET) Social and occupational functioning Global Assessment of Functioning (GAF), World Health Organization Disability Assessment Schedule 2.0 (WHODAS 2.0), Social and Occupational Functioning Assessment (SOFAS) Age of illness onset Case Report Form (CRF) Duration of illness, Case Report Form (CRF) Duration of untreated psychosis Case Report Form (CRF) Hospital admissions Case Report Form (CRF) Age Case Report Form (CRF) Education Case Report Form (CRF) Employment Status Case Report Form (CRF) Ethnicity Case Report Form (CRF) Gender Case Report Form (CRF) Marital Status Case Report Form (CRF) Migrant Status Case Report Form (CRF) Culture and spiritual beliefs Brief Multidimensional Measure of Religiousness/Spirituality (BMMRS), Functional Assessment of Chronic Illness Therapy-Spiritual Well-Being (FACIT-Sp-12) PRECISION PSYCHOTHERAPY: INTERVIEW SCRIPT Personal details Name: Email: Year you qualified: BABCP accredited: Years of experience with CBTP: Service: Trust: Sex: Voucher: Yes/No Part 1A What individual characteristics do you believe increase a client&#x27;s likelihood of engaging with and benefiting from CBTP? What individual characteristics do you believe decrease a client&#x27;s likelihood of engaging with and benefiting from CBTP? Part 1B</p>
+<p>Please rate each one of the characteristics identified in Part 1A in terms of importance where 0 corresponds to not at all important and 10 extremely important.</p>
+<p>More likely to improve 0 (not at all important) 1 2 3 4 5 6 7 8 9 10 (extremely important)</p>
+<p>Less likely to improve 0 (not at all important) 1 2 3 4 5 6 7 8 9 10 (extremely important)</p>
+<h3>Part 2</h3>
+<p>Research on the individual characteristics that may influence a client&#x27;s suitability for, engagement with, and outcomes from CBTP has examined the following factors. Based on your clinical experience, please rate each factor in terms of its importance.</p>
+<p>Socio-demographics 0 (not at all important) 1 2 3 4 5 6 7 8 9 10 (extremely important) Age Gender Ethnicity Marital status Migrant status Education Employment/work status Illness History Age of illness onset Duration of illness Duration of untreated psychosis Total number of hospital admissions Clinical Variables Delusional/Hallucinatory conviction (PDI) General psychopathology (anxiety, depression) Hopelessness Self-esteem Functioning Social and occupational functioning Cognition Premorbid IQ Current IQ Insight (awareness of the illness &amp; of the need for treatment) Cognitive flexibility Probabilistic reasoning Memory Executive functioning Processing speed Verbal fluency Emotional decision-making Attention Coping ability Jumping-to-conclusions bias Attribution biases Social cognition -Theory of Mind Delusional flexibility CONSOLIDATED CRITERIA FOR REPORTING QUALITATIVE STUDIES (COREQ): 32-ITEM CHECKLIST RESEARCH TEAM AND REFLEXIVITY Personal Characteristics 1. Interviewer Which authors conducted the interviews? SML (MSc); Supervised by AG (PhD). 2. Credentials What were the researcher&#x27;s credentials? AG (PhD); MCDP (MSc); SML (MSc); ST (PhD); SV (PhD). 3. Occupation What was their occupation at the time of the study? AG (Senior Lecturer); MCDP (RA and PhD student); SML (RA); ST (Reader in Psychology); SV (Research fellow). 4. Gender Was the researcher male or female? AG (female); MCDP (female); SML (female); ST (female); SV (female). 5. Experience and training What experience or training did the researcher have? The researcher (SML) was trained prior to the first interview by AG. The researcher did not have any interview experience prior to data collection. Relationship with participants 6. Relationship established Was a relationship established prior to study commencement?</p>
+<p>The Primary interviewer (SL) had no prior professional or personal relationship with the participants. AG, who was present during Interviews 1 and 3, had professional connections Framework Method (Gale et al., 2013), alongside descriptive quantitative analysis of clinicians&#x27; ratings. Findings were integrated through a staged analytical process (Fetters et al., 2013).</p>
+<p>Participant selection 10. Sampling How were participants selected? e.g. purposive, convenience, consecutive, snowball Participants were recruited through network-based sampling. The Principal Psychologist (AG) circulated the study invitation through her professional and clinical-academic networks, and recipients were encouraged to forward the invitation to eligible professional contacts. 11. Method of approach How were participants approached? e.g. face-to-face, telephone, mail, email Participants were recruited via email through the professional and clinicalacademic networks of the Principal Psychologist (AG), who circulated study information to relevant NHS colleagues and professional contacts. 12. Sample size How many participants were in the study? 20 participants 13. Non-participation How many people refused to participate or dropped out? Reasons? One recruited participant did not attend the scheduled interview; no reason was provided. The total number approached was not recorded. An additional participant was recruited to achieve the target sample of 20. Setting 14. Setting of data collection Where was the data collected? e.g. home, clinic, workplace Data were collected through individual semi-structured interviews conducted remotely via Microsoft Teams. Participants joined the interviews from a location of their choosing. 15. Presence of nonparticipants Was anyone else present besides the participants and researchers? For Interviews 1 and 3, AG (Principal Psychologist) was present alongside study documents were reviewed and refined following feedback from a person with lived experience of psychosis. The guide was not pilot tested. 18. Repeat interviews Were repeat inter views carried out? If yes, how many? No repeat interviews were conducted. 19. Audio/visual recording Did the research use audio or visual recording to collect the data? The interviews were audio and video recorded via Microsoft Teams with participants&#x27; consent. Audio recordings were transcribed for analysis. Video recording were not analyzed. 20. Field notes Were field notes made during and/or after the interview or focus group? No field notes were recorded during or following the interviews. 21. Duration What was the duration of the interviews? Interviews lasted between 24 and 59 minutes, with an average duration of 42 minutes. 22. Data saturation Was data saturation discussed? Data saturation was discussed during the study planning stage. The target sample size was predetermined at 20 clinicians and agreed upon at the conception of the study. 23. Transcripts returned Were transcripts returned to participants for comment and/or correction? Interview transcripts were not returned to participants for comment or correction. DOMAIN 3: ANALYSIS AND FINDINGS Data analysis 24. Number of data coders How many data coders coded the data? In total we had two data coders (SML and MP) 25. Description of the coding tree Did authors provide a description of the coding tree? The coding framework was developed iteratively through inductive and deductive coding. Initial codes were organised into categories and refined through discussion between the researchers (SML, MCDP and SV). The resulting analytical framework was applied across transcripts and refined throughout the analysis. 26. Derivation of themes Were themes identified in advance or derived from the data? Candidate factors were derived inductively from clinicians&#x27; unprompted accounts during Part 1A of the interviews. Initial coding was datadriven, allowing factors to emerge from participants&#x27; responses. The coding framework was subsequently refined iteratively by two researchers (SML and MCDP). Part 2 additionally incorporated deductively derived factors identified from existing literature. 27. Software What software, if applicable, was used to manage the data? The software used was NVivo 15 28. Participant checking Did participants provide feedback on the findings? Participants did not provide feedback on the findings Reporting 29. Quotations presented Were participant quotations presented to illustrate the themes/findings? Was each quotation identified? e.g. participant number Yes, we used quotations present in a table in the final manuscript. Participants quotes were identified using the participants number provided during the interview process 30. Data and findings consistent Was there consistency between the data presented and the findings? See Results section 31. Clarity of major themes Were major themes clearly presented in the findings? See Results section 32. Clarity of minor themes Is there a description of diverse cases or discussion of minor themes? See Results Section</p>
+<h3>Figure</h3>
+<p>Figure 1: Study Design</p>
+<h3>Figure 2 :</h3>
+<p>Figure 2: Clinician-derived factors identified through unprompted responses, organised by frequency of endorsement (number and percentage of clinicians). Factors shown in dark blue overlap with those identified in the literature.</p>
+<p>&quot;I would say also secondary gain here[...]. If the person will have secondary gain.[ …]  Trying to achieve housing benefits, something… some kind of profit from the contact with the mental health services.&quot; &quot;I guess when people have also got kind of relational difficulties or attachment difficulties as a comorbidity, that can go either way. Sometimes they&#x27;re really wanting therapy and then really engaging with you because actually it&#x27;s the relational aspect that they are benefiting most from; or equally if they&#x27;ve got a really avoidant attachment style and psychosis, then they&#x27;re less likely to but... So, it&#x27;s a dependent attachment style that will increase their likelihood of engaging, I would say...&quot; Early years experiencesClinician 01: &quot;Young people experiencing psychosis, who&#x27;ve probably had very difficult experience of authority figures in the past, school, police, sometimes within the home… the conditions for a trusting relationship are very, very difficult to predict. […] it is the clinician&#x27;s job to try and like, untangle that scepticism and establish safety. And so precisely when that&#x27;s possible and when that&#x27;s less possible is really, really kind of hard to know&quot; person journey through mental health services so far. So, for example, if they&#x27;ve been sectioned and admitted to an inpatient ward, it could be that bad experiences of the NHS or the clinical services or previous therapist even can be really difficult.&quot; they&#x27;ve got the medication optimised and they are using that. That as well makes it helpful, makes it better… easier.&quot; Negative SymptomsClinician 15: &quot;Negative symptoms definitely decrease the likelihood of engaging and benefiting&quot; &quot;Obviously, we can do CBT for negative symptoms, but getting people to engage is difficult&quot; Substance misuse Clinician 20: &quot;Substance misuse is a big (…) problem, which we sometimes feel is something which contributes a lot to [the] psychosis. So, if there is a dual diagnosis, I think what they can really help themselves with is just abstaining from substances which includes alcohol Neurodiversity Clinician 14: &quot;Neurodiversity, because the therapist will have to do some adaptations. I like metaphors, and I&#x27;m so mindful working with people with autism, for example, I need to be mindful of how I use metaphors, so there&#x27;s maybe more for the therapist to be aware of just in the way that people process things.&quot; Biologically, I guess people whose biology is affected, their sleep is affected, their appetite is affected, their daily routines are affected, they&#x27;re not exercising all of these things would reduce the probability the person might benefit from any intervention for that matter.&quot; Current level of risk Clinician 01: &quot;If a person is actively suicidal and with some intent to act on that, it&#x27;s going to be more difficult to work in a more typical CBT kind of formulation-based way&quot; Clinician 07: &quot;Also no self-harm […] I would say this contribute negatively&quot; marginalized communities or minority communities because of (…) the perceptions of services and therapy both. And I guess different belief systems. So, if… you know or different belief systems about psychosis. So, if somebody you know really feels that this needs a spiritual cure, then that&#x27;s, you know &quot;what good is therapy to me?&quot; of support in people&#x27;s networks, therapies are really often a kind of profound, but also just really challenging process to go through, and when people have supportive networks of friends and family, I think that can be a real benefit. […] when we&#x27;re thinking about individual factors for suitability, I think it&#x27;s… It has to be about context, really, what is the person&#x27;s context and is their context conducive to step forward in their lifewho are fortunate enough to be well resourced in their lives often have a more straightforward route through therapy. […]the degree to which you live in poverty and the degree to which you are lacking in stable housing, the degree to which you are, you are yeah, financially compromised, the degree to which you&#x27;re lacking in social support&quot; Language proficiency Language proficiency Clinician 14: &quot;People [...], for whom English is not their first language, or feel confident in expressing themselves in English. That can be a barrier.&quot;</p>
+<p>(n = 12), supportive networks/lack of support and isolation (n = 16), and culture and spiritual beliefs (n = 12)</p>
+<h3>Figure 3 :</h3>
+<p>Figure 3: Clinician ratings of inductively identified candidate factors.</p>
+<h3>Figure 3</h3>
+<p>Figure 3 notes: The x-axis represents mean perceived importance on a scale from 1 to 10, and the y-axis represents the standard deviation of clinicians&#x27; ratings, with lower values indicating lower between-clinician variability. Dashed lines show the within-panel medians and define four descriptive quadrants: higher importance/lower variability (green), higher importance/higher variability (purple), lower importance/lower variability (blue), and lower importance/higher variability (orange). Circle size represents the number of clinicians who spontaneously identified and rated each factor. AGE: age; ATT: attention; CAR: past and present experiences of care and therapy; COF: cognitive flexibility; CON: delusional/hallucinatory conviction; COP: coping ability; CUL: culture and spiritual beliefs; DEF: delusional flexibility; DUP: duration of untreated psychosis; DUR: duration of illness; EAR: early years experiences; EDU: education; EMP: employment/work status; ETH: ethnicity; EXF: executive functioning; EXP: expectations and understanding of therapy; HOP: hopelessness; INS: insight; IQS: IQ; LAN: language proficiency; MED: medication; MEM: memory; MIG: migrant status; NEG: negative symptoms; NEU: neurodiversity; PAT: personality and attachment style; PHY: physical health and wellbeing; PSY: general psychopathology; REA: clients&#x27; readiness and motivation; RIS: current level of risk; SES: socioeconomic status and environmental stability; SMO: secondary motivation; SOF: social and occupational functioning; SUB: substance misuse; SUP: supportive network/lack of support and isolation. Gender, emotional decision-making, and age of illness onset were excluded from the consensus plot because each factor was identified by only one clinician.</p>
+<h3>Figure 4 :</h3>
+<p>Figure 4: Clinician ratings of deductively derived candidate factors.</p>
+<h3>Figure 4</h3>
+<p>Figure 4 notes: The x-axis represents mean perceived importance on a scale from 1 to 10, and the y-axis represents the standard deviation of clinicians&#x27; ratings, with lower values indicating lower between-clinician variability. Dashed lines show the within-panel medians and define four descriptive quadrants: higher importance/lower variability (green), higher importance/higher variability (purple), lower importance/lower variability (blue), and lower importance/higher variability (orange). ADM: total number of hospital admissions; AGE: age; AIO: Age of illness onset; ATB: attribution biases; ATT: attention; COF: cognitive flexibility; CON: delusional/hallucinatory conviction; COP: coping ability; DEF: delusional flexibility; DUP: duration of untreated psychosis; DUR: duration of illness; EDU: education; EMD: emotional decision-making; EMP: employment/work status; ETH: ethnicity; EXF: executive functioning; GEN: gender; HOP: hopelessness; INS: insight; IQS: IQ; JTC: jumping-to-conclusions bias; MAR: marital status; MEM: memory; MIG: migrant status; ONS: age of illness onset; PIQ: premorbid IQ; PRO: probabilistic reasoning; PRS: processing speed; PSY: general psychopathology; SOF: social and occupational functioning; STE: self-esteem; TOM: social cognition/theory of mind; VEF: verbal fluency.</p>
+<h3>Figure 5</h3>
+<p>Figure 5 presents each factor&#x27;s classification, source (literature only, spontaneously identified by clinicians</p>
+<h3>Figure 5 :</h3>
+<p>Figure 5: Clinician-informed framework for prediction models in precision psychotherapy.</p>
+<h3>References</h3>
+<p>American Psychiatric Association. (2022). Diagnostic and statistical manual of mental disorders, Text Revision (DSM-5-TRTM). American Psychiatric Pub.</p>
+<p>Arbabshirani, M. R., Plis, S., Sui, J., &amp; Calhoun, V. D. (2017). Single subject prediction of brain disorders in neuroimaging: Promises and pitfalls. NeuroImage, 145, 137-165. https://doi.org/10.1016/j.neuroimage.2016.02.079</p>
+<p>Arciniegas, D. B. (2015). Psychosis. Continuum, 21(3), 715-736. https://doi.org/10.1212/01.CON.0000466662.89908.e7</p>
+<p>Bighelli, I., Huhn, M., Schneider-Thoma, J., Krause, M., Reitmeir, C., Wallis, S., Schwermann, F., Pitschel- Walz, G., Barbui, C., Furukawa, T. A., &amp; Leucht, S. (2018). Response rates in patients with schizophrenia and positive symptoms receiving cognitive behavioural therapy: A systematic review and single-group meta- analysis. BMC Psychiatry, 18(1), 380. https://doi.org/10.1186/s12888-018-1964-8</p>
+<p>Dunn, G., Fowler, D., Rollinson, R., Freeman, D., Kuipers, E., Smith, B., Steel, C., Onwumere, J., Jolley, S., Garety, P., &amp; Bebbington, P. (2012). Effective elements of cognitive behaviour therapy for psychosis: Results of a novel type of subgroup analysis based on principal stratification. Psychological Medicine, 42(5), 1057-1068. https://doi.org/10.1017/S0033291711001954</p>
+<p>Eilertsen, S. E. H., &amp; Eilertsen, T. H. (2023). Why is it so hard to identify (consistent) predictors of treatment outcome in psychotherapy? -Clinical and research perspectives. BMC Psychology, 11(1), 198. https://doi.org/10.1186/s40359-023-01238-8</p>
+<p>Fetters, M. D., Curry, L. A., &amp; Creswell, J. W. (2013). Achieving Integration in Mixed Methods Designs- Principles and Practices. Health Services Research, 48(6pt2), 2134-2156. https://doi.org/https://doi.org/10.1111/1475-6773.12117</p>
+<p>Freeman, D., Startup, H., Dunn, G., Černis, E., Wingham, G., Pugh, K., Cordwell, J., &amp; Kingdon, D. (2013). The interaction of affective with psychotic processes: A test of the effects of worrying on working memory, jumping to conclusions, and anomalies of experience in patients with persecutory delusions. Journal of Psychiatric Research, 47(12), 1837-1842. https://doi.org/https://doi.org/10.1016/j.jpsychires.2013.06.016</p>
+<p>Fusar-Poli, P., McGorry, P. D., &amp; Kane, J. M. (2017). Improving outcomes of first-episode psychosis: An overview. World Psychiatry, 16(3), 251-265. https://doi.org/10.1002/wps.20446</p>
+<p>Gale, N. K., Heath, G., Cameron, E., Rashid, S., &amp; Redwood, S. (2013). Using the framework method for the analysis of qualitative data in multi-disciplinary health research. BMC Medical Research Methodology, 13(1), 117. https://doi.org/10.1186/1471-2288-13-117</p>
+<p>Gorina, D., Del Piccolo, M. C., Georgiades, A., &amp; Vieira, S. (2026). Predictors of engagement and response in cognitive behaviour therapy for psychosis: A systematic review. Schizophrenia Research, 297, 314-329. https://doi.org/10.1016/j.schres.2026.08.018</p>
+<p>Granholm, E., McQuaid, J. R., Link, P. C., Fish, S., Patterson, T., &amp; Jeste, D. V. (2008). Neuropsychological predictors of functional outcome in Cognitive Behavioral Social Skills Training for older people with schizophrenia. Schizophrenia Research, 100(1-3), 133-143. https://doi.org/10.1016/j.schres.2007.11.032</p>
+<p>Jacobs, N., Jaleta, T. A., &amp; Hilbert, K. (PRE-PRINT). What Predicts Psychotherapy Outcomes Across Disorders and Treatments: An Umbrella Review.</p>
+<p>Jenner, L., Payne, M., Waite, F., Beckwith, H., Diamond, R., Isham, L., Collett, N., Emsley, R., &amp; Freeman, D. (2024). Theory driven psychological therapy for persecutory delusions: Trajectories of patient outcomes. Psychological Medicine, 54(15), 4173-4181. https://doi.org/10.1017/s0033291724002113</p>
+<p>Kukla, M., Davis, L. W., &amp; Lysaker, P. H. (2014). Cognitive Behavioral Therapy and Work Outcomes: Correlates of Treatment Engagement and Full and Partial Success in Schizophrenia. Behavioural and Cognitive Psychotherapy, 42(5), 577-592. https://doi.org/10.1017/s1352465813000428</p>
+<p>Lincoln, T. M., Rief, W., Westermann, S., Ziegler, M., Kesting, M.-L., Heibach, E., &amp; Mehl, S. (2014). Who stays, who benefits? Predicting dropout and change in cognitive behaviour therapy for psychosis. Psychiatry Research, 216(2), 198-205. https://doi.org/10.1016/j.psychres.2014.02.012</p>
+<p>Mechelli, A., &amp; Vieira, S. (2019). Machine learning: Methods and applications to brain disorders. Academic Press.</p>
+<p>Mohr, D. C., Ho, J., Duffecy, J., Baron, K. G., Lehman, K. A., Jin, L., &amp; Reifler, D. (2010). Perceived barriers to psychological treatments and their relationship to depression. Journal of Clinical Psychology, 66(4), 394- 409. https://doi.org/10.1002/jclp.20659</p>
+<p>Morrison, A. P., Pyle, M., Gumley, A., Schwannauer, M., Turkington, D., MacLennan, G., Norrie, J., Hudson, J., Bowe, S., French, P., Hutton, P., Byrne, R., Syrett, S., Dudley, R., McLeod, H. J., Griffiths, H., Barnes, T. R., Davies, L., Shields, G., … Kingdon, D. (2019). Cognitive-behavioural therapy for clozapine-resistant schizophrenia: The FOCUS RCT. Health Technology Assessment, 23(7), 1-144. https://doi.org/10.3310/hta23070</p>
+<p>Myhr, G., Russell, J. J., Saint-Laurent, M., Tagalakis, V., Belisle, D., Khodary, F., Faridi, K., &amp; Pinard, G. (2013). Assessing Suitability for Short-Term Cognitive-Behavioral Therapy in Psychiatric Outpatients with Psychosis: A Comparison with Depressed and Anxious Outpatients. Journal of Psychiatric Practice, 19(1), 29-41. https://doi.org/10.1097/01.pra.0000426325.49396.4c</p>
+<p>Nelson, B., Amminger, G. P., Yuen, H. P., Markulev, C., Lavoie, S., Schäfer, M. R., Hartmann, J. A., Mossaheb, N., Schlögelhofer, M., Smesny, S., Hickie, I. B., Berger, G., Chen, E. Y. H., De Haan, L., Nieman, D. H., Nordentoft, M., Riecher-Rössler, A., Verma, S., Thompson, A., … McGorry, P. D. (2018). NEURAPRO: A multi-centre RCT of omega-3 polyunsaturated fatty acids versus placebo in young people at ultra-high risk of psychotic disorders-medium-term follow-up and clinical course. Npj Schizophrenia, 4(1). https://doi.org/10.1038/s41537-018-0052-xNICEguidelines, Psychosis and schizophrenia. (2014). https://www.nice.org.uk/guidance/cg155/ifp/chapter/treating-a-first-episode-of-psychosis Nowak, I., Świtaj, P., Oberhauser, C., &amp; Anczewska, M. (2020). Factors Predicting Response to the Recovery-Oriented Cognitive Behavioural Workshop for Persons Diagnosed with Schizophrenia. Community Mental Health Journal, 56(6), 1115-1120. https://doi.org/10.1007/s10597-020-00595-7</p>
+<p>O&#x27;Keeffe, J., Conway, R., &amp; McGuire, B. (2017). A systematic review examining factors predicting favourable outcome in cognitive behavioural interventions for psychosis. Schizophrenia Research, 183, 22-30. https://doi.org/10.1016/j.schres.2016.11.021</p>
+<p>Omylinska-Thurston, J., McMeekin, A., Walton, P., &amp; Proctor, G. (2019). Clients&#x27; perceptions of unhelpful factors in CBT in IAPT serving a deprived area of the UK. Counselling and Psychotherapy Research, 19(4), 455-464. https://doi.org/10.1002/capr.12249</p>
+<p>Paulik, G., Jones, A., &amp; Hayward, M. (2018). Brief coping strategy enhancement for distressing voices: Predictors of engagement and outcome in routine clinical practice. Clinical Psychology &amp; Psychotherapy, 25(5), 634-640. https://doi.org/10.1002/cpp.2299</p>
+<p>Premkumar, P., Fannon, D., Sapara, A., Peters, E. R., Anilkumar, A. P., Simmons, A., Kuipers, E., &amp; Kumari, V. (2015). Orbitofrontal cortex, emotional decision-making and response to cognitive behavioural therapy for psychosis. Psychiatry Research: Neuroimaging, 231(3), 298-307. https://doi.org/10.1016/j.pscychresns.2015.01.013</p>
+<p>Premkumar, P., Peters, E. R., Fannon, D., Anilkumar, A. P., Kuipers, E., &amp; Kumari, V. (2011). Coping styles predict responsiveness to cognitive behaviour therapy in psychosis. Psychiatry Research, 187(3), 354-362. https://doi.org/10.1016/j.psychres.2010.12.029</p>
+<p>Priester, M. A., Browne, T., Iachini, A., Clone, S., DeHart, D., &amp; Seay, K. D. (2016). Treatment Access Barriers and Disparities Among Individuals with Co-Occurring Mental Health and Substance Use Disorders: An Integrative Literature Review. Journal of Substance Abuse Treatment, 61, 47-59. https://doi.org/10.1016/j.jsat.2015.09.006</p>
+<p>Putri, A. F., Chandler, C., &amp; Tocher, J. (2023). Realist Approach to Qualitative Data Analysis. Nursing Research, 72(6), 481-488. https://doi.org/10.1097/NNR.0000000000000686</p>
+<p>Rector, N. A., &amp; Beck, A. T. (2001). Cognitive Behavioral Therapy for Schizophrenia: An Empirical Review: The Journal of Nervous and Mental Disease, 189(5), 278-287. https://doi.org/10.1097/00005053-200105000-00002</p>
+<p>Tong, A., Sainsbury, P., &amp; Craig, J. (2007). Consolidated criteria for reporting qualitative research (COREQ): A 32-item checklist for interviews and focus groups. International Journal for Quality in Health Care, 19(6), 349-357. https://doi.org/10.1093/intqhc/mzm042</p>
+<p>Van Der Gaag, M., Valmaggia, L. R., &amp; Smit, F. (2014). The effects of individually tailored formulation-based cognitive behavioural therapy in auditory hallucinations and delusions: A meta-analysis. Schizophrenia Research, 156(1), 30-37. https://doi.org/10.1016/j.schres.2014.03.016</p>
+<p>Varese, F., Sudell, M., Morrison, A. P., Longden, E., &amp; Tudur Smith, C. (2025). Treatment effect modifiers of cognitive behaviour therapy in people with psychosis: An individual participant data meta-analysis of RCTs. Health Technology Assessment, 1-115. https://doi.org/10.3310/NCFR5074</p>
+<p>Vieira, S., Liang, X., Guiomar, R., &amp; Mechelli, A. (2022). Can we predict who will benefit from cognitive- behavioural therapy? A systematic review and meta-analysis of machine learning studies. Clinical Psychology Review, 97, 102193. https://doi.org/10.1016/j.cpr.2022.102193</p>
+<p>Williams, C. H. J. (2008). Cognitive behaviour therapy within assertive outreach teams: Barriers to implementation: a qualitative peer audit. Journal of Psychiatric and Mental Health Nursing, 15(10), 850- 856. https://doi.org/10.1111/j.1365-2850.2008.01332.x</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
