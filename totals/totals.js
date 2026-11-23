@@ -168,7 +168,10 @@ function sequential(t) { return mix(C.greenTint, C.greenDark, Math.max(0, Math.m
 function paperTip(p, extra) {
   return "<b>" + esc(clip(p.t || p.id, 110)) + "</b><br>" + esc(p.id) + (extra ? "<br>" + extra : "");
 }
-function link(p) { return "../" + p.id + "/"; }
+// the preprint's report page, or null when it has none (page false, written
+// by scripts/totals.py); totals written before that field have no "page", so
+// only an explicit false means no page
+function link(p) { return p.page === false ? null : "../" + p.id + "/"; }
 
 // ---- the box that names what the pointer is on --------------------------
 
@@ -1314,7 +1317,8 @@ function drawRecords(cards) {
     li.appendChild(document.createTextNode(label + ": "));
     li.appendChild(el("b", {}, show ? show(best[key]) : fmt(best[key])));
     li.appendChild(document.createTextNode(", in "));
-    li.appendChild(el("a", { href: link(best) }, best.t || best.id));
+    var href = link(best);
+    li.appendChild(href ? el("a", { href: href }, best.t || best.id) : el("span", {}, best.t || best.id));
     ul.appendChild(li);
   }
   rec("The longest text", "words", function (v) { return fmt(v) + " words"; });

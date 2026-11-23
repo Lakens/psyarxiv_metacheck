@@ -152,7 +152,11 @@ def paper_row(i, item, result, acc):
            "pub": published, "chk": item.get("checked") or result.get("checked"),
            "v": item.get("version") or pre.get("version"), "mc": result.get("metacheck_version"),
            "conv": result.get("converter"),
-           "L": "".join(LIGHT_CODE.get((mods.get(m) or {}).get("traffic_light"), "n")
+           # whether the preprint has a report page; the totals page links
+           # only to those (the server leaves it out when making it fails or
+           # takes too long)
+           "page": bool(item.get("report_page")),
+           "L":"".join(LIGHT_CODE.get((mods.get(m) or {}).get("traffic_light"), "n")
                         for m in acc["modules"])}
 
     # the text Metacheck read

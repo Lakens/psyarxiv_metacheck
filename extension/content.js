@@ -29,10 +29,12 @@
   }
 
   // The report for a preprint in the site's list: that version's when there
-  // is one, else the newest version checked. {paper, exact} or null.
+  // is one, else the newest version checked. {paper, exact} or null. Versions
+  // without a report page (report_page false: the server could not make it)
+  // are passed over.
   function findReport(papers, id) {
     var same = (papers || []).filter(function (p) {
-      return (p.base_id || String(p.id).split("_v")[0]) === id.base;
+      return (p.base_id || String(p.id).split("_v")[0]) === id.base && p.report_page !== false;
     });
     if (!same.length) return null;
     if (id.version !== null) {
