@@ -196,30 +196,31 @@ Does facial expression processing require attention? A multilab
 replication of Eimer et al. (2003)
 </p>
 <p class="meta">
-2026-11-17 · Metacheck 0.4.4.3
+2026-11-24 · Metacheck 0.4.4.40
 </p>
 </header>
 <div class="mc-main">
 <nav class="counts" aria-label="Results">
-<a class="count fix" href="#fix"><b>4</b><span>to
-fix</span></a><a class="count improve" href="#improve"><b>4</b><span>to
+<a class="count fix" href="#fix"><b>2</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>7</b><span>to
 check</span></a><span class="count decide zero"><b>0</b><span>to decide
 by
-hand</span></span><a class="count fine" href="#fine"><b>3</b><span>fine</span></a><a class="count na" href="#na"><b>5</b><span>not
+hand</span></span><a class="count fine" href="#fine"><b>2</b><span>fine</span></a><a class="count na" href="#na"><b>5</b><span>not
 applicable</span></a>
 </nav>
-<h2 id="fix">To fix <span class="n">(4)</span></h2>
+<h2 id="fix">To fix <span class="n">(2)</span></h2>
 <div class="check fix">
 <div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Power
-Analysis Check</span></p>
+<p><span class="tag fix">To fix</span> <span class="check-title">Exact
+P-Values</span></p>
 </div>
 <div class="rows">
 <div class="label">
 <p>What we found</p>
 </div>
 <div class="text">
-<p>We detected 6 potential power analyses.</p>
+<p>We found 11 imprecise <em>p</em> values out of 11 detected <em>p</em>
+values.</p>
 </div>
 </div>
 <details>
@@ -227,13 +228,318 @@ Analysis Check</span></p>
 Show details
 </summary>
 <div class="fold">
-<p>We used the LLM model ‘vllm/qwen3.5:4b’ to check the contents of 7
-paragraphs that contained words suggesting they might contain power
+<p>Reporting <em>p</em> values imprecisely (e.g., <em>p</em> &lt; .05)
+reduces transparency, reproducibility, and re-use (e.g., in <em>p</em>
+value meta-analyses). Best practice is to report exact p-values with
+three decimal places (e.g., <em>p</em> = .032) unless <em>p</em> values
+are smaller than 0.001, in which case you can use <em>p</em> &lt;
+.001.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (e.g., “decreased at the <em>p</em>
+&lt; .05 significance threshold”).</p>
+<div style="max-height:8em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+P-Value
+</th>
+<th style="text-align:left;">
+Text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p &lt; .05
+</td>
+<td style="text-align:left;">
+This attention-dependent emotion effect was observed in five ERP
+activities over four temporal phases, including an early frontal
+positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
+positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
+&gt; 7.2, ps &lt; .02), and positivities …
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &lt; .02
+</td>
+<td style="text-align:left;">
+This attention-dependent emotion effect was observed in five ERP
+activities over four temporal phases, including an early frontal
+positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
+positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
+&gt; 7.2, ps &lt; .02), and positivities …
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ps &lt; .01
+</td>
+<td style="text-align:left;">
+This attention-dependent emotion effect was observed in five ERP
+activities over four temporal phases, including an early frontal
+positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
+positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
+&gt; 7.2, ps &lt; .02), and positivities …
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .02
+</td>
+<td style="text-align:left;">
+For H1 and H2 (predictions of positive findings), frequentist analysis
+outputs with p &lt; .02 in the same direction as in the original study
+will be accepted as successful replications.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .02
+</td>
+<td style="text-align:left;">
+For H3 and H4 (predictions of negative findings), results showing p &lt;
+.02 or BF10 ≥ 3 in either direction and BF10 ≤ 0.333 will be accepted as
+evidence for the alternative and null hypothesis, respectively.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .02
+</td>
+<td style="text-align:left;">
+Any significant (p &lt; .02) one-way ANOVAs will be accepted as
+indications of potential ERP differences among the emotions.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .02
+</td>
+<td style="text-align:left;">
+For each positive hypothesis, the replication will be accepted as
+successful if the meta-analytic estimate across all replicating labs is
+significant (p &lt; .02) and in the hypothesized effect direction.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &gt; .02
+</td>
+<td style="text-align:left;">
+For each negative hypothesis, we define successful replication as a
+non-significant meta-analytic estimate (p &gt; .02).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .02
+</td>
+<td style="text-align:left;">
+d The symbol ‘+’ denotes results of p &lt; .02 or BF10 ≥ 3.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &gt; .02
+</td>
+<td style="text-align:left;">
+f The symbol ‘-’ denotes results of p &gt; .02 or BF10 ≤ 0.333.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .02
+</td>
+<td style="text-align:left;">
+g Only take place when p &lt; .02 in the frequentist one-way ANOVA
+(emotional trials only, on the whole sample across all labs).
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Cells longer than 300 characters are cut (…).</em></p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>The APA manual states: Report exact <em>p</em> values (e.g.,
+<em>p</em> = .031) to two or three decimal places. However, report
+<em>p</em> values less than .001 as <em>p</em> &lt; .001. However, 2
+decimals is too imprecise for many use-cases (e.g., a <em>p</em> value
+meta-analysis), so report <em>p</em> values with three digits.</p>
+<p>American Psychological Association (2020). <em>Publication manual of
+the American Psychological Association</em>, 7 edition. American
+Psychological Association.</p>
+</div>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Effect
+Sizes in t-tests and F-tests</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 t-test and/or F-test where effect sizes are not reported.
+Check these tests in the table below, and consider adding effect
+sizes.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We recommend checking the sentences below, and add any missing effect
+sizes.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+This attention-dependent emotion effect was observed in five ERP
+activities over four temporal phases, including an early frontal
+positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
+positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
+&gt; 7.2, ps &lt; .02), and positivities …
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Cells longer than 300 characters are cut (…).</em></p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating that effect sizes are often
+not reported:</p>
+<ul>
+<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
+(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
+Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
+</ul>
+<p>For educational material on reporting effect sizes:</p>
+<ul>
+<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
+to Effect Sizes and Confidence Intervals</a></li>
+</ul>
+</div>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+This attention-dependent emotion effect was observed in five ERP
+activities over four temporal phases, including an early frontal
+positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
+positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
+&gt; 7.2, ps &lt; .02), and positivities …
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(1,13) = 5.2
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Cells longer than 300 characters are cut (…).</em></p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="improve">To check <span class="n">(7)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Power Analysis Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We detected 4 potential power analyses.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We used the LLM model ‘vllm/qwen3-8-27b-fp8’ to check the contents of
+7 paragraphs that contained words suggesting they might contain power
 analyses.</p>
 <p>Some essential information could not be detected: statistical_test,
-sample_size, alpha_level, power, effect_size, effect_size_metric,
-software</p>
-<div style="max-height:15em;overflow:auto;">
+sample_size, alpha_level, software</p>
 <table class="dt-static">
 <thead>
 <tr>
@@ -351,7 +657,7 @@ other
 eta squared
 </td>
 <td style="text-align:left;">
-NA
+Morepower
 </td>
 </tr>
 <tr>
@@ -359,83 +665,25 @@ NA
 4
 </td>
 <td style="text-align:left;">
-sensitivity
+apriori
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+0.5000
 </td>
 <td style="text-align:left;">
 other
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:left;">
-posthoc
-</td>
-<td style="text-align:left;">
-other
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:left;">
-unknown
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-41
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -443,11 +691,6 @@ NA
 </tr>
 </tbody>
 </table>
-</div>
-<p>You reported a power analysis that has been classified as ‘post-hoc’.
-Calculating observed power is <a href="https://lakens.github.io/statistical_inferences/08-samplesizejustification.html#sec-posthocpower">almost
-never useful</a>. If you actually performed a sensitivity power
-analysis, label it as such explicitly.</p>
 <table class="dt-static">
 <thead>
 <tr>
@@ -469,109 +712,36 @@ Following the #EEGManyLabs recommendations (Pavlov et al., 2021) and
 recognizing that ERP studies often overestimate effect sizes due to
 small samples (Clayson et al., 2019), we calculated the required sample
 size of the replication. The calculation was based on the weakest
-original significant Task x Emotion interaction found in 160-215 ms (F =
-5.2, corresponding to η² p = 0.2857). We targeted 90%
-<strong>power</strong> to detect an effect half of the original effect
-(i.e., η² p = 0.1429) at an alpha level of .02. With these settings, an
-<strong>a priori</strong> <strong>power</strong> analysis using
-More<strong>Power</strong> 6.0.4 (Campbell &amp; Thompson, 2012)
-indicated a sample size of 82.
+original significant Task…
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2;3;4
+2;3
 </td>
 <td style="text-align:left;">
 Following the decision to reduce the sample size per replicating lab
 from 82 to 41, we did a <strong>sensitivity</strong>
 <strong>power</strong> analysis using More<strong>Power</strong> 6.0.4
 to assess the minimum detectable effect size (MDES) that each
-replicating lab can achieve for the Task x Emotion interactions. With
-90% <strong>power</strong> and an alpha level of .02, the analysis
-showed an MDES of η² p = 0.2587. This effect size is smaller than that
-of the weakest significant Task x Emotion interaction in the original
-study (frontal positivity at 160-215 ms, η² p = 0.2857). Expressed as
-<strong>power</strong>, each replicating lab will have 94.3%
-<strong>power</strong> to detect an effect of the magnitude reported for
-the weakest original interaction, and 98.9% and 99.9%
-<strong>power</strong> for the effects reported in the 220-315 ms and
-the later time windows. By comparison, the original study, with N = 14
-and an alpha level of .05, could only reliably detect effects of η² p =
-0.468 or larger at 90% <strong>power</strong>. Therefore, even with the
-halved sample size, each replicating lab is about twice as sensitive as
-the study being replicated, and at a more stringent alpha level.
-Furthermore, the metaanalysis will be highly
-<strong>power</strong>ed. The replication study has eight participating
-labs so far, giving a total sample size of 328. With this pooled sample
-size, at 90% <strong>power</strong> and alpha level of .02, we will be
-able to detect the effect as small as η² p = 0.0386 (a small effect
-size). Eimer et al. (2003) did not find any difference in the N170
-component, neither did they observe any differences across the six basic
-emotions. The current replication plans to further explore these
-patterns by including negative hypotheses (H3 and H4) based on the
-original study. To check whether the replication study will have enough
-<strong>power</strong> to statistically assess weak effects and be able
-to avoid mistakenly drawing negative conclusions, we ran further
-<strong>sensitivity</strong> <strong>power</strong> analyses with the
-same <strong>power</strong> and alpha level settings.
+replicating lab can achieve for the Task x Em…
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-5
+4
 </td>
 <td style="text-align:left;">
 However, the findings of the Eimer et al. (2003) study have been often
 debated upon. While it is widely accepted that emotional faces elicit
 enhanced ERP responses in comparison to neutral faces as found in the
 original study (e.g., Leppänen et al., 2007; Luo et al., 2010; Smith,
-2012), whether these effects require focal attention remains a topic of
-debate. More crucially, the absence of any difference in the N170
-component (a biomarker of early structural encoding of face stimuli;
-e.g., Bentin et al., 1996), both between emotional and neutral faces and
-among the six emotions, have been questioned in later research. Despite
-research advancements, due to its classic status in the face processing
-field, Eimer et al. (2003) is often cited to introduce the research
-background of emotional face processing (e.g., Fox et al., 2007; Sperl
-et al., 2020) and sometimes cited to support new findings without any
-direct investigation of the findings from Eimer et al. (2003) (e.g.,
-Balconi &amp; Canavesio, 2016; Gantiva et al., 2019). Therefore, a
-direct replication is deemed necessary yet still missing to date. As
-such, the present study was selected for preregistered direct
-replication by a community of EEG experts of the #EEGManyLabs, which is
-a global and large-scale multi-laboratory replication programme
-undertaking direct replications of highly influential studies with
-predefined sample sizes and high statistical <strong>power</strong> (90%
-<strong>power</strong> for 50% of the original effect sizes) (Pavlov et
-al., 2021).
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-6
-</td>
-<td style="text-align:left;">
-However, this sample size puts up a high demand on each lab’s data
-collection work and is potentially impractical. Therefore, we have
-decided to reduce the required sample size from each replicating lab to
-41 (half of the initial estimation; this reduced sample size is not
-related to the number or replicating labs). Following the meta-analytic
-theory (e.g., Borenstein et al., 2021), with a fixed total sample size,
-distributing participants across sites and then meta-analysing their
-effect sizes yields the same point estimate and nearly identical
-precision, provided the between-site heterogeneity is accounted for (see
-also Paul et al., 2025). As such, reducing the per-lab sample from 82 to
-41 will not compromise the meta-analytic <strong>power</strong> of the
-study as long as the overall sample is large enough. Each replicating
-lab will collect behavioural and EEG data from 41 participants. If any
-participants are to be excluded from the analysis, more participants
-will be tested to replace the excluded participants to obtain usable
-data from 41 participants in each replicating lab.
+2012), whether thes…
 </td>
 </tr>
 </tbody>
 </table>
+<p><em>Cells longer than 300 characters are cut (…).</em></p>
 <div class="callout-tip" title="Learn More" collapse="true">
 <p>Power analyses need to contain the following information to be
 interpretable: the type of power analysis, the statistical test, the
@@ -601,345 +771,6 @@ indicated that with 64 participants in each group, and an alpha level of
 </div>
 </details>
 </div>
-<div class="check fix">
-<div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Exact
-P-Values</span></p>
-</div>
-<div class="rows">
-<div class="label">
-<p>What we found</p>
-</div>
-<div class="text">
-<p>We found 11 imprecise <em>p</em> values out of 11 detected <em>p</em>
-values.</p>
-</div>
-</div>
-<details>
-<summary>
-Show details
-</summary>
-<div class="fold">
-<p>Reporting <em>p</em> values imprecisely (e.g., <em>p</em> &lt; .05)
-reduces transparency, reproducibility, and re-use (e.g., in <em>p</em>
-value meta-analyses). Best practice is to report exact p-values with
-three decimal places (e.g., <em>p</em> = .032) unless <em>p</em> values
-are smaller than 0.001, in which case you can use <em>p</em> &lt;
-.001.</p>
-<p>This module sometimes flags false positives when sentences discuss
-how p-value thresholds were set. It can also miss an imprecise p-value
-that is reported against a threshold (e.g., “decreased at the <em>p</em>
-&lt; .05 significance threshold”).</p>
-<div style="max-height:8em;overflow:auto;">
-<table class="dt-static">
-<colgroup>
-<col style="width:10%" />
-<col style="width:90%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align:left;">
-P-Value
-</th>
-<th style="text-align:left;">
-Text
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-p &lt; .05
-</td>
-<td style="text-align:left;">
-This attention-dependent emotion effect was observed in five ERP
-activities over four temporal phases, including an early frontal
-positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
-positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
-&gt; 7.2, ps &lt; .02), and positivities over frontal, central and
-parietal regions (320-495 and 500-700 ms, Fs &gt; 10.0, ps &lt; .01).
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ps &lt; .02
-</td>
-<td style="text-align:left;">
-This attention-dependent emotion effect was observed in five ERP
-activities over four temporal phases, including an early frontal
-positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
-positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
-&gt; 7.2, ps &lt; .02), and positivities over frontal, central and
-parietal regions (320-495 and 500-700 ms, Fs &gt; 10.0, ps &lt; .01).
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ps &lt; .01
-</td>
-<td style="text-align:left;">
-This attention-dependent emotion effect was observed in five ERP
-activities over four temporal phases, including an early frontal
-positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
-positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
-&gt; 7.2, ps &lt; .02), and positivities over frontal, central and
-parietal regions (320-495 and 500-700 ms, Fs &gt; 10.0, ps &lt; .01).
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-p &lt; .02
-</td>
-<td style="text-align:left;">
-For H1 and H2 (predictions of positive findings), frequentist analysis
-outputs with p &lt; .02 in the same direction as in the original study
-will be accepted as successful replications.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-p &lt; .02
-</td>
-<td style="text-align:left;">
-For H3 and H4 (predictions of negative findings), results showing p &lt;
-.02 or BF10 ≥ 3 in either direction and BF10 ≤ 0.333 will be accepted as
-evidence for the alternative and null hypothesis, respectively.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-p &lt; .02
-</td>
-<td style="text-align:left;">
-Any significant (p &lt; .02) one-way ANOVAs will be accepted as
-indications of potential ERP differences among the emotions.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-p &lt; .02
-</td>
-<td style="text-align:left;">
-For each positive hypothesis, the replication will be accepted as
-successful if the meta-analytic estimate across all replicating labs is
-significant (p &lt; .02) and in the hypothesized effect direction.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-p &gt; .02
-</td>
-<td style="text-align:left;">
-For each negative hypothesis, we define successful replication as a
-non-significant meta-analytic estimate (p &gt; .02).
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-p &lt; .02
-</td>
-<td style="text-align:left;">
-d The symbol ‘+’ denotes results of p &lt; .02 or BF10 ≥ 3.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-p &gt; .02
-</td>
-<td style="text-align:left;">
-f The symbol ‘-’ denotes results of p &gt; .02 or BF10 ≤ 0.333.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-p &lt; .02
-</td>
-<td style="text-align:left;">
-g Only take place when p &lt; .02 in the frequentist one-way ANOVA
-(emotional trials only, on the whole sample across all labs).
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="callout-tip" title="Learn More" collapse="true">
-<p>The APA manual states: Report exact <em>p</em> values (e.g.,
-<em>p</em> = .031) to two or three decimal places. However, report
-<em>p</em> values less than .001 as <em>p</em> &lt; .001. However, 2
-decimals is too imprecise for many use-cases (e.g., a <em>p</em> value
-meta-analysis), so report <em>p</em> values with three digits.</p>
-<p>American Psychological Association (2020). <em>Publication manual of
-the American Psychological Association</em>, 7 edition. American
-Psychological Association.</p>
-</div>
-</div>
-</details>
-</div>
-<div class="check fix">
-<div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Effect
-Sizes in t-tests and F-tests</span></p>
-</div>
-<div class="rows">
-<div class="label">
-<p>What we found</p>
-</div>
-<div class="text">
-<p>We found 1 t-test and/or F-test where effect sizes are not reported.
-Check these tests in the table below, and consider adding effect
-sizes.</p>
-</div>
-</div>
-<details>
-<summary>
-Show details
-</summary>
-<div class="fold">
-<p>We recommend checking the sentences below, and add any missing effect
-sizes.</p>
-<table class="dt-static">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-This attention-dependent emotion effect was observed in five ERP
-activities over four temporal phases, including an early frontal
-positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
-positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
-&gt; 7.2, ps &lt; .02), and positivities over frontal, central and
-parietal regions (320-495 and 500-700 ms, Fs &gt; 10.0, ps &lt; .01).
-</td>
-</tr>
-</tbody>
-</table>
-<div class="callout-tip" title="Learn More" collapse="true">
-<p>For metascientific articles demonstrating that effect sizes are often
-not reported:</p>
-<ul>
-<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
-(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
-Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
-</ul>
-<p>For educational material on reporting effect sizes:</p>
-<ul>
-<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
-to Effect Sizes and Confidence Intervals</a></li>
-</ul>
-</div>
-<div class="callout-tip" title="All detected and assessed stats" collapse="true">
-<table class="dt-static">
-<thead>
-<tr>
-<th style="text-align:left;">
-Sentence
-</th>
-<th style="text-align:left;">
-Effect Size
-</th>
-<th style="text-align:left;">
-Reported Test
-</th>
-<th style="text-align:left;">
-Test Type
-</th>
-<th style="text-align:left;">
-d Coherence
-</th>
-<th style="text-align:left;">
-d Assumption
-</th>
-<th style="text-align:left;">
-d Coherence Note
-</th>
-<th style="text-align:left;">
-eta Coherence
-</th>
-<th style="text-align:left;">
-eta Assumption
-</th>
-<th style="text-align:left;">
-eta Coherence Note
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-This attention-dependent emotion effect was observed in five ERP
-activities over four temporal phases, including an early frontal
-positivity (160-215 ms, F(1,13) = 5.2, p &lt; .05), a frontocentral
-positivity and an occipitotemporal negativity (both at 220-315 ms, Fs
-&gt; 7.2, ps &lt; .02), and positivities over frontal, central and
-parietal regions (320-495 and 500-700 ms, Fs &gt; 10.0, ps &lt; .01).
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-F(1,13) = 5.2
-</td>
-<td style="text-align:left;">
-F-test
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-indeterminate
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-No parseable eta-squared effect size found.
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</details>
-</div>
-<div class="check fix">
-<div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Codebook Check</span></p>
-</div>
-<div class="rows">
-<div class="label">
-<p>What we found</p>
-</div>
-<div class="text">
-<p>We found no codebook or README documentation for the 96 extracted
-data columns.</p>
-</div>
-</div>
-<details>
-<summary>
-Show details
-</summary>
-<div class="fold">
-<p>This module checks whether each extracted data column is documented
-in a codebook or README, and flags documented variables that never
-appear in the data.</p>
-<p>We examined 1 codebook/README/label source and 96 data columns across
-12 files.</p>
-<p>No codebook or README documentation was found, so no data columns
-could be matched to variable definitions.</p>
-</div>
-</details>
-</div>
-<h2 id="improve">To check <span class="n">(4)</span></h2>
 <div class="check improve">
 <div class="check-head">
 <p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
@@ -1024,6 +855,34 @@ temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
 values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
 Your Statistical Inferences</a>.</p>
 </div>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Codebook Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found no codebook or README documentation for the 96 extracted
+data columns.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>This module checks whether each extracted data column is documented
+in a codebook or README, and flags documented variables that never
+appear in the data.</p>
+<p>We examined 1 codebook/README/label source and 96 data columns across
+12 files.</p>
+<p>No codebook or README documentation was found, so no data columns
+could be matched to variable definitions.</p>
 </div>
 </details>
 </div>
@@ -1205,7 +1064,7 @@ NA
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34b949690f2ce19352bbd/" target="_blank">readme.md</a>
+<a href="https://osf.io/download/d6cvw/" target="_blank">readme.md</a>
 </td>
 <td style="text-align:left;">
 1.7 kB
@@ -1277,7 +1136,7 @@ NA
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34b95a8d5c8881a5f4920/" target="_blank">_change
+<a href="https://osf.io/download/9aqj8/" target="_blank">_change
 log.txt</a>
 </td>
 <td style="text-align:left;">
@@ -1292,7 +1151,7 @@ text
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34b9568cc7f36505f4e62/" target="_blank">Practice
+<a href="https://osf.io/download/3gz8x/" target="_blank">Practice
 task2.py</a>
 </td>
 <td style="text-align:left;">
@@ -1307,7 +1166,7 @@ code
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c032bcd0f4eba352feb/" target="_blank">D02.BMP</a>
+<a href="https://osf.io/download/b8436/" target="_blank">D02.BMP</a>
 </td>
 <td style="text-align:left;">
 15.3 kB
@@ -1321,7 +1180,7 @@ image
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c04ab6c9e13ff5f4bd5/" target="_blank">SU07.BMP</a>
+<a href="https://osf.io/download/uekdb/" target="_blank">SU07.BMP</a>
 </td>
 <td style="text-align:left;">
 15.3 kB
@@ -1349,7 +1208,7 @@ image
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c04d728792ff6bd0d7c/" target="_blank">H03.BMP</a>
+<a href="https://osf.io/download/2u5x6/" target="_blank">H03.BMP</a>
 </td>
 <td style="text-align:left;">
 15.3 kB
@@ -1391,7 +1250,7 @@ image
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c04c4ca0d9c935f50f2/" target="_blank">F04.BMP</a>
+<a href="https://osf.io/download/mpqrw/" target="_blank">F04.BMP</a>
 </td>
 <td style="text-align:left;">
 15.3 kB
@@ -1433,7 +1292,7 @@ image
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c04495f1853afbd0d9f/" target="_blank">D01.BMP</a>
+<a href="https://osf.io/download/du3ns/" target="_blank">D01.BMP</a>
 </td>
 <td style="text-align:left;">
 15.3 kB
@@ -2287,7 +2146,7 @@ image
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c312bcd0f4eba35300e/" target="_blank">trialsLine2.xlsx</a>
+<a href="https://osf.io/download/c4enh/" target="_blank">trialsLine2.xlsx</a>
 </td>
 <td style="text-align:left;">
 12.5 kB
@@ -2301,7 +2160,7 @@ data
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c3148b4312c90352fca/" target="_blank">counterbalance3.xlsx</a>
+<a href="https://osf.io/download/dupx8/" target="_blank">counterbalance3.xlsx</a>
 </td>
 <td style="text-align:left;">
 9 kB
@@ -2315,7 +2174,7 @@ data
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c32ab6c9e13ff5f4c02/" target="_blank">counterbalance8.xlsx</a>
+<a href="https://osf.io/download/h7afn/" target="_blank">counterbalance8.xlsx</a>
 </td>
 <td style="text-align:left;">
 9 kB
@@ -2329,7 +2188,7 @@ data
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c32a8d5c8881a5f4994/" target="_blank">counterbalance5.xlsx</a>
+<a href="https://osf.io/download/wp3b4/" target="_blank">counterbalance5.xlsx</a>
 </td>
 <td style="text-align:left;">
 9 kB
@@ -2343,7 +2202,7 @@ data
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c32f727f90f90352f4c/" target="_blank">trialsEmotion5.xlsx</a>
+<a href="https://osf.io/download/eb83u/" target="_blank">trialsEmotion5.xlsx</a>
 </td>
 <td style="text-align:left;">
 12.5 kB
@@ -2357,7 +2216,7 @@ data
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c34c4ca0d9c935f5110/" target="_blank">blocksEmotion.xlsx</a>
+<a href="https://osf.io/download/y95r3/" target="_blank">blocksEmotion.xlsx</a>
 </td>
 <td style="text-align:left;">
 9.7 kB
@@ -2371,7 +2230,7 @@ data
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c34495f1853afbd0dcd/" target="_blank">blocksLine.xlsx</a>
+<a href="https://osf.io/download/2krnv/" target="_blank">blocksLine.xlsx</a>
 </td>
 <td style="text-align:left;">
 9.7 kB
@@ -2385,7 +2244,7 @@ data
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c37f727f90f90352f4e/" target="_blank">trialsEmotion1.xlsx</a>
+<a href="https://osf.io/download/mcdkn/" target="_blank">trialsEmotion1.xlsx</a>
 </td>
 <td style="text-align:left;">
 12.5 kB
@@ -2413,7 +2272,7 @@ data
 <a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
 </td>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34c37a8d5c8881a5f4997/" target="_blank">counterbalance1.xlsx</a>
+<a href="https://osf.io/download/7s6vh/" target="_blank">counterbalance1.xlsx</a>
 </td>
 <td style="text-align:left;">
 9.8 kB
@@ -2562,37 +2421,10 @@ data
 data
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
-</td>
-<td style="text-align:left;">
-<a href="https://osf.io/download/69a34c3a9690f2ce19352c1a/" target="_blank">trialsLine3.xlsx</a>
-</td>
-<td style="text-align:left;">
-12.5 kB
-</td>
-<td style="text-align:left;">
-data
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://osf.io/4n2t8" class="uri">https://osf.io/4n2t8</a>
-</td>
-<td style="text-align:left;">
-<a href="https://osf.io/download/69a34c3a2bcd0f4eba353012/" target="_blank">counterbalance7.xlsx</a>
-</td>
-<td style="text-align:left;">
-9 kB
-</td>
-<td style="text-align:left;">
-data
-</td>
-</tr>
 </tbody>
 </table>
 </div>
+<p><em>Showing the first 100 of 102 rows.</em></p>
 <p>README files were found in all repositories.</p>
 <h4 id="file-naming">File Naming</h4>
 <p>File names should be machine-parseable: no spaces or special
@@ -4012,7 +3844,7 @@ task1.py</a>
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://osf.io/download/69a34b9568cc7f36505f4e62/" target="_blank">Practice
+<a href="https://osf.io/download/3gz8x/" target="_blank">Practice
 task2.py</a>
 </td>
 <td style="text-align:left;">
@@ -4125,6 +3957,11 @@ analysis are not recoverable, and they may drift between when this
 analysis was run and any later reproduction attempt. Consider depositing
 a <code>requirements.txt</code> that lists each package with its version
 (for example the output of <code>pip freeze</code>).</p>
+<p>The repository holds MATLAB code. State the version of MATLAB used in
+the README, and list any add-ons the code needs (for Stata, the
+user-written commands installed with <code>ssc install</code>; for
+MATLAB, the toolboxes), so that readers can run the code with the same
+software.</p>
 <h4 id="parsable-code">Parsable code</h4>
 <p>All R-type code files (.R, .Rmd, .qmd) could be read in. There were
 no parsing issues.</p>
@@ -33918,7 +33755,7 @@ blocksEmotion.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -33931,7 +33768,7 @@ blocksLine.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -33944,7 +33781,7 @@ counterbalance1.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -33957,7 +33794,7 @@ counterbalance2.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -33970,7 +33807,7 @@ counterbalance3.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -33983,7 +33820,7 @@ counterbalance4.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -33996,7 +33833,7 @@ counterbalance5.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -34009,7 +33846,7 @@ counterbalance6.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -34022,7 +33859,7 @@ counterbalance7.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 <tr>
@@ -34035,11 +33872,12 @@ counterbalance8.xlsx
 <td style="text-align:left;">
 <span title="This file reads as a table but is not a usable dataset (100% of columns are free text, not variables). Store the data as a plain rectangular table (one header row, one column per variable) with a codebook.">📐
 Not a rectangular dataset — This file reads as a table but is not a
-usable dataset (100% of col…</span>
+usable dat…
 </td>
 </tr>
 </tbody>
 </table>
+<p><em>Cells longer than 300 characters are cut (…).</em></p>
 <h4 id="spreadsheet-formatting">Spreadsheet Formatting</h4>
 <p>We examined 22 spreadsheet files in the repository; 10 have at least
 one formatting issue.</p>
@@ -34242,7 +34080,34 @@ a dataset is free of careless responding.</p>
 </div>
 </details>
 </div>
-<h2 id="fine">Fine <span class="n">(3)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Reproducibility Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We assessed 3 Python code files for reproducibility and ran none of
+them.</li>
+<li>0 of 3 Python scripts ran without error when executed.</li>
+<li>Of the others, 3 could not run because a package or program was not
+available.</li>
+<li>3 installable Python dependencies detected.</li>
+</ul>
+</div>
+<div class="label">
+<p>Note</p>
+</div>
+<div class="text">
+<p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
+for the details.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(2)</span></h2>
 <div class="done">
 <div class="done-row">
 <div class="tagcell">
@@ -34252,8 +34117,8 @@ a dataset is free of careless responding.</p>
 <p>Ethics Approval Check</p>
 </div>
 <div class="d">
-<p>All papers that appeared to involve live data collection contained an
-ethics approval statement.</p>
+<p>All papers that appeared to report data about people or animals that
+need an ethics statement contained one.</p>
 </div>
 </div>
 <div class="done-row">
@@ -34265,23 +34130,6 @@ ethics approval statement.</p>
 </div>
 <div class="d">
 <p>We detected no errors in t-tests or F-tests.</p>
-</div>
-</div>
-<div class="done-row">
-<div class="tagcell">
-<p><span class="tag fine">Fine</span></p>
-</div>
-<div class="t">
-<p>Reproducibility Check</p>
-</div>
-<div class="d">
-<ul>
-<li>We assessed AND ran 3 Python code files for reproducibility.</li>
-<li>0 of 3 Python scripts ran without error when executed.</li>
-<li>3 installable Python dependencies detected.</li>
-</ul>
-<p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
-for the details.</p>
 </div>
 </div>
 </div>
@@ -34349,8 +34197,8 @@ found.</p>
 <p>We ran the paper’s 3 Python scripts in the order they depend on each
 other, each in an isolated container, for at most 5 minutes per
 script.</p>
-<p><strong>0 of 3 scripts ran to the end</strong>: 3 could not run on
-our server.</p>
+<p><strong>0 of 3 scripts ran to the end</strong>: 3 could not run
+because a package or program was not available.</p>
 <table>
 <colgroup>
 <col width="33%" />
@@ -34397,26 +34245,27 @@ the ones below it.</p>
 <li><code>Practice task2.py</code> needs <code>psychopy</code>.</li>
 <li><code>FacialExpression.py</code> needs <code>psychopy</code>.</li>
 </ul>
-<p><code>psychopy</code> could not be installed with the current version
-of R, probably because it is old. Record the versions you used (in R,
-<code>renv::init()</code> writes them to a <code>renv.lock</code> file)
-and your R version. To be sure the code keeps running, provide a Docker
-image: a frozen copy of the whole computer setup the code needs, which
-you can build from <code>rocker/r-ver</code> at your R version.</p>
+<p><code>psychopy</code> could not be installed with <code>pip</code>.
+List it with its version in <code>requirements.txt</code>. If it is not
+on PyPI, or its name there differs from the name the code imports, say
+in the README how to install it.</p>
 <h3 id="other-problems-in-the-files">Other problems in the files</h3>
 <ul>
-<li>Practice task1.py calls os.chdir(), which ties the script to a
-folder on the author’s computer. We replaced the call with one that does
-nothing so the script could run; it should be removed from the
-script.</li>
-<li>Practice task2.py calls os.chdir(), which ties the script to a
-folder on the author’s computer. We replaced the call with one that does
-nothing so the script could run; it should be removed from the
-script.</li>
-<li>FacialExpression.py calls os.chdir(), which ties the script to a
-folder on the author’s computer. We replaced the call with one that does
-nothing so the script could run; it should be removed from the
-script.</li>
+<li>Practice task1.py calls os.chdir(), which sets the folder the script
+runs in. We replaced the call with one that does nothing, so the script
+ran from the top folder of the project. A folder on your own computer
+does not exist on another; paths written from the project’s top folder
+work everywhere.</li>
+<li>Practice task2.py calls os.chdir(), which sets the folder the script
+runs in. We replaced the call with one that does nothing, so the script
+ran from the top folder of the project. A folder on your own computer
+does not exist on another; paths written from the project’s top folder
+work everywhere.</li>
+<li>FacialExpression.py calls os.chdir(), which sets the folder the
+script runs in. We replaced the call with one that does nothing, so the
+script ran from the top folder of the project. A folder on your own
+computer does not exist on another; paths written from the project’s top
+folder work everywhere.</li>
 </ul>
 <h3 id="comparison-with-the-paper">Comparison with the paper</h3>
 <p>We found no statistical tests in the paper to compare with the output
@@ -34538,7 +34387,7 @@ dependency_unavailable
 dependency_unavailable
 </td>
 <td style="text-align:right;">
-1.0
+0.8
 </td>
 </tr>
 <tr>
@@ -34552,7 +34401,7 @@ dependency_unavailable
 dependency_unavailable
 </td>
 <td style="text-align:right;">
-0.9
+1.0
 </td>
 </tr>
 <tr>
@@ -34566,7 +34415,7 @@ dependency_unavailable
 dependency_unavailable
 </td>
 <td style="text-align:right;">
-1.0
+0.5
 </td>
 </tr>
 </tbody>
@@ -34684,8 +34533,8 @@ ModuleNotFoundError: No module named &#39;psychopy&#39;</code></pre>
 ModuleNotFoundError: No module named &#39;psychopy&#39;</code></pre>
 </div>
 <p>Dependencies were installed into a throwaway library before running
-(<code>pip install</code>): 2 succeeded, 1 failed. numpy, pandas,
-psychopy were installed.</p>
+(<code>pip install</code>): 2 succeeded, 1 failed. numpy, pandas were
+installed.</p>
 <p><strong>Failed:</strong> psychopy (ERROR: Cannot install
 psychopy==2025.2.1, psychopy==2025.2.2, psychopy==2025.2.3,
 psychopy==2025.2.4, psychopy==2026.1.0, psychopy==2026.1.1,
@@ -34833,13 +34682,9 @@ are marked.</p>
 Ethics Approval Check
 </summary>
 <div class="fold">
-<p>Based on the following text, we would expect an ethics approval
-statement, and it was present:</p>
-<blockquote>
-<p>The original study by Eimer et al. (2003) employed a within-subject
-design in which 14 participants completed two tasks (emotion and line
-tasks).</p>
-</blockquote>
+<p>The paper appears to report data that the authors collected from
+people or animals, and it has an ethics statement.</p>
+<p>We based this on:</p>
 <blockquote>
 <p>In the emotion task, participants were asked to discriminate between
 neutral faces and emotional faces (laterally presented to the left and
@@ -34856,18 +34701,7 @@ displays.</p>
 participants will be tested to replace the excluded participants to
 obtain usable data from 41 participants in each replicating lab.</p>
 </blockquote>
-<blockquote>
-<p>Volunteers are eligible for the study if they are 1) aged 18-60
-years, 2) with normal or corrected-to-normal vision, 3) self-reporting
-to have no neurological condition, and 4) without any skin
-allergies.</p>
-</blockquote>
-<blockquote>
-<p>If more than 50% of epochs in any of the two tasks from a participant
-are to be removed by this step, this particular participant will be
-removed from any further analysis.</p>
-</blockquote>
-<p>Ethics approval statement:</p>
+<p>Ethics statement:</p>
 <blockquote>
 <p>Each participating site will obtain local ethics approval for
 collecting, anonymizing, and publicly sharing data.</p>
@@ -34910,17 +34744,25 @@ How Ethics Approval Check works
 institutional review board approval, and related terms.</p>
 <p>Patterns are designed to capture:</p>
 <p><strong>Human research committee names</strong> -
-<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
 <code>Independent Ethics Committee</code> / IEC (ICH-GCP international
-clinical trial term) - <code>Ethical/Ethics Review Board</code>
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
 (generic) -
-<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
-- <code>Research Ethics Committee/Board/Panel</code>
-(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
 <code>Human Subjects/Research Committee</code> /
 <code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
 <code>Committee for/on the Protection of Human Subjects</code> -
-<code>Committee on (Health) Research Ethics</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
 <code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
 ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
 unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
@@ -34963,7 +34805,13 @@ Tierschutzgesetz) - French:
 <code>IRB (waiver|exemption|exempt)</code> -
 <code>Exempted from (ethics|irb|institutional review)</code> -
 <code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
-- <code>Deemed exempt</code></p>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
 <p><strong>Declaration of Helsinki</strong> -
 <code>Declaration of Helsinki</code> /
 <code>Helsinki Declaration</code></p>
@@ -34973,22 +34821,36 @@ considerations or ethical dilemmas in study content - Mentions of
 manuscript (e.g. “all authors approved the final version”) - Ethical
 behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
 containing “ethics” in path components</p>
-<p>Live data collection is detected by the internal helper
-<code>.detect_live_data()</code>, which searches for sentences
-indicating that data were collected directly from human or animal
-participants. Papers without any live-data signal are not flagged as
-missing ethics approval. The helper uses conservative patterns to avoid
-flagging secondary data analyses, computational experiments, or
-economics papers that analyse existing survey data. See
-<code>.detect_live_data()</code> for the full list of patterns and
-intentional exclusions.</p>
-<p>A paper that states that no human or animal subjects took part (“no
-human subjects were involved”, “did not involve human participants”, or
-people taking part “not as subjects”) is not expected to have an ethics
-statement, whatever participant phrase it also has (see
-<code>.detect_no_participants()</code>). A negation near a participant
-phrase alone (“No participants were excluded”) does not count: it
-reports a study with participants.</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
 <p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
 manual</a>.</p>
 </div>
@@ -35083,7 +34945,10 @@ correctly identified 38 statements (true positives) and incorrectly
 flagged 22 statements (false positives). It failed to detect 27
 statements. Thus, among all statements flagged by the module, 63% were
 genuine cases (positive predictive value). However, the module missed
-42% of all true statements (false negative rate).</p>
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
 </div>
 </div>
 </details>
@@ -35101,8 +34966,17 @@ tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/
 <p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
 <p>Statcheck considers p = 0.000 an error, as you should report p &lt;
 0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
-and one should simply report exact p-values (p = 0.031). Statcheck might
-miss one-sided tests, and falsely assume the p-value is incorrect. For
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
 more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
 <p>This module only checks statistical results reported in the running
 text of the manuscript. It cannot (yet) process statistics reported only
@@ -35125,7 +34999,8 @@ How Exact P-Values works
 </summary>
 <div class="fold">
 <p>List any p-values reported with insufficient precision (e.g., p &lt;
-.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
 <p>This module uses regular expressions to identify p-values. It will
 flag any values reported as p &gt; ? or p &lt; numbers greater than
 .001. It will also flag p-values reported as exactly zero (e.g., p =
@@ -35148,6 +35023,19 @@ test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
 significant (“genes with padj &lt; 0.05 were selected”); such a p-value
 is “named” in <code>not_a_test</code>. Notes in other forms, such as a
 marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
 <p>This module sometimes flags false positives when sentences discuss
 how p-value thresholds were set. It can also miss an imprecise p-value
 that is reported against a threshold (“decreased at the p &lt; .05
@@ -35314,6 +35202,26 @@ ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
 installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
 4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
 other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
 <p>Listing a repository’s files never requires an API key, but some
 hosts answer faster or more completely with one: OSF allows 100
 requests/hour unauthenticated versus 10,000/day with a token (see
@@ -35353,6 +35261,21 @@ text (93 of 95) and 90% in reference lists (74 of 82); the labels were
 made by Claude agents from each link’s evidence, and disputed ones
 checked against the deposits. Telling this paper’s own deposit from the
 authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
 <p>If you want to extend the package to be able to download files from
 additional data repositories reach out to the Metacheck development
 team.</p>
@@ -35608,19 +35531,101 @@ raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
 scripts. <code>dependency_unavailable</code> means the script’s own
 package could not be installed from live CRAN, the CRAN Archive, or a
 named GitHub/URL source — an infrastructure limitation, not a defect in
-the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
-it does <strong>not</strong> force the traffic light red. The full
-stdout/stderr of every run is kept in the result’s
-<code>run_results</code> (the report shows it in per-script dropdowns,
-capped for readability). The traffic light reflects the STATIC readiness
-signals by default, but an execution error
-(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
-a script that crashes on its own analysis is a genuine reproduction
-failure. A script that fails with <code>could not find function</code>
-is run once more with the <code>library()</code> calls the project’s
-other scripts make added at its top (or the one package that exports the
-function, or magrittr for <code>%&gt;%</code>), and a script that then
-runs is reported as reproducible only after that repair.</p>
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
 <p>Dependencies are reported name-only, with the source (CRAN, GitHub,
 or a base package already shipped with R) — static analysis of the code
 cannot know which <em>version</em> was used, and running against current
