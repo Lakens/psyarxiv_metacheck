@@ -195,171 +195,50 @@ MetaCheck Report
 Quantifying metacognition with the hmetad package in R
 </p>
 <p class="meta">
-2026-11-11 · Metacheck 0.4.3.27
+2026-11-24 · Metacheck 0.4.4.40
 </p>
 </header>
 <div class="mc-main">
 <nav class="counts" aria-label="Results">
-<a class="count fix" href="#fix"><b>4</b><span>to
-fix</span></a><a class="count improve" href="#improve"><b>2</b><span>to
+<a class="count fix" href="#fix"><b>1</b><span>to
+fix</span></a><a class="count improve" href="#improve"><b>3</b><span>to
 check</span></a><span class="count decide zero"><b>0</b><span>to decide
 by
-hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>8</b><span>not
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>10</b><span>not
 applicable</span></a>
 </nav>
-<h2 id="fix">To fix <span class="n">(4)</span></h2>
+<h2 id="fix">To fix <span class="n">(1)</span></h2>
 <div class="check fix">
 <div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Ethics
-Approval Check</span></p>
+<p><span class="tag fix">To fix</span> <span class="check-title">Reproducibility Check</span></p>
 </div>
 <div class="rows">
 <div class="label">
 <p>What we found</p>
 </div>
 <div class="text">
-<p>1 of 1 paper appeared to involve live data collection and lacked an
-ethics approval statement.</p>
+<ul>
+<li>We assessed 36 R code files for reproducibility and ran 6 of them
+(each in an isolated Docker container).</li>
+<li>4 of 6 scripts ran without error when executed (1 more is run by
+another script with <code>source()</code>).</li>
+<li>Of the others, 2 did not reproduce.</li>
+<li>22 installable dependencies detected.</li>
+</ul>
 </div>
-</div>
-<details>
-<summary>
-Show details
-</summary>
-<div class="fold">
-<p>Based on the following text, we would expect an ethics approval
-statement, but it was not present:</p>
-<blockquote>
-<p>Along with the primary decision, participants are asked to rate their
-confidence in their decision on an ordinal scale indicating whether
-their decision was a guess, made with high confidence, or somewhere in
-between. 1 Following Clarke et al. (1959), we refer to the primary
-decision as the Type I task and the task of rating confidence as the
-Type II task.</p>
-</blockquote>
-<blockquote>
-<p>Finally, participants completed a number of self-report psychiatric
-questionnaires, which were aggregated into three factors (i.e.,
-anxious-depression, compulsive behavior and intrusive thought, and
-social withdrawal) using factor analysis (for more information, see
-Rouault et al., 2018).</p>
-</blockquote>
-<blockquote>
-<p>Having settled on a prior for the group-level confidence criteria, we
-next visualize priors for participant-level standard deviations by
-simulating just a single participant (since all participants are
-equivalent a priori): |&gt; mutate(participant = first(d$participant))
-|&gt; add_linpred_rvars_metad(m.prior, pivot_longer = TRUE) |&gt;
-median_qi(.value) # A tibble: 15 x 10 anxious_depression participant
-.row .variable .value .lower .upper <dbl> <fct> <int> <chr> <dbl> <dbl>
-<dbl> 1 0 1015841 1 M 0.995 0.309 3.29 2 0 1015841 1 dprime 1.11 0.419
-1.84 3 0 1015841 1 c -0.00194 -0.674 0.744 4 0 1015841 1 meta_dprime
-1.10 0.200 3.93 5 0 1015841 1 meta_c -0.00194 -0.674 0.744 6 0 1015841 1
-meta_c2_0_1 -0.326 -4.35 0.497 7 0 1015841 1 meta_c2_0_2 -0.755 -8.43
-0.206 8 0 1015841 1 meta_c2_0_3 -1.25 -11.8 -0.00590 9 0 1015841 1
-meta_c2_0_4 -1.79 -16.7 -0.243 10 0 1015841 1 meta_c2_0_5 -2.34 -20.1
--0.467 11 0 1015841 1 meta_c2_1_1 0.333 -0.452 4.05 12 0 1015841 1
-meta_c2_1_2 0.768 -0.225 7.37 13 0 1015841 1 meta_c2_1_3 1.27 0.00714
-11.0 14 0 1015841 1 meta_c2_1_4 1.80 0.250 16.6 Note.</p>
-</blockquote>
-</div>
-</details>
-</div>
-<div class="check fix">
-<div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Marginal Significance</span></p>
-</div>
-<div class="rows">
 <div class="label">
-<p>What we found</p>
+<p>Note</p>
 </div>
 <div class="text">
-<p>You described 3 effects with terms related to ‘marginally
-significant’.</p>
+<p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
+for the details.</p>
 </div>
 </div>
-<details>
-<summary>
-Show details
-</summary>
-<div class="fold">
-<p>You described effects with terms related to ‘marginally significant’.
-If <em>p</em> values above 0.05 are interpreted as an effect, you
-inflate the alpha level, and increase the Type 1 error rate. If a
-<em>p</em> value is higher than the prespecified alpha level, it should
-be interpreted as a non-significant result.</p>
-<div style="max-height:8em;overflow:auto;">
-<table class="dt-static">
-<thead>
-<tr>
-<th style="text-align:left;">
-Text
-</th>
-<th style="text-align:left;">
-Section Header
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Putting aside recent debate over whether observed correlations are due
-to inattentive and biased responding (Gillan et al., 2026; Sarna et al.,
-2026a Sarna et al.,, 2026b)), this approach has three significant
-drawbacks: (a) participant-level estimates of metacognitive factors are
-noisy and thus benefit strongly from the partial pooling present in
-multilevel models (Fleming, 2017; Rahnev, 2025), (b) correlating
-participant-level estimates with mental health factors ignores
-uncertainty in participant-level estimates, as well as potential
-correlations in uncertainty, leading to miscalibrated statistical
-inferences (Moutoussis et al., 2018; Singmann &amp; Kellen, 2019), and
-(c) although mean confidence is a sensitive measure of metacognitive
-bias, it is known to be confounded by metacognitive sensitivity and Type
-I performance (O’Neill et al., 2026).
-</td>
-<td style="text-align:left;">
-Fitting the meta-𝑑 ′ model in R
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-However, this approach will significantly slow down model fitting and is
-not guaranteed to resolve the issue.
-</td>
-<td style="text-align:left;">
-Model convergence
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-So, here we will focus on one approach to Bayesian significance testing:
-Bayes Factors.
-</td>
-<td style="text-align:left;">
-Significance testing
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<div class="callout-tip" title="Learn More" collapse="true">
-<p>For metascientific articles demonstrating the rate at which
-non-significant p-values are interpreted as marginally significant,
-see:</p>
-<p>Olsson-Collentine A, van Assen MALM, Hartgerink CHJ (2019). “The
-Prevalence of Marginally Significant Results in Psychology Over Time.”
-<em>Psychological Science</em>, <b>30</b>, 576–586.
-<a href="https://doi.org/10.1177/0956797619830326">doi:10.1177/0956797619830326</a>.</p>
-<p>For the list of terms used to identifify marginally significant
-results, see this <a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
-post by Matthew Hankins</a>.</p>
-</div>
-</div>
-</details>
-</div>
-<div class="check fix">
+<h2 id="improve">To check <span class="n">(3)</span></h2>
+<div class="check improve">
 <div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Codebook Check</span></p>
+<p><span class="tag improve">To check</span> <span class="check-title">Codebook Check</span></p>
 </div>
 <div class="rows">
 <div class="label">
@@ -385,35 +264,6 @@ could be matched to variable definitions.</p>
 </div>
 </details>
 </div>
-<div class="check fix">
-<div class="check-head">
-<p><span class="tag fix">To fix</span> <span class="check-title">Reproducibility Check</span></p>
-</div>
-<div class="rows">
-<div class="label">
-<p>What we found</p>
-</div>
-<div class="text">
-<ul>
-<li>We assessed AND ran 8 R code files for reproducibility (each in an
-isolated Docker container).</li>
-<li>4 of 7 scripts ran without error when executed (1 more is run by
-another script with <code>source()</code>).</li>
-<li>14 installable dependencies detected.</li>
-<li>268 statistics stored from the extracted output; 1 of 2 reported
-tests matched (50%).</li>
-</ul>
-</div>
-<div class="label">
-<p>Note</p>
-</div>
-<div class="text">
-<p>See the section <a href="#section-reproducibility_check">Reproducibility Check</a> below
-for the details.</p>
-</div>
-</div>
-</div>
-<h2 id="improve">To check <span class="n">(2)</span></h2>
 <div class="check improve">
 <div class="check-head">
 <p><span class="tag improve">To check</span> <span class="check-title">Repository Check</span></p>
@@ -424,12 +274,13 @@ for the details.</p>
 </div>
 <div class="text">
 <ul>
-<li>We found 87 files in 2 repositories.</li>
+<li>We found 160 files in 2 repositories.</li>
+<li>The paper’s own R package is on CRAN (hmetad), which we list but do
+not check.</li>
 <li>We found 2 README files and 1 repository without READMEs.</li>
-<li>We could not classify 1 file.</li>
+<li>We could not classify 2 files.</li>
 <li>The manuscript’s studies and the repository’s file groups do not
 match.</li>
-<li>We found 1 file naming problem to fix.</li>
 </ul>
 </div>
 </div>
@@ -438,6 +289,121 @@ match.</li>
 Show details
 </summary>
 <div class="fold">
+<h4 id="r-packages-on-cran">R packages on CRAN</h4>
+<p>The paper’s own R package is on CRAN. We list it, but do not download
+or check it: CRAN checks its packages, and a package is not the paper’s
+analysis.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Package
+</th>
+<th style="text-align:left;">
+Title
+</th>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Published
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://CRAN.R-project.org/package=hmetad" target="_blank">hmetad</a>
+</td>
+<td style="text-align:left;">
+Fit the Meta-D’ Model of Confidence Ratings Using ‘brms’
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+2026-08-21
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="whose-deposits">Whose Deposits</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Cited in
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad_tutorial" target="_blank">github.com/metacoglab/hmetad_tutorial</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+the paper’s title names the repository: a tool the paper presents
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" target="_blank">github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+the deposit names this paper (its DOI, its title, or a link to it)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://CRAN.R-project.org/package=hmetad" target="_blank">CRAN.R-project.org/package=hmetad</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+an R package on CRAN by the paper’s authors, presented in the paper
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://doi.org/10.5281/ZENODO.1308151" target="_blank">doi.org/10.5281/ZENODO.1308151</a>
+</td>
+<td style="text-align:left;">
+reference list
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+a tool by others
+</td>
+</tr>
+</tbody>
+</table>
 <h4 id="repositories">Repositories</h4>
 <table class="dt-static">
 <thead>
@@ -480,7 +446,7 @@ github
 1
 </td>
 <td style="text-align:right;">
-42
+12
 </td>
 <td style="text-align:right;">
 0
@@ -497,13 +463,13 @@ github
 github
 </td>
 <td style="text-align:right;">
-22
+95
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+70
 </td>
 <td style="text-align:right;">
 2
@@ -1533,6 +1499,34 @@ file
 <a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
 </td>
 <td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/DESCRIPTION" target="_blank">DESCRIPTION</a>
+</td>
+<td style="text-align:left;">
+1.6 kB
+</td>
+<td style="text-align:left;">
+file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/NAMESPACE" target="_blank">NAMESPACE</a>
+</td>
+<td style="text-align:left;">
+2.1 kB
+</td>
+<td style="text-align:left;">
+file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
 <a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/NEWS.md" target="_blank">NEWS.md</a>
 </td>
 <td style="text-align:left;">
@@ -1540,6 +1534,230 @@ file
 </td>
 <td style="text-align:left;">
 text
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/auroc1_draws.R" target="_blank">auroc1_draws.R</a>
+</td>
+<td style="text-align:left;">
+5 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/auroc2_draws.R" target="_blank">auroc2_draws.R</a>
+</td>
+<td style="text-align:left;">
+5.7 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/data.R" target="_blank">data.R</a>
+</td>
+<td style="text-align:left;">
+2 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/epred_draws_metad.R" target="_blank">epred_draws_metad.R</a>
+</td>
+<td style="text-align:left;">
+9.3 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/hmetad-package.R" target="_blank">hmetad-package.R</a>
+</td>
+<td style="text-align:left;">
+609 B
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/hmetad.R" target="_blank">hmetad.R</a>
+</td>
+<td style="text-align:left;">
+24.5 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/linpred_draws_metad.R" target="_blank">linpred_draws_metad.R</a>
+</td>
+<td style="text-align:left;">
+7.6 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/mean_confidence_draws.R" target="_blank">mean_confidence_draws.R</a>
+</td>
+<td style="text-align:left;">
+7.6 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/metacognitive_bias_draws.R" target="_blank">metacognitive_bias_draws.R</a>
+</td>
+<td style="text-align:left;">
+6.7 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/metad_family.R" target="_blank">metad_family.R</a>
+</td>
+<td style="text-align:left;">
+27.1 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/predicted_draws_metad.R" target="_blank">predicted_draws_metad.R</a>
+</td>
+<td style="text-align:left;">
+7.6 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/roc1_draws.R" target="_blank">roc1_draws.R</a>
+</td>
+<td style="text-align:left;">
+9.6 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/roc2_draws.R" target="_blank">roc2_draws.R</a>
+</td>
+<td style="text-align:left;">
+11.6 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/simulate.R" target="_blank">simulate.R</a>
+</td>
+<td style="text-align:left;">
+24.5 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/type1_draws.R" target="_blank">type1_draws.R</a>
+</td>
+<td style="text-align:left;">
+6.8 kB
+</td>
+<td style="text-align:left;">
+code
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/type2_draws.R" target="_blank">type2_draws.R</a>
+</td>
+<td style="text-align:left;">
+8.9 kB
+</td>
+<td style="text-align:left;">
+code
 </td>
 </tr>
 <tr>
@@ -1603,27 +1821,13 @@ text
 <a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
 </td>
 <td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/extra.css" target="_blank">extra.css</a>
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/inst/CITATION" target="_blank">CITATION</a>
 </td>
 <td style="text-align:left;">
-71 B
+242 B
 </td>
 <td style="text-align:left;">
-web
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
-</td>
-<td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/apple-touch-icon-120x120.png" target="_blank">apple-touch-icon-120x120.png</a>
-</td>
-<td style="text-align:left;">
-13.3 kB
-</td>
-<td style="text-align:left;">
-image
+file
 </td>
 </tr>
 <tr>
@@ -1631,27 +1835,13 @@ image
 <a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
 </td>
 <td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/apple-touch-icon-152x152.png" target="_blank">apple-touch-icon-152x152.png</a>
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/man/aggregate_metad.Rd" target="_blank">aggregate_metad.Rd</a>
 </td>
 <td style="text-align:left;">
-17.5 kB
+3.1 kB
 </td>
 <td style="text-align:left;">
-image
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
-</td>
-<td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/apple-touch-icon-180x180.png" target="_blank">apple-touch-icon-180x180.png</a>
-</td>
-<td style="text-align:left;">
-21.2 kB
-</td>
-<td style="text-align:left;">
-image
+code
 </td>
 </tr>
 <tr>
@@ -1659,27 +1849,13 @@ image
 <a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
 </td>
 <td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/apple-touch-icon-60x60.png" target="_blank">apple-touch-icon-60x60.png</a>
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/man/auroc1.Rd" target="_blank">auroc1.Rd</a>
 </td>
 <td style="text-align:left;">
-5.3 kB
+1.5 kB
 </td>
 <td style="text-align:left;">
-image
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
-</td>
-<td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/apple-touch-icon-76x76.png" target="_blank">apple-touch-icon-76x76.png</a>
-</td>
-<td style="text-align:left;">
-7.3 kB
-</td>
-<td style="text-align:left;">
-image
+code
 </td>
 </tr>
 <tr>
@@ -1687,27 +1863,13 @@ image
 <a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
 </td>
 <td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/apple-touch-icon.png" target="_blank">apple-touch-icon.png</a>
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/man/auroc1_draws.Rd" target="_blank">auroc1_draws.Rd</a>
 </td>
 <td style="text-align:left;">
-21.2 kB
+2.4 kB
 </td>
 <td style="text-align:left;">
-image
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
-</td>
-<td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/favicon-16x16.png" target="_blank">favicon-16x16.png</a>
-</td>
-<td style="text-align:left;">
-892 B
-</td>
-<td style="text-align:left;">
-image
+code
 </td>
 </tr>
 <tr>
@@ -1715,27 +1877,13 @@ image
 <a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
 </td>
 <td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/favicon-32x32.png" target="_blank">favicon-32x32.png</a>
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/man/auroc2.Rd" target="_blank">auroc2.Rd</a>
 </td>
 <td style="text-align:left;">
-2.6 kB
+1.7 kB
 </td>
 <td style="text-align:left;">
-image
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
-</td>
-<td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/favicon.ico" target="_blank">favicon.ico</a>
-</td>
-<td style="text-align:left;">
-15.1 kB
-</td>
-<td style="text-align:left;">
-image
+code
 </td>
 </tr>
 <tr>
@@ -1743,18 +1891,19 @@ image
 <a href="https://github.com/metacoglab/hmetad" class="uri">https://github.com/metacoglab/hmetad</a>
 </td>
 <td style="text-align:left;">
-<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/pkgdown/favicon/favicon.svg" target="_blank">favicon.svg</a>
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/man/auroc2_draws.Rd" target="_blank">auroc2_draws.Rd</a>
 </td>
 <td style="text-align:left;">
-60.4 kB
+2.7 kB
 </td>
 <td style="text-align:left;">
-image
+code
 </td>
 </tr>
 </tbody>
 </table>
 </div>
+<p><em>Showing the first 100 of 160 rows.</em></p>
 <h4 id="readme-files">README Files</h4>
 <p>README files are a way to document the contents and structure of a
 folder, helping users locate the information they need. You can use a
@@ -1762,61 +1911,18 @@ README to document changes to a repository, and explain how files are
 named. Please consider adding a README to each repository or including
 ‘README’ in the name of your overview document.</p>
 <h4 id="unclassified-files">Unclassified Files</h4>
-<p>We could not classify 1 file by name or extension: .Rbuildignore. Add
-a recognisable keyword (<code>data</code>, <code>code</code>,
-<code>materials</code>, <code>documentation</code>, <code>output</code>)
-to the file name, or use a common extension, so both humans and machines
-can tell what kind of file it is.</p>
+<p>2 files are of a kind metacheck does not know, so they are not
+counted as data, code or documentation: DESCRIPTION, NAMESPACE. This is
+no problem in itself.</p>
 <h4 id="studyrepository-mismatch">Study/Repository Mismatch</h4>
 <p>The studies named in the manuscript do not match how the repository’s
 files are grouped: the repository separates out a study (ex1) not named
 in the manuscript. Check that every study has its own clearly-named
 folder or file prefix, and that the folder names match how the
 manuscript refers to each study.</p>
-<h4 id="file-naming">File Naming</h4>
-<p>File names should be machine-parseable: no spaces or special
-characters, and every file should be classifiable by name or extension.
-We found 1 naming problem that should be fixed, and 0 files with a
-naming suggestion (not required, but a good habit).</p>
-<table class="dt-static">
-<thead>
-<tr>
-<th style="text-align:left;">
-File
-</th>
-<th style="text-align:left;">
-Rule
-</th>
-<th style="text-align:left;">
-Severity
-</th>
-<th style="text-align:left;">
-Detail
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-.Rbuildignore
-</td>
-<td style="text-align:left;">
-unclassifiable
-</td>
-<td style="text-align:left;">
-Required
-</td>
-<td style="text-align:left;">
-could not be classified by name or extension (data_type is ‘unknown’);
-add a recognisable keyword (data, code, materials, …) or a known
-extension
-</td>
-</tr>
-</tbody>
-</table>
 <h4 id="file-classification">File Classification</h4>
 <div class="callout-note" title="See how every file was classified and grouped" collapse="true">
-<p><strong>code</strong> (17 files)</p>
+<p><strong>code</strong> (83 files)</p>
 <div style="max-height:28em;overflow:auto;">
 <table class="dt-static">
 <thead>
@@ -2000,6 +2106,182 @@ ex2
 </tr>
 <tr>
 <td style="text-align:left;">
+auroc1_draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/auroc1_draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+auroc2_draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/auroc2_draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+data.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/data.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+epred_draws_metad.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/epred_draws_metad.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad-package.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/hmetad-package.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/hmetad.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+linpred_draws_metad.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/linpred_draws_metad.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mean_confidence_draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/mean_confidence_draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metacognitive_bias_draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/metacognitive_bias_draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metad_family.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/metad_family.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+predicted_draws_metad.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/predicted_draws_metad.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc1_draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/roc1_draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc2_draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/roc2_draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+simulate.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/simulate.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type1_draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/type1_draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type2_draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+R/type2_draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 README.Rmd
 </td>
 <td style="text-align:left;">
@@ -2018,6 +2300,556 @@ ex2
 </td>
 <td style="text-align:left;">
 _pkgdown.yml
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+aggregate_metad.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/aggregate_metad.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+auroc1.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/auroc1.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+auroc1_draws.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/auroc1_draws.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+auroc2.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/auroc2.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+auroc2_draws.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/auroc2_draws.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bias_draws.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/bias_draws.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cor_matrix.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/cor_matrix.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cov_matrix.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/cov_matrix.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+epred_draws_metad.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/epred_draws_metad.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+example_data.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/example_data.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+example_model.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/example_model.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fit_metad.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/fit_metad.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad-package.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/hmetad-package.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+joint_probabilities.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/joint_probabilities.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+linpred_draws_metad.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/linpred_draws_metad.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mean_conf_draws.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/mean_conf_draws.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mean_confidence.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/mean_confidence.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metac2_parameters.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/metac2_parameters.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metad.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/metad.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metad_pmf.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/metad_pmf.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+normal_dist.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/normal_dist.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+predicted_draws_metad.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/predicted_draws_metad.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+responses.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/responses.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rmatrixnorm.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/rmatrixnorm.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc1.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/roc1.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc1_draws.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/roc1_draws.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc2.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/roc2.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc2_draws.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/roc2_draws.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+signed.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/signed.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sim_metad.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/sim_metad.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sim_metad_condition.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/sim_metad_condition.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sim_metad_participant.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/sim_metad_participant.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sim_metad_participant_condition.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/sim_metad_participant_condition.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stanvars_metad.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/stanvars_metad.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type1_draws.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/type1_draws.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type1_probabilities.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/type1_probabilities.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type2_draws.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/type2_draws.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type2_probabilities.Rd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/type2_probabilities.Rd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+testthat.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+tests/testthat.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-draws.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+tests/testthat/test-draws.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-hmetad.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+tests/testthat/test-hmetad.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-metad_family.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+tests/testthat/test-metad_family.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-simulate.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+tests/testthat/test-simulate.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+alternative_distributions.Rmd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/alternative_distributions.Rmd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+categorical.Rmd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/categorical.Rmd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+history.Rmd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/history.Rmd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad.Rmd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/hmetad.Rmd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+parameterization.Rmd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/parameterization.Rmd
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+precompile.R
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/precompile.R
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_categorical.Rmd
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/src/_categorical.Rmd
 </td>
 </tr>
 </tbody>
@@ -2052,7 +2884,7 @@ rouault_2018_exp2.csv
 </tr>
 </tbody>
 </table>
-<p><strong>documentation</strong> (18 files)</p>
+<p><strong>documentation</strong> (21 files)</p>
 <div style="max-height:28em;overflow:auto;">
 <table class="dt-static">
 <thead>
@@ -2258,6 +3090,17 @@ cran-comments.md
 </tr>
 <tr>
 <td style="text-align:left;">
+CITATION
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+inst/CITATION
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 extra.css
 </td>
 <td style="text-align:left;">
@@ -2267,10 +3110,32 @@ ex2
 pkgdown/extra.css
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+apa.csl
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/apa.csl
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+citations.bib
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/citations.bib
+</td>
+</tr>
 </tbody>
 </table>
 </div>
-<p><strong>materials</strong> (50 files)</p>
+<p><strong>materials</strong> (52 files)</p>
 <div style="max-height:28em;overflow:auto;">
 <table class="dt-static">
 <thead>
@@ -2729,6 +3594,17 @@ ex2
 </tr>
 <tr>
 <td style="text-align:left;">
+logo.svg
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+man/figures/logo.svg
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 apple-touch-icon-120x120.png
 </td>
 <td style="text-align:left;">
@@ -2837,10 +3713,21 @@ ex2
 pkgdown/favicon/favicon.svg
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+.gitignore
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+vignettes/.gitignore
+</td>
+</tr>
 </tbody>
 </table>
 </div>
-<p><strong>unknown</strong> (1 file)</p>
+<p><strong>unknown</strong> (3 files)</p>
 <table class="dt-static">
 <thead>
 <tr>
@@ -2867,6 +3754,28 @@ ex2
 .Rbuildignore
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+DESCRIPTION
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+DESCRIPTION
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NAMESPACE
+</td>
+<td style="text-align:left;">
+ex2
+</td>
+<td style="text-align:left;">
+NAMESPACE
+</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -2883,9 +3792,10 @@ ex2
 </div>
 <div class="text">
 <ul>
-<li>We found 8 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+<li>We found 36 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
 and 0 JASP code files.</li>
-<li>1 code file (_metad_model.qmd) had no comments.</li>
+<li>5 code files (_metad_model.qmd, test-hmetad.R, test-metad_family.R,
+history.Rmd, parameterization.Rmd) had no comments.</li>
 <li>Libraries/imports were loaded in multiple places in README.Rmd.</li>
 <li>No pinned R/package environment (renv.lock, sessionInfo(), or
 groundhog/checkpoint) was found. Consider adding a solution to improve
@@ -3042,6 +3952,278 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/auroc1_draws.R" target="_blank">auroc1_draws.R</a>
+</td>
+<td style="text-align:left;">
+52%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/auroc2_draws.R" target="_blank">auroc2_draws.R</a>
+</td>
+<td style="text-align:left;">
+52%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/data.R" target="_blank">data.R</a>
+</td>
+<td style="text-align:left;">
+72%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/epred_draws_metad.R" target="_blank">epred_draws_metad.R</a>
+</td>
+<td style="text-align:left;">
+37%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/hmetad-package.R" target="_blank">hmetad-package.R</a>
+</td>
+<td style="text-align:left;">
+91%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/hmetad.R" target="_blank">hmetad.R</a>
+</td>
+<td style="text-align:left;">
+44%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/linpred_draws_metad.R" target="_blank">linpred_draws_metad.R</a>
+</td>
+<td style="text-align:left;">
+29%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/mean_confidence_draws.R" target="_blank">mean_confidence_draws.R</a>
+</td>
+<td style="text-align:left;">
+70%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/metacognitive_bias_draws.R" target="_blank">metacognitive_bias_draws.R</a>
+</td>
+<td style="text-align:left;">
+37%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/metad_family.R" target="_blank">metad_family.R</a>
+</td>
+<td style="text-align:left;">
+33%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/predicted_draws_metad.R" target="_blank">predicted_draws_metad.R</a>
+</td>
+<td style="text-align:left;">
+27%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/roc1_draws.R" target="_blank">roc1_draws.R</a>
+</td>
+<td style="text-align:left;">
+40%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/roc2_draws.R" target="_blank">roc2_draws.R</a>
+</td>
+<td style="text-align:left;">
+34%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/simulate.R" target="_blank">simulate.R</a>
+</td>
+<td style="text-align:left;">
+51%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/type1_draws.R" target="_blank">type1_draws.R</a>
+</td>
+<td style="text-align:left;">
+49%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/R/type2_draws.R" target="_blank">type2_draws.R</a>
+</td>
+<td style="text-align:left;">
+46%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 <a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/README.Rmd" target="_blank">README.Rmd</a>
 </td>
 <td style="text-align:left;">
@@ -3055,6 +4237,209 @@ NA
 </td>
 <td style="text-align:right;">
 7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/tests/testthat.R" target="_blank">testthat.R</a>
+</td>
+<td style="text-align:left;">
+70%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/tests/testthat/test-draws.R" target="_blank">test-draws.R</a>
+</td>
+<td style="text-align:left;">
+4%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/tests/testthat/test-hmetad.R" target="_blank">test-hmetad.R</a>
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/tests/testthat/test-metad_family.R" target="_blank">test-metad_family.R</a>
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/tests/testthat/test-simulate.R" target="_blank">test-simulate.R</a>
+</td>
+<td style="text-align:left;">
+12%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/vignettes/alternative_distributions.Rmd" target="_blank">alternative_distributions.Rmd</a>
+</td>
+<td style="text-align:left;">
+3%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/vignettes/categorical.Rmd" target="_blank">categorical.Rmd</a>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/vignettes/history.Rmd" target="_blank">history.Rmd</a>
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/vignettes/hmetad.Rmd" target="_blank">hmetad.Rmd</a>
+</td>
+<td style="text-align:left;">
+10%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/vignettes/parameterization.Rmd" target="_blank">parameterization.Rmd</a>
+</td>
+<td style="text-align:left;">
+0%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/vignettes/precompile.R" target="_blank">precompile.R</a>
+</td>
+<td style="text-align:left;">
+33%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/metacoglab/hmetad/main/vignettes/src/_categorical.Rmd" target="_blank">_categorical.Rmd</a>
+</td>
+<td style="text-align:left;">
+10%
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 </tbody>
@@ -3097,11 +4482,12 @@ in one block near the top of the code. In 1 code file, libraries/imports
 were at multiple places (i.e., with more than 3 non-comment lines in
 between).</p>
 <h4 id="packages-dependencies">Packages / Dependencies</h4>
-<p>The code files load 14 distinct packages/libraries: bayestestR,
-distributional, dplyr, ggdist, hmetad, jsonlite, knitr, pak, paletteer,
-patchwork, posterior, tidybayes, tidyverse, tvthemes. These are the
-names found in the source (no version information is available from
-static analysis).</p>
+<p>The code files load 22 distinct packages/libraries: abind,
+bayestestR, brms, devtools, distributional, dplyr, ggdist, glue, hmetad,
+jsonlite, knitr, pak, paletteer, patchwork, posterior, purrr, stringr,
+testthat, tidybayes, tidyr, tidyverse, tvthemes. These are the names
+found in the source (no version information is available from static
+analysis).</p>
 <h4 id="reproducible-environment">Reproducible Environment</h4>
 <p>No <code>renv.lock</code> file,
 <code>sessionInfo()</code>/<code>session_info()</code> record, or
@@ -3144,8 +4530,8 @@ no parsing issues.</p>
 </div>
 <div class="d">
 <ul>
-<li>We classified 87 files: 1 data, 17 code, 18 documentation, 50
-materials, 1 unknown.</li>
+<li>We classified 160 files: 1 data, 83 code, 21 documentation, 52
+materials, 3 unknown.</li>
 <li>We found 1 tabular data file and extracted 9 columns from 1 of
 them.</li>
 <li>We grouped the files into 2 study groups (ex1, ex2), plus 2
@@ -3156,8 +4542,20 @@ demographic columns for Age, Gender.</li>
 </div>
 </div>
 </div>
-<h2 id="na">Not applicable <span class="n">(8)</span></h2>
+<h2 id="na">Not applicable <span class="n">(10)</span></h2>
 <div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>No papers appeared to report data about people or animals that need
+an ethics statement.</p>
+</div>
+</div>
 <div class="done-row">
 <div class="tagcell">
 <p><span class="tag na">N/A</span></p>
@@ -3178,6 +4576,18 @@ demographic columns for Age, Gender.</li>
 </div>
 <div class="d">
 <p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
 </div>
 </div>
 <div class="done-row">
@@ -3250,11 +4660,11 @@ found.</p>
 </div>
 </div>
 <h2 id="section-reproducibility_check">Reproducibility Check</h2>
-<p>We ran the paper’s 7 R scripts in the order they depend on each
+<p>We ran the paper’s 6 R scripts in the order they depend on each
 other, each in an isolated container, for at most 5 minutes per
 script.</p>
-<p><strong>4 of 7 scripts ran to the end</strong>: 2 stopped with an
-error, 1 ran out of time.</p>
+<p><strong>4 of 6 scripts ran to the end</strong>: 2 did not
+reproduce.</p>
 <table>
 <colgroup>
 <col width="33%" />
@@ -3270,49 +4680,212 @@ error, 1 ran out of time.</p>
 </thead>
 <tbody>
 <tr class="odd">
+<td>auroc1_draws.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="even">
+<td>roc1_draws.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="odd">
+<td>type1_draws.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="even">
+<td>auroc2_draws.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="odd">
+<td>roc2_draws.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="even">
+<td>type2_draws.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="odd">
 <td>_appendix_ll.qmd</td>
 <td>Ran to the end</td>
 <td></td>
 </tr>
 <tr class="even">
+<td>_categorical.Rmd</td>
+<td>Not run</td>
+<td>It documents or tests the software hmetad; nothing links it to the
+paper’s results.</td>
+</tr>
+<tr class="odd">
 <td>_discussion.qmd</td>
 <td>Ran to the end</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>_introduction.qmd</td>
 <td>Ran to the end</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>_metad_model.qmd</td>
 <td>Stopped with an error</td>
 <td><code>Error in type1_plot(evidence) : could not find function
 “type1_plot”</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>_model_fitting.qmd</td>
 <td>Stopped with an error</td>
 <td><code>Error in `check_folder()`: ! The directory ‘_models’ does not
 exist. Please choose an existing directory where the model can be saved
 after fitting.</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>_utils.R</td>
 <td>Ran inside another script</td>
 <td>Another script runs it with source(), so it ran as part of that
 script.</td>
 </tr>
+<tr class="even">
+<td>alternative_distributions.Rmd</td>
+<td>Not run</td>
+<td>It documents or tests the software hmetad; nothing links it to the
+paper’s results.</td>
+</tr>
 <tr class="odd">
+<td>categorical.Rmd</td>
+<td>Not run</td>
+<td>It documents or tests the software hmetad; nothing links it to the
+paper’s results.</td>
+</tr>
+<tr class="even">
+<td>data.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="odd">
+<td>epred_draws_metad.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="even">
+<td>history.Rmd</td>
+<td>Not run</td>
+<td>It documents or tests the software hmetad; nothing links it to the
+paper’s results.</td>
+</tr>
+<tr class="odd">
+<td>hmetad-package.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="even">
+<td>hmetad.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="odd">
+<td>hmetad.Rmd</td>
+<td>Not run</td>
+<td>It documents or tests the software hmetad; nothing links it to the
+paper’s results.</td>
+</tr>
+<tr class="even">
 <td>index.qmd</td>
 <td>Ran to the end</td>
 <td></td>
 </tr>
+<tr class="odd">
+<td>linpred_draws_metad.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="even">
+<td>mean_confidence_draws.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="odd">
+<td>metacognitive_bias_draws.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="even">
+<td>metad_family.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="odd">
+<td>parameterization.Rmd</td>
+<td>Not run</td>
+<td>It documents or tests the software hmetad; nothing links it to the
+paper’s results.</td>
+</tr>
+<tr class="even">
+<td>precompile.R</td>
+<td>Not run</td>
+<td>It documents or tests the software hmetad; nothing links it to the
+paper’s results.</td>
+</tr>
+<tr class="odd">
+<td>predicted_draws_metad.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
 <tr class="even">
 <td>README.Rmd</td>
-<td>Ran out of time</td>
-<td>It was still running after 300 seconds, our time limit per
-script.</td>
+<td>Not run</td>
+<td>It documents or tests the software hmetad; nothing links it to the
+paper’s results.</td>
+</tr>
+<tr class="odd">
+<td>simulate.R</td>
+<td>Not run</td>
+<td>It is part of the code of the package hmetad, which other files use;
+it is not a script to run on its own.</td>
+</tr>
+<tr class="even">
+<td>test-draws.R</td>
+<td>Not run</td>
+<td>It is a test of the software hmetad, not part of the analysis.</td>
+</tr>
+<tr class="odd">
+<td>test-hmetad.R</td>
+<td>Not run</td>
+<td>It is a test of the software hmetad, not part of the analysis.</td>
+</tr>
+<tr class="even">
+<td>test-metad_family.R</td>
+<td>Not run</td>
+<td>It is a test of the software hmetad, not part of the analysis.</td>
+</tr>
+<tr class="odd">
+<td>test-simulate.R</td>
+<td>Not run</td>
+<td>It is a test of the software hmetad, not part of the analysis.</td>
+</tr>
+<tr class="even">
+<td>testthat.R</td>
+<td>Not run</td>
+<td>It is a test of the software hmetad, not part of the analysis.</td>
 </tr>
 </tbody>
 </table>
@@ -3349,18 +4922,9 @@ another script made it.</p>
 first script and read them in the second.</li>
 <li>Load every package with <code>library()</code> at the top.</li>
 </ol>
-<p><strong>A script runs longer than our limit of 5
-minutes.</strong></p>
-<ul>
-<li><code>README.Rmd</code></li>
-</ul>
-<p>State in the README how long each script runs. If some steps take
-hours, save their results (such as fitted models) to files, add those to
-the deposit, and let the script read them, so readers can check the rest
-without waiting.</p>
 <h3 id="comparison-with-the-paper">Comparison with the paper</h3>
-<p>Of the 2 statistical tests reported in the paper, 1 was found in the
-output of the code.</p>
+<p>We found no statistical tests in the paper to compare with the output
+of the code.</p>
 <details>
 <summary>
 All details of the Reproducibility Check
@@ -3368,11 +4932,12 @@ All details of the Reproducibility Check
 <div class="fold">
 <p>This module assesses whether the paper’s code could be run on its
 data, and — because <code>execute = TRUE</code> — <strong>actually ran
-it</strong>. We examined 8 R code files.</p>
+it</strong>. We examined 36 R code files.</p>
 <h4 id="run-order">Run order</h4>
 <p>The scripts were ordered by their data dependencies (a script writing
 a file another reads runs first), <code>source()</code> calls, and
 numeric filename prefixes.</p>
+<div style="max-height:28em;overflow:auto;">
 <table class="dt-static">
 <thead>
 <tr>
@@ -3396,6 +4961,90 @@ Basis
 1
 </td>
 <td style="text-align:left;">
+auroc1_draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+roc1_draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+type1_draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+auroc2_draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+roc2_draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+type2_draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
 _appendix_ll.qmd
 </td>
 <td style="text-align:left;">
@@ -3407,7 +5056,21 @@ none
 </tr>
 <tr>
 <td style="text-align:right;">
-2
+8
+</td>
+<td style="text-align:left;">
+_categorical.Rmd
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
 </td>
 <td style="text-align:left;">
 _discussion.qmd
@@ -3421,7 +5084,7 @@ none
 </tr>
 <tr>
 <td style="text-align:right;">
-3
+10
 </td>
 <td style="text-align:left;">
 _introduction.qmd
@@ -3435,7 +5098,7 @@ none
 </tr>
 <tr>
 <td style="text-align:right;">
-4
+11
 </td>
 <td style="text-align:left;">
 _metad_model.qmd
@@ -3449,7 +5112,7 @@ none
 </tr>
 <tr>
 <td style="text-align:right;">
-5
+12
 </td>
 <td style="text-align:left;">
 _model_fitting.qmd
@@ -3463,7 +5126,7 @@ none
 </tr>
 <tr>
 <td style="text-align:right;">
-6
+13
 </td>
 <td style="text-align:left;">
 _utils.R
@@ -3477,7 +5140,119 @@ none
 </tr>
 <tr>
 <td style="text-align:right;">
-7
+14
+</td>
+<td style="text-align:left;">
+alternative_distributions.Rmd
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+categorical.Rmd
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+data.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+epred_draws_metad.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+history.Rmd
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+hmetad-package.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+hmetad.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+hmetad.Rmd
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22
 </td>
 <td style="text-align:left;">
 index.qmd
@@ -3491,7 +5266,105 @@ dependency
 </tr>
 <tr>
 <td style="text-align:right;">
-8
+23
+</td>
+<td style="text-align:left;">
+linpred_draws_metad.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:left;">
+mean_confidence_draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+metacognitive_bias_draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+metad_family.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:left;">
+parameterization.Rmd
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:left;">
+precompile.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+predicted_draws_metad.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+30
 </td>
 <td style="text-align:left;">
 README.Rmd
@@ -3503,15 +5376,376 @@ README.Rmd
 none
 </td>
 </tr>
+<tr>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+simulate.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:left;">
+test-draws.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+test-hmetad.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:left;">
+test-metad_family.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:left;">
+test-simulate.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:left;">
+testthat.R
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+none
+</td>
+</tr>
 </tbody>
 </table>
+</div>
 <h4 id="file-paths">File paths</h4>
 <p>Every data path in the code works in the repository as deposited.</p>
+<h4 id="files-not-run-on-their-own">Files not run on their own</h4>
+<p>29 files are not part of the analysis but of software (a package, its
+tests or documentation, a tool, a web application), so they were not run
+or counted as scripts.</p>
+<div style="max-height:28em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+auroc1_draws.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+auroc2_draws.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+data.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+epred_draws_metad.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad-package.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+linpred_draws_metad.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mean_confidence_draws.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metacognitive_bias_draws.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metad_family.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+predicted_draws_metad.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc1_draws.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc2_draws.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+simulate.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type1_draws.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type2_draws.R
+</td>
+<td style="text-align:left;">
+It is part of the code of the package hmetad, which other files use; it
+is not a script to run on its own.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+README.Rmd
+</td>
+<td style="text-align:left;">
+It documents or tests the software hmetad; nothing links it to the
+paper’s results.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+testthat.R
+</td>
+<td style="text-align:left;">
+It is a test of the software hmetad, not part of the analysis.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-draws.R
+</td>
+<td style="text-align:left;">
+It is a test of the software hmetad, not part of the analysis.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-hmetad.R
+</td>
+<td style="text-align:left;">
+It is a test of the software hmetad, not part of the analysis.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-metad_family.R
+</td>
+<td style="text-align:left;">
+It is a test of the software hmetad, not part of the analysis.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-simulate.R
+</td>
+<td style="text-align:left;">
+It is a test of the software hmetad, not part of the analysis.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+alternative_distributions.Rmd
+</td>
+<td style="text-align:left;">
+It documents or tests the software hmetad; nothing links it to the
+paper’s results.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+categorical.Rmd
+</td>
+<td style="text-align:left;">
+It documents or tests the software hmetad; nothing links it to the
+paper’s results.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+history.Rmd
+</td>
+<td style="text-align:left;">
+It documents or tests the software hmetad; nothing links it to the
+paper’s results.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad.Rmd
+</td>
+<td style="text-align:left;">
+It documents or tests the software hmetad; nothing links it to the
+paper’s results.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+parameterization.Rmd
+</td>
+<td style="text-align:left;">
+It documents or tests the software hmetad; nothing links it to the
+paper’s results.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+precompile.R
+</td>
+<td style="text-align:left;">
+It documents or tests the software hmetad; nothing links it to the
+paper’s results.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_categorical.Rmd
+</td>
+<td style="text-align:left;">
+It documents or tests the software hmetad; nothing links it to the
+paper’s results.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h4 id="execution">Execution</h4>
 <p><strong>The code was run.</strong> Each script ran in an isolated
 Docker container against a throwaway copy of the repository, in the run
-order above, with a 300-second per-script timeout. Of 8 scripts: 4 ran
-without error, 2 errored, 1 timed out, 0 could not run because one of
+order above, with a 300-second per-script timeout. Of 7 scripts: 4 ran
+without error, 2 errored, 0 timed out, 0 could not run because one of
 its own dependencies is unavailable, 0 did not parse, and 1 was run by
 another script with <code>source()</code>. Running against current
 package versions: a break can reflect version drift, which argues for
@@ -3519,6 +5753,7 @@ pinning versions.</p>
 <p><em>a script hit a <code>could not find function &quot;...&quot;</code> error;
 we added the <code>library()</code> calls it needs (see below), and
 re-ran once. The outcomes above are from that corrected run.</em></p>
+<div style="max-height:40em;overflow:auto;">
 <table class="dt-static">
 <thead>
 <tr>
@@ -3539,6 +5774,84 @@ Time (s)
 <tbody>
 <tr>
 <td style="text-align:left;">
+auroc1_draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc1_draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type1_draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+auroc2_draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+roc2_draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type2_draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 _appendix_ll.qmd
 </td>
 <td style="text-align:left;">
@@ -3552,6 +5865,19 @@ ran_ok
 </tr>
 <tr>
 <td style="text-align:left;">
+_categorical.Rmd
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 _discussion.qmd
 </td>
 <td style="text-align:left;">
@@ -3560,7 +5886,7 @@ ran_ok
 <td style="text-align:left;">
 </td>
 <td style="text-align:right;">
-1.2
+0.8
 </td>
 </tr>
 <tr>
@@ -3573,7 +5899,7 @@ ran_ok
 <td style="text-align:left;">
 </td>
 <td style="text-align:right;">
-1.2
+0.8
 </td>
 </tr>
 <tr>
@@ -3587,7 +5913,7 @@ errored
 undefined_variable
 </td>
 <td style="text-align:right;">
-4.0
+4.3
 </td>
 </tr>
 <tr>
@@ -3601,7 +5927,7 @@ errored
 runtime
 </td>
 <td style="text-align:right;">
-8.5
+9.1
 </td>
 </tr>
 <tr>
@@ -3610,6 +5936,110 @@ _utils.R
 </td>
 <td style="text-align:left;">
 run_by_source
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+alternative_distributions.Rmd
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+categorical.Rmd
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+data.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+epred_draws_metad.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+history.Rmd
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad-package.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hmetad.Rmd
+</td>
+<td style="text-align:left;">
+not_analysis
 </td>
 <td style="text-align:left;">
 </td>
@@ -3632,20 +6062,189 @@ ran_ok
 </tr>
 <tr>
 <td style="text-align:left;">
+linpred_draws_metad.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mean_confidence_draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metacognitive_bias_draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metad_family.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+parameterization.Rmd
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+precompile.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+predicted_draws_metad.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 README.Rmd
 </td>
 <td style="text-align:left;">
-timed_out
+not_analysis
 </td>
 <td style="text-align:left;">
-timeout
 </td>
 <td style="text-align:right;">
-300.4
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+simulate.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-draws.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-hmetad.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-metad_family.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test-simulate.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+testthat.R
+</td>
+<td style="text-align:left;">
+not_analysis
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+0.0
 </td>
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>Undefined-variable errors</strong></p>
 <p><strong>1 script failed on an undefined variable or function</strong>
 (<code>object &#39;...&#39; not found</code> /
@@ -3718,7 +6317,8 @@ _metad_model.qmd
 library(tidyverse), library(tidybayes), library(posterior),
 library(hmetad), library(bayestestR), library(distributional),
 library(ggdist), library(paletteer), library(patchwork),
-library(jsonlite), library(dplyr)
+library(jsonlite), library(dplyr), library(testthat), library(tidyr),
+library(brms)
 </td>
 </tr>
 <tr>
@@ -3729,7 +6329,8 @@ _model_fitting.qmd
 library(tidyverse), library(tidybayes), library(posterior),
 library(hmetad), library(bayestestR), library(distributional),
 library(ggdist), library(paletteer), library(patchwork),
-library(jsonlite), library(dplyr)
+library(jsonlite), library(dplyr), library(testthat), library(tidyr),
+library(brms)
 </td>
 </tr>
 </tbody>
@@ -3777,6 +6378,9 @@ produced.</em></p>
 &gt; library(patchwork)
 &gt; library(jsonlite)
 &gt; library(dplyr)
+&gt; library(testthat)
+&gt; library(tidyr)
+&gt; library(brms)
 &gt; evidence &lt;- tibble(stimulus=factor(0:1),
 &gt;                    d_prime=2, c=0.5, meta_d_prime=1,
 &gt;                    mu1=c(-1, 1)*d_prime/2, sd=1,
@@ -3854,6 +6458,13 @@ The following object is masked from ‘package:purrr’:
 
     flatten
 
+
+Attaching package: ‘testthat’
+
+The following objects are masked from ‘package:readr’:
+
+    edition_get, local_edition
+
 Error in type1_plot(evidence) : could not find function &quot;type1_plot&quot;
 Calls: .repro_docker_run -&gt; withVisible -&gt; eval -&gt; eval
 Execution halted</code></pre>
@@ -3871,6 +6482,9 @@ Execution halted</code></pre>
 &gt; library(patchwork)
 &gt; library(jsonlite)
 &gt; library(dplyr)
+&gt; library(testthat)
+&gt; library(tidyr)
+&gt; library(brms)
 &gt; d &lt;- read_csv(&quot;rouault_2018_exp2.csv&quot;) |&gt;
 &gt;   mutate(
 &gt;     across(stimulus_left:confidence, as.integer),
@@ -4082,6 +6696,13 @@ The following object is masked from ‘package:purrr’:
 
     flatten
 
+
+Attaching package: ‘testthat’
+
+The following objects are masked from ‘package:readr’:
+
+    edition_get, local_edition
+
 Rows: 103322 Columns: 9
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
@@ -4204,390 +6825,20 @@ The following object is masked from ‘package:purrr’:
 
     flatten</code></pre>
 </div>
-<div class="callout-tip" title="Output — README.Rmd (timed_out)" collapse="true">
-<p><strong>Output (stdout):</strong></p>
-<pre><code>&gt; knitr::opts_chunk$set(
-&gt;   collapse = TRUE,
-&gt;   comment = &quot;#&gt;&quot;,
-&gt;   fig.path = &quot;man/figures/README-&quot;,
-&gt;   out.width = &quot;100%&quot;
-&gt; )
-&gt; library(hmetad)
-&gt; library(dplyr)
-&gt; d &lt;- sim_metad(N_trials = 1000) |&gt;
-&gt;   ungroup() |&gt;
-&gt;   select(trial:confidence) |&gt;
-&gt;   slice_sample(prop = 1) |&gt;
-&gt;   mutate(trial = row_number())
-&gt; d
-# A tibble: 1,000 × 5
-   trial stimulus response correct confidence
-   &lt;int&gt;    &lt;int&gt;    &lt;int&gt;   &lt;int&gt;      &lt;int&gt;
- 1     1        0        0       1          2
- 2     2        1        1       1          1
- 3     3        0        0       1          3
- 4     4        0        0       1          2
- 5     5        0        0       1          3
- 6     6        0        1       0          1
- 7     7        0        1       0          3
- 8     8        0        0       1          1
- 9     9        1        1       1          3
-10    10        1        1       1          2
-# ℹ 990 more rows
-&gt; library(hmetad)
-&gt; m &lt;- fit_metad(N ~ 1,
-&gt;   data = d,
-&gt;   prior = prior(normal(0, 1), class = Intercept) +
-&gt;     set_prior(&quot;normal(0, 1)&quot;, class = c(&quot;dprime&quot;, &quot;c&quot;, metac2_parameters(K = 4)))
-&gt; )
-
-SAMPLING FOR MODEL &#39;anon_model&#39; NOW (CHAIN 1).
-Chain 1: 
-Chain 1: Gradient evaluation took 3e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.3 seconds.
-Chain 1: Adjust your expectations accordingly!
-Chain 1: 
-Chain 1: 
-Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 1: 
-Chain 1:  Elapsed Time: 0.103 seconds (Warm-up)
-Chain 1:                0.1 seconds (Sampling)
-Chain 1:                0.203 seconds (Total)
-Chain 1: 
-
-SAMPLING FOR MODEL &#39;anon_model&#39; NOW (CHAIN 2).
-Chain 2: Rejecting initial value:
-Chain 2:   Error evaluating the log probability at the initial value.
-Chain 2: Exception: Exception: multinomial_logit_lpmf: log-probabilities parameter[7] is -inf, but must be finite! (in &#39;anon_model&#39;, line 43, column 2 to line 46, column 66) (in &#39;anon_model&#39;, line 95, column 6 to column 185)
-Chain 2: 
-Chain 2: Gradient evaluation took 1.6e-05 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.
-Chain 2: Adjust your expectations accordingly!
-Chain 2: 
-Chain 2: 
-Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 2: 
-Chain 2:  Elapsed Time: 0.104 seconds (Warm-up)
-Chain 2:                0.094 seconds (Sampling)
-Chain 2:                0.198 seconds (Total)
-Chain 2: 
-
-SAMPLING FOR MODEL &#39;anon_model&#39; NOW (CHAIN 3).
-Chain 3: 
-Chain 3: Gradient evaluation took 1.6e-05 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.
-Chain 3: Adjust your expectations accordingly!
-Chain 3: 
-Chain 3: 
-Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 3: 
-Chain 3:  Elapsed Time: 0.102 seconds (Warm-up)
-Chain 3:                0.086 seconds (Sampling)
-Chain 3:                0.188 seconds (Total)
-Chain 3: 
-
-SAMPLING FOR MODEL &#39;anon_model&#39; NOW (CHAIN 4).
-Chain 4: 
-Chain 4: Gradient evaluation took 1.6e-05 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.
-Chain 4: Adjust your expectations accordingly!
-Chain 4: 
-Chain 4: 
-Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 4: 
-Chain 4:  Elapsed Time: 0.104 seconds (Warm-up)
-Chain 4:                0.089 seconds (Sampling)
-Chain 4:                0.193 seconds (Total)
-Chain 4: 
-&gt; m
- Family: metad__4__normal__absolute__multinomial 
-  Links: mu = log 
-Formula: N ~ 1 
-   Data: data.aggregated (Number of observations: 1) 
-  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
-         total post-warmup draws = 4000
-
-Regression Coefficients:
-          Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept    -0.19      0.17    -0.57     0.13 1.00     3629     3036
-
-Further Distributional Parameters:
-                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-dprime              0.99      0.08     0.83     1.15 1.00     4408     3156
-c                   0.03      0.04    -0.05     0.11 1.00     3805     3322
-metac2zero1diff     0.49      0.03     0.42     0.56 1.00     5178     3487
-metac2zero2diff     0.54      0.04     0.47     0.62 1.00     5426     3651
-metac2zero3diff     0.53      0.05     0.43     0.63 1.00     5553     2956
-metac2one1diff      0.50      0.04     0.44     0.58 1.00     4314     2892
-metac2one2diff      0.47      0.04     0.40     0.55 1.00     5442     3255
-metac2one3diff      0.45      0.04     0.36     0.54 1.00     5813     3010
-
-Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
-and Tail_ESS are effective sample size measures, and Rhat is the potential
-scale reduction factor on split chains (at convergence, Rhat = 1).
-&gt; d &lt;- sim_metad_participant_condition(N_participants = 25) |&gt;
-&gt;   group_by(participant, condition) |&gt;
-&gt;   select(participant:confidence) |&gt;
-&gt;   slice_sample(prop = 1) |&gt;
-&gt;   mutate(trial = row_number())
-&gt; d
-# A tibble: 5,000 × 7
-# Groups:   participant, condition [50]
-   participant condition trial stimulus response correct confidence
-         &lt;int&gt;     &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;   &lt;int&gt;      &lt;int&gt;
- 1           1         1     1        1        1       1          2
- 2           1         1     2        0        1       0          4
- 3           1         1     3        0        0       1          2
- 4           1         1     4        1        0       0          2
- 5           1         1     5        1        1       1          4
- 6           1         1     6        1        1       1          2
- 7           1         1     7        1        1       1          4
- 8           1         1     8        1        1       1          2
- 9           1         1     9        1        1       1          4
-10           1         1    10        0        1       0          2
-# ℹ 4,990 more rows
-&gt; m &lt;- fit_metad(
-&gt;   bf(
-&gt;     N ~ condition + (condition | participant),
-&gt;     dprime + c +
-&gt;       metac2zero1diff + metac2zero2diff + metac2zero3diff +
-&gt;       metac2one1diff + metac2one2diff + metac2one3diff ~
-&gt;       condition + (condition | participant)
-&gt;   ),
-&gt;   data = d, init = &quot;0&quot;,
-&gt;   prior = prior(normal(0, 1)) +
-&gt;     set_prior(&quot;normal(0, 1)&quot;, dpar = c(&quot;dprime&quot;, &quot;c&quot;, metac2_parameters(K = 4)))
-&gt; )
-
-SAMPLING FOR MODEL &#39;anon_model&#39; NOW (CHAIN 1).
-Chain 1: 
-Chain 1: Gradient evaluation took 0.000569 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 5.69 seconds.
-Chain 1: Adjust your expectations accordingly!
-Chain 1: 
-Chain 1: 
-Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)</code></pre>
-<p><strong>Messages / errors (stderr):</strong></p>
-<pre><code>Loading required package: brms
-Loading required package: Rcpp
-Loading &#39;brms&#39; package (version 2.23.0). Useful instructions
-can be found by typing help(&#39;brms&#39;). A more detailed introduction
-to the package is available through vignette(&#39;brms_overview&#39;).
-
-Attaching package: ‘brms’
-
-The following object is masked from ‘package:stats’:
-
-    ar
-
-
-Attaching package: ‘dplyr’
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-`hmetad` has inferred that there are K=4 confidence levels in the data. If this is incorrect, please set this manually using the argument `K=&lt;K&gt;`
-
-Compiling Stan program...
-Start sampling
-`hmetad` has inferred that there are K=4 confidence levels in the data. If this is incorrect, please set this manually using the argument `K=&lt;K&gt;`
-
-Compiling Stan program...
-Start sampling</code></pre>
-</div>
 <p>Dependencies were installed into a throwaway library before running:
-13 succeeded, 1 failed. bayestestR, distributional, dplyr, ggdist,
-hmetad, jsonlite, knitr, pak, paletteer, patchwork, posterior,
-tidybayes, tidyverse, tvthemes were installed.</p>
+11 succeeded, 1 failed. bayestestR, distributional, ggdist, hmetad,
+jsonlite, pak, paletteer, patchwork, posterior, tidybayes, tidyverse
+were installed.</p>
 <p><strong>Failed:</strong> tvthemes [not available on CRAN for this R
 version] (package ‘tvthemes’ is not available for this version of R</p>
 <p>A version of this package for your version of R might be available
 elsewhere, see the ideas at <a href="https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages" class="uri">https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</a>)</p>
-<h4 id="results-by-repository">Results by repository</h4>
-<table class="dt-static">
-<thead>
-<tr>
-<th style="text-align:left;">
-Repository
-</th>
-<th style="text-align:right;">
-Scripts
-</th>
-<th style="text-align:right;">
-Ran to the end
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-hmetad
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hmetad_tutorial
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-4
-</td>
-</tr>
-</tbody>
-</table>
-<h4 id="reported-vs.-reproduced">Reported vs. reproduced</h4>
-<p>2 statistical tests reported in the manuscript text were checked
-against the extracted analysis output: 1 matched (1 fully, 0 partially)
-— 50% found.</p>
-<table class="dt-static">
-<thead>
-<tr>
-<th style="text-align:left;">
-Reported
-</th>
-<th style="text-align:left;">
-Found
-</th>
-<th style="text-align:left;">
-Confidence
-</th>
-<th style="text-align:left;">
-Plausible
-</th>
-<th style="text-align:left;">
-Matched values
-</th>
-<th style="text-align:left;">
-Not matched
-</th>
-<th style="text-align:left;">
-Source file
-</th>
-<th style="text-align:left;">
-Analysis
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-n=0
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-full
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-n=0
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-_model_fitting.qmd
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-social_withdrawal=0 social_withdrawal=0
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:left;">
-none
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-</tbody>
-</table>
 </div>
 </details>
 <h2 id="files">Files in the repository</h2>
 <p>Where the files sit within each repository. Each file is followed by
-how it was classified, which study it belongs to, and any file-naming
-issue found by repo_check; junk files, hidden files and empty folders
-are marked.</p>
+how it was classified, which study it belongs to; junk files, hidden
+files and empty folders are marked.</p>
 <p><strong>Repository: <a href="https://github.com/metacoglab/hmetad_tutorial" class="uri">https://github.com/metacoglab/hmetad_tutorial</a></strong></p>
 <div style="max-height: 40em; overflow: auto;">
 <pre><code>├── _extensions/
@@ -4667,33 +6918,139 @@ are marked.</p>
 <div style="max-height: 40em; overflow: auto;">
 <pre><code>├── .github/
 │   ├── workflows/
-│   │   ├── check-cran-status.yml         💻 code          ex2
-│   │   ├── pkgdown.yaml                  💻 code          ex2
-│   │   └── R-CMD-check.yaml              💻 code          ex2
-│   └── .gitignore                        📁 materials     ex2
+│   │   ├── check-cran-status.yml           💻 code          ex2
+│   │   ├── pkgdown.yaml                    💻 code          ex2
+│   │   └── R-CMD-check.yaml                💻 code          ex2
+│   └── .gitignore                          📁 materials     ex2
+├── inst/
+│   └── CITATION                            📖 documentation ex2
+├── man/
+│   ├── figures/
+│   │   └── logo.svg                        📁 materials     ex2
+│   ├── aggregate_metad.Rd                  💻 code          ex2
+│   ├── auroc1_draws.Rd                     💻 code          ex2
+│   ├── auroc1.Rd                           💻 code          ex2
+│   ├── auroc2_draws.Rd                     💻 code          ex2
+│   ├── auroc2.Rd                           💻 code          ex2
+│   ├── bias_draws.Rd                       💻 code          ex2
+│   ├── cor_matrix.Rd                       💻 code          ex2
+│   ├── cov_matrix.Rd                       💻 code          ex2
+│   ├── epred_draws_metad.Rd                💻 code          ex2
+│   ├── example_data.Rd                     💻 code          ex2
+│   ├── example_model.Rd                    💻 code          ex2
+│   ├── fit_metad.Rd                        💻 code          ex2
+│   ├── hmetad-package.Rd                   💻 code          ex2
+│   ├── joint_probabilities.Rd              💻 code          ex2
+│   ├── linpred_draws_metad.Rd              💻 code          ex2
+│   ├── mean_conf_draws.Rd                  💻 code          ex2
+│   ├── mean_confidence.Rd                  💻 code          ex2
+│   ├── metac2_parameters.Rd                💻 code          ex2
+│   ├── metad_pmf.Rd                        💻 code          ex2
+│   ├── metad.Rd                            💻 code          ex2
+│   ├── normal_dist.Rd                      💻 code          ex2
+│   ├── predicted_draws_metad.Rd            💻 code          ex2
+│   ├── responses.Rd                        💻 code          ex2
+│   ├── rmatrixnorm.Rd                      💻 code          ex2
+│   ├── roc1_draws.Rd                       💻 code          ex2
+│   ├── roc1.Rd                             💻 code          ex2
+│   ├── roc2_draws.Rd                       💻 code          ex2
+│   ├── roc2.Rd                             💻 code          ex2
+│   ├── signed.Rd                           💻 code          ex2
+│   ├── sim_metad_condition.Rd              💻 code          ex2
+│   ├── sim_metad_participant_condition.Rd  💻 code          ex2
+│   ├── sim_metad_participant.Rd            💻 code          ex2
+│   ├── sim_metad.Rd                        💻 code          ex2
+│   ├── stanvars_metad.Rd                   💻 code          ex2
+│   ├── type1_draws.Rd                      💻 code          ex2
+│   ├── type1_probabilities.Rd              💻 code          ex2
+│   ├── type2_draws.Rd                      💻 code          ex2
+│   └── type2_probabilities.Rd              💻 code          ex2
 ├── pkgdown/
 │   ├── favicon/
-│   │   ├── apple-touch-icon-120x120.png  📁 materials     ex2
-│   │   ├── apple-touch-icon-152x152.png  📁 materials     ex2
-│   │   ├── apple-touch-icon-180x180.png  📁 materials     ex2
-│   │   ├── apple-touch-icon-60x60.png    📁 materials     ex2
-│   │   ├── apple-touch-icon-76x76.png    📁 materials     ex2
-│   │   ├── apple-touch-icon.png          📁 materials     ex2
-│   │   ├── favicon-16x16.png             📁 materials     ex2
-│   │   ├── favicon-32x32.png             📁 materials     ex2
-│   │   ├── favicon.ico                   📁 materials     ex2
-│   │   └── favicon.svg                   📁 materials     ex2
-│   └── extra.css                         📖 documentation ex2
-├── _pkgdown.yml                          💻 code          ex2
-├── .gitignore                            📁 materials     ex2
-├── .Rbuildignore                         ❓ unknown       ex2  could not be classified by name or extension (data_type is &#39;unknown&#39;); add a recognisable keyword (data, code, materials, ...) or a known extension
-├── cran-comments.md                      📖 documentation ex2
-├── NEWS.md                               📖 documentation ex2
-├── README.md                             📄 readme
-└── README.Rmd                            📄 readme</code></pre>
+│   │   ├── apple-touch-icon-120x120.png    📁 materials     ex2
+│   │   ├── apple-touch-icon-152x152.png    📁 materials     ex2
+│   │   ├── apple-touch-icon-180x180.png    📁 materials     ex2
+│   │   ├── apple-touch-icon-60x60.png      📁 materials     ex2
+│   │   ├── apple-touch-icon-76x76.png      📁 materials     ex2
+│   │   ├── apple-touch-icon.png            📁 materials     ex2
+│   │   ├── favicon-16x16.png               📁 materials     ex2
+│   │   ├── favicon-32x32.png               📁 materials     ex2
+│   │   ├── favicon.ico                     📁 materials     ex2
+│   │   └── favicon.svg                     📁 materials     ex2
+│   └── extra.css                           📖 documentation ex2
+├── R/
+│   ├── auroc1_draws.R                      💻 code          ex2
+│   ├── auroc2_draws.R                      💻 code          ex2
+│   ├── data.R                              💻 code          ex2
+│   ├── epred_draws_metad.R                 💻 code          ex2
+│   ├── hmetad-package.R                    💻 code          ex2
+│   ├── hmetad.R                            💻 code          ex2
+│   ├── linpred_draws_metad.R               💻 code          ex2
+│   ├── mean_confidence_draws.R             💻 code          ex2
+│   ├── metacognitive_bias_draws.R          💻 code          ex2
+│   ├── metad_family.R                      💻 code          ex2
+│   ├── predicted_draws_metad.R             💻 code          ex2
+│   ├── roc1_draws.R                        💻 code          ex2
+│   ├── roc2_draws.R                        💻 code          ex2
+│   ├── simulate.R                          💻 code          ex2
+│   ├── type1_draws.R                       💻 code          ex2
+│   └── type2_draws.R                       💻 code          ex2
+├── tests/
+│   ├── testthat/
+│   │   ├── test-draws.R                    💻 code          ex2
+│   │   ├── test-hmetad.R                   💻 code          ex2
+│   │   ├── test-metad_family.R             💻 code          ex2
+│   │   └── test-simulate.R                 💻 code          ex2
+│   └── testthat.R                          💻 code          ex2
+├── vignettes/
+│   ├── src/
+│   │   └── _categorical.Rmd                💻 code          ex2
+│   ├── .gitignore                          📁 materials     ex2
+│   ├── alternative_distributions.Rmd       💻 code          ex2
+│   ├── apa.csl                             📖 documentation ex2
+│   ├── categorical.Rmd                     💻 code          ex2
+│   ├── citations.bib                       📖 documentation ex2
+│   ├── history.Rmd                         💻 code          ex2
+│   ├── hmetad.Rmd                          💻 code          ex2
+│   ├── parameterization.Rmd                💻 code          ex2
+│   └── precompile.R                        💻 code          ex2
+├── _pkgdown.yml                            💻 code          ex2
+├── .gitignore                              📁 materials     ex2
+├── .Rbuildignore                           ❓ unknown       ex2
+├── cran-comments.md                        📖 documentation ex2
+├── DESCRIPTION                             ❓ unknown       ex2
+├── NAMESPACE                               ❓ unknown       ex2
+├── NEWS.md                                 📖 documentation ex2
+├── README.md                               📄 readme
+└── README.Rmd                              📄 readme</code></pre>
 </div>
 <h2 id="more-detail">More detail</h2>
 <div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper does not appear to report data about individual people or
+animals (we found: a tutorial or software paper named in the title or
+abstract; figures about groups or things), so we do not expect an ethics
+statement.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>Here we introduce the open-source R package hmetad, which allows
+users to fit the meta-𝑑 ′ model for a wide range of experimental designs
+using a familiar formula syntax.</p>
+</blockquote>
+<blockquote>
+<p>As noted by Maniscalco and Lau (2014), it is often more efficient to
+use a multinomial likelihood over the aggregated data instead.</p>
+</blockquote>
+<blockquote>
+<p>To increase the efficiency of model fitting, hmetad fits the meta-𝑑 ′
+model on aggregated data rather than this trial-level data.</p>
+</blockquote>
+</div>
+</details>
 <details>
 <summary>
 Power Analysis Check
@@ -8124,6 +10481,9 @@ Reference
 Comments
 </th>
 <th style="text-align:left;">
+Commenters
+</th>
+<th style="text-align:left;">
 PubPeer Link
 </th>
 </tr>
@@ -8137,6 +10497,9 @@ Statistics and Computing, 27(5), 1413-1432. <a href="https://doi.org/10.1007/s11
 </td>
 <td style="text-align:right;">
 2
+</td>
+<td style="text-align:left;">
+Mycale laxissima, Pariana parvispica
 </td>
 <td style="text-align:left;">
 <a href="https://pubpeer.com/publications/7A547C33C337D7E0F921C0017BFB71" target="_blank">link</a>
@@ -8173,17 +10536,25 @@ How Ethics Approval Check works
 institutional review board approval, and related terms.</p>
 <p>Patterns are designed to capture:</p>
 <p><strong>Human research committee names</strong> -
-<code>Institutional Review Board</code> / IRB (US standard) -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
 <code>Independent Ethics Committee</code> / IEC (ICH-GCP international
-clinical trial term) - <code>Ethical/Ethics Review Board</code>
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
 (generic) -
-<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee</code>
-- <code>Research Ethics Committee/Board/Panel</code>
-(UK/Canada/Australia) - <code>Medical Ethics Committee</code> -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
 <code>Human Subjects/Research Committee</code> /
 <code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
 <code>Committee for/on the Protection of Human Subjects</code> -
-<code>Committee on (Health) Research Ethics</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
 <code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
 ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
 unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
@@ -8226,7 +10597,13 @@ Tierschutzgesetz) - French:
 <code>IRB (waiver|exemption|exempt)</code> -
 <code>Exempted from (ethics|irb|institutional review)</code> -
 <code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
-- <code>Deemed exempt</code></p>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
 <p><strong>Declaration of Helsinki</strong> -
 <code>Declaration of Helsinki</code> /
 <code>Helsinki Declaration</code></p>
@@ -8236,22 +10613,36 @@ considerations or ethical dilemmas in study content - Mentions of
 manuscript (e.g. “all authors approved the final version”) - Ethical
 behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
 containing “ethics” in path components</p>
-<p>Live data collection is detected by the internal helper
-<code>.detect_live_data()</code>, which searches for sentences
-indicating that data were collected directly from human or animal
-participants. Papers without any live-data signal are not flagged as
-missing ethics approval. The helper uses conservative patterns to avoid
-flagging secondary data analyses, computational experiments, or
-economics papers that analyse existing survey data. See
-<code>.detect_live_data()</code> for the full list of patterns and
-intentional exclusions.</p>
-<p>A paper that states that no human or animal subjects took part (“no
-human subjects were involved”, “did not involve human participants”, or
-people taking part “not as subjects”) is not expected to have an ethics
-statement, whatever participant phrase it also has (see
-<code>.detect_no_participants()</code>). A negation near a participant
-phrase alone (“No participants were excluded”) does not count: it
-reports a study with participants.</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
 <p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
 manual</a>.</p>
 </div>
@@ -8346,7 +10737,10 @@ correctly identified 38 statements (true positives) and incorrectly
 flagged 22 statements (false positives). It failed to detect 27
 statements. Thus, among all statements flagged by the module, 63% were
 genuine cases (positive predictive value). However, the module missed
-42% of all true statements (false negative rate).</p>
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
 </div>
 </div>
 </details>
@@ -8364,8 +10758,17 @@ tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/
 <p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
 <p>Statcheck considers p = 0.000 an error, as you should report p &lt;
 0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
-and one should simply report exact p-values (p = 0.031). Statcheck might
-miss one-sided tests, and falsely assume the p-value is incorrect. For
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
 more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
 <p>This module only checks statistical results reported in the running
 text of the manuscript. It cannot (yet) process statistics reported only
@@ -8388,7 +10791,8 @@ How Exact P-Values works
 </summary>
 <div class="fold">
 <p>List any p-values reported with insufficient precision (e.g., p &lt;
-.05 or p = n.s.) or reported as exactly zero (e.g., p = .000).</p>
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
 <p>This module uses regular expressions to identify p-values. It will
 flag any values reported as p &gt; ? or p &lt; numbers greater than
 .001. It will also flag p-values reported as exactly zero (e.g., p =
@@ -8403,9 +10807,27 @@ puts such notes into the running text, so each p-value is judged by the
 words in its own clause (the text up to a “;” or a full stop), and never
 left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
 .05”). The column <code>not_a_test</code> of the table says why a
-p-value was left out (“marker”, “threshold” or “legend”). Notes in other
-forms, such as a marker after the p-value (“p &lt; .05 (*)“), are still
-flagged.</p>
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
 <p>This module sometimes flags false positives when sentences discuss
 how p-value thresholds were set. It can also miss an imprecise p-value
 that is reported against a threshold (“decreased at the p &lt; .05
@@ -8418,13 +10840,16 @@ to exclude — see above).</p>
 <p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
 manual</a>.</p>
 <div class="validation">
-<p>Validation: In a sample of 225 papers containing 405 instances of
-non-exact p-values, the module correctly detected 269 cases (true
-positives) and incorrectly identified 78 (false positives). It missed
-136 instances of imprecisely reported p-values (false negatives) and
-correctly identified 4557 cases of precisely reported p-values (true
-negative). Additionally, 78% of positive detections were correct
-(positive predictive value).</p>
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
 </div>
 </div>
 </details>
@@ -8444,6 +10869,12 @@ p-values.</p>
 learning classifier to only return sentences likely to contain
 misinterpretations. If you want to help to improve the module, reach out
 to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
 <p>This module only checks p-values reported in the running text of the
 manuscript. It cannot (yet) process p-values reported only in
 tables.</p>
@@ -8451,12 +10882,18 @@ tables.</p>
 <p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
 manual</a>.</p>
 <div class="validation">
-<p>Validation: In a sample of 194 papers with 1602 instances of
-non-significant p-values, this module correctly detected 1486 of them,
-and incorrectly identified 153. Additionally, 91% of detections were
-true instances (positive predictive value). That is, when this module
-flags non-significant p-values in a paper, it correctly identifies an
-issue 91% of the time.</p>
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
 </div>
 </div>
 </details>
@@ -8557,6 +10994,26 @@ ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
 installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
 4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
 other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
 <p>Listing a repository’s files never requires an API key, but some
 hosts answer faster or more completely with one: OSF allows 100
 requests/hour unauthenticated versus 10,000/day with a token (see
@@ -8576,6 +11033,41 @@ that project is public its files are listed under its own URL, and if it
 is closed or otherwise inaccessible the report flags it explicitly,
 since some registrations only describe their content rather than
 mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
 <p>If you want to extend the package to be able to download files from
 additional data repositories reach out to the Metacheck development
 team.</p>
@@ -8831,19 +11323,101 @@ raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
 scripts. <code>dependency_unavailable</code> means the script’s own
 package could not be installed from live CRAN, the CRAN Archive, or a
 named GitHub/URL source — an infrastructure limitation, not a defect in
-the paper’s code, so unlike <code>errored</code>/<code>timed_out</code>
-it does <strong>not</strong> force the traffic light red. The full
-stdout/stderr of every run is kept in the result’s
-<code>run_results</code> (the report shows it in per-script dropdowns,
-capped for readability). The traffic light reflects the STATIC readiness
-signals by default, but an execution error
-(<code>errored</code>/<code>timed_out</code>) does recolour it to red —
-a script that crashes on its own analysis is a genuine reproduction
-failure. A script that fails with <code>could not find function</code>
-is run once more with the <code>library()</code> calls the project’s
-other scripts make added at its top (or the one package that exports the
-function, or magrittr for <code>%&gt;%</code>), and a script that then
-runs is reported as reproducible only after that repair.</p>
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
 <p>Dependencies are reported name-only, with the source (CRAN, GitHub,
 or a base package already shipped with R) — static analysis of the code
 cannot know which <em>version</em> was used, and running against current
