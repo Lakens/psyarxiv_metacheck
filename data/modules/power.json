@@ -6066,17 +6066,9 @@
    "url": "https://osf.io/preprints/psyarxiv/h5vae_v4/",
    "published": "2026-10-22T20:08:00.553855",
    "report_page": true,
-   "light": "red",
-   "summary": "We detected 15 potential power analyses.",
+   "light": "yellow",
+   "summary": "We detected 8 potential power analyses.",
    "findings": [
-    {
-     "sentence": "Ideally, we use the fastest evidence accumulating E-process, as it will provide us with the earliest option to stop data collection and potentially maximise resource conservation. We use this optimisation principle to select E-processes in Section 2.1 below. Section 2.3 focuses on how n plan in Protocol 1.1 can be chosen based on a power analysis. As with a classical power analysis, we assume to be given a desired power requirement, e.g. power = 80%, and an expected, or minimum clinically relevant, effect size δ min . Such a δ min is intuitively meaningful when we are not interested in tiny e…",
-     "note": "Not found: the statistical test, the sample size, the alpha level, the power, the effect size, the effect size metric, the software."
-    },
-    {
-     "sentence": "For this reason we developed routines in the safestats package that efficiently sample the first-passage time distribution. Specifically, using (essentially) just Line 3 of R Code 2.1, we simulate (by default) m = 1000 e-value sequences under P δ min, all in under 2.4 seconds on a 2021 iMac M1. 14 Line 4 plots the first-passage time distribution as in 1 library ( safestats ) 2 3 designObj ← designSaviT ( deltaMin =0.5, beta =0.2, testType = \" twoSample \" ) 4 plot ( designObj ) The top panel of Fig. 7 illustrates the distinct roles of α, δ min, and the desired power for this power analysis. Fi…",
-     "note": "Not found: the sample size, the alpha level, the effect size, the effect size metric."
-    },
     {
      "sentence": "A reasonable estimate of the underlying standardised effect size based on the original findings (Gray & Wegner, 2009, Study 1a) is within (0.769, 0.872). 19 We err on the side of caution by using the lower bound for our power analysis. Furthermore, we can argue for a one-sided test (Grünwald & Koolen, 2025), as the working hypothesis deals with the offending adult man being perceived as more, not less, responsible compared to the offending baby. A classical power analysis shows that for δ min = 0.769 and power = 80%, the one-sided p-value test should be performed after gathering data from n1 …",
      "note": "Not found: the alpha level, the software."
@@ -6091,11 +6083,11 @@
     },
     {
      "sentence": "There were 57 Many Labs 2 replication attempts that fulfilled the inclusion criteria, of which 3 (5.26%) yielded a significant p-value less than α = 0.05. These conclusions were based on n1 = 3439 and n2 = 3508 participants. 22 A reasonable estimate of the datagoverning standardised effect size based on the original findings in Zhong and Liljenquist (2006, Study 2) is within (0.909, 1.429). As before, we err on the side of caution by using the lower bound for our design. A classical power analysis shows that for δ min = 0.909 and power = 80% power, the one-sided p < α test should be conducted…",
-     "note": "Not found: the software."
+     "note": "Not found: the power, the effect size, the effect size metric, the software."
     },
     {
      "sentence": "Fig.7. The first 100 e-value sequences until they hit 1/α are shown as blue curves. The histogram is based on the m = 1000 first-passage times N at which e N ≥ 1/α occurred.15 The top panel of Fig.7illustrates the distinct roles of α, δ min, and the desired power for this power analysis. Firstly, α defines the minimum level of evidence for persuasive support, e.g. 1/α = 20, which is shown as the horizontal black line. Secondly, δ min defines the optimal mom E-process which is expressed by the steepness of the average upward drift of the e-value sequences. Lastly, the blue histogram shows that…",
-     "note": "Not found: the sample size, the alpha level, the power, the effect size, the effect size metric, the software."
+     "note": "Not found: the software."
     },
     {
      "sentence": "There are circumstances where no minimal clinical relevant effect size δ min can be specified. Nonetheless, it is still possible to choose a tuning parameter and conduct a savi ttest. For instance, in a practical scenarios where the available budget forms the bottleneck of our investigation, yielding a restriction on the sample sizes, say, at most n1 = n2 = 40. Before running Protocol 1.1 with n plan = 40, we might want to get an indication of the δ that we can detect with, say, 80% power. Providing the designSaviT function with α, n plan, power, e.g. Lines 3 and 4 of R Code 2.1, reveals that…",
@@ -6104,26 +6096,6 @@
     {
      "sentence": "Subject experts might claim that an effect size of δ = 0.7 is more realistic. Such an effect can still be detected if we sample up to n1 = n2 = 40, but with smaller probability. Providing designSaviT with α, n plan, δ min, e.g. Lines 5 and 6 of R Code 2.1, we can conclude that under P δ with δ = 0.7 we have 64.2 % power to observe e n ≥ 20 by monitoring up to n plan = 40.",
      "note": "Not found: the alpha level."
-    },
-    {
-     "sentence": "The fact that the grow E-process yields the lowest n plan is due to it being the fastest evidence accumulating procedure amongst all E-processes. However, in case the grow t-test was optimised for δ min = 0.5, but the data-governing effect size is actually δ = 0.2, then the grow E-process requires many more samples to yield e n ≥ 1/α with 80% power. If the grow E-process were tuned to δmin = 0.2 from the beginning, then it only needs n plan = 531 instead of n plan = 2612, which equates to a relative increase of 392%. The relative increase is much less for mom (36.6%), eGauss (9.2%), and eCauc…",
-     "note": "Not found: the sample size, the alpha level, the software."
-    },
-    {
-     "sentence": "Upon reaching n plan without the e-value sequence crossing 1/α, we can halt data collection, maintain the null hypothesis as the status quo, and assert that the effect is not clinically relevant, with a type II error rate of at most 1 -power. Alternatively, we can also continue sampling if the e-value looks promising and we are keen to investigate a smaller effect. Similar conclusions can be reached by exploring the anytime-valid confidence intervals. The role of the planned sample size is to guarantee at least, e.g. power = 80% probability to gain persuasive support for a treatment effect un…",
-     "note": "Not found: the sample size, the alpha level, the effect size, the effect size metric, the software."
-    },
-    {
-     "sentence": "We recommend the mom E-process (Johnson & Rossell, 2010) as a default procedure, because the resulting savi t-test provides the best balance between efficiency and robustness to the choice of δ min, as a result of specifying a continuous prior as opposed to point priors (e.g. grow in purple in Fig. 4). It also yields well-concentrated anytime-valid confidence intervals (blue curves in Fig. 10). Table 2 shows n plan for various types of E-processes when α = 0.05 and power = 80% in the two-sample t-test setting with n = n1 = n 2 for δ min = 0.5 and δ min = 0.2. The ordering of the E-process typ…",
-     "note": "Not found: the effect size, the effect size metric, the software."
-    },
-    {
-     "sentence": "The mom savi t-test provides the best balance between efficiency and robustness to the choice of δ min . Except for the third and the last column with n mean above them, the table shows the planned sample sizes n1 = n 2 based on α = 0.05 and power = 80%. To acknowledge that these planned (and average) sample sizes are found by simulation we also included two times the bootstrap standard errors. The grow E-process has the lowest n plan for δ ≥ δ min, but requires an enormous number of samples to yield high evidence with, e.g. power = 80% probability under |δ| < δ min . The mom E-process is mor…",
-     "note": "Not found: the sample size, the effect size, the effect size metric, the software."
-    },
-    {
-     "sentence": "grow large when the null is false. As more data are collected under the alternative, the evalues should become increasingly pronounced, allowing the procedure to potentially achieve 100% statistical power (Ram & Ramdas, 2026). Fig. 5 illustrates this divergent behaviour by applying Protocol 1.1 with the mom type savi t-test, where g mom = 0.5 2 2 as introduced earlier, and the arbitrarily chosen time horizon n plan = 200. The left panel shows that sequences of e-values under the null have a tendency to decrease towards zero, whereas the right panel shows sequences where the data were generate…",
-     "note": "Not found: the effect size, the effect size metric, the software."
     }
    ]
   },
