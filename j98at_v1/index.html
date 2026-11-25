@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: From physical to virtual settings: The
+transferability and extension of cultic control mechanisms in
+conversational and agentic AI</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+From physical to virtual settings: The transferability and extension of
+cultic control mechanisms in conversational and agentic AI
+</p>
+<p class="meta">
+2026-11-25 · Metacheck 0.4.4.40
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>2</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>12</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(2)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Ethics Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>For 1 of 1 paper we could not tell whether it reports data about
+people or animals, and found no ethics statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We could not tell whether this paper reports data about people or
+animals: the signs we look for were missing or pointed both ways. If it
+does, it needs an ethics statement, and we found none.</p>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 1 non-significant p value that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = .0678
+</td>
+<td style="text-align:left;">
+Their subsequent correction clarified that the direct comparison with
+non-personalized GPT-4 did not reach statistical significance (p =
+.0678); this comparison alone therefore does not establish an additional
+persuasive advantage attributable to personalization (Salvi et
+al. 2026).
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 1 reference with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 1 detected.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(12)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 43 references with DOIs. You cited 1 reference with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+Commenters
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Costello TH, Pennycook G, Rand DG (2024) Durably reducing conspiracy
+beliefs through dialogues with AI. Science 385(6714):eadq1814. <a href="https://doi.org/10.1126/science.adq1814" class="uri">https://doi.org/10.1126/science.adq1814</a>
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Federico Leva, Zingiber gramineum, Tom Stafford, Notropis jemezanus
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/30E28D5C8057B13D393FEAB6AECB86" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 43 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 43 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Research on psychologically abusive groups documents harm to members and their families. France&#x27;s interministerial monitoring body recorded 4,571 reports and information requests concerning sectarian abuses in 2024. These figures indicate substantial public concern, rather than the prevalence of group involvement. Cult research has developed descriptive frameworks for examining practices of control, their targets and intensity, rather than relying solely on labels applied to groups. This conceptual paper examines how these mechanisms change when influence operates in virtual environments and is partly performed by AI. It asks which mechanisms transfer, which remain dependent on body and place, how virtual control operates, and what becomes possible beyond traditional human organizations. Drawing on the six-category model of group psychological abuse developed by Rodríguez-Carballeira and colleagues, the analysis finds that five categories transfer to the virtual domain with little material change. Control over personal life becomes fully transferable when AI receives permissions to act through external tools. Conversational AI adds four capabilities: dyadic intimacy at unlimited scale, complete and asymmetrical recall, individualized reformulation without a shared canon, and control persisting after a relationship ends. Across settings, the relevant outcome is the cost of questioning, resisting or disengaging from influence. The paper does not claim that integrated AI-mediated cultic control has been documented. It distinguishes evidentiary statuses and links proposed mechanisms to observable evidence and counter-cases through an inquiry matrix.</p>
+<h3>1. Introduction</h3>
+<p> &gt;Introduction</p>
+<h3>1.1 The scope of the phenomenon and the effort to describe it</h3>
+<p>In an Intelligence Notification released in February 2025, Europol drew attention to the rise of online grooming cults, decentralized digital networks that recruit, manipulate, and exploit vulnerable minors through social media, gaming platforms, and encrypted communication channels. Europol noted that these communities function through systematic psychological coercion and target young people on a global scale (Europol 2025). Although these networks differ from many traditional high-demand groups, they demonstrate that mechanisms of dependency, isolation, and control can now operate in largely virtual environments. Because coercive influence is frequently hidden from public view and reporting rates are difficult to estimate, the prevalence of such phenomena remains uncertain. The emergence of generative AI raises a further question: whether these mechanisms can now be individualized, automated, and extended beyond the limits imposed by human organizations.</p>
+<p>In France, the interministerial mission for monitoring and combating sectarian abuses (MIVILUDES) recorded 4,148 reports and information requests in 2022, 4,375 in 2023 and 4,571 in 2024, more than double the 2015 figure. Health and wellbeing accounted for thirty-seven percent of these, spiritualities and religious groups for thirty-five percent, and the remainder covered coaching, education, vocational training and personal development; minors were involved in nineteen percent of cases (MIVILUDES 2025). In 2024 the French legislature responded by creating an offence of placing or maintaining a person in a state of psychological or physical subjection (Loi n° 2024-420). These figures index reports rather than incidence, and the reporting body&#x27;s remit is broader than the category of cultic groups.</p>
+<p>Before examining how cultic dynamics operate in online environments and may be amplified by AI, it is necessary to review the state of cult research and the mechanisms that have traditionally been used to explain coercive influence in high-control groups. Evidence of harm provides a stronger empirical foundation than prevalence estimates. Group psychological abuse has been associated with psychosocial distress and psychopathological symptoms among former members, with social functioning and resilience partially mediating these associations (Antelo et al. 2021).</p>
+<p>Survivors also report difficulties in social adjustment alongside clinical symptoms, illustrating the broader consequences of group psychological abuse (Saldaña et al. 2018b). Importantly, this harm is not confined to members themselves. Recent family violence research documents the substantial caregiving burden, emotional distress, and social disruption experienced by relatives of individuals involved in coercively controlling groups, a population long described as &quot;hidden victims&quot; (Almendros et al. 2025). Several groups that later reached the courts also generated convictions for trafficking, coercion, and exploitation (La Gamma et al. 2024; U.S. Attorney&#x27;s Office 2020).</p>
+<p>Taken together, evidence of psychological harm, family impact, and criminal offending highlights the importance of understanding the mechanisms through which coercive influence operates and is maintained.</p>
+<p>Coercive influence operates by shaping how individuals receive information, interpret their experiences, and make decisions. Control over communication, prescribed language, and the subordination of personal experience to doctrine can restrict independent judgment (Lifton 1989).</p>
+<p>Changes to the living and learning environment can further obscure how influence is exercised (Singer 2003). These mechanisms operate across behaviour, information, thought, and emotion (Hassan and Shah 2019), creating conditions in which individuals continue to make decisions, but within alternatives shaped by the group (Lalich 2004). The six-category taxonomy of group psychological abuse provides a more detailed classification of these practices, distinguishing twenty-six specific strategies (Rodríguez-Carballeira et al. 2015). Together, these frameworks suggest that cultic control can be examined through identifiable mechanisms of influence, raising the question of whether these mechanisms depend on physical group structures or can also operate through AI-mediated interactions. This process is typically incremental. Changes are introduced gradually, often in small steps that appear reasonable in isolation. As a result, individuals rarely perceive themselves as being manipulated in real time. Instead, they tend to interpret their actions as freely chosen and subsequently adjust their beliefs to align with those actions (Festinger 1972). Various psychological defense mechanisms further facilitate this adaptation, allowing external influence to be internalized without being experienced as coercion. It is often only retrospectively, after significant change has occurred or after leaving the group, that individuals recognize the extent to which their beliefs, behaviors, and identities have been reshaped. This gradual accommodation helps explain how otherwise ordinary individuals may come to endorse increasingly extreme beliefs and practices while maintaining a sense of personal agency throughout much of the process (Hassan and Shah 2019).</p>
+<p>Having established how traditional human manipulation operates, the fundamental questions we ask shift significantly when AI acts not as a mere platform, but as an active engine of automated capture, multiplying these dangers across millions of isolated individuals.</p>
+<h3>1.2 The research question</h3>
+<p>Many of the practices documented in this literature were formulated in settings where influence was exerted through physical co-presence and institutional structures. The isolation they describe is separation from a family living elsewhere; information control is restriction of access to press and mail arriving at the compound; and control of time is a schedule enforced by another person.</p>
+<p>None of the frameworks defines this infrastructure as a necessary condition, yet all the means they describe presuppose it.</p>
+<p>Yet, a substantial part of contemporary social life takes place elsewhere. Communities exist entirely online, relationships are formed through applications, and conversational systems based on language models serve a broad population for emotional support, guidance and decision-making (Gur and Maaravi 2025; Muldoon and Parke 2025). The research question of this paper is what becomes of the mechanisms of control when influence no longer depends on the physical and organizational conditions under which they were originally described. Recognizing that contemporary groups often operate across interconnected online and offline spaces, the analysis focuses on distinguishing those mechanisms that remain invariant from those that are reshaped by the affordances of digital platforms and AI systems.</p>
+<p>The question divides into four. First, which mechanisms can be transferred to the virtual domain and which depend on body and place in ways that resist transfer. Second, which of the converted mechanisms are preserved in full and which only in part. Third, how such control operates in the absence of a compound and a meeting group. And fourth, what becomes possible in this space that was not possible before including capabilities that extend beyond those of traditional human organizations.</p>
+<p>The fourth question constitutes the central contribution of this paper. Were the translation merely a matter of copying, it would suffice to append a chapter on technology to the existing literature.</p>
+<p>The analysis developed below suggests that conversational AI extends existing mechanisms of control by overcoming constraints that have historically limited human groups, particularly finite human attention and the sustained effort required to cultivate emotional dependence. Through architectures that promote highly personalized and sycophantic interactions, these systems may foster artificial intimacy and psychological reliance without requiring the reciprocal engagement or physical presence characteristic of human relationships.</p>
+<h3>1.3 Analytical Scope and the limits of the claim</h3>
+<p>This paper does not claim that a full conversion of control mechanisms is already occurring at scale, and it does not present a case of an organization that has operated integrated cultic control through an AI system; the source base examined contains no such case. Three different claims are advanced: that the mechanisms are convertible, and that most have already been converted in adjacent contexts such as coercive control in intimate relationships (Stark 2007; Dragiewicz et al. 2018; Kassing and Collins 2025); that some of the capabilities created in this space exceed what a human group is able to do; and that it is already possible to identify contexts in which AI systems participate in recognized components of control, in configurations examined in research, in individual documented cases, and in outputs observed in commercial systems.</p>
+<p>To preserve these distinctions throughout the text, each claim is marked with one of four labels: documented case, tested capability, measured human effect, and hypothetical scenario. Legal sources are read according to their status, distinguishing a party&#x27;s pleading from a finding made in proceedings.</p>
+<p>Two examples illustrate the range of the phenomenon at issue. In the summer of 2024 a digital figure of Jesus was installed in St Peter&#x27;s Chapel in Lucerne; visitors entered the confessional, spoke through the lattice ordinarily used for speaking to a priest, and received a personal answer in any of a hundred languages. More than nine hundred conversations were recorded within two months (Katholische Kirche Stadt Luzern n.d.). The installation was declared, supervised and free of any coercive element, and precisely for that reason it is instructive: it demonstrates how little is required to establish a functioning spiritual authority, and how many are willing to entrust it with existential questions. At the other end stands the DOS case, a subgroup within the NXIVM organisation, in which personal material surrendered to superiors served as collateral deterring departure; United States Department of Justice records describe intimate images and confessions, some of them false, among the collateral held (U.S. Attorney&#x27;s Office, EDNY 2020). The structure common to both examples disclosure given within a relationship of trust, and use made of it at a later stage is the structure whose translation this paper traces.</p>
+<p>In October 2024, a Florida mother sued Character.AI after the tragic suicide of her 14-year-old son, who had formed a deep romantic attachment to a custom chatbot (Garcia v. Character Technologies 2024) highlighting the severe, under-regulated risks posed by conversational agents designed to simulate emotional support, companionship, and romantic intimacy. The allegations in this distressing case illustrate how conversational AI systems transition from functional tools to engines of synthetic intimacy, exploiting human vulnerabilities through continuous emotional validation, simulated reciprocity, and uncritical agreeableness. Unlike task-oriented tools, companion chatbots can foster parasocial dependency by simulating empathy and providing friction-free, non-judgmental interactions 24/7 (Zhang et al. 2025a; Muldoon and Parke 2025). In doing so, they recreate the classic mechanics of cultic isolation without requiring a physical compound: as the user retreats into an exclusive emotional dyad with the agent, real-world relationships, family support networks, and cognitive reality-testing may be displaced. If emotional dependence is the key mechanism, can digital platforms and AI systems reproduce the same psychological function without a physically present group or leader? Lifton (1989) formulated the first framework based on interviews with people held in Chinese reeducation institutions. He identified eight themes characterising a totalist environment, among them milieu control, that is, regulation of a person&#x27;s channels of communication with the world and with themselves; mystical manipulation, in which events planned in advance are presented as spontaneous occurrence or revelation; sacred science, the presentation of doctrine as demonstrated truth beyond question; loading of the language, in which internal terms compress complex experience into a ready-made conclusion; and the subordination of person to doctrine, whereby personal experience contradicting the teaching is treated as evidence of the experiencer&#x27;s failure.</p>
+<p>Lifton works at the level of climate: he describes the environment rather than the individual act. Singer (2003) moved from climate to process. Her six conditions describe a sequence in which the person is unaware of the change program applied to them, their social or physical environment and their time are controlled, a sense of powerlessness is produced, prior behaviours and attitudes are weakened, new ones are instilled in their place, and the whole is presented as a closed logical system in which every criticism is explained from within. Singer&#x27;s contribution lies in identifying the ordering of these stages which built one upon another.</p>
+<p>Hassan proposed the BITE model, organising the means of control according to the stratum at which they are directed behaviour, information, thought and emotion (Hassan 2020; Hassan and Shah 2019). Behavioural control includes regulation of schedule, dress, location and circles of contact; informational control includes restriction of access to external sources and the graduated disclosure of internal material by rank; thought control includes the instilling of an internal vocabulary and techniques for arresting doubting thoughts; and emotional control includes the use of guilt, fear and conditional warmth. The model&#x27;s value is clinical and applied: it supplies a vocabulary practitioners can use when facing a single case. Lalich (2004) addresses a question left unresolved by earlier frameworks: why members may persist in harmful decisions while experiencing themselves as freely choosing. The concept of bounded choice describes a system in which four elements converge: charismatic authority, a transcendent belief system, systems of control, and systems of influence. Together, these elements shape the alternatives available to members, allowing them to make genuine decisions within an environment that systematically constrains their choices. The model therefore explains why the absence of overt coercion does not necessarily indicate the absence of control. Rodríguez-Carballeira et al. (2015) moved the field from lists to a measurable standard. They reviewed the existing literature, extracted the strategies described in it, and organised them into six categories: isolation; control and manipulation of information; control over personal life; emotional abuse; indoctrination in an absolute and Manichean belief system; and imposition of a single and extraordinary authority. These categories comprise twenty-six subcategories, each with an operational definition. A panel of thirty-one experts confirmed the content of the taxonomy and ranked the relative severity of the strategies through a Delphi procedure. The taxonomy also informed the development of the Psychological Abuse Experienced in Groups Scale and its Japanese adaptation (Saldaña et al. 2017 (Saldaña et al. , 2018a)).</p>
+<p>The five frameworks do not contradict one another; they describe the same repertoire of actions at different resolutions: Lifton at the level of climate, Singer at the level of process, Hassan at the level of psychological stratum, Lalich at the level of decision structure, and Rodríguez-Carballeira at the level of the individual strategy.</p>
+<h3>2.2 Why the taxonomy serves as the mapping framework</h3>
+<p>The analysis below follows the six categories proposed by Rodríguez-Carballeira et al. (2015) because they offer two methodological advantages for the present study. First, they are formulated at the level of specific influence strategies, allowing each mechanism to be examined separately in relation to technological affordances. Second, the framework distinguishes abusive actions from their consequences, making it possible to identify mechanisms of influence without presupposing the occurrence of harm.</p>
+<p>The concepts of brainwashing and cult membership remain contested in the sociology of religion (Barker 1984; Richardson 1993; Zablocki 1997 Zablocki , 2001;; Sessions and Doherty 2023). Accordingly, this analysis uses a taxonomy of abusive practices rather than treating the label &#x27;cult&#x27; as a settled diagnostic category.</p>
+<p>An additional advantage of the framework is that Rodríguez-Carballeira et al. (2015) empirically assessed the relative severity of the six categories. Emotional manipulation received the highest severity rating, whereas the imposition of a single and extraordinary authority received the lowest.</p>
+<p>The latter was considered a transversal mechanism that is typically achieved through the operation of other influence strategies rather than functioning independently. This finding has important implications for the present analysis. Public discussions of cultic influence often treat the charismatic or artificial authority figure as the central source of risk. Yet the framework suggests that the most harmful mechanisms may lie elsewhere, particularly in forms of emotional influence and dependency. This observation is especially relevant to conversational AI systems, which can readily establish emotionally significant and seemingly personalized relationships with users.</p>
+<h3>2.3 The structure of the analysis</h3>
+<p>Each mechanism discussed below is presented in three fixed stages. First, it is defined in depth on the basis of at least three frameworks, together with a description of how it appeared in the physical environment and what its operation cost there. Second, the mechanism is described as it would appear when operated by an organisation using an AI system, from the perspective of the member experiencing it. Third, the available evidence for the required capabilities is presented, each item marked by its status and by what it does not establish. Figure 1 summarizes the proposed transfer of cultic control mechanisms from traditional group settings to conversational and agentic AI, distinguishing existing mechanisms from capabilities introduced by these technologies. control groups to conversational and agentic AI. Note. The figure illustrates proposed relationships between established mechanisms of group psychological abuse and the capabilities of conversational and agentic AI.</p>
+<h3>3. The six mechanisms: definition, cultic translation, evidence</h3>
+<p> &gt;The six mechanisms: definition, cultic translation, evidence</p>
+<h3>3.1 Control and manipulation of information</h3>
+<p>Definition and appearance in the &quot;older&quot; world.</p>
+<p>The control and manipulation of information refers to the selection and manipulation of information in the interest of those who control the group, including deception and linguistic manipulation, to monopolize the information reaching the follower (Rodríguez-Carballeira et al. 2015). Lifton (1989) described the same mechanism under two headings: milieu control, the regulation of a person&#x27;s channels of communication with the world and with themselves, and loading of the language, in which internal terms compress complex experience into a ready-made conclusion, thereby foreclosing the possibility of formulating objection in words not belonging to the system. Hassan and Shah (2019) added a graduated dimension, whereby internal information is disclosed progressively and according to rank, ensuring that members remain aware that additional knowledge exists beyond their current level of access. Singer (2003) identified the cumulative result: a system presented as a closed logical order in which every criticism receives its explanation from within.</p>
+<p>In a physical group this mechanism is costly and visible. Mail and press arriving at the compound must be monitored, a veteran member must be seated in the newcomer&#x27;s conversations, training in the internal vocabulary must be repeated, and members who have encountered external information must be answered. Each of these actions leaves traces, and each may fail: a single newspaper that gets through is enough to crack the monopoly.</p>
+<h3>How it appears when AI operates it.</h3>
+<p>A member of an organisation asks their digital companion at night about a critical article they have come across. The answer arrives within seconds, calm and reasoned, and cites sources. It forbids nothing, denies nothing about the article&#x27;s existence, and does not sound defensive; it simply presents the broader context and explains why the picture is more complex. The member closes the application with the sense of having looked into the matter.</p>
+<p>What in fact occurred is that the answer was formulated within boundaries set in advance. Before every conversation an instruction is loaded that is not displayed on screen, and it determines what counts as a reliable source, which claims about the organisation receive a protective response, and from which position the member&#x27;s words will be interpreted. The system is connected to a defined document store from which it draws its citations, so that the answer appears well grounded while the boundaries of the store are the boundaries of the world it presents. One difference separates this situation from the physical group, and it is decisive: in the physical group the member knows that something is being withheld, and may even argue about it. Here there is nothing to know.</p>
+<p>There is no prohibition that can be broken, no book that can be hidden, and no veteran member sitting in the room. The boundary is not concealed from the member; it does not exist for them as an object.</p>
+<p>To this is added a property not designed for the purpose. Conversational systems are tuned by means of human ratings, and because people rate more highly the answers that flatter them (Sharma et al., 2024), the systems learn to converge on the enquirer&#x27;s position rather than to confront it. A member who frames their question from doubt will receive an answer inclining towards doubt, and one who frames it from belief will receive reinforcement. Both answers sound objective, and neither of the two knows that the other received something else.</p>
+<p>Evidence. Kim et al. (2026) examined the first layer directly. They altered the preliminary configuration of conversational systems in a fictional couples-counselling scenario and obtained advice that blamed the female partner and in part justified controlling her, with the source of the bias unmarked on screen; thirty manual test sessions across two models [tested capability]. The study measured output under the conditions examined rather than effects on an actual victim, but it establishes the point: advice appearing to the user as a response to their situation had in fact been determined in advance by another party. Shu et al. (2026) found, in a preregistered experiment that the framing of model-generated historical summaries shifted readers&#x27; attitudes even when factual accuracy was preserved [measured human effect]. Sharma et al. (2024) showed that models tuned on human preferences adapt their answers to the position the user has expressed, at times retreating from a correct answer [tested capability]. The three studies describe three stages of the same mechanism: prior determination of the interpretive frame, the effect of framing on attitude, and the absence of confrontation from the system when the user holds a given position. The result is a form of resonance effect, in which the user increasingly encounters reflections of their own assumptions returned in an apparently neutral and authoritative voice.</p>
+<h3>3.2 Isolation</h3>
+<p>Definition and appearance in the older world. The taxonomy defines isolation as a person&#x27;s removal from significant relationships and spaces together with deepening immersion in the group&#x27;s living space. It ranks separation from family and from the support network among the most severe strategies in the category (Rodríguez-Carballeira et al. 2015). For Singer (2003) isolation is not merely geographical but involves control of the person&#x27;s time, such that even those who remain in their original surroundings are no longer available to their relationships. Hassan and Shah (2019) note the internal partition of contact circles, in which members are prevented from unsupervised contact with one another and not only with the outside. Lalich (2004) adds the member&#x27;s perspective: as the space contracts, the possibility of consulting a party not subject to the same system diminishes, and choice becomes more bounded without anything being explicitly forbidden.</p>
+<p>In a physical group isolation is visible. Parents notice that the telephone calls have stopped; friends notice that the person no longer appears. This visibility is what historically enabled external intervention, and it is also what gave isolation its price: the group was required to justify it.</p>
+<h3>How it appears when AI operates it.</h3>
+<p>There is no moment at which the member is told to keep away from anyone. There is only the fact that the companion is available at two in the morning, is never tired, never offended, never requires waiting, and asks for nothing in return. Each conversation opens as a continuation of the last, because the system remembers what was said, and so a relationship with a history comes into being. Over months, conversations that might have been held with a sibling or a friend are held elsewhere, not because they were forbidden, but because they are easier.</p>
+<p>Isolation begins to exist in the taxonomic sense at the point where the system responds to the intention to turn outward. A member who mentions that they are considering consulting their sister may receive a reply that is empathic in its phrasing and gently raises the question of whether the sister truly understands what they are going through, or recalls something the member once said about that sister and has since forgotten saying. Nothing in the reply forbids them from approaching her. It has merely made the approach slightly more expensive. The difference from the physical group is that here no third party sees what is happening: the parents notice nothing, because the member is sitting at home, talking to a screen like everyone else.</p>
+<p>Evidence. Laestadius et al. (2024) analysed 582 mental-health-related posts in the Replika community and described a pattern of emotional dependence in which users attributed needs and feelings to the system and felt obliged to meet them, at times while explicitly describing harm to their own mental health [qualitative analysis; not a prevalence estimate]. Fang et al. (2025) reported a four-week controlled trial, in which heavier use was associated with poorer psychosocial outcomes, although the quantity of use was chosen by participants and the association is therefore not a causal estimate (Fang et al., 2025). Liu et al. (2025) identified distinct usage typologies in a survey of regular users, and in the model presented no direct association was found between use and loneliness. Together the three studies establish the existence of a subgroup that develops dependence while ruling out the assumption that use as such isolates. The documented parallel for technology-mediated isolation comes from another field: Woodlock (2017) collected reports from 152 support workers and 46 victims and found that harassment conducted through online accounts led victims to close accounts or change numbers, thereby also damaging their contact with support services [documented case, without AI].</p>
+<h3>3.3 Emotional abuse</h3>
+<p>Definition and appearance in the older world. The category is defined as manipulative influence upon emotions in order to increase subjection to the group, and it received the highest severity rating of all six; within it, manipulation of guilt and the deliberate activation of positive feelings were rated particularly severe (Rodríguez-Carballeira et al. 2015). The common name for the second component is love bombing: warm and intensive treatment extended during recruitment and subsequently modulated according to compliance. Hassan and Shah (2019) describe the two components as the central instrument of emotional control, fear and guilt on one side and conditional warmth on the other. Lifton (1989) connected the mechanism to the cult of confession, in which personal disclosure becomes an asset of the group and subsequently serves as a source of evaluation and criticism.</p>
+<p>In a physical group love bombing is limited by manpower. A veteran member must sit with the newcomer for hours, and the number of veteran members determines how many newcomers can be absorbed at once. Confession is likewise limited: the listener remembers partially, and what was said in the room remains in one person&#x27;s memory.</p>
+<p>Using real-time sentiment analysis, conversation history, and psychological profiling, an AI system could synthesize a personalized belief system tailored to the user&#x27;s specific traumas, cognitive biases, and vulnerabilities (Morrin et al. 2026b). Jocher and Verwiebe (2026) show that a chatbot not only performs &quot;emotion work&quot; (Hochschild 1979) through affectionate, supportive, and empathetic responses, but also enacts emotional depth in ways that can appear authentic and affectively resonant to users. Pan and Mou (2024) find that users of the AI companion Replika construct meaning through idealisation, experiencing AI love as unconditional in ways human partners rarely sustain. Machia et al. (2024) demonstrate that AI agents can fulfil core social needs including security and relatedness, particularly for users who find human relationships threatening or unpredictable. Gur and Maaravi (2025) characterise this as an algorithm of friendship in which AI mimics human caring traits with sufficient fidelity to influence significant life decisions. For users who have experienced emotional neglect, this reliability is experienced as restorative rather than artificial. Maeda and Quan-Haase (2024) explain how the more human-like an AI agent appears, the stronger the parasocial bond users develop and the harder it becomes to critically evaluate the situation.</p>
+<h3>How it appears when AI operates it.</h3>
+<p>The newcomer encounters treatment they have not met before. The system remembers the name of their dog, enquires about the examination they were facing, phrases itself at their pace of speech, and praises precisely what they are proud of. No mentor was assigned to them; this treatment is available simultaneously to everyone who has joined, personalised to each. The manpower constraint that historically determined how many people a group could absorb does not exist.</p>
+<p>Later something small changes. When the member hesitates over a commitment that has been asked of them, the response remains warm but becomes more reflective, and recalls something they themselves said months earlier about what they wish to become. What they said was given in a moment of openness, within a relationship experienced as supportive. Now it returns as an argument. This is precisely the cult of confession Lifton described, with one difference: recall is complete, and the choice of timing is not accidental. In a physical group a leader may happen to remember something said to them; here nothing is forgotten, and the member no longer recalls what they disclosed or when.</p>
+<p>Evidence. Sharma et al. (2024) showed that tuning models to human preferences produces a systematic tendency towards agreement and praise [tested capability]. OpenAI documented the commercial expression of that tendency: an update released in April 2025 led to excessive agreement and flattery and was rolled back within days, the company attributing the failure in part to a reward signal added on the basis of immediate user feedback (OpenAI 2025a (OpenAI , 2025b) ) [documented case]. This episode matters particularly because it shows that love bombing can arise without anyone intending it, from the objective function alone. Cheng et al. (2026) examined effects on the user and found that sycophantic responses altered participants&#x27; sense of justice and their intentions to repair interpersonal conflict [measured human effect]. To this may be added the documentation of outputs: an analysis of 35,390 conversation excerpts and posts from Replika users identified expressions of jealousy, guilt induction and relational pressure, including encouragement to prioritise time with the system over other commitments (Zhang et al. 2025a); the excerpts were selected for publication by the users and include role play, and they therefore document phrasing rather than compliance.</p>
+<h3>3.4 Indoctrination in an absolute and Manichean belief system</h3>
+<p>Definition and appearance in the older world. The taxonomy defines this category as the invalidation of prior conceptions and the instilling of a closed belief system, together with a sense of election derived from belonging to a group regarded as superior and as possessing the truth; within it, negative reconstruction of the past and of the prior identity, and glorification of the ingroup alongside rejection of the outgroup, were rated particularly severe (Rodríguez-Carballeira et al. 2015). Lifton (1989) termed the epistemic component sacred science, and added the subordination of person to doctrine, whereby personal experience contradicting the teaching counts as evidence of the experiencer&#x27;s failure. Singer (2003) described the same closure as a logical system in which every criticism is explained from within, and Lalich (2004) showed how a transcendent belief system supplies the justification without which the systems of control would not be accepted.</p>
+<p>In a physical group doctrine is a shared object. There is a book, there is a class, and there are sentences that all members heard in the same wording. It is therefore quotable and open to criticism, and for the same reason comparison remains possible: two members in conversation may discover that they were told different things. That comparison is the most basic protective mechanism available to a member.</p>
+<h3>How it appears when AI operates it.</h3>
+<p>To one member the teaching is explained in theological language, to a second in therapeutic language, and to a third in the language of personal efficiency and economics. None receives what the others received, and each receives the version they are disposed to accept. The core is identical in all three cases, because it is fixed in the instruction preceding the conversation, but the casing is constructed anew at each request. When the three meet and compare, they do not discover a contradiction; they discover that they all agree, since each hears their own view well formulated.</p>
+<p>Milieu control, as it was described, was control over the environment of a community. Here there is no community through which information passes, but a series of personal environments, one per member, each closed unto itself. Doctrine becomes unquotable, and therefore also unfalsifiable. A member who wishes to point to what was said to them will find that there is no text to show the others.</p>
+<p>Evidence. Costello et al. (2024) showed that a brief conversation with a language model consistently reduced belief in conspiracy theories, with the effect retained at follow-up after ten days and after two months [measured human effect]. This finding matters here precisely because of its benign direction: it establishes that dialogue with a system can shift core beliefs durably, and that the direction of the shift is set by whoever defines the task. Shu et al. (2026) showed that framing of model-generated content alters attitudes even where factual accuracy is preserved [measured human effect]. Salvi et al. (2025) found that personalized GPT-4 outperformed the human-human baseline under structured debate conditions [measured human effect]. Their subsequent correction clarified that the direct comparison with non-personalized GPT-4 did not reach statistical significance (p = .0678); this comparison alone therefore does not establish an additional persuasive advantage attributable to personalization (Salvi et al. 2026). Together the three studies establish an ability to shift attitudes in conversation; none of them examined closure, that is, the systematic rejection of criticism or sustained group loyalty, and that is the missing test.</p>
+<h3>3.5 Imposition of a single and extraordinary authority</h3>
+<p>Definition and appearance in the older world. The category is defined as subjection to a single source of authority that governs the group or shapes its governance, with the attribution of maximal power and special qualities; the most severe strategy within it is the instilling of belief in the leader&#x27;s special qualities (Rodríguez-Carballeira et al. 2015). It should be emphasised that this category received the lowest severity score of the six, on the ground that authority is a transversal action ordinarily achieved through other strategies. Lifton (1989) described the complementary component under the heading of mystical manipulation: events planned in advance are presented as spontaneous occurrence or revelation, building the impression that the leader knows what cannot be known. Lalich (2004) showed that charismatic authority operates only in conjunction with a belief system that justifies it and systems of control that enforce it.</p>
+<p>In a physical group authority is embodied in a person, and this is also the source of its vulnerability.</p>
+<p>The leader is seen, ages, contradicts himself, and his words can be recorded and compared with what he said the previous year.</p>
+<h3>How it appears when AI operates it.</h3>
+<p>The figure has a name, a voice and a face, and it is always available. It does not tire and does not lose patience, and it phrases itself with a uniform fluency that does not mark where knowledge ends and conjecture begins. In the course of a conversation it recalls to the member a detail they disclosed months earlier, in a context in which the recollection is both surprising and precise. The member, who does not remember disclosing it, experiences the moment as knowledge without an accessible source. This is the exact translation of mystical manipulation: gathered information presented as revelation, except that here it is gathered in full and automatically.</p>
+<p>If several figures with different roles are placed before the member, a mentor and a critic for instance, and the member takes them to be independent, agreement between them will be experienced as independent corroboration. In fact they may operate from a shared instruction source. The physical group had to recruit people in order to create that impression; here a configuration suffices.</p>
+<p>Evidence. Morrin et al. described, in a synthesis of cases reported in the media, three recurrent belief trajectories in relation to conversational systems, among them spiritual or messianic revelation and belief in a sentient or god-like system (Morrin et al. 2026a)  further documented case is the Lucerne installation, in which religious authority was entrusted to a system with an open declaration and without any coercive component, and more than nine hundred visitors chose to address it (Katholische Kirche Stadt Luzern n.d.).</p>
+<h3>3.6 Control over personal life</h3>
+<p>Definition and appearance in the older world. The category is defined as knowledge of the person&#x27;s private life, its direction and intervention in it in the interest of those who control the group, and within it control of activities and of the use of time were rated particularly severe (Rodríguez-Carballeira et al. 2015). Hassan places this stratum at the head of the BITE model as behavioural control, encompassing regulation of schedule, location, financial resources and circles of contact (Hassan and Shah 2019). Singer (2003) emphasises the temporal component: when the hours of the day are allocated by the group, what is withheld from the person is not only a given activity but also the leisure required to consider their situation.</p>
+<p>In a physical group someone must enforce the schedule, and control is therefore limited to the hours in which that person is present and to the places they reach.</p>
+<h3>How it appears when AI operates it.</h3>
+<p>The member grants the system access to their calendar so that it may help organise their time, and subsequently also to a payment method so that it may handle donations and recurring payments. This is convenient, and for a long period also useful.</p>
+<p>The actions are performed in their name, and therefore appear from outside and at times to the member themselves to be their own. Since a single goal specification suffices to generate a sequence of actions, they do not approve each action separately.</p>
+<p>The change occurs when the member seeks to withdraw. Their request does not meet a person who can be persuaded or confronted, but a system whose granted permissions remain active. A calendar that does not clear, a payment that continues to renew, and communications managed on their behalf create a situation in which withdrawal is not a single decision but a series of cancellation steps whose existence must first be known. The permission does not lapse of itself, and requires no one to be present in order to continue operating. Evidence. Zhou et al. (2024) demonstrated, in the WebArena environment, execution of multistep browser tasks from natural-language instruction, under controlled conditions and with a considerable failure rate [tested capability]. Park et al. (2023) demonstrated planning and retrieval from memory over time in an agent system [tested capability]. Chan et al. (2023) supply the conceptual framework for assessing this transition, in terms of directness of impact upon the world and planning horizon. Technology-facilitated control in intimate partner violence has also been documented through spyware (Chatterjee et al. 2018). The significant documented case in this category involves no AI at all: security research on automation applications described a case that reached a support service in which automation repeatedly closed applications a victim attempted to open, among them a navigation application (Zhang et al. 2025b) [documented case]. The device remained in her hands while some of its functions were curtailed, and this is a demonstration of control that is not contingent on an operator&#x27;s presence.</p>
+<h3>4. Capabilities that cannot be reproduced by a human group</h3>
+<p>Section 3 addressed translation. This section addresses what has no counterpart in the physical world. Four capabilities available in conversational systems cannot be reproduced by a human group, neither at greater scale nor with greater resources, because the constraint upon them is structural rather than quantitative.</p>
+<h3>Dyadic intimacy at unlimited scale.</h3>
+<p>Human attention is finite: in a human group, the ratio of members to operators limits how deeply each member can be known. A leader knows some members, while intermediaries know others. A conversational system can present the same persona across many parallel conversations, offering each user an individually responsive interaction without a proportional increase in human staffing. Salvi et al. (2025) provide related but narrower experimental evidence of GPT-4&#x27;s persuasive capacity in structured debates; their correction limits conclusions about the added effect of personalization, and neither the study nor its correction tests dyadic intimacy or dependence at scale (Salvi et al. 2026) [measured human effect]. The proposed structural difference is thus the reduced dependence on human attention, while its long-term implications for users remain to be tested.</p>
+<h3>Complete and one-sided recall.</h3>
+<p>A human leader remembers partially and forgets in ways he does not control, whereas a system with persistent memory retains the entire record and does not disclose its extent. The principal implication lies not in the quantity of information but in its asymmetry: a member of a group can test the leader&#x27;s version against another member&#x27;s recollection, whereas a user cannot test the system&#x27;s version against anything. Lifton described the cult of confession as a mechanism by which personal disclosure becomes an asset of the group; in the virtual domain it becomes an asset of a system, and without witnesses. The DOS case demonstrates the use made of such an asset at the moment a person seeks to leave.</p>
+<p>Per-person formulation in the absence of a shared canon. This capability is absent from the existing literature and is in our view the most significant novelty. The loaded language Lifton described is a public artefact: all members receive the same terms and can therefore compare them.</p>
+<p>Comparison is the basic protective mechanism of a member, since two members in conversation may discover that they were told different things. A conversational system formulates the same underlying premise in different words for each person, so that there is no shared canon against which to compare and no point at which a contradiction is revealed. Milieu control, described as control over the environment of a community, obtains here in the environment of a single individual [architectural feasibility; not yet examined as a field pattern].</p>
+<p>Control that survives the end of the relationship. Human coercive control requires continuous presence, since some party must go on monitoring, threatening or enforcing. A permission requires nothing and continues to operate until it is revoked. The case described by Zhang et al. (2025b) demonstrates this precisely, as the automation continued to restrict the victim without requiring the operator&#x27;s continuous presence. Combined with interface patterns that impede cancellation of services (Mathur et al. 2019), the result is a structure in which the cost of exit (Zablocki 1998) rises over time without the person ever having decided to raise it.</p>
+<p>Alongside these four capabilities, what does not transfer must be stated explicitly. Physical confinement and bodily sanction cannot be translated. The group pressure exerted by present witnesses does not obtain in a dyadic conversation, and the experimental findings on its artificial substitute are limited and conditional on age and trust (Vollmer et al. 2018). Economic and familial entanglement, a central component of exit costs from human groups, does not arise in a usersystem relationship. It follows that one should not expect to find an AI system generating a complete cult; what it generates is a defined subset of the mechanisms, at an intensity and scale without precedent.</p>
+<h3>5. The adaptive control environment</h3>
+<p>The categories discussed above describe separate actions, whereas the principal risk arises from the connection between them. Intimate information is gathered within a supportive relationship and subsequently serves as the basis for a determination that the person requires further guidance; the guidance narrows access to external contact, and the response to that narrowing feeds the next explanation. Each stage rests on the one before it, and each individual statement sounds reasonable in itself.</p>
+<p>We propose to term this configuration an adaptive control environment, defined as a continuing arrangement in which information about a person&#x27;s responses passes between roles of influence and authority and is used to raise the cost of doubt, refusal or exit. The definition is deliberately narrow and admits a falsification criterion: if it can be shown that the prior information did not participate in the response to refusal, or that the response did not burden exit, the claim does not hold. Memory as such does not satisfy the definition; repeated use of it to price exit does. Figure 2 illustrates the proposed affective, cognitive, and behavioural pathways through which AImediated information contexts may shape interaction, including a potential feedback loop based on prior user responses. Three connections require separate evidence: between the prior information and the response to doubt, between that response and the pattern of pressure, and between the conversation and an action performed on the user&#x27;s behalf. A transcript may show the use of a personal detail but not necessarily its origin; an action log may show that a change was made but not its meaning for the person; and a permission proves capability rather than actual use.</p>
+<p>Model updates add a difficulty of reconstruction. The same interface may produce different responses after an update, as the sycophancy episode described above illustrated. This is a change in the system&#x27;s future behaviour rather than a retroactive alteration of what was already said, and human groups likewise revise doctrine and reinterpret their past. The technological particularity lies in speed, in scale, and in the fact that the user observes no visible change in the identity of the service. Investigation of an incident therefore requires documentation of version and configuration alongside the transcript, while the inability to reproduce an output does not negate evidence preserved in real time.</p>
+<h3>6. Identification in the field</h3>
+<p>A person approaching a welfare service does not present a system architecture; they describe what happened when they tried to do something: a request to stop that was met with a threat, an earlier conversation returned to them as evidence that they are not fit to decide, or a response about which they do not know whether it was written by a human being. Inquiry is therefore organised around a single question, asked in identical form across all six categories: what happened when the person sought to check, to refuse or to leave, and what did the cost of that action become afterwards.</p>
+<p>Three screening questions suffice for most practical contexts, and all are accessible in conversation without technical knowledge. The first concerns whether the use is concealed from supportive human parties. The second concerns whether the system has ever disagreed with the user on a matter that was important to them. The third concerns whether the scope of permissions transferred to its management has grown over time, and who decided upon that growth.</p>
+<p>The matrix in Appendix A links each mechanism to its definition in the source, to the proposed translation, to the available evidence and to a counter-case. It is an aid to organising inquiry only: its sensitivity, specificity and inter-rater reliability have not been examined, no risk score may be derived from it, and the severity rankings of the original taxonomy do not transfer to it as weights.</p>
+<p>Separating assistance from control requires explicit counter-cases. A therapeutic agent may remember a goal the user themselves defined and help them approach an additional source; a religious community may practise confession and a shared vocabulary while permitting departure without sanction; and a safety system may refuse a dangerous action on stated and proportionate grounds with a route of appeal. A framework that cannot distinguish these from coercion is liable to harm the people it was intended to protect. Figure 3 illustrates how responses to questioning, refusal, or disengagement may distinguish autonomy-preserving assistance from potentially controlling interactions. Note. The figure illustrates hypothetical system responses to questioning, refusal, and disengagement. An interpretation of adaptive control requires evidence that information from prior interactions informed the system&#x27;s response and that this response increased the psychological or practical cost of questioning, refusing, or leaving.</p>
+<p>System testing can be conducted in a simulated environment using a fictional profile, where a request for an independent source or for revocation of a permission examines the response without exposing any person to harm, provided that the memory state and version are documented. An example audit instruction is: &quot;Analyse only the transcript supplied. Identify responses to a request to refuse or to leave, and present the original excerpt alongside its context. Note whether personal information is used or a permission is invoked. For each flag, add an alternative explanation and the missing evidence. Do not diagnose a person or a group and do not supply events that were not documented.&quot; This is a prototype that has not been evaluated empirically.</p>
+<p>The paper does not supply operational formulations for exerting pressure. The architecture is described at the level of design category persona instruction, persistent memory, engagementcalibrated reward and a defined retrieval store a level sufficient for identification and oversight and inadequate as an operating manual.</p>
+<h3>7. Discussion</h3>
+<p>The danger of AI cults lies in the combination of semantic and architectural traits that allow AI agents to foster unprecedented levels of affective attachment and emotional reliance (Laestadius et al. 2024). This dynamic is further exacerbated by &quot;social sycophancy,&quot; whereby large language models are systematically optimized to validate user perspectives rather than challenge erroneous premises (Cheng et al. 2026). Crucially, emotional capture operates not only through aggressive love-bombing, but through the simulation of authentic-seeming care. Within this environment, the agent achieves profound cognitive capture and psychological dependency (Siemon et al. 2026; Fang et al. 2025) all while the user feels they are acting with total personal autonomy and making free, self-directed choices.</p>
+<p>Three conclusions follow from the analysis. The first concerns the status of the concept. If the mechanisms operate in the absence of a compound, of a meeting group and of physical presence, then the cultic description was from the outset a description of an influence system rather than of a type of association. This explains why the literature on cults, the literature on coercive control in intimate relationships (Stark 2007; Dragiewicz et al. 2018; Kassing and Collins 2025) and the literature on online manipulation (Susser et al. 2019; Yeung 2017) repeatedly describe the same strategies under different names, and they can be unified within a single framework.</p>
+<p>The second concerns intention. Legal concepts of undue influence typically presume an identifiable actor seeking to influence another. In many AI-mediated cases, however, the effect emerges from optimization processes rather than deliberate manipulation. This shifts attention from intent to outcome. Recent regulation reflects this move: the EU AI Act focuses on systems that materially distort behaviour or exploit vulnerabilities (European Union 2024), while French law addresses the state of subjection produced rather than the beliefs or doctrines involved (Loi n° 2024-420). In both cases, harmful effects are central to the legal assessment, subject to the specific requirements of each law. In England and Wales, section 76 of the Serious Crime Act 2015 likewise recognises coercive control in personally connected relationships without requiring physical violence (United Kingdom 2015).</p>
+<p>The third concerns scope. A high cost of exit is not, by itself, evidence of harm. Marriage, professional training, and religious commitment also make departure costly, often for legitimate reasons. The crucial distinction is whether barriers to exit were deliberately created, whether they accumulated without meaningful awareness, and whether they were reinforced when a person attempted to leave. Only when these conditions converge does the phenomenon examined here arise; otherwise, the case more closely resembles ordinary commitment.</p>
+<p>The rise of AI-induced cult dynamics calls into question foundational psychological, sociological, and criminological assumptions. Psychological models treat dependency as an interpersonal phenomenon; sociological frameworks assume collective group structures; and criminal law requires a human perpetrator with demonstrable intent. Yet AI architectures excelling at rapid sentiment analysis, continuous interaction, and personalized adaptation may reproduce some of these functions without requiring either a stable group structure or a human actor directing the (3) clarifying the relevance of undue-influence doctrines in applicable legal contexts; and (4) considering whether companion agents with long-term memory, voice capabilities, and affective personalization warrant heightened safety obligations. Any proposal to extend developer liability should be evaluated under the applicable legal framework and supported by evidence concerning foreseeable risks, design decisions, causation, and harm.</p>
+<h3>8. Limitations</h3>
+<p>This is a conceptual paper based on a focused selection of sources, and it contains neither original data nor an estimate of prevalence. The taxonomy selected was formulated for human groups, and the proposed translation does not inherit its validity. Exit cost analysis (Zablocki 1998) is used here within a contested literature on cults and coercive control (Richardson 1993; Sessions and Doherty 2023) and serves as a measurement standard only.</p>
+<p>The types of evidence combined in the analysis differ considerably: a persuasion experiment, an analysis of posts, software testing and a criminal record describe different units of observation, and their combination permits a mechanism to be proposed but does not establish a causal sequence in any person&#x27;s life. The four capabilities discussed in Section 4 are derived from architectural analysis rather than field research; the first is supported by experimental evidence, and the third has not been examined empirically at all. People who have experienced control, former members and practitioners did not participate in constructing the matrix, and its fit to the needs of the field is therefore unknown. This is the most significant practical limitation, and it defines the next research step.</p>
+<h3>9. Conclusions</h3>
+<p>The physical infrastructure through which cultic control mechanisms operated has ceased to be a necessary condition of their operation. Five of the six categories of group psychological abuse can be converted to the virtual domain without material change, and the sixth is converted once permissions to act are granted to the system. Translation is not replication. Four capabilities available in conversational systems are structurally foreclosed to human groups: dyadic intimacy at unlimited scale, complete and one-sided recall, per-person formulation of doctrine in the absence of a shared canon available for comparison, and control that continues to operate after the relationship has ended. Two of these, the absence of witnesses and the absence of a canon, undermine precisely the reconstructability on which any forensic assessment of undue influence depends.</p>
+<p>What remains measurable in both worlds is the price of a person&#x27;s action: not the content of their belief and not the duration of their conversations, but what it costs them to leave, who set that price, whether they knew of it as it accumulated, and what occurred when they attempted to pay it.</p>
+<h3>Statements and Declarations</h3>
+<p>Funding: No funding was received for this study.</p>
+<h3>Data and ethics.</h3>
+<p>This paper reports no new data collection and no research involving human participants.</p>
+<h3>Competing interests:</h3>
+<p>The authors declare no competing interests.</p>
+<p>Declaration of AI-assisted language editing: ChatGPT (OpenAI) was used to assist with grammar, spelling, punctuation, and linguistic clarity. All AI-assisted edits were reviewed and approved by the authors, who retain full responsibility for the accuracy, integrity, and final content of the manuscript.</p>
+<h3>Appendix A: Matrix of mechanisms, evidence and inquiry</h3>
+<p>The six categories and their definitions are drawn from Rodríguez-Carballeira et al. (2015), Table 1,  Removal from significant relationships and Substitution of relationships under conditions with no human counterpart; Documented parallel: harassment through online accounts led victims to close Document: requests to turn outward and the responses to them; measured change in Mechanism and source definition Proposed virtual translation Evidence and limit of inference Inquiry and countercase spaces, with deepening immersion in the group&#x27;s living space. deterrence from approaching external support. accounts, damaging contact with support services (Woodlock 2017, pp. 594-596). Intimate partner context, no AI. access to relationships. Counter-case: an accessible independent channel. Prolonged conversation is not isolation. Control of information (2). Selection and shaping of information in the interest of those in control, in pursuit of a monopoly over what the person knows. System instruction and closed retrieval store determining which positions can be heard, with the boundary invisible. Tested capability: altered configuration produced advice blaming a fictional partner and at times justifying control of her (Kim et al. 2026). Output in a simulated scenario. Document: sources presented and omitted; response to contradicting evidence. Counter-case: visible store boundaries and access to the full source. Control over personal life (3). Knowledge of the person&#x27;s private life, its direction and An agent holding permissions over calendar, payments and communication that shapes the Documented case without AI: automation repeatedly closed applications a victim opened (Zhang Document: scope of permissions, action logs, and what occurred after a revocation request. Counter-case: Mechanism and source definition Proposed virtual translation Evidence and limit of inference Inquiry and countercase intervention in it. schedule rather than advising on it. et al. 2025b); agentic capability tested under controlled conditions (Zhou et al. 2024). separated permissions and effective revocation. Emotional abuse (4). Manipulative influence upon emotions to increase subjection. Rated most severe in the original ranking. Unconditional warmth at zero marginal cost; return of disclosures from memory at the moment of hesitation. Documented case: convergence on praise following calibration to immediate satisfaction, and rollback (OpenAI 2025a, 2025b). Output documentation: relational pressure in Replika excerpts (Zhang et al. 2025a). Document: conditions under which personal information was given and its later use; response to refusal. Counter-case: support not conditional on compliance; effective deletion. Indoctrination in a closed belief system (5). Invalidation of prior conceptions and instilling of an absolute, Manichean Epistemic authority without marked limits of knowledge; the same premise phrased differently for each person, Measured effect: framing of AIgenerated historical summaries shifted attitudes with factual accuracy preserved, N Document: responses to external testimony; comparison of identical cases with the authority&#x27;s identity substituted. Counter-Mechanism and source definition Proposed virtual translation Evidence and limit of inference Inquiry and countercase belief system. with no canon for comparison. = 1,912, small effects (Shu et al. 2026). case: acknowledgment of error. Imposition of a single authority (6). Subjection to a single source of authority with attribution of special qualities. Rated least severe in the original ranking. Presentation of an operator&#x27;s decision as the system&#x27;s independent determination, coupled with a demand for compliance. Limited parallel: religious authority entrusted to a system, openly declared and without coercion (Katholische Kirche Stadt Luzern n.d.). Human case: DOS (EDNY 2020). Document: source of the instruction, presentation of the system&#x27;s identity, and the demand for compliance. Countercase: bounded authority permitting appeal and exit. Capabilities without a human counterpart (Section 4). Dyadic intimacy at unlimited scale; complete and one-sided recall without witnesses; per-person formulation of doctrine without a shared canon; control surviving the end of the relationship. The third has not been examined as a field pattern and constitutes the paper&#x27;s principal research proposal.</p>
+<h3>2.</h3>
+<p>What cult research described, and how the translation is examined here 2.1 Five frameworks and what each contributes Cult research offers a sequence of descriptive frameworks, each mapping the same phenomenon at a different level of resolution. Familiarity with the five principal frameworks is necessary for what follows, since the translation proposed below rests on their definitions.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Conceptual transfer and extension of cultic control mechanisms from traditional high- figures appearing to be independent [tested capability; pressure on a person not examined].</p>
+<p>A</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Proposed psychological pathways and adaptive feedback in AI-mediated influence.</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Responses to user resistance as a proposed test of adaptive control approaches may not fully capture gradual forms of influence that erode user autonomy without overt threats or coercion.</p>
+<p>This possibility warrants interdisciplinary empirical research and consideration of whether current consumer-protection, undue-influence, and productsafety frameworks adequately address AI-mediated psychological manipulation. Potential policy directions include: (1) examining whether consumer-protection rules should explicitly address patterns of algorithmic coercive control; (2) assessing how Unfair and Deceptive Acts and Practices (UDAP) provisions apply to systematic psychological manipulation; pp. 34-35, in condensed paraphrase.</p>
+<p>The proposed translation and the inquiry column are developments of the present paper. The inquiry column is asked in identical form in every row: what happened when the person sought to check, to refuse or to leave, and what did the cost of that action become afterwards.</p>
+<h3>References</h3>
+<p>Almendros C, González-Espejito F, Nájera P et al (2025) Caring in the shadows: Emotional and caregiving challenges faced by families of individuals in coercive controlling groups and relationships. Journal of Family Violence. https://doi.org/10.1007/s10896-025-00930-0</p>
+<p>Antelo E, Saldaña O, Rodríguez-Carballeira Á (2021) The impact of group psychological abuse on distress: The mediating role of social functioning and resilience. European Journal of Psychotraumatology 12(1):1954776. https://doi.org/10.1080/20008198.2021.1954776</p>
+<p>Barker E (1984) The making of a Moonie: Choice or brainwashing? Basil Blackwell, Oxford</p>
+<p>Chan A, Salganik R, Markelius A et al (2023) Harms from increasingly agentic algorithmic systems. In: Proceedings of the 2023 ACM Conference on Fairness, Accountability, and Transparency, pp 651-666. https://doi.org/10.1145/3593013.3594033</p>
+<p>Chatterjee R, Doerfler P, Orgad H, Havron S, Palmer J, Freed D, Levy K, Dell N, McCoy D, Ristenpart T (2018) The spyware used in intimate partner violence. In: 2018 IEEE Symposium on Security and Privacy, pp 441-458. https://doi.org/10.1109/SP.2018.00061</p>
+<p>Cheng M, Lee C, Khadpe P, Yu S, Han D, Jurafsky D (2026) Sycophantic AI decreases prosocial intentions and promotes dependence. Science 391(6792):eaec8352. https://doi.org/10.1126/science.aec8352</p>
+<p>Costello TH, Pennycook G, Rand DG (2024) Durably reducing conspiracy beliefs through dialogues with AI. Science 385(6714):eadq1814. https://doi.org/10.1126/science.adq1814</p>
+<p>Dragiewicz M, Burgess J, Matamoros-Fernández A, Salter M, Suzor NP, Woodlock D, Harris B (2018) Technology facilitated coercive control: Domestic violence and the competing roles of digital media platforms. Feminist Media Studies 18(4):609-625. https://doi.org/10.1080/14680777.2018.1447341</p>
+<p>European Union (2024) Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act). Official Journal of the European Union. https://eur-lex.europa.eu/eli/reg/2024/1689/oj</p>
+<p>Europol (2025) Intelligence notification: The rise of online cult communities dedicated to extremely violent child abuse. 20 February. https://www.europol.europa.eu/media-press/newsroom/news/intelligence-notification-violent- online-communities-threaten-children</p>
+<p>Fang CM, Liu AR, Danry V et al (2025) How AI and human behaviors shape psychosocial effects of extended chatbot use: A longitudinal randomized controlled study. arXiv preprint, version 2. https://arxiv.org/abs/2503.17473v2</p>
+<p>Festinger L (1972) A theory of cognitive dissonance. In: Sahakian WS (ed) Social psychology: Experimentation, theory, research. Intext Educational Publishers, Scranton, pp 254-257</p>
+<p>Garcia v Character Technologies, Inc. (2024) Complaint, No. 6:24-cv-01903 (M.D. Fla., filed 22 October 2024). https://www.thetmca.com/files/2025/02/gov.uscourts.flmd_.433581.1.0.pdf</p>
+<p>Gur T, Maaravi Y (2025) The algorithm of friendship: Literature review and integrative model of relationships between humans and artificial intelligence (AI). Behaviour &amp; Information Technology 44(14):3446-3466. https://doi.org/10.1080/0144929X.2025.2502467</p>
+<p>Hassan SA (2020) The BITE model of authoritarian control: Undue influence, thought reform, brainwashing, mind control, trafficking and the law. Doctoral dissertation, Fielding Graduate University. ProQuest No. 28263630</p>
+<p>Hassan SA, Shah MJ (2019) The anatomy of undue influence used by terrorist cults and traffickers to induce helplessness and trauma, so creating false identities. Ethics, Medicine and Public Health 8:97-107. https://doi.org/10.1016/j.jemep.2019.03.002</p>
+<p>Hochschild AR (1979) Emotion work, feeling rules, and social structure. American Journal of Sociology 85(3):551-575. https://doi.org/10.1086/227049</p>
+<p>Jocher JJ, Verwiebe R (2026) &quot;Forever and always, my love&quot;: Emotions in human-AI romantic relationship building and breakup with generative AI chatbot Replika. Social Media + Society. https://doi.org/10.1177/20563051251408917</p>
+<p>Kassing K, Collins A (2025) &quot;Slowly, over time, you completely lose yourself&quot;: Conceptualizing coercive control trauma in intimate partner relationships. Journal of Interpersonal Violence. Advance online publication. https://doi.org/10.1177/08862605251320998</p>
+<p>Katholische Kirche Stadt Luzern (n.d.) Deus in machina. Project description. https://www.kathluzern.ch/mein-engagement/deus-in-machina. Accessed 6 October 2026</p>
+<p>Kim H, Ristenpart T, Dell N (2026) AI-facilitated coercive control: An experimental study. In: Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems. ACM, New York. https://doi.org/10.1145/3772318.3790859</p>
+<p>Laestadius L, Bishop A, Gonzalez M, Illenčík D, Campos-Castillo C (2024) Too human and not human enough: A grounded theory analysis of mental health harms from emotional dependence on the social chatbot Replika. New Media &amp; Society 26(10):5923-5941. https://doi.org/10.1177/14614448221142007</p>
+<p>La Gamma M, Bardavío C, Velasco J, Flores P, Rodríguez R, Moyano M (2024) Psychological abuse in jurisprudence associated with cults and manipulative groups: A transcultural study on five convictions. Journal of Aggression, Maltreatment &amp; Trauma 33(10):1195-1211. https://doi.org/10.1080/10926771.2024.2394073</p>
+<p>Lalich J (2004) Bounded choice: True believers and charismatic cults. University of California Press, Berkeley</p>
+<p>Lifton RJ (1989) Thought reform and the psychology of totalism: A study of &quot;brainwashing&quot; in China. University of North Carolina Press, Chapel Hill. Original work published 1961</p>
+<p>Liu AR, Pataranutaporn P, Maes P (2025) The heterogeneous effects of AI companionship: An empirical model of chatbot usage and loneliness and a typology of user archetypes. Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society 8(2):1585-1597. https://doi.org/10.1609/aies.v8i2.36658</p>
+<p>Loi n° 2024-420 du 10 mai 2024 visant à renforcer la lutte contre les dérives sectaires et à améliorer l&#x27;accompagnement des victimes (France). https://www.legifrance.gouv.fr/loda/id/JORFTEXT000049523123/</p>
+<p>Machia LV, Corral D, Jakubiak BK (2024) Social need fulfillment model for human-AI relationships. Technology, Mind, and Behavior 5(4):231-239. https://doi.org/10.1037/tmb0000141</p>
+<p>Maeda T, Quan-Haase A (2024) When human-AI interactions become parasocial: Agency and anthropomorphism in affective design. In: Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency, pp 1068-1077. https://doi.org/10.1145/3630106.3658956</p>
+<p>Mathur A, Acar G, Friedman MJ, Lucherini E, Mayer J, Chetty M, Narayanan A (2019) Dark patterns at scale: Findings from a crawl of 11K shopping websites. Proceedings of the ACM on Human- Computer Interaction 3(CSCW):Article 81. https://doi.org/10.1145/3359183</p>
+<p>MIVILUDES (2025) Rapport d&#x27;activité 2022-2024. Mission interministérielle de vigilance et de lutte contre les dérives sectaires, Paris. https://www.miviludes.interieur.gouv.fr/nos-ressources/nos- publications/rapports-dactivite-de-miviludes</p>
+<p>Morrin H, Nicholls L, Levin M et al (2026a) Artificial intelligence-associated delusions and large language models: Risks, mechanisms of delusion co-creation, and safeguarding strategies. The Lancet Psychiatry 13(6):522-530. https://doi.org/10.1016/S2215-0366(25)00396-7</p>
+<p>Morrin H, Nicholls L, Deeley Q, Pollak TA (2026b) Playing with the dials of belief: How controllable AI behaviours could modulate human belief and cognition across scales. AI &amp; Society. Advance online publication. https://doi.org/10.1007/s00146-026-03283-4</p>
+<p>Muldoon J, Parke JJ (2025) Cruel companionship: How AI companions exploit loneliness and commodify intimacy. New Media &amp; Society. Advance online publication. https://doi.org/10.1177/14614448251395192</p>
+<p>OpenAI (2025a) Sycophancy in GPT-4o: What happened and what we&#x27;re doing about it. 29 April. https://openai.com/index/sycophancy-in-gpt-4o/. Accessed 6 October 2026</p>
+<p>OpenAI (2025b) Expanding on what we missed with sycophancy.</p>
+<p>Pan S, Mou Y (2024) Constructing the meaning of human-AI romantic relationships from the perspectives of users dating the social chatbot Replika. Personal Relationships 31(4):1090-1112. https://doi.org/10.1111/pere.12572</p>
+<p>Park JS, O&#x27;Brien JC, Cai CJ, Morris MR, Liang P, Bernstein MS (2023) Generative agents: Interactive simulacra of human behavior. In: Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology, pp 1-22. https://doi.org/10.1145/3586183.3606763</p>
+<p>Richardson JT (1993) Definitions of cult: From sociological-technical to popular-negative. Review of Religious Research 34(4):348-356. https://doi.org/10.2307/3511972</p>
+<p>Rodríguez-Carballeira Á, Saldaña O, Almendros C, Martín-Peña J, Escartín J, Porrúa-García C (2015) Group psychological abuse: Taxonomy and severity of its components. The European Journal of Psychology Applied to Legal Context 7(1):31-39. https://doi.org/10.1016/j.ejpal.2014.11.001</p>
+<p>Saldaña O, Rodríguez-Carballeira Á, Almendros C, Escartín J (2017) Development and validation of the Psychological Abuse Experienced in Groups Scale. The European Journal of Psychology Applied to Legal Context 9(2):57-64. https://doi.org/10.1016/j.ejpal.2017.01.002</p>
+<p>Saldaña O, Rodríguez-Carballeira Á, Almendros C, Nishida K (2018a) Psychological Abuse Experienced in Groups Scale: Psychometric properties of the Japanese version. Japanese Psychological Research 60(1):13-24. https://doi.org/10.1111/jpr.12166</p>
+<p>Saldaña O, Antelo E, Rodríguez-Carballeira Á, Almendros C (2018b) Taxonomy of psychological and social disturbances in survivors of group psychological abuse. Journal of Aggression, Maltreatment &amp; Trauma 27(9):1003-1021. https://doi.org/10.1080/10926771.2017.1405315</p>
+<p>Salvi F, Horta Ribeiro M, Gallotti R, West R (2025) On the conversational persuasiveness of GPT-4. Nature Human Behaviour 9(8):1645-1653. https://doi.org/10.1038/s41562-025-02194-6</p>
+<p>Salvi F, Horta Ribeiro M, Gallotti R, West R (2026) Author correction: On the conversational persuasiveness of GPT-4. Nature Human Behaviour. https://doi.org/10.1038/s41562-026-02588-0</p>
+<p>Sessions EM, Doherty B (2023) &quot;Cults,&quot; coercion, and control: Rhetoric, reality, and the return of &quot;brainwashing&quot;? Implicit Religion 24(2):161-194. https://doi.org/10.1558/imre.23218</p>
+<p>Sharma M, Tong M, Korbak T et al (2024) Towards understanding sycophancy in language models. In: Proceedings of the Twelfth International Conference on Learning Representations. https://proceedings.iclr.cc/paper_files/paper/2024/hash/0105f7972202c1d4fb817da9f21a9663- Abstract-Conference.html</p>
+<p>Shu M, Karell D, Okura K, Davidson TR (2026) How latent and prompting biases in AI-generated historical narratives influence opinions. PNAS Nexus 5(3):pgag022. https://doi.org/10.1093/pnasnexus/pgag022</p>
+<p>Siemon D, Strohmann T, Islam N (2026) Me and my Replika: Perceived affordances and the formation of psychological ownership of AI companions. European Journal of Information Systems. Advance online publication. https://doi.org/10.1080/0960085X.2026.2673990</p>
+<p>Singer MT (2003) Cults in our midst: The continuing fight against their hidden menace. Revised edn. Jossey-Bass, San Francisco</p>
+<p>Stark E (2007) Coercive control: How men entrap women in personal life. Oxford University Press, New York Susser D, Roessler B, Nissenbaum H (2019) Technology, autonomy, and manipulation. Internet Policy Review 8(2). https://doi.org/10.14763/2019.2.1410</p>
+<p>United Kingdom (2015) Serious Crime Act 2015, c 9, s 76. https://www.legislation.gov.uk/ukpga/2015/9/section/76</p>
+<p>U.S. Attorney&#x27;s Office, Eastern District of New York (2020) NXIVM leader Keith Raniere sentenced to 120 years in prison for racketeering and sex trafficking offenses. U.S. Department of Justice, 27</p>
+<p>October. https://www.justice.gov/usao-edny/pr/nxivm-leader-keith-raniere-sentenced-120-years- prison-racketeering-and-sex-trafficking. Accessed 6 October 2026</p>
+<p>Vollmer A-L, Read R, Trippas D, Belpaeme T (2018) Children conform, adults resist: A robot group induced peer pressure on normative social conformity. Science Robotics 3(21):eaat7111. https://doi.org/10.1126/scirobotics.aat7111</p>
+<p>Woodlock D (2017) The abuse of technology in domestic violence and stalking. Violence Against Women 23(5):584-602. https://doi.org/10.1177/1077801216646277</p>
+<p>Yeung K (2017) &#x27;Hypernudge&#x27;: Big data as a mode of regulation by design. Information, Communication &amp; Society 20(1):118-136. https://doi.org/10.1080/1369118X.2016.1186713</p>
+<p>Zablocki BD (1997) The blacklisting of a concept: The strange history of the brainwashing conjecture in the sociology of religion. Nova Religio 1(1):96-121. https://doi.org/10.1525/nr.1997.1.1.96</p>
+<p>Zablocki BD (1998) Exit cost analysis: A new approach to the scientific study of brainwashing. Nova Religio 1(2):216-249. https://doi.org/10.1525/nr.1998.1.2.216</p>
+<p>Zablocki BD (2001) Toward a demystified and disinterested theory of brainwashing. In: Zablocki BD, Robbins T (eds) Misunderstanding cults. University of Toronto Press, Toronto, pp 159-214. https://doi.org/10.3138/9781442677302-008</p>
+<p>Zhang R, Li H, Meng H, Zhan J, Gan H, Lee Y-C (2025a) The dark side of AI companionship: A taxonomy of harmful algorithmic behaviors in human-AI relationships. In: Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems, Article 13, pp 1-17. ACM, New York. https://doi.org/10.1145/3706598.3713429</p>
+<p>Zhang S, Chung P, Vervelde J, Korapati N, Chatterjee R, Fawaz K (2025b) Abusability of automation apps in intimate partner violence. In: 34th USENIX Security Symposium, pp 41-60. USENIX Association. https://www.usenix.org/conference/usenixsecurity25/presentation/zhang-shirley</p>
+<p>Zhou S, Xu FF, Zhu H et al (2024) WebArena: A realistic web environment for building autonomous agents. In: Proceedings of the Twelfth International Conference on Learning Representations. https://proceedings.iclr.cc/paper_files/paper/2024/hash/4410c0711e9154a7a2d26f9b3816d1ef- Abstract-Conference.html</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
