@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Adapting familiar object use to altered
+structure under different viewing conditions</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Adapting familiar object use to altered structure under different
+viewing conditions
+</p>
+<p class="meta">
+2026-11-25 · Metacheck 0.4.4.40
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>2</b><span>fine</span></a><a class="count na" href="#na"><b>13</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Non-Significant P Value Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 18 non-significant p values that should be checked for
+appropriate interpretation.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Meta-scientific research has shown nonsignificant p values are
+commonly misinterpreted. It is incorrect to infer that there is ‘no
+effect’, ‘no difference’, or that groups are ‘the same’ after p &gt;
+0.05.</p>
+<p>It is possible that there is a true non-zero effect, but that the
+study did not detect it. Make sure your inference acknowledges that it
+is possible that there is a non-zero effect. It is correct to include
+the effect is ‘not significantly’ different, although this just restates
+that p &gt; 0.05.</p>
+<p>Metacheck does not yet analyze automatically whether sentences which
+include non-significant p-values are correct, but we recommend manually
+checking the sentences below for possible misinterpreted non-significant
+p values.</p>
+<div style="max-height:28em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Sentence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p = .22
+</td>
+<td style="text-align:left;">
+Reaction time showed no statistically significant effect of Condition
+(GEE: χ²(2) = 3.0, p = .22), Object Type (p = .39) or their interaction
+(p = .91; Supplementary Figure S2).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .39
+</td>
+<td style="text-align:left;">
+Reaction time showed no statistically significant effect of Condition
+(GEE: χ²(2) = 3.0, p = .22), Object Type (p = .39) or their interaction
+(p = .91; Supplementary Figure S2).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .91
+</td>
+<td style="text-align:left;">
+Reaction time showed no statistically significant effect of Condition
+(GEE: χ²(2) = 3.0, p = .22), Object Type (p = .39) or their interaction
+(p = .91; Supplementary Figure S2).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .085
+</td>
+<td style="text-align:left;">
+Movement time increased numerically across conditions (C1: 760 ms; C2:
+856 ms; C3: 875 ms), but the Condition effect did not reach the
+conventional significance threshold (χ²(2) = 4.9, p = .085); the
+evidence for an Object-Type effect was likewise inconclusive (p = .054;
+interaction: p = .17).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .054
+</td>
+<td style="text-align:left;">
+Movement time increased numerically across conditions (C1: 760 ms; C2:
+856 ms; C3: 875 ms), but the Condition effect did not reach the
+conventional significance threshold (χ²(2) = 4.9, p = .085); the
+evidence for an Object-Type effect was likewise inconclusive (p = .054;
+interaction: p = .17).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .17
+</td>
+<td style="text-align:left;">
+Movement time increased numerically across conditions (C1: 760 ms; C2:
+856 ms; C3: 875 ms), but the Condition effect did not reach the
+conventional significance threshold (χ²(2) = 4.9, p = .085); the
+evidence for an Object-Type effect was likewise inconclusive (p = .054;
+interaction: p = .17).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .078
+</td>
+<td style="text-align:left;">
+The Condition effect was supported by the linear mixed model (χ²(2) =
+6.71, p = .035) but not by the population-averaged GEE (p = .078), and
+was therefore model-dependent.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .79
+</td>
+<td style="text-align:left;">
+No statistically significant Object-Type effect (p = .79) or interaction
+(p = .67) was detected for MGA (Fig. 2A; movement time is shown in Fig.
+2B).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .67
+</td>
+<td style="text-align:left;">
+No statistically significant Object-Type effect (p = .79) or interaction
+(p = .67) was detected for MGA (Fig. 2A; movement time is shown in Fig.
+2B).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .42
+</td>
+<td style="text-align:left;">
+Peak transport velocity decreased across conditions (C1: 0.95 m/s; C2:
+0.88 m/s; C3: 0.79 m/s; linear mixed model: χ²(2) = 6.3, p = .044; GEE:
+p = .004), with no statistically significant Object-Type effect (p =
+.42) or interaction (p = .47; Supplementary Figure S4).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .47
+</td>
+<td style="text-align:left;">
+Peak transport velocity decreased across conditions (C1: 0.95 m/s; C2:
+0.88 m/s; C3: 0.79 m/s; linear mixed model: χ²(2) = 6.3, p = .044; GEE:
+p = .004), with no statistically significant Object-Type effect (p =
+.42) or interaction (p = .47; Supplementary Figure S4).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .55
+</td>
+<td style="text-align:left;">
+Exploratory successive contrasts identified a grip-aperture difference
+between C1 and C2 (p = .036), whereas the C2-C3 contrast was
+inconclusive (p = .55).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .17
+</td>
+<td style="text-align:left;">
+Neither movement-time contrast was statistically significant (C1-C2: p =
+.17; C2-C3: p = .71), and neither peak-velocity contrast was
+individually significant (C1-C2: p = .19; C2-C3: p = .29).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .71
+</td>
+<td style="text-align:left;">
+Neither movement-time contrast was statistically significant (C1-C2: p =
+.17; C2-C3: p = .71), and neither peak-velocity contrast was
+individually significant (C1-C2: p = .19; C2-C3: p = .29).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .19
+</td>
+<td style="text-align:left;">
+Neither movement-time contrast was statistically significant (C1-C2: p =
+.17; C2-C3: p = .71), and neither peak-velocity contrast was
+individually significant (C1-C2: p = .19; C2-C3: p = .29).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .29
+</td>
+<td style="text-align:left;">
+Neither movement-time contrast was statistically significant (C1-C2: p =
+.17; C2-C3: p = .71), and neither peak-velocity contrast was
+individually significant (C1-C2: p = .19; C2-C3: p = .29).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .35
+</td>
+<td style="text-align:left;">
+Spatial exploration increased across conditions (C1: .04; C2: .15; C3:
+.26; GEE effect of Condition: χ²(2) = 13.7, p = .001) and was more
+frequent for unusual than usual objects (.24 vs. .17; GEE effect of
+Type: χ²(1) = 15.0, p = .0001), with no statistically significant
+interaction (p = .35; Fig. 2…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p = .088
+</td>
+<td style="text-align:left;">
+The exploratory C1-C2 contrast supported an increase in exploration
+after removal of online vision (p = .023); evidence for an additional
+C2-C3 increase was inconclusive (p = .088). trials with spatial
+exploration (C) and proportion of trials with a use error (D), as a
+function of Condition (C1 = fu…
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Cells longer than 300 characters are cut (…).</em></p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating the rate of
+misinterpretations of non-significant results is high, see:</p>
+<p>Aczel B, Palfi B, Szollosi A, Kovacs M, Szaszi B, Szecsi P, Zrubka M,
+Gronau Q, van den Bergh D, Wagenmakers E (2018). “Quantifying Support
+for the Null Hypothesis in Psychology: An Empirical Investigation.”
+<em>Advances in Methods and Practices in Psychological Science</em>,
+<b>1</b>(3), 357–366.
+<a href="https://doi.org/10.1177/2515245918773742">doi:10.1177/2515245918773742</a>.</p>
+<p>Murphy S, Merz R, Reimann L, Fernández A (2025). “Nonsignificance
+misinterpreted as an effect’s absence in psychology: Prevalence and
+temporal analyses.” <em>Royal Society Open Science</em>, <b>12</b>(3),
+242167.
+<a href="https://doi.org/10.1098/rsos.242167">doi:10.1098/rsos.242167</a>.</p>
+<p>For educational material on preventing the misinterpretation of p
+values, see <a href="https://lakens.github.io/statistical_inferences/01-pvalue.html#sec-misconception1">Improving
+Your Statistical Inferences</a>.</p>
+</div>
+</div>
+</details>
+</div>
+<h2 id="fine">Fine <span class="n">(2)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to report data about people or animals that
+need an ethics statement contained one.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 28 detected.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(13)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper appears to report data that the authors collected from
+people or animals, and it has an ethics statement.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>Forty-six right-handed volunteers (mean age 23.56 years, SD 2.04),
+recruited among students at the University of Bologna, took part after
+giving informed consent.</p>
+</blockquote>
+<blockquote>
+<p>Participants were asked to grasp and demonstrate the use of the
+object with their right hand.</p>
+</blockquote>
+<blockquote>
+<p>All participants gave informed consent.</p>
+</blockquote>
+<p>Ethics statement:</p>
+<blockquote>
+<p>The experiment was approved by the bioethical committee of the
+University of Bologna (N. 0122497 of 23/05/2022), and was carried out in
+accordance with the Declaration of Helsinki.</p>
+</blockquote>
+<blockquote>
+<p>Ethics approval and consent to participate: The experiment was
+approved by the bioethical committee of the University of Bologna
+(No.</p>
+</blockquote>
+<blockquote>
+<p>0122497, 23 May 2022) and was conducted in accordance with the
+Declaration of Helsinki.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 51 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 51 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 51 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Using a modified familiar object requires learned actions to be reconciled with its current structure. We examined this problem using six everyday objects and altered counterparts designed to preserve recognisable identity and function while changing the relation between graspable and functional parts. Forty-six participants grasped and demonstrated object use in one of three conditions: continuous vision, immediate action after visual occlusion, or action after a 3-s delay without vision. Reach-to-grasp kinematics, manual spatial exploration and use errors provided complementary measures of performance; kinematic analyses included 45 participants and four object pairs. Errors occurred almost exclusively with unusual objects, which also elicited more exploration. No statistically significant object-type effect was detected in the measured kinematics.</p>
+<p>Reduced visual availability was associated with more exploration and lower peak transport velocity, whereas the condition effect on maximum grip aperture depended on the statistical model.</p>
+<p>Exploratory successive-condition contrasts identified changes in exploration and grip aperture after removal of online vision; evidence for an additional retention cost was inconclusive. No selective amplification of the unusual-object cost by viewing condition was detected. Together, the measures identify behavioural consequences of altered structure-function relations while leaving their effects on pre-contact movement uncertain. The findings identify difficulties in adapting familiar actions to altered objects and motivate assessing demonstrated use and exploration alongside grasping when investigating object usability.</p>
+<p>Familiar objects can be redesigned while retaining their identity and purpose. This raises a practical cognitive question: how do people adapt when an object suggests a familiar action but its structure requires a different way of using it? We addressed this question with everyday objects and structurally altered versions, asking participants to grasp and demonstrate their use with RUNNING TITLE: STRUCTURE-FUNCTION CONFLICT IN OBJECT USE 3 continuous vision, immediately after vision was blocked, or after a short delay. Altered objects elicited more use errors and manual exploration. Differences in the selected grasp measures remained uncertain. Limiting vision also increased exploration and slowed peak hand transport. These findings suggest that evaluating how an object is grasped may miss difficulties that become apparent when people attempt to use it. The paradigm provides a basis for investigating how familiar appearance and current geometry guide action with modified tools. Applications to product design and instruction will require tests involving actual task outcomes, representative users and repeated use.</p>
+<h3>1. Introduction</h3>
+<p>Familiar objects can retain their identity and purpose even when their geometry changes, as in redesigned or adapted implements. Such objects raise a practical question: how do users adapt an established action when its usual implementation no longer fits the object? Skilled object use requires more than reaching and grasping an object. A grasp-to-move action can often be specified from current information about size, location and orientation, whereas a grasp-to-use action must also satisfy a learned functional goal and the postural constraints of the intended end-state. It therefore requires the system to integrate what the object is, what it is for and how its present geometry permits it to be used. Because these sources normally converge for familiar objects, ordinary tools offer limited opportunities to determine how learned use knowledge and current structural evidence are combined when they disagree. Examining both the movement towards an object and the subsequent demonstration of its use can reveal consequences that a single measure of successful grasping would miss. This provides a use-inspired approach to studying the cognitive demands of adapting familiar actions, without assuming that laboratory performance directly predicts everyday usability.</p>
+<p>In this context, the concept of affordance becomes relevant. Gibson&#x27;s (1979) ecological theory introduced affordances as possibilities for action that emerge from relations between an agent and the environment. Borghi and Riggio (2015) subsequently distinguished stable from variable affordances. Stable affordances capture relatively invariant, experience-dependent relations, whereas variable affordances depend more strongly on the object&#x27;s current position, orientation and context. This is not a rigid stored-versus-online dichotomy: both sources can be activated rapidly, updated and flexibly weighted according to the goal. The distinction nevertheless identifies the central computational problem of object use-combining learned regularities with currently available evidence.</p>
+<p>At the neuroanatomical level, the Two Action Systems account associates learned, function-related manipulation knowledge mainly with a left-lateralised ventro-dorsal network, and rapid visuomotor transformations based on current object structure mainly with a bilateral dorsodorsal network (Rizzolatti &amp; Matelli, 2003; Binkofski &amp; Buxbaum, 2013; Sakreida et al., 2016).</p>
+<p>These distinctions motivate questions about the contributions of remembered and current information to action (Rossetti &amp; Pisella, 2003). Work on posterior parietal cortex further emphasises the integration of visual evidence and motor signals during action control (Fattori et al., 2024; Galletti &amp; Fattori, 2018). More recent gradient and multiple-route accounts emphasise parallel, recurrent and partly overlapping processing rather than isolated modules (Rounis &amp; Binkofski, 2023; Jüchtern et al., 2024; Stoll et al., 2025). Accordingly, the structure-function distinction is used here to formulate hypotheses about information use, not to localise behavioural outcomes to named pathways.</p>
+<p>At the behavioural level, object grasping reflects an interplay between affordances and the end-goal of the action (Sartori et al., 2011; Rosenbaum et al., 2012; Bach et al., 2014; Federico &amp; Brandimonte, 2019), and the affordance construct itself continues to be refined both conceptually and methodologically (Osiurak et al., 2017; de Wit et al., 2017; Alhasan et al., 2025). Affordancerelated information is represented across distributed parieto-frontal and premotor circuits, as shown by neurophysiological, fMRI and lesion evidence (Maranesi et al., 2014; Breveglieri et al., 2015; Kourtis et al., 2018; Garrido-Vásquez et al., 2021; Di Caro et al., 2025), and its functional organisation across perception-action systems remains under active investigation (Przybylski &amp; Kroliczak, 2026). These systems span ventro-dorsal manipulation knowledge (Buxbaum &amp; Kalénine, 2010; Almeida et al., 2013), the dorsal reach-to-grasp route (Gallivan &amp; Goodale, 2018; Breveglieri et al., 2019) and left parietal tool representations (Garcea &amp; Mahon, 2014; Vingerhoets, 2014; Binkofski &amp; Buccino, 2018). Relatedly, the same familiar object can cue competing functional and structural actions that interfere with one another (Bub et al., 2008; Jax &amp; Buxbaum, 2010); reach-to-grasp kinematics are sensitive to task goals and object properties (Begliomini et al., 2007; Rounis et al., 2018); and the sensorimotor experience of manipulating objects shapes their stored representations (Bellebaum et al., 2013). This integrative view also accommodates several complementary accounts of tool use.</p>
+<p>Memory-based theories emphasise learned manipulation representations (Buxbaum, 2017), whereas technical-reasoning theories emphasise inference from the physical relations among the hand, tool and intended effect (Osiurak &amp; Badets, 2016; Reynaud et al., 2016). Action-and objectrelated knowledge converge in left temporo-parietal regions (Kalénine &amp; Buxbaum, 2016), while lateral occipitotemporal and parieto-frontal systems represent partly distinct aspects of action meaning, grasp and manipulation (Wurm et al., 2017; Wurm &amp; Caramazza, 2022). Recent evidence further suggests recurrent exchanges among visual, bodily, contextual and semantic representations rather than a strictly feedforward sequence (Zimmermann &amp; Lingnau, 2025). The unresolved question is therefore how stored action knowledge and structural reasoning jointly constrain the action selected for a given object.</p>
+<p>A second constraint is the availability of current visual evidence. Online visuomotor information is continuously updated during action; after occlusion, control increasingly depends on remembered estimates, prediction and remaining sensory inputs. Delayed grasps can become slower and more conservative, although stored knowledge can influence planning early and visual memory is not equivalent to the absence of a representation (Goodale et al., 2005; Westwood &amp; Goodale, 2003; Hesse &amp; Franz, 2010; Schettino et al., 2003). Continuous vision, immediate action after occlusion and delayed action after the same preview therefore distinguish access to online visual feedback from the additional demands of retaining information. Occlusion does not remove proprioceptive or subsequent haptic information, and an added delay does not isolate memory decay from other time-dependent processes. Hierarchical active inference offers a candidate account of how learned expectations and current evidence jointly guide action (Friston, 2010; Proietti et al., 2023; Proietti et al., 2026).</p>
+<p>Related accounts emphasise the interaction between potential actions and feedback control (Pezzulo &amp; Cisek, 2016). Within active inference, familiar functional knowledge can favour a habitual action, whereas sensory evidence can support revising that action or acquiring further information. This provides a useful interpretation of unusual-object use, but the models proposed by Proietti et al. (2023 Proietti et al. ( , 2026) ) have not been fitted to the present task. We therefore use the framework to formulate candidate explanations and future tests, alongside accounts based on manipulation knowledge and technical reasoning.</p>
+<p>In this study we introduce a new category of stimuli, the usual and unusual objects, as they provide a distinctive probe of hierarchical active inference processes. Usual objects are congruent across identity, function, structure and canonical use. Their unusual counterparts are designed to preserve a recognisable identity and intended function but alter the spatial relation between the graspable component and the functional head (Sciulli et al., 2018). They thus combine familiar object cues with an unfamiliar requirement for implementing use. Resolving this mismatch may require further exploration, modification of a habitual action or computation of a new grasp-to-use solution. The manipulation also changes whole-object geometry and potentially other perceptual or mechanical properties, so it does not isolate structure-function conflict from novelty or difficulty.</p>
+<p>The present study combined this structure-function manipulation with three betweensubjects viewing conditions: continuous vision (C1), immediate action after occlusion (C2) and action after a 3-s delay without vision (C3). C1-C2 compares action with versus without online visual feedback after the same 500-ms preview; C2-C3 holds the absence of online vision constant and adds a retention interval. These comparisons address different constraints on action rather than a single linear manipulation of visual reliability. Reach-to-grasp kinematics characterise movement initiation, transport and hand shaping; manual spatial exploration captures overt search around the object; and error categories describe departures from its intended use. The contribution of the present study is to combine these behavioural and kinematic measures with manipulations of visual availability, asking how altered structure and access to vision are expressed across performance without assuming that each measure isolates a separate cognitive process.</p>
+<p>The central question was whether unusual objects would elicit more exploration and use errors than usual objects when a familiar action no longer fits their structure. For the four object pairs included in the kinematic analyses, the local graspable component was intended to remain comparable; we therefore examined whether the consequences of altered structure also extended to pre-contact movement. Reduced visual availability was expected to increase exploration and encourage more cautious transport and grasping. The successive C1-C2 and C2-C3 contrasts were exploratory and distinguish removal of online feedback from the added retention interval. A further candidate prediction, motivated by hierarchical active inference, is that reduced visual availability might disproportionately increase canonical-use errors or exploration for unusual objects if it shifts behaviour towards a familiar action. Clinical observations also suggest that object-use disorders may arise either from impaired retrieval of familiar use knowledge or from impaired derivation of an action from object structure, and that apraxic patients may over-rely on habitual affordances when object properties activate competing actions (Rounis &amp; Binkofski, 2023); this motivates treating regularization as a bias towards a familiar. This prediction depends on how uncertainty and alternative sensory inputs are represented; it is not entailed by active inference alone. The activeinference interpretation and successive contrasts were not preregistered.</p>
+<h3>2. Method</h3>
+<p> &gt;Method</p>
+<h3>2.1 Participants</h3>
+<p>Forty-six right-handed volunteers (mean age 23.56 years, SD 2.04), recruited among students at the University of Bologna, took part after giving informed consent. None had a history of musculoskeletal or neurological disorders; all had normal or corrected-to-normal vision and were naïve to the purpose of the study. Each participant was assigned to a single viewing condition in a between-subjects design. The kinematic analyses included 45 participants with usable marker data (C1: n = 15; C2: n = 14; C3: n = 16); the video-based analyses included all 46 participants.</p>
+<h3>2.2 Ethics</h3>
+<p>The experiment was approved by the bioethical committee of the University of Bologna (N. 0122497 of 23/05/2022), and was carried out in accordance with the Declaration of Helsinki.</p>
+<h3>2.3 Stimuli</h3>
+<p>Six everyday objects (key, comb, mug, screwdriver, fork and toothbrush) and structurally altered versions were used (Fig. 1). In each unusual version, the spatial relation between the graspable component and the functional head was changed while identity and intended function were designed to remain recognisable. This altered the relation between the familiar use action and the object&#x27;s current configuration. The local handle was intended to remain comparable between the usual and unusual version of each object. The manipulation did not, however, equate wholeobject geometry, mass distribution or end-state constraints across versions. (right).</p>
+<h3>2.4 Apparatus and procedure</h3>
+<p>Participants sat at a table wearing PLATO visual-occlusion goggles controlled by E-Prime 2.0. To begin a trial they pressed a start button positioned 20 cm in front of them with their right hand. Objects were placed on a small support on a wooden base 13 cm from the table edge, with the handle oriented 45° to the right to facilitate the grasp; the mug was placed directly on the base.</p>
+<p>The right-hand kinematics were recorded with a 3D-optoelectronic Smart-D System (Bioengineering Technology &amp; Systems, BTS; sampling interval 8 ms). Four infrared video cameras were placed at the four angles of the table. The calibration of the cameras&#x27; position, focus and brightness was carried out for each participant. Four reflective markers were placed on the hand (thumbnail, index fingernail, and two on the wrist) and a fifth on the object. A frontal video camera recorded performance for the qualitative analysis.</p>
+<p>Participants were asked to grasp and demonstrate the use of the object with their right hand.</p>
+<p>At the start of each trial the goggles were opaque and the experimenter placed the object.</p>
+<p>Participants held the start button until the auditory movement cue. Two seconds after the button press, the goggles became transparent. The interval between goggle opening and the auditory movement cue defined the three conditions. In Condition 1 the goggles remained transparent and the cue was delivered 500 ms after object presentation, so the object could be grasped under full vision. In Condition 2 the object was visible for 500 ms; the goggles then became opaque and, simultaneously, the cue was delivered, so the object was grasped immediately without vision. In Condition 3 the object was visible for 500 ms, the goggles then became opaque, and the cue was delivered after a 3-s delay. Usual and unusual objects were each presented once, in random order.</p>
+<p>Five practice trials with different objects preceded the experiment.</p>
+<h3>2.5 Kinematic recording and analysis</h3>
+<p>Three-dimensional marker positions were reconstructed with the BTS Tracker software and processed with custom scripts. For each trial we computed the index-thumb grip aperture and transport events. Marker trajectories were cleaned for tracking artefacts: isolated spikes were removed with a Hampel filter and gaps of ≤ 5 frames were interpolated (cubic spline; de Boor, 1978); trials with longer gaps in the reach window, or yielding non-physiological apertures, were excluded. We analysed four measures. Reaction time (RT) was the interval between the auditory movement cue and button release (movement onset); RTs shorter than 200 ms or longer than 1500 ms were excluded. Movement time (MT) was the interval between movement onset and the estimate of first contact, operationalised as the object reaching a velocity of 30 mm/s; MTs longer than 3000 ms were excluded. Maximum grip aperture (MGA) was the maximum index-thumb distance during the reach phase; to avoid contamination by the transient hand configuration at button release, MGA was taken from 150 ms after movement onset to the estimate of first contact.</p>
+<p>Peak transport velocity was the maximum tangential velocity of the wrist (mean of the two wrist markers, low-pass filtered at 10 Hz) during the reach phase. The mug and the key were excluded from the kinematic analysis: the mug was frequently grasped by the body, and the key&#x27;s graspable part differed in size between versions. This left four object pairs (screwdriver, fork, comb and toothbrush). MGA extraction is illustrated in Supplementary Figure S1; alternative extraction definitions are shown in Supplementary Figure S3.</p>
+<h3>2.6 Video-based analysis of errors and exploration</h3>
+<p>Two independent judges scored the videos for errors and manual spatial exploration, and inter-judge agreement was assessed with Cohen&#x27;s κ. Movement-related errors comprised (i) suboptimal grasps despite a well-executed, correctly oriented use movement (grasp errors) and (ii) correct grasps followed by a use movement with an incorrect orientation. Function-related errors comprised (i) using an unusual object as its usual counterpart, neglecting the structural change (regularisation), and (ii) using an object as another meaningful object not in the set (lexicalisation).</p>
+<p>Trials in which the object was not recognised were also recorded. These labels describe observed behaviour and do not by themselves identify its cognitive cause. Spatial exploration referred to manual search around the object and for the position of its graspable part. All six object pairs were included in these analyses.</p>
+<h3>2.7 Statistical analysis</h3>
+<p>Kinematic parameters were analysed with linear mixed-effects models including Condition (C1/C2/C3), Object Type (usual/unusual) and their interaction as fixed effects and a by-participant random intercept. Omnibus effects were tested with likelihood-ratio tests and complemented by population-averaged generalised estimating equations (GEE) with robust standard errors. The binary video-based outcomes (occurrence of errors and exploration, scored per trial and repeated within participant) were analysed with logistic GEE using an exchangeable working correlation clustered by participant, with Wald tests for Condition, Type and their interaction. The Condition term was additionally decomposed with successive-difference contrasts comparing C1 with C2 and C2 with C3. These contrasts address, respectively, the removal of online visual feedback and the addition of a 3-s retention interval after an identical preview, and are reported as exploratory analyses. The models account for participant clustering but do not include variation across object pairs. Kinematics and video-based outcomes were analysed separately; the reported analyses do not test trial-level associations between exploration, errors and movement.</p>
+<h3>3. Results</h3>
+<p> &gt;Results</p>
+<h3>3.1 Kinematics</h3>
+<p>Reaction time showed no statistically significant effect of Condition (GEE: χ²(2) = 3.0, p = .22), Object Type (p = .39) or their interaction (p = .91; Supplementary Figure S2). Movement time increased numerically across conditions (C1: 760 ms; C2: 856 ms; C3: 875 ms), but the Condition effect did not reach the conventional significance threshold (χ²(2) = 4.9, p = .085); the evidence for an Object-Type effect was likewise inconclusive (p = .054; interaction: p = .17). Mean maximum grip aperture increased across conditions (C1: 89 mm; C2: 97 mm; C3: 100 mm). The Condition effect was supported by the linear mixed model (χ²(2) = 6.71, p = .035) but not by the population-averaged GEE (p = .078), and was therefore model-dependent. No statistically significant Object-Type effect (p = .79) or interaction (p = .67) was detected for MGA (Fig. 2A; movement time is shown in Fig. 2B). Its descriptive ordering across conditions held under alternative extraction definitions (Supplementary Figure S3). Peak transport velocity decreased across conditions (C1: 0.95 m/s; C2: 0.88 m/s; C3: 0.79 m/s; linear mixed model: χ²(2) = 6.3, p = .044; GEE: p = .004), with no statistically significant Object-Type effect (p = .42) or interaction (p = .47; Supplementary Figure S4). Exploratory successive contrasts identified a grip-aperture difference between C1 and C2 (p = .036), whereas the C2-C3 contrast was inconclusive (p = .55).</p>
+<p>Neither movement-time contrast was statistically significant (C1-C2: p = .17; C2-C3: p = .71), and neither peak-velocity contrast was individually significant (C1-C2: p = .19; C2-C3: p = .29). The stepwise velocity decrease is therefore descriptive despite the significant omnibus effect (Fig. 4).</p>
+<p>Different significance outcomes for the two successive contrasts do not establish that the effects differ from one another.</p>
+<h3>3.2 Errors and exploration</h3>
+<p>Inter-judge agreement was κ = .84 for errors and κ = .77 for exploration. Errors occurred almost exclusively with unusual objects (44 errors with unusual vs. 1 with usual objects; GEE effect of Type: p &lt; .0001). Five categories were distinguished: grasp errors, incorrect movement orientation, object non-recognition, regularisations and lexicalisations. Among unusual objects, regularisations (n = 22) and lexicalisations (n = 11) accounted for most errors; movement-related errors and non-recognition were comparatively rare. No statistically significant condition effect was detected for the overall error rate or individual error types (all p values &gt; .37; Fig. 2D), although the sparse subtype counts limit these comparisons. Spatial exploration increased across conditions (C1: .04; C2: .15; C3: .26; GEE effect of Condition: χ²(2) = 13.7, p = .001) and was more frequent for unusual than usual objects (.24 vs. .17; GEE effect of Type: χ²(1) = 15.0, p = .0001), with no statistically significant interaction (p = .35; Fig. 2C). Error categories are shown in Figure 3. The exploratory C1-C2 contrast supported an increase in exploration after removal of online vision (p = .023); evidence for an additional C2-C3 increase was inconclusive (p = .088). trials with spatial exploration (C) and proportion of trials with a use error (D), as a function of Condition (C1 = full vision; C2 = immediate, no vision; C3 = delayed, no vision) and Object Type (usual vs. unusual). unusual-object trials). Regularisations and lexicalisations are shown separately; movementrelated errors and non-recognition are grouped in the figure. No statistically significant condition effect was detected, but subtype counts were sparse. means (collapsed across object type; mean ± 95% CI) for grip aperture (A), movement time (B), peak transport velocity (C) and spatial exploration (D). Brackets show the C1→C2 step (loss of online visual feedback, red) and the C2→C3 step (added retention interval, blue), with the significance of each contrast (* p &lt; .05, † p &lt; .10, n.s. not significant). The grip-aperture widening and the rise in exploration are concentrated in the C1→C2 step.</p>
+<h3>4. Discussion</h3>
+<p>The present study examined how altered object structure and access to vision affect grasping and demonstrated use. Unusual objects elicited markedly more use errors and more manual spatial exploration, whereas no statistically significant object-type effect was detected in the measured reach-to-grasp kinematics. Reduced visual availability was associated with more exploration and lower peak transport velocity; its effect on maximum grip aperture was modeldependent. No selective increase in the unusual-object cost with viewing condition was detected.</p>
+<p>For understanding the use of modified familiar objects, the combination of measures reveals difficulties in demonstrated use and exploration that were not captured by statistically significant changes in the selected grasp measures. It does not establish independent processing systems, and the null kinematic findings leave the magnitude of any object-type effect uncertain.</p>
+<h3>4.1 Functional knowledge and structural constraints on object use</h3>
+<p>The unusual objects allow familiar functional knowledge and current geometry to impose different demands on action. Regularisations, in which participants implemented a canonical use despite the altered structure, are compatible with persistence of a familiar action. Lexicalisations indicate selection of another meaningful use, but do not establish whether that choice arose from structural reasoning, visual resemblance or reinterpretation of the instruction. Memory-based accounts can explain interference from learned manipulation knowledge (Buxbaum, 2017; Jax &amp; Buxbaum, 2010); technical-reasoning accounts emphasise deriving an action from physical relations among the hand, object and intended effect (Osiurak &amp; Badets, 2016; Reynaud et al., 2016). The observed error categories are relevant to both accounts. Establishing which mechanism generated an individual error would require independent measures of object recognition, intended function and the participant&#x27;s chosen goal. This interpretation remains compatible with recurrent, graded interactions among occipitotemporal, parietal and premotor systems (Wurm et al., 2017; Jüchtern et al., 2024; Zimmermann &amp; Lingnau, 2025), but the present behavioural results do not identify the contribution of any particular pathway. Proietti et al. (2023) distinguish exploration that reduces uncertainty about the current hidden state from exploration that learns an uncertain mapping. The unusual objects combine a familiar identity and function with a novel structure-to-action mapping, so both processes may contribute: participants may sample the current handle location, work out how the altered configuration supports action, or both. Because each object was presented once, the design does not measure learning across repeated encounters. Greater manual exploration is therefore compatible with epistemic information seeking, but it is not a direct measure of information gain and may also reflect novelty, generic difficulty or caution. Proietti et al. (2026) further argue that the benefit of interacting with a real tool arises from a structured multisensory context that narrows the set of plausible policies, rather than from tactile input alone. The present increase in exploration when vision was absent is consistent with that proposal, but a compensatory interpretation remains untested: exploration was not manipulated, and the analyses do not show that exploratory trials were followed by fewer use errors.</p>
+<p>The error taxonomy provides candidate behavioural signatures of how the conflict was resolved. Regularisation-executing the canonical use despite altered geometry-is compatible with a prior-dominated familiar policy. Lexicalisation may reflect selection of an alternative, structure-consistent object-action hypothesis, but could also arise from global similarity or explicit problem solving. Grip and orientation errors may instead arise during lower-level implementation of an otherwise appropriate goal. These are computational hypotheses, not direct readouts of separate pathways. Critically, no condition effect on errors and no Type × Condition interaction on exploration were detected. A candidate precision-weighting interpretation would predict that less reliable structural evidence would strengthen prior-consistent regularisation or selectively increase sampling for unusual objects; the present data provide no support for that interaction. Because condition was manipulated between participants and error subtypes were sparse, the evidence does not establish either the predicted interaction or equivalence between conditions.</p>
+<h3>4.2 What the combined measures establish</h3>
+<p>No statistically significant Object-Type effect was detected for reaction time, movement time, maximum grip aperture or peak transport velocity. Grip aperture increased descriptively across viewing conditions, consistent with more cautious grasping under reduced or remembered vision (Hesse &amp; Franz, 2010; Schettino et al., 2003), but its omnibus condition effect depended on the statistical model. Previous work has shown that the goal of using rather than moving an object can influence action preparation (Valyear et al., 2011). Here, however, the absence of a significant type effect does not establish equivalent grasping or a dissociation between action selection and movement control. For the four kinematically analysed pairs, the local graspable component was intended to remain comparable, potentially allowing similar pre-contact hand shaping even when subsequent use required adaptation. Difficulties may instead emerge in grasp-point selection, postcontact reorientation or the transition from grasp to demonstrated use, which are not characterised by maximum grip aperture or peak transport velocity alone. Moreover, the video analyses included two object pairs excluded from the kinematic analyses, limiting direct comparisons across measures. Full trajectories, contact points and post-grasp adjustments, assessed for the same objects and with sufficiently precise estimates, would help locate these difficulties more closely.</p>
+<p>The viewing conditions provide a second perspective on action control. Lower peak transport velocity across conditions is consistent with more cautious movement when vision is unavailable, whereas the movement-time evidence was inconclusive and the MGA omnibus effect depended on the model. Related work has documented changes in grasping under delayed or reduced visual feedback (Hu et al., 1999; Hesse &amp; Franz, 2010; Schettino et al., 2003). Here, exploratory contrasts detected differences in MGA and exploration after removal of online vision, while the corresponding comparisons for the additional retention interval were inconclusive. This supports distinguishing feedback availability from retention demands, but does not establish that their effects differ in magnitude or that retention has no effect. Neither successive peak-velocity contrast was individually significant. Likewise, the non-significant Type × Condition interactions do not establish additivity or independence of the processes involved.Viewing condition produced a reliable decrease in peak transport velocity, whereas movement time showed only a trend, and the maximum-grip-aperture effect depended on the statistical model. This might be due to the fact that reduced visual availability induced a more cautious transport strategy, not that all grasp metrics showed a robust visual-decay effect. Because the three conditions do not form a single gradient, the two component steps were revealing (Figure 4): the widening of grip aperture and the increase in spatial exploration were driven mainly by the loss of online visual feedback (C1→C2) rather than by the added retention interval (C2→C3), whereas peak transport velocity declined gradually across both. Thus, the data provide stronger evidence for an effect of removing online vision than for an additional retention cost, but they do not show that retention is irrelevant. In active-inference terms, C1-C2 removes ongoing visual evidence during action, whereas C2-C3 increases reliance on a retained state estimate</p>
+<h3>4.3 Active inference and alternative explanations</h3>
+<p>Active inference offers one interpretation of the interaction between familiar action knowledge and current evidence (Friston, 2010; Proietti et al., 2023 Proietti et al., , 2026)). Familiar function could favour a canonical action, while altered geometry could prompt revision of that action or additional information sampling. This interpretation remains provisional: the present study neither estimates latent parameters nor compares a fitted active-inference model with competing accounts. In particular, canonical-use errors need not uniquely reflect strong prior beliefs, and exploration need not uniquely reflect uncertainty reduction. Interference from learned manipulation knowledge, technical reasoning, novelty and general task difficulty remain plausible explanations. The absence of a detected selective increase in unusual-object costs with reduced visual availability also leaves the candidate precision-weighting prediction unsupported in this dataset.</p>
+<p>A prospective study could distinguish these explanations by manipulating familiarity, structural novelty and access to informative feedback separately. One candidate prediction is that cues favouring the canonical function would increase regularisation for unusual objects when structural evidence is unreliable. Repeated exposure could test whether exploration and errors decrease as users learn the altered mapping. Trial-wise measures would then be needed to distinguish information sampling within an encounter from improvement across encounters.</p>
+<p>Manipulating the availability and diagnostic value of haptic information could test whether exploration causes fewer subsequent errors. A formal analysis should jointly predict trial-wise exploration, error category and kinematics, and compare the active-inference model out of sample with alternatives based on novelty, general difficulty, technical reasoning and end-state comfort.</p>
+<h3>4.4 Implications for using modified familiar objects</h3>
+<p>The practical problem motivating this work is how users adapt an established action to a familiar-looking object whose configuration has changed. The present findings suggest that assessing grasping alone may miss errors that appear during attempted use. For research on redesigned or adapted implements, it would therefore be informative to assess the intended task outcome alongside exploration, grasp selection and movement. A user who reaches and grasps an object successfully may still implement an action that fits its familiar counterpart rather than its current structure. This is a candidate concern for usability evaluation, not evidence that the specific alterations tested here occur commonly in everyday products.</p>
+<p>The paradigm also generates questions about instruction and feedback. Future studies could test whether drawing attention to the altered functional part, demonstrating an appropriate action or allowing guided practice reduces canonical-use errors. Visual occlusion in the present experiment is a controlled manipulation of feedback availability; it should not be treated as equivalent to divided attention or poor visibility in everyday settings. Establishing practical benefits will require representative users, actual goal-directed tasks and repeated use. The present study identifies behaviours worth measuring in such evaluations, but does not establish the effectiveness of a design change or training procedure.</p>
+<h3>5. Conclusions</h3>
+<p>Structurally altered familiar objects elicited more use errors and manual exploration, while their effects on the selected pre-contact kinematic measures remained uncertain. Reduced visual availability was associated with greater exploration and lower peak transport velocity; evidence for an additional retention cost was inconclusive. These findings highlight the value of assessing demonstrated use and exploratory behaviour alongside grasping when studying adaptation to modified objects. They provide a basis for testing how familiarity, geometry and feedback shape successful object use, without establishing a unique cognitive mechanism or the equivalence of usual and unusual grasping.</p>
+<p>The active inference framework can increase the study&#x27;s explanatory and predictive impact if it is treated as a model to be constrained. The observed pattern is compatible with conflict at the level of action policies and structure-function mappings while pre-contact transport remains primarily sensitive to available sensory evidence. As the unusual objects preserve familiar identity and function while perturbing the implementation of use, and because the three viewing conditions separately probe online feedback and retention, the paradigm offers a promising basis for prospective model testing. Within this framework, the unusual objects generate the conflict by activating a familiar functional prior that is incongruent with the current structure; the conflict is then resolved either by letting the prior prevail (regularization) or by selecting an alternative, structure-consistent action (lexicalization). On this view, the error taxonomy indexes how the conflict was resolved, whereas the increased exploration indexes the additional sampling recruited to resolve it.</p>
+<p>Hierarchical active inference gives this pattern a testable interpretation. The usual-unusual contrast manipulates congruence between a familiar functional-policy prior and current structural evidence, while C1-C2 and C2-C3 distinguish the availability of online sensory updating from the additional demands of retention. Regularisation, lexicalisation and manual exploration are candidate readouts of prior-dominated policy selection, alternative hypothesis selection and epistemic sampling, respectively. They are not direct measures of latent model variables, and the absent Type × Condition interaction does not support the simplest prediction that reducing visual evidence selectively strengthens canonical priors for unusual objects. The contribution of the present study is therefore to provide a paradigm that constrains hierarchical accounts and generates prospective predictions. With repeated trials, item-aware modelling and direct measurement of information sampling, it can distinguish whether object-use failures arise mainly from high-level policy priors, cross-level structure-function mappings or lower-level sensory uncertainty.</p>
+<h3>Open Practices Statement:</h3>
+<p>The datasets are available on reasonable request. The study was not preregistered.</p>
+<p>Funding: AT, AB and PF were funded by the European Union&#x27;s Horizon H2020-EIC-FETPROACT-2019 Programme for Research and Innovation under Grant Agreement 951910 (MAIA).</p>
+<p>Acknowledgements: The authors thank Michele Marzocchi for help with data acquisition.</p>
+<h3>Availability of data and materials:</h3>
+<p>The datasets generated and analysed during the current study are available on reasonable request.</p>
+<h3>Competing interests:</h3>
+<p>The authors declare no competing interests.</p>
+<h3>Declaration of AI-assisted manuscript preparation:</h3>
+<p>During the preparation of this manuscript, the authors used ChatGPT to assist with English-language editing. The authors reviewed and edited the content and take full responsibility for the manuscript.</p>
+<p>Authors&#x27; contributions: Conceptualization: AT and IS; Data curation: IS and RP; Formal analysis: RP, IS and AB; Funding acquisition: AT and PF; Investigation: IS; Methodology: AT and IS; Project administration: AT and IS; Resources: AT; Software: AT; Supervision: AT; Validation: RP and IS; Visualization: RP and IS; Writing -original draft: RP, IS and AT; Writing -review and editing: RP, AT, AB, PF.</p>
+<h3>Abbreviations</h3>
+<p>C1, continuous vision; C2, immediate action after visual occlusion; C3, delayed action after visual occlusion; CI, confidence interval; GEE, generalised estimating equations; MGA, maximum grip aperture; MT, movement time; RT, reaction time.</p>
+<h3>Declarations</h3>
+<p>Ethics approval and consent to participate: The experiment was approved by the bioethical committee of the University of Bologna (No. 0122497, 23 May 2022) and was conducted in accordance with the Declaration of Helsinki. All participants gave informed consent.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Stimuli: pairs of usual objects (left) and their corresponding unusual versions</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Mean (± 95% CI) maximum grip aperture (A), movement time (B), proportion of</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Error categories for unusual objects by condition (mean ± 95% CI proportion of</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. Decomposition of the condition effect into its two component steps. Condition</p>
+<h3>References</h3>
+<p>Alhasan, A., Karin, E., Caruana, N., Cross, E., Kaplan, D., &amp; Richardson, M. J. (2025). Kinematics in context: predicting others&#x27; action intentions entails the perception of affordances. Cognition, 260, 106122.</p>
+<p>Almeida, J., Fintzi, A. R., &amp; Mahon, B. Z. (2013). Tool manipulation knowledge is retrieved by way of the ventral visual object processing pathway. Cortex, 49(9), 2334-2344.</p>
+<p>Bach, P., Nicholson, T., &amp; Hudson, M. (2014). The affordance-matching hypothesis: how objects guide action understanding and prediction. Frontiers in Human Neuroscience, 8, 254.</p>
+<p>Begliomini, C., Caria, A., Grodd, W., &amp; Castiello, U. (2007). Comparing natural and constrained movements: new insights into the visuomotor control of grasping. PLoS ONE, 2(10), e1108.</p>
+<p>Bellebaum, C., Tettamanti, M., Marchetta, E., Della Rosa, P., Rizzo, G., Daum, I., &amp; Cappa, S. F. (2013). Neural representations of unfamiliar objects are modulated by sensorimotor experience. Cortex, 49(4), 1110-1125.</p>
+<p>Binkofski, F., &amp; Buccino, G. (2018). The role of the parietal cortex in sensorimotor transformations and action coding. Handbook of Clinical Neurology, 151, 467-479.</p>
+<p>Binkofski, F., &amp; Buxbaum, L. J. (2013). Two action systems in the human brain. Brain and Language, 127(2), 222-229.</p>
+<p>Borghi, A. M., &amp; Riggio, L. (2015). Stable and variable affordances are both automatic and flexible. Frontiers in Human Neuroscience, 9, 351.</p>
+<p>Breveglieri, R., Galletti, C., Bosco, A., Gamberini, M., &amp; Fattori, P. (2015). Object affordance modulates visual responses in the macaque medial posterior parietal cortex. Journal of Cognitive Neuroscience, 27(7), 1447-1455.</p>
+<p>Breveglieri, R., Vaccari, F. E., Bosco, A., Gamberini, M., Fattori, P., &amp; Galletti, C. (2019). Neurons modulated by action execution and observation in the macaque medial parietal cortex. Current Biology, 29(7), 1218-1225.</p>
+<p>Bub, D. N., Masson, M. E., &amp; Cree, G. S. (2008). Evocation of functional and volumetric gestural knowledge by objects and words. Cognition, 106(1), 27-58.</p>
+<p>Buxbaum, L. J. (2017). Learning, remembering, and predicting how to use tools. Psychological Review, 124(3), 346-360.</p>
+<p>Buxbaum, L. J., &amp; Kalénine, S. (2010). Action knowledge, visuomotor activation, and embodiment in the two action systems. Annals of the New York Academy of Sciences, 1191(1), 201- 218.</p>
+<p>de Boor, C. (1978). A practical guide to splines. Springer-Verlag.</p>
+<p>de Wit, M. M., de Vries, S., van der Kamp, J., &amp; Withagen, R. (2017). Affordances and neuroscience: steps towards a successful marriage. Neuroscience &amp; Biobehavioral Reviews, 80, 622-629.</p>
+<p>Di Caro, V., Cesari, P., Sala, F., &amp; Cattaneo, L. (2025). The neural bases of the reach-grasp movement in humans: quantitative evidence from brain lesions. Proceedings of the National Academy of Sciences, 122(10), e2419801122.</p>
+<p>Fattori, P., De Vitis, M., Filippini, M., Vaccari, F. E., Diomedi, S., Gamberini, M., &amp; Galletti, C. (2024). Visual sensitivity at the service of action control in posterior parietal cortex. Frontiers in Physiology, 15, 1408010.</p>
+<p>Federico, G., &amp; Brandimonte, M. A. (2019). Tool and object affordances: An ecological eye- tracking study. Brain and Cognition, 135, 103582.</p>
+<p>Friston, K. (2010). The free-energy principle: a unified brain theory? Nature Reviews Neuroscience, 11(2), 127-138.</p>
+<p>Galletti, C., &amp; Fattori, P. (2018). The dorsal visual stream revisited: stable circuits or dynamic pathways? Cortex, 98, 203-217.</p>
+<p>Gallivan, J. P., &amp; Goodale, M. A. (2018). The dorsal &quot;action&quot; pathway. Handbook of Clinical Neurology, 151, 449-466.</p>
+<p>Garcea, F. E., &amp; Mahon, B. Z. (2014). Parcellation of left parietal tool representations by functional connectivity. Neuropsychologia, 60, 131-143.</p>
+<p>Garrido-Vásquez, P., Wengemuth, E., &amp; Schubö, A. (2021). Priming of grasp affordance in an ambiguous object: evidence from ERPs, source localization, and motion tracking. Heliyon, 7(4), e06764.</p>
+<p>Gibson, J. J. (1979). The ecological approach to visual perception. Houghton Mifflin.</p>
+<p>Goodale, M. A., Króliczak, G., &amp; Westwood, D. A. (2005). Dual routes to action: contributions of the dorsal and ventral streams to adaptive behavior. Progress in Brain Research, 149, 269- 283.</p>
+<p>Hesse, C., &amp; Franz, V. H. (2010). Grasping remembered objects: exponential decay of the visual memory. Vision Research, 50(24), 2642-2650.</p>
+<p>Hu, Y., Eagleson, R., &amp; Goodale, M. A. (1999). The effects of delay on the kinematics of grasping. Experimental Brain Research, 126(1), 109-116.</p>
+<p>Jax, S. A., &amp; Buxbaum, L. J. (2010). Response interference between functional and structural actions linked to the same familiar object. Cognition, 115(2), 350-355.</p>
+<p>Jüchtern, M., Shaikh, U. J., Caspers, S., &amp; Binkofski, F. (2024). A gradient of hemisphere-specific dorsal to ventral processing routes in parieto-premotor networks. Network Neuroscience, 8(4), 1563-1589.</p>
+<p>Kalénine, S., &amp; Buxbaum, L. J. (2016). Thematic knowledge, artifact concepts, and the left posterior temporal lobe: where action and object semantics converge. Cortex, 82, 164-178.</p>
+<p>Kourtis, D., Vandemaele, P., &amp; Vingerhoets, G. (2018). Concurrent cortical representations of function-and size-related object affordances: an fMRI study. Cognitive, Affective, &amp; Behavioral Neuroscience, 18(6), 1221-1232.</p>
+<p>Maranesi, M., Bonini, L., &amp; Fogassi, L. (2014). Cortical processing of object affordances for self and others&#x27; action. Frontiers in Psychology, 5, 538.</p>
+<p>Osiurak, F., &amp; Badets, A. (2016). Tool use and affordance: manipulation-based versus reasoning- based approaches. Psychological Review, 123(5), 534-568.</p>
+<p>Osiurak, F., Jarry, C., Allain, P., Aubin, G., Etcharry-Bouyx, F., Richard, I., Bernard, I., &amp; Le Gall, D. (2009). Unusual use of objects after unilateral brain damage: The technical reasoning model. Cortex, 45(6), 769-783.</p>
+<p>Osiurak, F., Rossetti, Y., &amp; Badets, A. (2017). What is an affordance? 40 years later. Neuroscience &amp; Biobehavioral Reviews, 77, 403-417.</p>
+<p>Pezzulo, G., &amp; Cisek, P. (2016). Navigating the affordance landscape: feedback control as a process model of behavior and cognition. Trends in Cognitive Sciences, 20(6), 414-424.</p>
+<p>Proietti, R., Pezzulo, G., &amp; Tessari, A. (2023). An active inference model of hierarchical action understanding, learning and imitation. Physics of Life Reviews, 46, 92-118.</p>
+<p>Proietti, R., Pezzulo, G., Binkofski, F., &amp; Tessari, A. (2026). Limb apraxia and active inference in the visuomotor pathways. Psychonomic Bulletin &amp; Review, 33, Article 153.</p>
+<p>Przybylski, L., &amp; Kroliczak, G. (2026). Organization of affordance processing in perception-action systems. Frontiers in Human Neuroscience, 20, 1774789.</p>
+<p>Reynaud, E., Lesourd, M., Navarro, J., &amp; Osiurak, F. (2016). On the neurocognitive origins of human tool use: a critical review of neuroimaging data. Neuroscience &amp; Biobehavioral Reviews, 64, 421-437.</p>
+<p>Rizzolatti, G., &amp; Matelli, M. (2003). Two different streams form the dorsal visual system. Experimental Brain Research, 153(2), 146-157.</p>
+<p>Rosenbaum, D. A., Chapman, K. M., Weigelt, M., Weiss, D. J., &amp; van der Wel, R. (2012). Cognition, action, and object manipulation. Psychological Bulletin, 138(5), 924-946.</p>
+<p>Rossetti, Y., &amp; Pisella, L. (2003). Mediate responses as direct evidence for intention. In Taking action: Cognitive neuroscience perspectives on intentional acts (pp. 67-105). MIT Press.</p>
+<p>Rounis, E., &amp; Binkofski, F. (2023). Limb apraxias: The influence of higher order perceptual and semantic deficits in motor recovery after stroke. Stroke, 54(1), 30-43.</p>
+<p>Rounis, E., van Polanen, V., &amp; Davare, M. (2018). A direct effect of perception on action when grasping a cup. Scientific Reports, 8, 171.</p>
+<p>Sakreida, K., Effnert, I., Thill, S., Menz, M. M., Jirak, D., Eickhoff, C. R., ... &amp; Binkofski, F. (2016). Affordance processing in segregated parieto-frontal dorsal stream sub-pathways. Neuroscience and Biobehavioral Reviews, 69, 89-112.</p>
+<p>Sartori, L., Straulino, E., &amp; Castiello, U. (2011). How objects are grasped: the interplay between affordances and end-goals. PLoS ONE, 6(9), e25203.</p>
+<p>Schettino, L. F., Adamovich, S. V., &amp; Poizner, H. (2003). Effects of object shape and visual feedback on hand configuration during grasping. Experimental Brain Research, 151(2), 158-166. RUNNING TITLE: STRUCTURE-FUNCTION CONFLICT IN OBJECT USE 32</p>
+<p>Sciulli, I., Ottoboni, G., &amp; Tessari, A. (2018). Acting on unusual objects: the comparison between function and structure. Giornale Italiano di Psicologia, 45(2), 419-425.</p>
+<p>Stoll, S., Lorentz, L., Binkofski, F., &amp; Randerath, J. (2025). Apraxia: From neuroanatomical pathways to clinical manifestations. Current Neurology and Neuroscience Reports, 25(1), 1.</p>
+<p>Valyear, K. F., Chapman, C. S., Gallivan, J. P., Mark, R. S., &amp; Culham, J. C. (2011). To use or to move: goal-set modulates priming when grasping real tools. Experimental Brain Research, 212(1), 125-142.</p>
+<p>Vingerhoets, G. (2014). Contribution of the posterior parietal cortex in reaching, grasping, and using objects and tools. Frontiers in Psychology, 5, 151.</p>
+<p>Westwood, D. A., &amp; Goodale, M. A. (2003). Perceptual illusion and the real-time control of action. Spatial Vision, 16(3), 243-254.</p>
+<p>Wurm, M. F., &amp; Caramazza, A. (2022). Two &quot;what&quot; pathways for action and object recognition. Trends in Cognitive Sciences, 26(2), 103-116.</p>
+<p>Wurm, M. F., Caramazza, A., &amp; Lingnau, A. (2017). Action categories in lateral occipitotemporal cortex are organized along sociality and transitivity. The Journal of Neuroscience, 37(3), 562-575.</p>
+<p>Zimmermann, M., &amp; Lingnau, A. (2025). The spatiotemporal neural dynamics of action-related features underlying action recognition. Imaging Neuroscience, 3, imag.a.1019.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
