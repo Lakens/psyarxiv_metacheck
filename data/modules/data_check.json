@@ -905,6 +905,7 @@
   "ktzmq_v2",
   "kv5z9_v1",
   "kvmr6_v1",
+  "kwy5j_v3",
   "kx2ht_v1",
   "kz9ma_v2",
   "kzcv2_v2",
@@ -492511,6 +492512,479 @@
    "light": "yellow",
    "summary": "-  We found no files to analyse.\n-  We could not list every file of 1 repository, so the checks did not see all its files: https://osf.io/ge3sk (could not be listed: private).",
    "findings": []
+  },
+  {
+   "id": "kwy5j_v3",
+   "title": "LLM agents in online communities draw fewer replies and more disagreement when labeled as AI",
+   "url": "https://osf.io/preprints/psyarxiv/kwy5j_v3/",
+   "published": "2026-10-20T17:58:27.900651",
+   "report_page": true,
+   "light": "yellow",
+   "summary": "-  We classified 1764 files: 1715 data, 33 code, 15 documentation, 1 unknown.\n-  We found 158 tabular data files and extracted 1886 columns from 155 of them.\n-  We grouped the files into 1 study group (ex1), plus 5 collection-level files (README/ro-crate metadata).\n-  1 tabular data file could not be read because it was not downloaded. This can happen for private repositories or failed downloads; you can also pass `local_path` to point at a local copy.\n-  2 files read as a table but are not a usable rectangular dataset (memory_community_digests.csv: 70% of columns are free text, not variables; excluded_windows.csv: 100% of columns are free text, not variables). No columns were extracted and they were not sent to the LLM. Share the underlying data as a plain rectangular table (one header row, one column per variable) with a codebook: memory_community_digests.csv, excluded_windows.csv. We ran automated data-quality checks on 1886 columns; 72 columns have at least one potential issue (34 columns whose name suggests personal information; 17 columns of free text that may contain personal detail; 11 columns with no observed values (entirely empty); 10 columns with inconsistent category casing; 2 columns with numeric values stored as text; 2 columns whose values look like personal information; 1 column with leading/trailing whitespace). We detected demographic columns for Age, Gender.",
+   "findings": [
+    {
+     "file": "interlocutor_measures.csv",
+     "column": "content_criticism_evidence",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: Disagree/disagree"
+    },
+    {
+     "file": "interlocutor_measures.csv",
+     "column": "content_criticism_evidence",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 42 characters, 100% distinct, 34% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "recommendation_giving.csv",
+     "column": "gives_recommendation_evidence",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: Dark/dark/DARK; Alice in Borderland/Alice in borderland; bring back the fun/Bring back the fun"
+    },
+    {
+     "file": "request_classification.csv",
+     "column": "text",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: I agree/i agree; Dark/dark/DARK; Agree/agree; So real/so real; Alice in Borderland/Alice in borderland; yes/Yes/YES; Thank youuu/thank youuu; exactly/EXACTLY/Exactly; yes i agree/Yes I agree; absolutely!/Absolutely!; Definitely/definitely; mee to/Mee to; YESSS!!!!…"
+    },
+    {
+     "file": "request_classification.csv",
+     "column": "text",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 110 characters, 99% distinct, 44% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "request_classification.csv",
+     "column": "evidence",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: What are your thoughts?/what are your thoughts?; what do you say?/What do you say?"
+    },
+    {
+     "file": "sessions.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "per_session.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "thread_opens.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "snapshot_user_reputation.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "snapshot_memory_social_cards.csv",
+     "column": "agent_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "snapshot_memory_social_cards.csv",
+     "column": "other_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "snapshot_contents.csv",
+     "column": "tweet",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: I agree/i agree; Dark/dark/DARK; Agree/agree; So real/so real; Alice in Borderland/Alice in borderland; absolutely!/Absolutely!; yes/Yes/YES; Yess/YESS/yess; EXACTLY/exactly/Exactly; Thank youuu/thank youuu; yes i agree/Yes I agree; Definitely/definitely; mee to/M…"
+    },
+    {
+     "file": "snapshot_contents.csv",
+     "column": "tweet",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 107 characters, 99% distinct, 43% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "snapshot_events.csv",
+     "column": "target_author_code",
+     "label": "Empty column",
+     "detail": "Column is empty: all 9612 values are missing."
+    },
+    {
+     "file": "snapshot_events.csv",
+     "column": "text",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: I agree/i agree; Dark/dark/DARK; Agree/agree; So real/so real; Alice in Borderland/Alice in borderland; absolutely!/Absolutely!; yes/Yes/YES; Yess/YESS/yess; EXACTLY/exactly/Exactly; Thank youuu/thank youuu; yes i agree/Yes I agree; Definitely/definitely; mee to/M…"
+    },
+    {
+     "file": "snapshot_events.csv",
+     "column": "text",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 93 characters, 98% distinct, 39% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "snapshot_memory_interaction_events.csv",
+     "column": "actor_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "snapshot_memory_interaction_events.csv",
+     "column": "target_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "snapshot_memory_interaction_events.csv",
+     "column": "target_code",
+     "label": "Empty column",
+     "detail": "Column is empty: all 3910 values are missing."
+    },
+    {
+     "file": "snapshot_memory_interaction_events.csv",
+     "column": "actor_post_id",
+     "label": "Empty column",
+     "detail": "Column is empty: all 3910 values are missing."
+    },
+    {
+     "file": "snapshot_daily_trust_ratings.csv",
+     "column": "rater_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "snapshot_daily_trust_ratings.csv",
+     "column": "target_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "rq1_prior_scale_sensitivity.csv",
+     "column": "p_value_primary",
+     "label": "Empty column",
+     "detail": "Column is empty: all 3 values are missing."
+    },
+    {
+     "file": "rq1_prior_scale_sensitivity.csv",
+     "column": "p_value_doubled_prior",
+     "label": "Empty column",
+     "detail": "Column is empty: all 3 values are missing."
+    },
+    {
+     "file": "browsing_per_session.csv",
+     "column": "y_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "browsing_gate_status.csv",
+     "column": "threshold",
+     "label": "Numeric as text",
+     "detail": "Column is 84% numeric but 1 value cannot be parsed: \"True\""
+    },
+    {
+     "file": "study_ai_settings.csv",
+     "column": "value",
+     "label": "Numeric as text",
+     "detail": "Column is 82% numeric but 5 values cannot be parsed: \"llm\", \"tree_dfs\", \"False\", \"True\", \"HotNW\""
+    },
+    {
+     "file": "rq1_primary_estimand.csv",
+     "column": "p_value",
+     "label": "Empty column",
+     "detail": "Column is empty: all 3 values are missing."
+    },
+    {
+     "file": "image_posts.csv",
+     "column": "title",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 72 characters, 90% distinct, 19% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "reputation_final.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "reactions.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "follows.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "post_sentiment.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "images.csv",
+     "column": "description",
+     "label": "Whitespace",
+     "detail": "1 value with leading/trailing whitespace: \"This is a movie poster for \"\"Swapped,\"\" showing an animated green bird with leafy feathers and a small brown animal near a pond; the bird stands on rocks while the animal looks on, and their reflections in the water appear swapped. Visible text includes \"\"…"
+    },
+    {
+     "file": "images.csv",
+     "column": "remote_article_id",
+     "label": "Empty column",
+     "detail": "Column is empty: all 187 values are missing."
+    },
+    {
+     "file": "posts.csv",
+     "column": "author_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "posts.csv",
+     "column": "text",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: I agree/i agree; Dark/dark/DARK; Agree/agree; So real/so real; Alice in Borderland/Alice in borderland; absolutely!/Absolutely!; yes/Yes/YES; Yess/YESS/yess; EXACTLY/exactly/Exactly; Thank youuu/thank youuu; yes i agree/Yes I agree; Definitely/definitely; mee to/M…"
+    },
+    {
+     "file": "posts.csv",
+     "column": "text",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 107 characters, 99% distinct, 43% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "posts.csv",
+     "column": "post_img",
+     "label": "Empty column",
+     "detail": "Column is empty: all 6944 values are missing."
+    },
+    {
+     "file": "mentions.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "feed_recommendations.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "ai_persona_pairs.csv",
+     "column": "g1_username",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: username). Review before sharing."
+    },
+    {
+     "file": "ai_persona_pairs.csv",
+     "column": "g2_username",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: username). Review before sharing."
+    },
+    {
+     "file": "ai_interest_updates.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "accounts.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "accounts.csv",
+     "column": "left_on",
+     "label": "Empty column",
+     "detail": "Column is empty: all 112 values are missing."
+    },
+    {
+     "file": "participant_login_days.csv",
+     "column": "user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "memory_interaction_events.csv",
+     "column": "actor_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "memory_interaction_events.csv",
+     "column": "target_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "memory_interaction_events.csv",
+     "column": "actor_post_id",
+     "label": "Empty column",
+     "detail": "Column is empty: all 3910 values are missing."
+    },
+    {
+     "file": "memory_interaction_events.csv",
+     "column": "topics_json",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: [\"\"games\"\", \"\"Lord of the Rings\"\", \"\"video games\"\"]/[\"\"games\"\", \"\"lord of the rings\"\", \"\"video games\"\"]; [\"\"music\"\", \"\"pop culture\"\", \"\"Ariana Grande\"\"]/[\"\"music\"\", \"\"pop culture\"\", \"\"ariana grande\"\"]/[\"\"Music\"\", \"\"Pop Culture\"\", \"\"Ariana Grande\"\"]; [\"\"movies\"\", \"…"
+    },
+    {
+     "file": "memory_thread_cards.csv",
+     "column": "agent_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "memory_items.csv",
+     "column": "agent_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "memory_items.csv",
+     "column": "text",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 214 characters, 92% distinct, 37% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "memory_items.csv",
+     "column": "metadata_json",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: {\"\"supporting_event_ids\"\": [549], \"\"reason\"\": \"\"event\"\", \"\"link_kind\"\": \"\"topic\"\", \"\"other_username\"\": \"\"G1-P03\"\", \"\"topical_experience\"\": \"\"tv show analyses\"\"}/{\"\"supporting_event_ids\"\": [549], \"\"reason\"\": \"\"event\"\", \"\"link_kind\"\": \"\"topic\"\", \"\"other_username\"\": …"
+    },
+    {
+     "file": "memory_items.csv",
+     "column": "other_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "memory_items.csv",
+     "column": "topic_tags_json",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: [\"\"games\"\", \"\"Lord of the Rings\"\", \"\"video games\"\"]/[\"\"games\"\", \"\"lord of the rings\"\", \"\"video games\"\"]; [\"\"books\"\", \"\"BookTok\"\", \"\"literature genres\"\"]/[\"\"books\"\", \"\"booktok\"\", \"\"literature genres\"\"]; [\"\"card games\"\", \"\"strategy games\"\", \"\"Warhammer 40k\"\"]/[\"\"car…"
+    },
+    {
+     "file": "memory_social_cards.csv",
+     "column": "agent_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "memory_social_cards.csv",
+     "column": "other_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "memory_social_cards.csv",
+     "column": "summary_text",
+     "label": "Empty column",
+     "detail": "Column is empty: all 1686 values are missing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "agent_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "agent_username",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: username). Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "conflict",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 131 characters, 99% distinct, 11% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "human_interactions",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 118 characters, 90% distinct, 93% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "humor",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 104 characters, 85% distinct, 24% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "overall_sense",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 126 characters, 97% distinct, 10% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "strongest_memories",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 130 characters, 100% distinct, 32% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "trusted_or_connected_users",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 102 characters, 82% distinct, 99% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "appropriateness_audience_publicness",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 119 characters, 82% distinct, 64% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "appropriateness_fitting_action",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 137 characters, 100% distinct, 71% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "appropriateness_identity_role",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 105 characters, 99% distinct, 66% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "nightly_interviews.csv",
+     "column": "appropriateness_learning",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 126 characters, 100% distinct, 91% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "daily_trust_ratings.csv",
+     "column": "rater_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "daily_trust_ratings.csv",
+     "column": "target_user_id",
+     "label": "Personal info (column name)",
+     "detail": "Column name suggests personal information (matched: userid). Review before sharing."
+    },
+    {
+     "file": "timeline_events.csv",
+     "column": "evidence",
+     "label": "Personal info (values)",
+     "detail": "Values look like personal information: ip_address (2 values, 1%). Review before sharing."
+    },
+    {
+     "file": "timeline_events.csv",
+     "column": "outcome",
+     "label": "Personal info (values)",
+     "detail": "Values look like personal information: ip_address (6 values, 2%). Review before sharing."
+    }
+   ]
   }
  ]
 }
