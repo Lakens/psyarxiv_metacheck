@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Brain activity associated with working memory
+load and spatial attention during visual change detection</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Brain activity associated with working memory load and spatial attention
+during visual change detection
+</p>
+<p class="meta">
+2026-11-25 · Metacheck 0.4.4.40
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<a class="count fix" href="#fix"><b>2</b><span>to fix</span></a><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><a class="count fine" href="#fine"><b>2</b><span>fine</span></a><a class="count na" href="#na"><b>11</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="fix">To fix <span class="n">(2)</span></h2>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Exact
+P-Values</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 4 imprecise <em>p</em> values out of 13 detected <em>p</em>
+values.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>Reporting <em>p</em> values imprecisely (e.g., <em>p</em> &lt; .05)
+reduces transparency, reproducibility, and re-use (e.g., in <em>p</em>
+value meta-analyses). Best practice is to report exact p-values with
+three decimal places (e.g., <em>p</em> = .032) unless <em>p</em> values
+are smaller than 0.001, in which case you can use <em>p</em> &lt;
+.001.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (e.g., “decreased at the <em>p</em>
+&lt; .05 significance threshold”).</p>
+<div style="max-height:8em;overflow:auto;">
+<table class="dt-static">
+<colgroup>
+<col style="width:10%" />
+<col style="width:90%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+P-Value
+</th>
+<th style="text-align:left;">
+Text
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+p &lt; .002
+</td>
+<td style="text-align:left;">
+Post hoc tests showed statistically significant differences for all
+pair-wise comparisons of memory load (for all Tukey’s HSD tests p &lt;
+.002) and orientation changes (for all Tukey’s HSDtests p &lt; .001).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .05
+</td>
+<td style="text-align:left;">
+Voxel threshold p &lt; .001, cluster correction p &lt; .05.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p&lt;.05
+</td>
+<td style="text-align:left;">
+Voxel threshold p &lt; .001, cluster correction (p&lt;.05).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+p &lt; .05
+</td>
+<td style="text-align:left;">
+Voxel threshold p &lt; .001, cluster correction p &lt; .05.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>The APA manual states: Report exact <em>p</em> values (e.g.,
+<em>p</em> = .031) to two or three decimal places. However, report
+<em>p</em> values less than .001 as <em>p</em> &lt; .001. However, 2
+decimals is too imprecise for many use-cases (e.g., a <em>p</em> value
+meta-analysis), so report <em>p</em> values with three digits.</p>
+<p>American Psychological Association (2020). <em>Publication manual of
+the American Psychological Association</em>, 7 edition. American
+Psychological Association.</p>
+</div>
+</div>
+</details>
+</div>
+<div class="check fix">
+<div class="check-head">
+<p><span class="tag fix">To fix</span> <span class="check-title">Effect
+Sizes in t-tests and F-tests</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>We found 3 t-tests and/or F-tests where effect sizes are not
+reported. Check these tests in the table below, and consider adding
+effect sizes.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We recommend checking the sentences below, and add any missing effect
+sizes.</p>
+<div style="max-height:8em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+As seen in Figure 2, the participants’ d’ values decreased significantly
+as Memory Load increased (F(2,56) = 113.1, p &lt; .001, = .78) or the
+Precision Demand (i.e., the size of orientation change) decreased
+(F(2,56) = 59.1, p &lt; .001, = .54).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+As seen in Figure 2, the participants’ d’ values decreased significantly
+as Memory Load increased (F(2,56) = 113.1, p &lt; .001, = .78) or the
+Precision Demand (i.e., the size of orientation change) decreased
+(F(2,56) = 59.1, p &lt; .001, = .54).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The interaction of Memory Load and Precision Demand was also
+statistically significant (F(4,112) = 7.4, p &lt; .001, = .21).
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>For metascientific articles demonstrating that effect sizes are often
+not reported:</p>
+<ul>
+<li>Peng, C.-Y. J., Chen, L.-T., Chiang, H.-M., &amp; Chiang, Y.-C.
+(2013). The Impact of APA and AERA Guidelines on Effect Size Reporting.
+Educational Psychology Review, 25(2), 157–209. <a href="doi:%5B10.1007/s10648-013-9218-2" class="uri">doi:[10.1007/s10648-013-9218-2</a>](<a href="https://doi.org/10.1007/s10648-013-9218-2" class="uri">https://doi.org/10.1007/s10648-013-9218-2</a>).</li>
+</ul>
+<p>For educational material on reporting effect sizes:</p>
+<ul>
+<li><a href="https://matthewbjane.quarto.pub/guide-to-effect-sizes-and-confidence-intervals/">Guide
+to Effect Sizes and Confidence Intervals</a></li>
+</ul>
+</div>
+<div class="callout-tip" title="All detected and assessed stats" collapse="true">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sentence
+</th>
+<th style="text-align:left;">
+Effect Size
+</th>
+<th style="text-align:left;">
+Reported Test
+</th>
+<th style="text-align:left;">
+Test Type
+</th>
+<th style="text-align:left;">
+d Coherence
+</th>
+<th style="text-align:left;">
+d Assumption
+</th>
+<th style="text-align:left;">
+d Coherence Note
+</th>
+<th style="text-align:left;">
+eta Coherence
+</th>
+<th style="text-align:left;">
+eta Assumption
+</th>
+<th style="text-align:left;">
+eta Coherence Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+As seen in Figure 2, the participants’ d’ values decreased significantly
+as Memory Load increased (F(2,56) = 113.1, p &lt; .001, = .78) or the
+Precision Demand (i.e., the size of orientation change) decreased
+(F(2,56) = 59.1, p &lt; .001, = .54).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(2,56) = 113.1
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+As seen in Figure 2, the participants’ d’ values decreased significantly
+as Memory Load increased (F(2,56) = 113.1, p &lt; .001, = .78) or the
+Precision Demand (i.e., the size of orientation change) decreased
+(F(2,56) = 59.1, p &lt; .001, = .54).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(2,56) = 59.1
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The interaction of Memory Load and Precision Demand was also
+statistically significant (F(4,112) = 7.4, p &lt; .001, = .21).
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+F(4,112) = 7.4
+</td>
+<td style="text-align:left;">
+F-test
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+indeterminate
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+No parseable eta-squared effect size found.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 2 references with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(2)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to report data about people or animals that
+need an ethics statement contained one.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>We detected no errors in t-tests or F-tests.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(11)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper appears to report data that the authors collected from
+people or animals, and it has an ethics statement.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>They were recruited from the participant pool of Sichuan Normal
+University.</p>
+</blockquote>
+<blockquote>
+<p>The age range was from 18 to 25 years (avg.</p>
+</blockquote>
+<blockquote>
+<p>The overall orientation of this set was randomly selected, and its
+four orientations were randomly assigned to the four locations.</p>
+</blockquote>
+<p>Ethics statement:</p>
+<blockquote>
+<p>The ethical committee of Sichuan Normal University (Chengdu, China)
+reviewed and approved the experiments (committee decision
+SCNU-221114).</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 76 references with DOIs. You cited 2 references with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+Commenters
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Brady, T. F., &amp; Tenenbaum, J. B. (2013). A probabilistic model of
+visual working memory: Incorporating higher order regularities into
+working memory capacity estimates. Psychological Review, 120(1), 85-109.
+<a href="https://doi.org/10.1037/a0030779" class="uri">https://doi.org/10.1037/a0030779</a>
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Lydia M. Maniatis
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/D3AC83A03374BF84062CF587DFEC24" target="_blank">link</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sreenivasan, K. K., &amp; D’Esposito, M. (2019). The what, where and how
+of delay activity. Nature Reviews Neuroscience, 20(8), 466-481. <a href="https://doi.org/10.1038/s41583-019-0176-7" class="uri">https://doi.org/10.1038/s41583-019-0176-7</a>
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Lydia M. Maniatis
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/437B415282B034ABA9AC3502ADB3F6" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 76 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 76 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Visual working memory (VWM) and attention interact bi-directionally: external cues modulate the selection of stimuli in VWM, while active representations in VWM can guide attention. However, the neural mechanisms underlying VWM, attention, and their interconnection remain poorly understood. In the present study, we investigated functional mechanics of VWM and the role of attention in VWM using a visual change detection task. We recorded brain responses with functional magnetic resonance imaging (fMRI) to examine the effects of spatial attention (left vs. right pre-cue), change (present vs. absent), memory load (1, 2 or 4 line orientations while controlling for the number of stimuli), and memory precision demand (15° , 30° or 60° orientation changes). As expected, behavioral performance systematically decreased as the memory load increased or degree of orientation change decreased. Analysis of variance of fMRI activations revealed significant main effects of attention, load, and change across 164 brain areas (determined by Human Connectome Project parcellation), whereas all interaction effects were non-significant. Notably, ca. 75% of these areas exhibited only a single main effect, while two or three main effects converged in 21 parietal, 15 occipital, and 2 frontal areas. Absence of significant interaction effects, combined with multi-feature processing confined to a few fronto-parietal and occipital areas, highlights a largely segregated functional architecture for attention and VWM.</p>
+<h3>1. Introduction</h3>
+<p>Visual working memory (VWM) allows visual information to be temporarily maintained and manipulated, supporting core cognitive functions such as learning, reasoning and goal-directed behavior (Brady et al., 2011; Luck &amp; Vogel, 2013). In neuroimaging studies, a widespread network of brain regions has been associated with VWM processes (Li et al., 2022; Y. Xu &amp; Chun, 2006). In behavioral studies, much research has focused on VWM capacity or number of items that can be stored in working memory at one time (Cowan, 2001; Miller, 1994; Xu &amp; Chun, 2006). Research has also examined how precisely individual items are represented in VWM (Bays &amp; Husain, 2008; Ma et al., 2014; Zhang &amp; Luck, 2008; Zhao et al., 2020) and how the limited VWM capacity is used in the best possible way by considering, for example, environmental regularities (Bays et al., 2024; Brady &amp; Tenenbaum, 2013). Selective attention is used to choose relevant sensory information from the environment for processing and then storing in VWM (Chun et al.https://www.zotero.org/google-docs/?FRlPnn 2011) https://www.zotero.org/google-docs/?QmZap9 prioritizing information within VWM (Griffin &amp; Nobre, 2003) , and transforming VWM representations to reduce interference (Hu et al., 2024). Thus, in addition to VWM load or capacity, it is important to take into account the precision demand of the memory task as well as the effects of attention when studying VWM.</p>
+<p>Previous studies suggest that VWM and visual attention have qualitative similaritieshttps://www.zotero.org/google-docs/?uGbDiF as both are limited in capacity (Marois &amp; Ivanoff, 2005) , but it is not yet clear to what extent these two are based on the same neural mechanisms. A key question is how attentional selection and VWM demands are reflected in regional brain activity (Bays et al., 2024; Gazzaley &amp; Nobre, 2012). There is evidence that attention and VWM are connected and share partially overlapping neural networks (Zhou et al., 2022). The findings suggest that visual attention and VWM are closely interrelated: attention contributes to the successful maintenance of information in VWM (Awh et al.https://www.zotero.org/google-docs/?JPVOX2 2006; Kiyonaga &amp; Egner, 2013) , and partially shared neural mechanisms may support the attentional selection of perceived and remembered information (Zhou et al., 2022). Furthermore, VWM representations can also serve as templates for attentional selection (Olivers et al., 2011).</p>
+<p>The posterior parietal cortex (PPC) has been associated with both VWM and selective visual attention (Berryhill et al., 2011; Hu et al., 2024; Zhou et al., 2022). One account emphasizes the contribution of PPC to capacity-limited storage (Todd &amp; Marois, 2004). Other accounts emphasize its role in selecting information for encoding or retrieval and in refreshing or transforming memory representations (Berryhill et al., 2011; Hu et al., 2024). The lateral prefrontal cortex (PFC) is closely linked to the PPC, which has led to an idea that PFC also has a role in various top-down signals such as in the allocation of cognitive resources or in directing attention (Miller &amp; Cohen, 2001; Riley &amp; Constantinidis, 2016). However, how activity across these regions varies with different VWM demands remains incompletely understood (Li et al., 2022).</p>
+<p>VWM has been characterized by neural activity that persists during the retention interval of different delay tasks, such as change detection tasks (Sreenivasan &amp; D&#x27;Esposito, 2019). Metaanalyses of functional magnetic resonance imaging (fMRI) studies have revealed widespread activation in the frontoparietal network underlying VWM (https://www.zotero.org/google-docs/?sKciIF  Daniel et al., 2016) including the lateral PFC, motor association area, anterior insula and PPC (Li et al., 2022). In addition, VWM has been associated with activation in the inferior temporal lobe, visual cortices, posterior cerebellum and thalamic nuclei (Wager &amp; Smith, 2003). The limited capacity of VWM is also reflected in neural activation during VWM tasks. The capacity limit has been associated with activation in the parietal lobe, particularly in the intraparietal and intraoccipital sulcus (IPS and IOS, respectively), and activity in posterior parietal regions increases with VWM load and can approach an asymptote near behavioral capacity limits (Todd &amp; Marois, 2004 , 2005; Xu &amp; Chun, 2006). Areas in the medial temporal lobe (MTL) have also been associated with the VWM capacity, and the connectivity of MTL and PFC has been found to be strongest at the upper limits of capacity (Rissman et al., 2008). Studies analyzing information content (e.g., decoding) instead of brain activity as such, have revealed widespread networks for VWM spreading from early visual areas to parietal and frontal regions (Christophel et al., 2017; Harrison &amp; Tong, 2009).</p>
+<p>Activity during a change-detection task can reflect not only memory encoding and maintenance but also comparison, decision, and response processes. Previous research has distinguished neural responses associated with physical changes from those associated with their subjective detection (Pessoa &amp; Ungerleider, 2004). Attentional cueing can also alter regional brain activity and functional connectivity associated with comparing remembered and perceptual information (Kuo &amp; Astle, 2014). Therefore, examining change occurrence alongside memory load helps characterize additional sources of task-related activity.</p>
+<p>The number of presented objects and the amount of distinct feature information need not vary together. Previous fMRI research has distinguished sensitivity to object individuation from sensitivity to object identity information, including comparisons between arrays containing the same number of objects but different numbers of unique identities (Xu, 2009). This distinction motivates examining how regional activity varies with orientation diversity when object count is held constant.</p>
+<p>Our previous electroencephalography (EEG) work used lateralized orientation change-detection paradigm, with one, two or four distinct to-be-memorized orientations (memory load 1, 2 or 4, respectively) within each hemifield at a fixed object count (Guo et al., 2025; Xu et al., 2026). In one of these studies (Guo et al.https://www.zotero.org/google-docs/?zZJEe3 2025) , we examined contralateral delay activity (CDA), a sustained lateralized event-related potential (ERP) component whose amplitude magnitude typically increases with the number of items maintained in VWM up to capacity limits (Vogel &amp; Machizawa, 2004). CDA amplitude magnitude was smaller for memory load 1 than for loads 2 or 4 during late maintenance. In our subsequent study (Xu et al.https://www.zotero.org/google-docs/?xbtZvZ 2026) , multivariate reanalysis of the same EEG dataset revealed differentiation between load 1 and the other conditions during encoding, whereas decoding based on contralateral-minus-ipsilateral EEG signal primarily revealed differences during later maintenance. These findings indicate that sensitivity to orientation diversity depends on the neural measure and processing stage. In the present study, we assumed that applying fMRI in this paradigm would provide complementary evidence about the regional distribution of load-related effects and their anatomical relationship with activity associated with spatial attention direction.</p>
+<p>Building on our previous EEG studies (Guo et al.https://www.zotero.org/google-docs/?wrmqqz 2025; Xu et al., 2026) , the present study on VWM used fMRI to examine regional brain activations associated with memory load, spatial attention direction, precision demand, and occurrence of stimulus orientation change within the same task. The central question was how regional brain activity varies with orientation diversity at a fixed object count, and does sensitivity to orientation diversity overlap regionally with activity depending on the direction of visual spatial attention. Memory load was manipulated by varying the number of distinct orientations within each hemifield while keeping the number and locations of the presented bars constant. Spatial attention was guided to the left or right hemifield by a pre-cue. Precision demand was operationalized by the magnitude of orientation change from memory array to probe array, with smaller changes requiring more precise VWM representations to enable finer discrimination between the to-be-memorized orientation and the probe orientation. In addition, comparing change and no-change trials (with an equal probability of occurrence in the forcedchoice change-detection task) allowed us to examine brain activity associated with stimulus change. We examined the regional distribution of these effects and the anatomical overlap between them and effects of direction of visuo-spatial attention. Unlike many previous designs in which the number of presented objects increases in parallel with memory load, the present paradigm varied orientation diversity at a fixed object count, although the orientation structure of the display necessarily differed across load conditions. Because the trials were short, memory encoding, retention, and retrieval were modeled jointly using a single boxcar function for each experimental condition. The resulting estimates therefore characterize activity across the whole memory task rather than isolating stage-specific effects -in contrast to the approach typically taken in studies of VWM (Curtis &amp; D&#x27;Esposito, 2003; Postle et al., 2000).</p>
+<h3>2. Methods</h3>
+<p>Participants. There were 29 participants in the sample (20 females). They were recruited from the participant pool of Sichuan Normal University. The age range was from 18 to 25 years (avg. 19.90 yrs., SD 2.04 yrs.). The participants had normal or corrected-to-normal vision and no history of neurological problems. They signed a written informed consent form and received financial compensation (50 Chinese Yuan/hour) for their participation. One participant was excluded from the fMRI data analyses because spatial normalization failed, leaving 28 participants in the present sample. The ethical committee of Sichuan Normal University (Chengdu, China) reviewed and approved the experiments (committee decision SCNU-221114).</p>
+<p>Stimuli. Stimuli were presented against a black background with a white fixation cross at the center of the display (Figure 1). Memory and probe stimuli were white bars (RGB: 225, 225, 225), each subtending 1.4° × 0.2° of visual angle. Each memory array contained eight bars at fixed locations on an imaginary circle with a radius of 5° around fixation, with four equally spaced locations in each hemifield and a mirror-symmetric arrangement across hemifields. Bar orientations were selected from 180 possible values.</p>
+<p>Memory load was operationalized as the number of distinct orientations within the cued hemifield. The labels 1, 2, and 4 denote the experimental conditions and do not assume that participants maintained exactly that number of memory representations. The same load condition applied to both hemifields, but their orientations were generated independently. For memory load 1, one orientation was randomly selected for each hemifield and assigned to all four bars. For memory load 2, two orientations differing by at least 45° were randomly selected for each hemifield, and each orientation was assigned to two bars. For memory load 4, each hemifield contained four orientations separated by 45° . The overall orientation of this set was randomly selected, and its four orientations were randomly assigned to the four locations. No minimum angular separation was imposed between orientations in different hemifields.</p>
+<p>Each probe array contained one bar in each hemifield at a location previously occupied by a memory item. The probe in the cued hemifield either retained the orientation of the corresponding memory item or differed from it by 15° , 30° or 60°.</p>
+<h3>Procedure.</h3>
+<p>The experiment was programmed using E-Prime software (Psychology Software Tools, Inc., Pittsburgh, Pennsylvania, USA). Participants lay in the MRI scanner and viewed the display through a mirror. Each trial began with a white arrow cue (1.4° × 0.3° ) above the fixation cross (shown in the center of the screen throughout the trial) pointing toward the left or right hemifield for 200 ms, followed by a 100-ms fixation interval. The memory array was then presented for 500 ms, followed by a 1000-ms retention interval. A probe array followed, with a response window of 2000 ms. Feedback indicating a correct response, an incorrect response, or no response was presented for 500 ms, followed by a 5000-ms intertrial interval.</p>
+<p>The participants judged whether the probe in the cued hemifield had the same orientation as the preceding memory item presented at that location. They held one response box in each hand, with one active button on each box. A &quot;no change&quot; judgment was indicated by pressing the left-hand button with the left thumb, and a &quot;change&quot; judgment by pressing the right-hand button with the right thumb.</p>
+<p>On half of the experimental trials, the orientation of the cued probe was unchanged from the orientation of the preceding memory item at the same location. On the remaining trials, its orientation changed by 15° , 30° or 60° , with each change magnitude occurring equiprobably among change trials. The experiment comprised 216 experimental trials presented in randomized order across six runs of 36 trials. Each run began with task instructions and five practice trials.</p>
+<p>Behavioral analysis. Each participant&#x27;s performance accuracy was estimated by calculating a discrimination index (d&#x27; value). To calculate the d&#x27; values, the participant&#x27;s performance in all trials was divided into hits and false alarms. Then d&#x27; values were calculated by subtracting z values of false alarms from the z values of hit rates (d&#x27; = z(hit) -z(fa)).</p>
+<p>The behavioral data were analyzed using two-way repeated-measures analyses of variance (ANOVAs), with memory load (1, 2 or 4 different orientations) and orientation change (15° , 30° or 60° ) as explanatory variables. The data included two missing values, which were replaced with the participant&#x27;s mean values to enable analysis. Based on the Q-Q plot and the histogram of residuals, the residuals followed a normal distribution. The sphericity assumption was not violated. Post hoc tests were performed to examine the differences between the groups in more detail. Paired comparisons were performed using Tukey&#x27;s test for contrast comparisons of different memory loads and orientation changes, as well as for interactions between those variables. The analyses utilized the ez package (Lawrence, 2009) of the R software (https://www.zotero.org/google-docs/?GbcTAG. The effect sizes of the results were obtained using the sjstats package (Lüdecke, 2016). The afex package (Singmann et al., 2012) was used to test the normality of the residuals. fMRI recording. fMRI data were measured using Siemens 3T Prisma scanner (Siemens Healthineers AG, Erlangen, Germany) at Sichuan Normal University. A 64-channel head coil was used. Blood-oxygen level dependent (BOLD) signals were acquired with a multiband echo-planar imaging (EPI) sequence (slice acceleration factor = 2). The imaging area consisted of 62 slices with 2.0×2.0×2.0 mm voxels (slice thickness 2.0 mm). TR was 2.0 s, and TE was 30 ms. The fMRI sessions started with an anatomical T1 scan, followed by six experimental runs (225 volumes in each, with 5 dummy scans discarded prior to analysis). fMRI analysis. Pre-processing was performed automatically according to the standard fMRIPrep 22.1.1 protocol (Esteban et al., 2019). See Appendix 1 for details. One participant was rejected due to failed normalization of images to MNI space in pre-processing. After pre-processing a designmatrix was created with 18 predictors for the experimental conditions (boxcar functions, modeling simultaneously memory encoding, retention, and retrieval), one predictor for the practice trial, one predictor for the instructions, and one predictor for the responses. In addition, there were 27 nuisance regressors obtained from fMRIPrep to remove artefacts from the data such as noise due to motion. A general linear model was fitted to each subject&#x27;s fMRI data based on the design-matrix detailed above. All analyses after pre-processing were conducted with MatLab (https://www.zotero.org/google-docs/?GlMzCx) and spm12 (Friston et al., 2007) and MRM (McFarquhar et al., 2016) toolboxes. Both correct and incorrect trials were included in the fMRI analyses and were assigned to conditions according to the experimental manipulations rather than response accuracy.</p>
+<p>A 4-way repeated measures analysis of variance (ANOVA) was conducted to test the main effects of factors Attention (left vs. right), Change (yes vs. no), Memory Load (1 vs. 2 vs. 4 orientations), and Precision Demand (15° vs. 30° vs. 60° orientation change), as well as all their interactions. The ANOVA was performed using the MRM toolbox (McFarquhar et al., 2016). Voxel-wise threshold was set to p &lt; .001 and statistically significant clusters were tested with a permutation test (1000 permutations for each test). Pairwise contrast comparisons were used to further investigate the significant clusters found in ANOVA, that is, the direction of the effect. For Memory Load three pairwise comparisons were made with t tests (1 vs. 2 orientations, 1 vs. 4 orientations, and 2 vs. 4 orientations). A cluster-level analysis was performed, and in this analysis the voxel-wise threshold was p &lt; .001 and minimum size for clusters was set to k = 50.</p>
+<p>For ANOVA and t tests, activation locations were interpreted using multi-modal parcellation (MMP) of the human cerebral cortex of Glasser and colleagues (2016) which is based on the Human Connectome Project (HCP). MMP divides the human cerebral cortex into 180 areas per hemisphere based on differences in the structure, functioning, connectivity, and topography of the cortex (Glasser et al., 2016).</p>
+<h3>3. Results</h3>
+<p> &gt;Results</p>
+<h3>Behavioral results</h3>
+<p>The participants&#x27; behavioral performance was tested with repeated-measures ANOVAs. First we tested whether direction of attention (left vs. right) had a significant effect on the percentage of correct responses, and as expected, it did not. Next, we combined data from the left and right precue conditions and calculated the discrimination index d&#x27;. As seen in Figure 2, the participants&#x27; d&#x27; values decreased significantly as Memory Load increased (F(2,56) = 113.1, p &lt; .001, = .78) or the Precision Demand (i.e., the size of orientation change) decreased (F(2,56) = 59.1, p &lt; .001, = .54). Thus, the participants&#x27; performance systematically declined as the difficulty of the working memory task was increased by either increasing the memory load or the demand for memory precision. Post hoc tests showed statistically significant differences for all pair-wise comparisons of memory load (for all Tukey&#x27;s HSD tests p &lt; .002) and orientation changes (for all Tukey&#x27;s HSDtests p &lt; .001).</p>
+<p>The interaction of Memory Load and Precision Demand was also statistically significant (F(4,112) = 7.4, p &lt; .001, = .21). As seen in Figure 2, while for all set sizes, the d&#x27; values were the largest for the largest change (i.e., the lowest Precision Demand) and the smallest for the smallest change</p>
+<h3>fMRI results</h3>
+<p>As seen on Figure 3, the 4-way repeated-measures ANOVA revealed wide-spread activations related to main effects of the factors Attention (left vs. right), Change (yes vs. no) and Memory Load (1, 2 or 4). For Precision Demand (15° , 30° or 60° change), only a small cluster in the motor cortex of the right hemisphere was significant. No significant activation clusters were found for any interactions of the four factors.</p>
+<h3>Attention</h3>
+<p>The statistically significant main effect of direction of attention covered a large area of the visual cortex and extended into the parietal regions (Figure 3, top row). Increased activation was observed in the hemisphere opposite to the cued direction, as expected (https://www.zotero.org/google-docs/?oOMBo0  Heinze et al., 1994).</p>
+<p>Increased activation associated with spatial attention were found in the following visual areas (HCP labels listed in parentheses; both hemispheres if not otherwise specified): the early visual cortices (V1-V4), dorsal stream (V3A, V3B, V6A, V7, and right V6 and IPS1), ventral stream (V8, VVC, FFC, VMV1, VMV2, VMV3, and PIT), dorsal stream (right DVT), and MT+ complex (LO1, LO2, LO3, MST, MT, V3CD, V4t, and right FST and PH). In parietal regions, increased activity was restricted to a few areas in Inferior Parietal Lobule (IPL; IP0 and PGp) and Superior Parietal Lobule (SPL; 7PL, 7Am, 7Pm, MIP, VIP and left PCV).</p>
+<h3>Change</h3>
+<p>The presence of change as an independent factor in ANOVA, revealed a few significant clusters (Fig. 3., second row; Fig. 4). In visual-cortex regions, lower activity in change trials compared to no-change trials was found. Interestingly, several regions regarded as belonging to the so-called default mode network (https://www.zotero.org/google-docs/?11op0I  Mak et al., 2017) showed higher activity in change than no-change trials: A cluster on the left parietal cortex (PFm, PGi, PGs), a cluster in the posterior cingulate cortex (7m, d23ab, POS2, and left 31pd, 31pv, PCV, RSC), and a cluster in the left dorsolateral prefrontal cortex (DLPF; 8Av, 8BL, 8C, 9p).</p>
+<h3>Memory load</h3>
+<p>ANOVA revealed several clusters in which the main effect of Memory Load was statistically significant (Figure 3, third row). In most of these regions, activity increased as VWM load increased, but for some regions the opposite was found (Figure 5). The latter regions were mainly those regarded as areas of the default mode network (https://www.zotero.org/google-docs/?3vPkH4  Mak et al.https://www.zotero.org/google-docs/?3vPkH4 2017) , such as posterior cingulate cortex. Based on pair-wise comparisons, the effects were mainly driven by the presence of memory load (1-vs-2 and 1-vs-4), rather than the increase of memory load (2-vs-4; Figure 5).</p>
+<h3>Memory precision demand</h3>
+<p>ANOVA revealed a small cluster in the right hemisphere in the motor cortex (areas 1, 3a, 3b, 4, 6d) in which pairwise comparison showed that activity was stronger for easier conditions (30° or 60° change) compared with the most difficult condition (15° change). This activity is likely associated with differences in motor responses between conditions with different precision demands.</p>
+<h3>Common and separate regions for spatial attention, change and memory load</h3>
+<p>Figure 6 shows a summary of the present results, and maps the cortical regions to different cognitive functions based on ANOVA results. In ca. 75% of the cortical regions showing significant effects of the factors Attention, Change, Memory Load or Precision Demand, only one main effect was found, suggesting separate regions for visual spatial attention and VWM. However, regions in the parietal cortex contributed to almost all studied factors or their combinations suggesting a more domain general processing.</p>
+<p>Significant activity was found in 22 HCP regions in the frontal cortex. The activity was related to Memory Load (17 areas) or Change (3 areas), or both (2 areas). The two common regions are 8Av and 8C in the middle frontal gyrus previously associated with attention and cognitive control (e.g., Germann &amp; Petrides, 2020). In the parietal cortex, significant activity was found in 59 regions, which were related to all studied factors except Precision Demand: Change only (5 areas), Memory Load only (27 areas), Attention only (6 areas), both Memory Load and Change (7 areas), both Memory Load and Attention (8 areas), both Attention and Change (3 areas), and Memory Load, Attention and Change (left IP0, left PGp, right POS2).</p>
+<p>In the occipital cortex, significant activity was found in 49 regions. These activations were related to Attention (32 areas), Memory Load (1 area), both Attention and Change (11 areas), and both Attention and Memory Load (3 areas), and to Attention, Change and Memory Load (left V2/V3). Significant activations in the temporal cortex (12 areas in total) and in the somatosensory and motor cortex (22 areas in total) were related to Memory Load, Change, and Precision Demand.  (Glasser et al., 2016). The plot classifies cortical regions based on statistically significant main effects revealed by ANOVA to provide an overall summary to which functions different brain regions and lobes contributed to in the present results.</p>
+<h3>Discussion</h3>
+<p>The aim of the present study was to investigate the functional mechanics of VWM and the role of attention in VWM using a visual change detection task. To this end, we examined regional brain activity with fMRI associated, within the same task, with VWM load, VWM precision demand, direction of attention, and occurrence of orientation change from memory to probe array. The results showed a clear behavioral effect according to which the participants&#x27; performance systematically declined as the memory load increased and as the orientation change decreased, that is, precision demand increased. The repeated-measures ANOVA revealed wide-spread brain activations related to main effects of Attention, Memory Load, and Change across 164 brain areas (HCP parcellation). However, no areas showing interactions of these factors were found. Local brain activations associated with VWM and spatial attention were observed mainly in the parietal, occipital and frontal cortices. Ca. 75% of the regions showing significant effects of the presently studied factors on brain activity exhibited only a single main effect, while two or three main effects converged in 21 parietal, 15 occipital, and 2 frontal areas. Some brain regions were jointly recruited by two or three factors. This might indicate that the effects are additive so that partly the same regions are recruited for both attention and memory, but the functions within the areas are still independent. The absence of interaction effects, combined with multi-feature processing confined to a few localized fronto-parietal and occipital regions, highlights a largely segregated functional architecture for visual attention and VWM. In accordance with previous studies, the results highlight the role of the parietal cortex and the distributed nature of VWM.</p>
+<p>The present findings extend our previous EEG work by providing complementary evidence about the regional distribution of activity associated with varying orientation diversity at a fixed object count. One of our previous EEG Studies (Guo et al., 2025) found that behavioral performance improved progressively as memory load decreased, whereas CDA amplitude was reduced only in the memory-load 1 condition relative to the memory-load 2 and 4 conditions, and only during late maintenance. Multivariate reanalysis of the same EEG dataset in our subsequent study (Xu et al., 2026) revealed differentiation between the memory-load 1 condition and the other two conditions already during encoding, with activity patterns in the memory-load 2 condition more closely resembling those in the memory-load 4 condition. The present fMRI results show a qualitatively consistent pattern: behavioral sensitivity differed across all three load conditions, whereas regional activity differences were primarily expressed in comparisons of memory load 1 with loads 2 and 4, with less extensive differentiation between loads 2 and 4. Importantly, the present fMRI findings located load-related effects across parietal, frontal, and insular regions and identified cortical parcels sensitive to both memory load and attention direction. The present findings, therefore, complement the temporal information provided by our previous EEG results with an anatomical account of regional sensitivity within the same core paradigm. Across these studies, the contrast between graded behavioral improvement and the predominant neural distinction involving memory load 1 cautions against treating the number of distinct orientations as a direct index of the number of maintained representations or against assuming that neural activity must scale proportionally with that number. Instead, our present fMRI and previous EEG findings are compatible with differences in how orientation information is organized and maintained (e.g., memory load 1 may allow a common orientation to support judgments across locations, whereas loads 2 and 4 place greater demands on retaining which orientation appeared at the probed location), although perceptual organization, orientation-location binding demands, and task difficulty remain alternative or overlapping explanations. This convergence concerns the pattern of condition differences rather than equivalence between CDA amplitude, EEG decoding, and mean BOLD activity; weaker differentiation between loads 2 and 4 also does not establish neural equivalence. Moreover, because the present fMRI analysis combined encoding, retention, and retrieval, it cannot identify the generators or processing stages of the earlier EEG effects.</p>
+<p>A distinctive feature of the present study is that memory load was varied through orientation diversity while the number and locations of the presented objects remained constant. In designs that increase object count to manipulate memory load, greater mnemonic demands coincide with changes in the number of visual elements and potentially in the demands of selecting and individuating them. Here, every memory array contained four bars in each hemifield, allowing us to examine load-related activity without this accompanying increase in object count. The observed behavioral and BOLD differences therefore cannot be explained simply by the presentation of more objects. Building on earlier work distinguishing object count from distinct identity information (Xuhttps://www.zotero.org/google-docs/?0ZxIWr 2009) , the present study characterizes regional sensitivity across three levels of orientation diversity and examines its anatomical relationship with sensitivity to spatial attention direction. Together with our previous EEG studies using the same core paradigm, this approach provides complementary evidence about how task-related neural activity varies with the information contained within a fixed set of objects. This distinction is relevant to interpreting what constitutes memory load in VWM. Four presented objects need not impose the same representational demands when they share one orientation as when they contain two or four distinct orientations. In the present memory-load 1 condition, a common orientation may support judgments across locations, whereas the loads 2 and 4 require retaining which orientation appeared at the probed location. The more extensive neural differences involving load 1 are therefore compatible with differences in how orientation information is organized and bound to locations, rather than necessarily reflecting a proportional increase in the number of independently maintained representations. However, fixed object count does not imply identical perceptual processing: orientation diversity also changes display organization and covaries with task difficulty. The design thus establishes sensitivity to orientation diversity at a constant object count, while leaving the relative contributions of perceptual organization, binding demands, and memory maintenance to be resolved.</p>
+<p>One relevant part of the present study was to assess how the activations related to VWM and attention overlap. It has been previously stated that attention and WM cannot function without each other as attention guides how to use the limited WM capacity and prior knowledge guides what should be attended (Chun &amp; Turk-Browne, 2007). In the present study, most significantly activated regions had only a single main effect and only a few of the brain regions were recruited by two or three of the studied factors (Memory Load, Change, Attention). In addition no interactions were found. Thus, the results suggest that apart from sharing some common neural basis, VWM and visual attention still operate separately in specialized regions. There is prior evidence that visual attention and VWM are connected and share partially overlapping neural networks (https://www.zotero.org/google-docs/?Z8jcIP  Zhou et al., 2022). For example, the PPC has previously been associated with both VWM and selective attention (Berryhill et al., 2011). According to a previous fMRI decoding study there was a common neural mechanism found for attention and VWM in occipital and parietal areas and to a lesser extent also in the frontal lobe (Zhou et al., 2022). The present results are to some extent consistent with these findings, but highlight the independent role of these functions.</p>
+<p>Areas of the visual cortices in the lateral occipital complex have previously been associated with precision of VWM (Zhao et al., 2020). Instead, activity in frontal and parietal regions was associated only with memory load and not with precision (Zhao et al., 2020). However, according to fMRI decoding studies, the contents of VWM can be determined from the early visual cortices (Harrison &amp; Tong, 2009). In the present study significant brain activity related to Precision Demand was restricted to a small cluster in the motor cortex which likely reflects different motor responses. Univariate fMRI research on the precision of VWM is rather limited, and it still remains unclear in which brain areas activity varies according to precision of memory representations. However, previous fMRI studies have distinguished memory load from object complexity and in these studies it is often assumed that more precision is required when the object complexity increases (https://www.zotero.org/google-docs/?DCzJKU  Xu &amp; Chun, 2006).</p>
+<p>Default mode network is typically activated in situations in which a person is not actively paying attention to their external environment (Mak et al., 2017). In the present study, activation of the default mode network was mainly found in situations where the demands of the task were smaller, as expected. However, when comparing change present trials to change absent trials, some default mode regions showed increased activity. This is consistent with previous studies showing default mode activity during task switching (Crittenden et al.https://www.zotero.org/google-docs/?lIudof 2015) , and positive coupling of working memory and default mode networks during the encoding and retrieval phases of working memory (Piccoli et al., 2015). However, these activations could be also more directly related to visual target detection (https://www.zotero.org/google-docs/?3sfyNO  Clark et al., 2000; Gur et al., 2007).</p>
+<h3>Limitations of the present study.</h3>
+<p>When interpreting the results it is necessary to consider the features of the experimental design and take into account that the activations found, for example, in the frontal and parietal cortices can also fluctuate depending on the specific characteristics of the VWM task (e.g., depending on what kind of stimuli are used or how long is the memory delay). One limitation of the present study is that the activations related to encoding, retention and retrieval were all averaged and thus cannot be separated. Attention could have different effects during these three stages of memory. Moreover, it is likely that attention to the left and attention to the right visual hemifield activated also many overlapping areas not revealed by the present left vs. right and right vs. left contrasts (https://www.zotero.org/google-docs/?rOXL1l  Heinze et al., 1994; Salmi et al., 2007 Salmi et al., , 2026)). In the present paradigm, these areas might overlap with those associated with working memory.</p>
+<p>In summary, the present study found that at a fixed object count, varying orientation diversity was associated with behavioral differences and regional changes in task-related BOLD activity. Loadrelated effects were distributed across parietal, frontal, and insular regions and overlapped anatomically with effects of direction of attention in a subset of cortical parcels. These results are consistent with previous research and support the association of attention and WM, but they also bring up the independent roles of these cognitive functions. Together with our earlier EEG findings, the present fMRI results provide complementary temporal and spatial evidence concerning the demands associated with orientation diversity in VWM.</p>
+<p>implementations in Nipype(following the definitions by Power et al. 2014). The three global signals are extracted within the CSF, the WM, and the whole-brain masks. Additionally, a set of physiological regressors were extracted to allow for component-based noise correction (CompCor, Behzadi et al. 2007). Principal components are estimated after high-pass filtering the preprocessed BOLD time-series (using a discrete cosine filter with 128s cut-off) for the two CompCor variants: temporal (tCompCor) and anatomical (aCompCor). tCompCor components are then calculated from the top 2% variable voxels within the brain mask. For aCompCor, three probabilistic masks (CSF, WM and combined CSF+WM) are generated in anatomical space. The implementation differs from that of Behzadi et al. in that instead of eroding the masks by 2 pixels on BOLD space, a mask of pixels that likely contain a volume fraction of GM is subtracted from the aCompCor masks. This mask is obtained by dilating a GM mask extracted from the FreeSurfer&#x27;s aseg segmentation, and it ensures components are not extracted from voxels containing a minimal fraction of GM. Finally, these masks are resampled into BOLD space and binarized by thresholding at 0.99 (as in the original implementation). Components are also calculated separately within the WM and CSF masks. For each CompCor decomposition, the k components with the largest singular values are retained, such that the retained components&#x27; time series are sufficient to explain 50 percent of variance across the nuisance mask (CSF, WM, combined, or temporal). The remaining components are dropped from consideration. The head-motion estimates calculated in the correction step were also placed within the corresponding confounds file. The confound time series derived from head motion estimates and global signals were expanded with the inclusion of temporal derivatives and quadratic terms for each (Satterthwaite et al. 2013). Frames that exceeded a threshold of 0.5 mm FD or 1.5 standardized DVARS were annotated as motion outliers. Additional nuisance timeseries are calculated by means of principal components analysis of the signal found within a thin band (crown) of voxels around the edge of the brain, as proposed by (Patriat, Reynolds, and Birn 2017). The BOLD time-series were resampled into standard space, generating a preprocessed BOLD run in MNI152NLin2009cAsym space. First, a reference volume and its skull-stripped version were generated using a custom methodology of fMRIPrep. All resamplings can be performed with a single interpolation step by composing all the pertinent transformations (i.e. head-motion transform matrices, susceptibility distortion correction when available, and co-registrations to anatomical and output spaces). Gridded (volumetric) resamplings were performed using antsApplyTransforms (ANTs), configured with Lanczos interpolation to minimize the smoothing effects of other kernels (Lanczos 1964). Non-gridded (surface) resamplings were performed using mri_vol2surf (FreeSurfer).</p>
+<h3>Functional data preprocessing</h3>
+<p>For each of the 6 BOLD runs found per subject (across all tasks and sessions), the following preprocessing was performed. First, a reference volume and its skull-stripped version were generated using a custom methodology of fMRIPrep. Head-motion parameters with respect to the BOLD reference (transformation matrices, and six corresponding rotation and translation parameters) are estimated before any spatiotemporal filtering using mcflirt (FSL 6.0.5.1:57b01774, Jenkinson et al. 2002). BOLD runs were slice-time corrected to 0.958s (0.5 of slice acquisition range 0s-1.92s) using 3dTshift from AFNI (Cox and Hyde 1997, RRID:SCR_005927). The BOLD time-series (including slice-timing correction when applied) were resampled onto their original, native space by applying the transforms to correct for head-motion. These resampled BOLD timeseries will be referred to as preprocessed BOLD in original space, or just preprocessed BOLD. The BOLD reference was then co-registered to the T1w reference using bbregister (FreeSurfer) which implements boundary-based registration (Greve and Fischl 2009). Co-registration was configured with six degrees of freedom. Several confounding time-series were calculated based on the preprocessed BOLD: framewise displacement (FD), DVARS and three region-wise global signals. FD was computed using two formulations following Power (absolute sum of relative motions, Power et al. (2014)) and Jenkinson (relative root mean square displacement between affines, Jenkinson et al. (2002)). FD and DVARS are calculated for each functional run, both using their implementations in Nipype(following the definitions by Power et al. 2014). The three global signals are extracted within the CSF, the WM, and the whole-brain masks. Additionally, a set of physiological regressors were extracted to allow for component-based noise correction (CompCor, Behzadi et al. 2007). Principal components are estimated after high-pass filtering the preprocessed BOLD time-series (using a discrete cosine filter with 128s cut-off) for the two CompCor variants: temporal (tCompCor) and anatomical (aCompCor). tCompCor components are then calculated from the top 2% variable voxels within the brain mask. For aCompCor, three probabilistic masks (CSF, WM and combined CSF+WM) are generated in anatomical space. The implementation differs from that of Behzadi et al. in that instead of eroding the masks by 2 pixels on BOLD space, a mask of pixels that likely contain a volume fraction of GM is subtracted from the aCompCor masks. This mask is obtained by dilating a GM mask extracted from the FreeSurfer&#x27;s aseg segmentation, and it ensures components are not extracted from voxels containing a minimal fraction of GM. Finally, these masks are resampled into BOLD space and binarized by thresholding at 0.99 (as in the original implementation). Components are also calculated separately within the WM and CSF masks. For each CompCor decomposition, the k components with the largest singular values are retained, such that the retained components&#x27; time series are sufficient to explain 50 percent of variance across the nuisance mask (CSF, WM, combined, or temporal). The remaining components are dropped from consideration. The head-motion estimates calculated in the correction step were also placed within the corresponding confounds file. The confound time series derived from head motion estimates and global signals were expanded with the inclusion of temporal derivatives and quadratic terms for each (Satterthwaite et al. 2013). Frames that exceeded a threshold of 0.5 mm FD or 1.5 standardized DVARS were annotated as motion outliers. Additional nuisance timeseries are calculated by means of principal components analysis of the signal found within a thin band (crown) of voxels around the edge of the brain, as proposed by (Patriat, Reynolds, and Birn 2017). The BOLD time-series were resampled into standard space, generating a preprocessed BOLD run in MNI152NLin2009cAsym space. First, a reference volume and its skull-stripped version were generated using a custom methodology of fMRIPrep. All resamplings can be performed with a single interpolation step by composing all the pertinent transformations (i.e. head-motion transform matrices, susceptibility distortion correction when available, and co-registrations to anatomical and output spaces). Gridded (volumetric) resamplings were performed using antsApplyTransforms (ANTs), configured with Lanczos interpolation to minimize the smoothing effects of other kernels (Lanczos 1964). Non-gridded (surface) resamplings were performed using mri_vol2surf (FreeSurfer).</p>
+<p>Many internal operations of fMRIPrep use Nilearn 0.9.1 (Abraham et al. 2014, RRID:SCR_001362), mostly within the functional processing workflow. For more details of the pipeline, see the section corresponding to workflows in fMRIPrep&#x27;s documentation.</p>
+<h3>Copyright Waiver</h3>
+<p>The above boilerplate text was automatically generated by fMRIPrep with the express intention that users should copy and paste this text into their manuscripts unchanged. It is released under the CC0 license.</p>
+<p>This work was supported by the Research Council of Finland (formerly the Academy of Finland; Academy Research Fellow project, Grant No. 355369), the Finnish Cultural Foundation (Grant Nos. 00231373 and 00240135), and the National Natural Science Foundation of China (Grant No. 31700948). All authors maintained full independence from the funding sources.</p>
+<h3>Appendix 1. Preprocessing with fMRIprep</h3>
+<p>Results included in this manuscript come from preprocessing performed using fMRIPrep 22.1.1 (Esteban, Markiewicz, et al. (2018); Esteban, Blair, et al. (2018); RRID:SCR_016216), which is based on Nipype 1.8.5 (K. Gorgolewski et al. (2011); K. J. Gorgolewski et al. (2018); RRID:SCR_002502). The following preprocessing was conducted for each participant&#x27;s data.</p>
+<h3>Anatomical data preprocessing</h3>
+<p>A total of 1 T1-weighted (T1w) images were found within the input BIDS dataset.The T1-weighted (T1w) image was corrected for intensity non-uniformity (INU) with N4BiasFieldCorrection (Tustison et al. 2010), distributed with ANTs 2.3.3 (Avants et al. 2008, RRID:SCR_004757), and used as T1w-reference throughout the workflow. The T1w-reference was then skull-stripped with a Nipype implementation of the antsBrainExtraction.sh workflow (from ANTs), using OASIS30ANTs as target template. Brain tissue segmentation of cerebrospinal fluid (CSF), whitematter (WM) and gray-matter (GM) was performed on the brain-extracted T1w using fast (FSL 6.0.5.1:57b01774, RRID:SCR_002823, Zhang, Brady, and Smith 2001). Brain surfaces were reconstructed using recon-all (FreeSurfer 7.2.0, RRID:SCR_001847, Dale, Fischl, and Sereno 1999), and the brain mask estimated previously was refined with a custom variation of the method to reconcile ANTs-derived and FreeSurfer-derived segmentations of the cortical gray-matter of Mindboggle (RRID:SCR_002438, Klein et al. 2017). Volume-based spatial normalization to one standard space (MNI152NLin2009cAsym) was performed through nonlinear registration withantsRegistration (ANTs 2.3.3), using brain-extracted versions of both T1w reference and the T1w template. The following template was selected for spatial normalization: ICBM 152 Nonlinear Asymmetrical template version 2009c [Fonov et al. (2009), RRID:SCR_008796; TemplateFlow ID: MNI152NLin2009cAsym].</p>
+<h3>Functional data preprocessing</h3>
+<p>For each of the 6 BOLD runs found per subject (across all tasks and sessions), the following preprocessing was performed. First, a reference volume and its skull-stripped version were generated using a custom methodology of fMRIPrep. Head-motion parameters with respect to the BOLD reference (transformation matrices, and six corresponding rotation and translation parameters) are estimated before any spatiotemporal filtering using mcflirt (FSL 6.0.5.1:57b01774, Jenkinson et al. 2002). BOLD runs were slice-time corrected to 0.959s (0.5 of slice acquisition range 0s-1.92s) using 3dTshift from AFNI (Cox and Hyde 1997, RRID:SCR_005927). The BOLD time-series (including slice-timing correction when applied) were resampled onto their original, native space by applying the transforms to correct for head-motion. These resampled BOLD timeseries will be referred to as preprocessed BOLD in original space, or just preprocessed BOLD. The BOLD reference was then co-registered to the T1w reference using bbregister (FreeSurfer) which implements boundary-based registration (Greve and Fischl 2009). Co-registration was configured with six degrees of freedom. Several confounding time-series were calculated based on the preprocessed BOLD: framewise displacement (FD), DVARS and three region-wise global signals. FD was computed using two formulations following Power (absolute sum of relative motions, Power et al. (2014)) and Jenkinson (relative root mean square displacement between affines, Jenkinson et al. (2002)). FD and DVARS are calculated for each functional run, both using their</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Task design and experimental manipulations. (A) Trial sequence. A directional precue indicated the relevant hemifield, followed by the memory array, retention interval, probe array, feedback, and intertrial interval. (B) Left-and right-cue conditions. (C) Memory-load conditions, defined by one, two, or four distinct orientations among four bars in each hemifield. Object number and locations remained constant across load conditions. (D) Probe conditions: no change or an orientation change of 15° , 30° or 60° relative to the corresponding memory item. Participants judged the probe in the cued hemifield.</p>
+<p>(i.e., the highest Precision Demand), the d&#x27; values for the largest and smallest change sizes came closer together as Memory Load gradually increased from 1 to 4, the d&#x27; value for the medium change size (30° ) being markedly closer to that for the largest change when Memory Load was 1, and markedly closed to that for the smallest change when Memory Load was 2. Post hoc comparisons confirmed this interpretation. Participants&#x27; performance did not differ from each other in condition when Memory Load was 2 or 4 and change was 15° or 30°.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Mean discrimination sensitivity (d&#x27;) as a function of Memory Load (1, 2 or 4) and Precision Demand (the demand being the highest for the smallest orientation change of 15° ). Error bars indicate standard errors of the mean.</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. ANOVA results showing main effects of Attention, Change, Memory Load and Precision. Voxel threshold p &lt; .001, cluster correction p &lt; .05.</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. Brain activation in pair-wise contrast of change vs. no change. Areas appearing positive (red-yellow scale) indicate stronger activity in change conditions, areas appearing negative (bluecyan scale) indicate stronger activity in no-change conditions. Voxel threshold p &lt; .001, cluster correction (p&lt;.05).</p>
+<p>Increased activity with increasing Memory Load was found in three clusters in the parietal cortex: In the superior parietal lobule (SPL; 7PL, 7AL, 7PC, AIP, VIP, MIP, LIPv, right 7Pm, and left 7Am, left LIPd), and inferior parietal lobule (IPL; PFt, IP2, left PF, left PGp, left IP0, left IP1), and inferior lateral cluster in the right hemisphere (right PFcm, right PF, right PFop). Also, in a large cluster in the insular cortex (areas AVI, FOP4, FOP5, MI, right AAIC), activity was higher for higher Memory Load, as well as in clusters in the superior (SCEF, 6ma, right 6mp) and inferior (IFSp, left IFJp, left 45) frontal cortex and in the DLPC (i6-8, SFL, left p9-46v). In addition, increasing Memory Load increased activity in a few clusters in the motor (2, left 1, left 3a, left 3b) and pre-motor (PEF, 6a, 6d, left 6r, left 6v, left FEF) cortex. Decreased activity due to increasing Memory Load was found in several default-mode regions: IPL (PGs, PFm and right PGi), DLPC (left 8Av, left 8C. left s6-8, right 8BL) and Posterior Cingulate Cortex (PCC; left 23d, left 31a).</p>
+<h3>Figure 5.</h3>
+<p>Figure 5. Significant brain activity differences revealed by pair-wise contrasts examining activity differences due to working memory load. Areas appearing positive (red-yellow scale) indicate stronger activity in higher-load condition, areas appearing negative (blue-cyan scale) indicate stronger activity in lower-load condition. Voxel threshold p &lt; .001, cluster correction p &lt; .05.</p>
+<h3>Figure 6.</h3>
+<p>Figure6. Parcel-based summary of significant main effects across cortical regions. The thickness of lines represents the number of HCP regions(Glasser et al., 2016). The plot classifies cortical regions based on statistically significant main effects revealed by ANOVA to provide an overall summary to which functions different brain regions and lobes contributed to in the present results.</p>
+<h3>References</h3>
+<p>Awh, E., Vogel, E. K., &amp; Oh, S.-H. (2006). Interactions between attention and working memory. Neuroscience, 139(1), 201-208. https://doi.org/10.1016/j.neuroscience.2005.08.023</p>
+<p>Bays, P. M., &amp; Husain, M. (2008). Dynamic shifts of limited working memory resources in human Vision. Science, 321(5890), 851-854. https://doi.org/10.1126/science.1158023</p>
+<p>Bays, P. M., Schneegans, S., Ma, W. J., &amp; Brady, T. F. (2024). Representation and computation in visual working memory. Nature Human Behaviour, 8(6), 1016-1034. https://doi.org/10.1038/s41562-024-01871-2</p>
+<p>Berryhill, M. E., Chein, J., &amp; Olson, I. R. (2011). At the intersection of attention and memory: The mechanistic role of the posterior parietal lobe in working memory. Neuropsychologia, 49(5), 1306-1315. https://doi.org/10.1016/j.neuropsychologia.2011.02.033</p>
+<p>Brady, T. F., Konkle, T., &amp; Alvarez, G. A. (2011). A review of visual memory capacity: Beyond individual items and toward structured representations. Journal of Vision, 11(5), 4-4. https://doi.org/10.1167/11.5.4</p>
+<p>Brady, T. F., &amp; Tenenbaum, J. B. (2013). A probabilistic model of visual working memory: Incorporating higher order regularities into working memory capacity estimates. Psychological Review, 120(1), 85-109. https://doi.org/10.1037/a0030779</p>
+<p>Christophel, T. B., Klink, P. C., Spitzer, B., Roelfsema, P. R., &amp; Haynes, J.-D. (2017). The distributed nature of working memory. Trends in Cognitive Sciences, 21(2), 111-124. https://doi.org/10.1016/j.tics.2016.12.007</p>
+<p>Chun, M. M., Golomb, J. D., &amp; Turk-Browne, N. B. (2011). A taxonomy of external and internal attention. Annual Review of Psychology, 62(1), 73-101. https://doi.org/10.1146/annurev.psych.093008.100427</p>
+<p>Chun, M. M., &amp; Turk-Browne, N. B. (2007). Interactions between attention and memory. Current Opinion in Neurobiology, 17(2), 177-184. https://doi.org/10.1016/j.conb.2007.03.005</p>
+<p>Clark, V. P., Fannon, S., Lai, S., Benson, R., &amp; Bauer, L. (2000). Responses to rare visual target and distractor stimuli using event-related fMRI. Journal of Neurophysiology, 83(5), 3133- 3139. https://doi.org/10.1152/jn.2000.83.5.3133</p>
+<p>Cowan, N. (2001). The magical number 4 in short-term memory: A reconsideration of mental storage capacity. Behavioral and Brain Sciences, 24(1), 87-114. Scopus. https://doi.org/10.1017/S0140525X01003922</p>
+<p>Crittenden, B. M., Mitchell, D. J., &amp; Duncan, J. (2015). Recruitment of the default mode network during a demanding act of executive control. eLife, 4, e06481. https://doi.org/10.7554/eLife.06481</p>
+<p>Curtis, C. E., &amp; D&#x27;Esposito, M. (2003). Persistent activity in the prefrontal cortex during working memory. Trends in Cognitive Sciences, 7(9), 415-423. https://doi.org/10.1016/S1364-6613(03)00197-9</p>
+<p>Daniel, T. A., Katz, J. S., &amp; Robinson, J. L. (2016). Delayed match-to-sample in working memory: A BrainMap meta-analysis. Biological Psychology, 120, 10-20. https://doi.org/10.1016/j.biopsycho.2016.07.015</p>
+<p>Esteban, O., Markiewicz, C. J., Blair, R. W., Moodie, C. A., Isik, A. I., Erramuzpe, A., Kent, J. D., Goncalves, M., DuPre, E., Snyder, M., Oya, H., Ghosh, S. S., Wright, J., Durnez, J., Poldrack, R. A., &amp; Gorgolewski, K. J. (2019). fMRIPrep: A robust preprocessing pipeline for functional MRI. Nature Methods, 16(1), 111-116. https://doi.org/10.1038/s41592-018-0235-4</p>
+<p>Friston, K., Ashburner, J., Kiebel, S., Nichols, T., &amp; Penny, W. (2007). Statistical Parametric Mapping: The Analysis of Functional Brain Images. Elsevier. https://doi.org/10.1016/B978- 0-12-372560-8.X5000-1</p>
+<p>Gazzaley, A., &amp; Nobre, A. C. (2012). Top-down modulation: Bridging selective attention and working memory. Trends in Cognitive Sciences, 16(2), 129-135. https://doi.org/10.1016/j.tics.2011.11.014</p>
+<p>Germann, J., &amp; Petrides, M. (2020). Area 8A within the posterior middle frontal gyrus underlies cognitive selection between competing visual targets. Eneuro, 7(5). https://doi.org/10.1523/ENEURO.0102-20.2020</p>
+<p>Glasser, M. F., Coalson, T. S., Robinson, E. C., Hacker, C. D., Harwell, J., Yacoub, E., Ugurbil, K., Andersson, J., Beckmann, C. F., Jenkinson, M., Smith, S. M., &amp; Van Essen, D. C. (2016). A multi-modal parcellation of human cerebral cortex. Nature, 536(7615), 171-178. https://doi.org/10.1038/nature18933</p>
+<p>Griffin, I. C., &amp; Nobre, A. C. (2003). Orienting attention to locations in internal representations. Journal of Cognitive Neuroscience, 15(8), 1176-1194. https://doi.org/10.1162/089892903322598139</p>
+<p>Guo, L., Park, H.-B., Ren, G., Liu, P., Liu, R., Nie, D., &amp; Ye, C. (2025). All identical objects reduce memory load at the late maintenance stage in working memory. Scientific Reports, 15(1), 16700. https://doi.org/10.1038/s41598-025-00433-4</p>
+<p>Gur, R. C., Turetsky, B. I., Loughead, J., Waxman, J., Snyder, W., Ragland, J. D., Elliott, M. A., Bilker, W. B., Arnold, S. E., &amp; Gur, R. E. (2007). Hemodynamic responses in neural circuitries for detection of visual target and novelty: An event-related fMRI study. Human Brain Mapping, 28(4), 263-274. https://doi.org/10.1002/hbm.20319</p>
+<p>Harrison, S. A., &amp; Tong, F. (2009). Decoding reveals the contents of visual working memory in early visual areas. Nature, 458(7238), 632-635. https://doi.org/10.1038/nature07832</p>
+<p>Heinze, H. J., Mangun, G. R., Burchert, W., Hinrichs, H., Scholz, M., Münte, T. F., Gös, A., Scherg, M., Johannes, S., Hundeshagen, H., Gazzaniga, M. S., &amp; Hillyard, S. A. (1994). Combined spatial and temporal imaging of brain activity during visual selective attention in humans. Nature, 372(6506), 543-546. https://doi.org/10.1038/372543a0</p>
+<p>Hu, H., Li, A., Zhang, L., Liu, C., Shi, L., Peng, X., Li, T., Zhou, Y., &amp; Xue, G. (2024). Goal- directed attention transforms both working and long-term memory representations in the human parietal cortex. PLOS Biology, 22(7), e3002721. https://doi.org/10.1371/journal.pbio.3002721</p>
+<p>Kiyonaga, A., &amp; Egner, T. (2013). Working memory as internal attention: Toward an integrative account of internal and external selection processes. Psychonomic Bulletin &amp; Review, 20(2), 228-242. https://doi.org/10.3758/s13423-012-0359-y</p>
+<p>Kuo, B.-C., &amp; Astle, D. E. (2014). Neural mechanisms by which attention modulates the comparison of remembered and perceptual representations. PLoS ONE, 9(1), e86666. https://doi.org/10.1371/journal.pone.0086666</p>
+<p>Lawrence, M. A. (2009). ez: Easy analysis and visualization of factorial experiments (p. 4.5-0) [Data set]. https://doi.org/10.32614/CRAN.package.ez</p>
+<p>Li, X., O&#x27;Sullivan, M. J., &amp; Mattingley, J. B. (2022). Delay activity during visual working memory: A meta-analysis of 30 fMRI experiments. NeuroImage, 255. Scopus. https://doi.org/10.1016/j.neuroimage.2022.119204</p>
+<p>Luck, S. J., &amp; Vogel, E. K. (2013). Visual working memory capacity: From psychophysics and neurobiology to individual differences. Trends in Cognitive Sciences, 17(8), 391-400. https://doi.org/10.1016/j.tics.2013.06.006</p>
+<p>Lüdecke, D. (2016). sjstats: Collection of convenient functions for common statistical computations (p. 0.19.1) [Data set]. https://doi.org/10.32614/CRAN.package.sjstats</p>
+<p>Ma, W. J., Husain, M., &amp; Bays, P. M. (2014). Changing concepts of working memory. Nature Neuroscience, 17(3), 347-356. https://doi.org/10.1038/nn.3655</p>
+<p>Mak, L. E., Minuzzi, L., MacQueen, G., Hall, G., Kennedy, S. H., &amp; Milev, R. (2017). The default mode network in healthy individuals: A systematic review and meta-analysis. Brain Connectivity, 7(1), 25-33. https://doi.org/10.1089/brain.2016.0438</p>
+<p>Marois, R., &amp; Ivanoff, J. (2005). Capacity limits of information processing in the brain. Trends in Cognitive Sciences, 9(6), 296-305. https://doi.org/10.1016/j.tics.2005.04.010</p>
+<p>McFarquhar, M., McKie, S., Emsley, R., Suckling, J., Elliott, R., &amp; Williams, S. (2016). Multivariate and repeated measures (MRM): A new toolbox for dependent and multimodal group-level neuroimaging data. NeuroImage, 132, 373-389. https://doi.org/10.1016/j.neuroimage.2016.02.053</p>
+<p>Miller, E. K., &amp; Cohen, J. D. (2001). An integrative theory of prefrontal cortex function. Annual Review of Neuroscience, 24(1), 167-202. https://doi.org/10.1146/annurev.neuro.24.1.167</p>
+<p>Miller, G. A. (1994). The magical number seven, plus or minus two: Some limits on our capacity for Processing Information. Psychological Review, 101(2), 343-352. Scopus. https://doi.org/10.1037//0033-295x.101.2.343</p>
+<p>Olivers, C. N. L., Peters, J., Houtkamp, R., &amp; Roelfsema, P. R. (2011). Different states in visual working memory: When it guides attention and when it does not. Trends in Cognitive Sciences, S1364661311000854. https://doi.org/10.1016/j.tics.2011.05.004</p>
+<p>Pessoa, L., &amp; Ungerleider, L. G. (2004). Neural correlates of change detection and change blindness in a working memory task. Cerebral Cortex, 14(5), 511-520. https://doi.org/10.1093/cercor/bhh013</p>
+<p>Piccoli, T., Valente, G., Linden, D. E. J., Re, M., Esposito, F., Sack, A. T., &amp; Salle, F. D. (2015). The default mode network and the working memory network are not anti-correlated during all phases of a working memory task. PLOS ONE, 10(4), e0123354. https://doi.org/10.1371/journal.pone.0123354</p>
+<p>Postle, B. R., Zarahn, E., &amp; D&#x27;Esposito, M. (2000). Using event-related fMRI to assess delay- period activity during performance of spatial and nonspatial working memory tasks. Brain Research Protocols, 5(1), 57-66. https://doi.org/10.1016/S1385-299X(99)00053-7</p>
+<p>R Core Team. (2023). R: A language and environment for statistical computing [Computer software].</p>
+<p>R Foundation for Statistical Computing, Vienna, Austria. https://www.R- project.org/</p>
+<p>Riley, M. R., &amp; Constantinidis, C. (2016). Role of prefrontal persistent activity in working memory. Frontiers in Systems Neuroscience, 9. https://doi.org/10.3389/fnsys.2015.00181</p>
+<p>Rissman, J., Gazzaley, A., &amp; D&#x27;Esposito, M. (2008). Dynamic adjustments in prefrontal, hippocampal, and inferior temporal interactions with increasing visual working memory load. Cerebral Cortex, 18(7), 1618-1629. https://doi.org/10.1093/cercor/bhm195</p>
+<p>Salmi, J., Aquilino, B., Poç an, B., Riihimä ki, H., Kangas, S., Kä rhä , S., Alho, K., &amp; Wikman, P. (2026). Regional topography of auditory and visual attention: An fMRI-based meta- analysis. Neuroscience &amp; Biobehavioral Reviews, 186, 106698. https://doi.org/10.1016/j.neubiorev.2026.106698</p>
+<p>Salmi, J., Rinne, T., Degerman, A., Salonen, O., &amp; Alho, K. (2007). Orienting and maintenance of spatial attention in audition and vision: Multimodal and modality-specific brain activations. Brain Structure and Function, 212(2), 181-194. https://doi.org/10.1007/s00429-007-0152-2</p>
+<p>Singmann, H., Bolker, B., Westfall, J., Aust, F., &amp; Ben-Shachar, M. S. (2012). afex: Analysis of factorial experiments (p. 1.5-1) [Data set]. https://doi.org/10.32614/CRAN.package.afex</p>
+<p>Sreenivasan, K. K., &amp; D&#x27;Esposito, M. (2019). The what, where and how of delay activity. Nature Reviews Neuroscience, 20(8), 466-481. https://doi.org/10.1038/s41583-019-0176-7</p>
+<p>The MathWorks Inc. (2023). MATLAB version: 23.2 (R2023b) [Computer software]. The MathWorks Inc. https://www.mathworks.com</p>
+<p>Todd, J. J., &amp; Marois, R. (2004). Capacity limit of visual short-term memory in human posterior parietal cortex. Nature, 428(6984), 751-754. https://doi.org/10.1038/nature02466</p>
+<p>Todd, J. J., &amp; Marois, R. (2005). Posterior parietal cortex activity predicts individual differences in visual short-term memory capacity. Cognitive, Affective, &amp; Behavioral Neuroscience, 5(2), 144-155. https://doi.org/10.3758/CABN.5.2.144</p>
+<p>Vogel, E. K., &amp; Machizawa, M. G. (2004). Neural activity predicts individual differences in visual working memory capacity. Nature, 428(6984), 748-751. https://doi.org/10.1038/nature02447</p>
+<p>Wager, T. D., &amp; Smith, E. E. (2003). Neuroimaging studies of working memory. Cognitive, Affective, &amp; Behavioral Neuroscience, 3(4), 255-274. https://doi.org/10.3758/CABN.3.4.255</p>
+<p>Xu, Q., Ye, C., &amp; Xie, W. (2026). Redundant perceptual inputs modulate early neural activity patterns in visual working memory: Evidence from EEG decoding. Neuropsychologia, 233, 109597. https://doi.org/10.1016/j.neuropsychologia.2026.109597</p>
+<p>Xu, Y. (2009). Distinctive neural mechanisms supporting visual object individuation and identification. Journal of Cognitive Neuroscience, 21(3), 511-518. https://doi.org/10.1162/jocn.2008.21024</p>
+<p>Xu, Y., &amp; Chun, M. M. (2006). Dissociable neural mechanisms supporting visual short-term memory for objects. Nature, 440(7080), 91-95. https://doi.org/10.1038/nature04262</p>
+<p>Zhang, W., &amp; Luck, S. J. (2008). Discrete fixed-resolution representations in visual working memory. Nature, 453(7192), 233-235. https://doi.org/10.1038/nature06860</p>
+<p>Zhao, Y., Kuai, S., Zanto, T. P., &amp; Ku, Y. (2020). Neural correlates underlying the precision of visual working memory. Neuroscience, 425, 301-311. https://doi.org/10.1016/j.neuroscience.2019.11.037</p>
+<p>Zhou, Y., Curtis, C. E., Sreenivasan, K. K., &amp; Fougnie, D. (2022). Common neural mechanisms control attention and working memory. The Journal of Neuroscience, 42(37), 7110-7120. https://doi.org/10.1523/JNEUROSCI.0443-22.2022</p>
+<p>Abraham, A., Pedregosa, F., Eickenberg, M., Gervais, P., Mueller, A., Kossaifi, J., Gramfort, A., Thirion, B., &amp; Varoquaux, G. (2014). Machine learning for neuroimaging with scikit-learn. Frontiers in Neuroinformatics, 8, Article 14. https://doi.org/10.3389/fninf.2014.00014</p>
+<p>Avants, B. B., Epstein, C. L., Grossman, M., &amp; J. C. Gee. (2008). Symmetric diffeomorphic image registration with cross-correlation: Evaluating automated labeling of elderly and neurodegenerative brain. Medical Image Analysis, 12(1), 26-41. https://doi.org/10.1016/j.media.2007.06.004</p>
+<p>Behzadi, Y., Restom, K., Liau, J., &amp; Liu, T. T. (2007). A component based noise correction method (CompCor) for BOLD and perfusion based fMRI. NeuroImage, 37(1), 90-101. https://doi.org/10.1016/j.neuroimage.2007.04.042</p>
+<p>Cox, Robert W., &amp; Hyde, J. S. (1997). Software tools for analysis and visualization of fMRI data. NMR in Biomedicine, 10(4-5), 171-178. https://doi.org/10.1002/(SICI)1099-1492(199706/08)10:4/5&lt;171::AID-NBM453&gt;3.0.CO;2-L</p>
+<p>Dale, A. M., Fischl, B., &amp; Sereno, M. I. (1999). Cortical surface-based analysis: I. Segmentation and surface reconstruction. NeuroImage, 9(2), 179-194. https://doi.org/10.1006/nimg.1998.0395</p>
+<p>Esteban, O., Blair, R., Markiewicz, C. J., Berleant, S. L., Moodie, C., Ma, F., Isik, A. I., et al. (2018). fMRIPrep 22.1.1 [Software]. Zenodo. https://doi.org/10.5281/zenodo.852659</p>
+<p>Esteban, O., Markiewicz, C., Blair, R. W., Moodie, C., Isik, A. I., Aliaga, A. E., Kent, J., et al. (2018). fMRIPrep: A robust preprocessing pipeline for functional MRI. Nature Methods, 16, 111- 116. https://doi.org/10.1038/s41592-018-0235-4</p>
+<p>Fonov, V. S., Evans, A. C., McKinstry, R. C., Almli, C. R., &amp; Collins, D. L. (2009). Unbiased nonlinear average age-appropriate brain templates from birth to adulthood. NeuroImage, 47(Suppl.</p>
+<p>S102. https://doi.org/10.1016/S1053-8119(09)70884-5</p>
+<p>Gorgolewski, K., Burns, C. D., Madison, C., Clark, D., Halchenko, Y. O., Waskom, M. L., &amp; Ghosh, S. (2011). Nipype: A flexible, lightweight and extensible neuroimaging data processing framework in Python. Frontiers in Neuroinformatics, 5, Article 13. https://doi.org/10.3389/fninf.2011.00013</p>
+<p>Gorgolewski, K. J., Esteban, O., Markiewicz, C. J., Ziegler, E., Ellis, D. G., Notter, M. P., Jarecka, D., et al. (2018). Nipype [Software]. Zenodo. https://doi.org/10.5281/zenodo.596855</p>
+<p>Greve, D. N., &amp; Fischl, B. (2009). Accurate and robust brain image alignment using boundary- based registration. NeuroImage, 48(1), 63-72. https://doi.org/10.1016/j.neuroimage.2009.06.060</p>
+<p>Jenkinson, M., Bannister, P., Brady, M., &amp; Smith, S. (2002). Improved optimization for the robust and accurate linear registration and motion correction of brain images. NeuroImage, 17(2), 825- 841. https://doi.org/10.1006/nimg.2002.1132</p>
+<p>Klein, A., Ghosh, S. S., Bao, F. S., Giard, J., Hä me, Y., Stavsky, E., Lee, N., et al. (2017). Mindboggling morphometry of human brains. PLOS Computational Biology, 13(2), e1005350. https://doi.org/10.1371/journal.pcbi.1005350</p>
+<p>Lanczos, C. (1964). Evaluation of noisy data. Journal of the Society for Industrial and Applied Mathematics Series B Numerical Analysis, 1(1), 76-85. https://doi.org/10.1137/0701007</p>
+<p>Patriat, R., Reynolds, C. R., &amp; Birn, R. M. (2017). An improved model of motion-related signal changes in fMRI. NeuroImage, 144(Part A), 74-82. https://doi.org/10.1016/j.neuroimage.2016.08.051</p>
+<p>Power, J. D., Mitra, A., Laumann, T. O., Snyder, A. Z., Schlaggar, B. L., &amp; Petersen, S. E. (2014). Methods to detect, characterize, and remove motion artifact in resting state fMRI. NeuroImage, 84 (Suppl. C), 320-341. https://doi.org/10.1016/j.neuroimage.2013.08.048</p>
+<p>Satterthwaite, T. D., Elliott, M. A., Gerraty, R. T., Ruparel, K., Loughead, J., Calkins, M. E., Eickhoff, S. B., et al. (2013). An improved framework for confound regression and filtering for control of motion artifact in the preprocessing of resting-state functional connectivity data. NeuroImage, 64(1), 240-256. https://doi.org/10.1016/j.neuroimage.2012.08.052</p>
+<p>Tustison, N. J., Avants, B. B., Cook, P. A., Zheng, Y., Egan, A., Yushkevich, P. A., &amp; Gee, J. C. (2010). N4itk: Improved N3 bias correction. IEEE Transactions on Medical Imaging, 29(6), 1310- 1320. https://doi.org/10.1109/TMI.2010.2046908</p>
+<p>Zhang, Y., Brady, M., &amp; Smith, S. (2001). Segmentation of brain MR images through a hidden Markov random field model and the expectation-maximization algorithm. IEEE Transactions on Medical Imaging, 20(1), 45-57. https://doi.org/10.1109/42.906424</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
