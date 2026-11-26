@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: On Color and Emotion: What Can Vision Science
+Learn from the Rorschach?</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+On Color and Emotion: What Can Vision Science Learn from the Rorschach?
+</p>
+<p class="meta">
+2026-11-27 · Metacheck 0.4.4.40
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to fix</span></span><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>14</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="info">For information <span class="n">(2)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 1 reference with comments in PubPeer.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>You cited 1 article in the RetractionWatch database.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(14)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>No papers appeared to report data about people or animals that need
+an ethics statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper does not appear to report data about individual people or
+animals (we found no method part, no sample description and no
+statistical results, and at most one sign that the authors collected
+data), so we do not expect an ethics statement.</p>
+<p>Ethics statement:</p>
+<blockquote>
+<p>Ethical approval and informed consent were not required for this
+article, which reviews published work and reports no new data from human
+participants.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 94 references with DOIs. You cited 1 reference with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+Commenters
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Thorstenson, C. A., Pazda, A. D., &amp; Elliot, A. J. (2015). Sadness
+impairs color perception. Psychological Science. Advance online
+publication. <a href="https://doi.org/10.1177/0956797615597672" class="uri">https://doi.org/10.1177/0956797615597672</a> (Retraction
+published 2015, Psychological Science, 26[11], 1822)
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:left;">
+Unregistered Submission, Peer 6, Peer 10, Peer 11, Peer 2, Peer 12, Peer
+1, Peer 3, Peer 4, Peer 7, Peer 14
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/989FBE60680F308F7BF98BB22F3C50" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 94 references with DOIs. You cited 1 article in the
+RetractionWatch database.</p>
+<p>Check if you are aware of the retraction, correction, or expression
+of concern for each reference, and consider whether it still supports
+your claims.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:left;">
+RW Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Thorstenson, C. A., Pazda, A. D., &amp; Elliot, A. J. (2015). Sadness
+impairs color perception. Psychological Science. Advance online
+publication. <a href="https://doi.org/10.1177/0956797615597672" class="uri">https://doi.org/10.1177/0956797615597672</a> (Retraction
+published 2015, Psychological Science, 26[11], 1822)
+</td>
+<td style="text-align:left;">
+Retraction
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 94 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Use of artificial intelligence. The author used Claude (Anthropic) to assist with literature searching, checking of citations, and drafting. The author reviewed and edited the text and takes full responsibility for the content.</p>
+<h3>Introduction</h3>
+<p>One of the largest bodies of data on how individual people respond to color under ambiguity sits outside vision science. It was gathered by clinical psychologists and psychiatrists. Since 1921, examiners have shown the same ten inkblots to very large numbers of people and coded, response by response, whether each person used color and how.</p>
+<p>The motive was a theory of emotion. Hermann Rorschach believed that chromatic color stirs feeling, and that a person who is carried away by the color of a blot is a person who is carried away by affect. That claim shaped clinical practice for decades. It also produced a long experimental argument about whether it was true.</p>
+<p>Vision scientists have understandable reasons for having overlooked all this. Projective tests acquired a poor scientific reputation in the late twentieth century. The stimuli are uncalibrated.</p>
+<p>The key terms are clinical. The literature is scattered across journals that color scientists do not read.</p>
+<p>As a blanket verdict, that reputation is outdated. Modern Rorschach research uses standardized administration and coding with documented interrater reliability (Viglione et al., 2012; Viglione &amp; Taylor, 2003) and international reference norms (Viglione &amp; Giromini, 2016), and the validity of the test is now judged score by score through meta-analysis (Mihura et al., 2013; Viglione, 1999; Viglione &amp; Hilsenroth, 2001; Viglione et al., 2022). The test&#x27;s most persistent critics have accepted the principal meta-analysis as an unbiased summary of the published literature. They have withdrawn their call for a moratorium as far as the cognitive scores are concerned, while still disputing the scores meant to measure emotion and personality (Wood et al., 2015).</p>
+<p>Researchers in the field now describe the Rorschach as a performance-based task and no longer as a projective test (Meyer &amp; Kurtz, 2006; Meyer et al., 2014). I keep the older word in this paper because it is the one most readers outside the field will recognize.</p>
+<p>Yet the two fields have been asking neighboring questions. Modern color-emotion research, led by groups such as those of Domicele Jonauskaite and Christine Mohr in Lausanne, Karen Schloss in Madison, and Daniel Oberfeld in Mainz, asks which colors go with which emotions, why, and whether colors change how people feel. A parallel line of work in social and personality psychology, led by Andrew Elliot and Markus Maier, asks how a color such as red affects motivation and behavior in particular contexts (Elliot &amp; Maier, 2014). The projective tradition asked something different: what does a person&#x27;s manner of using color say about that person? The first question is about shared meaning. The second is about individual differences.</p>
+<p>The separation is explicit. Jonauskaite and Mohr&#x27;s (2025) systematic review of 128 years of research on color and emotion set as an eligibility criterion that it would &quot;exclude clinical samples&quot; and studies &quot;using clinical tests (e.g., Rorschach test, Lüscher test).&quot; That was a reasonable choice for a review of healthy populations. It also means that the main modern synthesis of color-emotion research does not touch the projective literature. Traffic in the other direction has only just begun. De Villemor-Amaral and Yazigi (2022) traced the history of the color-affect idea in psychological assessment, from Rorschach through the Lüscher and Color Pyramid tests, and ended by citing the cross-cultural association studies of Jonauskaite and colleagues. Their essay accepts the link between color and affect and does not take up the experiments that tested it or the validity evidence. Piotrowski (2023) applied modern research on the color red to the red areas of Cards II and III, and Di Girolamo et al. (2026) applied the concept of color diagnosticity to Rorschach coding. The separation has been noticed before. In a doctoral dissertation, Hartz (2019) observed that &quot;the Rorschach is almost never mentioned in the color psychology literature&quot; (p. 40) and suggested that Rorschach research could lead color psychologists to study individual differences.</p>
+<p>One experiment is an exception to the separation. Kron et al. (2009), cognitive psychologists writing in a personality assessment journal, showed that the balance of color against form on the Rorschach predicts how much color affects the naming of ordinary objects. Vision science did not take it up. The two literatures remain largely disconnected. I found no review that sets the experimental and validity evidence beside modern color science, or that addresses vision scientists. Figure 1 sets the two histories on one timeline.</p>
+<p>Figure 1. Two literatures on color and emotion that have barely met. Upper track: the projective tradition, with the periods of the main Rorschach scoring systems (boundaries approximate) and the landmarks discussed in this paper. Lower track: color-emotion science, shown as the span of studies covered by the systematic review of Jonauskaite and Mohr (2025), with recent landmarks. The dashed line marks the review&#x27;s explicit exclusion of studies that used the Rorschach or Lüscher tests. After 2011 the Comprehensive System, revised in 2022, and R-PAS are both in use. The diamond marks Darwin&#x27;s (1872) account of emotion changing the color of the face, which precedes both literatures. Three early marks on the lower track show that the idea of color acting on feeling was established before and alongside Rorschach&#x27;s test: Cohn&#x27;s study of color preference in Wundt&#x27;s laboratory, Ellis&#x27;s essay on red, and Goldstein&#x27;s proposal that red arouses and green calms (the last two as described by Elliot &amp; Maier, 2014; the first as described by de Villemor-Amaral &amp; Yazigi, 2022). This paper has three aims. The first is to explain the projective color literature to readers who know nothing about it, without jargon. The second is to report honestly what held up and what did not. The third is to place both literatures inside a constructivist model of color (Peterzell, 2026) whose central claim is reciprocal determinism: the color percept and the systems around it, including affect, shape each other.</p>
+<p>A note on evidence. Effect sizes are given as correlations (r). By the conventions of this literature, r near .2 is modest and r above .3 is good. None of the effects reported here is large.</p>
+<h3>Projective Testing in Plain Language</h3>
+<h3>The Stimuli</h3>
+<p>There are ten cards, the same ten since 1921 (Table 1). They differ in color in a way that matters for everything that follows. The plates themselves are not reproduced here, out of respect for test security.</p>
+<p>The ink is mottled, so every card also varies in lightness and texture. The colored cards differ from the gray ones in shape, complexity, and order as well as in color. No card was ever specified colorimetrically. Any comparison of &quot;chromatic&quot; with &quot;achromatic&quot; cards is therefore confounded from the start.</p>
+<h3>How Color Is Scored</h3>
+<p>Each response is coded for whether color helped produce it, and whether color or form led (Table 2).</p>
+<h3>Scoring Systems, Old and New</h3>
+<p>Readers who open this literature will meet several scoring systems, and results from one do not always transfer to another. Three periods matter (Table 3).</p>
+<p>Rorschach died in 1922, a year after publishing the test, and left no finished system. In the United States five separate systems grew up between the 1930s and the 1950s, associated with Beck (1944), Klopfer and Kelley (1942), Hertz, Piotrowski (1957), and Rapaport et al. (1945 Rapaport et al. ( -1946)). All five kept Rorschach&#x27;s three-way coding of form and color but differed in administration, added categories, and interpretation (Exner, 1969). Most of the experiments on color shock described below were run under these systems.</p>
+<p>Exner&#x27;s Comprehensive System (Exner, 1974 (Exner, , 2003) ) combined what he judged the bestsupported elements of the five into one method with fixed administration, coding rules, and norms. It dominated practice and research from the 1970s into the 2000s, and its color scores are the ones most validity studies have used. It drew sustained criticism over its norms and the evidence for some scores, remains in use, and was revised in 2022 (Exner et al., 2022).</p>
+<p>The Rorschach Performance Assessment System (R-PAS; Meyer et al., 2011), developed by Meyer, Viglione, Mihura, Erard, and Erdberg, keeps the same cards and much of the same coding. It retains variables according to the meta-analytic evidence, controls the number of responses a person gives (Dean et al., 2007), and uses international reference norms. The two systems are now used side by side, and the older one can be used with international norms (Viglione &amp; Giromini, 2016). The Color-Affect Hypothesis and Why It Was Believed Rorschach&#x27;s claim was that the way a person handles color in a blot mirrors the way that person handles emotion. He held that chromatic color evokes emotional excitability and that color responses reflect a person&#x27;s overall affective responsiveness (Rorschach, 1921 (Rorschach, /1942)). His evidence was clinical observation of patients, and he knew its limits. The link, he wrote, &quot;has been found empirically,&quot; but &quot;the basis for this deduction is, however, quite insufficient to satisfy the demands of scientific logic&quot; (Rorschach, as quoted in de Villemor-Amaral &amp; Yazigi, 2022, p. 71). He did try one experiment. He showed people pictures of animals in which shape and color disagreed, such as a cat colored like a frog, and noted that some people named the animal by its color and others by its shape (de Villemor-Amaral &amp; Yazigi, 2022). That is the design that Siipola in 1950 and Kron and colleagues in 2009 would later use. Note what the claim is not. It says nothing about which color means which emotion. Red and blue are treated alike. The claim concerns a process: whether a salient feature is absorbed into a structured percept or allowed to take it over.</p>
+<h3>Color Shock</h3>
+<p>Rorschach also described &quot;color shock.&quot; Some people falter when the first colored card appears.</p>
+<p>They take longer, give poorer answers, or refuse the card. He read this as a sign of neurotic suppression of feeling. This became the tradition&#x27;s most testable prediction.</p>
+<h3>The Perceptual Passivity Argument</h3>
+<p>The most interesting defense of the hypothesis came from Schachtel (1943) and Shapiro (1956 Shapiro ( , 1960)), and it is a claim about perception. They argued that color and form are taken in differently. Color arrives at once and without effort. It is something that happens to the observer.</p>
+<p>Form must be actively traced, organized, and held.</p>
+<p>Emotion, they said, shares the structure of color. An affect is also undergone, not constructed. A person whose perception is easily captured by color is therefore a person whose behavior is easily captured by feeling. A pure color response is perceptual impulsivity. A form-led color response is color brought under control.</p>
+<p>A vision scientist will hear something familiar here. Color is a feature that is available early and can be registered with little attention. Shape recognition takes organization. The passivity argument is, in effect, an early statement that features differ in the effort needed to use them, joined to a hypothesis about individual differences in that effort. It was never tested with psychophysical methods.</p>
+<h3>Five Rival Explanations</h3>
+<p>In a congress lecture, Malmgren (1999) set out five ways the colored cards might disturb a response. They are worth keeping apart because modern color science can separate them. I give each with the classic source.</p>
+<p>1. Color directly evokes an affective response (Rorschach, 1921 (Rorschach, /1942)).</p>
+<p>2. Color perception and affect share a passive structure (Schachtel, 1943; Shapiro, 1956).</p>
+<p>3. Colored regions call up emotionally loaded content, such as red as blood (Wallen, 1948).</p>
+<p>4. Color conflicts with form, as in a blue region shaped like a spider (Siipola, 1950; Wolpin &amp; Hamlin, 1959).</p>
+<p>5. Color plus form is an informational overload, that is, simply a harder task.</p>
+<h3>What the Experiments Showed</h3>
+<p>Color shock was never convincingly shown to be caused by color. The most direct design was simple and will appeal to any experimentalist: reproduce the colored cards in gray and see whether the disturbance goes away. Lazarus (1949) showed 100 high-school seniors the standard cards and an achromatic version six weeks apart, in counterbalanced order, using group administration with slides. He concluded that color did not affect the scoring categories of the test or the frequency of the standard signs of color shock. The clearest change was a drop in poor-form answers when color was removed, which he attributed to the direct use of color in responses and not to disorganization. Later studies refined the picture (Table 4).  (Holtzman et al., 1954), and a blue printing of Card I drew the most responses among four printings (Exner, 1959). These effects were specific to particular cards and hues. Baughman (1958) found no general effect of color on latency or on the summary scores.</p>
+<p>Set against the five explanations, the pattern in these small and varied studies favors content associations (explanation 3) and color-form conflict (explanation 4). It gives little support to direct emotional arousal by color (explanation 1). The passivity account (explanation 2) was left largely untested.</p>
+<p>A fair summary must also record the defense. Malmgren (1999) argued that the experiments were weak tests. Lazarus&#x27;s group format could not record reaction times or spoken comments about the colors. His participants were normal adolescents, in whom little color shock would be expected. The test-retest design introduced practice effects. Later studies were small and examined one sign at a time. On this view the hypothesis is unproven, not disproven.</p>
+<p>Experimental work on it has been sparse for decades, so the matter was abandoned more than settled.</p>
+<p>For vision science, the lasting result is Siipola&#x27;s. The strongest disturbance came from a mismatch between color and form. In modern terms it anticipates questions about color-form congruency and object-color knowledge. Tanaka and Presnell (1999) later showed that color speeds recognition mainly for objects that have a typical color, such as a banana, and that the wrong color slows it. Knowledge of an object&#x27;s typical color can even change how its color looks. A banana shown in gray appears faintly yellow, and observers must shift it toward blue before it looks gray (Hansen et al., 2006; Witzel et al., 2011).</p>
+<h3>What Survives: The Validity Evidence</h3>
+<p>A narrower association received some support. The best evidence is a set of meta-analyses by Mihura et al. (2013), covering 65 Rorschach variables, 215 samples, and 25,795 participants.  report criteria. Dotted lines mark the authors&#x27; thresholds for good (r = .21) and excellent (r = .33) support, which also require statistical significance. The columns at right give each coefficient and the number of samples behind it. Three features of this figure deserve attention. First, the most robust result is a measure of integration. The weighted color sum has a higher point estimate but rests on five samples and a wide interval, whereas the Form-Color Ratio rests on twelve. The criteria on which the Form-Color Ratio showed the expected relationship were acute stress reaction, substantiated child abuse by fathers, low cerebrospinal levels of a serotonin metabolite, violent offending in men, hospitalization for psychosis, posttraumatic stress disorder, and suicide attempts. Mihura et al. label what the score measures &quot;emotional impulsivity or reactivity.&quot; The criteria themselves are heterogeneous. They may share something to do with emotional reactivity or its regulation, but they do not establish a single underlying construct.</p>
+<p>Whatever the score measures, it is the balance between color and form, not the presence of color.</p>
+<p>Second, the purest test of &quot;color equals raw emotion&quot; failed. Pure C, color with no form, showed no support in the available data. Neither did the experience type that Rorschach himself considered central.</p>
+<p>Third, these scores do not track what people say about themselves. Across all variables, mean validity was r = .27 against externally assessed criteria and r = .08 against self-report. For the Form-Color Ratio the self-report figure was r = .07, from two samples. In the few studies available, people whose blot responses are color-led did not describe themselves as more emotional. The gap could reflect limited introspective access, a mismatch between what the score and the questionnaires measure, or differences in method. The data cannot yet say which.</p>
+<p>Two cautions apply. Mihura and Meyer are co-developers of R-PAS and state that they share copyright and ownership in the manual, the scoring program, and the company that supports them (Mihura et al., 2013). And the color dominance score is not coded very reliably: in one study of 112 protocols its interrater reliability was only fair (intraclass correlation = .57), against .83 for the weighted color sum and .88 for achromatic color (Pignolo et al., 2017).</p>
+<p>Deciding whether color or form led a response leaves room for judgment. Reliability can be much higher under research conditions: with two trained judges scoring every protocol, Kron et al. (2009) reported intraclass correlations of .93 for form-led and .91 for color-led responses. A recent study of color diagnosticity in R-PAS coding found that some objects are strongly tied to particular colors and others only ambiguously, and called for more standardized guidance (Di Girolamo et al., 2026). That is a question vision scientists know how to study.</p>
+<h3>Resources, Stress, and Overload</h3>
+<p>The color scores were never read alone. Rorschach systems combine them with other scores into indices of how much a person has to work with and how much that person is carrying. Three kinds of response enter these indices. A human movement response sees a person doing something (&quot;two people lifting a basket&quot;). An inanimate movement response sees an object in motion (&quot;a spinning top&quot;). A shading response uses the light and dark gradations of the ink (&quot;it looks shadowy&quot;). The first, added to the weighted color sum, gives a score for psychological resources. The second and third are read as signs of stress and distress. The difference between resources and demands, called the D Score, was meant to show whether a person is coping or overloaded.</p>
+<p>Several of these indices did as well as the color scores or better in the same meta-analyses (Table 5). The typologies and single signs, such as the experience type and the use of white space as a sign of anger, did not. For this paper the lesson is that pure color read alone did poorly, and color did better when it was weighted by form or set in a balance: against form in the Form-Color Ratio, and against demands in the D Score.</p>
+<p>The Critics Wood et al. (2015) accepted four groups of scores, which they called the cognitive quartet: productivity, complexity and synthesis, form quality, and deviant verbalization. They placed human movement, the resources score, and the blends ratio in this cognitive group, as measures of complexity and not of emotion.</p>
+<p>They challenged the rest. They reanalyzed the four non-cognitive scores with the highest validity, adding unpublished dissertations. Two of those scores appear in Table 5. For the weighted color sum they obtained a validity of .41 across seven studies and 569 participants, higher than the original estimate. They still concluded that the score &quot;probably does not measure its intended target.&quot; Their reasons were specific. Patients with borderline personality disorder, a condition marked by emotional dysregulation, scored close to the nonpatient average. And in one dissertation the score was unrelated to ratings of the person&#x27;s emotionality by friends and family (r = -.08) or by the person (r = -.02). They called its psychological meaning &quot;presently a mystery&quot; (p. 241). For the shading total the result was worse. With ten further studies added, most of them dissertations, its validity fell from .37 to .09. Wood et al. did not reanalyze the Form-Color Ratio or the D Score. Their overall conclusion was that the evidence does not yet justify using the system to measure emotionality or negative affect. Mihura et al. (2015) replied that the reanalysis contained methodological errors, data errors, and omitted studies, and that its negative conclusions did not follow from its own numbers. Wood et al. nonetheless called the original estimates &quot;an unbiased and trustworthy summary of the published literature&quot; (p. 243). The clearest common ground between the two sides is the stronger evidence for the test&#x27;s perceptual and cognitive scores, and its developers now present it as a performance task (Meyer et al., 2014). The color scores that survive are the ones that can be read that way.</p>
+<h3>How the Newer System Reframed Color</h3>
+<p>R-PAS kept the surviving color variables and changed how they are described. The share of responses to the colored cards, formerly the Affective Ratio, is now presented as a general responsiveness to compelling stimuli, and the color dominance score as a measure of cognitive control and modulation in reaction to the environment (Andò et al., 2019). The outward and inward experience types gave way to a simple proportion. The move is away from emotion and toward stimulus salience and control, which are concepts vision science shares.</p>
+<p>The older reading has not been abandoned. Malone et al. (2013) studied 88 patients referred for psychological testing at a hospital clinic, scored with the Comprehensive System. They noted that the link between color and affect had &quot;a long history of theoretical support but minimal empirical evidence&quot; (p. 71). Color-led responses (CF) went with self-reported anxiety, depression, suicidal ideation (r = .35), and neuroticism (r = .35). Form-led color responses (FC) were unrelated to self-reported symptoms and to IQ, but went with better scores on tests of attention and memory (r = .28 to .36).</p>
+<p>Patients reporting more suicidal ideation and more psychotic experience were more likely to show a balance tipped toward color-led responses. The authors called this initial support for the affect-modulation reading. The study has limits. The sample was small, the color scores were not coded by a second rater, and the correlations were exploratory, with only the significant ones reported. Two of its results stand out here. The relationships were with self-report, where the meta-analysis found almost none. And the formled response went with attention and memory, which fits a cognitive reading as well as an emotional one.</p>
+<h3>Cognitive Tempo</h3>
+<p>One study links color dominance to a standard cognitive variable. Katz and Ziffo (1975) classified people as impulsive or reflective on the Matching Familiar Figures Test and showed them the chromatic cards.</p>
+<p>Impulsive responders gave more color-dominated (CF and C) responses. This fits one measurable version of the passivity argument: a fast, less analytic style of perceptual decision goes with letting color lead.</p>
+<h3>A Direct Test with an Object-Recognition Task</h3>
+<p>One study has tested the perceptual reading directly, and it deserves to be better known. Kron et al. (2009) asked whether the color scores reflect how much a person&#x27;s visual system uses color when recognizing ordinary objects. They photographed ten fruits and vegetables and showed each in its typical color, in gray, and in the typical color of another item, such as a red banana. In a first experiment with 15 undergraduates, naming was fastest for typical colors and slowest for wrong colors. The difference between the two, the congruency effect, measures how much color enters into recognizing the object.</p>
+<p>In the second experiment, 59 ninth-grade students took the Rorschach, scored with the Comprehensive System, and then the naming task. Students whose color responses were mostly color-led (n = 24) showed a congruency effect of 236 ms, against 114 ms for those whose color responses were mostly form-led (n = 17). Scored as a continuous balance of form-led against color-led responses, the Rorschach measure correlated with the congruency effect at r = -.25.</p>
+<p>The weighted color sum and the Affective Ratio did not (r = .08 and .10). Only the balance of color against form predicted how much color affected object naming. The amount of color in the record did not.</p>
+<p>The authors raised the conclusion this paper argues for. Their results, they wrote, &quot;might imply that the response process of the [Rorschach] is another form of an object-recognition task,&quot; in which the color scores &quot;are the relative contribution of colors and form to this recognition&quot; (p. 141). They also named the alternative. A wrongly colored object sets up a conflict, and people with color-led records may simply be worse at resolving conflict, as in the Stroop task.</p>
+<p>That would make the score a measure of cognitive control, which is close to how R-PAS now describes it. The study could not separate the two readings.</p>
+<p>The study has limits. It is a single experiment with adolescents, the effect is modest, and the colors were not calibrated. I found no replication among the papers that cite it. A group in Japan followed up the conflict reading with Stroop-type tasks and brain potentials, in work published mainly in Japanese. A reanalysis of that work found only limited associations between chromatic color responses and performance on a Stroop-type task of attentional control (Matsuda et al., 2025), which does not favor the conflict reading. In a small sample of community adults, a balance tipped toward color-led responses went with greater thickness of the middle frontal cortex, which the authors took as support for the score as a measure of control over emotional responses (Steinert et al., 2021). Neither result settles the matter. But Kron et al. showed that the question can be answered in the laboratory, and that the answer so far favors a perceptual or cognitive account of the color-form balance.</p>
+<h3>Parts and Wholes</h3>
+<p>Color is not the only feature the Rorschach asks a person to integrate. Every response is also coded for location: whether the person used the whole blot (W), a common detail (D), or an unusual detail (Dd). Further scores record how well the parts were organized into a whole, such as synthesized responses (DQ+) and the frequency of organizational activity (Zf). A vision scientist will recognize the question of global and local processing, familiar from the hierarchical-figure work that began with Navon (1977).</p>
+<p>Factor analysts have looked at these scores for decades (Meyer, 1992, reviews the history). In a clinical sample of 152 adolescents, Wood et al. (2003) found three clearly defined factors in</p>
+<p>Comprehensive System scores: one of synthesized complexity, defined partly by the proportion of form-only responses, one of productivity, and one of form quality. R-PAS makes a related composite, Complexity, its first interpretive step. Viglione (1999) introduced the term for the productivity, precision, differentiation, and integration shown across a person&#x27;s responses. The score combines features of location and object quality, content, and determinants. Responses of higher Complexity were accompanied by greater activity in the dorsal attention network (Vitolo et al., 2021).</p>
+<p>Three points follow for the present argument. First, the structure that factor analysis recovers from the test is a structure of perceptual and cognitive integration. That fits the view that the Rorschach is best read as a perceptual task. Second, color use is not independent of that structure. Determinants, color among them, enter the Complexity score by construction, and form-only responding helped define the complexity factor of Wood et al. (2003). A person who gives many rich, synthesized responses will tend to produce more color responses of every kind.</p>
+<p>Third, the color dominance score is a proportion, so it is partly protected from this, but any claim that it reflects something specific must show that it separates from complexity and productivity.</p>
+<p>Whether letting color lead over form goes with seeing wholes or with seeing parts is an open and answerable question. The answer would say whether color dominance belongs to a general style of integration or stands apart from it.</p>
+<h3>The Neuroimaging Evidence</h3>
+<p>One imaging study compared the card types directly. Ishibashi et al. (2016) scanned 40 adults and found greater activity in left V4 and left orbitofrontal cortex for chromatic cards than for achromatic cards. The orbitofrontal result is sometimes taken as support for the color-affect hypothesis. It should not be. The card types differ in many ways besides color, and orbitofrontal cortex does much besides emotion. Giromini, Viglione, and colleagues have examined neural activity during Rorschach responding and mirroring activity linked to movement responses (Giromini et al., 2010 (Giromini et al., , 2017;; Porcelli et al., 2013; Vitolo et al., 2021). In a preliminary study, R-PAS stress and distress scores, which include achromatic color, predicted electrodermal reactivity to a later laboratory stressor (Giromini et al., 2016). None of this work isolates chromatic color, and that gap is an opening for vision science.</p>
+<h3>Other Color-Based Tests</h3>
+<p>Tests that read personality from color preference or color choice have fared worse than the Rorschach (Table 6). They assume that each color carries a fixed psychological meaning, which is the assumption modern research most clearly rejects as a basis for diagnosis.  (Braun &amp; Bonta, 1979); personality reports based on it showed little agreement with reports based on a standard inventory in 42 counseling students (Holmes et al., 1984); its interpretations show a Barnum effect (Holmes et al., 1986) Color Pyramid Test Fills a pyramid with colored squares Evidence sparse and dated (Schaie, 1963; Schaie &amp; Heiss, 1964) Holtzman Inkblot Technique One response to each of 45 blots Red blots drew more love and anger words; other colored blots had no effect on emotion words (Leichsenring, 2004) Color in children&#x27;s drawings Child colors or draws to a prompt Children used preferred colors for nice figures and less preferred colors for nasty ones (Burkitt et al., 2003); in free drawings of happy and sad events, color use did not differ (Crawford et al., 2012) Two of these results are useful to vision science despite the failure of the tests.</p>
+<p>The Holtzman result isolates red. Leichsenring (2004) scored the emotion words in responses and separated red blots from other colored blots. Healthy adults, neurotic patients, and borderline patients expressed love and anger more often to cards containing red. Non-red colors had no effect on love, anger, anxiety, or depression. That is what one would expect if the effect runs through what red stands for and not through chromatic color as such. Love and anger are the two emotions most strongly tied to red in cross-cultural work.</p>
+<p>The drawing result shows color used as a deliberate signal. When asked to color a nice or a nasty figure, children choose colors they like or dislike. They do not leak a mood onto the page, and Crawford et al. (2012) concluded that color use is not a reliable index of the emotional content of a drawing. Color here is a tool of expression chosen by the person.</p>
+<h3>The Modern Science of Color and Emotion</h3>
+<p>Modern research finds that people link colors to emotions with striking agreement. Evidence that colors change how people feel is much thinner and less consistent, though it is not absent. Both halves of that sentence bear on the projective tradition.</p>
+<h3>Shared Associations: Jonauskaite and Colleagues</h3>
+<p>Jonauskaite, Abu-Akel, et al. ( 2020) asked 4,598 people from 30 nations, speaking 22 languages, to associate 12 color terms with 20 emotion concepts. National patterns correlated on average r = .88 with the global pattern. Agreement was closer between nations that are linguistically or geographically near. A classifier could still identify a participant&#x27;s nation at 34.4% against a chance rate of 9.7%, so culture leaves a mark on a largely shared pattern. Among the prominent associations, red alone was linked to both a positive emotion, love, and a negative one, anger.</p>
+<p>Four further results matter here.</p>
+<p>• Words work nearly as well as patches. Emotion associations for color terms and for color patches were highly similar, r = .82 (Jonauskaite, Parraga, et al., 2020).</p>
+<p>• Seeing the color is not required. Sixty-four men with congenital red-green color blindness showed associations similar to those of 66 controls, and severity of the deficiency made no difference (Jonauskaite et al., 2021). The associations are carried largely by concepts. The opposite split, seeing a color without having its concept, was noticed long ago. Darwin wrote that his young children &quot;seemed quite incapable of affixing the right names to the colours in coloured engravings&quot; (Darwin, 1877).</p>
+<p>• Associations are not feelings. A review of 132 articles and 42,266 participants concluded: &quot;for now, we do not know if we feel colours, but we know that colours convey emotions&quot; (Jonauskaite &amp; Mohr, 2025, Conclusions section). Of 31 studies of color and felt affect, only eight immersed participants in colored environments and accounted for lightness or chroma as well as hue, and their results were inconsistent (Jonauskaite et al., 2026).</p>
+<p>• The body and the report can disagree. Sixty people spent six minutes in red or blue virtual-reality rooms that varied in lightness and saturation. Heart rate rose more in dark rooms than in medium-light ones, and skin conductance rose more in red rooms than in blue ones, on some lightness and saturation combinations. Self-reported valence and arousal showed no effect of hue, lightness, or saturation (Weijs et al., 2023).</p>
+<p>Physiological arousal and felt emotion are separate outcomes.</p>
+<p>Five linked presentations at the Progress in Colour Studies meeting in Wrocław, held on 10 to 12 September 2026, extend this picture. They are conference reports, not yet peer-reviewed publications, and the figures below are from the printed abstracts.</p>
+<p>• Shared structure across 35 countries. In a sample of 6,995 people from 35 countries and 38 languages, association patterns were highly similar between countries (average r = .92). Two dimensions organized them: valence with lightness, and arousal with warmth (Ouznadji et al., 2026).</p>
+<p>• No vision required. People with congenital blindness (n = 25), acquired blindness (n = 18), and intact vision (n = 60) rated 12 color terms against 20 emotion concepts.</p>
+<p>Association patterns correlated between .865 and .900 across the three groups. The authors conclude that visual experience is not necessary for conceptual color-emotion associations (Jonauskaite, Gierlinger, et al., 2026).</p>
+<p>• Colored rooms and felt emotion. Eighty people spent one minute in each of 18 virtualreality rooms that varied in hue and lightness. In the printed abstract, hue and lightness had no significant effect on which emotions people reported. Most reported feeling relaxed, calm, bored, or neutral (Adamczyk et al., 2026).</p>
+<p>• Imagined against experienced. In a companion poster, 77 people both imagined colored rooms and were immersed in them. The two patterns of color-emotion correspondence agreed only weakly (r = .37). Red diverged most: 36% expected to feel tense in a red room, but 6% reported feeling tense after being in one, and the most common report was calm (Droz et al., 2026).</p>
+<p>• Meaning behind the associations. A fifth paper coded the free associations people give to colors. When 135 people gave associations to their favorite and least favorite colors, the central prediction of ecological valence theory held: favorite colors drew mostly positive, object-based associations. Purple, whose emotional associations vary most across studies, carried the most abstract and diverse meanings. The authors suggest that the more abstract a color&#x27;s meaning, the less people converge on the same emotions (Epicoco et al., 2026).</p>
+<p>The conclusion is the same as before, and firmer: color carries affective meaning more reliably than it has been shown to produce the affect. Two of these results bear directly on the Rorschach.</p>
+<p>The last suggests a conjecture. If abstract meanings produce divergent emotions, then concrete ones should produce convergent responses, and the red of Cards II and III has about as concrete a meaning as a color can have. The red-room result shows the distance between belief and experience. What people believe red will do to them is close to what Rorschach believed it did.</p>
+<p>What red did in the room was much less.</p>
+<p>The 2025 review also found that lightness and saturation carry much of the effect. Light colors go with positive emotions and dark colors with negative ones. Saturated colors go with positive, high-arousal emotions. Gray and black were each linked to sadness in 75% of the studies that examined the pairing.</p>
+<h3>Why the Associations Exist: Schloss and Colleagues</h3>
+<p>Karen Schloss&#x27;s work supplies a mechanism. Ecological valence theory holds that people like a color to the degree that they like the things that carry it (Palmer &amp; Schloss, 2010). In the original study, liking for associated objects explained 80% of the variance in average color preference.</p>
+<p>Later tests in British, Saudi, and Japanese samples found less, from 66% down to 37% (Al-Rasheed et al., 2022; Taylor &amp; Franklin, 2012; Yokosawa et al., 2016).</p>
+<p>The theory makes preference movable. After people viewed liked objects of one color and disliked objects of another, preference for the color of the liked objects rose reliably (Strauss et al., 2013). Schloss et al. (2020) then showed that the familiar idea of happy yellow and sad blue depends on lightness and chroma. With those controlled, &quot;colors with blue hue were no sadder than colors with yellow hue, and in some cases, colors with blue hue were actually happier&quot; (p. 813).</p>
+<p>Jonauskaite and Mohr (2022) questioned the color representations and the use of a single happysad scale in that study, and noted that dark yellows may be seen as brown.</p>
+<p>More broadly, Schloss (2024) treats a color&#x27;s meaning as something the observer infers in context from a network of learned color-concept associations. Meaning is inferred. It is not fixed.</p>
+<h3>Does Color Change Feeling and Behavior? Oberfeld, and Elliot and Maier</h3>
+<p>Two further lines of work ask whether color does something to the person, which is the question closest to Rorschach&#x27;s own. Daniel Oberfeld&#x27;s group in Mainz has tested the question with careful stimulus control. Wilms and Oberfeld (2018) noted that many earlier studies &quot;failed to control for saturation and brightness when presenting stimuli with different hues&quot; (p. 896). They varied hue, saturation, and brightness independently on an LED display. Sixty-two people viewed each of 30 colors for 30 seconds and then rated how they felt. Saturated and bright colors raised reported arousal and valence and produced stronger skin conductance responses, and arousal rose from blue and green to red. Saturation had the largest effect on arousal. The authors concluded that the effect of a color on emotion is determined &quot;by the combination of hue, saturation, and brightness&quot; (p. 910), not by hue alone. A second study from the same laboratory found no effect in a more ordinary setting. When 170 students took intelligence and memory tests in cabins painted red, pink, blue, or white, neither their performance nor their reported emotional state differed by color (von Castell et al., 2018). Brief, saturated, full-field color can shift reported feeling. The color of a room during a task may not.</p>
+<p>Andrew Elliot and Markus Maier work in social and personality psychology. Their review begins with the older idea that long-wavelength colors such as red arouse and short-wavelength colors such as blue calm. Of the many studies testing it they write that &quot;they have primarily produced null results; this is particularly the case for experiments utilizing rigorous methods&quot; (Elliot &amp; Maier, 2014, p. 98). That is the same verdict the Rorschach experiments reached on direct arousal. Their own color-in-context theory replaces arousal with meaning. A color carries meanings, some learned and some based on inherited tendencies. The inherited part has a long history. Darwin (1872) described the face reddening in rage, paling in fear, and blushing in shame, and observed that monkeys also redden when enraged. Red as a sign of anger may be read from faces before it is learned from culture. The meanings depend on the setting, and the color is said to shift motivation and behavior without the person&#x27;s awareness (Elliot &amp; Maier, 2012 , 2014). Red is the main case. In a test setting it is said to mean failure and to lower performance, and in courtship to increase attraction. The early findings drew wide attention, and they have weakened. A meta-analysis of 67 effect sizes found that the effect of red on test performance was much larger in the first studies than in later ones and concluded that, after correction for publication bias, there was no evidential value for it (Gnambs, 2020). A metaanalysis that included Elliot as an author found a small effect of red on men&#x27;s ratings of women&#x27;s attractiveness (d = 0.26) and a very small one for women rating men (d = 0.13), with signs that the effects had declined over time and were inflated by bias (Lehmann et al., 2018). Elliot and Maier (2014) themselves cautioned that the research &quot;remains at a nascent stage of development&quot; (p. 111).</p>
+<p>The two halves of the theory have fared differently, and the pattern is familiar.</p>
+<p>The claim that the same red means different things in different settings agrees with Schloss&#x27;s account and with what Wallen and Siipola found in inkblots. The claim that red acts on behavior automatically is the closest modern counterpart to Rorschach&#x27;s belief that color acts on the person. Its mechanism is meaning, not arousal, but like Rorschach&#x27;s belief it has weakened under stricter tests.  inspired by the color-in-context theory of Elliot and Maier (2012), in which the meaning of red depends on the setting and is said to shift motivation and behavior. Meta-analyses have weakened the evidence for those last two steps. Solid outlines mark what the cited work establishes. Dashed outlines mark this paper&#x27;s extension of the framework to inkblots, or a step that has not been established. The three lower panels are this author&#x27;s renderings and are not the cited authors&#x27; own figures. Three consequences follow. First, the blood responses to the red on Cards II and III need no theory of direct emotional arousal. Red is strongly associated with blood, anger, and love. The association does the work, as Wallen saw in 1948 and Leichsenring confirmed in 2004.</p>
+<h3>What This Does to the Projective Tradition</h3>
+<p>Second, high agreement leaves little for a diagnostic test to find. If nearly everyone links black with sadness, then linking black with sadness says little about a person. This is one reason tests that assign fixed personal meanings to colors, such as the Lüscher, face a basic validity problem.</p>
+<p>Third, the Rorschach finding that survives is not reducible to shared meaning. It concerns how a person combines color with form, although meaning and the typical colors of objects may contribute to that and should be measured (Di Girolamo et al., 2026). Shared meaning and individual style are different things, and the two fields have each studied one of them.</p>
+<h3>A Constructivist Reading: Color Influences Emotion, Emotion Influences Color</h3>
+<p>Both literatures make more sense inside a model in which color and emotion determine each other. The constructivist account of color (Peterzell, 2026) supplies one. This section states the model briefly and then sorts the evidence by direction of influence.</p>
+<h3>The Model in Brief</h3>
+<p>The account distinguishes three levels.</p>
+<p>• Level 1 is the physical stimulus: light of a given spectral composition reaching the eye.</p>
+<p>• Level 2 is the color percept: the hue, saturation, and brightness a person consciously sees.</p>
+<p>• Level 3 is the whole event the stimulus sets off. It has four families of processes: perceptual, physiological, cognitive-semantic, and affective-social-behavioral.</p>
+<p>The percept is the visible core of the event, not the end of the process. The model&#x27;s central claim is reciprocal determinism, a term borrowed from Bandura (1978). The Level 3 systems do not merely respond to the color. They help fix what is seen, while the percept shapes them in turn. 3 event in four families, each reciprocally related to the percept. Arrow weight shows how well established each inward influence is.</p>
+<p>Figure 4 shows the general model. Figure 5 applies it to color and emotion and marks the two directions of influence taken up below. (2b), and possibly how color looks (2c). Arrow weight shows the strength of the evidence, using the same three grades as Figure 4.</p>
+<p>The model also issues a warning that applies with force here. A finding at one level does not transfer to another without argument. An association is not an induced feeling. A verbal report about a blot is not a measurement of the percept.</p>
+<h3>Direction One: Color Influences Emotion</h3>
+<p>This is the direction both fields have mostly studied, and the evidence is uneven (Figure 5). That color calls up emotion concepts is well established: association patterns correlated r = .88 across 30 nations. That color calls up affectively loaded content has moderate support, in the blood seen in the red of Cards II and III and the love and anger words given to red Holtzman blots. That color raises bodily arousal has some support, inconsistent across measures. Heart rate rose in dark virtual rooms and skin conductance in red ones, without matching changes in reported feeling (Weijs et al., 2023). That color directly produces a felt emotion is not established as a general mechanism. Color shock was not shown to be caused by color, although saturation, brightness, and hue have shifted reported feeling under controlled conditions (Wilms &amp; Oberfeld, 2018).</p>
+<p>The pattern suggests that color reaches emotion mainly through the cognitive-semantic family and not by a direct line. Rorschach&#x27;s first explanation was not established by the experiments that tested it, and Wallen&#x27;s and Schloss&#x27;s is better supported. In the model&#x27;s terms, the path runs from the percept to meaning to affect.</p>
+<h3>Direction Two: Emotion Influences Color</h3>
+<p>This is the direction modern color-emotion science has largely set aside, and it is where the projective tradition has the most to offer. The oldest observation of emotion changing color is Darwin&#x27;s (1872): rage reddens the face, fear pales it, and shame brings a blush. That is emotion changing the stimulus itself, at Level 1, for another observer. Within the observer, three kinds of influence need to be kept apart, because they sit at different levels.</p>
+<p>Emotion shapes which colors a person chooses. After a sadness induction, healthy participants chose less chromatic and more often achromatic colors to represent their mood than after joy, relaxation, or fear, and darker colors than after joy or relaxation (Jonauskaite et al., 2019). Asked for a color to represent their mood, most anxious and depressed patients chose one, and two grays were their most frequent choices, whereas the healthy participants who chose a color most often picked a yellow (Carruthers et al., 2010). Use of black and gray in inkblot responses relates to independent markers of negative emotion (r = .24). This is the best supported of the three influences, and for color choice the evidence is experimental.</p>
+<p>Emotion may shape how color is combined with form. Color dominance relates to several externally assessed clinical and behavioral criteria (r = .32) and to an impulsive cognitive tempo (Katz &amp; Ziffo, 1975). On this reading, an aroused or poorly regulated state loosens the hold of form and lets the most salient feature lead. The direction of cause is not established, since the data are correlational. But the reading is the reverse of Rorschach&#x27;s. It is the state of the person that alters the handling of color.</p>
+<p>Emotion alters the percept itself. This is the strong claim, and the evidence is thin. People with depression often say the world looks gray. Bubl et al. (2010) reported sharply reduced retinal contrast gain in 40 patients with depression, measured with the pattern electroretinogram. The same laboratory has since reported related findings (Bubl et al., 2012 (Bubl et al., , 2015)), but the one independent test found normal electroretinograms alongside reduced psychophysical contrast sensitivity (Fam et al., 2013). These are results about luminance contrast, not about color. A report that sadness impairs blue-yellow discrimination was retracted by its authors within months (Thorstenson et al., 2015). Knowledge can reach the percept: the memory color effect shows that what a person knows about an object&#x27;s color alters its appearance (Hansen et al., 2006; Witzel et al., 2011). That is a Level 3 process changing Level 2, but it concerns object knowledge, not emotion. Robinson et al. (2015) review the evidence on affect and color perception. And Firestone and Scholl (2014) showed that some reported effects of mental states on perceived brightness behave like effects on judgment, not on perception. The question is open.</p>
+<p>Here the model&#x27;s warning applies. Inkblot data show that emotion is tied to how people use and report color. They do not show that emotion changes how color looks. The first is a Level 3 behavior. The second would be a Level 2 effect. Reciprocal determinism predicts the second, and the projective literature cannot confirm it. That is a prediction to test.</p>
+<h3>Where Personality Enters</h3>
+<p>Bandura&#x27;s formulation had three parts: the person, the person&#x27;s behavior, and the environment, each shaping the others. Personality, in the sense of stable individual differences, is the first part.</p>
+<p>The projective tradition&#x27;s lasting contribution may be its insistence that observers differ in a stable way in how they handle color. Many Rorschach scores have been reported to hold steady over retest intervals of years (Exner et al., 1978). Classical group-average methods in vision science often treated such differences as noise. Individual-differences research in vision treats them as signal: the way measures vary together across observers reveals the mechanisms behind them (Mollon et al., 2017; Peterzell, 2016). The constructivist account takes the same view of the chromatic event. Jonauskaite and Mohr (2025) make a related point from within color-emotion science: not everybody shares the same correspondences, and individual differences that have not yet been studied probably explain much of the variation.</p>
+<p>Two features of the Rorschach data fit this view. Agreement on what colors mean is high, so meaning is unlikely to be the main place where people differ. And the color scores show little relation to self-description in the few studies available, so the differences may not be available to introspection. What varies between people appears to be a way of processing: the weight given to color against form when a percept must be constructed. That is a perceptual individual difference with affective correlates, which is the kind of variable a reciprocal model expects to find.</p>
+<h3>What Vision Science Can Learn</h3>
+<p>The projective literature offers vision science several things, none of which requires accepting projective testing as a clinical tool. It offers a neglected individual difference, the balance of color against form. It offers an early result on color-form conflict and a testable hypothesis that color is taken in with less effort than form. It offers a cautionary record of what happens when uncalibrated stimuli are interpreted for decades. And it offers the reverse question: whether the state of the person shows in how color is used. In return, vision science can offer calibrated stimuli, more reliable measurement, the distinction between associating a color with an emotion and feeling it, and a mechanism, learned color-concept associations, for the content the cards evoke.</p>
+<h3>Studies That Would Close the Gap</h3>
+<p>Five studies would connect the two fields. Kron et al. (2009) made a start on the fourth, and two older studies bear on the second. Otherwise I found no published study that combines these elements.</p>
+<p>1. Calibrated inkblots. Build blots in an approximately uniform color space, measure the displayed colors, and vary hue, lightness, and chroma independently on the same forms.</p>
+<p>Code responses with R-PAS and record reaction time, skin conductance, and heart rate.</p>
+<p>This is Lazarus&#x27;s design with modern color science, and it provides a controlled basis for testing the five explanations. Figure 6 shows the logic.</p>
+<h3>2. Color-deficient observers.</h3>
+<p>Give the standard cards to people with congenital red-green deficiency and to matched controls. People with these deficiencies still see color, so measure each observer&#x27;s color discrimination and do not rely on group labels. If color-led responses and blood content depend mainly on knowing a region is red, they will vary little with discrimination. If they depend on seeing it, they will vary more. The finding that blind and color-deficient people share the usual color-emotion associations makes the first outcome the likelier one. Two older studies give different answers. Among young men, 43 with color vision deficits differed from 43 controls only in giving fewer pure color responses (Corsino, 1985). Among 42 older adults, the 10 with color vision deficits showed more affective constriction on the Rorschach than the 32 with normal color vision, after controls for intelligence and number of responses (Hayslip et al., 1992). The first sample probably had lifelong deficits and the second deficits acquired with age, so the two are not strictly comparable. CIELAB is only approximately uniform, so a real study would measure the displayed colors and report their tristimulus values and viewing conditions. Displayed and printed colors will differ. A full design would add shading as a fourth factor.</p>
+<h3>Conclusion</h3>
+<p>The Rorschach tells us almost nothing about how color is seen and something modest about how color is used. Its founding belief, that color stirs emotion directly, was not established by the experiments that tested it. Narrower findings fared better. Letting color lead over form is modestly associated with several independently assessed outcomes. Some indices that set color in balance with other responses, such as the one for coping versus overload, are also supported, although the critics dispute several of them. These results show that the scores track something real. They do not establish what the scores measure. One experiment has shown that the balance of color against form predicts how strongly color affects the naming of ordinary objects (Kron et al., 2009). It has not been replicated, and it shows that the question belongs to vision science.</p>
+<p>Modern color-emotion science explains what the projective tradition could not. Colors carry widely shared emotional meanings learned from experience with colored things. That explains the blood on Card II and helps explain the weakness of tests built on fixed color meanings. Neither field has the whole picture. One has studied what colors mean to nearly everyone. The other has studied how individuals differ in handling color. A model in which color and emotion determine each other reciprocally has room for both, and it points to the question both have left open: whether a person&#x27;s emotional state changes not only what they do with color but what they see.</p>
+<p>The author received no financial support for the research, authorship, and/or publication of this article.</p>
+<p>Ethical approval and informed consent were not required for this article, which reviews published work and reports no new data from human participants.</p>
+<h3>A</h3>
+<p>projective test shows a person an ambiguous stimulus and asks an open question about it. The idea is that, because the stimulus does not dictate the answer, the answer reflects the person. The Rorschach is the best known. The examiner hands over an inkblot and asks, &quot;What might this be?&quot; A psychophysicist can think of it as a perceptual task with an unconstrained response. The person must organize an ambiguous image into an object. Examiners then code not only what was seen but which features of the blot were used to see it. Those coded features are called determinants.</p>
+<h3>Figure 2</h3>
+<p>Figure2shows the color-related results. Externally assessed criteria are outcomes measured independently of the test, such as diagnosis or recorded behavior.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Validity of the color-related Rorschach variables in the meta-analyses of Mihura et al. (2013). Points are random-effects validity coefficients and bars are 95% confidence intervals. Filled circles show validity against externally assessed criteria and open squares against self-</p>
+<p>Two points keep this in proportion. These are relationships with outside criteria, drawn from published studies. They show that a score tracks something real, not that it measures what its name says, and the next section shows that two of them are contested. And the resources score is half movement and half color. Human movement is related to cognitive ability, so the validity of the resources score may owe more to its movement half than to color.</p>
+<h3>Figure 3</h3>
+<p>Figure3traces a single red region through the four accounts.</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Four accounts of a red region in an inkblot. Top: Rorschach&#x27;s account, in which color arouses emotion directly. Second: a model inspired by the color inference framework of Schloss(2024), in which the red activates learned color-concept associations and the context selects among them. The association weights shown are illustrative. Third: a model inspired by the shared color-emotion associations described byJonauskaite and Mohr (2025). Bottom: a model</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. The constructivist model of the chromatic event, reproduced from Peterzell (2026). (A) The percept, constructed. The inherited feedforward chain carries the chromatic stimulus (Level 1) to the color percept (Level 2). The Level 3 determinants and the percept reciprocally determine one another (double-headed arrows). (B) The whole event. The same model as one event: the stimulus at the hub generates the percept (inner ring), the visible core of a larger Level</p>
+<h3>Figure 5.</h3>
+<p>Figure 5. Color and emotion within the constructivist model. Path 1, color influences emotion: the percept calls up concepts and content (1a), meaning may carry feeling (1b), and color may induce felt emotion directly (1c). Path 2, emotion influences color: the person&#x27;s affective state shapes which colors are chosen (2a), how color is weighed against form in the perceptual family</p>
+<h3>3.</h3>
+<p>Association profiles against inkblot behavior. Measure each person&#x27;s color-emotion associations and test whether they predict that person&#x27;s content and color use on the colored cards. This asks directly whether shared meaning or individual style drives the responses. 4. Color dominance against binding, search, and tempo. Replicate the object-naming result of Kron et al. (2009) in adults with calibrated colors, and add a conflict task without color to separate reliance on color from difficulty with conflict. Then relate color dominance to laboratory measures of color-form binding, feature search, and cognitive tempo, with coding reliable enough to support the analysis. This tests whether the score is a perceptual variable. 5. Emotion to percept. Induce or sample mood states and measure color appearance with psychophysical methods such as hue scaling, discrimination thresholds, and achromatic settings, with designs that separate sensitivity from response bias. Preregister it, given the retraction history. This is the direct test of whether emotion reaches Level 2. Studies 4 and 5 lend themselves to a factor-analytic individual-differences design. The analysis should include the location and synthesis scores and should control for the number of responses and for Complexity, since these dominate the factor structure of the test. If color dominance, binding performance, and affective reactivity then load on a common factor, the perceptual reading gains support. If color dominance instead loads with whole and synthesized responses, it is one face of a general integrative style. A separate factor would suggest a more specific dimension of color use.</p>
+<h3>Figure 6.</h3>
+<p>Figure 6. Proposed calibrated stimuli for Study 1. One computer-generated symmetric form, which is not a Rorschach plate, is shown on a neutral ground. Top row: hue varies with lightness and chroma fixed. Middle row: lightness varies with hue and chroma fixed. Bottom row: chroma varies with hue and lightness fixed. Values are nominal CIELAB coordinates and are illustrative.</p>
+<h3>Table 1.</h3>
+<p>The ten Rorschach cards by color content.</p>
+<h3>Table 2.</h3>
+<p>How color use is coded in a Rorschach response.</p>
+<h3>Table 3.</h3>
+<p>Rorschach scoring systems and how each treats color.</p>
+<h3>Table 4.</h3>
+<p>Experimental and review evidence on color and disturbance in inkblot responses.</p>
+<h3>Table 5.</h3>
+<p>Validity of the indices of emotional resources, stress, and control in the meta-analyses ofMihura et al. (2013). Coefficients are random-effects estimates against externally assessed criteria, with the number of samples in parentheses.</p>
+<h3>Table 6.</h3>
+<p>Other color-based projective methods and the evidence on them.</p>
+<h3>References</h3>
+<p>Adamczyk, A., Droz, K., Diaz-Barrancas, F., Dan-Glauser, E., Ruggieri, P., Mohr, C., &amp; Jonauskaite, D. (2026, September 10). Subjectively felt and objectively measured emotions in response to colour: A study in virtual reality [Conference presentation; abstract book, p. 10]. Progress in Colour Studies 2026, Wrocław, Poland.</p>
+<p>Al-Rasheed, A. S., Franklin, A., &amp; Maule, J. (2022). A test of the ecological valence theory of color preference, the case of Arabic. Frontiers in Psychology, 13, Article 1010108. https://doi.org/10.3389/fpsyg.2022.1010108</p>
+<p>Andò, A., Pignolo, C., Viglione, D. J., Zennaro, A., Caviglia, S., &amp; Ferro, L. (2019). Assessing the personality profile with ADHD characteristics using the Rorschach Performance Assessment System (R-PAS). Journal of Child and Family Studies, 28, 1967-1981. https://doi.org/10.1007/s10826-019-01359-y</p>
+<p>Bandura, A. (1978). The self system in reciprocal determinism. American Psychologist, 33(4), 344-358. https://doi.org/10.1037/0003-066X.33.4.344</p>
+<p>Baughman, E. E. (1958). The role of the stimulus in Rorschach responses. Psychological Bulletin, 55(3), 121-147.</p>
+<p>Beck, S. J. (1944). Rorschach&#x27;s test: Vol. 1. Basic processes. Grune &amp; Stratton.</p>
+<p>Braun, C. M. J., &amp; Bonta, J. L. (1979). Cross-cultural validity, reliability, and stimulus characteristics of the Luscher Color Test. Journal of Personality Assessment, 43(5), 459- 460. https://doi.org/10.1207/s15327752jpa4305_3</p>
+<p>Bubl, E., Ebert, D., Kern, E., Tebartz van Elst, L., &amp; Bach, M. (2012). Effect of antidepressive therapy on retinal contrast processing in depressive disorder. The British Journal of Psychiatry, 201(2), 151-158. https://doi.org/10.1192/bjp.bp.111.100560</p>
+<p>Bubl, E., Kern, E., Ebert, D., Bach, M., &amp; Tebartz van Elst, L. (2010). Seeing gray when feeling blue? Depression can be measured in the eye of the diseased. Biological Psychiatry, 68(2), 205-208. https://doi.org/10.1016/j.biopsych.2010.02.009</p>
+<p>Bubl, E., Kern, E., Ebert, D., Riedel, A., Tebartz van Elst, L., &amp; Bach, M. (2015). Retinal dysfunction of contrast processing in major depression also apparent in cortical activity. European Archives of Psychiatry and Clinical Neuroscience, 265(4), 343-350. https://doi.org/10.1007/s00406-014-0573-x</p>
+<p>Burkitt, E., Barrett, M., &amp; Davis, A. (2003). Children&#x27;s colour choices for completing drawings of affectively characterised topics. Journal of Child Psychology and Psychiatry, 44(3), 445-455. https://doi.org/10.1111/1469-7610.00134</p>
+<p>Carruthers, H. R., Morris, J., Tarrier, N., &amp; Whorwell, P. J. (2010). The Manchester Color Wheel: Development of a novel way of identifying color choice and its validation in healthy, anxious and depressed individuals. BMC Medical Research Methodology, 10, Article 12. https://doi.org/10.1186/1471-2288-10-12</p>
+<p>Cerbus, G., &amp; Nichols, R. C. (1963). Personality variables and response to color. Psychological Bulletin, 60(6), 566-575. https://doi.org/10.1037/h0048173</p>
+<p>Corsino, B. V. (1985). Color blindness and Rorschach color responsivity. Journal of Personality Assessment, 49(5), 533-534. https://doi.org/10.1207/s15327752jpa4905_13</p>
+<p>Crawford, E., Gross, J., Patterson, T., &amp; Hayne, H. (2012). Does children&#x27;s colour use reflect the emotional content of their drawings? Infant and Child Development, 21(2), 198-215. https://doi.org/10.1002/icd.742</p>
+<p>Crumpton, E. (1956). The influence of color on the Rorschach test. Journal of Projective Techniques, 20(2), 150-158. https://doi.org/10.1080/08853126.1956.10380682</p>
+<p>Darwin, C. (1872). The expression of the emotions in man and animals. John Murray.</p>
+<p>Darwin, C. (1877). Letter to E. L. Krause, 30 June 1877 (Letter no. DCP-LETT-11023). Darwin Correspondence Project, University of Cambridge. https://www.darwinproject.ac.uk</p>
+<p>Dean, K. L., Viglione, D. J., Perry, W., &amp; Meyer, G. J. (2007). A method to optimize the response range while maintaining Rorschach Comprehensive System validity. Journal of Personality Assessment, 89(2), 149-161. https://doi.org/10.1080/00223890701468543</p>
+<p>de Villemor-Amaral, A. E., &amp; Yazigi, L. (2022). Color and affect: A long, never-ending history. Rorschachiana, 43(1), 70-88. https://doi.org/10.1027/1192-5604/a000156</p>
+<p>Di Girolamo, M., Pimentel, R. P. F. A., Corgiat-Loia, A., Pasqualini, S., &amp; Ales, F. (2026). What makes it look like that? Prototypicality and color diagnosticity for the Rorschach. Assessment. Advance online publication. https://doi.org/10.1177/10731911261442057</p>
+<p>Droz, K., Adamczyk, A., Diaz-Barrancas, F., Mohr, C., Dan-Glauser, E., Ruggieri, P., &amp; Jonauskaite, D. (2026, September 11). Imagined vs experienced: Do colours make us feel what we think they would? [Poster presentation; abstract book, pp. 17-18]. Progress in Colour Studies 2026, Wrocław, Poland.</p>
+<p>Elliot, A. J., &amp; Maier, M. A. (2012). Color-in-context theory. Advances in Experimental Social Psychology, 45, 61-125. https://doi.org/10.1016/B978-0-12-394286-9.00002-0</p>
+<p>Elliot, A. J., &amp; Maier, M. A. (2014). Color psychology: Effects of perceiving color on psychological functioning in humans. Annual Review of Psychology, 65, 95-120. https://doi.org/10.1146/annurev-psych-010213-115035</p>
+<p>Epicoco, D., Jonauskaite, D., &amp; Mohr, C. (2026, September 10). Using semantic associations to test theories and assumptions in colour psychology [Conference presentation; abstract book, pp. 19-20]. Progress in Colour Studies 2026, Wrocław, Poland.</p>
+<p>Exner, J. E., Jr. (1959). The influence of chromatic and achromatic color in the Rorschach. Journal of Projective Techniques, 23(4), 418-425.</p>
+<p>Exner, J. E., Jr. (1969). The Rorschach systems. Grune &amp; Stratton.</p>
+<p>Exner, J. E., Jr. (1974). The Rorschach: A comprehensive system. Wiley.</p>
+<p>Exner, J. E., Jr. (2003). The Rorschach: A comprehensive system: Vol. 1. Basic foundations and principles of interpretation (4th ed.). Wiley.</p>
+<p>Exner, J. E., Jr., Andronikof, A., &amp; Fontan, P. (2022). The Rorschach: A Comprehensive System, revised: Administration and coding manual. Rorschach Workshops.</p>
+<p>Exner, J. E., Jr., Armbruster, G. L., &amp; Viglione, D. (1978). The temporal stability of some Rorschach features. Journal of Personality Assessment, 42(5), 474-482. https://doi.org/10.1207/s15327752jpa4205_6</p>
+<p>Fam, J., Rush, A. J., Haaland, B., Barbier, S., &amp; Luu, C. (2013). Visual contrast sensitivity in major depressive disorder. Journal of Psychosomatic Research, 75(1), 83-86. https://doi.org/10.1016/j.jpsychores.2013.03.008</p>
+<p>Firestone, C., &amp; Scholl, B. J. (2014). &quot;Top-down&quot; effects where none should be found: The El Greco fallacy in perception research. Psychological Science, 25(1), 38-46. https://doi.org/10.1177/0956797613485092</p>
+<p>Frank, G. (1976). On the validity of hypotheses derived from the Rorschach: I. The relationship between color and affect. Perceptual and Motor Skills, 43(2), 411-427. https://doi.org/10.2466/pms.1976.43.2.411</p>
+<p>Frank, G. (1993). On the validity of hypotheses derived from the Rorschach: The relationship between color and affect, update 1992. Psychological Reports, 73(1), 12-14. https://doi.org/10.2466/pr0.1993.73.1.12</p>
+<p>Giromini, L., Andò, A., Morese, R., Salatino, A., Di Girolamo, M., Viglione, D. J., &amp; Zennaro, A. (2016). Rorschach Performance Assessment System (R-PAS) and vulnerability to stress: A preliminary study on electrodermal activity during stress. Psychiatry Research, 246, 166-172. https://doi.org/10.1016/j.psychres.2016.09.036</p>
+<p>Giromini, L., Porcelli, P., Viglione, D. J., Parolin, L., &amp; Pineda, J. A. (2010). The feeling of movement: EEG evidence for mirroring activity during the observations of static, ambiguous stimuli in the Rorschach cards. Biological Psychology, 85(2), 233-241. https://doi.org/10.1016/j.biopsycho.2010.07.008</p>
+<p>Giromini, L., Viglione, D. J., Jr., Zennaro, A., &amp; Cauda, F. (2017). Neural activity during production of Rorschach responses: An fMRI study. Psychiatry Research: Neuroimaging, 262, 25-31. https://doi.org/10.1016/j.pscychresns.2017.02.001</p>
+<p>Gnambs, T. (2020). Limited evidence for the effect of red color on cognitive performance: A meta-analysis. Psychonomic Bulletin &amp; Review, 27(6), 1374-1382. https://doi.org/10.3758/s13423-020-01772-1</p>
+<p>Hansen, T., Olkkonen, M., Walter, S., &amp; Gegenfurtner, K. R. (2006). Memory modulates color appearance. Nature Neuroscience, 9(11), 1367-1368. https://doi.org/10.1038/nn1794</p>
+<p>Hartz, A. (2019). Embodied associations beyond the Rorschach: Color, emotion, and personality (Publication No. 27771498) [Doctoral dissertation, Long Island University, The Brooklyn Center]. ProQuest Dissertations and Theses Global.</p>
+<p>Hayslip, B., McBride, P. A., Lowman, R. L., &amp; Aronson, H. J. (1992). Color vision deficits and Rorschach performance in aged persons. The International Journal of Aging and Human Development, 34(2), 165-173. https://doi.org/10.2190/3VP2-X2J1-KQT2-DUV1</p>
+<p>Holmes, C. B., Buchannan, J. A., Dungan, D. S., &amp; Reed, T. (1986). The Barnum effect in Luscher Color Test interpretation. Journal of Clinical Psychology, 42(1), 133-136.</p>
+<p>Holmes, C. B., Wurtz, P. J., Waln, R. F., Dungan, D. S., &amp; Joseph, C. A. (1984). Relationship between the Luscher Color Test and the MMPI. Journal of Clinical Psychology, 40(1), 126-128.</p>
+<p>Holtzman, W. H., Iscoe, I., &amp; Calvin, A. D. (1954). Rorschach color responses and manifest anxiety in college women. Journal of Consulting Psychology, 18(5), 317-324. https://doi.org/10.1037/h0057964</p>
+<p>Ishibashi, M., Uchiumi, C., Jung, M., Aizawa, N., Makita, K., Nakamura, Y., &amp; Saito, D. N. (2016). Differences in brain hemodynamics in response to achromatic and chromatic cards of the Rorschach: A fMRI study. Rorschachiana, 37(1), 41-57. https://doi.org/10.1027/1192-5604/a000076</p>
+<p>Jonauskaite, D., &amp; Mohr, C. (2022). Discussing color representations and implicit assumptions in Schloss et al.&#x27;s (2020) study. Color Research &amp; Application, 47(6), 1224-1228. https://doi.org/10.1002/col.22815</p>
+<p>Jonauskaite, D., &amp; Mohr, C. (2025). Do we feel colours? A systematic review of 128 years of psychological research linking colours and emotions. Psychonomic Bulletin &amp; Review, 32(4), 1457-1486. https://doi.org/10.3758/s13423-024-02615-z</p>
+<p>Jonauskaite, D., Abu-Akel, A., Dael, N., Oberfeld, D., Abdel-Khalek, A. M., Al-Rasheed, A. S., Antonietti, J.-P., Bogushevskaya, V., Chamseddine, A., Chkonia, E., Corona, V., Fonseca-Pedrero, E., Griber, Y. A., Grimshaw, G., Hasan, A. A., Havelka, J., Hirnstein, M., Karlsson, B. S. A., Laurent, E., … Mohr, C. (2020). Universal patterns in color- emotion associations are further shaped by linguistic and geographic proximity. Psychological Science, 31(10), 1245-1260. https://doi.org/10.1177/0956797620948810</p>
+<p>Jonauskaite, D., Althaus, B., Dael, N., Dan-Glauser, E., &amp; Mohr, C. (2019). What color do you feel? Color choices are driven by mood. Color Research &amp; Application, 44(2), 272-284. https://doi.org/10.1002/col.22327</p>
+<p>Jonauskaite, D., Camenzind, L., Parraga, C. A., Diouf, C. N., Mercapide Ducommun, M., Müller, L., Norberg, M., &amp; Mohr, C. (2021). Colour-emotion associations in individuals with red-green colour blindness. PeerJ, 9, Article e11180. https://doi.org/10.7717/peerj.11180</p>
+<p>Jonauskaite, D., Gierlinger, N., Leder, H., &amp; Mohr, C. (2026, September 10). Visual experience is not necessary for colour-emotion associations: Evidence from people with congenital and acquired blindness [Conference presentation; abstract book, pp. 24-25]. Progress in Colour Studies 2026, Wrocław, Poland.</p>
+<p>Jonauskaite, D., Parraga, C. A., Quiblier, M., &amp; Mohr, C. (2020). Feeling blue or seeing red? Similar patterns of emotion associations with colour patches and colour terms. i- Perception, 11(1), Article 2041669520902484. https://doi.org/10.1177/2041669520902484</p>
+<p>Jonauskaite, D., Spagnulo, G. F. M., Epicoco, D., &amp; Mohr, C. (2026). Beware! Colour and emotion correspondences are rarely about feelings. In C. P. Biggam, D. Jonauskaite, M. Uusküla, &amp; D. Mylonas (Eds.), Progress in colour studies: Colour expression and cognition (pp. 29-57). John Benjamins. https://doi.org/10.1075/z.244.03jon</p>
+<p>Katz, J. M., &amp; Ziffo, P. M. (1975). Cognitive tempo as a Rorschach color variable. Journal of Personality Assessment, 39(5), 462-465. https://doi.org/10.1207/s15327752jpa3905_3</p>
+<p>Klopfer, B., &amp; Kelley, D. M. (1942). The Rorschach technique. World Book.</p>
+<p>Kron, A., Cohen, A., Benziman, H., &amp; Ben-Shakhar, G. (2009). What is it that color determinants determine? The relation between the Rorschach Inkblot Method and cognitive object-recognition processes. Journal of Personality Assessment, 91(2), 137- 142. https://doi.org/10.1080/00223890802634233</p>
+<p>Lazarus, R. S. (1949). The influence of color on the protocol of the Rorschach test. The Journal of Abnormal and Social Psychology, 44(4), 506-516. https://doi.org/10.1037/h0055058</p>
+<p>Lehmann, G. K., Elliot, A. J., &amp; Calin-Jageman, R. J. (2018). Meta-analysis of the effect of red on perceived attractiveness. Evolutionary Psychology, 16(4), Article 1474704918802412. https://doi.org/10.1177/1474704918802412</p>
+<p>Leichsenring, F. (2004). The influence of color on emotions in the Holtzman Inkblot Technique. European Journal of Psychological Assessment, 20(2), 116-123. https://doi.org/10.1027/1015-5759.20.2.116</p>
+<p>Malmgren, H. (1999, July 19-24). Colour shock: Does it exist, and does it depend on colour? [Lecture summary]. 16th International Congress of Rorschach and Projective Methods, Amsterdam, Netherlands. https://captainmnemo.se/ro/hhrotex/rotexcolour.pdf</p>
+<p>Malone, J. C., Stein, M. B., Slavin-Mulford, J., Bello, I., Sinclair, S. J., &amp; Blais, M. A. (2013). Seeing red: Affect modulation and chromatic color responses on the Rorschach. Bulletin of the Menninger Clinic, 77(1), 70-93. https://doi.org/10.1521/bumc.2013.77.1.70</p>
+<p>Matsuda, R., Suzuki, C., Takamura, K., &amp; Hatano, Y. (2025). Exploring cognitive processing and neural correlates in Rorschach responses: A reanalysis of two experimental studies. Rorschachiana, 46(2). https://doi.org/10.1027/1192-5604/a000195</p>
+<p>Meyer, G. J., &amp; Kurtz, J. E. (2006). Advancing personality assessment terminology: Time to retire &quot;objective&quot; and &quot;projective&quot; as personality test descriptors. Journal of Personality Assessment, 87(3), 223-225. https://doi.org/10.1207/s15327752jpa8703_01</p>
+<p>Meyer, G. J. (1992). The Rorschach&#x27;s factor structure: A contemporary investigation and historical review. Journal of Personality Assessment, 59(1), 117-136. https://doi.org/10.1207/s15327752jpa5901_10</p>
+<p>Meyer, G. J., Viglione, D. J., &amp; Giromini, L. (2014). An introduction to Rorschach-based performance assessment. In R. P. Archer &amp; S. R. Smith (Eds.), Personality assessment (2nd ed., pp. 301-369). Routledge. https://doi.org/10.4324/9780203119143-8</p>
+<p>Meyer, G. J., Viglione, D. J., Mihura, J. L., Erard, R. E., &amp; Erdberg, P. (2011). Rorschach Performance Assessment System: Administration, coding, interpretation, and technical manual. Rorschach Performance Assessment System, LLC.</p>
+<p>Mihura, J. L., Meyer, G. J., Bombel, G., &amp; Dumitrascu, N. (2015). Standards, accuracy, and questions of bias in Rorschach meta-analyses: Reply to Wood, Garb, Nezworski, Lilienfeld, and Duke (2015). Psychological Bulletin, 141(1), 250-260. https://doi.org/10.1037/a0038445</p>
+<p>Mihura, J. L., Meyer, G. J., Dumitrascu, N., &amp; Bombel, G. (2013). The validity of individual Rorschach variables: Systematic reviews and meta-analyses of the Comprehensive System. Psychological Bulletin, 139(3), 548-605. https://doi.org/10.1037/a0029406</p>
+<p>Mollon, J. D., Bosten, J. M., Peterzell, D. H., &amp; Webster, M. A. (2017). Individual differences in visual science: What can be learned and what is good experimental practice? Vision Research, 141, 4-15. https://doi.org/10.1016/j.visres.2017.11.001</p>
+<p>Navon, D. (1977). Forest before trees: The precedence of global features in visual perception. Cognitive Psychology, 9(3), 353-383. https://doi.org/10.1016/0010-0285(77)90012-3</p>
+<p>Ouznadji, M., Jonauskaite, D., Epicoco, D., Mohr, C., Garzilli, A., Parraga, C. A., &amp; the International Colour Emotion Association Survey Group. (2026, September 10). Prototypical colour selections and their associations with emotion concepts across 35 countries [Conference presentation; abstract book, pp. 40-41]. Progress in Colour Studies 2026, Wrocław, Poland.</p>
+<p>Palmer, S. E., &amp; Schloss, K. B. (2010). An ecological valence theory of human color preference. Proceedings of the National Academy of Sciences, 107(19), 8877-8882. https://doi.org/10.1073/pnas.0906172107</p>
+<p>Peterzell, D. H. (2016). Discovering sensory processes using individual differences: A review and factor-analytic manifesto. Electronic Imaging, 2016(16), 1-11. https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-112</p>
+<p>Peterzell, D. H. (2026). Beyond color: A constructivist account of chromatic stimuli as multidimensional physiological and psychological events. PsyArXiv. https://doi.org/10.31234/osf.io/5bcvm_v2</p>
+<p>Pignolo, C., Giromini, L., Andò, A., Ghirardello, D., Di Girolamo, M., Ales, F., &amp; Zennaro, A. (2017). An interrater reliability study of Rorschach Performance Assessment System (R- PAS) raw and complexity-adjusted scores. Journal of Personality Assessment, 99(6), 619-625. https://doi.org/10.1080/00223891.2017.1296844</p>
+<p>Piotrowski, C. (2023). Color red and the assessment process: Implications for the Rorschach. Journal of Projective Psychology &amp; Mental Health, 30(1), 11-17.</p>
+<p>Piotrowski, Z. A. (1957). Perceptanalysis. Macmillan.</p>
+<p>Porcelli, P., Giromini, L., Parolin, L., Pineda, J. A., &amp; Viglione, D. J. (2013). Mirroring activity in the brain and movement determinant in the Rorschach test. Journal of Personality Assessment, 95(5), 444-456. https://doi.org/10.1080/00223891.2013.775136</p>
+<p>Rapaport, D., Gill, M., &amp; Schafer, R. (1945-1946). Diagnostic psychological testing (Vols. 1-2). Year Book Publishers.</p>
+<p>Robinson, M. D., Liu, T., &amp; Bair, J. L. (2015). Affect-related influences on color perception. In A. J. Elliot, M. D. Fairchild, &amp; A. Franklin (Eds.), Handbook of color psychology (pp. 660-676). Cambridge University Press. https://doi.org/10.1017/CBO9781107337930.033</p>
+<p>Rorschach, H. (1942). Psychodiagnostics: A diagnostic test based on perception (P. Lemkau &amp; B. Kronenberg, Trans.). Hans Huber. (Original work published 1921)</p>
+<p>Schachtel, E. G. (1943). On color and affect: Contributions to an understanding of Rorschach&#x27;s test. II. Psychiatry, 6(4), 393-409. https://doi.org/10.1080/00332747.1943.11022473</p>
+<p>Schaie, K. W., &amp; Heiss, R. (1964). Color and personality. Hans Huber.</p>
+<p>Schaie, K. W. (1963). The Color Pyramid Test: A nonverbal technique for personality assessment. Psychological Bulletin, 60(6), 530-547.</p>
+<p>Schloss, K. B. (2024). Color semantics in human cognition. Current Directions in Psychological Science, 33(1), 58-67. https://doi.org/10.1177/09637214231208189</p>
+<p>Schloss, K. B., Witzel, C., &amp; Lai, L. Y. (2020). Blue hues don&#x27;t bring the blues: Questioning conventional notions of color-emotion associations. Journal of the Optical Society of America A, 37(5), 813-824. https://doi.org/10.1364/JOSAA.383588</p>
+<p>Shapiro, D. (1956). Color-response and perceptual passivity. Journal of Projective Techniques, 20(1), 52-69. https://doi.org/10.1080/08853126.1956.10380671</p>
+<p>Shapiro, D. (1960). A perceptual understanding of color response. In M. A. Rickers-Ovsiankina (Ed.), Rorschach psychology (pp. 154-201). Wiley.</p>
+<p>Siipola, E. M. (1950). The influence of color on reactions to ink blots. Journal of Personality, 18(3), 358-382. https://doi.org/10.1111/j.1467-6494.1950.tb01257.x</p>
+<p>Steinert, S. W., Daugherty, A. M., Shankar, S., Schwarb, H. D., Cerjanic, A., Sutton, B., &amp; Arble, E. (2021). A performance-based measure of emotion response control: A preliminary MRI study. Scandinavian Journal of Psychology, 62, 321-327. https://doi.org/10.1111/sjop.12705</p>
+<p>Stevens, D. T., Edwards, K. J., Hunter, W. F., &amp; Bridgman, L. (1993). An investigation of the color-affect hypothesis in Exner&#x27;s Comprehensive System. Perceptual and Motor Skills, 77(3, Suppl.), 1347-1360. https://doi.org/10.2466/pms.1993.77.3f.1347</p>
+<p>Strauss, E. D., Schloss, K. B., &amp; Palmer, S. E. (2013). Color preferences change after experience with liked/disliked colored objects. Psychonomic Bulletin &amp; Review, 20(5), 935-943. https://doi.org/10.3758/s13423-013-0423-2</p>
+<p>Tanaka, J. W., &amp; Presnell, L. M. (1999). Color diagnosticity in object recognition. Perception &amp; Psychophysics, 61(6), 1140-1153. https://doi.org/10.3758/BF03207619</p>
+<p>Taylor, C., &amp; Franklin, A. (2012). The relationship between color-object associations and color preference: Further investigation of ecological valence theory. Psychonomic Bulletin &amp; Review, 19(2), 190-197. https://doi.org/10.3758/s13423-012-0222-1</p>
+<p>Thorstenson, C. A., Pazda, A. D., &amp; Elliot, A. J. (2015). Sadness impairs color perception. Psychological Science. Advance online publication. https://doi.org/10.1177/0956797615597672 (Retraction published 2015, Psychological Science, 26[11], 1822)</p>
+<p>Viglione, D. J., &amp; Giromini, L. (2016). The effects of using the international versus Comprehensive System Rorschach norms for children, adolescents, and adults. Journal of Personality Assessment, 98(4), 391-397. https://doi.org/10.1080/00223891.2015.1136313</p>
+<p>Viglione, D. J., &amp; Hilsenroth, M. J. (2001). The Rorschach: Facts, fictions, and future. Psychological Assessment, 13(4), 452-471. https://doi.org/10.1037/1040-3590.13.4.452</p>
+<p>Viglione, D. J., &amp; Taylor, N. (2003). Empirical support for interrater reliability of Rorschach Comprehensive System coding. Journal of Clinical Psychology, 59(1), 111-121. https://doi.org/10.1002/jclp.10121</p>
+<p>Viglione, D. J. (1999). A review of recent research addressing the utility of the Rorschach. Psychological Assessment, 11(3), 251-265. https://doi.org/10.1037/1040-3590.11.3.251</p>
+<p>Viglione, D. J., Blume-Marcovici, A. C., Miller, H. L., Giromini, L., &amp; Meyer, G. (2012). An inter-rater reliability study for the Rorschach Performance Assessment System. Journal of Personality Assessment, 94(6), 607-612. https://doi.org/10.1080/00223891.2012.684118</p>
+<p>Viglione, D. J., de Ruiter, C., King, C. M., Meyer, G. J., Kivisto, A. J., Rubin, B. A., &amp; Hunsley, J. (2022). Legal admissibility of the Rorschach and R-PAS: A review of research, practice, and case law. Journal of Personality Assessment, 104(2), 137-161. https://doi.org/10.1080/00223891.2022.2028795</p>
+<p>Vitolo, E., Giromini, L., Viglione, D. J., Cauda, F., &amp; Zennaro, A. (2021). Complexity and cognitive engagement in the Rorschach task: An fMRI study. Journal of Personality Assessment, 103(5), 634-644. https://doi.org/10.1080/00223891.2020.1842429</p>
+<p>von Castell, C., Stelzmann, D., Oberfeld, D., Welsch, R., &amp; Hecht, H. (2018). Cognitive performance and emotion are indifferent to ambient color. Color Research &amp; Application, 43(1), 65-74. https://doi.org/10.1002/col.22168</p>
+<p>Wallen, R. (1948). The nature of color shock. The Journal of Abnormal and Social Psychology, 43(3), 346-356. https://doi.org/10.1037/h0056296</p>
+<p>Weijs, M. L., Jonauskaite, D., Reutimann, R., Mohr, C., &amp; Lenggenhager, B. (2023). Effects of environmental colours in virtual reality: Physiological arousal affected by lightness and hue. Royal Society Open Science, 10(10), Article 230432. https://doi.org/10.1098/rsos.230432</p>
+<p>Wilms, L., &amp; Oberfeld, D. (2018). Color and emotion: Effects of hue, saturation, and brightness. Psychological Research, 82(5), 896-914. https://doi.org/10.1007/s00426-017-0880-8</p>
+<p>Witzel, C., Valkova, H., Hansen, T., &amp; Gegenfurtner, K. R. (2011). Object knowledge modulates colour appearance. i-Perception, 2(1), 13-49. https://doi.org/10.1068/i0396</p>
+<p>Wolpin, M., &amp; Hamlin, R. M. (1959). Effect of form-color incongruity on responses to inkblots. Journal of Clinical Psychology, 15(2), 151-155.</p>
+<p>Wood, J. M., Garb, H. N., Nezworski, M. T., Lilienfeld, S. O., &amp; Duke, M. C. (2015). A second look at the validity of widely used Rorschach indices: Comment on Mihura, Meyer, Dumitrascu, and Bombel (2013). Psychological Bulletin, 141(1), 236-249. https://doi.org/10.1037/a0036005</p>
+<p>Wood, J. M., Krishnamurthy, R., &amp; Archer, R. P. (2003). Three factors of the Comprehensive System for the Rorschach and their relationship to Wechsler IQ scores in an adolescent sample. Assessment, 10(3), 259-265. https://doi.org/10.1177/1073191103255493</p>
+<p>Yokosawa, K., Schloss, K. B., Asano, M., &amp; Palmer, S. E. (2016). Ecological effects in cross- cultural differences between U.S. and Japanese color preferences. Cognitive Science, 40(7), 1590-1616. https://doi.org/10.1111/cogs.12291</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
