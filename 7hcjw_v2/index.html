@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Predictor Selection for Doubly Robust
+Double/debiased Machine Learning Estimators for Causal Inference</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Predictor Selection for Doubly Robust Double/debiased Machine Learning
+Estimators for Causal Inference
+</p>
+<p class="meta">
+2026-11-26 · Metacheck 0.4.4.40
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to fix</span></span><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>16</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="na">Not applicable <span class="n">(16)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>No papers appeared to report data about people or animals that need
+an ethics statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper does not appear to report data about individual people or
+animals (we found: simulations), so we do not expect an ethics
+statement.</p>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 20 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 20 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 20 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Although machine learning (ML) facilitates causal effect estimation in high-dimensional settings, its naive application may introduce regularization and overfitting biases into effect estimates. Double/debiased ML (DML) mitigates these biases through Neyman orthogonality and sample splitting. While the local insensitivity of DML estimators to estimation errors in the propensity score (PS) and outcome models is well established, less attention has been given to improving the robustness of doubly robust DML estimators against model misspecification arising from ML-based predictor selection. To address this, we propose a union-based double post-Lasso estimator that re-estimates both the PS and outcome models using the union of their separately selected predictors. This approach eliminates differential predictor selection in the final models and reduces the risk of excluding important predictors from either model. Simulation results demonstrate that the proposed approach consistently reduces remaining confounding bias relative to approaches using separately selected predictor sets. The results also show that ML-based estimation does not uniformly outperform conventional doubly robust estimation and that post-Lasso reduces more confounding bias than Lasso. These findings highlight that reliable ML-based causal inference depends not only on the performance of the ML algorithm but also on how selected predictors are incorporated into causal effect estimation.</p>
+<h3>[div-01]</h3>
+<p>Predictor Selection for Doubly Robust Double/debiased Machine Learning Estimators for Causal Inference Introduction Consistent estimation of causal effects from observational studies requires an observed set of baseline covariates that eliminates all confounding bias (unconfoundedness assumption; Rosenbaum &amp; Rubin, 1983). To satisfy this assumption, researchers often adjust for a large set of covariates. However, even if the number of covariates is smaller than the sample size, the set of predictors derived from them (including higher-order polynomials and interaction terms) can easily exceed the sample size. In such high-dimensional settings, inefficiency and underdetermination challenge the estimation of causal effects with conventional propensity score (PS) or regression-based estimators.</p>
+<p>Thus, selecting the appropriate predictors for these models is a primary challenge for reliable causal inference.</p>
+<p>To address settings with high-dimensional covariate or predictor sets, researchers often rely on machine learning (ML) methods like the least absolute shrinkage and selection operator (Lasso; Tibshirani, 1996) to reduce dimensionality via automated predictor selection. However, a naive application of ML introduces two validity issues: regularization bias and overfitting bias (Chernozhukov et al., 2018), both threatening the √ n-consistency of causal effect estimators. Regularization constrains model complexity to prevent excessive estimator variance and improve out-of-sample prediction, but this comes at the cost of introducing bias into the estimator. Overfitting bias arises when the same data are used to estimate the PS and outcome models and to estimate the causal effect, causing the estimator to capture sample-specific noise in addition to the true functional relationships.</p>
+<p>To address these biases, Chernozhukov et al. (2018) introduced double/debiased ML (DML). DML models both treatment selection and the outcome using ML, and then isolates the causal effect using residualized regression (partialling-out approach; Frisch &amp; Waugh, 1933; Lovell, 1963 Lovell, , 2008) ) or doubly robust score functions. DML mitigates regularization bias via Neyman orthogonality, making the target parameter (e.g., causal effect) locally insensitive to small estimation errors in the PS and outcome models. To eliminate overfitting bias, DML employs sample splitting (cross-fitting) to ensure that the PS and outcome models are regularized on one data fold while the causal effect is evaluated on another. Alternatively, a theory-driven plug-in penalty allows the Lasso to bypass sample splitting while preserving asymptotic properties.</p>
+<p>Because DML enables √ n-consistent inference with high-dimensional data, it has become an important framework for causal inference (Chernozhukov, Hansen, Kallus, Spindler, &amp; Syrgkanis, 2024; Hünermund, Louw, &amp; Caspi, 2023; Valentin, Detommaso, Li, Opper, &amp; Brückner, 2025). Beyond the shared local insensitivity of DML estimators, some of them possess an additional but underemphasized global property: double robustness (DR; Chernozhukov et al., 2018; Valentin et al., 2025). In general, a doubly robust estimator remains consistent if either the PS model or the outcome model is correctly specified with regard to the covariate set that establishes unconfoundedness (Robins &amp; Rotnitzky, 2001; Robins, Rotnitzky, &amp; Zhao, 1994). Thus, the DR property of DML estimators offers some protection against the global model misspecification of one model, for instance due to a researcher-intended omission of an influential variable or a poorly chosen penalty for ML methods. Crucially, reliable implementation of doubly robust estimators requires avoiding differentially selected predictor sets for the PS and outcome models as the correctly specified model might fail to address amplification or collider bias induced by the misspecified model (Steiner &amp; Lyu, 2024).</p>
+<p>In this study, we investigate the finite-sample performance of Lasso-based DML with a doubly robust score function. In particular, we highlight the advantages of utilizing the post-Lasso and re-estimating both the PS and outcome models on the union of their model-specific predictor sets-a strategy that has neither received sufficient attention nor been systematically evaluated.</p>
+<p>We focus on the Lasso given its foundational role in the theoretical development of automated predictor selection and DML (Belloni, Chen, Chernozhukov, &amp; Hansen, 2012; Chernozhukov et al., 2024). By contrasting the Lasso with (a) the post-Lasso which mitigates shrinkage bias by re-estimating the models on the selected predictors (Belloni &amp; Chernozhukov, 2013) and (b) its version where models are re-estimated using the union of model-specific predictors, we are able to explicitly assess the unique benefits of both post-Lasso estimation and union-based predictor selection.</p>
+<p>Finally, this study provides guidance on when ML-based predictor selection is beneficial, unnecessary, or even undesirable for causal inference. In our discussions, we particularly address regularization bias because in this article we propose strategies to further protect DML from biases arising from the application of regularized ML methods to finite data. Readers interested in more detailed explanations of regularization bias and overfitting bias, including technical derivations and formal results, are referred to Ahrens et al. (2025) and Chernozhukov et al. (2018 Chernozhukov et al. ( , 2024)). When discussing the asymptotic properties of the estimators, we assume that the relevant regularity conditions hold. For formal statements of these conditions, we refer readers to the existing literature (Belloni et al., 2012; Belloni &amp; Chernozhukov, 2013; Belloni, Chernozhukov, Chetverikov, &amp; Kato, 2015; Cattaneo, Jansson, &amp; Newey, 2018; Scharfstein, Rotnitzky, &amp; Robins, 1999).</p>
+<p>To formalize ideas, we consider the estimation of the ATE under the following interactive regression model with potentially heterogeneous treatment effects (i.e., they vary with predictors X): where Y is the outcome, Z is a binary treatment indicator with Z = 1 denoting treatment and Z = 0 denoting the control condition, and X is a set of predictors derived from observed covariates that meet the unconfoundedness assumption.</p>
+<p>U and V are additive disturbances. X nonparametrically predicts Y and Z via the outcome function that is, the difference in the expected treatment and control outcomes.</p>
+<h3>Regularization Bias and Overfitting Bias</h3>
+<p>When estimating the ATE via ML with high-dimensional data, a naive approach would just fit the outcome model in Equation 1 while ignoring the selection model. Though applying ML to the outcome model offers flexible and accurate predictions of the outcome, it does not imply that one obtains an unbiased estimator for the ATE. Suppose we estimate the outcome model g(Z, X) using regularized ML. Then, the corresponding estimator can be decomposed as follows: where δ g (z, X) denotes the estimation error.</p>
+<p>When regularized ML is used to control for the outcome model&#x27;s complexity, the estimation error has a non-zero mean because regularization introduces systematic bias, resulting in inaccurate estimation of the conditional expectation function g. For example, the Lasso regularizes a regression model by imposing a penalty that shrinks estimated coefficients toward zero and sets some coefficients exactly to zero (i.e., drops predictors). Although regularization prevents the variance of an ML estimator from becoming excessively large, it introduces systematic regularization bias into the estimator. Thus, ĝ(z, X) is a biased estimator for g(z, X).</p>
+<p>Suppose the ATE is estimated using ĝ(z, X). The resulting ML-based plug-in estimator θML can be written as where the last equality follows from the decomposition in Equation 3.</p>
+<p>The overall estimation error of the ML estimator θML then decomposes into</p>
+<p>The first term captures sampling error arising from replacing the population expectation with its empirical counterpart. The sampling error typically converges to zero at a rate of n -1/foot_2 , implying √ n-consistent estimation. The second term captures the impact of estimation error in the outcome regression due to regularization and overfitting (the decomposition of the DML estimator in the following section explicitly separates the terms associated with these two sources of bias). As discussed above, the outcome model estimation error δ g (z, X), for z = 0, 1, contains systematic regularization bias and therefore has a non-zero mean. Overfitting bias (also referred to as own-observation bias;</p>
+<p>Chernozhukov et al., 2024) occurs when the same samples are used to estimate the high-dimensional outcome model through regularized ML methods and to estimate the ATE θ. Overfitting means that the regularized outcome regression estimator captures not only the underlying systematic relationships but also idiosyncratic noise specific to the samples used for estimation.</p>
+<p>Then, reusing the same samples to estimate the ATE induces dependence between the estimation error δ g (z, X), which contains the sample-specific noise, and the samples used for causal effect estimation. 2 This dependence introduces overfitting bias into the causal effect estimator. Because the overall estimation error arising from regularization and overfitting enters the plug-in ATE estimator as a first-order (linear) term, its slow convergence directly carries over to the ATE estimator. As a result, the estimator θML converges at a rate less than n -1/2 , that is, the scaled estimation error converges in probability to infinity:</p>
+<p>Addressing Regularization and Overfitting Biases in DML DML addresses the impact of regularization bias and overfitting bias. Regularization bias is mitigated by constructing estimators that rely on predictions from both the PS and outcome models. Overfitting bias is addressed through sample splitting, in which separate samples are used to estimate the PS and outcome models and to estimate the causal effect.</p>
+<p>For the interactive regression model specified in Equation 1, we use a doubly robust DML estimator (Belloni, Chernozhukov, &amp; Hansen, 2014; Chernozhukov et al., 2018):</p>
+<p>Analogously to the outcome estimator (Equation 3), the ML-based PS estimator, m(X), where δ m (X) denotes the estimation error in the PS estimator.</p>
+<p>As before, this estimation error has a non-zero mean due to systematic regularization bias. Thus, the estimator m(X) is biased for m(X).</p>
+<p>Using the two decompositions in Equations 3 and 8, the overall estimation error in the DML estimator θDML decomposes into three parts (Chernozhukov et al., 2018; also see Supplemental Document):</p>
+<p>The first term, a, corresponds to the sampling error due to replacing the population expectation with the empirical sample expectation:</p>
+<p>As in Equation 5, the sampling error term typically converges to zero at a rate of n -1/2.</p>
+<p>The remaining terms, b and c, correspond to regularization bias and overfitting bias, respectively, which are discussed in the following sections.</p>
+<h3>Mitigating Regularization Bias: Neyman Orthogonality</h3>
+<p>The second term, b, captures the impact of the estimation errors in the PS and outcome estimators:</p>
+<p>This term depends on the product of the estimation errors of the PS and outcome models and is therefore second-order, rather than first-order. As a result, this second-order error term converges to zero faster than either first-order estimation error alone. Thus, even when each estimation error converges to zero at a rate less than n -1/2 , the DML estimator remains √ n-consistent as long as the product of the two estimation errors converges to zero at a rate of n -1/2 . For example, if the estimation errors in both the PS and outcome regression estimators converge at a rate of n -1/4 , their product converges at a rate of n -1/4 × n -1/4 = n -1/2 . This local insensitivity to small estimation errors in the two models is known as Neyman orthogonality (Neyman, 1959). For a detailed explanation of Neyman orthogonality, including formal derivations and mathematical proofs, see Ahrens et al. (2025) and Chernozhukov et al. (2018 Chernozhukov et al. ( , 2024)).</p>
+<h3>Removing Overfitting Bias: Sample Splitting</h3>
+<p>The third term, c, representing overfitting bias, includes where V is an additive disturbance for the treatment indicator, defined in the interactive regression model (Equation 1).</p>
+<p>As discussed above, when the outcome regression model is estimated through regularized ML methods, the estimation error δ g captures sample-specific noise. If the same samples are subsequently used to estimate the causal effect, the estimation error δ g becomes correlated with the PS model disturbance V , because those samples contribute both to estimating the outcome regression model and to evaluating the disturbance V.</p>
+<p>To address overfitting bias, DML employs sample splitting, ensuring that the PS and outcome models are estimated using one subset of the data, while the causal effect is estimated using a separate, non-overlapping subset. This separation of samples reduces the dependence between the estimation error and the samples used for causal effect estimation.</p>
+<p>While sample splitting prevents overfitting bias in the estimators, its direct application can lead to a substantial loss of efficiency because the causal effect is estimated using only a subset of the available data. This inefficiency can be addressed through cross-fitting, in which the roles of the separate samples are reversed to obtain additional estimates of the causal effect. Averaging these estimates allows all samples to contribute to the final estimate, thereby recovering much of the efficiency lost through sample splitting (Chernozhukov et al., 2018). Sample splitting and cross-fitting guarantee that the remaining estimation error c converges to zero at a rate of n -1/2 (Ahrens et al., 2025; Chernozhukov et al., 2018 Chernozhukov et al., , 2024)).</p>
+<p>Although sample splitting and cross-fitting are generally recommended in DML to address overfitting bias, they may not be necessary for Lasso-based estimators under appropriate regularity conditions (Ahrens et al., 2025; Chernozhukov et al., 2018 Chernozhukov et al., , 2024)).</p>
+<p>We discuss this in detail in the following sections on the Lasso.</p>
+<p>Overall, the DML estimator θDML is √ n-consistent because its scaled estimation error converges in probability to zero and, moreover, is approximately normally distributed:</p>
+<h3>Protection against Model Misspecifications: Doubly Robust Estimation</h3>
+<p>Although DML effectively mitigates regularization and overfitting biases, it may still fail to consistently estimate the ATE. Neyman orthogonality alone does not guarantee consistency when either the PS or outcome model is misspecified, as the second-order error may not vanish asymptotically. Such misspecification may occur for various reasons. For instance, the chosen tuning parameters for one model may be suboptimal, resulting in persistent estimation error in the corresponding estimator. Or, the assumptions underlying the theoretical guarantees of the ML methods (e.g., approximate sparsity for the Lasso) may not be sufficiently met for either model.</p>
+<p>Or, to avoid bias-amplification issues, researchers might intentionally remove predictors from the PS model that are highly predictive of treatment assignment but incorrectly assumed to be only weakly associated with the outcome. In such scenarios, DML estimators lose their local insensitivity property, resulting in a biased effect estimate.</p>
+<p>To address model misspecification, at least partially, we introduced above a doubly robust DML estimator in Equation 7 (also referred to as a doubly robust score function).</p>
+<p>The form of the estimator is identical to the well-established augmented inverse probability weighting estimator, which is widely used in causal inference because of its DR property (Bang &amp; Robins, 2005; Glynn &amp; Quinn, 2010; Imbens &amp; Wooldridge, 2009; Robins &amp; Rotnitzky, 2001; Robins et al., 1994; Schafer &amp; Kang, 2008; Scharfstein et al., 1999). The DR property ensures robustness to misspecification of either the PS or outcome model-a vulnerability that non-doubly robust DML estimators cannot address on their own. More formally, a doubly robust estimator consistently estimates the ATE if either the PS model or the outcome model is correctly specified with regard to a joint covariate set that satisfies unconfoundedness (Glynn &amp; Quinn, 2010; Robins &amp; Rotnitzky, 1995 , 2001; Robins et al., 1994; Scharfstein et al., 1999; Steiner &amp; Lyu, 2024; Tsiatis, 2006). That is, the DR property offers protection against model misspecification by providing two opportunities to remove the entire confounding bias. For the DML estimator to be consistent, where R g and R m denote the predictor subsets used to specify the outcome and PS models, respectively.</p>
+<p>Importantly, the DR property requires that the correctly specified model is correct with respect to the entire set X. That is, even if a model would remove the entire confounding bias on its own using the subset R, it might still fail to satisfy the DR condition with respect to X. This failure can occur because the seemingly correctly specified model is typically kept blind to any amplification or collider bias induced by misspecifications in the alternative model. Thus, to remove any bias introduced by the misspecification of the other model, the correctly specified model must explicitly include the bias-inducing predictors (or at least predictors that are able to block the induced bias).</p>
+<p>For a detailed discussion of these bias-inducing mechanics, see Steiner and Lyu (2024) and Steiner and Kim (2016). To safeguard against issues arising from such differential predictor selection, we propose below re-estimating both the PS and outcome models using the union of model-specific predictors obtained from the ML-based regularization step.</p>
+<p>Therefore, the doubly robust DML estimator provides two routes to consistent ATE estimation through Neyman orthogonality and the DR property. When both the PS and outcome models are consistently estimated, Neyman orthogonality facilitates √ n-consistency even if their estimation errors converge slowly, provided that the product of these errors converges to zero at a rate of at least n -1/2 . Alternatively, even when one model is misspecified, the DR property ensures consistency, provided that the other model is correctly specified. Although neither the PS nor outcome model may be perfectly specified when using ML methods in practice, the DR property suggests that improving the specification of either model may still reduce the remaining confounding bias, even when the formal conditions for the DR property are not fully satisfied.</p>
+<h3>Lasso for Double/debiased Machine Learning</h3>
+<p>In this section, we introduce a concrete implementation of DML using Lasso as the ML method. Lasso is one of the most widely used methods for automated predictor selection (Belloni et al., 2012; Tibshirani, 1996) and has played a foundational role in the theoretical development of DML (Chernozhukov et al., 2024). We first introduce the Lasso and its underlying assumption of approximate sparsity, and then describe how the Lasso is implemented within the DML framework.</p>
+<h3>Lasso</h3>
+<p>Consider the linear regression model is a p-dimensional set of standardized predictors, where p is large relative to the sample size, and the error term ε is uncorrelated with X. With the coefficient vector β, β ′ X denotes the population best linear predictor of Y .</p>
+<p>The Lasso constructs β as the solution of the following penalized least squares problem: where λ denotes the penalty level.</p>
+<p>By introducing this penalty, the Lasso trades off in-sample model fit against model complexity. This trade-off shrinks the estimated coefficients toward zero, with some coefficients being set exactly to zero, thereby performing automated predictor selection. The penalty level λ can be selected either through cross-validation or using a theoretically justified choice. Under appropriate regularity conditions, the theoretically justified plug-in penalty choice, proposed by Belloni et al. (2012), provides performance guarantees for both Lasso and post-Lasso. This choice of penalty level offers sufficient control over overfitting, thereby reducing the need for cross-validation to select the penalty level, and additional sample splitting and cross-fitting (Chernozhukov et al., 2024). In the following simulation study, we use the theoretically justified choice for the penalty level λ. For a more detailed explanation of the Lasso, see Tibshirani (1996).</p>
+<p>The key assumption underlying the Lasso&#x27;s automated predictor selection is approximate sparsity. Under approximate sparsity, a relatively small number of predictors have sufficiently large coefficients to provide a good approximation to β ′ X. The remaining predictors have relatively small coefficients and collectively contribute little to the approximation. Formally, approximate sparsity requires that the j th largest coefficient in absolute value, denoted by |β| (j) , satisfies where A is a constant and r is a decay rate of coefficients.</p>
+<p>To obtain theoretical prediction guarantees for the Lasso, a coefficient decay rate of r &gt; 0.5 is required, along with additional regularity conditions. For the double Lasso introduced below to achieve √ n-consistency, a stronger condition of r &gt; 1 is required (Chernozhukov et al., 2024).</p>
+<p>In the following sections, we introduce three approaches to implementing the Lasso within the DML framework: (1) double Lasso and (2) double post-Lasso, both of which are established approaches (Belloni et al., 2014), and (3) double post-Lasso with the union of selected predictors, which we propose in this study.</p>
+<h3>Double Lasso</h3>
+<p>We first introduce the double Lasso (Belloni et al., 2014), which applies the Lasso separately to the PS and outcome models. Among Lasso-based DML methods, the double Lasso is widely used in practice and serves as the default implementation in many software packages. To illustrate the approach, suppose that we estimate the ATE under the interactive regression model in Equation 1 using the doubly robust DML estimator in Equation 7. Hereafter, we consider a theoretically justified choice for the penalty level λ and therefore present the procedures without sample splitting or cross-fitting. The double Lasso procedure for estimating the ATE is implemented as follows:</p>
+<p>Box 1: Estimation Procedure of Double Lasso 1. Predictor selection using the Lasso.</p>
+<p>• For the PS model m(X).</p>
+<p>(a) Fit a logistic Lasso regression of Z on X.</p>
+<p>(b) Identify the selected predictors X PS ⊂ X with non-zero coefficients.</p>
+<p>• For the outcome model g(z, X) for z = 0, 1.</p>
+<p>(a) Fit a Lasso regression of Y z on X.</p>
+<p>(b) Identify the selected predictors X Yz ⊂ X with non-zero coefficients.</p>
+<p>2. Prediction using the selected predictor set.</p>
+<p>• Predict the PSs using the selected set: Ẑ = m(X PS ).</p>
+<p>• Predict the outcomes using the selected set: Ŷz = ĝ(z, X Yz ).</p>
+<p>3. Estimation of the ATE by plugging the predicted values m(X PS ) and ĝ(z, X Yz ) into Equation 7.</p>
+<p>Note that in the procedure described in Box 1, the outcome model is estimated separately using the Lasso for the treatment (z = 1) and control (z = 0) groups. Also, in the prediction step, the PSs and outcomes are predicted using the Lasso-selected coefficients, which are shrunk toward zero.</p>
+<h3>Double Post-Lasso</h3>
+<p>The post-Lasso (Belloni &amp; Chernozhukov, 2013) builds on the Lasso by separating the predictor selection step from the subsequent model estimation step. After selecting predictors using the Lasso, the post-Lasso re-estimates the model without penalization using only the selected predictors. This re-estimation step removes the coefficient shrinkage induced by the penalty level, potentially reducing estimation errors in both the PS and outcome models. Consequently, the regularization bias term in Equation 11 may converge to zero more rapidly. Although such advantages of the post-Lasso over the Lasso have been well established under suitable conditions (Belloni &amp; Chernozhukov, 2013), the two approaches are often used or discussed interchangeably in applied research. When the post-Lasso is applied separately to the PS and outcome models within the DML framework, the procedure is referred to as the double post-Lasso (Belloni et al., 2014). The double post-Lasso procedure is implemented as follows:</p>
+<p>Box 2: Estimation Procedure of Double Post-Lasso 1. Predictor selection using the Lasso.</p>
+<p>• For the PS model m(X).</p>
+<p>(a) Fit a logistic Lasso regression of Z on X.</p>
+<p>(b) Identify the selected predictors X PS ⊂ X with non-zero coefficients.</p>
+<p>• For the outcome model g(z, X) for z = 0, 1.</p>
+<p>(a) Fit a Lasso regression of Y z on X.</p>
+<p>(b) Identify the selected predictors X Yz ⊂ X with non-zero coefficients.</p>
+<p>2. Re-estimation using the selected predictor set.</p>
+<p>• For the PS model m(X).</p>
+<p>(a) Fit a logistic regression of Z on X PS.</p>
+<p>(b) Predict the PSs using the selected set: Ẑ = m(X PS ).</p>
+<p>• For the outcome model g(z, X) for z = 0, 1.</p>
+<p>(a) Fit an OLS regression of Y z on X Yz.</p>
+<p>(b) Predict the outcomes using the selected set: Ŷz = ĝ(z, X Yz ).</p>
+<h3>3. Estimation of the ATE by plugging the predicted values m(X PS</h3>
+<p>) and ĝ(z, X Yz ) into Equation 7.</p>
+<p>In the procedure described in Box 2, the re-estimation step, which removes penalty-induced coefficient shrinkage, is the key distinction between the double post-Lasso and the double Lasso.</p>
+<h3>Double Post-Lasso with Union of Model-specific Predictors</h3>
+<p>Although the two previously discussed approaches may perform well in estimating the ATE under regularity conditions and approximate sparsity, both are susceptible to differential predictor selection, which is discussed earlier in relation to the DR property.</p>
+<p>Differential predictor selection is particularly likely to arise when the Lasso is used for automated predictor selection. In the two procedures described above, although the PS and outcome models are initially specified using the same predictor set X, the Lasso may select different subsets of predictors for each model (i.e., X PS ̸ = X Yz ). Consequently, the predicted PSs and outcomes may be obtained using different predictor sets, potentially undermining the DR property. To address the potential issues arising from differential predictor selection, we propose re-estimating both the PS and outcome regression models using the union of the predictor sets selected by their respective Lasso models. The estimation procedure using the union set of predictors is implemented as follows:</p>
+<p>Box 3: Estimation Procedure of Double Post-Lasso Using the Union Set 1. Predictor selection using the Lasso.</p>
+<p>• For the PS model m(X).</p>
+<p>(a) Fit a logistic Lasso regression of Z on X.</p>
+<p>(b) Identify the selected predictors X PS ⊂ X with non-zero coefficients.</p>
+<p>• For the outcome model g(z, X) for z = 0, 1.</p>
+<p>(a) Fit a Lasso regression of Y z on X.</p>
+<p>(b) Identify the selected predictors X Yz ⊂ X with non-zero coefficients.</p>
+<p>2. Construction of the union set: 3.</p>
+<p>Re-estimation using the union set.</p>
+<p>• For the PS model m(X).</p>
+<p>(a) Fit a logistic regression of Z on X Union.</p>
+<p>(b) Predict the PSs using the union set: Ẑ = m(X Union ).</p>
+<p>• For the outcome model g(z, X) for z = 0, 1.</p>
+<p>(a) Fit an OLS regression of Y z on X Union.</p>
+<p>(b) Predict the outcomes using the union set: Ŷz = ĝ(z, X Union ).</p>
+<p>4. Estimation of the ATE by plugging the predicted values m(X Union ) and ĝ(z, X Union ) into Equation 7.</p>
+<p>The predictor selection step for the PS and outcome models is identical to that for the double Lasso and double post-Lasso. The primary difference is the construction of the</p>
+<p>After constructing the union set, the PS and outcome models are re-estimated using the same union set X Union , thereby eliminating differences in the predictors used for the final PS and outcome predictions.</p>
+<p>In addition to preventing differential predictor selection, using the union set increases the likelihood that both models include important predictors necessary for correct specification (Belloni et al., 2014). In Box 3, suppose that the separately selected predictor sets, X PS and X Yz , are insufficient to correctly specify their respective models, which may occur for various reasons as discussed in the section on doubly robust estimation.</p>
+<p>Nevertheless, if the union set X Union is sufficient to correctly specify at least one of the two models, the doubly robust DML estimator remains consistent for the ATE because of its DR property. Even when the union set is insufficient to correctly specify either model, it may still reduce estimation errors in both the PS and outcome models, allowing the regularization bias term in Equation 11 to converge to zero more rapidly. Thus, the union-based double post-Lasso provides an additional opportunity to obtain consistent estimates of the ATE.</p>
+<h3>Simulation</h3>
+<p>In the simulation study, we demonstrate the advantages of using the union set for doubly robust DML estimation relative to using separate predictor sets for the PS and outcome models. Beyond this primary contribution, the simulation also provides two additional insights. First, by comparing conventional doubly robust estimation with ML-based approaches, we identify conditions under which ML-based predictor selection is beneficial and conditions under which it may be unnecessary or even undesirable. Second, we demonstrate the advantages of the post-Lasso over the Lasso, showing that re-estimating the PS and outcome models to circumvent shrinkage in the coefficients of the selected predictors can further reduce confounding bias. To address these objectives, we estimated the ATE under various simulation conditions designed to examine factors affecting the performance of Lasso-based predictor selection.</p>
+<h3>Data-Generating Model</h3>
+<p>We generated the data according to the interactive regression model with heterogeneous treatment effects specified in Equation 1. The predictor set X = (X k ) p k=1 consists of p observed covariates that meet the unconfoundedness assumption. 4 Thus, adjustment for X removes the entire confounding bias. The predictors in X were independently sampled from a uniform distribution over [-1, 1]. The uniform distribution was chosen to avoid extreme PSs and lack of overlap. The treatment indicator Z follows a</p>
+<p>Bernoulli distribution with probability determined by the logistic model P(Z = 1|X) = 1/{1 + exp(-β ′ Z X)}, and the potential outcomes follow the linear model</p>
+<p>The treatment-by-predictor interaction term zX allows treatment effects to vary across predictors. However, because the predictors have a mean of zero, ATE = E[Y 1 -Y 0 ] = τ . The parameter τ was specified such that the standardized ATE, divided by the standard deviation of the outcome in the control group, is 0.3 across all simulation conditions. Similarly, the error standard deviation σ was specified such that the predictors X and their interactions with treatment zX jointly explain 80% of the outcome&#x27;s variance in all simulation conditions. We considered three sample-size conditions, n = 1500, 3000, and 10000, and three predictor settings, p = 100, 300, and 500.</p>
+<p>As discussed before, the Lasso relies on the approximate sparsity assumption for effective predictive performance. To investigate how the rate of coefficient decay affects the resulting causal effect estimators, the coefficients (β Z , β Y , and β Y Z ) were generated as positive values that decay at different rates. To examine how varying predictor importance across the PS and outcome models affects predictor selection by the Lasso, we evaluated two contrasting scenarios that differ in how coefficient magnitudes align between the two models. 0 20 40 60 80 100 0.0 0.2 0.4 0.6 0.8 1.0 k-th predictors Coefficient magnitude 0 20 40 60 80 100 0.0 0.2 0.4 0.6 0.8 1.0 k-th predictors Propensity score model Outcome model (control group)</p>
+<p>Scenario 1: Aligned Coefficient Decay. In the first scenario, the PS and outcome models share the same coefficient magnitudes and ordering, such that predictors have the same relative importance in both models. This scenario represents a particularly favorable condition for Lasso-based estimation because both models are likely to select nearly the same strong predictors. Even if influential predictors were selected by only one of the two models, confounding bias would still be substantially reduced because of the estimator&#x27;s DR property. For β Z,k ∈ β Z and β Y,k ∈ β Y , the coefficients were specified as β Z,k = β Y,k = 1/k r , with k = 1, . . . , p, where r denotes the coefficient decay rate. The coefficients for the treatment-by-predictor interaction, β Y Z,k ∈ β Y Z , were specified as β Y Z,k = 0.05/k r for k = 1, . . . , p. Under this specification, the effects of the predictors on the outcome are 5% larger in the treatment group than in the control group. We only allowed for modest interaction effects to minimize the likelihood that the Lasso regressions for the treatment and control groups select substantially different sets of predictors. We 0 20 40 60 80 100 0.0 0.4 0.8 1.2 1.6 2.0 k-th predictors Coefficient magnitude 0 20 40 60 80 100 0.0 0.4 0.8 1.2 1.6 2.0 k-th predictors Propensity score model Outcome model (control group) considered two decay rates, r = 0.5 and r = 1.</p>
+<p>Figure 1 illustrates the coefficient decay for the first scenario with 100 predictors. In the left panel (r = 0.5), the coefficients decay relatively slowly, whereas in the right panel (r = 1), they decay more rapidly, reflecting a greater degree of sparsity.</p>
+<p>Scenario 2: Reversed Coefficient Decay. In Scenario 2, we reversed the magnitude of coefficients between the PS and outcome models, except for 20% of predictors that have the same coefficient magnitude in both models. This scenario represents a more realistic setting than Scenario 1. Except for the shared influential predictors, the Lasso will likely select different predictors for the PS and outcome models. For the PS model, the coefficients β Z,k ∈ β Z were specified as β Z,k = 2/k r , with k = 1, . . . , p. For the outcome model, the ordering of coefficient magnitudes is reversed relative to the PS model, such that predictors with larger coefficients in the PS model generally have smaller coefficients in the outcome model, and vice versa. The 20% of predictors with identical coefficients comprise two subsets. The first subset includes 10% of the predictors, beginning with the predictor having the third-largest coefficient in the PS model. The second subset includes another 10% of the predictors, beginning with the predictor having the third-smallest coefficient in the PS model. Thus, β Y,k ∈ β Y were specified as follows:</p>
+<p>Compared with Scenario 1, all coefficients were multiplied by 2 to induce a non-negligible degree of confounding bias. As in Scenario 1, we chose the coefficients for the interaction effects β Y Z,k ∈ β Y Z to be 5% of the control group&#x27;s effects, and we considered the same decay rates, r = 0.5 and r = 1. Figure 2 illustrates the coefficient decay for the second scenario with 100 predictors. Unlike in Scenario 1, the coefficients&#x27; ordering is reversed between the PS and outcome models, except for a subset of predictors with identical coefficients across both models.</p>
+<h3>Estimation of Average Treatment Effect</h3>
+<p>We generated 1000 datasets for each simulation condition. For each dataset, the ATE was estimated using four estimators based on the doubly robust estimation framework in Equation 7. The first estimator is the conventional doubly robust estimator (DR), which estimates the ATE without using any regularization. The second estimator uses the double Lasso (DL) as described in Box 1, where the Lasso is applied to both the PS and outcome models. The third estimator is the double post-Lasso estimator (DPL), which re-estimates the PS and outcome models after predictors have been selected (see Box 2). The fourth estimator is the double post-Lasso with the union set (DPL-U) as described in Box 3.</p>
+<p>For the three Lasso-based estimators, we used a theoretically justified penalty parameter λ. Although different penalty levels may be appropriate for the Lasso and post-Lasso (Chernozhukov et al., 2024), we intentionally used the same penalty level across 0.5 0 0.35 0.7 Remaining Bias (Prop.)</p>
+<p>DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 0 0.35 0.7 DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 0 0.35 0.7 DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 1 0 0.35 0.7 Remaining Bias (Prop.) DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 0 0.35 0.7 DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 0 0.35 0.7 DR DL DPL DPL-U p = 500 p = 300 p = 100 DR DL DPL DPL-U p = 500 p = 300 p = 100 DR DL DPL DPL-U p = 500 p = 300 p = 100</p>
+<p>Note. r denotes the decay rate, n the sample size, and p the number of predictors. DR refers to the conventional doubly robust estimation without predictor selection. DL refers to the double Lasso estimation. DPL refers to the double post-Lasso estimation using separately selected predictor sets. DPL-U refers to the double post-Lasso estimation using the union set. The horizontal dotted line represents zero remaining bias.</p>
+<p>all three estimators to isolate differences in their estimation procedures rather than differences arising from penalty selection.</p>
+<p>For each simulation condition and estimator, we report the remaining confounding bias as a proportion of the initial, unadjusted confounding bias, the scaled root mean squared error (RMSE), divided by the initial confounding bias, and the proportion of predictors selected by the Lasso-based approaches.</p>
+<h3>Results</h3>
+<h3>Scenario 1: Aligned Coefficient Decay</h3>
+<p>Figure 3 represents the proportion of confounding bias remaining for the aligned coefficient decay scenario. Overall, the conventional doubly robust estimator (DR) produces nearly unbiased estimates across most simulation conditions. An exception occurs Note. r denotes the decay rate, p the number of predictors, and n the sample size. DR refers to the conventional doubly robust estimation without predictor selection. DL refers to the double Lasso estimation. DPL refers to the double post-Lasso estimation using separately selected predictor sets. DPL-U refers to the double post-Lasso estimation using the union set.</p>
+<p>when the sample size is small relative to the number of predictors. In particular, when n = 1500, p = 500, and the coefficient decay rate is 0.5, the proportion of remaining confounding bias for the conventional doubly robust estimator falls outside the range displayed in the figure. As shown in Table 1, the corresponding scaled RMSE of 832.65 is huge compared to the other conditions. This result highlights the potential inefficiency of conventional doubly robust effect estimation in high-dimensional settings.</p>
+<p>The double Lasso (DL) performs poorly when the coefficients decay slowly (r = 0.5). When the sample size is small (n = 1500) and the number of predictors is large (p = 500), approximately 70% of confounding bias remains. Even when the number of predictors is relatively small compared with the sample size (p = 100), approximately 40% of confounding bias remains. Moreover, even with a large sample size (n = 10000), the DL estimator retains non-negligible confounding bias across all numbers of predictors. When the coefficients decay fast (r = 1), the DL estimator still shows non-negligible confounding bias across sample sizes and numbers of predictors, whereas the other estimators remove nearly all confounding bias. Table 1 also shows that the DL estimator generally yields the largest scaled RMSE, except when n = 1500 and p = 500, where the doubly robust estimator exhibits the largest scaled RMSE. Note. r denotes the decay rate, p the number of predictors, and n the sample size. PS refers to the propensity score model, and Outcome refers to the outcome model. Union refers to the union of the predictors selected by the PS and outcome models. For the outcome model, the proportion is calculated using the sum of the numbers of predictors selected separately for the treatment and control groups.</p>
+<p>At the lower coefficient decay rate (r = 0.5), the double post-Lasso (DPL) substantially reduces the remaining confounding bias relative to DL across all sample sizes and numbers of predictors.</p>
+<p>Because DL and DPL use the same selected predictors, this improvement is attributed to re-estimating the coefficients without regularization-induced shrinkage. This finding suggests that a substantial proportion of the remaining confounding bias in DL is attributable to coefficient shrinkage. Nevertheless, the DPL estimator still retains non-negligible confounding bias unless the sample size is sufficiently large (n = 10000) or the number of predictors is relatively small (p = 100). When the coefficients decay fast (r = 1), the DPL estimator removes nearly all confounding bias.</p>
+<p>Re-estimating both models using the union of the selected predictor sets further reduces confounding bias. The DPL-U estimator yields the smallest proportion of remaining bias across all simulation conditions. This occurs because the union set is typically larger than either model-specific predictor set, which reduces the risk of omitting influential predictors. Moreover, utilizing the union set protects against bias amplification resulting from differential predictor selection. The amplified portion of the remaining bias stemming from a slightly misspecified outcome model is mitigated when all predictors from 0.5 0 0.35 0.7 Remaining Bias (Prop.)</p>
+<p>DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 0 0.35 0.7 DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 0 0.35 0.7 DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 1 0 0.35 0.7 Remaining Bias (Prop.) DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 0 0.35 0.7 DR DL DPL DPL-U DR DL DPL DPL-U DR DL DPL DPL-U 0 0.35 0.7 DR DL DPL DPL-U p = 500 p = 300 p = 100 DR DL DPL DPL-U p = 500 p = 300 p = 100 DR DL DPL DPL-U p = 500 p = 300 p = 100</p>
+<p>Note. r denotes the decay rate, n the sample size, and p the number of predictors. DR refers to conventional doubly robust estimation without predictor selection. DL refers to the double Lasso estimation. DPL refers to the double post-Lasso estimation using separately selected predictor sets. DPL-U refers to the double post-Lasso estimation using the union set. The horizontal dotted line represents zero remaining bias.</p>
+<p>the outcome model are forced into the PS model (Steiner &amp; Lyu, 2024). Thus, the benefits of re-estimating both models using the union set are greater when the coefficients decay slowly (r = 0.5) than when they decay fast (r = 1), because the union set includes substantially more predictors for re-estimating the PS model under slower coefficient decay (see Table 2).</p>
+<p>Table 2 reports the proportions of predictors selected by the Lasso for the PS and outcome models, as well as their union, across simulation conditions. Note that the proportions of predictors initially selected by the Lasso are identical across the three Lasso-based estimators. The union set contains the largest proportion of selected predictors because it includes predictors selected by either model. For the outcome model, Lasso generally selects a larger proportion of predictors than the PS model. This is due to the different model specifications: the PS model uses logistic regression, whereas the outcome model uses linear regression. Consequently, although the coefficients were assigned the Note. r denotes the decay rate, p the number of predictors, and n the sample size. DR refers to conventional doubly robust estimation without predictor selection. DL refers to the double Lasso estimation. DPL refers to the double post-Lasso estimation using separately selected predictor sets. DPL-U refers to the double post-Lasso estimation using the union set.</p>
+<p>same magnitudes in both models, they operate on different scales, leading to differences in the predictive strength of the predictors and their likelihood of being selected by the Lasso.</p>
+<h3>Scenario 2: Reversed Coefficient Decay</h3>
+<p>Figure 4 illustrates the proportion of remaining confounding bias for the more realistic reversed coefficient scenario. As in Scenario 1, the conventional doubly robust estimator produces nearly unbiased ATE estimates across most simulation conditions.</p>
+<p>However, when the sample size is small (n = 1500) and the number of predictors is large (p = 500), the estimator becomes highly inefficient as indicated by the extreme scaled RMSEs exceeding 10 12 and 10 6 for decay rates of r = 0.5 and r = 1, respectively (Table 3).</p>
+<p>The three Lasso-based estimators exhibit patterns similar to those observed in Scenario 1, but generally show a larger proportion of remaining confounding bias because most predictors that are important in one model are less important in the other model so that some of the strongest confounders are less likely to be selected for both models (potentially resulting in a larger second-order estimation error and, thus, a slower convergence to zero).</p>
+<p>For the DL estimator, more than 70% of the original confounding bias remains when the sample size is small (n = 1500), the number of predictors is large (p = 500), and coefficient decay is slow (r = 0.5). Even under more favorable conditions with a large sample size (n = 10000), small number of predictors (p = 100), and rapid coefficient decay (r = 1), the DL estimator still fails to remove approximately 10% of the confounding bias.</p>
+<p>The DPL estimator removes substantially more confounding bias than the DL estimator because it circumvents the regularization-induced coefficient shrinkage. However, for almost all simulation settings, this is still insufficient to eliminate almost all of the confounding bias. When the union set is used, the performance of the DPL-U improves because the larger union set that includes more number of predictors reduces the regularization bias (together with the re-estimation of coefficients) and prevents differential predictor selection. This particularly holds in settings with smaller sample sizes, larger predictor sets, and slower coefficient decay.</p>
+<h3>Discussion</h3>
+<h3>Summary</h3>
+<p>High-dimensional data create substantial challenges for causal effect estimation because adjusting for a large number of predictors can make conventional estimation inefficient or even lead to underdetermined models. ML methods address these challenges through regularization but can introduce regularization and overfitting biases. DML was developed to mitigate the effects of the two biases on causal effect estimation. However, comparatively less attention has been given to approaches that further improve the robustness of doubly robust DML estimators by combining the post-Lasso estimation with the union of predictors selected for the PS and outcome models. While the post-Lasso estimation reduces shrinkage bias by re-estimating coefficients without regularization, the use of the union set reduces the risk of excluding important predictors from either model and also mitigates bias amplification and collider bias associated with differential predictor selection.</p>
+<p>Our simulations demonstrate that re-estimating both the PS and outcome models with the union set reduces residual confounding bias relative to standard Lasso-based DML estimators across the simulation conditions considered. The results also indicate that conventional doubly robust estimators generally perform well as long as the number of predictors is small relative to the sample size. However, when the number of predictors is large relative to the sample size, the conventional doubly robust estimation becomes unstable, making regularization necessary for reliable estimation.</p>
+<p>Lasso-based estimators may exhibit substantial residual confounding bias when the sample size is small relative to the number of predictors. The performance of the double Lasso estimators may even be worse when the approximate sparsity assumption is violated or the penalty level is poorly chosen. Larger sample sizes may mitigate some of these problems, although they do not necessarily resolve violations of approximate sparsity.</p>
+<p>Thus, for low-or moderate-dimensional data, the conventional doubly robust estimation may be preferable to ML-based estimation.</p>
+<p>Taken together, these findings suggest that the advantages of DML for causal inference should not be evaluated solely in terms of predictive performance or dimensionality reduction. Rather, researchers should pay careful attention to how automated predictor selection affects the specification of the PS and outcome models and, ultimately, the removal of confounding bias. In particular, predictor selection should not be treated as an independent process for each model without considering the predictors selected by the other model. Overall, our simulation results suggest that doubly robust DML with the post-Lasso estimation and the union set offers the strongest protection against regularization bias and biases associated with differential predictor selection.</p>
+<h3>Limitations</h3>
+<p>Several limitations should be considered when interpreting these findings. First, although the simulation incorporated heterogeneous treatment effects and different alignments of coefficient magnitudes between the PS and outcome models, the data-generating model remained relatively simple. In particular, the predictors were generated independently, the PS and outcome models followed logistic and linear functional forms, respectively, and the coefficient decay followed theoretical assumptions. These conditions allow us to isolate the consequences of ML-based predictor selection but do not fully reflect the complexity of real-world data. In practice, predictors may be highly correlated, their functional relationships with treatment and outcome may be nonlinear, and the approximate sparsity assumption may not hold. Moreover, although our theoretical motivation includes bias-inducing misspecification arising from differential predictor selection, the simulation only covered regular bias amplification but included neither instrumental variables nor collider structures (Steiner &amp; Lyu, 2024). Future research should therefore examine whether the advantages of the union-based approach extend to more complex and realistic settings.</p>
+<p>Second, the present study focused on the reduction of confounding bias rather than providing a comprehensive evaluation of estimator performance with regard to statistical inference. Thus, future studies should evaluate estimation efficiency and confidence interval coverage.</p>
+<p>Finally, our findings may not generalize to other ML methods. The Lasso provides a powerful starting point because it explicitly selects predictors by setting some coefficients to zero. Other ML methods, such as random forests and boosting, may be able to capture more complex functional relationships but do not necessarily provide an equally direct definition of predictor selection. Extending the proposed approach to these methods would require appropriate strategies for identifying and combining important predictors across the PS and outcome models. Such extensions would be valuable for determining whether the advantages of the union set extend beyond Lasso-based estimation.</p>
+<p>As high-dimensional methods grow in popularity, applied researchers risk assuming that automated selection inherently outperforms conventional PS or regression approaches to causal inference. Our simulation results clarify the conditions under which DML provides a practical advantage over conventional estimation strategies for the average treatment effect (ATE), given that the observed covariates meet the unconfoundedness assumption. Because DML is less well known outside the causal inference literature, we first provide a comprehensive introduction to the DML framework before detailing our specific post-Lasso and union-based predictor selection suggestions.Double/debiased Machine LearningChernozhukovet al. (2018)  proposed DML to avoid two biases that arise when ML methods are applied only to the outcome model for causal effect estimation: regularization bias and overfitting bias. This section briefly describes why these biases arise and how DML addresses them, following simplified formulations fromChernozhukov et al. (2018).</p>
+<h3>Figure 1</h3>
+<p>Figure 1True coefficient magnitudes in Scenario 1 with 100 predictors under two decay rates for approximate sparsity: r = 0.5 (left panel) and r = 1 (right panel). Points with identical coefficient magnitudes are slightly offset horizontally to avoid overlap and improve visibility.</p>
+<h3>Figure 2</h3>
+<p>Figure 2True coefficient magnitudes in Scenario 2 with 100 predictors under two decay rates for approximate sparsity: r = 0.5 (left panel) and r = 1 (right panel). Points with identical coefficient magnitudes are slightly offset horizontally to avoid overlap and improve visibility.</p>
+<h3>Figure 3</h3>
+<p>Figure 3 Proportion of confounding bias remaining in average treatment effect estimates for Scenario 1: Aligned coefficient decay r n = 1500 n = 3000 n = 10000</p>
+<h3>Figure 4</h3>
+<p>Figure 4 Proportion of confounding bias remaining in average treatment effect estimates for Scenario 2: Reversed coefficient decay r n = 1500 n = 3000 n = 10000</p>
+<h3>Table 1</h3>
+<p>Root mean squared error scaled by the initial confounding bias for Scenario 1: Aligned coefficient decay</p>
+<h3>Table 2</h3>
+<p>Proportion of the selected predictors in the Lasso-based estimators for Scenario 1: Aligned coefficient decay</p>
+<h3>Table 3</h3>
+<p>Root mean squared error scaled by the initial confounding bias for Scenario 2: Reversed coefficient decay</p>
+<h3>Table 4</h3>
+<p>Proportion of the selected predictors in the Lasso-based estimators for Scenario 2: Reversed coefficient decay Note. r denotes the decay rate, p the number of predictors, and n the sample size. PS refers to the propensity score model, and Outcome refers to the outcome model. Union refers to the union of the predictors selected by the PS and outcome models. For the outcome model, the proportion is calculated using the sum of the numbers of predictors selected separately for the treatment and control groups.</p>
+<p>The DML literature discusses regularization bias(Chernozhukov et al., 2018, 2024) and overfitting bias(Ahrens et al., 2025) in the context of semiparametric score functions.</p>
+<p>Here, we illustrate the same issue using the simpler plug-in estimator.</p>
+<p>With the low-dimensional outcome model, this dependency can be adequately characterized and managed through adjustments to the asymptotic variance. SeeNewey (1994).</p>
+<p>Under a regression model that assumes a constant treatment effect (i.e., partially linear model), DML estimators are constructed differently. For details, seeChernozhukov et al. (2018 Chernozhukov et al. ( , 2024)).</p>
+<p>In this simulation, the sets of covariates and predictors coincide because the covariates enter the PS and outcome models only through their main effects and interactions with the treatment indicator.</p>
+<h3>References</h3>
+<p>Ahrens, A., Chernozhukov, V., Hansen, C., Kozbur, D., Schaffer, M., &amp; Wiemann, T. (2025). An introduction to double/debiased machine learning. arXiv preprint arXiv:2504.08324.</p>
+<p>Bang, H., &amp; Robins, J. M. (2005). Doubly robust estimation in missing data and causal inference models. Biometrics, 61 (4), 962-973.</p>
+<p>Belloni, A., Chen, D., Chernozhukov, V., &amp; Hansen, C. (2012). Sparse models and methods for optimal instruments with an application to eminent domain. Econometrica, 80 (6), 2369-2429.</p>
+<p>Belloni, A., &amp; Chernozhukov, V. (2013). Least squares after model selection in high-dimensional sparse models. Bernoulli, 19 (2), 521-547.</p>
+<p>Belloni, A., Chernozhukov, V., Chetverikov, D., &amp; Kato, K. (2015). Some new asymptotic theory for least squares series: Pointwise and uniform results. Journal of Econometrics, 186 (2), 345-366.</p>
+<p>Belloni, A., Chernozhukov, V., &amp; Hansen, C. (2014). Inference on treatment effects after selection among high-dimensional controls. Review of Economic Studies, 81 (2), 608-650.</p>
+<p>Cattaneo, M. D., Jansson, M., &amp; Newey, W. K. (2018). Inference in linear regression models with many covariates and heteroscedasticity. Journal of the American Statistical Association, 113 (523), 1350-1361.</p>
+<p>Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C., Newey, W., &amp; Robins, J. (2018). Double/debiased machine learning for treatment and structural parameters. The Econometrics Journal , 21 (1), C1-C68.</p>
+<p>Chernozhukov, V., Hansen, C., Kallus, N., Spindler, M., &amp; Syrgkanis, V. (2024). Applied causal inference powered by ML and AI. arXiv preprint arXiv:2403.02467.</p>
+<p>Frisch, R., &amp; Waugh, F. V. (1933). Partial time regressions as compared with individual trends. Econometrica: Journal of the Econometric Society, 387-401.</p>
+<p>Glynn, A. N., &amp; Quinn, K. M. (2010). An introduction to the augmented inverse propensity weighted estimator. Political Analysis, 18 (1), 36-56.</p>
+<p>Hünermund, P., Louw, B., &amp; Caspi, I. (2023). Double machine learning and automated confounder selection: A cautionary tale. Journal of Causal Inference, 11 (1).</p>
+<p>Imbens, G. W., &amp; Wooldridge, J. M. (2009). Recent developments in the econometrics of program evaluation. Journal of Economic Literature, 47 (1), 5-86.</p>
+<p>Lovell, M. C. (1963). Seasonal adjustment of economic time series and multiple regression analysis. Journal of the American Statistical Association, 58 (304), 993-1010.</p>
+<p>Lovell, M. C. (2008). A simple proof of the FWL theorem. The Journal of Economic Education, 39 (1), 88-91.</p>
+<p>Newey, W. K. (1994). The asymptotic variance of semiparametric estimators. Econometrica: Journal of the Econometric Society, 1349-1382.</p>
+<p>Neyman, J. (1959). Optimal asymptotic tests of composite statistical hypotheses. In U. Grenander (Ed.), Probability and Statistics: The Harald Cramér Volume (pp. 213-234). Almqvist &amp; Wiksell.</p>
+<p>Robins, J. M., &amp; Rotnitzky, A. (1995). Semiparametric efficiency in multivariate regression models with missing data. Journal of the American Statistical Association, 90 (429), 122-129.</p>
+<p>Robins, J. M., &amp; Rotnitzky, A. (2001). Comment on &quot;Inference for semiparametric models: Some questions and an answer,&quot; by PJ Bickel and J. Kwon. Statistica Sinica, 11 , 920-936.</p>
+<p>Robins, J. M., Rotnitzky, A., &amp; Zhao, L. P. (1994). Estimation of regression coefficients when some regressors are not always observed. Journal of the American Statistical Association, 89 (427), 846-866.</p>
+<p>Rosenbaum, P. R., &amp; Rubin, D. B. (1983). The central role of the propensity score in observational studies for causal effects. Biometrika, 70 (1), 41-55.</p>
+<p>Schafer, J. L., &amp; Kang, J. (2008). Average causal effects from nonrandomized studies: a practical guide and simulated example. Psychological Methods, 13 (4), 279.</p>
+<p>Scharfstein, D. O., Rotnitzky, A., &amp; Robins, J. M. (1999). Adjusting for nonignorable drop-out using semiparametric nonresponse models. Journal of the American Statistical Association, 94 (448), 1096-1120.</p>
+<p>Steiner, P. M., &amp; Kim, Y. (2016). The mechanics of omitted variable bias: Bias amplification and cancellation of offsetting biases. Journal of Causal Inference, 4 (2).</p>
+<p>Steiner, P. M., &amp; Lyu, W. (2024). Robust covariate selection for doubly robust estimators in causal inference. OSF.</p>
+<p>Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society Series B: Statistical Methodology, 58 (1), 267-288.</p>
+<p>Tsiatis, A. A. (2006). Semiparametric Theory and Missing Data (Vol. 4). Springer.</p>
+<p>Valentin, S., Detommaso, G., Li, Y., Opper, M., &amp; Brückner, M. (2025). On double robustness in double machine learning. In Neurips 2025 workshop on causcien: Uncovering causality in science.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
