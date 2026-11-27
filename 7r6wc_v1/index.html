@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Lexical features reveal distinct developmental
+patterns in valence and arousal</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Lexical features reveal distinct developmental patterns in valence and
+arousal
+</p>
+<p class="meta">
+2026-11-27 · Metacheck 0.4.4.40
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>13</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Ethics Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to report data about people or animals that
+need an ethics statement, and lacked one.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>The paper appears to report data that the authors collected from
+people or animals, but we found no ethics statement. Such data need one:
+approval by an ethics committee, or a reason why none was needed. We
+based this on the sentences below. A paper can describe someone else’s
+study in the same words; if these data are not the authors’ own, no
+statement is needed.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>Across two experiments, Spanish affective ratings from children aged
+7, 9, 11, and 13 years were modeled within and across age groups and
+compared with adult judgments.</p>
+</blockquote>
+<blockquote>
+<p>The sample comprised 350 sevenyear-olds (173 girls and 177 boys; mean
+age = 7 years 7 months, SD = 4 months), 318 nine-yearolds (161 girls and
+157 boys; mean age = 9 years 6 months, SD = 4 months), 297
+eleven-year-olds (157 girls and 140 boys; mean age = 11 years 8 months,
+SD = 4 months), and 311 thirteen-yearolds (155 girls and 156 boys; mean
+age = 13 years 8 months, SD = 4 months).</p>
+</blockquote>
+<blockquote>
+<p>A small number of seven-year-old participants completed only one
+questionnaire list.</p>
+</blockquote>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>We found 1 replication for 1 original you cited.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We found no imprecise <em>p</em> values, <em>p</em>-values of exactly
+zero or impossible <em>p</em> values out of 1 detected.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(13)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 72 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 72 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 72 references with DOIs. We found 1 replication for 1
+original you cited.</p>
+<p>Check if you are aware of the replication studies, and cite them
+where appropriate.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:50%" />
+<col style="width:50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:left;">
+Replication
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Aryani, A., Isbilen, E. S., &amp; Christiansen, M. H. (2020). Affective
+arousal links sound to meaning. Psychological Science, 31(8), 978-986.
+<a href="https://doi.org/10.1177/0956797620927967" class="uri">https://doi.org/10.1177/0956797620927967</a>
+</td>
+<td style="text-align:left;">
+Boyce, V., Mathur, M., &amp; Frank, M. C. (2023). Eleven years of
+student replication projects provide evidence on the correlates of
+replicability in psychology. Royal Society Open Science, 10(11).
+<a href="https://doi.org/10.1098/rsos.231240" target="_blank">doi:10.1098/rsos.231240</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Affective word meanings are often treated as stable lexical properties, although their organization may change across development. Using representational content analysis, we examined how semantic and form-based lexical information predicts valence and arousal judgments from childhood to adulthood. Across two experiments, Spanish affective ratings from children aged 7, 9, 11, and 13 years were modeled within and across age groups and compared with adult judgments. Semantic representations were the strongest predictors of both dimensions, but valence and arousal showed distinct developmental patterns. Valence remained comparatively stable across childhood and showed strong correspondence with adult judgments already at age 7.</p>
+<p>Arousal, despite being systematically predictable within each child group, showed weaker crossage generalization, with semantic transfer declining as developmental distance increased.</p>
+<p>Moreover, semantic information predicted word-specific age differences more accurately for arousal than for valence. Child-adult correspondence in arousal shifted from negative at age 7 to positive at ages 11 and 13, suggesting increasing similarity in lexical-affective mappings across development. These findings indicate that developmental variation in arousal does not reflect an absence of systematic organization in younger children but rather age-related differences in how lexical meaning relates to activation. Overall, affective lexical development combines a relatively stable evaluative structure with a more flexible organization of arousal.</p>
+<h3>[div-01]</h3>
+<p>Affective meaning is a fundamental component of language, allowing individuals to evaluate and communicate the emotional significance of their experiences. As children develop, changes in linguistic knowledge and emotional understanding may shape not only how they evaluate individual words but also how affective meaning is organized across the lexicon. Yet, little is known about whether this organization remains consistent across development or whether different dimensions of affective meaning follow distinct developmental patterns. The present study addresses these questions by examining how lexical information relates to valence and arousal judgments from childhood to adulthood.</p>
+<p>Words convey not only conceptual information but also whether their referents are desirable or threatening, comforting or disturbing, and calming or activating. Such affective information influences word recognition, attention, and memory (Citron, 2012; Ferré et al., 2025; Hinojosa et al., 2020). Dimensional accounts characterize affective meaning primarily through valence, ranging from unpleasant to pleasant, and arousal, reflecting activation or intensity (Russell, 1980).</p>
+<p>Although distinct, these dimensions are systematically related: both positive and negative stimuli can be highly arousing, whereas neutral stimuli tend to elicit lower activation, producing the nonlinear relationship commonly observed in affective norms (e.g., Ćoso et al., 2019; Moors et al., 2013; Stadthagen-González et al., 2017; Warriner et al., 2013).</p>
+<p>Affective norms have traditionally treated valence and arousal as relatively stable properties of words, providing ratings used to select stimuli, match experimental conditions, and predict behavioral and neural responses. This research has established that affective content interacts with lexical, semantic, and contextual information during language processing (Citron, 2012; Hinojosa et al., 2020). Positive valence generally facilitates visual word recognition, whereas effects of negative content depend more strongly on emotional intensity and other lexical characteristics (Ferré et al., 2025; Haro et al., 2024; Kuperman et al., 2014; Rodríguez-Ferreiro &amp; Davies, 2019).</p>
+<p>Normative studies also document relationships among valence, arousal, discrete emotions, concreteness, and other psycholinguistic variables (e.g., Ćoso et al., 2023; Hinojosa et al., 2016; Montefinese et al., 2014; Speed &amp; Brysbaert, 2024). However, affective ratings reflect judgments made at particular developmental stages, and treating them as age-invariant properties may obscure changes in how emotional meaning is organized.</p>
+<p>Language and emotional knowledge develop together. Children learn to associate words with bodily states, actions, situations, goals, and social experiences, drawing on linguistic and paralinguistic cues, including intonation, acoustic properties, and facial expressions during interactions with caregivers (e.g., Dave et al., 2018; Golinkoff et al., 2015; Pons et al., 2004; Tamis-LeMonda et al., 2014). Because emotional experiences vary considerably in their perceptual and bodily features, linguistic labels help organize them into conceptual categories that support communication, memory, and prediction (Hoemann et al., 2019; Lindquist et al., 2015).</p>
+<p>As linguistic knowledge expands, children may therefore change both the emotion concepts they represent and the dimensions used to organize affective information (Huang et al., 2025). Indeed, preschoolers integrate syntactic and situational information when learning novel emotion words (Shablack et al., 2020).</p>
+<p>Developmental evidence suggests that valence provides an early organizing dimension of emotion knowledge. Children initially rely on broad positive-negative distinctions and gradually incorporate additional dimensions as their verbal knowledge develops (Nook et al., 2017; Woodard et al., 2022). Their use of emotion words becomes increasingly adult-like between ages 4 and 11, although valence remains the only clearly identifiable semantic dimension shared across all child groups (Grosse et al., 2021). This does not imply that younger children lack arousal information, but suggests that pleasantness may provide a more accessible distinction, whereas activation becomes increasingly differentiated with development.</p>
+<p>Lexical-processing findings support the early importance of valence. Children&#x27;s recognition of emotion words improves between ages 5 and 12, alongside developmental changes in the processing advantage for positive words (Bahn et al., 2017; Ponari et al., 2018). Valence influences auditory word recognition by ages 6-7 and may support abstract concept acquisition (Lund et al., 2019). It can also be predicted from children&#x27;s developing semantic representations (Martínez-Huertas et al., 2021). Moreover, positive emotion-laden Spanish words are acquired earlier than negative and neutral words, even after controlling for relevant lexical characteristics (Sabater et al., 2023), with comparable advantages for positive emotion labels in English and Chinese (Li &amp; Yu, 2015; Ponari et al., 2020).</p>
+<p>Valence may therefore stabilize relatively early because it captures a broad evaluative distinction relevant to approach, avoidance, safety, and reward. Arousal, by contrast, may require more differentiated assessments of activation, intensity, and bodily engagement (Norman et al., 2011; Murty &amp; Pessoa, 2025; Smith et al., 2025). Children must learn that positive and negative experiences can both be highly activating, that similarly valenced situations may differ in intensity, and that activation depends on context and experience. Changing social environments and expanding emotional knowledge during adolescence may further alter the arousal associated with particular concepts without necessarily changing their overall evaluation. Thus, the lexical organization of arousal may undergo greater developmental reorganization than that of valence.</p>
+<p>Developmental affective norms support this possibility. The Spanish Affective Norms for Development in Children and Adolescents (SANDchild; Sabater et al., 2020) provide valence and arousal ratings for Spanish words from children aged 7, 9, 11, and 13 years. Although both dimensions differ across ages, agreement is consistently higher for valence, whereas seven-yearolds&#x27; arousal ratings are particularly distinct from those of older children. Younger children also rate some negative words as less arousing than older participants. These findings suggest that development may involve changes not only in average ratings but also in the relative affective positions of individual words (see Figure 1A). German norms similarly reveal the nonlinear valence-arousal relationship from ages 6 to 12, alongside age differences in rating extremity and response speed (Sylvester et al., 2016).</p>
+<p>Adult comparisons provide a complementary perspective. Bahn et al. (2018) found high childadult agreement in valence and arousal ratings for 48 German emotion terms, although nine-yearolds reported somewhat lower absolute arousal. Together with evidence that arousal becomes increasingly important in emotion representations with age (Nook et al., 2017), these findings raise the question of whether child-adult correspondence develops similarly for valence and arousal across larger vocabularies and multiple child ages.</p>
+<p>Importantly, agreement between age-group ratings does not establish whether the lexical information underlying those judgments is shared. Similar ratings may arise from different relationships between lexical features and affective judgments, whereas lower agreement may reflect either measurement variability or systematic developmental differences. Distinguishing continuity from reorganization therefore requires examining whether the relationships between lexical information and affective judgments generalize across ages.</p>
+<p>Predictive modeling offers a way to address this question. Previous research has shown that distributional word vectors predict valence and arousal judgments (Hollis et al., 2017), while ridge regression applied to semantic representations predicts item-level (pseudo)word memorability (Aka et al., 2023; Gatti &amp; Günther, 2026; see also Gatti, Raveling et al., 2024; Martínez-Tomás et al., 2026). This approach, termed representational content analysis (RCA; Hussain et al., 2024), examines which information can be recovered from high-dimensional representations. Evaluating predictions on unseen words establishes whether these relationships generalize beyond the training data (Yarkoni &amp; Westfall, 2017). Applied across development, strong cross-age prediction would indicate shared lexical-affective mappings, whereas declining prediction with increasing age distance would suggest developmental differences. Child-adult transfer can further establish whether these mappings become progressively more similar to those observed in adulthood.</p>
+<p>Semantic information is a plausible basis for shared affective organization. Distributional semantic models represent words through their linguistic contexts, capturing graded relationships among concepts and emotional meanings (e.g., Günther et al., 2019; Kumar, 2021). Although these models do not directly represent children&#x27;s internal semantic knowledge, they provide a common space for comparing lexical-affective relationships across ages and predicting human judgments (Mandera et al., 2017). Semantic vectors predict valence judgments (e.g., Gatti, Raveling et al., 2024), and models based on children&#x27;s semantic representations can extend affective information to subsequently acquired words (Martínez-Huertas et al., 2021). If valence relies on semantic relationships established early in development, its mapping should generalize across ages. Arousal may also be predictable from semantic information related to action, intensity, danger, or excitement, but its mapping may change more substantially as children revise the activation associated with particular concepts.</p>
+<p>Affective information may also be associated with word form. Languages contain statistical regularities linking phonological and orthographic patterns to meaning (form-meaning mappings; Dingemanse et al., 2015). Cross-linguistic studies indicate that phonemes carry weak but reliable information about valence, sometimes particularly in word-initial positions (Adelman et al., 2018).</p>
+<p>Arousal may also contribute to sound-meaning associations, as sharper-sounding pseudowords and angular visual forms evoke higher activation (Aryani et al., 2020; see Hinojosa et al., 2026).</p>
+<p>In Spanish, phonological and phonetic properties predict valence, emotionality, and arousal beyond several lexical and semantic variables (De Zubicaray &amp; Hinojosa, 2024). Specific phonemes have also been associated with affective dimensions and discrete emotions, including associations of plosives with high arousal and some fricatives with highly arousing negative words (Calvillo-Torres et al., 2025).</p>
+<p>Together, these findings indicate that affective information is distributed across semantic, orthographic, phonological, and articulatory levels. Semantic representations may provide the most direct information about affective meaning, whereas form-based features may capture weaker regularities related to phonological and acoustic properties, morphology, lexical history, or semantic categories. However, research on these relationships has focused primarily on adults, while developmental studies have largely documented differences in affective ratings without examining their lexical organization. It therefore remains unclear whether these mappings generalize across child ages, whether their feature weights remain similar, whether they predict which individual words change most strongly, and whether their correspondence with adult judgments increases with age. Addressing these questions can clarify which aspects of affective lexical knowledge show continuity or reorganization across development and whether these patterns differ between valence and arousal.</p>
+<h3>The Present Study</h3>
+<p>The present study examines the developmental organization of valence and arousal through two re-analyses of existing affective norms. Experiment 1 uses ratings from 7-, 9-, 11-, and 13-yearold children in SANDchild (Sabater et al., 2020). Using representational content analysis, we examined how semantic, orthographic, phonological, and articulatory features predict affective judgments for unseen words, both within and across age groups. We expected semantic representations to provide the strongest predictions of both dimensions, with weaker contributions from form-based features. Given the proposed earlier stabilization of valence, we also expected stronger cross-age generalization for valence than for arousal, with arousal prediction declining more sharply as developmental distance increased. Additional analyses examined whether transfer differed by developmental direction, whether feature weights remained consistent across ages, and whether lexical information predicted word-specific developmental differences.</p>
+<p>Experiment 2 extends this framework to adulthood by comparing SANDchild ratings with adult Spanish affective norms (Stadthagen-González et al., 2017). Using the same representations and held-out prediction approach, we examined bidirectional transfer between children and adults and whether correspondence changed systematically with child age. We expected relatively high child-adult correspondence for valence throughout childhood, whereas arousal correspondence was expected to increase more strongly with age, producing a more pronounced developmental gradient. Finally, we examined whether these patterns were specific to semantic representations or extended to form-based lexical information.</p>
+<h3>Experiment 1 Method</h3>
+<h3>Materials and affective ratings</h3>
+<p>The analyses used the published Spanish affective normative data for children and adolescents (SANDchild; Sabater et al., 2020). The original study recruited 1,276 native Spanish-speaking children and adolescents from schools in the Madrid region. The sample comprised 350 sevenyear-olds (173 girls and 177 boys; mean age = 7 years 7 months, SD = 4 months), 318 nine-yearolds (161 girls and 157 boys; mean age = 9 years 6 months, SD = 4 months), 297 eleven-year-olds (157 girls and 140 boys; mean age = 11 years 8 months, SD = 4 months), and 311 thirteen-yearolds (155 girls and 156 boys; mean age = 13 years 8 months, SD = 4 months). The schools represented areas with different socioeconomic characteristics.</p>
+<p>SANDchild contains valence and arousal ratings for 1,406 Spanish words. The words were randomly allocated to 20 paper-and-pencil questionnaires: 14 questionnaires contained 70 words and six contained 71 words. Separate valence and arousal versions were created for each questionnaire. Each participant generally completed the valence and arousal versions of two questionnaire lists, thereby rating approximately 140-142 words on each affective dimension. A small number of seven-year-old participants completed only one questionnaire list. Ratings were collected using nine-point Self-Assessment Manikin scales. For valence, 1 indicated a very unpleasant response, 9 a very pleasant response, and 5 a neutral response. For arousal, 1 indicated feeling very relaxed and 9 feeling very activated. The published norms showed high mean interrater reliability for valence at ages 7, 9, 11, and 13, respectively (r = .89, .94, .95, and .94).</p>
+<p>Reliability was lower, although still generally adequate, for arousal (r = .76, .80, .83, and .85). The present analyses used the age-specific mean valence and arousal ratings for the same complete set of 1,406 words.</p>
+<h3>Orthographic features</h3>
+<p>To construct spelling-based predictors, words were lowercased, transliterated to Latin ASCII, and restricted to the letters a-z. This normalization removed differences due to capitalization and diacritics, allowing the orthographic representations to encode differences in letter identity and ordering within a common alphabet.</p>
+<p>Three levels of orthographic information were considered. Letter unigrams represented each word by the frequency of its individual letters, yielding 26 dimensions corresponding to the letters a-z.</p>
+<p>This representation captures letter composition but not letter order: words containing the same letters in different arrangements can therefore receive identical unigram representations. Adjacent orthographic bigrams captured local letter-order information by counting consecutive letter pairs. Explicit start and end markers were added so that word-initial and word-final letter information was also represented. The resulting predictor space contained 728 possible dimensions: 26 startletter pairs, 676 letter-letter pairs, and 26 letter-end pairs. Thus, unlike letter unigrams, adjacent bigrams distinguish words according to local sequential structure as well as their constituent letters. Open orthographic bigrams provided a less strictly local representation of letter order. They counted every ordered pair of letters in the boundary-marked word, including pairs separated by one or more intervening letters. Consequently, open bigrams preserve information about relative letter order without requiring the two letters to be adjacent. Repeated occurrences of the same ordered pair contributed repeated counts, and the direct start-end pair was excluded. The resulting representation contained the same 728 potential dimensions as the adjacent-bigram representation.</p>
+<p>Together, these three representations provide progressively richer descriptions of word form, from individual letter composition to local and nonlocal orthographic ordering.</p>
+<h3>Phonological and articulatory features</h3>
+<p>Spanish pronunciations were generated for all 1,406 words using Phonemizer 3.4.0 with the eSpeak NG 1.52.0 backend (Bernard &amp; Titeux, 2021). Pronunciations were returned in International Phonetic Alphabet (IPA) notation and segmented into individual phoneme tokens.</p>
+<p>Stress marks were removed so that the resulting representations focused on segmental phonological structure rather than lexical stress. Across the complete stimulus set, the resulting pronunciation inventory contained 36 distinct phoneme tokens.</p>
+<p>Two phonological representations were constructed. Phoneme unigrams counted the occurrence of each of the 36 phoneme tokens in a word, capturing its phonemic composition without retaining information about sequence. Adjacent phoneme bigrams additionally encoded local phoneme order by counting consecutive phoneme pairs. As for the orthographic bigrams, explicit start and end markers were included to represent word-initial and word-final phonemes. This resulted in 1,368 potential phoneme-bigram dimensions. Together, these representations allowed us to distinguish information about which speech sounds a word contains from information about their local sequential organization.</p>
+<p>Two additional representations described pronunciations in terms of articulatory and phonological features rather than discrete phoneme identities. These were derived from a fixed PanPhon 0.22.2 feature lookup table (Mortensen et al., 2016), which characterizes IPA segments according to 24 distinctive features describing properties of speech production and phonological structure. Each phoneme therefore contributes a bundle of features rather than being represented as a single categorical unit. Positive and negative values for the 24 features were counted separately, yielding 48 possible feature counts. For the global articulatory representation, these token-level feature counts were summed across the entire pronunciation, producing 48 dimensions for each word. This representation captures the overall articulatory-feature composition of a word while discarding the precise order and location of its phonemes. The positional articulatory representation retained coarse information about where these features occurred by dividing each phoneme sequence into initial, middle, and final thirds and computing the same 48 feature counts separately within each region. This yielded 144 dimensions (48 features × 3 positions). Phonemes were assigned to thirds according to the midpoint of their normalized ordinal position in the sequence; the resulting bins therefore describe relative position within the phoneme sequence, rather than temporal or acoustic duration.</p>
+<p>These four representations provide complementary levels of spoken-form information, ranging from phoneme identity and local phoneme order to more abstract articulatory-feature composition and its approximate position within the word.</p>
+<h3>Word embedding model</h3>
+<p>Semantic information was represented using the 300-dimensional vectors from a pre-trained Spanish fastText model (available at: https://fasttext.cc/docs/en/crawl-vectors.html; Bojanowski et al., 2017; Grave et al., 2018), trained on large Spanish-language corpora derived from Common Crawl and Wikipedia. FastText is an extension of the prominent word2vec model (Mikolov et al., 2013), a simple neural language model trained on a large corpus of natural language, with the training objective to predict the words immediately before and after a given word. To this end, word2vec uses a simple neural network model with one-hot vectors of the lexicon as input and output layers, and one hidden layer. After training, the weights between a given word in the input layer and the hidden layer is taken as the word embedding of that word. Since only the activation values of the hidden layer are directly used to predict the (context) words in the output layer, these activation values in the word embedding contain, in a condensed format, all the information required to make those predictions about (context) words. Thus, the word embedding encodes the distributional history of a word. Ultimately, these vectors carry semantic information and are thus generally employed as (distributed) semantic representations (Günther et al., 2019; Kumar, 2021).</p>
+<p>A single 300-dimensional vector was extracted for each stimulus word prior to model fitting, providing a fixed numerical representation of that word that was subsequently used as the predictor space for both valence and arousal. Note that these 300 embedding dimensions should be interpreted jointly rather than as individually labeled linguistic features. Unlike predictors such as letters or phonemes, individual fastText coordinates do not correspond to predefined semantic categories such as concreteness, emotion, social meaning, or action. Semantic information is distributed across combinations of dimensions, and the orientation of individual dimensions is not inherently linguistically interpretable. Accordingly, predictive performance of the fastText models is interpreted as evidence that information encoded in the multidimensional distributional representation is systematically related to affective ratings, rather than as evidence for the contribution of any particular embedding coordinate.</p>
+<p>Using a single pre-trained semantic space was particularly well suited to the present aims because the critical question concerned developmental changes in the mapping between lexical meaning and affective judgments, rather than developmental changes in the semantic representations themselves. Keeping the fastText vectors fixed across ages ensured that all age groups were evaluated within the same representational coordinate system. Consequently, differences in predictive performance or cross-age transfer can be attributed to differences in how a common set of distributional regularities relates to valence and arousal ratings, rather than to differences between independently trained embedding spaces. This also avoids potential confounds arising from the substantially smaller and less comparable language resources available for constructing age-specific semantic models, where differences in corpus size, genre, dialect, or lexical coverage could be mistaken for developmental change. Moreover, the large and heterogeneous corpus used to train the Spanish fastText model provides stable representations for the full stimulus vocabulary and reduces the influence of idiosyncratic sampling variation. The resulting shared semantic space therefore provides a controlled reference system for testing developmental reweighting of lexicalaffective information while holding the underlying distributional representation constant.</p>
+<h3>Analytical approach</h3>
+<p>Analyses were conducted in R (R Core Team, 2025). For each age group, separate models used each lexical representation to predict valence or arousal and cross-age prediction tested whether a mapping learned from one age group generalized to another. For RCA, Gaussian ridge regressions with an intercept and an L2 penalty were fitted using glmnet (Friedman et al., 2010). Balanced five-fold partitions of word identities were repeated 50 times, with the same outer folds reused across ages, outcomes, and representations. Within each partition, the held-out words were excluded from training at every age. Within each outer fold, a model was trained on four-fifths of the words, and its penalty was selected by a separate five-fold cross-validation within the training words, minimizing mean squared error. Outcomes were centered and scaled using the source-age training words, and predictors (i.e. orthographic, phonological or semantic features) were standardized within training. Each fitted model predicted the held-out words at every target age without refitting. Pooling combined predictions from the five held-out sets, so each word contributed one prediction per repetition. Spearman correlations between pooled held-out predictions and observed ratings were calculated within each repetition and then averaged.</p>
+<p>Developmental-distance slopes indexed changes in cross-age prediction per year of absolute separation between child groups. These slopes tested whether prediction accuracy declined as the training and target ages became farther apart. Word-specific developmental slopes were estimated by regressing each word&#x27;s four mean ratings on ages 7, 9, 11, and 13; the same prediction framework was then used to predict these slopes. These word-level slopes, expressed in rating points per year, captured the direction and rate of differences across age-group means rather than change within individual children.</p>
+<p>For slope-prediction correlations and paired-bootstrap tests, each word&#x27;s held-out predictions were first averaged across the 50 repetitions; correlations and contrasts were then calculated from these ensemble predictions. Paired comparisons resampled word identities together across the outcomes and models being compared, using 499 bootstrap resamples. The same sampled words were used across ages, outcomes, and models to preserve the paired comparisons. Bootstrap inference was conditional on the fitted predictions. Models were not refitted during resampling; the intervals therefore quantify word-sampling uncertainty for the fitted prediction ensembles. Significance was assessed using Benjamini-Hochberg false-discovery-rate adjusted q values within the respective test families (Benjamini &amp; Hochberg, 1995).</p>
+<p>All data, scripts and codes used in the analysis are included as Supplementary Materials.</p>
+<h3>Results</h3>
+<h3>Agreement in ratings across ages</h3>
+<p>Valence ratings showed consistently stronger agreement across childhood than arousal ratings (Figure 1B). Across the six age pairs, Spearman correlations ranged from .801 to .897 for valence and from .508 to .746 for arousal. Agreement was lowest across the largest age separation, between ages 7 and 13, for both valence, ρ = .801, and arousal, ρ = .508. These comparisons used the same 1,406 words throughout; all correlations survived false-discovery-rate correction (Table S3).</p>
+<h3>Prediction across child age groups</h3>
+<p>Semantic dimensions provided the strongest prediction of both affective outcomes (Figure 1C).</p>
+<p>Mean cross-age prediction was ρ = .688 for valence and .541 for arousal, compared with within-age prediction of .699 and .638, respectively. Cross-age performance was therefore only .011 below the target-age baseline for valence, but .097 below it for arousal. Semantic mappings generalized across childhood, with substantially greater continuity for valence. The strongest form-based cross-age correlations were much smaller: .064 for valence with phoneme bigrams and .112 for arousal with orthographic bigrams. 1 Experiment 1 (1,406 words); cells involving adults use Experiment 2 (1,373 shared words). Red indicates positive correlations, blue negative correlations, and white zero.</p>
+<h3>Valence and arousal contrasts</h3>
+<p>The relative predictability of valence and arousal depended on lexical representation (Figure 2A).</p>
+<p>The paired cross-age contrast favored valence for semantic dimensions, Δρ = .147, 95% bootstrap interval [.114, .181], q = .005. It favored arousal for letter counts, adjacent and open orthographic bigrams, phoneme counts, and global articulatory features, with corrected q values ranging from .005 to .048. Phoneme bigrams and positional articulatory features did not show reliable outcome differences, qs = .080 and .322, respectively. See Supplementary Material and Table S13 for complete contrasts, including within-age comparisons.</p>
+<h3>Developmental distance</h3>
+<p>Semantic transfer declined as the separation between child age groups increased (Figure 2B). The estimated decline per year of age distance was -.0075 for valence, 95% bootstrap interval [-.0097, -.0049], q = .008, and -.0397 for arousal, [-.0452, -.0335], q = .008. A direct comparison confirmed the steeper arousal decline, with a valence-minus-arousal slope difference of .0322, [.0258, .0383], q = .008. The age dependence of semantic transfer was therefore considerably greater for arousal. See Supplementary Material for the full representation-specific distance analyses (Figure S3; Tables S4 and S14) and tests of transfer direction (Tables S5 and S17).</p>
+<h3>Prediction of word-specific age differences</h3>
+<p>Semantic information also predicted which words differed most across child age groups (Figure 2C). Correlations between observed and predicted word-specific slopes were .308 for valence and .497 for arousal, both qs &lt; .001. Prediction was reliably stronger for arousal: the valence-minusarousal contrast was -.189, 95% bootstrap interval [-.253, -.124], q = .002. Semantic structure was therefore more informative about age-related differences in arousal despite its stronger prediction of valence levels. See Supplementary Material for all representations (Figure S4; Table S15) 1 . As a robustness analysis, we examined whether word frequency could account for the semantic prediction of developmental change. This control is necessary because frequency-related information is encoded in distributional semantic spaces and could therefore contribute indirectly to predictions based on word embeddings (Hollis &amp; Westbury, 2016). Adult frequency was weakly associated with word-specific valence slopes, ρ = -.113, q &lt; .001, but not with arousal slopes, ρ = .008, q = .772. After controlling for adult frequency, semantic predictions remained significant for both valence, partial ρ = .290, q &lt; .001, and arousal, partial ρ = .497, q &lt; .001. The adjusted semantic effect remained significantly stronger for arousal than for valence, Δρ = .207, 95% CI [.140, .271], p = .002. The semantic organization of developmental change, particularly for arousal, therefore cannot be explained by frequencyrelated information in the embeddings.</p>
+<p>transfer per child year in both child-to-adult and adult-to-child directions; black error bars show paired-bootstrap 95% intervals, and asterisks denote age trends (D).</p>
+<h3>Experiment 2</h3>
+<p>Experiment 1 showed that lexical-affective mappings generalized across childhood, but with markedly different developmental patterns for valence and arousal. Whereas valence showed strong cross-age stability, arousal became progressively less transferable as developmental distance increased, suggesting greater age-related change in its lexical organization. Experiment 2 extended these findings beyond childhood by examining whether child lexical-affective mappings increasingly converge with those observed in adults, and whether this developmental convergence differs between valence and arousal and across lexical representations.</p>
+<h3>Method</h3>
+<h3>Materials</h3>
+<p>The child data were the age-specific mean ratings described in Experiment 1 for children aged 7, 9, 11, and 13 years. Adult ratings were obtained from the norms of Stadthagen-Gonzalez et al. (2017), which contain valence and arousal ratings for 14,031 Spanish words.</p>
+<p>The adult norms were collected from 512 native Spanish speakers enrolled in undergraduate psychology courses at the University of Murcia. Valence ratings were provided by 350 participants (mean age = 22 years and 3 months), whereas arousal ratings were provided by 395 participants (mean age = 22 years and 5 months). As for child ratings, adult ratings were collected using ninepoint numerical scales, for valence, 1 corresponded to unhappy and 9 to happy; for arousal, 1 corresponded to quiet or calm and 9 to excited.</p>
+<p>From the set of 14,031 Spanish words available, we included only those matching between the two databases using exact lowercase, whitespace-trimmed, Unicode-normalized Spanish forms. Of the 1,406 words in SANDchild, 1,373 had both valence and arousal ratings in the adult norms, corresponding to 97.65% of the child database, and the remaining 33 words were excluded. Every retained word therefore had complete ratings for all four child groups and adults, ensuring that all correlations and predictive comparisons were based on the same word identities.</p>
+<h3>Lexical representations</h3>
+<p>The analyses used the same eight predictor spaces described in Experiment 1: letter counts, adjacent orthographic bigrams, open orthographic bigrams, phoneme counts, phoneme bigrams, global articulatory features, positional articulatory features, and 300 Spanish fastText semantic dimensions.</p>
+<h3>Analytical approach</h3>
+<p>The RCA procedure described in Experiment 1 was applied to the 1,373 words shared by the child and adult norms. Models were evaluated within each rating group and in both child-to-adult and adult-to-child directions. Child age indexed the training group in child-to-adult analyses and the target group in adult-to-child analyses. Linear trends indexed change in held-out Spearman correlation per child year, with paired word-bootstrap inference and false-discovery-rate correction across the 16 representation-by-outcome tests within each direction. Adult developmental-distance analyses were not conducted because the adult sample did not represent a single age. See Supplementary Material for pairwise age comparisons, directional asymmetry, prediction error, and transfer relative to the within-target baseline.</p>
+<p>All data, scripts and codes used in the analysis are included as Supplementary Materials.</p>
+<h3>Results</h3>
+<h3>Observed child-adult correspondence</h3>
+<p>Valence ratings already showed strong correspondence with adults at age 7, ρ = .769, and agreement increased to .820, .859, and .870 at ages 9, 11, and 13, respectively (Figure 1B; Table S6). Arousal followed a different pattern: correspondence was negative at age 7, ρ = -.124, close to zero at age 9, ρ = .067, and positive at ages 11 and 13, ρs = .201 and .260.</p>
+<h3>Bidirectional lexical transfer</h3>
+<p>Semantic valence transferred strongly in both directions (Figures 1C and 3). Child-trained models predicted adult ratings with correlations increasing from .712 at age 7 to .739 at age 13; adulttrained models predicted child ratings with correlations ranging from .638 to .702. Semantic arousal transfer instead shifted from negative at age 7 to positive in the older groups. Child-toadult correlations were -.131, .061, .219, and .237 at ages 7, 9, 11, and 13; adult-to-child transfer showed the same progression, with correlations of -.118, .062, .202, and .224. This weak early arousal transfer occurred alongside strong prediction within each rating population. The adult within-group semantic correlation was .708, and child within-group correlations ranged from .608 to .681. The younger groups therefore showed predictable arousal organization whose mapping onto semantic information differed from the adult mapping. Full bidirectional results and the Experiment 2 within-group baselines are shown in Figure S5 and Tables S7-S8. See Supplementary Material for prediction error, directional asymmetry, and transfer relative to the target-group baseline (Figure S6; Tables S11-S12).</p>
+<p>Age-related convergence with adults Semantic transfer increased with child age in both directions (Figure 2D; Figure 3). For childtrained models predicting adults, the estimated increase per child year was .0048 for valence, 95% bootstrap interval [.0026, .0072], q = .016, and .0636 for arousal, [.0550, .0717], q = .016. For adult-trained models predicting children, the corresponding trends were .0104 for valence, [.0063, .0145], q = .011, and .0587 for arousal, [.0504, .0669], q = .011. The developmental gradient was numerically much larger for arousal in both directions. Detailed trends and pairwise comparisons are reported in Tables S9-S10.</p>
+<p>Semantic dimensions remained the strongest predictors of valence and produced the strongest arousal transfer by ages 11 and 13 (Figure 1C). At age 13, child-to-adult prediction reached .739 for semantic valence and .237 for semantic arousal, whereas the best form-based correlations were .061 and .139, respectively. See Supplementary Material for the complete form-based age trends (Figure S7; Table S9).</p>
+<h3>Discussion</h3>
+<p>The present study identified distinct age-related patterns in the lexical organization of valence and arousal. Valence showed comparatively strong continuity across childhood and already corresponded closely with adult judgments at age 7. Arousal, by contrast, was reliably predictable within each child age group but showed weaker semantic generalization across ages and substantial differences from adult mappings in younger children. Semantic information also predicted wordspecific age differences more successfully for arousal than for valence. Together, these findings suggest that affective lexical development involves both continuity and reorganization: valence provides a relatively stable evaluative structure, whereas the relationship between lexical meaning and activation varies more substantially across development. Importantly, greater age-related variation in arousal did not imply an absence of systematic organization in younger children.</p>
+<h3>Developmental Continuity and Reorganization of Affective Meaning</h3>
+<p>Dimensional theories identify valence and arousal as fundamental components of affect, reflecting whether an experience is pleasant or unpleasant and how activating it is (Russell, 1980). The present findings suggest that these dimensions follow different developmental patterns. Across ages 7-13, valence ratings showed substantial consistency, and lexical-affective mappings generalized well between child groups. Moreover, correspondence with adult judgments was already strong at age 7, suggesting that the relative evaluative organization of familiar words is established comparatively early. This finding is consistent with developmental research showing that valence provides a prominent basis for children&#x27;s early emotion representations, while additional dimensions become increasingly differentiated with age (Nook et al., 2017; Russell &amp; Ridgeway, 1983; Woodard et al., 2022). The present study extends this evidence beyond emotional expressions and categories to the organization of a broader vocabulary. Valence may provide a relatively stable framework because positive and negative concepts occur in systematically different linguistic and experiential contexts, allowing children to acquire broad evaluative distinctions early. This does not imply that evaluative meaning is fixed or independent of experience, but rather that the relative positions of words along this dimension change comparatively little across the ages examined.</p>
+<p>Arousal showed a different pattern. Semantic prediction declined more strongly with increasing distance between child age groups, while child-adult correspondence shifted from negative at age 7 to positive at ages 11 and 13. Nevertheless, arousal remained predictable within every child group. Thus, younger children&#x27;s arousal judgments were not simply unstructured or absent; instead, their relationships with lexical meaning differed from those observed at later ages.</p>
+<p>Previous research has shown that emotion representations become increasingly multidimensional across development, with verbal knowledge contributing to the growing importance of arousal (Nook et al., 2017). The present findings extend this account by suggesting that systematic arousalrelated information is already present in younger children&#x27;s lexical judgments, even when its organization differs substantially from that of adults. Development may therefore involve not only increasing differentiation of affective dimensions but also changes in which concepts are considered relatively activating.</p>
+<p>Unlike valence, arousal may depend on integrating several sources of information, including anticipated bodily responses, intensity, novelty, urgency, perceived control, and situational context. As children acquire new experiences and enter changing social environments, the activation associated with particular concepts may change without corresponding shifts in their overall positive or negative evaluation. For example, words such as school, party, darkness, or dog may retain their evaluative direction while acquiring different levels of emotional intensity or physiological relevance. This interpretation is consistent with accounts emphasizing gradual changes in how children combine and weight information when representing emotions (Woodard et al., 2022). Evidence that emotion transitions become increasingly organized by valence and more adult-like as vocabulary expands also supports a close relationship between linguistic and emotional development (Nencheva et al., 2024). Language may contribute by helping children organize heterogeneous bodily and contextual experiences into meaningful conceptual categories (Hoemann et al., 2019; Lindquist et al., 2015), while increasing verbal knowledge supports more differentiated emotion representations (Nook et al., 2017). Developmental improvements in interoceptive awareness may further contribute to the differentiation of arousal as children become better able to identify and interpret internal physiological signals (Addabbo &amp; Milani, 2025; Craik et al., 2026; Murphy et al., 2017).</p>
+<p>Together, these processes may help explain why arousal shows greater age-related variation than valence. Rather than acquiring an entirely new affective dimension, children may progressively revise the activation associated with familiar concepts as linguistic, bodily, and social knowledge expands. This interpretation is compatible with constructionist approaches, which emphasize interactions among affect, conceptual knowledge, language, and situated experience in the development of emotional meaning (Hoemann et al., 2019; Lindquist et al., 2015).</p>
+<h3>Lexical Information as a Basis for Developmental Continuity and Change</h3>
+<p>Semantic representations provided the strongest predictions of both valence and arousal, suggesting that affective meaning is closely related to the broader organization of lexical knowledge. For arousal, semantic information predicted judgments within each age group, identified words showing larger age-related differences, and showed progressively stronger correspondence with adult judgments across child ages. These findings indicate that age-related differences in arousal were not entirely unsystematic: words with related meanings tended to show related patterns of variation.</p>
+<p>This result can be understood in light of the distributed nature of affective information in language.</p>
+<p>Hollis and Westbury (2016) identified distinct valence and dominance components in English semantic embeddings but found no single component uniquely corresponding to arousal. Instead, arousal-related information was distributed across multiple semantic dimensions. More broadly, emotional meaning has been characterized as high-dimensional and situated, reflecting patterns of attention, interpretation, and appraisal rather than isolated affective dimensions or explicit emotion labels alone (Hoemann et al., 2025). Whereas valence may correspond relatively closely to a broad positive-negative distinction, arousal may depend on combinations of semantic information associated with action, danger, novelty, intensity, and social experience.</p>
+<p>Such distributed organization may contribute to the greater developmental flexibility of arousal.</p>
+<p>Evaluating activation may require integrating multiple context-dependent cues whose relative importance changes with experience. The finding that semantic information predicted wordspecific age differences is consistent with this possibility: changes in arousal judgments were related to the conceptual organization of the lexicon rather than reflecting only random disagreement between age groups.</p>
+<p>The child-adult analyses further clarify this interpretation. Because the same semantic embeddings were used across populations, differences in predictive transfer cannot be attributed to differences between embedding spaces. Instead, they reflect differences in the estimated relationships between a common semantic representation and affective ratings. The negative or near-zero transfer observed for younger children&#x27;s arousal judgments suggests that semantic information associated with greater activation in these groups was not weighted in the same way as in adults. Increasing transfer with age indicates greater correspondence between these mappings, although it does not establish that children and adults internally represent words within identical semantic structures.</p>
+<p>More generally, the findings distinguish the systematicity of affective organization within an age group from its consistency across development. High within-group predictability can coexist with weak cross-age transfer when different populations show different relationships between lexical information and affective judgments. A common representational space can therefore capture both developmental continuity and variation without requiring that the same lexical features contribute identically at every age.</p>
+<p>Although semantic representations were the strongest predictors, orthographic, phonological, and articulatory features also contained some affective information. Their weaker performance is consistent with evidence that emotional content is closely integrated with lexical-semantic processing (Ferré et al., 2025), but does not imply that relationships between word form and affect are arbitrary. Previous studies have identified systematic associations between phonological properties and affective meaning, particularly for activation-related qualities (Adelman et al., 2018; Aryani et al., 2020; de Zubicaray et al., 2023; Schmidtke &amp; Conrad, 2025). Such associations may provide probabilistic cues to intensity, movement, abruptness, size, or force. Because activation is more directly related than evaluative direction to properties such as tempo, sonority, articulatory effort, and abruptness, arousal may be particularly sensitive to some sublexical regularities (Bänziger &amp; Scherer, 2005; Zheng et al., 2026). Nevertheless, their limited predictive contribution indicates that the developmental patterns observed here were primarily associated with semantic information.</p>
+<p>These findings have broader implications for theories of affective and conceptual development.</p>
+<p>Valence and arousal may define a common affective space while showing different degrees of continuity across development. In particular, possessing an organized arousal dimension does not necessarily imply possessing an adult-like organization of that dimension. This distinction is consistent with developmental accounts emphasizing the progressive differentiation and reorganization of emotional knowledge (Davis et al., 2023; Nook et al., 2018). Rather than requiring a complete reconstruction of the lexicon, development may involve changes in how affective information is associated with existing concepts. Language provides a shared system through which culturally recurring affective relationships are learned and communicated, while individual experiences contribute to the situated meaning of particular concepts (Winkielman et al., 2023). The present results suggest that this system supports both a comparatively stable evaluative organization and a more developmentally flexible organization of activation.</p>
+<h3>Limitations and Future Directions</h3>
+<p>Several limitations qualify these interpretations. First, the developmental analyses relied on crosssectional normative data. Age-related differences in ratings and word-specific slopes therefore cannot establish how individual children&#x27;s affective judgments change over time, and cohort composition or sampling variation may contribute to the observed patterns. Moreover, the four child age groups provide only a coarse representation of development, and linear slopes cannot identify temporary transitions or nonlinear trajectories. Nevertheless, the findings converged across complementary analyses: cross-age prediction declined with developmental distance for arousal, while child-adult correspondence increased through age 11, with no supported additional increase between ages 11 and 13 (Table S10). Longitudinal studies with more densely sampled ages would help establish the timing and within-person course of these changes.</p>
+<p>Second, analyses were conducted on age-group means rather than individual responses. This approach is appropriate for characterizing normative lexical organization and reduces idiosyncratic variation, but it does not capture individual differences in affective knowledge. Future studies could examine whether vocabulary, reading experience, pubertal development, interoceptive awareness, and social or emotional functioning explain variation in lexical-affective organization.</p>
+<p>Third, the semantic embeddings were derived from a general-language corpus likely to reflect adult linguistic experience more strongly than children&#x27;s language environments. Using a common representational space was analytically useful because it allowed differences between age groups to be attributed to their estimated lexical-affective mappings rather than to differences between separately trained embedding spaces. Moreover, successful prediction within child groups indicates that general linguistic regularities contain information relevant to children&#x27;s affective judgments. However, these embeddings should not be equated with children&#x27;s internal semantic representations, and differences in model weights do not directly demonstrate changes in mental representations. Developmentally trained semantic models could clarify how age-related differences in linguistic experience contribute to affective organization. Fourth, arousal ratings may be less reliable than valence ratings, particularly among younger children. SANDchild reported lower agreement for arousal and especially pronounced differences involving the youngest participants (Sabater et al., 2020). Reduced reliability may limit observable predictive performance and contribute to weaker cross-age correspondence. However, it is unlikely to provide a complete explanation: arousal was predictable within younger groups, its cross-age generalization varied with developmental distance, and semantic information predicted word-specific age differences. These converging patterns suggest that the observed variation contains systematic structure beyond measurement imprecision.</p>
+<p>Fifth, the child-adult comparison combined ratings from separate normative studies with different samples and procedures. The adult sample consisted primarily of young university students rather than a continuously sampled adult population. Consequently, differences cannot be attributed exclusively to age, and adult ratings should be understood as a reference population rather than a developmental endpoint or ground truth. Nevertheless, convergence between observed rating patterns and bidirectional held-out prediction suggests that the main findings are not restricted to a single direction of predictive transfer.</p>
+<p>Future research could extend these findings through longitudinal and cross-linguistic designs combining affective ratings with measures of linguistic, emotional, and bodily development. Joint modeling of valence and arousal could also establish whether age-related differences in activation depend on the evaluative position of individual words. Another important question concerns the relationship between lexical arousal and emotion differentiation. The present findings do not demonstrate that differences in word ratings correspond directly to differences in everyday emotional experiences. However, they reveal systematic age-related variation in lexical activation during a period characterized by substantial development in emotion knowledge and differentiation (Nook et al., 2018; Nook, 2021). Linking lexical judgments to children&#x27;s everyday experiences could clarify how changes in affective word meaning relate to broader developments in emotional understanding and regulation.</p>
+<h3>Conclusion</h3>
+<p>The present findings suggest that affective lexical development combines continuity with selective age-related reorganization. Valence showed a comparatively stable evaluative organization across childhood and substantial correspondence with adult judgments from age 7. Arousal showed greater developmental variation: its semantic mapping generalized less successfully across child ages, became progressively more similar to adult mappings, and showed word-specific differences systematically related to lexical meaning. Importantly, limited early child-adult correspondence did not imply that younger children lacked an organized arousal dimension. Rather, their judgments were systematically related to lexical information in ways that differed from those observed in older groups. These findings suggest that affective development may involve the progressive reweighting of information within an existing lexical organization, rather than the simple acquisition of an initially absent dimension.</p>
+<p>Distinguishing the relative stability of valence from the greater developmental flexibility of arousal connects dimensional theories of affect with constructionist and developmental accounts of conceptual reorganization, while highlighting the importance of treating affective word meanings as developmentally situated.</p>
+<p>Authors declare that they have no competing interests.</p>
+<h3>Open Practices Statements:</h3>
+<p>Data and codes used in the analysis are included as Supplementary Materials.</p>
+<p>Author contributions: Conceptualization: JAH, DG Methodology: SMS, JAH, DG Formal analysis: SMS, DG Supervision: SL, JAH, DG Writing -original draft: SMS, DG Writing -review &amp; editing: SMS, SL, JAH, DG</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Affective organization and lexical transfer across childhood and adulthood. Developmental trajectories of three Spanish words in the valence-arousal space; points show mean ratings at ages 7, 9, 11, and 13 and in adults; black arrows indicate the sequence of rating groups, and adult points are green (A). Spearman correlations between observed ratings, separately for valence and arousal (B). Mean word-disjoint held-out Spearman correlations for all eight lexical representations, rows identify the training age and columns the target age; diagonal cells show within-age prediction (C). Lines separate the adult row and column in B and C. Child-child cells, including the child predictive diagonals, use</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. Developmental differences between valence and arousal. Paired prediction differences, Δρ = valence ρ -arousal ρ, for each child training-age and target-age combination and lexical representation; positive cells favor valence; negative cells favor arousal (A). Mean held-out semantic prediction at two-, four-, and six-year age distances, with valence and arousal shown as adjacent columns and connected across distances; black error bars indicate the 2.5th-97.5th percentiles across repeated word partitions; black V/A asterisks denote negative distance trends (B). Observed and predicted word-specific age slopes for semantic dimensions, outcome-specific regression lines are overlaid, the upperright asterisks indicate the paired difference between outcomes (C). Change in semantic</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Cross-age transfer based on semantic dimensions. Spearman correlations between observed ratings and predictions from ridge-regression models based on semantic embeddings. Each row identifies the age group used to train the models, indicated by the highlighted icon, and arrows point toward the child or adult group whose ratings were predicted. Numbers report transfer correlations, and arrow thickness represents their absolute magnitude. Red arrows indicate positive correlations; blue arrows indicate negative ones.</p>
+<h3>References</h3>
+<p>Addabbo, M., &amp; Milani, L. (2025). Measuring interoception from infancy to childhood: A scoping review. Neuroscience &amp; Biobehavioral Reviews, 173, 106161. https://doi.org/10.1016/j.neubiorev.2025.106161</p>
+<p>Adelman, J. S., Estes, Z., &amp; Cossu, M. (2018). Emotional sound symbolism: Languages rapidly signal valence via phonemes. Cognition, 175, 122-130. https://doi.org/10.1016/j.cognition.2018.02.007</p>
+<p>Aka, A., Bhatia, S., &amp; McCoy, J. P. (2023). Semantic determinants of memorability. Cognition, 239, Article 105497. https://doi.org/10.1016/j.cognition.2023.105497</p>
+<p>Aryani, A., Isbilen, E. S., &amp; Christiansen, M. H. (2020). Affective arousal links sound to meaning. Psychological Science, 31(8), 978-986. https://doi.org/10.1177/0956797620927967</p>
+<p>Bahn, D., Kauschke, C., Vesker, M., &amp; Schwarzer, G. (2018). Perception of valence and arousal in German emotion terms: A comparison between 9-year-old children and adults. Applied Psycholinguistics, 39(3), 463-481. https://doi.org/10.1017/S0142716417000443</p>
+<p>Bahn, D., Vesker, M., García Alanis, J. C., Schwarzer, G., &amp; Kauschke, C. (2017). Age- dependent positivity-bias in children&#x27;s processing of emotion terms. Frontiers in Psychology, 8, Article 1268. https://doi.org/10.3389/fpsyg.2017.01268</p>
+<p>Bänziger, T., &amp; Scherer, K. R. (2005). The role of intonation in emotional expressions. Speech Communication, 46(3-4), 252-267. https://doi.org/10.1016/j.specom.2005.02.016</p>
+<p>Benjamini, Y., &amp; Hochberg, Y. (1995). Controlling the false discovery rate: A practical and powerful approach to multiple testing. Journal of the Royal Statistical Society: Series B (Methodological), 57(1), 289-300. https://doi.org/10.1111/j.2517-6161.1995.tb02031.x</p>
+<p>Bernard, M., &amp; Titeux, H. (2021). Phonemizer: Text to phones transcription for multiple languages in Python. Journal of Open Source Software, 6(68), Article 3958. https://doi.org/10.21105/joss.03958</p>
+<p>Bojanowski, P., Grave, E., Joulin, A., &amp; Mikolov, T. (2017). Enriching word vectors with subword information. Transactions of the Association for Computational Linguistics, 5, 135-146. https://doi.org/10.1162/tacl_a_00051</p>
+<p>Calvillo-Torres, R., Haro, J., Ferré, P., Poch, C., &amp; Hinojosa, J. A. (2025). Sound symbolic associations in Spanish emotional words: Affective dimensions and discrete emotions. Cognition and Emotion, 39(7), 1515-1531. https://doi.org/10.1080/02699931.2024.2345377</p>
+<p>Citron, F. M. M. (2012). Neural correlates of written emotion word processing: A review of recent electrophysiological and hemodynamic neuroimaging studies. Brain and Language, 122(3), 211-226. https://doi.org/10.1016/j.bandl.2011.12.007</p>
+<p>Ćoso, B., Guasch, M., Bogunović, I., Ferré, P., &amp; Hinojosa, J. A. (2023). CROWD-5e: A Croatian psycholinguistic database of affective norms for five discrete emotions. Behavior Research Methods, 55(8), 4018-4034. https://doi.org/10.3758/s13428-022-02003-2</p>
+<p>Ćoso, B., Guasch, M., Ferré, P., &amp; Hinojosa, J. A. (2019). Affective and concreteness norms for 3,022 Croatian words. Quarterly Journal of Experimental Psychology, 72(9), 2302-2312</p>
+<p>Craik, L., Quadt, L., Garner, M., &amp; Pfeifer, G. (2026). Interoception and emotion regulation in children and adolescents: A systematic literature review. European Review of Applied Psychology / Revue Européenne de Psychologie Appliquée, 76(3), 1-7. https://doi.org/10.1016/j.erap.2026.101164</p>
+<p>Davis, E. L., Parsafar, P., &amp; Brady, S. M. (2023). Early antecedents of emotion differentiation and regulation: Experience tunes the appraisal thresholds of emotional development in infancy. Infant Behavior and Development, 70, 101786. https://doi.org/10.1016/j.infbeh.2022.101786</p>
+<p>de Zubicaray, G. I., &amp; Hinojosa, J. A. (2024). Statistical relationships between phonological form, emotional valence and arousal of Spanish words. Journal of Cognition, 7(1), Article 42. https://doi.org/10.5334/joc.366</p>
+<p>Dave, S., Mastergeorge, A., &amp; Olswang, L. (2018). Motherese, affect, and vocabulary development: Dyadic communicative interactions in infants and toddlers. Journal of Child Language, 45(4), 917-938. doi:10.1017/S0305000917000551</p>
+<p>de Zubicaray, G. I., McMahon, K. L., Arciuli, J., Kearney, E., &amp; Guenther, F. H. (2023). Emotion from the sound of a word: Statistical relationships between surface form and valence of English words influence lexical access and memory. Journal of Experimental Psychology: General, 152(12), 3566-3593. https://doi.org/10.1037/xge0001477</p>
+<p>Dingemanse, M., Blasi, D. E., Lupyan, G., Christiansen, M. H., &amp; Monaghan, P. (2015). Arbitrariness, iconicity, and systematicity in language. Trends in Cognitive Sciences, 19(10), 603-615. https://doi.org/10.1016/j.tics.2015.07.013</p>
+<p>Ferré, P., Sánchez-Carmona, A. J., Haro, J., Calvillo-Torres, R., Albert, J., &amp; Hinojosa, J. A. (2025). How does emotional content influence visual word recognition? A meta-analysis of valence effects. Psychonomic Bulletin &amp; Review, 32(2), 570-587. https://doi.org/10.3758/s13423-024-02555-8</p>
+<p>Friedman, J., Hastie, T., &amp; Tibshirani, R. (2010). Regularization paths for generalized linear models via coordinate descent. Journal of Statistical Software, 33(1), 1-22. https://doi.org/10.18637/jss.v033.i01</p>
+<p>Gatti, D., &amp; Günther, F. (2026). Zero-shot pseudowords memorability via representational content analysis. Psychonomic Bulletin &amp; Review, 33, Article 137. https://doi.org/10.3758/s13423-026-02875-x</p>
+<p>Gatti, D., Raveling, L., Petrenco, A., &amp; Günther, F. (2024). Valence without meaning: Investigating form and semantic components in pseudowords valence. Psychonomic Bulletin &amp; Review, 31(5), 2357-2369.</p>
+<p>Golinkoff, R. M., Can, D. D., Soderstrom, M., &amp; Hirsh-Pasek, K. (2015). (Baby) talk to me: the social context of infant-directed speech and its effects on early language acquisition. Current Directions in Psychological Science, 24(5), 339-344. https://doi.org/10.1177/0963721415595345</p>
+<p>Grave, E., Bojanowski, P., Gupta, P., Joulin, A., &amp; Mikolov, T. (2018). Learning word vectors for 157 languages. In Proceedings of the Eleventh International Conference on Language Resources and Evaluation (pp. 3483-3487). European Language Resources Association. https://aclanthology.org/L18-1550/</p>
+<p>Grosse, G., Streubel, B., Gunzenhauser, C., &amp; Saalbach, H. (2021). Let&#x27;s talk about emotions: The development of children&#x27;s emotion vocabulary from 4 to 11 years of age. Affective Science, 2, 150-162. https://doi.org/10.1007/s42761-021-00040-2</p>
+<p>Günther, F., Rinaldi, L., &amp; Marelli, M. (2019). Vector-space models of semantic representation from a cognitive perspective: A discussion of common misconceptions. Perspectives on Psychological Science, 14(6), 1006-1033. https://doi.org/10.1177/1745691619861372</p>
+<p>Haro, J., Hinojosa, J. A., &amp; Ferré, P. (2024). The role of individual differences in emotional word recognition: Insights from a large-scale lexical decision study. Behavior Research Methods, 56(8), 8501-8520. https://doi.org/10.3758/s13428-024-02488-z</p>
+<p>Hinojosa, J. A., Martínez-García, N., Villalba-García, C., Fernández-Folgueiras, U., Sánchez- Carmona, A., Pozo, M. A., &amp; Montoro, P. R. (2016). Affective norms of 875 Spanish words for five discrete emotional categories and two emotional dimensions. Behavior Research Methods, 48(1), 272-284. https://doi.org/10.3758/s13428-015-0572-5</p>
+<p>Hinojosa, J. A., Moreno, E. M., &amp; Ferré, P. (2020). Affective neurolinguistics: Towards a framework for reconciling language and emotion. Language, Cognition and Neuroscience, 35(7), 813-839. https://doi.org/10.1080/23273798.2019.1620957</p>
+<p>Hoemann, K., Lee, Y., Dussault, È., Devylder, S., Ungar, L. H., Geeraerts, D., &amp; Mesquita, B. (2025). The construction of emotional meaning in language. Communications Psychology, 3, Article 99. https://doi.org/10.1038/s44271-025-00255-0</p>
+<p>Hoemann, K., Xu, F., &amp; Barrett, L. F. (2019). Emotion words, emotion concepts, and emotional development in children: A constructionist hypothesis. Developmental Psychology, 55(9), 1830-1849. https://doi.org/10.1037/dev0000686</p>
+<p>Hollis, G., &amp; Westbury, C. (2016). The principals of meaning: Extracting semantic dimensions from co-occurrence models of semantics. Psychonomic Bulletin &amp; Review, 23(6), 1744- 1756. https://doi.org/10.3758/s13423-016-1053-2</p>
+<p>Hollis, G., Westbury, C., &amp; Lefsrud, L. (2017). Extrapolating human judgments from skip-gram vector representations of word meaning. Quarterly Journal of Experimental Psychology, 70(8), 1603-1619. https://doi.org/10.1080/17470218.2016.1195417</p>
+<p>Huang, S., Pollak, S. D., &amp; Xie, W. (2025). Conceptual knowledge increasingly supports emotion understanding as perceptual contribution declines with age. Nature Communications, 16(1), 6838. https://doi.org/10.1038/s41467-025-62210-1</p>
+<p>Hussain, Z., Mata, R., Newell, B. R., &amp; Wulff, D. U. (2024). Probing the contents of semantic representations from text, behavior, and brain data using the psychNorms metabase. arXiv. https://doi.org/10.48550/arXiv.2412.04936</p>
+<p>Kumar, A. A. (2021). Semantic memory: A review of methods, models, and current challenges. Psychonomic Bulletin &amp; Review, 28(1), 40-80. https://doi.org/10.3758/s13423-020- 01792-x Kuperman, V., Estes, Z., Brysbaert, M., &amp; Warriner, A. B. (2014). Emotion and language: Valence and arousal affect word recognition. Journal of Experimental Psychology: General,143(3), 1065-1081. https://doi.org/10.1037/a0035669</p>
+<p>Li, Y., &amp; Yu, D. (2015). Development of emotion word comprehension in Chinese children from 2 to 13 years old: Relationships with valence and empathy. PloS One, 10(12), e0143712. https://doi.org/10.1371/journal.pone.0143712</p>
+<p>Lindquist, K. A., MacCormack, J. K., &amp; Shablack, H. (2015). The role of language in emotion: Predictions from psychological constructionism. Frontiers in Psychology, 6, Article 444. https://doi.org/10.3389/fpsyg.2015.00444</p>
+<p>Lund, T. C., Sidhu, D. M., &amp; Pexman, P. M. (2019). Sensitivity to emotion information in children&#x27;s lexical processing. Cognition, 190, 61-71. https://doi.org/10.1016/j.cognition.2019.04.017</p>
+<p>Mandera, P., Keuleers, E., &amp; Brysbaert, M. (2017). Explaining human performance in psycholinguistic tasks with models of semantic similarity based on prediction and counting: A review and empirical validation. Journal of Memory and Language, 92, 57- 78. Martínez-Huertas, J. Á., Jorge-Botana, G., &amp; Olmos, R. (2021). Emotional valence precedes semantic maturation of words: A longitudinal computational study of early verbal emotional anchoring. Cognitive Science, 45(7), Article e13026. https://doi.org/10.1111/cogs.13026</p>
+<p>Martínez-Tomás, C., Günther, F., Hinojosa, J. A., &amp; Gatti, D. (2026). Conveying (discrete) emotionality with novel words. Journal of Experimental Psychology: General, 155(8), 2001-2020. https://doi.org/10.1037/xge0001960</p>
+<p>Mikolov, T., Chen, K., Corrado, G., &amp; Dean, J. (2013). Efficient estimation of word representations in vector space. In 1st International Conference on Learning Representations (ICLR 2013), Workshop Track Proceedings. https://arxiv.org/abs/1301.3781</p>
+<p>Montefinese, M., Ambrosini, E., Fairfield, B., &amp; Mammarella, N. (2014). The adaptation of the affective norms for English words (ANEW) for Italian. Behavior Research Methods, 46(3), 887-903. https://doi.org/10.3758/s13428-013-0405-3</p>
+<p>Moors, A., De Houwer, J., Hermans, D., Wanmaker, S., Van Schie, K., Van Harmelen, A. L., ... &amp; Brysbaert, M. (2013). Norms of valence, arousal, dominance, and age of acquisition for 4,300 Dutch words. Behavior Research Methods, 45, 169-177. https://doi.org/10.3758/s13428-012-0243-8</p>
+<p>Mortensen, D. R., Littell, P., Bharadwaj, A., Goyal, K., Dyer, C., &amp; Levin, L. (2016). PanPhon: A resource for mapping IPA segments to articulatory feature vectors. In Proceedings of COLING 2016 (pp. 3475-3484). https://aclanthology.org/C16-1328/</p>
+<p>Murphy, J., Brewer, R., Catmur, C., &amp; Bird, G. (2017). Interoception and psychopathology: A developmental neuroscience perspective. Developmental cognitive neuroscience, 23, 45- 56. https://doi.org/10.1016/j.dcn.2016.12.006</p>
+<p>Murty, D. V. P. S., &amp; Pessoa, L. (2025). Disentangling value, arousal and valence systems in approach-avoidance behaviors in humans using functional magnetic resonance imaging. bioRxiv: the preprint server for biology, 2025.02.19.639143. https://doi.org/10.1101/2025.02.19.639143</p>
+<p>Nencheva, M. L., Nook, E. C., Thornton, M. A., Lew-Williams, C., &amp; Tamir, D. I. (2024). The emergence of organized emotion dynamics in childhood. Affective Science, 5(3), 246- 258. https://doi.org/10.1007/s42761-024-00248-y</p>
+<p>Norman, G. J., Norris, C. J., Gollan, J., Ito, T. A., Hawkley, L. C., Larsen, J. T., ... &amp; Berntson, G. G. (2011). Current emotion research in psychophysiology: The neurobiology of evaluative bivalence. Emotion Review, 3(3), 349-359. https://doi.org/10.1177/17540739114024</p>
+<p>Nook, E. C. (2021). Emotion differentiation and youth mental health: Current understanding and open questions. Frontiers in Psychology, 12, Article 700298. https://doi.org/10.3389/fpsyg.2021.700298</p>
+<p>Nook, E. C., Sasse, S. F., Lambert, H. K., McLaughlin, K. A., &amp; Somerville, L. H. (2017). Increasing verbal knowledge mediates development of multidimensional emotion representations. Nature Human Behaviour, 1(12), 881-889. https://doi.org/10.1038/s41562-017-0238-7</p>
+<p>Nook, E. C., Sasse, S. F., Lambert, H. K., McLaughlin, K. A., &amp; Somerville, L. H. (2018). The nonlinear development of emotion differentiation: Granular emotional experience is low in adolescence. Psychological Science, 29(8), 1346-1357. https://doi.org/10.1177/0956797618773357</p>
+<p>Ponari, M., Norbury, C. F., &amp; Vigliocco, G. (2018). Acquisition of abstract concepts is influenced by emotional valence. Developmental Science, 21(2), e12549. https://doi.org/10.1111/desc.12549</p>
+<p>Ponari, M., Norbury, C., &amp; Vigliocco, G. (2020). The role of emotional valence in learning novel abstract concepts. Developmental Psychology, 56(10), 1855-1865. https://doi.org/10.1037/dev0001091</p>
+<p>Pons, F., Harris, P. L., &amp; de Rosnay, M. (2004). Emotion comprehension between 3 and 11 years: Developmental periods and hierarchical organization. European Journal of Developmental Psychology, 1(2), 127-152. https://doi.org/10.1080/17405620344000022</p>
+<p>R Core Team. (2025). R: A language and environment for statistical computing [Computer software].</p>
+<p>R Foundation for Statistical Computing. https://www.R-project.org/ Rodríguez-Ferreiro, J., &amp; Davies, R. (2019). The graded effect of valence on word recognition in Spanish. Journal of Experimental Psychology: Learning, Memory, and Cognition, 45(5), 851-868. https://doi.org/10.1037/xlm0000616</p>
+<p>Russell, J. A. (1980). A circumplex model of affect. Journal of Personality and Social Psychology, 39(6), 1161-1178. https://doi.org/10.1037/h0077714</p>
+<p>Russell, J. A., &amp; Ridgeway, D. (1983). Dimensions underlying children&#x27;s emotion concepts. Developmental Psychology, 19(6), 795-804. https://doi.org/10.1037/0012-1649.19.6.795</p>
+<p>Sabater, L., Guasch, M., Ferré, P., Fraga, I., &amp; Hinojosa, J. A. (2020). Spanish affective normative data for 1,406 words rated by children and adolescents (SANDchild). Behavior Research Methods, 52(5), 1939-1950. https://doi.org/10.3758/s13428-020-01377-5</p>
+<p>Sabater, L., Ponari, M., Haro, J., Fernández-Folgueiras, U., Moreno, E. M., Pozo, M. A., Ferré, P., &amp; Hinojosa, J. A. (2023). The acquisition of emotion-laden words from childhood to adolescence. Current Psychology, 42(33), 29280-29290. https://doi.org/10.1007/s12144-022-03989-w</p>
+<p>Shablack, H., Becker, M., &amp; Lindquist, K. A. (2020). How do children learn novel emotion words? A study of emotion concept acquisition in preschoolers. Journal of Experimental Psychology: General, 149(8), 1537-1553. https://doi.org/10.1037/xge0000727</p>
+<p>Schmidtke, D., &amp; Conrad, M. (2025). The role of valence and arousal for phonological iconicity in the lexicon of German: A cross-validation study using pseudoword ratings. Cognition and Emotion, 39(7), 1493-1514. https://doi.org/10.1080/02699931.2024.2353775</p>
+<p>Smith, K. E., Woodard, K., &amp; Pollak, S. D. (2025). Arousal may not be anything to get excited about. Emotion Review, 17(1), 3-15. https://doi.org/10.1177/17540739241303499</p>
+<p>Speed, L. J., &amp; Brysbaert, M. (2024). Ratings of valence, arousal, happiness, anger, fear, sadness, disgust, and surprise for 24,000 Dutch words. Behavior Research Methods, 56(5), 5023- 5039. https://doi.org/10.3758/s13428-023-02239-6</p>
+<p>Stadthagen-González, H., Imbault, C., Pérez Sánchez, M. A., &amp; Brysbaert, M. (2017). Norms of valence and arousal for 14,031 Spanish words. Behavior Research Methods, 49(1), 111- 123. https://doi.org/10.3758/s13428-015-0700-2</p>
+<p>Sylvester, T., Braun, M., Schmidtke, D., &amp; Jacobs, A. M. (2016). The Berlin Affective Word List for Children (kidBAWL): Exploring processing of affective lexical semantics in the visual and auditory modalities. Frontiers in Psychology, 7, Article 969. https://doi.org/10.3389/fpsyg.2016.00969</p>
+<p>Tamis-LeMonda, C. S., Kuchirko, Y., &amp; Song, L. (2014). Why is infant language learning facilitated by parental responsiveness?. Current Directions in Psychological Science, 23(2), 121-126. https://doi.org/10.1177/0963721414522813</p>
+<p>Warriner, A. B., Kuperman, V., &amp; Brysbaert, M. (2013). Norms of valence, arousal, and dominance for 13,915 English lemmas. Behavior Research Methods, 45, 1191-1207. https://doi.org/10.3758/s13428-012-0314-x</p>
+<p>Winkielman, P., Davis, J. D., &amp; Coulson, S. (2023). Moving thoughts: emotion concepts from the perspective of context dependent embodied simulation. Language, Cognition and Neuroscience, 38(10), 1531-1553. https://doi.org/10.1080/23273798.2023.2236731</p>
+<p>Woodard, K., Zettersten, M., &amp; Pollak, S. D. (2022). The representation of emotion knowledge across development. Child Development, 93(3), e237-e250. https://doi.org/10.1111/cdev.13716</p>
+<p>Yarkoni, T., &amp; Westfall, J. (2017). Choosing prediction over explanation in psychology: Lessons from machine learning. Perspectives on Psychological Science, 12(6), 1100-1122. https://doi.org/10.1177/1745691617693393</p>
+<p>Zheng, T., Levelt, C. C., &amp; Chen, Y. (2026). The affective iconicity of segment and tone in Standard Chinese. Psychonomic Bulletin &amp; Review, 33(3), 67. https://doi.org/10.3758/s13423-025-02849-5</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
