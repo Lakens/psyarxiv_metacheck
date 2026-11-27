@@ -1237,6 +1237,7 @@
   "prbf5_v1",
   "pt2bc_v2",
   "pux23_v1",
+  "pwak4_v1",
   "pwbhy_v1",
   "pxsv8_v1",
   "pxwqh_v1",
@@ -838305,6 +838306,437 @@
    "light": "yellow",
    "summary": "-  We found no files to analyse.\n-  We could not list every file of 1 repository, so the checks did not see all its files: https://osf.io/y45bc/overview (could not be listed: private).",
    "findings": []
+  },
+  {
+   "id": "pwak4_v1",
+   "title": "Making good decisions with counterfactuals",
+   "url": "https://osf.io/preprints/psyarxiv/pwak4_v1/",
+   "published": "2026-10-11T00:00:29.302752",
+   "report_page": true,
+   "light": "yellow",
+   "summary": "-  We classified 1266 files: 286 data, 663 code, 53 documentation, 264 materials.\n-  We found 71 tabular data files and extracted 285 columns from 33 of them.\n-  We grouped the files into 12 study groups (ex1, ex10, ex11, ex12, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9), plus 4 collection-level files (README/ro-crate metadata).\n-  5 tabular data files could not be read because they were not downloaded. This can happen for private repositories or failed downloads; you can also pass `local_path` to point at a local copy.\n-  Repository https://github.com/cicl-stanford/good_decisions exceeds the 500 MB per-repository budget: downloaded the smallest files up to the cap, 5 files omitted. Raise `max_download_size` to include more.\n-  53 trial-level data files (E-Prime / Inquisit / jsPsych / Behaverse) were recognised. These are per-participant records of a behavioural task, so they are not listed as separate datasets. Nothing is deleted. We ran automated data-quality checks on 285 columns; 66 columns have at least one potential issue (44 columns whose name contains file-illegal characters or is excessively long; 12 columns with no observed values (entirely empty); 8 columns with leading/trailing whitespace; 4 columns of free text that may contain personal detail; 2 columns with inconsistent category casing). We detected demographic columns for Age, Gender, Race.",
+   "findings": [
+    {
+     "file": "data/experiment1_feedback/counterfactual_inference-merged.csv",
+     "column": "participants.feedback",
+     "label": "Whitespace",
+     "detail": "2 values with leading/trailing whitespace: \"If it was 50/50 I said no, because that would still save me .50. If the odds were more for a flyer handed out, I said yes. If the odds were 100% with attainable, I said no because that was more effective. \", \"the data that was given to me regarding each t…"
+    },
+    {
+     "file": "data/experiment1_feedback/counterfactual_inference-merged.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 2200 values are missing."
+    },
+    {
+     "file": "data/experiment1_feedback/counterfactual_inference-participants.csv",
+     "column": "feedback",
+     "label": "Whitespace",
+     "detail": "2 values with leading/trailing whitespace: \"If it was 50/50 I said no, because that would still save me .50. If the odds were more for a flyer handed out, I said yes. If the odds were 100% with attainable, I said no because that was more effective. \", \"the data that was given to me regarding each t…"
+    },
+    {
+     "file": "data/experiment1_feedback/counterfactual_inference-participants.csv",
+     "column": "feedback",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 87 characters, 100% distinct, 62% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data/experiment1_feedback/counterfactual_inference-participants.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 100 values are missing."
+    },
+    {
+     "file": "data/experiment1_feedback/counterfactual_inference-trials.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 2200 values are missing."
+    },
+    {
+     "file": "data/experiment1_feedback/experiment_trial_objs.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_feedback/experiment_trial_objs.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_feedback/experiment_trial_objs.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_feedback/experiment_trial_objs.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_feedback/experiment_trials.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_feedback/experiment_trials.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_feedback/experiment_trials.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_feedback/experiment_trials.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_no_feedback/counterfactual_inference-merged.csv",
+     "column": "participants.feedback",
+     "label": "Whitespace",
+     "detail": "6 values with leading/trailing whitespace: \"The actions that influenced my decisions were based upon how many tickets were sold with or without movie posters being distributed in the two ways. If I saw more ticket sales with movie posters, I skewed towards handing them out, but if I saw they hurt s…"
+    },
+    {
+     "file": "data/experiment1_no_feedback/counterfactual_inference-merged.csv",
+     "column": "participants.race",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: latino/Latino"
+    },
+    {
+     "file": "data/experiment1_no_feedback/counterfactual_inference-merged.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 2178 values are missing."
+    },
+    {
+     "file": "data/experiment1_no_feedback/counterfactual_inference-participants.csv",
+     "column": "feedback",
+     "label": "Whitespace",
+     "detail": "6 values with leading/trailing whitespace: \"The actions that influenced my decisions were based upon how many tickets were sold with or without movie posters being distributed in the two ways. If I saw more ticket sales with movie posters, I skewed towards handing them out, but if I saw they hurt s…"
+    },
+    {
+     "file": "data/experiment1_no_feedback/counterfactual_inference-participants.csv",
+     "column": "feedback",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 94 characters, 100% distinct, 57% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data/experiment1_no_feedback/counterfactual_inference-participants.csv",
+     "column": "race",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: latino/Latino"
+    },
+    {
+     "file": "data/experiment1_no_feedback/counterfactual_inference-participants.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 99 values are missing."
+    },
+    {
+     "file": "data/experiment1_no_feedback/counterfactual_inference-trials.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 2178 values are missing."
+    },
+    {
+     "file": "data/experiment1_no_feedback/experiment_trial_objs.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_no_feedback/experiment_trial_objs.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_no_feedback/experiment_trial_objs.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_no_feedback/experiment_trial_objs.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_no_feedback/experiment_trials.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_no_feedback/experiment_trials.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_no_feedback/experiment_trials.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment1_no_feedback/experiment_trials.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_data_composition/counterfactual_inference-merged.csv",
+     "column": "participants.feedback",
+     "label": "Whitespace",
+     "detail": "2 values with leading/trailing whitespace: \"This was extremely difficult. I thought I understood what to do, but it was very confusing. \", \"If the number of tickets sold were similar for people with or without the flyers, I would not hand them out because it would be a waste of money. If more peopl…"
+    },
+    {
+     "file": "data/experiment2_data_composition/counterfactual_inference-merged.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 1056 values are missing."
+    },
+    {
+     "file": "data/experiment2_data_composition/counterfactual_inference-participants.csv",
+     "column": "feedback",
+     "label": "Whitespace",
+     "detail": "2 values with leading/trailing whitespace: \"This was extremely difficult. I thought I understood what to do, but it was very confusing. \", \"If the number of tickets sold were similar for people with or without the flyers, I would not hand them out because it would be a waste of money. If more peopl…"
+    },
+    {
+     "file": "data/experiment2_data_composition/counterfactual_inference-participants.csv",
+     "column": "feedback",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 99 characters, 100% distinct, 58% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data/experiment2_data_composition/counterfactual_inference-participants.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 48 values are missing."
+    },
+    {
+     "file": "data/experiment2_data_composition/counterfactual_inference-trials.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 1056 values are missing."
+    },
+    {
+     "file": "data/experiment2_data_composition/experiment_trial_objs.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_data_composition/experiment_trial_objs.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_data_composition/experiment_trial_objs.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_data_composition/experiment_trial_objs.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_data_composition/experiment_trials.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_data_composition/experiment_trials.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_data_composition/experiment_trials.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_data_composition/experiment_trials.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "benefit_proportions.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "benefit_proportions.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "benefit_proportions.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "benefit_proportions.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/counterfactual_inference-merged.csv",
+     "column": "participants.feedback",
+     "label": "Whitespace",
+     "detail": "2 values with leading/trailing whitespace: \"How many fliers were given out and then how many people returned to see the movie vs how fliers weren't given out and then how many people decided to see the movie. The experiment took awhile because you had to enter percentages for each trial. \", \"I most…"
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/counterfactual_inference-merged.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 1188 values are missing."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/counterfactual_inference-participants.csv",
+     "column": "feedback",
+     "label": "Whitespace",
+     "detail": "2 values with leading/trailing whitespace: \"How many fliers were given out and then how many people returned to see the movie vs how fliers weren't given out and then how many people decided to see the movie. The experiment took awhile because you had to enter percentages for each trial. \", \"I most…"
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/counterfactual_inference-participants.csv",
+     "column": "feedback",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 71 characters, 100% distinct, 57% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/counterfactual_inference-participants.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 54 values are missing."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/counterfactual_inference-trials.csv",
+     "column": "error",
+     "label": "Empty column",
+     "detail": "Column is empty: all 1188 values are missing."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/experiment_trial_objs.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/experiment_trial_objs.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/experiment_trial_objs.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/experiment_trial_objs.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/experiment_trials.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/experiment_trials.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/experiment_trials.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment2_people_inference_novice/experiment_trials.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment3_people_inference_expert/experiment_trial_objs.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment3_people_inference_expert/experiment_trial_objs.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment3_people_inference_expert/experiment_trial_objs.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment3_people_inference_expert/experiment_trial_objs.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment3_people_inference_expert/experiment_trials.csv",
+     "column": "P(y|x)",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment3_people_inference_expert/experiment_trials.csv",
+     "column": "P(y|x')",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment3_people_inference_expert/experiment_trials.csv",
+     "column": "P(y|do(x))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    },
+    {
+     "file": "data/experiment3_people_inference_expert/experiment_trials.csv",
+     "column": "P(y|do(x'))",
+     "label": "Problematic column name",
+     "detail": "Column name has characters not allowed in file names (\"|\"). Such names break when reused as file names or in code; prefer short names of letters, digits and underscores. A name like this can also mean the file's header was not parsed as intended."
+    }
+   ]
   }
  ]
 }
