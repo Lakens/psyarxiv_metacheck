@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Trust from mistrust: How mistrust can turn
+gullibility into rational trust</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Trust from mistrust: How mistrust can turn gullibility into rational
+trust
+</p>
+<p class="meta">
+2026-11-27 · Metacheck 0.4.4.41
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>14</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Ethics Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>1 of 1 paper appeared to report data about people or animals that
+need an ethics statement, and lacked one.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>The paper appears to report data that the authors collected from
+people or animals, but we found no ethics statement. Such data need one:
+approval by an ethics committee, or a reason why none was needed. We
+based this on the sentences below. A paper can describe someone else’s
+study in the same words; if these data are not the authors’ own, no
+statement is needed.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>An external red team of expert critics was recruited to provide
+feedback on the research plan developed by the blue team and was tasked
+with playing “devil’s advocate” to identify oversights and prevent
+groupthink.</p>
+</blockquote>
+<blockquote>
+<p>A similar phenomenon, though usually without monetary compensation,
+sometimes goes under the description of white hat (as opposed to black
+hat) hacking.</p>
+</blockquote>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 5 references with comments in PubPeer.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(14)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 61 references with DOIs. You cited 5 references with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+Commenters
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Bailey, D. H., Jung, A. J., Beltz, A. M., Eronen, M. I., Gische, C.,
+Hamaker, E. L., … &amp; Murayama, K. (2024). Causal inference on human
+behaviour. Nature Human Behaviour, 8(8), 1448-1459.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Dunaliella minuta
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/CE040F12946BA3AFA90B72E0BD17C8" target="_blank">link</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Boutron, I., &amp; Ravaud, P. (2018). Misrepresentation and distortion
+of research in biomedical literature. Proceedings of the National
+Academy of Sciences, 115(11), 2613-2619.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Wytske M. Hepkema
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/2384A1434ADA16622CCA4CF7D751CE" target="_blank">link</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lau, H. (2023). Where is the ‘posterior hot zone’? Open Review of
+Ferrante et al (2023):“An Adversarial Collaboration to Critically
+Evaluate Theories of Consciousness” (by the ARC-Cogitate Consortium). <a href="https://doi.org/10.31234/osf.io/93ufe" class="uri">https://doi.org/10.31234/osf.io/93ufe</a>
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Liad Mudrik
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/8F50E3B2DB49EE6DA592ED16CDB781" target="_blank">link</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miyakawa, T. (2020). No raw data, no science: another possible source of
+the reproducibility crisis. Molecular Brain, 13(24), 1-6.
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Boris Lamotte d’Incamps, Epichloe clarkii, Candidula spadae, Tsuyoshi
+Miyakawa, Actinopolyspora biskrensis
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/76A124FBAA68F2CBD3A4FAD089896C" target="_blank">link</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Open Science Collaboration (2015). Estimating the reproducibility of
+psychological science. Science, 349(6251), aac4716. <a href="https://doi.org/10.1126/science.aac4716" class="uri">https://doi.org/10.1126/science.aac4716</a>
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Heterorhabditis megidis, Lycenchelys muraena, Alpinacris crassicauda,
+Clarissa F. D. Carneiro
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/0115DF644CBF969779F00829E78A83" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 61 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 61 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>In this paper, we explore the social dynamics of trust, mistrust, trustingness, and trustworthiness in communal settings. In a well-functioning group or institution, especially a group dedicated to inquiry (e.g., scientists, journalists), systematic mistrust by enough people ensures that the outputs of group inquiry are trustworthy, which in turn means that default trustingness -even gullibility -outside of one&#x27;s area of expertise is a reasonable disposition or stance to adopt. At the same time, this means that in a poorly-functioning group that lacks systematic mistrust by enough people, default trustingness or gullibility is not rational. We argue that philosophers should reject as too stringent any assumption that default trustingness amounts to irrationality for three reasons. First, whether default trustingness is irrational depends on the norms and practices of the social epistemic structure in which one finds oneself. Second, people are often justified in trusting even when some might regard that trust as irrational. Third, we should be more stringent in policing epistemic norms, and in empowering, honoring, and rewarding what Nietzsche calls the &quot;police of mistrust.&quot; This is because default trustingness is only rationally justified when such mistrust is systematic and those who do the policing are not discredited.</p>
+<h3>Introduction</h3>
+<p>In this paper, we explore the reasoning underlying a social and critical approach to trust, mistrust, trustingness, and trustworthiness in groups and institutions. We contend that the dynamics among these attitudes and dispositions are well modeled by considering contemporary philosophy of science and social epistemology, especially with respect to our practices and institutions of epistemic accountability and blame. In particular, the framework we develop reinforces the view that &quot;Mandevillean&quot; virtues play an important role in collective inquiry; these are dispositions, such as excessive mistrust, that are putatively vicious when manifested by individuals in isolation, but epistemically valuable when selectively manifested in many collectivist contexts (Smart, 2018; Astola, 2021; Bland, 2022, and Astola et al., 2024). In a wellfunctioning group or institution, especially a group dedicated to inquiry (e.g., scientists, journalists, police investigators, counterintelligence operatives), systematic mistrust by enough experts ensures that the outputs of group inquiry are in fact trustworthy. [1] This in turn means that default trustingness outside one&#x27;s area of expertise is often a reasonable disposition or stance to adopt. As Greco (2020) observes, our epistemic norms &quot;should make it harder to get information into the system than we make it to distribute that information, once in&quot; (p. 492). The fact that scientists, journalists, and others make themselves epistemically accountable to other experts, who vet their work and offer verdicts on it, makes their work more trustworthy for people who are not in a position to vet it themselves. A collection of individuals, some of whom seem to be overly skeptical while others overly credulous, can perform their function as epistemic agents well when they interact with one another in appropriate ways, under the right sorts of conditions. Such individuals manifest Mandevillean virtues. By contrast, in a poorlyfunctioning group or institution that lacks systematic mistrust by enough people, default trustingness, either by members of the group or by laypeople, is no longer reasonable. This diminishes the effectiveness of inquiry. If this is right, several things follow. First, we should reject as too stringent any assumption that default trustingness amounts to irrational gullibility. In epistemic communities with a well functioning &quot;police of mistrust&quot; (Nietzsche HH AOM 215), default trustingness is a rational attitude for most people to have. Building and maintaining these communities requires that hyper-vigilant experts be supported and rewarded, rather than being defamed as &quot;methodological terrorists,&quot; as some reform-minded psychologists were several years ago.</p>
+<p>[2] In another recent incident, critics of the Integrated Information Theory (IIT) of consciousness (IIT Concerned, et al 2025) were referred to as &quot;a hundred academics&quot; aiming to enact &quot;scientific excommunication&quot; (Tononi et al., 2025). Without the police of mistrust playing their role and being recognized and rewarded for doing so, people need to assess, on a case-by-case or fieldby-field basis, whether trust is reasonable (de Ridder, 2022). This requirement is too demanding when it comes to large-scale institutional science and other forms of collective expert inquiry where there is a division of cognitive labor (Miller &amp; Freiman, 2020; Levy, 2022; Ballantyne et al., 2024; Buzzell &amp; Rini 2023). Thus, the Enlightenment&#x27;s slogans of nullius in verba (take no one&#x27;s word for it) and sapere aude (have the courage to be wise), associated with the British Royal Society and Kant (1784 Kant ( /1983)), respectively, fail to countenance our profound epistemic interdependence.</p>
+<p>Here is the plan for this paper: section 1 explains the Nietzschean inspiration for our proposal, according to which the mistrustfulness of some experts makes the gullibility of nonexperts (and experts in disjoint fields) rational. Section 2 articulates, following Karen Jones, an account of the attitudes of trust and mistrust, as well as the dispositions of trustworthiness, trustingness, and mistrustfulness. Section 3 explores the social epistemology of these attitudes and dispositions, arguing that certain structures enable the many to reasonably trust the few. Such trust is not always warranted, but in a well-functioning network, it is. Section 4 then explores the normative implications of this account of structures of trust and mistrust, arguing for several specific reformations of the institutions of science and journalism. In particular, we think that more respect and honor should be accorded to the &quot;police of mistrust&quot; so that enough experts are incentivized to take on this role. Section 5 concludes by summarizing the problem of unqualified individuals impersonating the police of mistrust in order to interfere with the transmission of knowledge.</p>
+<h3>1 A perhaps-surprising inspiration</h3>
+<p>This paper draws inspiration from a perhaps-unexpected source -Friedrich Nietzsche -to reflect on and offer recommendations for social epistemic institutions and networks such as science and journalism. Nietzsche went so far as to claim that, despite the fact that &quot;a suspicious disposition might be a sign of &#x27;bad character&#x27;,&quot; philosophers have &quot;a duty to suspicion today, to squint maliciously out of every abyss of suspicion&quot; (Beyond Good and Evil 34). In The Gay Science 297, Nietzsche celebrated both the willingness to be the object of mistrust and the willingness to express mistrust with a good conscience. And In The Gay Science 344 he contended that convictions are allowed into science only &quot;under police supervision, the police of mistrust.&quot; In Human, All-too-human, Assorted Opinions and Maxims 215, Nietzsche rationalized such claims in a description of research that has passed through an idealised version of academic peer review: &quot;Regular and rapid progress in the sciences is possible only when the individual is not obliged to be too mistrustful in the testing of every account and assertion made by others in domains in which he is a relative stranger.&quot; Rather than criticizing in areas where one lacks relevant expertise and skills, one does best to take assertions made by other scientists on trust. But Nietzsche observes that trust by non-experts (who may have expertise in some other area, of course) is rational only because &quot;in his own field everyone must have rivals who are extremely mistrustful and are accustomed to observe him very closely&quot; (HH AOM 215). The idea is that we can take the outcomes of scientific inquiry on trust not because scientists are virtuous and selfregulating, but because they face intense scrutiny from other scientists who do have the relevant epistemic expertise and skills and are motivated and incentivized to use them critically (Merton, 1973; Popper, 2002 Popper, /1996)). Nietzsche concludes that it is &quot;out of this juxtaposition of &#x27;not too mistrustful&#x27; and &#x27;extremely mistrustful&#x27; that the integrity of the republic of the learned originates&quot; (HH AOM 215). The trustworthiness of scientific conclusions emerges not from the intellectual and moral virtue of individual scientists, but from the structure and norms of the community of scientists.</p>
+<p>The argument that we will develop in what follows draws on this idea by first articulating an account of the occurrent attitudes of trust and mistrust, then providing an account of the dispositions that govern the manifestation of these attitudes.</p>
+<h3>2 Trust-involving attitudes and dispositions</h3>
+<p>This paper focuses primarily on epistemic trust, i.e., accepting another&#x27;s assertion without sufficient knowledge of the conditions that make it true or well-evidenced. Trusting can be understood both as an attitude and as a disposition. The truster adopts an attitude of not doubting the trustee, which can mean they are disposed to not air follow-up questions, not monitor, challenge, verify, or double-check what has been asserted (Nguyen, 2022). When we adopt an attitude of trust towards someone with respect to some domain, we are disposed to expect them to treat our reliance on them as a strong, if not dispositive, reason to exercise their competence in that domain on our behalf (Jones, 2012).</p>
+<p>Likewise, mistrusting can be understood both as an attitude and as a disposition. The mistruster adopts an attitude of doubting the candidate trustee, which can mean that they are disposed to ask follow-up questions, monitor, challenge, verify, or double-check what the candidate trustee asserts. When we adopt an attitude of mistrust towards someone who purports to have knowledge in some domain, we are disposed to expect them not to have relevant competence or not to exercise their competence in that domain on our behalf.</p>
+<p>Some people are more trusting than others, meaning that they extend the trusting attitude more readily. Likewise, some people are more mistrustful than others, meaning that they are reluctant to extend the attitude of trust and instead tend to adopt the attitude of mistrust. For instance, war veterans often end up distrustful of the civilian society that sanctioned their actions, leading to traumas such as moral injury (Shay, 2002; 2010). And, as with the disposition of trustingness, mistrustfulness is justified and discerning to the extent that we are capable of differentiating among potential trustees. The veterans that Shay describes tend to have very high levels of trust in fellow-veterans (especially those who served with them), but very low levels of trust in civilians and politicians (and often also in senior military officials). In what follows, we offer fuller accounts of both trust-involving attitudes and trust-involving dispositions.</p>
+<h3>2.1 Trust-involving attitudes</h3>
+<p>As mentioned above, trust is the attitude that an agent takes towards other agents when they regard them as both competent in some relevant domain and motivated to exercise that competence because they are being relied upon (Jones, 2012).</p>
+<p>[3] However, it is not possible to cleanly cleave epistemic trust from non-epistemic trust. Taking someone&#x27;s word for it typically involves trusting them to do things, not just act as sources of knowledge. Trustees exercise skills, for example, by reporting evidence clearly, thoroughly, and with nuance. They also know how to take advantage of feedback from other experts, and respond thoughtfully to good-faith criticism.</p>
+<p>Deciding whether to trust someone&#x27;s testimony is a matter of assessing both their competence and their motivation, where their motivation is likely to be conditional on their personal and institutional incentives. Consider a paradigm case: the lead author of the Intergovernmental Panel on Climate Change (IPCC) report, Hoesung Lee, reported in 2023 that &quot;Human activities, principally through emissions of greenhouse gasses, have unequivocally caused global warming, with global surface temperature reaching 1.1°C above 1850-1900 in 2011-2020&quot; (Lee et al., 2023). Would it be rational for non-experts to take him and his coauthors at their word? To do so may mean non-experts have to update their beliefs based on Lee and colleagues&#x27; assumed motivation to exercise their knowledge and expertise to accurately inform other scientists, policy-makers, and the public about a scientific reality of great consequence (Irzik &amp; Kurtulmus 2024). [4] Thus, epistemic trust is intimately bound up with our epistemic responsibility practices. It would be normal for someone whose epistemic trust has been betrayed to turn to the betrayer with an attitude of blame, resentment, hurt feelings, or related reactive attitudes (Strawson 1963).</p>
+<p>There is disagreement about whether epistemic blame is a distinct category of blame (Meehan, 2019) or reducible to moral or general blame (Piovarchy, 2021; forthcoming). We do not take a stand in this debate, though we are sympathetic to Goldberg&#x27;s (2010) argument that epistemic obligations to others can be grounded in moral and social obligations because when we invite someone to take our word for it, we are putatively offering them knowledge. Another way of putting this point is that assertions are, characteristically, attempts to get the interlocutor to adopt a belief because they have been told something that the speaker knows. Of course, not all assertions are true, and not all of them express knowledge; they might be innocent mistakes, bullshit, or lies. But just as promises aim to get the interlocutor to accept that the speaker is making a commitment, so assertions aim to get the interlocutor to accept that the speaker is expressing their knowledge. [5] When knowledge is actionable information, then such an invitation is also an invitation to take some actions and not others, which immediately lands us in practical territory. If this is on the right track, then it should be no surprise that all three faces of moral responsibility (Shoemaker, 2015) are visible in the epistemic domain as well. We hold each other to account for epistemic failures, sometimes blaming or punishing people for these failures. We treat each other as attributable, meaning that failures of knowledge can be traced back to the causal role of particular agents. And we often regard each other as answerable for epistemic failures: we ask people to explain how they ended up reaching the wrong conclusion. The attitude of mistrust also involves an assessment of the potential trustee&#x27;s competence and motivation. Because trustworthiness involves assessing two orthogonal characteristics of a testifier, mistrust comes in three varieties. First, we might mistrust a testifier because we think they are well-motivated but incompetent. Second, we might mistrust a testifier because we think they are competent but ill-motivated. This would be appropriate in, for example, a poker game when one&#x27;s cheeky opponent engages in table talk about the cards she&#x27;s holding. It would also be appropriate in many other contexts that are epistemically hostile, where the other has an incentive to confuse or misinform us (Sterelny, 2003; Timms &amp; Spurrett, 2023). Third, we might mistrust a testifier because we think they are both incompetent and ill-motivated.</p>
+<p>With these trust-involving attitudes on the table, we now turn to the more complex issue of trust-involving dispositions.</p>
+<h3>2.2 Trust-involving dispositions</h3>
+<p>We agree with Jones (2012) that an account of trusting should start from an account of trustworthiness. Jones offers an account of dispositional trustworthiness, which she calls rich trustworthiness. According to this view, an agent is richly trustworthy with respect to a potential trustee when she reliably signals what she can and cannot be trusted with by that agent. This account has been generalized by Alfano and Huijts (2020), who point out that the same potential trustee might reliably signal, within a domain, to more than one agent whatever each of them can rely on the trustee to do.</p>
+<p>Of course, there are far too many people in this world for anyone to be able to reliably signal trustworthiness to everyone else. When we talk about trusting the IPCC report, however, we can see the role that being able to reliably signal plays in generating and maintaining epistemic trust. Hoesung Lee and colleagues have attempted to do this by sharing with other scientists, policy makers, and the public a thoroughly referenced and comprehensive review of the scientific literature developed by a large panel of over 700 experts (Parker, 2024; Tandon 2023), which includes data and analysis code used to generate results.</p>
+<p>[6] On the one hand, scientists who understand the value of open science practices and norms, and who can reanalyze some of the results of the report, can treat this openness as both evidence of and a prerequisite for rich trustworthiness. Science journalists, on the other hand, can interview these other scientists and try to establish the extent to which they are convinced by the report. Policy makers and the public can observe this multi-stage, multi-actor process of scrutiny and decide whether they are convinced. Reliably signaling, whether by the IPCC panel itself or the community of experts and science journalists who scrutinize the panel&#x27;s work, in the right way, to the extent that it is possible, makes it reasonable for even the public to be in a position to trust the results of a massive, multi-disciplinary inquiry that they themselves will never be able to understand fully. It is easy to imagine someone thinking that if there were malfeasance leading to the IPCC report, it is very likely that there would have been a whistleblower at this point. If errors had been made in the analyses or interpretation of the analyses, it is reasonable to expect some independent experts, competing scientists, or other vested interests would have pointed them out. The fact that this has not happened is good evidence that the conclusions of the IPCC are trustworthy (Vickers, 2023). Goldberg (2010) has written about a similar phenomenon under the heading of &quot;coverage.&quot; When the credibility of certain pieces of information is important and under investigation by multiple, independent, and competent agents, it is reasonable to rely on the heuristic, &quot;if that were true, I would have heard it by now.&quot; For example, if there had been a nuclear detonation in Times Square yesterday, I would have heard about it by now. Since I haven&#x27;t heard a report of such a disaster, I can reasonably infer that no such event occurred. We contend that there is a negative version of coverage -a heuristic according to which, &quot;if that were false or discredited, I would have heard it by now.&quot; This heuristic is at work giving coverage to the IPCC report because Lee and colleagues subjected themselves to intense scrutiny by a large number of fellow experts who have had the time and incentives to find flaws in their conclusions. In other words, the trustworthiness of some is secured by the mistrust of others.</p>
+<p>To be rationally trusting towards an epistemic agent in a domain is to be sensitive to whether they reliably signal whether and to what extent they can be trusted in that domain, and to adjust one&#x27;s credences accordingly.</p>
+<p>[7] Perhaps Lee is not competent to fly us around in a plane, but he and his team are competent to inform us about climate change, and they are prepared to exercise that competence on our behalf. For that reason, we should believe them on the topic of climate science. Part of what makes it rational to trust them is coverage. Any one of us who can receive and interpret the relevant sorts of signals from them is richly trusting their report. The richly trusting person doesn&#x27;t just trust those who are trustworthy but would trust them in a range of counterfactual scenarios. They may do so because they are good at assessing higher-order evidence about trustworthiness, but likewise they may do so because they are in the lucky position in which others do the assessment of higher-order evidence for them -perhaps without their even knowing it. Likewise, someone who is disposed to critically scrutinize material that is put forward for acceptance by an audience only when they are well-positioned to competently exercise such scrutiny is richly mistrustful. The richly mistrustful epistemic agent will not be able to exercise such scrutiny with respect to every claim they could investigate, which is why we use a conditional rather than a biconditional. Instead, they will be sensitive to the stakes, to whether other competent experts have already directed critical scrutiny to the claim, to whether those other experts have conflicts of interest, to whether the other experts have made their conclusions public or signed and abided by non-disclosure agreements, and so on.</p>
+<p>Following Nietzsche, we can say that while a suspicious disposition might be a sign of &quot;bad character&quot; in ordinary life, the scientist or other expert sometimes has a duty to be suspicious, to &quot;squint maliciously&quot; out of what he calls the abyss of suspicion at claims and conclusions that she is in a position to critically evaluate (Beyond Good and Evil 34). Indeed, the mistrustful scientist might even acquire less knowledge than other scientists who uncritically trust what has passed through peer review. In this sense, they manifest a deficiency of trust that is deleterious for themselves but nevertheless beneficial for the collective, insofar as it compels them to subject the work in their area to severe criticism that makes it more trustworthy. Their personal deficiency is, in this case, a Mandevillean virtue. This deficiency may arise from a sceptical disposition that prevents scientists from accepting well-founded theories, or from a dogmatic attachment to an alternative theory. The beneficial effects that dogmatic holdouts can have for scientific progress have been widely discussed by philosophers of science (Popper 1970; Soloman 1992). For example, Einstein refused to accept mainstream quantum mechanics on metaphysical grounds, which led him to issue repeated challenges to the theory, including the influential &#x27;paradox&#x27; presented in his paper with Podolsky and Rosen (Einstein, Podolsky &amp; Rosen 1935). The responses to these challenges both reinforced and developed quantum mechanics, but never did convince Einstein.</p>
+<p>Questions about the replicability of results in various sciences have led to the rise of forensic post-publication peer review (Ballantyne et al., 2017). This sort of peer review has often been conducted by mistrustful experts who have received epithets such as &quot;methodological terrorists.&quot; It takes a certain kind of disposition to continue pursuing critical inquiries in the face of such backlash. The team behind the blog Data Colada, for instance, recently uncovered evidence of research fraud by Harvard Business School Professor Francesca Gino, who filed a $25,000,000 lawsuit against them and Harvard.</p>
+<p>[8] The discovery by Data Colada was prompted by a tip from one of Gino&#x27;s own graduate students, a fact that illustrates the crossover between the epistemic and the practical and political in scientific research. [9] Beyond science, rich mistrustfulness is also needed by those who fact-check claims made by politicians, investigative journalists who divulge misconduct by powerful figures, detectives who pursue clandestine criminal conspiracies, counterintelligence analysts, and operatives who track terrorist cells.</p>
+<p>[10]</p>
+<p>It is worth considering a case study of trust within a scientific community gone awry. First, a little bit of context. It is now widely accepted that the discipline of psychology faces a &quot;replication crisis&quot; (Open Science Collaboration, 2015; Nelson et al., 2018; Nosek et al., 2022). Numerous psychology studies fail to replicate, which raises questions about the evidence that those studies provided for scientific theories and the supposition that psychology is a cumulative science. This replication crisis is multi-causal, with different commentators focusing on different issues; however, we contend that the malfunctioning part of psychology&#x27;s scientific ecosystem is that researchers have been too trusting of one another. [11] In other words, the police of mistrust often have not operated effectively in this field. Consider, for example, a stark point of contrast between the IPCC report&#x27;s transparent sharing of raw data with typical data sharing practices in psychology. It is essential that scientists can consult the raw data produced by other scientists to verify results and test alternative hypotheses. Scientists must have access to the materials that are necessary to police the research within their areas of expertise. However, as recently as 2022, it was still uncommon for empirical articles published in psychology journals to include a preregistration, materials, data, or analysis scripts (Hardwicke et al., 2024). Instead, psychology articles tended to include statements indicating that &quot;data is available upon request.&quot; This amounts to saying, just take my word for it. And what is puzzling about this is that we think that people should generally take the word of scientists as read, but also that they should only do so because there is a background of mistrust by domain experts that ensures that the word of scientists is visible or audible only after it has passed through a process of intensive mistrust. In practice, psychologists typically don&#x27;t share their data upon request (Hussey, 2025), meaning that the police of mistrust cannot access the information they need to do their detective work. [12] Consequently, questionable research practices (John et al. 2012), analysis errors (Nuijten et al. 2016), and outright fraud (Heathers 2024) might be surprisingly frequent, yet very difficult to detect. This problem has been welldocumented in psychology, but it is prevalent in the sciences more generally and also in areas such as journalism and governance.</p>
+<p>One approach that has been advocated is making it mandatory to put raw data in a public repository or at least explain why it is not possible or ethical to do so. This seems to improve data sharing, but not as much as one might assume (Hardwicke et al., 2018). What is needed, it seems, are regulators with teeth: &quot;no raw data, no science&quot; (Miyakawa, 2020). One promising development has been a new editorial policy at the journal Psychological Science: a recent editorial announces that &quot;transparency is the new default at Psychological Science&quot; (Hardwicke 3 Trustworthiness and trustingness of the many from mistrustfulness of the (right) few This section further develops our Mandevillean argument by making the case that gullibility, like extreme mistrust, can be beneficial at the level of collectives, in the right conditions. [14] In her discussion of the conditions for testimonial knowledge, Fricker (1995) asks: &quot;does not mere logic, plus our commonsense knowledge of what kind of an act an assertion is, and what other people are like, entail that we should not just believe whatever we are told, without critically assessing the speaker for trustworthiness?&quot; (p. 400). We answer Fricker&#x27;s rhetorical question in the negative. Sometimes, the best strategy is to just believe whatever we are told, without assessing the speaker for trustworthiness -because someone in a much better position to make that judgment has already done so. We reject as too stringent the intuition that default trustingness amounts to irrational gullibility. As the contrast between climate science and psychological science illustrates, whether default trustingness is irrationally gullible depends on the norms and practices of the social epistemic structure in which one finds oneself. This means both that people are justified in trusting when some might regard that trust as irrationally gullible and that those who claim to think for themselves are often instead trusting the wrong sources in a foolhardy way (Altay et al., 2023). To put a finer point on it, we contend that gullibility is a Mandevillean virtue in the right contexts. Default trustingness is gullibility because most agents who use this strategy lack the practical wisdom to do so selectively or discerningly -hence our use of &quot;default&quot;.</p>
+<p>[15] By adopting this attitude, laypeople could easily be misled in hostile epistemic environments. Moreover, laypeople usually don&#x27;t know whether an expert community has an effective police of mistrust, so they are not in a position to know whether default trustingness is a rational attitude to adopt. An important aspect of the division of epistemic labor is that it relieves agents of the need to consistently manifest the requirement of robust practical wisdom that&#x27;s required for traditional virtues Contrary to popular concerns about widespread irrational gullibility, Mercier (2020) argues that we&#x27;re often insufficiently gullible, rather than insufficiently vigilant. He bases this claim on Yamagishi&#x27;s insight about the asymmetrical informational returns of trust versus mistrust (Yamagishi, 2001; see also D&#x27;Cruz, 2019). When we trust someone, we afford them the opportunity to show us whether or not they are trustworthy; if we don&#x27;t trust them, we are unlikely to ever find out whether or not they should have been trusted. Mercier argues that we should do more exploring of new territory in our social environments and less exploiting of familiar territory. [16] This can be done by being less vigilant in environments that generate clear, timely, and accurate feedback about the performance of those with whom we routinely interact, and where mistakes are not ruinous. Alfano and Huijts (2020) characterize such environments as offering small test dependencies, from which we can learn about whom we can reasonably trust. It&#x27;s problematic, then, that many of the environments that are rich in socially transmitted information are not like this. The information that we receive from others is increasingly hyperspecialized: it is generated by experts whose credentials, practices, and performance we are unable to aptly assess (Milgram, 2015). For instance, very few laypeople have the requisite training to understand the data, models, and inferences contained in IPCC reports (Ballantyne, Celniker &amp; Dunning, 2024). Even the executive summaries of the IPCC reports are often too data-and analysis-dense for educated laypeople to properly digest. Instead, the public must rely on translational work such as science journalism to achieve some understanding of the reports. Unfortunately, scientific articles, university press releases, and science journalism frequently include spin that misrepresents the strength of evidence that studies provide for their hypotheses (Yavchitz et al., 2012; Boutron &amp; Ravaud, 2018) [17].</p>
+<p>The problem of hyperspecialization arises because we divide the cognitive labor required to know and understand the world. Different people receive different types of training to make progress in different areas of inquiry. As these areas become more disparate, cognitive labor becomes increasingly specialized. Indeed, even within science, and even within disciplines and subdisciplines, experts in adjacent fields are often not qualified to assess the evidence and argumentation of other experts -a point that Hardwig (1985; 1991) has forcefully made. Failure to recognize the limitations imposed by hyperspecialization can lead to epistemic trespassing, which comes with its own problems (Ballantyne 2019). However, the same phenomenon can also secure the trustworthiness of experts without laypeople having to evaluate them. Goldberg (2011) argues that the sources and receivers of testimony need not assess the veracity of the information being transmitted in cases of testimonial knowledge. In particular, this will be true in &quot;friendly&quot; environments where the community filters out false testimony, making testimonial belief a reliable source of knowledge. In related work, Sterelny (2010) points out that epistemic environments range from friendly to neutral to hostile. Friendly environments are ones in which the social and material environment makes it easier to arrive at accurate, reliable, justified beliefs. Neutral environments neither help nor hinder epistemic agency (or do so in mixed ways). Hostile environments actively undermine the agent&#x27;s attempts to learn. In friendly environments, trust is a smart strategy. Goldberg points out that this is not a mere possibility: we typically outsource credibility monitoring and policing to the expert communities who are most apt to do it well. They not only remove false testimony from circulation, but also discredit or ostracize incompetent and malicious actors. Goldberg adds: &quot;The &#x27;remote monitoring and policing&#x27; role played by others thus decreases the burden on individual hearers as they go about managing their reception of incoming testimony&quot; (p. 119). Laypeople can be more gullible when it comes to expert testimony, not because they thereby learn who to trust by directly assessing testimony themselves, but because the community of experts has already done that cognitive labor for them. However, this will be the case only when there is a hypervigilant police of mistrust within the community that effectively criticizes and filters out false or unfounded information. In this way, collectives can efficiently divide the cognitive labor required to manifest epistemic vigilance. In this arrangement, the excesses and deficiencies of epistemic vigilance are, from the collective&#x27;s perspective, Mandevillean virtues. To have this status, though, they must be manifested by the right people, in the right way, at the right time. Achieving this delicate balance requires scaffolding in the form of role assignments, incentive structures, constraints, norms, and the like.</p>
+<p>A key problem in the epistemic ecosystem of science and related sectors is the absence of career incentives for experts to take on the role of the police of mistrust. Notably, there are very few expert data sleuths working to identify fraud in academic research, and they are typically unpaid volunteers (Bik, 2024). Having the police of mistrust work for free or as vigilantes is not sustainable. We suggest that the scientific ecosystem needs to evolve to reward scientists with expertise in this role. Below, we survey some of the ways that this sort of process has been handled in military and industrial contexts, through incentives for red-teaming and bug bounties. We envision a range of types and levels of monitoring, including oversight, stress-testing, independent corroboration, and internal interventions. In this way, we aim to show that the problems for science are shared by other knowledge-seeking institutions and that the solutions may be shared across sectors.</p>
+<h3>3.1 Oversight</h3>
+<p>Oversight is a relatively mild form of monitoring practiced by expert communities. It is characterized by internal, as opposed to external, scrutiny. Individuals can oversee themselves, especially if they have enough time and resources to switch roles and become their own critics. However, oversight is typically best practiced by dividing these roles. We can illustrate this phenomenon with the example of psychology research. Psychology papers are typically written by a team who have subject-specific knowledge (e.g., prejudice, eating disorders, and so on), but limited methodological expertise. Unfortunately, this routinely leads to error (Hardwicke et al., 2019) because statistics is hard, and experts are needed to identify and implement the most appropriate statistical methods (Sijtsma, 2023). Similarly, if the research team lacks expertise with other complex methodological tools, such as causal inference (Bailey et al., 2024) and psychometrics (Sijtsma, 2009), errors are likely. In fact, statistical mistakes are so common that papers have been written that provide authors and reviewers of scientific papers with advice on how to spot them (e.g., Markin &amp; Orban de Xivry, 2019) and meta-scientists have advocated for specialised statistical review at psychology journals (Hardwicke et al., 2019). The solution to this problem is to develop interdisciplinary scientific teams whose members each have specific expertise to increase the chances that errors will be spotted and corrected. Psychologists have often failed to assemble such teams, but recently there has been a move to do so (e.g., Hoogeveen et al., 2024).</p>
+<p>Other techniques that teams can use as part of their own oversight include (semi-)automated error-detection and auditing. These come in a wide variety of manifestations. For instance, there are now tools that enable researchers to check whether publications have been retracted or corrected, [18] statistical tools to detect anomalies in results reported in papers (Brown and Heathers, 2017), and, of course, it is often wise to consult statisticians to ensure that the assumptions of various statistical methods are satisfied (Sijtsma, 2023).</p>
+<p>In each of these cases, researchers or other epistemic agents are inviting others to approach them with a kind of mistrust. Importantly, the interaction is not fully mistrustful because there is a presupposition of good faith among all parties. The aim is not to detect outright fraud but rather to ensure that conclusions drawn in good faith are reliable. It&#x27;s a matter of keeping the people who want to be honest honest. Returning to the framework of trustworthiness described above, these techniques are suitable for detecting incompetence but not for detecting dishonesty.</p>
+<h3>3.2 Stress-testing</h3>
+<p>With stress-testing, the relationship between inquirers and those who direct mistrust towards them is more adversarial, though it is still typically founded in good faith. We have in mind here cases where the inquirers do not necessarily know who the mistrusters are, what approaches they might employ, or even whether they exist. Examples of stress-testing include approaches more familiar outside of the sciences, such as red teaming (Lakens, 2020), bug bounties (Laszka et al., 2018), [19] and white hat hacking (Maurushat, 2019), as well as some more familiar within the sciences, such as adversarial collaboration (Peters et al., 2024; Krumrai-Mancuso et al., 2024). Let&#x27;s briefly review each of these approaches. The phrase &quot;red team&quot; originated in military planning and wargaming. The basic idea was that our military operation is more likely to succeed if we plan it out in advance and test it in a tabletop exercise against allies who roleplay enemies. The blue team is &quot;us&quot;; the red team is &quot;them&quot;. In short, the red team plays the enemy and attempts to defeat us using whatever resources and intelligence the enemy might have. The ultimate goal of both the blue team and the red team is to improve &quot;our&quot; prospects in the envisioned conflict, but the red team does so by temporarily adopting the perspective and motivations of the opponent. [20] Red teaming can be used in many other contexts where hostile interactions are anticipated, including examples in scientific research (Zenko, 2015). [21] For instance, red teaming is conducted in the context of port security (Culpepper, 2004). Experts are assembled to try to sneak weapons, explosives, and other contraband through security and customs, with the goal of identifying and guarding against vulnerabilities. Likewise, red teaming is frequently conducted against government and banking infrastructure (Scott, 2020). Experts are assembled to try to defraud or thwart these organizations, with the goal of identifying and guarding against vulnerabilities.</p>
+<p>Red teaming is infrequently used in scientific research, but there are recent examples. For example, Schaerer et al. (2023) conducted a meta-analysis and forecasting survey of 44 years of field experiments testing for gender bias in hiring decisions. An external red team of expert critics was recruited to provide feedback on the research plan developed by the blue team and was tasked with playing &quot;devil&#x27;s advocate&quot; to identify oversights and prevent groupthink. After several rounds of detailed feedback from the red team, the revised research plan for the project was pre-registered, followed by data extraction and analysis. The authors report that this red team approach substantially improved the quality of the research project and the resulting scientific publication.</p>
+<p>Enterprise-level industries have developed and implemented a process similar to red teaming that relies on anonymous members of the public rather than dedicated employees of the organization: bug bounties (Laszka et al., 2018). Software and hardware are unreliable and exploitable. Stack dependencies and the frequency and unpredictability of software pushes make such problems inevitable. To give one of many examples, a hacker exploited an internet-ofthings connected aquarium in a casino to steal funds on deposit.</p>
+<p>[22] Companies and governments sometimes respond by rewarding hackers with bug bounties instead of punishing them for exposing vulnerabilities, which ultimately contributes to making the information systems more secure and reliable. Like red teaming, bug bounties appear to be rare in academia, but examples can be found. The psychologist Ruben Arslan recently announced a bug bounty program on his personal webpage.</p>
+<p>[23] He stated that if anyone could find an error in any of his pre-prints, published papers, or journal articles published after October 2 2018 they would be paid a bounty according to the category of error. As Arslan admits, the bounties he could offer were modest; however, other academics have taken him up on this offer and identified errors. Consequently, this project acts as a proof concept and suggests that better-funded research groups, scientific associations, and publishers could make use of this approach. A similar phenomenon, though usually without monetary compensation, sometimes goes under the description of white hat (as opposed to black hat) hacking. Specifically, white hat hacking refers to the ethical application of hacking skills to identify and help resolve software vulnerabilities with no criminal intention (Maurushat, 2019). Motivations of white hat hackers may vary from desire to prove to well-resourced developers that they are not as invulnerable as they take themselves to be, to the thrill of the chase, to the desire to hone one&#x27;s skills. While we aren&#x27;t aware of any examples of researchers explicitly borrowing from the hacking literature to strengthen scientific research, we see parallels in activities. For example, Crüwell et al. (2019) conducted an audit that examined the computational reproducibility of articles published in a single issue of the prestigious journal Psychological Science (i.e., they attempted to reproduce the analyses using the data and analysis code that had been shared). They found that only four out of 14 articles to be exactly reproducible or reproducible with only minor deviations.</p>
+<p>What&#x27;s important about these approaches to stress-testing is that the trustworthiness of software and hardware is secured by the motivated mistrustfulness of those with the capability to expose vulnerabilities. As with red teaming, those who are motivated to take the perspective of the blue team are often not well-positioned to see and exploit and guard against the vulnerabilities.</p>
+<h3>3.3 Independent corroboration</h3>
+<p>Let&#x27;s turn to a more adversarial way in which the mistrust of some contributes to the trustworthiness of others: fact-checking in journalism and independent forensic peer review. Newsrooms routinely employ professional fact-checkers to assess claims made by politicians and others.</p>
+<p>[24] In addition, some also employ fact-checkers to ensure that their own journalists do not publish false, misleading, or unsupported claims (Graves &amp; Amazeen, 2019). Perhaps the best-known external fact-checkers are Snopes.com and the International Fact-Checking Network.</p>
+<p>[25] A point that we want to emphasize is that it&#x27;s important that there is a journalistic ecosystem in which fact-checking exists and that journalists, publishers, and the public are somewhat aware of this phenomenon. There are troubling trends and shortcomings in contemporary journalism, but to the extent that it works effectively, this is not so much because the cudgel of fact-checking is wielded but because journalists and publications self-regulate in ways that the cudgel doesn&#x27;t need to be used. In the United States in 2024, Donald Trump mounted a campaign against realtime fact-checking in order to enable himself to pollute this ecosystem, [26] and J. D. Vance, Trump&#x27;s running mate, clashed with debate moderators when they fact-checked him in real time.</p>
+<p>[27] That both of these figures objected so vociferously to being fact-checked indicates that, when such a system is in place, it is harder to get away with mendacity. The trustworthiness of political discourse is underpinned by the systematic mistrust that journalists, moderators, and other fact-checkers bring to the system. An important point to add here is that, unlike oversight and stress-testing, fact-checking can be extremely adversarial. In the process of oversight, the interests of the practitioner and the overseer are to some extent aligned. The latter helps the former to keep themselves honest, on the presumption that that&#x27;s what they want to do. Likewise, when it comes to practices such as red teaming, the red team eventually debriefs with the blue team because their ultimate goals are aligned. And when it comes to bug bounties, the hacker informs the institution of vulnerabilities rather than criminally exploiting them. The sort of independent corroboration involved in factchecking is -or at least can be -different: Trump and Vance had no interest in establishing the truth and reliability of their claims.</p>
+<p>One might think or hope that things would be different in science. By our estimate, things probably are better, but independent corroboration in science also has its own problems. The equivalent of external fact-checking in science is independent, forensic peer review. This is a form of peer review that occurs after a paper is published and questions are raised about the possibility of mistakes or misconduct on the part of the authors. Recall from our definition of trust that someone can fail to be trustworthy in several main ways: incompetence or lack of motivation to prove trustworthy. Forensic peer review can be triggered when either of these is suspected. In a recent dramatic example, concerns were raised that Francesca Gino, a Professor at the Harvard Business School, had made serious errors, committed research fraud, or even made serious errors while committing research fraud.</p>
+<p>[28] Gino faced an internal investigation by Harvard as well as expert forensic peer review by the researchers affiliated with Data Colada, both of whom found evidence of misconduct.</p>
+<p>[29] Instead of cooperating with the investigations, Gino sued both Harvard and Data Colada for millions of dollars and, ultimately, lost tenure and was counter-sued by Harvard.</p>
+<p>[</p>
+<p>Harvard has deep pockets, including an endowment valued at over $50B [31] and some of the most capable legal defenders in the country. But Data Colada is a consortium of three researchers employed by different universities. Their legal defense was supported by a gofundme.com effort, which raised nearly $400k from over 2,000 donors globally.</p>
+<p>[32] While such crowdfunding is impressive and admirable, it is no substitute for the legal, institutional, monetary, and reputational support that would need to be in place to protect the scientific police of mistrust. It is also not sustainable as a long-term strategy of scientific oversight. While the crowdfunding campaign to aid the legal defense of Data Colada allowed many individuals to express their generosity in an admirable way, that is not a sensible way to run the police of mistrust in a prosperous academic ecosystem.</p>
+<h3>3.4 Internal interventions</h3>
+<p>In a heated public debate, the integrated information theory of consciousness has been characterized as pseudoscience (IIT Concerned et al., 2023). Following the debate, a group of over 100 scientists and philosophers wrote a follow-up paper justifying the pseudoscience accusation (IIT Concerned et al., 2025). The contributing authors represented a sizable portion of the field of consciousness studies, including both senior and relatively junior members of relevant disciplines. The attitude of this team was what we described as richly mistrustful towards the object of analysis. The analysis itself was focused and critical, but with an eye to the epistemic value of consciousness science. This is an example of a well-functioning police of mistrust within a specific domain of inquiry. For a model of the interaction between institutional and group actors in the model consider Figure 1 below: Other attitudes we discussed also feature in this model. The corresponding team in particular should be mistrustful of the contributing authors, managing their expectations and content to remain balanced, all things considered. This team should also be richly trusting of the editorial team, who are responsible for the formal process of submission, review, and communication with the corresponding team. Without these complex social epistemic dynamics, the editorial team, who themselves remain mistrustful, may unintentionally sow discord among the contributing and corresponding authors. One important optional component of this model is the Response Team and their response to the meta-scientific analysis -including them would make sense especially if the meta-scientific review is boldly critical, as in the case of IIT we present here. We imagine a similar model can be applied to any domain of inquiry where Mandevillean virtues are lacking or in question and there is an affordance for the police of mistrust to do some good.</p>
+<p>What, then, is to be done? We have surveyed quite distinct epistemic strengths and pathologies from the sciences, journalism, software engineering, and war-planning. Our primary focus has been on the sciences and journalism, so we will restrict our recommendations to these sectors. Based on the double-barreled nature of trustworthiness (competence, motivation) outlined above, we think that different solutions will be appropriate depending on which of the two components of trustworthiness is of most concern.</p>
+<p>When good-enough epistemic motivation can be taken for granted, then the police of mistrust can function more as gatekeepers than as punishers: they need to be on the lookout for and responsive to signals of incompetence. The aim here should be to detect and correct errors in a non-punitive way unless there is clear evidence of a pattern of mistakes that should have been caught earlier. Disqualifying untrustworthy research can be done at the level of individual researchers or journalists, but it can also be done more systematically. For instance, Finland&#x27;s Publication Forum (JUFO) recently downgraded publications in Frontiers and MDPI journals because of their predatory business models that lack a proper police of mistrust, making it essentially worthless in the Finnish research environment to publish in such journals (in terms of reputational benefit, grant opportunities, etc.).</p>
+<p>[33] This decision was not about punishing misconduct by academics, but rather changing the research ecosystem to disincentivize publishing in untrustworthy journals. Relatedly, more journals should adopt open science practices such as pre-registration, registered reports, open data, open code, and so on as defaults rather than nice-to-haves (Hardwicke &amp; Vazire, 2024; Wildman et al., 2024). And universities and funding agencies should aim to incentivize competent pre-publication and post-publication peer review. Anecdotally, we have become aware of a growing crisis in peer review, where more and more journal submissions are being reviewed by fewer and fewer academics. Recently, Clarivate&#x27;s Web of Science added verified peer reviews to the metrics section of their &quot;author profile dashboard,&quot; which tracks how frequently people do peer review.</p>
+<p>[34] Nonetheless, we are also aware that no one gets hired, promoted, or funded based on this metric. To ensure that science is trustworthy, the systematic mistrust that regulates peer review needs to be incentivized. Likewise, post-publication review, including forensic peer review, needs to be incentivized with institutional, reputational, and financial rewards. Without such incentives, competent and ambitious researchers who don&#x27;t have an axe to grind will tend to avoid working for the police of mistrust, undermining the whole infrastructure on which the system rests. It should be possible to create bug bounties for science, through which domain experts and experts in statistics are thanked and rewarded for identifying errors in published papers. In journalism, similar considerations are appropriate. Every politician makes mistakes. Other public figures likewise misspeak or sincerely express false opinions. Fact-checking and related forms of organized mistrust can and should systematically regulate such errors in a nonpunitive way, especially when the stakes are high. And fact-checkers should receive institutional rewards, rather than being treated resentfully. We find it remarkable that there are Pulitzer Prizes, for, among other categories, breaking news, investigative reporting, explanatory reporting, commentary, and feature photography, but not for fact-checking.</p>
+<p>[35] Likewise, we suggest that there should be institutional rewards for issuing corrections and retractions, which are largely disincentivized in the current ecosystem. We need to take seriously the metaphor of &quot;epistemic pollution&quot; (Ryan, 2018). Ryan goes so far as to suggest that there should be a state-sanctioned list of epistemic polluters. While this comes with its own difficulties, an international institution of qualified experts might be well-positioned to create such a list. A more challenging case, for both science and journalism, is when there are concerns not only about competence but also about effort exerted to demonstrate such competence. In cases where someone is inclined to commit data fraud or knowingly engage in questionable research practices the police of mistrust are not tasked with correcting honest mistakes. Instead, they need to be on the lookout for more-or-less sophisticated attempts to abuse and pollute the epistemic environment. The alleged efforts of Francesca Gino seem to have been relatively simplemindedmanually editing values in spreadsheets. By contrast, Diederick Stapel engaged in a different kind of fraud using functions to generate random numbers (Callaway, 2011).</p>
+<p>[36] When it comes to high-profile research that has red flags, especially when there is a lot of money on the line, we suggest that forensic peer review should be the norm, rather than something that a few poorlyfunded individuals engage in because they have the time and inclination. Such work needs to become an institutionally-valued and -rewarded way to pursue a career in academia, not something that a handful of independent scholars do as a disagreeable hobby. The argument is similar in journalism. We suggest that it would be salubrious to build institutions that recognize and reward hard-hitting fact-checking and investigative journalism. Most newsrooms are reducing their staffing for such important work at a time when it is desperately needed, as evidenced by world events in the last several years. There have been activist calls to defund the police, which we understand, but in this paper we are issuing a call to fund the police of mistrust. Only when the right incentives are in place for both scientists and journalists to exercise their mistrust appropriately will we enjoy the significant benefits of reasonable default trustingness.</p>
+<p>As for internal interventions, they could become institutionalized, perhaps by replicating the format of the debate about the scientific status of IIT, as specialized publication formats designed for that purpose. At present, Nature Neuroscience, where the debate about IIT has recently been published, does not have an article type specifically for meta-scientific analysis. Instead, the intervention is captured in a trio of Comments (IIT Concerned et al., 2025; Tononi et al., 2025; Gomez-Marin &amp; Seth et al., 2025). We can imagine a &quot;Meta-scientific Review&quot; article type handled by specialized editorial teams and other resources designed to facilitate the formation and maintenance of requisite trust-mistrust attitudes and dispositions among the disparate parts of the model depicted in Figure 1.</p>
+<h3>5 Coda: The problems of impersonation and manufactured mistrust</h3>
+<p>Lacking a competent and properly incentivized police of mistrust is one type of problem; manipulation of public trust and mistrust by posing as such a force for epistemic good is another. It is with this problem of impersonation that we conclude our treatment of trust from mistrust.</p>
+<p>In order to be richly trustworthy, an agent must be able to reliably signal to a potential trustee what they can (and cannot) be trusted with. The success of this process depends on features of the senders, the receivers, and their shared environment. Senders have to signal their trustworthiness; receivers have to reliably discern the signal as a sign of trustworthiness; and the environment must not make the discernment of veridical signals too difficult.</p>
+<p>We have outlined several ways in which scientific research and journalism can be monitored and policed, such that its results can be trusted even by those who have not engaged with the research themselves. The mere fact that there is such monitoring and policing is a signal that the research is richly trustworthy. This is the case in benign environments where it&#x27;s clear who is doing the monitoring and policing, and who should be doing it, but that is often not the environment we live in (Levy, 2022). We regularly face the problem of impersonation: agents, including institutions, who pose as the police of mistrust without having the knowledge, expertise, or motivation to actually perform the job. For example, climate change deniers pose as hyper-vigilant sceptics who claim to find fault with the research carried out by the IPCC -it has not been stress-tested or independently corroborated, etc. Without the expertise to accurately assess these claims, large parts of the public are reticent to accept the scientific consensus. This is an instance of manufactured mistrust, i.e., calling into question the epistemic processes that generated a scientific consensus, based on little or no understanding of science in general, or the processes in question. This is distinct from the problem of manufactured doubt, which calls into question the existence of a consensus by producing ambivalent but specious evidence (Oreskes &amp; Conway, 2011).</p>
+<p>The problems of impersonation and manufactured mistrust are widespread partly because it&#x27;s easier to impersonate the police of mistrust than it is to be the police.</p>
+<p>[37] When one&#x27;s audience has little understanding of the science under discussion, one can criticize it to great effect without having to understand much of it oneself. Impersonators need only sound as though they know what they&#x27;re talking about, which takes a lot less work than actually knowing what one is talking about. For the same reason, it is easier for impersonators to manufacture mistrust than it is for laypersons to discern impersonators. Thus, it is small wonder that our epistemic environments are so badly polluted: false signals of untrustworthiness are easy to create and difficult for most people to discern from true signals of trustworthiness.</p>
+<p>We might hope to mitigate this problem by making the true markers of trustworthiness more salient and intelligible to larger numbers of people. This is the intent behind Vazire and Holcombe&#x27;s proposal to institute observable self-correction indicators that clearly signal the transparency and critical thoroughness of scientific fields (Vazire &amp; Holcombe, 2022). Their indicators include: open data, code, and materials and methods, pre-registration, registered reports, automated error detection, computational reproducibility checks, empirical replicability checks, and strong theory and predictions. They claim that scientific fields can earn public trust by demonstrating their adherence to these criteria, which are &quot;visible, quantifiable, and easy for outsiders to evaluate&quot; (p. 215).</p>
+<p>While we wish it were otherwise, we doubt that any such scoring system would be easy for laypersons to evaluate. First, it would be surprising if more than a fraction of the public knows what most of these indicators mean. Could someone with a high school level of scientific training be expected to know what registered reports or computational reproducibility checks are and why they are valuable? Second, the public would have to trust the bodies who are generating the self-correction scores, be they institutions, funders, journals, or what have you. Therefore, the use of observable self-correction indicators can deepen the public&#x27;s trust in reliable science, but it cannot establish such trust where it is absent in the first place. Third, these indicators are just as gameable as other signals of trustworthiness. Impersonators can generate their own scores for the scientific fields they wish to disparage, or criticize the scores of others, thereby making it difficult for laypersons to discern what is trustworthy.</p>
+<p>We think that observable self-correction indicators should be widely adopted, and that they would make scientific fields more richly trustworthy, but only for those who can understand them and discern them from counterfeits. This will generally not include members of the lay public. Unfortunately, a deep understanding of science is too much to expect from non-scientists, but a shallow understanding is easy to manipulate. Consequently, we should expect most environments where public policy is influenced by scientific findings to be polluted by impersonators and manufactured mistrust. [38] On this somewhat dismal note, we conclude by pointing out that both science and journalism have produced many impressive successes over the last centuries. They will always be imperfect -perhaps deeply imperfect -but there are also promising ways to improve them.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Schematic model of an internal police of mistrust.</p>
+<p>&amp; Vazire 2024) and that raw data (along with research materials and analysis scripts) must be made available in a trusted third-party repository, else a submitted manuscript cannot be accepted for publication. Importantly, the editorial team verifies that the data have been deposited (and that running the raw data through the supplied code produces the results reported in the paper). Given the prestige of this journal, this has the potential to reorient the incentive structures of psychology towards transparency and trustworthiness.[ 13] To the extent that such efforts are also adopted by other sciences and institutions, we may hope that these reforms will constitute a catalyst. The ecosystem in which psychology is done is saturated with mutual trust. Our suggestion is not to change that default trustingness, but to create conditions in which a police of mistrust can function effectively, so that default trustingness is a fruitful strategy.</p>
+<h3>References</h3>
+<p>Alfano, M., &amp; Huijts, N. (2020). Trust in institutions and governance. In J. Simon (ed.). The Routledge handbook of trust and philosophy (pp. 256-270). Routledge.</p>
+<p>Altay, S., Nera, K., Ejaz, W., Schöpfer, C., &amp; Tomas, F. (2023). Conspiracy believers claim to be free thinkers but (Under)use advice like everyone else. British Journal of Social Psychology, 62(4), 1782-1797.</p>
+<p>Anderson, E. (2011). Democracy, Public Policy, and Lay Assessments of Scientific Testimony. Episteme 8(2):144-164.</p>
+<p>Astola, M. (2021). Mandevillean virtues. Ethical Theory and Moral Practice, 24(1), 19-32.</p>
+<p>Astola, M., Bland, S., &amp; Alfano, M. (2024). Mandevillean vices. Synthese, 204(1), 29.</p>
+<p>Baier, A. C. (1992). Trusting people. Philosophical Perspectives, 6, 137-153.</p>
+<p>Baier, A. C. (2013). What is trust?. In Reading Onora O&#x27;Neill (pp. 175-185). Routledge.</p>
+<p>Bailey, D. H., Jung, A. J., Beltz, A. M., Eronen, M. I., Gische, C., Hamaker, E. L., ... &amp; Murayama, K. (2024). Causal inference on human behaviour. Nature Human Behaviour, 8(8), 1448-1459.</p>
+<p>Ballantyne, Nathan (2019). Epistemic Trespassing. Mind 128 (510):367-395.</p>
+<p>Ballantyne, N., Celniker, J. B., &amp; Dunning, D (2024). Do your own research. Social Epistemology 38 (3):302-317.</p>
+<p>Ballantyne, K. N., Edmond, G., &amp; Found, B. (2017). Peer review in forensic science. Forensic science international, 277, 66-76.</p>
+<p>Barack, D. L., Ludwig, V. U., Parodi, F., Ahmed, N., Brannon, E. M., Ramakrishnan, A., &amp; Platt, M. L. (2024). Attention deficits linked with proclivity to explore while foraging. Proceedings of the Royal Society B, 291(2017), 20222584.</p>
+<p>Bernard, S. Proust, J. &amp; Clément, F. (2015). Four-to six-year-old children&#x27;s sensitivity to reliability versus consensus in the endorsement of object labels. Child Development, 86(4), 1112-1124.</p>
+<p>Bik, E. M. (2024). Finding the truth in science. Nature Reviews Cancer, 1-2.</p>
+<p>Bland, S. (2022). In defence of epistemic vices. Synthese, 200(1), 59.</p>
+<p>Boutron, I., &amp; Ravaud, P. (2018). Misrepresentation and distortion of research in biomedical literature. Proceedings of the National Academy of Sciences, 115(11), 2613-2619.</p>
+<p>Brown, N. J., &amp; Heathers, J. A. (2017). The GRIM test: A simple technique detects numerous anomalies in the reporting of results in psychology. Social Psychological and Personality Science, 8(4), 363-369.</p>
+<p>Buzzell, A. &amp; Rini, R (2023). Doing your own research and other impossible acts of epistemic superheroism. Philosophical Psychology 36 (5):906-930.</p>
+<p>Callaway, E. (2011). Report finds massive fraud at Dutch universities: Investigation claims dozens of social-psychology papers contain faked data. Nature, 479(7371), 15-16.</p>
+<p>Chen, H., Zhao, Y., Cao, B., Petersen, D. J., Valente, M. J., &amp; Cen, W. (2024). Breaking the silence of sharing data in medical research. PLoS ONE, 19(5). https://doi.org/10.1371/journal.pone.0301917</p>
+<p>Clément, F. (2010). To trust or not to trust? Children&#x27;s social epistemology. Review of Philosophy and Psychology, 1(4), 1-19.</p>
+<p>Clément, F., Koenig, M.A. &amp; Harris, P. (2004). The ontogenesis of trust. Mind and Language, 19(4), 360-379.</p>
+<p>Cologna, V., Mede, N. G., Berger, S., Besley, J. C., Brick, C., Joubert, M., … Linden, S. (2024, January 25). Trust in scientists and their role in society across 68 countries. https://doi.org/10.31219/osf.io/6ay7s</p>
+<p>Crüwell, S., Apthorp, D., Baker, B. J., Colling, L., Elson, M., Geiger, S. J., ... &amp; Brown, N. J. (2023). What&#x27;s in a badge? A computational reproducibility investigation of the open data badge policy in one issue of Psychological Science. Psychological Science, 34(4), 512-522.</p>
+<p>Culpepper, A. M. (2004). Effectiveness of using red-teams to identify maritime security vulnerabilities to terrorist attack (Doctoral dissertation, Monterey, California. Naval Postgraduate School).</p>
+<p>D&#x27;Cruz, J. (2019). Humble trust. Philosophical Studies, 176, 933-953.</p>
+<p>De Ridder, J. (2022). How to trust a scientist. Studies in History and Philosophy of Science, 93, 11-20.</p>
+<p>Diogenes, Y., &amp; Ozkaya, E. (2018). Cybersecurity-attack and defense strategies: Infrastructure security with red team and blue team tactics. Packt Publishing Ltd.</p>
+<p>Einstein, A., Podolsky, B. &amp; Rosen, N. (1935). Can quantum-mechanical description of physical reality be considered complete? Physical Review 47(10): 777-780.</p>
+<p>Fiske, S. T., Schacter, D. L., &amp; Taylor, S. E. (2016). Introduction. Annual Review of Psychology, 67.</p>
+<p>Frederiksen, M. (2019). On the inside of generalized trust: Trust dispositions as perceptions of self and others. Current Sociology, 67(1), 3-26.</p>
+<p>Fricker, E. (1995). Review: Telling and trusting. Mind, 104(414): 393-411.</p>
+<p>Goldberg, S. (2010). Relying on others: An essay in epistemology. Oxford University Press.</p>
+<p>Goldberg, S. (2011). The division of epistemic labor. Episteme, 8(1), 112-125.</p>
+<p>Goldman, A.I. (2001). Experts: Which ones should you trust? Philosophy and Phenomenological Research, 63(1), 85-110.</p>
+<p>Gomez-Marin, A., Seth, A.K. (2025) A science of consciousness beyond pseudo-science and pseudo-consciousness. Nature Neuroscience. https://doi.org/10.1038/s41593-025-01913-6</p>
+<p>Graves, L., &amp; Amazeen, M. (2019). Fact-checking as idea and practice in journalism. Oxford Research Encyclopedia of Communication. Oxford University Press.</p>
+<p>Greco, J. (2020). The transmission of knowledge. Cambridge University Press.</p>
+<p>Hamilton, D. G., Hong, K., Fraser, H., Rowhani-Farid, A., Fidler, F., &amp; Page, M. J. (2023). Prevalence and predictors of data and code sharing in the medical and health sciences: systematic review with meta-analysis of individual participant data. BMJ. https://doi.org/10.1136/bmj-2023-075767</p>
+<p>Hardin, R. (2002). Trust and trustworthiness. Russell Sage Foundation.</p>
+<p>Hardwig, J. (1985). Epistemic Dependence. Journal of Philosophy 82(7).</p>
+<p>Hardwig, J. (1991). The Role of Trust in Knowledge. Journal of Philosophy 88(12). Hardwicke, T. E., Frank, M. C., Vazire, S., &amp; Goodman, S. N. (2019). Should psychology journals adopt specialized statistical review?. Advances in Methods and Practices in Psychological Science, 2(3), 240-249.</p>
+<p>Hardwicke, T. E., Mathur, M. B., MacDonald, K., Nilsonne, G., Banks, G. C., Kidwell, M. C., Hofelich Mohr, A., Clayton, E., Yoon, E. J., Henry Tessler, M., Lenne, R. L., Altman, S., Long, B., &amp; Frank, M. C. (2018). Data availability, reusability, and analytic reproducibility: evaluating the impact of a mandatory open data policy at the journal Cognition. R Soc Open Sci, 5(8), 180448. https://doi.org/10.1098/rsos.180448</p>
+<p>Hardwicke, T. E., &amp; Vazire, S. (2024). Transparency Is Now the Default at Psychological Science. Psychol Sci, 35(7), 708-711.</p>
+<p>Hardwicke, T. E., Thibault, R. T., Clarke, B., Moodie, N., Crüwell, S., Schiavone, S. R., … Vazire, S. (2024). Prevalence of transparent research practices in psychology: A cross- sectional study of empirical articles published in 2022. Advances in Methods and Practices in Psychological Science.</p>
+<p>Heathers, J. (2024). Approximately 1 in 7 scientific papers are fake. https://doi.org/10.17605/OSF.IO/5RF2M</p>
+<p>Hoogeveen, S., Borsboom, D., Kucharský, Š., Marsman, M., Molenaar, D., de Ron, J., Sekulovski, N., Visser, I., van Elk, M., &amp; Wagenmakers, E. J. (2024). Prevalence, patterns and predictors of paranormal beliefs in The Netherlands: a several-analysts approach. Royal Society Open Science, 11(9).</p>
+<p>Hussey, I. (2025). Data is not available upon request. Meta-Psychology, 9. https://doi.org/10.17605/OSF.IO/QN7XM</p>
+<p>IIT Concerned., Klincewicz, M., Cheng, T. et al. (2025). What makes a theory of consciousness unscientific?. Nature Neuroscience. https://doi.org/10.1038/s41593-025-01881-xIIT Concernedetal (2023). The integrated information theory of consciousness as pseudoscience. https://doi.org/10.31234/osf.io/zsr78.</p>
+<p>Irzik, G., &amp; Kurtulmus, F. (2024). Distributive epistemic justice in science. The British Journal for the Philosophy of Science, 75(2), 000-000.</p>
+<p>John, L. K., Loewenstein, G., &amp; Prelec, D. (2012). Measuring the prevalence of questionable research practices with incentives for truth telling. Psychological science, 23(5), 524-532.</p>
+<p>Johnson, D. (2016). God is watching you: How the fear of God makes us human. Oxford University Press, USA.</p>
+<p>Jones, K. (2012). Trustworthiness. Ethics, 123(1), 61-85.</p>
+<p>Kant, I. (1784/1983). Perpetual Peace and other essays. Translated by T. Humphrey. Hackett. Krumrei-Mancuso, E. J., Pärnamets, P., Bland, S., Astola, M., Cichocka, A., de Ridder, J., ... &amp; Van Bavel, J. J. (2024). Toward an understanding of collective intellectual humility. Trends in Cognitive Sciences.</p>
+<p>Lakens, D. (2020). Pandemic researchers--recruit your own best critics. Nature, 581(7807), 121.</p>
+<p>Laszka, A., Zhao, M., Malbari, A., &amp; Grossklags, J. (2018). The rules of engagement for bug bounty programs. In Financial Cryptography and Data Security: 22nd International Conference, FC 2018, Nieuwpoort, Curaçao, February 26-March 2, 2018, Revised Selected Papers 22 (pp. 138-159). Springer.</p>
+<p>Lau, H. (2023). Where is the &#x27;posterior hot zone&#x27;? Open Review of Ferrante et al (2023):&quot;An Adversarial Collaboration to Critically Evaluate Theories of Consciousness&quot; (by the ARC-Cogitate Consortium). https://doi.org/10.31234/osf.io/93ufe</p>
+<p>Lee, H., Calvin, K., Dasgupta, D., Krinner, G., Mukherji, A., Thorne, P., ... &amp; Park, Y. (2023). IPCC, 2023: Climate Change 2023: Synthesis Report, Summary for Policymakers. Contribution of Working Groups I, II and III to the Sixth Assessment Report of the Intergovernmental Panel on Climate Change [Core Writing Team, H. Lee and J. Romero (eds.)].</p>
+<p>IPCC, Geneva, Switzerland.</p>
+<p>Levy, N. (2022). Do your own research! Synthese, 200 (5),1-19.</p>
+<p>Lignou, S. &amp; Hart, J. (2024). Navigating climate responsibility: a critical examination of healthcare professionals&#x27; moral duties. Journal of Medical Ethics 50 (6):376-377.</p>
+<p>McCarthy, C. (2022). Stella Maris. Knopf. Makin, T. R., &amp; Orban de Xivry, J. J. (2019). Ten common statistical mistakes to watch out for when writing or reviewing a manuscript. Elife, 8, e48175.</p>
+<p>Maurushat, A. (2019). Ethical hacking. University of Ottawa Press.</p>
+<p>Meehan, D. (2019). Is epistemic blame distinct from moral blame? Logos and Episteme, 10 (2):183-194.</p>
+<p>Mede, N. G., Cologna, V., Berger, S., Besley, J., Brick, C., Joubert, M., Maibach, E., Mihelj, S., Oreskes, N., Schäfer, M. S., van der Linden, S., Alfano, M, …. (2024). Perceptions of science, science communication, and climate change attitudes in 68 countries: The TISP dataset. Scientific Data.</p>
+<p>Mercier, H. (2020). Not Born Yesterday: The Science of who we Trust and what we Believe. Princeton University Press.</p>
+<p>Merton, R. K. (1973). The sociology of science: Theoretical and empirical investigations. University of Chicago press.</p>
+<p>Miller, B., &amp; Freiman, O. (2020). Trust and distributed epistemic labor. In The routledge handbook of trust and philosophy (pp. 341-353). Routledge.</p>
+<p>Millgram, E. (2015). The Great Endarkenment: Philosophy for an Age of Hyperspecialization. Oxford: Oxford University Press.</p>
+<p>Mills, C.M. &amp; Keil, F.C. (2008). Children&#x27;s developing notions of (im)partiality. Cognition, 107(2), 528-551.</p>
+<p>Miyakawa, T. (2020). No raw data, no science: another possible source of the reproducibility crisis. Molecular Brain, 13(24), 1-6.</p>
+<p>Nelson, L. D., Simmons, J., &amp; Simonsohn, U. (2018). Psychology&#x27;s renaissance. Annual Review of Psychology, 69, 511-534.</p>
+<p>Nguyen, C. T. (2022). Trust as an unquestioning attitude. Oxford Studies in Epistemology 7, 214-244.</p>
+<p>Nietzsche, F. (2001). Beyond Good and Evil: Prelude to a Philosophy of the Future. Edited by R.-P. Horstmann &amp; J. Norman. Translated by J. Norman. Cambridge University Press. Nietzsche, F. (2001). The Gay Science: With a Prelude in German Rhymes and an Appendix in Songs. Edited by B. Williams. Translated by J. Nauckhoff. Cambridge University Press.</p>
+<p>Nietzsche, F. (1986). Human, All Too Human. Translated by R. J. Hollingdale. Cambridge University Press.</p>
+<p>Nosek, B. A., Hardwicke, T. E., Moshontz, H., Allard, S., Corker, K. S., Dreber, A., Fidler, F., Hilgard, J., Struhl, M. K., Nuijten, M. B., Rohrer, J. M., Remero, F., Scheel, A. M., Scherer, L. D., Schonbrodt, F. D., &amp; Vazire, S. (2022). Replicability, robustness, and reproducibility in psychological science. Annual Review of Psychology, 73, 719-748.</p>
+<p>Nuijten, M. B., Hartgerink, C. H., Van Assen, M. A., Epskamp, S., &amp; Wicherts, J. M. (2016). The prevalence of statistical reporting errors in psychology (1985-2013). Behavior research methods, 48, 1205-1226.</p>
+<p>Open Science Collaboration (2015). Estimating the reproducibility of psychological science. Science, 349(6251), aac4716. https://doi.org/10.1126/science.aac4716</p>
+<p>Parker, W. S. (2024). Climate Science. Cambridge University Press.</p>
+<p>Piovarchy, A. (2021). What do We Want from a Theory of Epistemic Blame? Australasian Journal of Philosophy, 99 (4):791-805.</p>
+<p>Piovarchy, A. (forthcoming). Scepticism About Epistemic Blame Scepticism. Episteme:1-15.</p>
+<p>Popper, K. (2002[1996]). The Open Society and Its Enemies. Fifth Edition. New York: Routledge. Popper, K. (1970). Normal science and its dangers. In I. Lakatos &amp; A. Musgrave (eds.) Criticism and the Growth of Knowledge (pp. 51-88). Cambridge: Cambridge University Press.</p>
+<p>Reyez-Jaquez, B. &amp; Echols, C.H. (2015). Playing by the rules: Self-interest information influences children&#x27;s trust and trustworthiness in the absence of feedback. Cognition, 134, 140-154.</p>
+<p>Ryan, S. (2018). Epistemic environmentalism. Journal of Philosophical Research, 43, 97-112.</p>
+<p>Schiavone, S. R., Rhemtulla, M., &amp; Vazire, S. (2024). Researchers&#x27; Perceptions of the State of Social and Personality Psychology. https://osf.io/preprints/psyarxiv/ja4u2</p>
+<p>Scott, B. F. (2020). Red teaming financial crime risks in the banking sector. Journal of Financial Crime, 28(1), 98-111.</p>
+<p>Shay, J. (2010). Achilles in Vietnam: Combat trauma and the undoing of character. Simon and Schuster.</p>
+<p>Shay, J. (2002). Odysseus in America: Combat trauma and the trials of homecoming. Simon and Schuster.</p>
+<p>Shoemaker, D. (2015). Responsibility from the Margins. Oxford University Press.</p>
+<p>Sijtsma, K. (2009). On the use, the misuse, and the very limited usefulness of Cronbach&#x27;s alpha. Psychometrika, 74, 107-120.</p>
+<p>Sijtsma, K (2023) Never Waste a Good Crisis: Lessons Learned from Data Fraud and Questionable Research Practices. CRC Press.</p>
+<p>Smart, P. R. (2018). Mandevillean intelligence. Synthese, 195, 4169-4200.</p>
+<p>Solomon, M. (1992). Scientific rationality and human reasoning. Philosophy of Science 59(3): 439-455.</p>
+<p>Strawson, Peter (1963). Freedom and Resentment. Proceedings of the British Academy 48:187-211.</p>
+<p>Sterelny, K. (2003). Thought in a Hostile World. Blackwell.</p>
+<p>Sterelny, Kim (2010). Minds: extended or scaffolded? Phenomenology and the Cognitive Sciences 9 (4):465-481.</p>
+<p>Tedersoo, L., Küngas, R., Oras, E., Köster, K., Eenmaa, H., Leijen, Ä., ... &amp; Sepp, T. (2021). Data sharing practices and data availability upon request differ across scientific disciplines. Scientific data, 8(1), 192.</p>
+<p>Tandon, A. (2023). Analysis: How the diversity of IPCC authors has changed over three decades. Carbon Brief. www.carbonbrief.org/analysis-how-thediversity-of-ipcc- authors-has-changed-over-three-decades/.</p>
+<p>Timms, R., &amp; Spurrett, D. (2023). Hostile scaffolding. Philosophical Papers, 52(1), 53-82.</p>
+<p>Tononi, G., Albantakis, L., Barbosa, L., et al. (2025). Consciousness or pseudo- consciousness? A clash of two paradigms. Nature Neuroscience. https://doi.org/10.1038/s41593-025-01880-y</p>
+<p>Vickers, P. (2023). Identifying Future-Proof Science. Oxford University Press.</p>
+<p>Wildman, W. J., Ross, R. M., McKay, R. T., Watts, J., Hoogeveen, S., Sosis, R., ... &amp; Shaver, J. (2024). Religion, Brain &amp; Behavior adopts stricter transparency standards. Religion, Brain &amp; Behavior, 14(4), 341-344.</p>
+<p>Yamagishi, T. (2001). Trust as a form of social intelligence. In K. Cook (ed.) Trust in Society (pp. 121-147). Russell Sage Foundation.</p>
+<p>Yavchitz, A., Boutron, I., Bafeta, A., Marroun, I., Charles, P., Mantz, J., &amp; Ravaud, P. (2012). Misrepresentation of randomized controlled trials in press releases and news coverage: a cohort study. PLOS Medicine.</p>
+<p>Zenko, M. (2015). Red Team: How to succeed by thinking like the enemy. Basic Books.</p>
+<p>We note that there is an important difference between active, systematic mistrust, which is the focus of this paper, and merely refraining from trusting. The former always entails the latter, but not vice versa. Thanks to an anonymous referee for pointing out this distinction.</p>
+<p>Other accounts, e.g., Baier (1992, 2013), spell out the content of the trustee&#x27;s motivation in more detail. We prefer Jones&#x27;s framework because it allows for people to be trustworthy in multiple ways and for multiple reasons. Perhaps some people are trustworthy because they have goodwill (Baier 2013), while others are trustworthy because their interests are encapsulated in the interests of the truster (Hardin 2002), while still others are trustworthy because they take their professional or role-based responsibilities seriously (Lignou &amp; Hart 2024), and yet others are trustworthy because they fear God&#x27;s punishment (Johnson 2016). The motivation underlying trustworthiness, on this view, is multiply realizable.</p>
+<p>For a recent empirical study of global levels of trust in scientists and, in particular, climate scientists, see Cologna et al., (2024) and Mede et al. (2024). For a philosophical analysis of the gap between trust and trustworthiness in this domain, see Anderson (2011). Anderson develops a taxonomy of criteria for judging honest that includes conflicts of interest, evidence of past (mis)conduct, evidence of employing questionable research practices such as cherry-picking, and bad faith arguments. She also lists several criteria that are typically useful when assessing epistemic responsibility, such as evasion of peer review, failure to revise one&#x27;s views in light of good faith criticism, advancing crackpot theories, and voluntarily associating with crackpots such as Nathan Cofnas or Emil Kirkegaard (though she does not mention either of them by name).</p>
+<p>Thanks to an anonymous referee for pressing us on this point.</p>
+<p>See Frederickson (2019) for an empirical study of such dispositions.</p>
+<p>Thanks to an anonymous reviewer for insisting that we emphasize this point.</p>
+<p>We are only using psychology as an example of trust gone awry in science. Many other scientific disciplines have had replication crises and, arguably, psychology has been at the vanguard of getting its house in order (Nosek et al., 2022).</p>
+<p>Again, we emphasize that psychology does not appear to be an outlier in terms of bad scientific practices, including poor levels of data sharing (Tedersoo et al., 2021). For example, very low levels of data sharing have been found in medical research (Chen et al., 2024; Hamilton et al., 2023).</p>
+<p>Inspired by this Psychological Science editorial, one of us has helped develop stricter transparency standards at a social science journal that we co-edit, see Wildman et al. (2024).</p>
+<p>To be clear, we do not think that the practices discussed in this section will guarantee the truth of scientific conclusions or that these practices need to be implemented for every item of scientific knowledge. We argue that, in general, following these recommendations will lead to better, more reliable, more trustworthy scientific research. Thanks to an anonymous reviewer for pressing us on this point.</p>
+<p>One might think that default trustingness in the right conditions just is rich trustingness. We are keen to point out that typically people are not in a position to know whether they are in the right conditions, and thus are in a very important sense flying blind. Thanks to an anonymous reviewer for pointing this out.</p>
+<p>Barack et al. (2024) offer a similar argument that attention deficit hyperactivity disorder may in fact be adaptive because it leads people to explore more.</p>
+<p>For example, consider how many university press releases and write-ups by journalists about the latest medical advances imply that the research is directly relevant to humans, but neglect to tell their readers that the research was done in mice. See url = &lt; https://jamesheathers.medium.com/in-mice-explained-77b61b598218 &gt;</p>
+<p>This approach has been proposed not only for industry but also for science. See, e.g., url = &lt; https://chris- said.io/2024/08/25/bounty-hunters-for-science/ &gt; and url = &lt; https://error.reviews/ &gt; and url &lt; https://rubenarslan.github.io/bug_bounty.html &gt;, accessed 26 December 2024.</p>
+<p>For a recent example involving American assistance and advice to Ukrainian war strategists, see url = &lt; https://www.nytimes.com/interactive/2025/03/29/world/europe/us-ukraine-military-war-wiesbaden.html &gt;, accessed 31 March 2025.</p>
+<p>For an interesting discussion of red teaming in psychology research see url = &lt; https://www.the100.ci/ 2020/06/29/red-team-part-1/ &gt;, accessed 26 December 2024.</p>
+<p>In fact, they bought the technology from a startup. See url = &lt; https://www.nature.com/articles/ nature.2017.22094/ &gt;, accessed 27 December 2024.</p>
+<p>Consider, for instance, that as of the writing of this paper, RFK Jr. is Secretary of the US Department of Health and Human Services. In other words, someone who is manifestly unqualified to issue advice about a domain in which there are real experts has been elevated to the highest government role in that domain.</p>
+<p>For recent examples, see urls = &lt; https://www.whitehouse.gov/presidential-actions/2025/05/restoring-gold- standard-science/ &gt;, &lt; https://www.nature.com/articles/d41586-025-01668-x &gt;, &lt; https://www.nature.com/articles/ d41586-025-02770-w &gt;, and &lt; https://www.nature.com/articles/d41586-025-02682-9 &gt;, accessed 9 October 2026.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
