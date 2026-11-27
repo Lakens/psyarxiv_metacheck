@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: A Framework for Item Difficulty Prediction
+Using AI with Ordered Anchor Booklets</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+A Framework for Item Difficulty Prediction Using AI with Ordered Anchor
+Booklets
+</p>
+<p class="meta">
+2026-11-27 · Metacheck 0.4.4.40
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>1</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>15</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(1)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Ethics Approval Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<p>For 1 of 1 paper we could not tell whether it reports data about
+people or animals, and found no ethics statement.</p>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>We could not tell whether this paper reports data about people or
+animals: the signs we look for were missing or pointed both ways. If it
+does, it needs an ethics statement, and we found none.</p>
+</div>
+</details>
+</div>
+<h2 id="na">Not applicable <span class="n">(15)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 16 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 16 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 16 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Item difficulty prediction from item content has been studied with linguistic features, supervised models, and AI systems, but most approaches ask a model to produce a calibrated numeric difficulty value directly. This study evaluates a Bookmark-inspired framework in which an AI system places a new item within an ordered booklet of anchor items with known difficulty. To examine whether the framework generalized beyond a single system, Claude Opus 5 and GPT-5.6 placed 50 target items on booklets of 5 to 50 anchors dealt from the same 50 anchors in three pools: Reading Comprehension and Quantitative Reasoning items from a high-stakes examination for admission to higher education, scored on the IRT b scale, and publicly released NAEP grade 8 mathematics items, scored on percent correct. Correlations with known difficulty were generally in the mid-.70s for the reading items, about .90 for the quantitative items, and in the mid-.70s for the NAEP items, at or above the accuracy reported for informed human panels. Booklet length made no meaningful difference within a fixed anchor budget. The self-pilot run predicted the target run&#x27;s accuracy to within about .09 and closely reproduced its bias. The framework&#x27;s pilot-based bias correction was effective in reducing bias in the target item predictions.</p>
+<h3>Introduction</h3>
+<p>Item difficulty information is crucial for test development and operational tasks, including item selection, test assembly, calibration, and scoring. Traditional calibration requires large response samples and psychometric analysis to obtain stable item parameter estimates, and before those data exist, testing programs have had to rely on judgment.</p>
+<p>Judgmental estimation of item difficulty is older than item response theory. Testing programs have long asked people to estimate how examinees will perform on an item before any data exist, for test assembly, for pre-equating, and above all for standard setting, where the Angoff, Nedelsky, and Bookmark procedures all rest on judgments about the probability that examinees at a given level will answer an item correctly (Karantonis &amp; Sireci, 2006; Lorge &amp; Kruglov, 1953; Thorndike, 1982). The accuracy of those judgments has been studied for seventy years, and several regularities are consistent enough that any new method of judgment, including one carried out by an AI system, could reasonably be held to them.</p>
+<p>Individual judges are modest predictors of empirical difficulty, and subject-matter expertise does not close the gap. Content experts&#x27; ratings of item statistics agree only modestly with empirical values (Bejar, 1983), and teachers estimating difficulty for their own students are inaccurate at the item level (Impara &amp; Plake, 1998). Across the studies collected in reviews of this literature, correlations between a single judge and the observed statistics fall mostly between .1 and .6, and averages over a panel of judges fall mostly between .4 and .7 (Brandon, 2004; Hambleton &amp; Jirka, 2006). Pooling therefore helps, and Thorndike (1982) made pooled judgment the basis of a judgmental equating procedure for that reason, but the gains are bounded in the way one would expect when judges share the same misconceptions about what makes an item hard: averaging removes idiosyncratic error and leaves the shared component untouched. Knowing the content and knowing how a population will perform on it are different kinds of expertise.</p>
+<p>The most consequential regularity for the present framework is that information about examinee performance, rather than more judges, is the active ingredient. Lorge and Kruglov (1953) showed that estimates improve when judges are given reference items of known difficulty, and Hambleton and Jirka (2006) later systematized this idea as anchor-based judgmental estimation of item statistics. In a study for the Law School Admission Council, six test specialists reached .84 after two rounds on logical reasoning items rated against a full booklet of items whose empirical difficulties were displayed, and .55 on reading comprehension items rated against three anchor points and six revealed items (Hambleton, Sireci, Swaminathan, Xing, &amp; Rizavi, 2003). Reviews of the modified-Angoff research reach a compatible conclusion, that judges misjudge item difficulty and that normative and impact feedback improve both accuracy and agreement (Brandon, 2004), and an experimental study confirmed that judges use performance data when it is provided (Clauser, Mee, Baldwin, Margolis, &amp; Dillon, 2009). Any judgmental procedure, human or otherwise, should therefore be evaluated in the form in which it would be used, with reference items and feedback, rather than as unaided guessing.</p>
+<p>Three further regularities bear on how such a procedure should be evaluated. Accuracy depends on the domain: the same specialists, in the same study, were considerably more accurate on logical reasoning items than on reading comprehension items (Hambleton et al., 2003). The two subtests were rated with different amounts of reference information, so the gap partly reflects method as well as domain, but its direction is consistent with the difficulty of a reasoning item being visible in the demands the item makes, whereas the difficulty of a reading item arises from the interaction of passage, question, and distractors. Judges also compress the scale, judging easy items harder than they are and hard items easier, so that judged difficulties span a narrower range than empirical ones (Bejar, 1983; Impara &amp; Plake, 1998). Bias and rank accuracy are thus separable, because a judge can order items well while placing the whole set at the wrong level, and an evaluation should report both. Finally, comparative judgments are better than absolute ones, since people are more reliable at saying which of two items is harder than at saying how hard an item is; paired comparisons yielded better difficulty estimates than absolute ratings in an ETS study (Attali, Saldivia, Jackson, Schuppan, &amp; Wanamaker, 2014), consistent with the Thurstonian tradition in which comparative judgment is preferred precisely because absolute judgments are unstable (Thurstone, 1927). An ordered reference set, such as the ordered item booklet of the Bookmark method, converts an absolute judgment into a series of comparisons, which may be one reason anchor-based procedures perform as well as they do.</p>
+<p>Automated prediction using AI has so far performed in the same accuracy range as human judgment. Text-feature models and fine-tuned language models have been reviewed systematically (AlKhuzaey, Grasso, Payne, &amp; Tamma, 2024; Benedetto et al., 2023) and benchmarked in a shared task on medical licensing items (Yaneva et al., 2024), with accuracies that overlap the human range rather than exceed it. One recent result should give pause to any model-based approach: fine-tuned transformers reproduced response curves at correlations of .74 to .82 yet recovered calibrated difficulty parameters at only .08 to .22, or .59 once items whose discrimination estimates had failed were removed (Maeda, 2025), so that agreement with one representation of difficulty does not guarantee agreement with another.</p>
+<p>Four implications guide the evaluation of AI judges in this study. First, the relevant benchmark is the informed panel rather than the unaided individual: roughly .4 to .7 for panels and up to the mid .8s for anchored specialists, with strong domain dependence. Second, because reference items and feedback are what move human judges, a modelbased procedure should include an analogue of both and should be evaluated with them; the anchor booklet supplies the reference items, and the pilot run and adjustment described in the next section supply the feedback. Third, bias and ordering should be reported separately. Fourth, results from one content domain should not be expected to transfer to another until shown to.</p>
+<p>Approaches to automated difficulty prediction fall into three broad lines.</p>
+<p>The first line treats item difficulty as a continuous parameter and predicts that value directly from item content, whether the target is a classical p-value or a model-based quantity such as an IRT b parameter. The operational logic is straightforward, but the model must interpret the item and translate that interpretation into a stable numeric value on an externally established scale. That translation can be fragile when the scale is bounded, depends on the sample or population, or is difficult to interpret from content alone. It becomes harder when items draw on several latent skills or content domains that are treated as one measure. This instability may help explain why direct numerical prediction often shows uneven calibration even when rank ordering is more accurate (AlKhuzaey et al., 2024; Van der Linden, 2018).</p>
+<p>The second line uses AI representations as inputs to a separate supervised prediction model. In these systems, a language model encodes the item as embeddings or learned features, and a regression or machine-learning layer maps those representations to difficulty (Bulut, Gorgun, &amp; Tan, 2024; Zhang, Fu, &amp; Han, 2026). Automated pipelines can estimate IRT item parameters from item features before response data accumulate (Sharpnack, Mulcaire, Bicknell, LaFlair, &amp; Yancey, 2024). The AI supplies a representation of item content, and the supervised layer learns the local psychometric scale. This approach requires a large set of items with known statistics from the relevant program. Building that set is costly, performance may deteriorate when the item bank, population, or construct changes, and a multistage model can be difficult to interpret when its predictions depend on recurring surface patterns rather than features related to difficulty.</p>
+<p>The third line infers difficulty indirectly from AI behavior, including simulated responses, estimated success rates, and alignment with human response patterns, so the system is not asked to state a difficulty value directly (Acquaye, Huang, Carpuat, &amp; Rudinger, 2026). Some studies go further by prompting the AI to respond as examinees with specified abilities or demographic characteristics and then aggregating those simulated responses. That strategy can produce useful item-level signals, but it requires evidence that the simulated response distribution represents the intended examinee population rather than the capabilities and training history of the AI itself.</p>
+<p>Human and machine difficulty are not interchangeable. An arithmetic item involving extremely large numbers may be laborious for many people but routine for a computational system, whereas an item that depends on pragmatic language, culturally situated knowledge, an unconventional diagram, or a simple physical intuition may be easy for people and unexpectedly difficult for an AI. A correct or incorrect model response therefore does not by itself establish how hard the item is for human examinees. The inference becomes still more fragile when one model&#x27;s behavior is treated as a proxy for a heterogeneous population: apparent difficulty may reflect the model&#x27;s tools, tokenization, training exposure, or reasoning strategy rather than the knowledge and processes the assessment is intended to measure.</p>
+<p>Demographic persona simulation adds a separate fairness risk. Asking an AI to behave as members of a racial, ethnic, gender, socioeconomic, disability, linguistic, or national group invites the model to fill gaps with associations learned from its training data. Empirical studies show that persona wording can materially change simulated group responses and that generated portrayals can reproduce stereotypes, especially for marginalized and intersectional groups (Cheng, Durmus, &amp; Jurafsky, 2023; Lutz et al., 2025). Even if such prompts predict average item performance reasonably well, the resulting estimates may encode socially biased perceptions of who should find an item difficult. Using those estimates in item selection, assembly, or calibration could then convert an unvalidated stereotype into a consequential measurement decision. This is a construct-validity and fairness problem with possible social consequences. Across the three lines of work, automated estimates can correlate with psychometric difficulty, but absolute calibration, transfer across populations or domains, and the interpretation of simulated population behavior remain uncertain (AlKhuzaey et al., 2024).</p>
+<p>This literature raises a question about how the task is posed. LLMs often perform comparative, semantic, and categorical judgments well (Zheng et al., 2023), but most item-difficulty studies ask for direct numeric estimates. That task requires the model to interpret item content and map the interpretation to a calibrated external scale. LLM training provides extensive practice with analysis, classification, comparison, and explanation in natural language, but it does not by itself establish a psychometric scale. The question this study takes up is whether ordinal placement against empirical anchors elicits usable relative difficulty judgments, so that the scale is supplied by the anchors rather than inferred by the model.</p>
+<p>The present study evaluates such a framework, which adapts the ordered-booklet logic of Bookmark standard setting. The method begins with an anchor-only pilot in which the AI places anchors with known difficulty. Those placements estimate accuracy and bias for the pool before target items are judged, and the estimated bias is then subtracted from the target predictions. We evaluated the framework with two current AI systems from independent developers on three item pools: adult verbal reasoning, adult quantitative reasoning, and school mathematics. Using systems from two model lineages provided a check on whether the framework&#x27;s results generalized beyond a single system. The Method section describes the item pools, scoring procedures, and model settings.</p>
+<p>The study was guided by four questions: (a) how a Bookmark-inspired AI framework can be operationalized for item difficulty prediction through ordinal placement against anchor items with known empirical difficulty; (b) how booklet length and aggregation over parallel booklets affect prediction quality, and how consistent placements are across booklets and repeated runs; (c) whether the framework provides useful predictions across item types, measured skills, and AI systems; and (d) whether an anchoronly pilot run predicts the accuracy and bias of the target run, and whether an adjustment based on the pilot improves target estimates.</p>
+<h3>Bookmark-Inspired Framework</h3>
+<p>The Bookmark standard-setting method is a well-established procedure in educational measurement (Karantonis &amp; Sireci, 2006; Lewis, Mitzel, &amp; Green, 1996). In its traditional form, trained panelists review an ordered booklet of items sorted from easiest to hardest by empirical difficulty and place a bookmark at the point that corresponds to a targeted response-probability criterion, thereby locating a performance standard on the ordered continuum. The important feature of the method, for the purposes of this study, is not the bookmark itself but the way it reduces a difficult scaling problem to a more manageable ordered-placement task. Panelists are not asked to estimate a numeric difficulty value; they are asked to identify a relative location on a known difficulty continuum.</p>
+<p>This study proposes a framework that adapts this ordered-placement logic to AI-based item difficulty prediction. The framework asks the AI to play a role analogous to that of a Bookmark panelist: given an ordered booklet of anchor items whose difficulty values are already available, the model is asked to identify where a new target item should be placed within that ordered map. The placement is then converted to a predicted difficulty value through anchor-based interpolation rather than being requested as a numeric estimate from the model directly. In this formulation the scale itself, whether percent correct on the 0 to 100 range or IRT b on the logit scale, is carried by the ordered anchors rather than introduced as a separately defined metric outside the task.</p>
+<p>The analogy to the Bookmark method should be stated precisely, because what the framework borrows from it is narrower than the name suggests. What is borrowed is the ordered item booklet and the act of placement within it. What is not borrowed is the response-probability criterion and the performance standard: a Bookmark panelist judges, at each position, whether an examinee at a borderline level of proficiency would have a specified probability of answering correctly, whereas the AI system in this framework judges only which anchors a new item is closest to in difficulty, and the anchors carry their difficulty values with them. The task is therefore a comparative judgment referenced to items of known difficulty, and its closer relatives in the measurement literature are the anchor-based methods for judgmentally estimating item statistics (Hambleton &amp; Jirka, 2006), in which judges estimate the difficulty of new items with reference to items whose statistics are known, and the comparative-judgment methods in which relative judgments are preferred to absolute ratings (Attali et al., 2014; Thurstone, 1927). The ordered booklet is the device that turns an absolute judgment into a sequence of comparisons.</p>
+<p>Ordered placement differs from the three lines of prior work because the empirical scale is present inside the task. Direct prediction asks an AI to infer an item&#x27;s demands and translate that judgment into an externally calibrated number. Ordered placement separates the two operations. The AI locates the target relative to concrete anchors, and a fixed conversion rule assigns a value. The placement can still be wrong, but the AI does not have to infer the origin, unit, and range of the scale from a verbal description alone.</p>
+<p>Because calibration is local to the anchors, the method does not require model training. Supervised systems can learn a program-specific mapping when thousands of items with stable statistics are available, but many testing programs do not have a labeled item bank large enough to support that approach. A mapping trained for one construct may also fail to transfer to another. The ordered-booklet method uses a smaller set of operational anchors from the pool at hand. A change in population, score scale, or content domain simply requires new anchors rather than a newly trained model. The testing program retains control of the empirical definition of difficulty.</p>
+<p>Each prediction also has an inspectable reference frame. A placement identifies the neighboring anchors used for the judgment, so a content specialist can examine the comparison and the local anchor spacing. Disagreement across booklets is visible in the placement records. When booklets from the same anchor set place an item at substantially different levels, the dispersion may reflect an unstable judgment, a heterogeneous anchor neighborhood, or item demands that the pool does not represent consistently. Averaging then reduces booklet-specific placement error in much the same way that pooling human judgments reduces judge-specific error.</p>
+<p>This framework also avoids demographic persona simulation. The AI receives only the information about the assessment and intended population needed to interpret the items. It is not asked to impersonate racial, ethnic, gender, socioeconomic, disability, linguistic, or other demographic groups. Removing persona instructions closes the route, described in the Introduction, by which stereotypes can enter simulated responses.</p>
+<p>The self-pilot can be evaluated before new items are rated. Each anchor has a known difficulty, so replacing it among the remaining anchors estimates rank accuracy, absolute error, scale compression, and systematic offset for the pool and prompt used in the target run. A testing program can check whether the AI reads the pool accurately enough and whether a stable bias should be removed before it commits the full target-call budget. This pool-specific evidence is more useful than a general benchmark when performance may change with the domain, model version, or prompt.</p>
+<p>These features also impose limits. The anchors must have trustworthy statistics, cover the intended difficulty range, and represent the content and cognitive demands of the targets. Large gaps or a poorly matched anchor set can make interpolation unstable. A consistent placement may still be systematically wrong if the AI and the anchors omit the same source of human difficulty. Repeated placements quantify disagreement; response data from the intended population provide the evidence needed for consequential use.</p>
+<p>The framework treats the anchor set as a resource that can be organized in more than one way. The same anchors can be divided into several disjoint booklets, each spanning the full difficulty range, so that placement judgments are collected on each booklet and then combined across booklets in a manner analogous to combining the judgments of several panelists. This makes it possible to ask whether reliable difficulty information is recovered from one long ordered context or from several shorter contexts whose judgments are later averaged, and it makes the number of anchors shown in a single prompt a design parameter that can be traded against the number of prompts.</p>
+<h3>The Four Step Process</h3>
+<p>The framework consists of four steps (Figure 1). In Step 1, Build, a set of anchor items with known difficulty is assembled to span the range of the pool, sorted, and dealt into one or more ordered booklets. In Step 2, the self-pilot, each anchor is removed from its booklet in turn and placed by the AI against the remaining anchors, exactly as a target item would be; because the anchors&#x27; difficulties are known, this step yields the correlation, MAE, and bias of the AI&#x27;s placements on this pool before any target item has been judged. In Step</p>
+<h3>Translating Difficulty Placements to Difficulty Values</h3>
+<p>Let the anchor set consist of n items with known difficulties on scale S. A booklet contains B anchors ordered from easiest to hardest. For a target item, the AI system returns an integer placement k from 0 through B. Values from 1 through B -1 place the target between anchors k and k + 1, k = 0 places it below the first anchor, and k = B places it above the last anchor. For an interior placement, the converted prediction is the mean of the two bracketing difficulties. For an endpoint placement, it is the mean of the end anchor and a fixed lower or upper bound outside the pool&#x27;s observed range. When n anchors are divided into K = n / B disjoint booklets, the target prediction is the mean of its K converted values. In the self-pilot, each anchor is placed on its own booklet with itself removed, and the pilot bias is the mean converted prediction minus the known difficulty across anchors. The adjusted prediction for a target is its booklet-averaged prediction minus the pilot bias.</p>
+<h3>Method</h3>
+<h3>Item Pools</h3>
+<p>Three item pools were used. Two consist of operational items from a high-stakes examination used for admission to graduate programs in higher education: 100 Reading Comprehension items, each consisting of a passage followed by a question, and 100 Quantitative Reasoning items. All 200 items are multiple choice with five options. Item difficulty for these pools is the IRT difficulty parameter b, on the logit scale, obtained from the testing program&#x27;s operational calibration under a three-parameter logistic model with the guessing parameter fixed (FG3PLM; Han, 2012); only the b parameter was used in this study. Sixty-two distinct passages underlie the 100 Reading Comprehension items, so that some items share a passage; each item was presented with its own passage throughout, and an anchor that shared a passage with a target was treated no differently from any other anchor.</p>
+<p>The third pool consists of publicly released grade 8 mathematics items from the National Assessment of Educational Progress (NAEP). NAEP reports national item-level results from samples designed to represent students in U.S. public and private schools, and released items and their performance statistics are available through the NAEP Questions Tool (National Center for Education Statistics [NCES], n.d.). For this pool, item difficulty is the reported national percentage of students answering the item correctly. NAEP calculates that percentage from correct, incorrect, and omitted responses; omitted responses to multiplechoice items count as incorrect, whereas items not reached are excluded. The eligible pool contained 152 released multiple-choice items with four or five response options and reported national percentages; items whose content depended on a figure that could not be rendered as text were excluded. NAEP content-area and mathematical-complexity classifications were retained for description only.</p>
+<p>Table 1 reports the descriptive statistics of the three pools. Known difficulty spanned about 5 logits on the Reading Comprehension items (b from -2.50 to 2.44), about 6 logits on the Quantitative Reasoning items (-4.33 to 1.78), and 77 percentage points on the NAEP items (15.9 to 92.7). The Reading Comprehension items averaged 454 words including the passage, the Quantitative Reasoning items 56 words, and the NAEP items 42 words, computed over the full pool in each case (100 items for the two examination pools, 152 for NAEP). In the tables and figures, the pools are abbreviated RC (Reading Comprehension), QR (Quantitative Reasoning), and NAEP (NAEP grade 8 mathematics); Claude Opus 5 is abbreviated Opus 5; and RC and QR values are in logits, NAEP values in percentage points.</p>
+<p>From each pool, 50 items served as anchors, the items that make up the ordered booklets, and 50 as targets, the items whose difficulty was predicted; the same split was used in every condition. For the two examination pools, the split followed an even grid over the rank order of difficulty, the targets being taken first and the anchors from the remainder, so that both sets span the range of the pool at about the same spacing. For the NAEP pool, the 152 items were stratified into 50 difficulty strata of three adjacent items, and one anchor and one target were drawn from each stratum. The resulting sets are matched in location and spread: the anchors and targets had means of -0.10 and 0.07 logits (SD = 1.46 and 1.35) on the Reading Comprehension items, -1.30 and -1.20 (SD = 1.85 and 1.67) on the Quantitative Reasoning items, and 54.9 and 55.0 percentage points (SD = 18.8 and 18.7) on the NAEP items. The discrimination parameter, which the framework does not use, was slightly lower among anchors than among targets on the two examination pools (mean a of 0.74 against 0.85 and 0.81 against 0.96). The NAEP content strands are not equally represented across the two sets, with 8 anchors and 3 targets in geometry and 8 anchors and 16 targets in algebra, and results by strand are therefore reported only descriptively.</p>
+<h3>Booklet Construction</h3>
+<p>Table 2 summarizes the design. Within each pool, the 50 anchors were sorted from easiest to hardest and used to build booklets of four lengths, B = 50, 25, 10, and 5 anchors. For each length the anchors were dealt round robin in rank order into K = 50/B disjoint booklets, so that every booklet spanned the full difficulty range and every anchor appeared in exactly one booklet of a given length; the four lengths thus correspond to K = 1, 2, 5, and 10 parallel booklets built from the same 50 anchors; in the tables, booklet conditions are given as B (K), the number of anchors per booklet and the number of booklets. Anchors were presented in ascending order of difficulty in every condition. Each of the 50 targets was placed once on every booklet, giving 50 placements at B = 50, 100 at B = 25, 250 at B = 10, and 500 at B = 5, or 900 target placements per pool and AI system, with the booklet-averaged prediction serving as Table 2: Design of the Booklets Figure 2 illustrates how the same 50 sorted anchors were dealt into the four booklet conditions: L50 × 1 (B = 50, K = 1), L25 × 2 (B = 25, K = 2), L10 × 5 (B = 10, K = 5), and L5 × 10 (B = 5, K = 10). Each row in a condition is one nonoverlapping booklet, and together the rows reconstruct the full anchor set.</p>
+<h3>Prompting Conditions</h3>
+<p>Two AI systems from different developers were used, each at its highest available reasoning setting: Claude Opus 5 (Anthropic, model identifier claude-opus-5) with the reasoning effort set to its maximum, and GPT-5.6 (OpenAI, model identifier gpt-5.6-sol) with the reasoning effort likewise set to maximum. Every placement was a separate call with no conversation history, and neither interface exposed a sampling temperature, so the developers&#x27; default sampling applied. Ranking the two systems was not a study objective.</p>
+<p>A single prompt structure was used throughout. The prompt described the assessment and its examinee population in general terms, defined the difficulty metric (the b parameter on the logit scale for the examination pools, the national percent correct for the NAEP pool), instructed the model to read the entire booklet before deciding and to form its own account of what distinguished harder from easier anchors in that booklet, listed the anchors from easiest to hardest with each anchor&#x27;s difficulty value, presented the target item, and asked for the position at which the target&#x27;s neighbors would be closest to it in difficulty, with placement 0 denoting easier than the first anchor and placement B harder than the last. The NAEP prompt described the source only as a national mathematics assessment administered to a representative sample of grade 8 students, without naming the program, so that the prompt itself could not serve as a key to any published statistics. Appendix A presents the NAEP B = 25 prompt template. Anchor and target item text and all anchor difficulty values are omitted.</p>
+<h3>Difficulty Computation and Evaluation</h3>
+<p>Placements were converted to difficulty values by the rule given in the framework section. The fixed bounds used for endpoint placements were -3 and +3 logits for Reading Comprehension, -4.75 and +2.25 logits for Quantitative Reasoning, and 0 and 100 for NAEP. Difficulty for the examination item pools was represented directly on the b scale, in logits, without conversion to a proportion-correct scale; NAEP difficulty was represented in percentage points. Booklet averaging, the pilot run, and the Step 3 adjustment followed the definitions given there, with the pilot bias computed separately for each pool and AI system.</p>
+<p>Prediction quality was evaluated by the Pearson correlation between the booklet-averaged predictions and the known difficulties of the 50 targets, the mean absolute error (MAE), the bias (mean signed error), the standard deviation of the errors, and the root mean square error. Reporting bias with the standard deviation of the errors separates systematic from unsystematic error. Confidence intervals for correlations were obtained by resampling the 50 targets 2,000 times. Changes in MAE before and after the pilot-bias adjustment were tested by paired bootstrap on the same items, with an asterisk in Table 3 marking an interval that excludes zero. The comparison between the pilot and target runs used independent resampling because the runs involved different items. Consistency across booklets was quantified by the one-way intraclass correlation of a single booklet&#x27;s predictions and of the K-booklet average, the split-half correlation between odd-and even-numbered booklets with its Spearman-Brown projection, and the withintarget standard deviation across booklets. Correlations between the two systems&#x27; errors were examined as a check on whether residual errors generalized across model lineages.</p>
+<p>Two baselines requiring no model calls were computed for each pool: the MAE of predicting the pool mean for every target, and the MAE and correlation of random placement on the 50-anchor booklet over 200 replications. The B = 50 target prompts were submitted a second time in every pool and AI system to assess run-to-run consistency in placements, predictions, and accuracy.</p>
+<h3>Results</h3>
+<h3>Prediction Accuracy Across Item Pools and Booklet Lengths</h3>
+<p>Table 3 lists, for each item pool, booklet length, and AI system, the correlation between the booklet-averaged predictions and the known difficulty of the 50 target items, together with its bootstrap confidence interval, the mean absolute error (MAE), the bias, the standard deviation of the errors, and the root mean square error; the pilot run of each pool and AI system, in which each of the 50 anchor items was placed against the other 49, appears in the first two rows of each block. Figure 3 plots the predicted against the known difficulty for the two-booklet condition (B = 25) in every pool and AI system.</p>
+<p>Accuracy differed mainly by item pool. Across both AI systems and all booklet lengths, correlations were .85 to .91 for Quantitative Reasoning, .61 to .79 for Reading Comprehension, and .70 to .77 for NAEP grade 8 mathematics. The corresponding MAE ranges were 0.62 to 0.86 logits, 0.65 to</p>
+<p>Pool B (K) Model r [95% CI] MAE Bias Error SD RMSE Pilot bias MAE after Change in MAE [95% CI] Bias after RC Pilot Opus 5 0.71 [0.61, 0.80] 0.91 +0.28 1.05 1.09 ----RC Pilot GPT-5.6 0.70 [0.56, 0.82] 1.00 -0.68 1.08 1.28 ----RC 50 (1) Opus 5 0.76 [0.64, 0.87] 0.70 +0.27 0.88 0.92 +0.28 0.69 -0.01 [-0.08, +0.07] -0.01 RC 50 (1) GPT-5.6 0.61 [0.40, 0.77] 1.17 -0.81 1.13 1.39 -0.68 0.90 -0.27 [-0.42, -0.12]* -0.13 RC 25 (2) Opus 5 0.78 [0.65, 0.88] 0.66 +0.23 0.85 0.88 +0.28 0.67 +0.00 [-0.07, +0.08] -0.04 RC 25 (2) GPT-5.6 0.63 [0.42, 0.80] 1.15 -0.87 1.08 1.39 -0.68 0.87 -0.28 [-0.44, -0.13]* -0.19 RC 10 (5) Opus 5 0.79 [0.66, 0.89] 0.65 +0.16 0.84 0.85 +0.28 0.64 -0.00 [-0.08, +0.07] -0.12 RC 10 (5) GPT-5.6 0.70 [0.53, 0.84] 1.10 -0.91 0.96 1.32 -0.68 0.79 -0.31 [-0.45, -0.16]* -0.23 RC 5 (10) Opus 5 0.79 [0.66, 0.89] 0.70 +0.16 0.85 0.86 +0.28 0.68 -0.02 [-0.09, +0.06] -0.11 RC 5 (10) GPT-5.6 0.70 [0.50, 0.85] 1.06 -0.84 0.96 1.28 -0.68 0.77 -0.28 [-0.43, -0.13]* -0.17 QR Pilot Opus 5 0.91 [0.85, 0.95] 0.69 -0.38 0.80 0.89 ----QR Pilot GPT-5.6 0.88 [0.81, 0.93] 0.88 -0.71 0.94 1.18 ----QR 50 (1) Opus 5 0.84 [0.74, 0.92] 0.78 -0.28 0.94 0.98 -0.38 0.69 -0.09 [-0.18, +0.01] +0.10 QR 50 (1) GPT-5.6 0.90 [0.86, 0.94] 0.84 -0.65 0.75 0.99 -0.71 0.59 -0.25 [-0.40, -0.08]* +0.06 QR 25 (2) Opus 5 0.89 [0.83, 0.94] 0.70 -0.23 0.80 0.84 -0.38 0.61 -0.09 [-0.18, +0.01] +0.15 QR 25 (2) GPT-5.6 0.90 [0.85, 0.94] 0.86 -0.66 0.75 1.00 -0.71 0.59 -0.27 [-0.43, -0.11]* +0.04 QR 10 (5) Opus 5 0.88 [0.82, 0.93] 0.70 -0.03 0.86 0.86 -0.38 0.69 -0.01 [-0.11, +0.09] +0.35 QR 10 (5) GPT-5.6 0.90 [0.85, 0.94] 0.79 -0.51 0.74 0.90 -0.71 0.60 -0.20 [-0.35, -0.04]* +0.20 QR 5 (10) Opus 5 0.88 [0.81, 0.94] 0.62 +0.18 0.82 0.84 -0.38 0.70 +0.08 [-0.01, +0.17] +0.56 QR 5 (10) GPT-5.6 0.91 [0.87, 0.95] 0.64 -0.31 0.70 0.76 -0.71 0.60 -0.04 [-0.20, +0.12] +0.40 NAEP Pilot Opus 5 0.79 [0.68, 0.87] 10.35 -2.16 11.70 11.90 ----NAEP Pilot GPT-5.6 0.84 [0.74, 0.92] 11.74 +10.62 10.17 14.71 ----NAEP 50 (1) Opus 5 0.74 [0.60, 0.84] 10.61 +0.18 12.67 12.67 -2.16 10.78 +0.18 [-0.44, +0.79] +2.34 NAEP 50 (1) GPT-5.6 0.71 [0.55, 0.83] 14.74 +12.07 13.11 17.82 +10.62 10.72 -4.01 [-6.51, -1.32]* +1.45 NAEP 25 (2) Opus 5 0.70 [0.53, 0.81] 11.17 +0.47 13.65 13.66 -2.16 11.40 +0.22 [-0.37, +0.83] +2.64 NAEP 25 (2) GPT-5.6 0.77 [0.62, 0.87] 13.60 +11.59 12.04 16.71 +10.62 9.74 -3.86 [-6.38, -1.15]* +0.97 NAEP 10 (5) Opus 5 0.72 [0.56, 0.83] 10.53 -0.12 13.26 13.26 -2.16 10.55 +0.01 [-0.58, +0.63] +2.04 NAEP 10 (5) GPT-5.6 0.77 [0.63, 0.87] 13.32 +11.44 12.04 16.61 +10.62 9.90 -3.42 [-5.85, -0.76]* +0.81 NAEP 5 (10) Opus 5 0.72 [0.56, 0.84] 11.07 -1.59 13.76 13.85 -2.16 10.88 -0.19 [-0.77, +0.41] +0.57 NAEP 5 (10) GPT-5.6 0.76 [0.61, 0.86] 13.78 +11.87 12.19 17.02 +10.62 9.99 -3.79 [-6.15, -1.26]* +1.25</p>
+<p>Table 3: Prediction Accuracy and Pilot-Bias Adjustment by Pool, Booklet Length, and AI System 1.17 logits, and 10.5 to 14.7 percentage points.</p>
+<p>Both systems produced useful rank ordering in each pool, although their bias and their Reading Comprehension accuracy differed. With 50 targets, confidence-interval half-widths were about .05 for Quantitative Reasoning and .12 to .19 for the other two pools. Two baselines put these values in context. In every pool, condition, and system, the framework outperformed simply predicting the pool mean for each target (MAE of 1.18 logits for Reading Comprehension, 1.46 logits for Quantitative Reasoning, and 15.7 points for NAEP), and random placement on the 50-anchor booklet produced correlations centered on zero, indicating that the observed accuracy reflects the placements themselves rather than the booklet structure.</p>
+<h3>Booklet Length and Aggregation</h3>
+<p>Figure 4 shows the correlations of Table 3 by booklet length with their confidence intervals. Because the 50 anchors were divided among K = 50/B disjoint booklets, shorter booklets came with more booklets. The comparison is therefore among designs with the same total anchor bud-  get. Across the six pool-by-system series, the change between adjacent booklet lengths was no larger than .07 and did not follow a consistent direction; paired bootstrap contrasts on the same targets excluded zero in only 3 of the 18 adjacent comparisons. No booklet length was uniformly more accurate across pools and systems. These results indicate that booklet length made little practical difference within the fixed anchor budget, although the sample of 50 targets cannot rule out small differences.</p>
+<p>Booklet length and aggregation offset each other. Single-booklet correlations changed with booklet length, but averaging across the available booklets recovered most of the loss associated with shorter booklets. Across pools and systems, moving from one booklet to the full set increased correlation by .01 to .07. Two booklets captured about half of the total gain, three captured about three-quarters, and each additional booklet added .01 or less. With a fixed anchor budget, one long booklet and several short booklets therefore had nearly the same accuracy. In all 18 multibooklet conditions, the correlation after averaging was at least as high as the mean correlation of the component booklets.</p>
+<h3>Consistency and Its Limits</h3>
+<p>Table 4 reports the consistency of the placements across booklets. The single-booklet reliability (the intraclass correlation of one booklet&#x27;s predictions) ranged from .74 to .96, and the K-booklet reliability (that of the K-booklet average) from .85 to .99; split-half correlations between the odd-and even-numbered booklets ranged from .84 to .99, or .91 to .99 after the Spearman-Brown projection to the full number of booklets. The within-target standard deviation across booklets was 0.31 to 0.61 logits on the two examination pools and 3.6 to 8.0 points on the NAEP items. Every one of these reliability coefficients exceeded the corresponding validity coefficient in Table 3, in several cells by .2 or more; the AI systems agreed with themselves considerably more than they agreed with the known difficulty.</p>
+<p>The repeated B = 50 run showed that the main findings were stable across calls. Predictions from the two runs correlated between .92 and .99, and their correlations with known difficulty differed by -.02 to +.03, with every interval spanning zero. Exact placements were less stable: the same position was selected for 18% to 52% of targets, and a position within one step was selected for 46% to 80%. A placement typically moved one or two positions on a 50-anchor booklet without materially changing the predicted difficulty.</p>
+<p>Agreement between the two systems served as a crosslineage check. Their errors on the same targets correlated .79 to .93 for Reading Comprehension, .72 to .86 for Quantitative Reasoning, and .66 to .91 for NAEP. Averaging predictions across the systems increased the correlation by no more than .01. The residual errors therefore were not confined to one system and appear to reflect item features that both systems judged similarly.</p>
+<h3>Bias and Compression</h3>
+<p>Bias varied by pool and AI system. GPT-5.6 placed items as harder than they were on both examination pools, by 0.8 to 0.9 logits for Reading Comprehension and 0.3 to 0.7 logits for Quantitative Reasoning, and as easier than they were on NAEP, by 11 to 12 points. Claude Opus 5 was within 0.3 logits and 2 points of zero except for a 0.2 to 0.3 logit bias on Reading Comprehension. These differences show why the pilot bias needs to be estimated separately for each pool and system. Predictions from both systems were compressed toward the middle of the scale for Reading Comprehension and NAEP, with slopes of .52 to .64 and .52 to .73, respectively.</p>
+<p>Compression was slight for Quantitative Reasoning, where slopes were .84 to .96. Systematic level and scale compression therefore behaved differently: the Pool Condition Model K Single-booklet reliability K-booklet reliability Split-half r Spearman-Brown (K) Within-target SD Validity r RC 5 (10) Opus 5 10 0.76 0.97 0.96 0.98 0.50 0.79 RC 5 (10) GPT-5.6 10 0.77 0.97 0.97 0.99 0.53 0.70 RC 10 (5) Opus 5 5 0.79 0.95 0.92 0.96 0.47 0.79 RC 10 (5) GPT-5.6 5 0.80 0.95 0.94 0.97 0.48 0.70 RC 25 (2) Opus 5 2 0.74 0.85 0.84 0.91 0.47 0.78 RC 25 (2) GPT-5.6 2 0.86 0.93 0.87 0.93 0.34 0.63 QR 5 (10) Opus 5 10 0.88 0.99 0.98 0.99 0.61 0.88 QR 5 (10) GPT-5.6 10 0.86 0.98 0.97 0.99 0.60 0.91 QR 10 (5) Opus 5 5 0.92 0.98 0.98 0.99 0.49 0.88 QR 10 (5) GPT-5.6 5 0.90 0.98 0.97 0.98 0.51 0.90 QR 25 (2) Opus 5 2 0.96 0.98 0.96 0.98 0.32 0.89 QR 25 (2) GPT-5.6 2 0.95 0.97 0.95 0.98 0.31 0.90 NAEP 5 (10) Opus 5 10 0.82 0.98 0.97 0.98 8.03 0.72 NAEP 5 (10) GPT-5.6 10 0.77 0.97 0.95 0.98 6.72 0.76 NAEP 10 (5) Opus 5 5 0.90 0.98 0.96 0.98 5.12 0.72 NAEP 10 (5) GPT-5.6 5 0.87 0.97 0.95 0.97 4.90 0.77 NAEP 25 (2) Opus 5 2 0.88 0.93 0.92 0.96 4.36 0.70 NAEP 25 (2) GPT-5.6 2 0.88 0.93 0.93 0.96 3.62 0.77</p>
+<p>Table 4: Consistency of Placements Across Booklets pilot could estimate the level offset, while the remaining compression depended mainly on the item domain.</p>
+<h3>Pilot Run Versus Target Run</h3>
+<p>Table 5 sets the pilot run of each pool and AI system, in which the anchors were placed against one another with their difficulty known, beside the corresponding target run at B = 50. The pilot correlations ran from .70 to .91 and the target correlations from .61 to .90; the six differences ranged from -.05 to +.13, and none of their intervals excluded zero. Across the six cells, the pilot correlation predicted the target correlation at r = .74, with a fitted line of target r = 0.04 + 0.90 × pilot r and a largest residual of .09, and the pilot correctly ordered the three pools for both AI systems.</p>
+<p>The pilot predicted the bias more closely than it predicted the correlation. On the two examination pools the pilot bias and the target bias, in logits, were +0.28 and +0.27 for Claude Opus 5 and -0.68 and -0.81 for GPT-5.6 on the Reading Comprehension items, and -0.38 and -0.29 and -0.71 and -0.65 on the Quantitative Reasoning items, a correlation of .98 across the four cells; on the NAEP items the pilot gave -2.2 points against a target bias of +0.2 for Claude Opus 5 and +10.6 against +12.1 for GPT-5.6. Thus, 50 anchor-only placements, which require no knowledge of the target items&#x27; difficulty, reproduced the direction and approximate size of the offset that the target run would show.</p>
+<h3>Target Run Before and After Adjustment</h3>
+<p>Table 3 lists the pilot bias of each pool and AI system and the MAE and bias of every target cell before and after that bias was subtracted, and Figure 5 displays the change in bias. For GPT-5.6, which had sizable pilot bias in all three pools, the adjustment lowered MAE by 0.27 to 0.31 logits for Reading Comprehension, by 0.20 to 0.27 logits for three Quantitative Reasoning conditions, and by 3.4 to 4.0 points for NAEP. Each of these 11 intervals excluded zero, and the adjusted biases moved close to zero. For Claude Opus 5, whose pilot biases were small, changes in MAE ranged from -0.09 to +0.08 logits and from -0.2 to +0.2 points, with no interval excluding zero. Across all 24 target cells, MAE fell in 19 and absolute bias fell in 18. Increases were limited to cells whose raw bias was already near zero. The adjustment therefore reduced error when the pilot identified a sizable offset and had little effect when the offset was small. Correlation was unchanged because the adjustment shifts all predictions by the same amount.</p>
+<h3>Computational Cost Across Booklet Lengths</h3>
+<p>Table 6 gives the approximate number of prompt tokens per call (estimated as characters / 4 over the first booklet&#x27;s prompts, output tokens excluded), the number of calls in a complete pipeline (50 pilot placements plus K × 50 target placements), and the resulting prompt tokens per pipeline, beside the correlation each configuration achieved. On the Reading Comprehension items, where every anchor carries a passage, a 50-anchor booklet ran to about 39,000 tokens per call and a 5-anchor booklet to about 5,300, so that the four designs cost between 2.6 and 3.9 million prompt tokens per pipeline; on the two mathematics pools the same designs cost between 0.35 and 0.59 million. Because correlations changed little across designs, the two-booklet condition (B = 25), which requires 150 calls, was within .07 of the best result in all six pool-by-system cells. The fivebooklet condition (B = 10) was within .02 in every cell and used much shorter prompts. These two designs provide practical options when a program must balance the number of calls against prompt length.</p>
+<h3>Discussion</h3>
+<p>The results answer the four research questions directly. Across the two AI systems, ordinal placement produced correlations of .61 to .79 for Reading Comprehension, .85 to .91 for Quantitative Reasoning, and .70 to .77 for NAEP grade 8 mathematics. Random placement produced correlations near zero. Within a fixed anchor budget, several short booklets recovered the accuracy of one long booklet. Placements were more repeatable than accurate across booklets and repeated runs. The similar broad pattern across the two systems supports the framework&#x27;s generalizability across the tested model lineages, while the pool differences show that performance remains domain dependent. The pilot predicted target-run accuracy to within about .09 and closely reproduced target-run bias. Subtracting the pilot bias reduced error when the system showed a stable offset and changed little when the offset was small.</p>
+<h3>Relation to Prior Lines of Work</h3>
+<p>The ordered-booklet method differs from direct continuous prediction because the model places an item against known anchors before a fixed rule converts the placement to the empirical scale. The anchors carried both the proportioncorrect scale and the IRT b scale without requiring the model to produce a calibrated number directly. The observed correlations are consistent with the view that comparative placement is a suitable task for AI systems. Supervised prediction remains the better choice where a program has a large item repository and the resources to train and maintain a local model (Sharpnack et al., 2024); the ordered-booklet method serves programs that hold anchors with known difficulty but not that volume.</p>
+<p>Behavior-based and persona-based approaches infer difficulty from simulated responses or modeled examinee behavior. The ordered-booklet method asks for an explicit comparison with empirical anchors. It still requires validation against response data, but the placement record shows which anchors framed each judgment and avoids (often untestable) assumptions about whether a prompted persona represents real examinees.</p>
+<p>The difference between the two lines can be stated in the terms that standard setting has long used for its own methods. Jaeger (1989) distinguished test-centered methods, in which judges examine the items and locate them on a scale, from examinee-centered methods, in which judgments are made about people and the items are characterized through those people. The Bookmark procedure that this framework adapts is test-centered, and so is the framework: the AI system examines item content and places each item among anchors whose empirical difficulties are known, and nothing about the examinee population enters the procedure except through those empirical values. Persona-based and simulated-respondent approaches are person-centered in the same sense. Difficulty is inferred from the behavior of simulated people, so the estimate is only as good as the model&#x27;s representation of how a population, or a subpopulation, thinks and errs. That representation is the weak point. A test-centered procedure needs no assumption about the population beyond the anchor statistics, which the testing program has already estimated from real examinees and which carry the population&#x27;s actual behavior, including its guessing, its misconceptions, and its exposure to instruction. A person-centered procedure must supply that information as assumptions: what a simulated examinee knows, which strategies it uses, which errors it makes, and how these differ across the groups it is asked to portray. Those assumptions are rarely testable in advance, because the response data that would test them are exactly what the procedure is meant to replace, and when they are wrong the error is systematic and invisible; the simulated population answers confidently, and the resulting difficulty estimates inherit the model&#x27;s picture of the population rather than the population itself. Machine and human difficulty also diverge, as the Introduction noted, and a simulated respondent cannot correct for the divergence: a model asked to behave like an examinee blends its own capability profile into the estimate, and the more faithfully it plays the role, the harder that blending is to detect. The test-centered framework does not remove this problem, because the model still reads the items with its own competence, but it contains it: the judgment requested is one of relative difficulty against anchors, and the pilot run measures how well that judgment agrees with empirical difficulty on the pool before any target item is scored.</p>
+<p>The person-centered approach also carries the fairness risk described in the Introduction, because deciding how a demographic group performs draws on associations in the training data rather than on evidence about the examinees a program serves. The test-centered procedure has no comparable entry point. It never characterizes people; it characterizes items relative to other items whose behavior in the real population is known, and group differences in item functioning remain a matter for differential item functioning and fairness analyses on human response data, where they belong.</p>
+<p>The distinction also determines what the two approaches require and what they can promise. A person-centered simulation requires a specification of the population and, if subgroups matter, of each subgroup, together with enough simulated respondents per item to estimate a response curve, and its accuracy depends on how well that specification generalizes to new items and populations, which cannot be checked without the response data it is meant to anticipate. The test-centered procedure requires only anchors with known statistics, which most operational programs already hold, and one placement per anchor to learn how the system reads the pool. Its limits are the ones documented in this study, and they are visible in the pilot run before the target budget is spent, which is a property that a procedure resting on assumptions about people cannot offer.</p>
+<h3>Relation to Human Judgment</h3>
+<p>The review of human judgment offered four standards, and the results can be read against each. The benchmark is the informed panel. Correlations here ranged from .61 to .91 across pools and systems, overlapping or exceeding the .4 to .7 reported for panels. On the quantitative items, correlations of .85 to .91 were comparable to the .84 that anchored specialists reached on logical reasoning items. The comparison is between different tests and populations, and no human panel judged these items, so it establishes only that the AI placements fall within the range expected of informed human judges. Reference items and feedback are what move human judges, and the framework builds both in: the anchors are the reference items, and the pilot run plays the part that performance feedback plays for a panel, showing how accurately a given AI system reads the pool and the direction of its errors before the target items are judged. Bias and ordering were reported separately, and they behaved separately, as in the human literature. The AI systems compressed the scale on the reading and school mathematics items in the same direction that human judges do, judging easy items harder than they are and hard items easier, while largely preserving item order. Accuracy also depended on domain, as it does for humans, a point taken up below.</p>
+<h3>Why Consistency Exceeds Validity</h3>
+<p>The clearest pattern in the study is the gap between consistency and accuracy. Reliabilities of .74 to .96 for a single booklet and .85 to .99 for a set of booklets stood against validities of .63 to .91. Averaging more booklets added .01 or less beyond the third, and repeating the same prompt changed the correlation by .03 or less. Errors from the two independently developed systems correlated .66 to .93 on the same items, and averaging their predictions increased the correlation by no more than .01. The error that remained after aggregation was therefore associated with the items and was reproduced across model lineages.</p>
+<p>Once two or three booklets have been averaged, further calls of the same kind, including repeated runs or judgments from another AI system, may improve reliability without improving validity. Further gains will require new information about the items rather than more judgments of the same kind, and the future directions below follow from that conclusion.</p>
+<h3>Domain and Construct Differences</h3>
+<p>The Quantitative Reasoning items were judged most accurately, the Reading Comprehension items least accurately overall, and the NAEP items in between, and the compression of the scale followed the same order. In quantitative items, difficulty is largely readable from the item content: the number of steps, the operations involved, and the structure of the answer choices signal difficulty fairly directly, and the slopes of prediction on known difficulty were close to one. In reading comprehension items, difficulty depends on a layered combination of passage, question, and distractors that varies substantially from item to item, so that comparable surface features can correspond to substantially different difficulty values, and the slopes fell to about .5 to .6. The NAEP items combine readable procedural demands with a young population and a guessing floor from four or five options, and their slopes fell between. The same contrast appeared in the anchored human study reviewed in the Introduction, with the caveat noted there. Practitioners should therefore not assume that accuracy observed in one domain will transfer to another without direct empirical checking, and the pilot run is the instrument for that check.</p>
+<h3>Bias and Adjustment</h3>
+<p>The pilot correction targets systematic offset, the one component of error that can be estimated from the anchors before the target run and that, in this study, was nearly constant across booklet lengths and closely reproduced by the pilot. This pool-and system-specific check is a central part of the framework. Because the correction is additive, it does not change rank correlation or remove scale compression, which remains a property of the item domain.</p>
+<h3>Practical Implications for Measurement Programs</h3>
+<p>For programs that wish to apply the framework, the anchor set should span the difficulty range of the pool at roughly even spacing. Fifty anchors were sufficient here, and the 50 self-pilot placements cost the same at every booklet length. The pilot should be conducted first because it estimates likely accuracy and bias for the selected pool and AI system before target items are judged. The pilot bias should then be subtracted from target predictions. For the target run, two booklets of 25 anchors, at 150 calls for 50 targets including the pilot, or five booklets of 10 anchors where shorter prompts matter more than the number of calls, offer the best balance shown in Table 6, and calls beyond the third booklet add little. Programs should repeat the pilot whenever the item pool, population, prompt, or AI system changes.</p>
+<p>At the moment, given the observed results, the framework should remain a support tool for item development and calibration planning rather than a replacement for empirical calibration. It can produce an early difficulty signal when field-test data are not yet available, can help prioritize which items deserve further empirical attention, and can do so without a supervised training pipeline; programs should validate its outputs against empirical data on their own item pools before relying on it for consequential decisions.</p>
+<h3>Limitations, Future Directions, and Conclusion</h3>
+<p>The study has a few limitations. No human panel judged these items, so the comparison with human judgment depends on published studies of other tests and populations; a same-item comparison would require a new judgment study because the two examination pools are secure. The framework was evaluated with two AI systems from independent developers at their highest reasoning settings, and their similar broad results reduce dependence on a single model lineage without establishing generalizability to other systems or settings. Fifty targets per pool were sufficient to identify the large pool differences but may not detect small differences among booklet designs. Finally, the examination pools use IRT b while the NAEP pool uses percent correct, so cross-pool comparisons of accuracy must use correlations.</p>
+<p>There are several further studies to consider. The pilot run currently informs the analyst but not the AI system; giving the system its own pilot errors before the target run would test whether the feedback that improves human panels has an analogue for AI judges, and the anchors make such feedback available without new data. Response data on a subset of target items would test the claim that further gains require new information rather than more judgments: if placements informed by a small response sample move validity toward the reliability ceiling, the framework could be combined with small-sample calibration in the way judgmental priors have been combined with response data in the past. Open-weight models would show whether the pattern of results depends on frontier proprietary systems, and they would allow the procedure to run where item security rules out external services. Larger target sets would sharpen the comparison between booklet designs, which 50 targets could not separate below about .07, and pools with both observed percent correct and IRT parameters would allow the two difficulty scales used here to be compared on the same items.</p>
+<p>Ordered placement against anchors with known difficulty therefore offers a test-centered route to early difficulty estimates: it requires no assumptions about the examinee population, no model training, and about 150 calls per 50 targets, and it reports on its own accuracy and offset before any new item is judged. Its remaining error is attached to the items rather than to the judgments, so the next gains will come from new information about the items.</p>
+<h3>NAEP Grade 8 Mathematics Prompt</h3>
+<p>The prompt below shows the wording used for the B = 25 NAEP condition. Anchor and target item text and all anchor difficulty values are omitted.</p>
+<p>You are an expert in educational assessment, specializing in item difficulty analysis. BACKGROUND Assessment: a national mathematics assessment given to a nationally representative sample of grade 8 students. Each item presents a question with four or five answer options. Population: Grade 8 students in a nationally representative sample of public and private schools (whole-cohort sampling, not a self-selected or applicant sample). Item Difficulty: indicated by the national percent correct. Higher percent correct means easier; lower percent correct means harder.</p>
+<h3>STUDY THE BOOKLET FIRST</h3>
+<p>Before placing the new item, read the entire booklet carefully. The anchors are ordered from easiest to hardest. Each anchor was labeled with its percent correct in the actual prompt; those values are omitted here. As you move through the booklet, identify the content, form, cognitive demand, surface characteristics, or other features that distinguish harder items from easier ones in this booklet. Base your judgment on the anchors rather than on a fixed checklist. Only after reviewing the progression should you place the new item where its neighbors are most similar to it in difficulty. ORDERED BOOKLET Positions 1 through 25: [anchor item text and difficulty values omitted] NEW ITEM TO PLACE: [target item text omitted] TASK Place the new item at the position whose neighbors are closest to it in difficulty. Use placement 0 if the new item is easier than Position 1 and placement 25 if it is harder than Position 25. Respond in exactly this JSON format (all fields required): { &quot;difficulty_observations&quot;: &quot;&lt;2-6 sentences describing how item difficulty changes across the booklet&gt;&quot;, &quot;placement&quot;: &lt;integer from 0 through 25&gt;, &quot;estimated_pct_correct&quot;: &lt;numeric estimate&gt;, &quot;confidence&quot;: &quot;low&quot; | &quot;medium&quot; | &quot;high&quot;, &quot;reasoning&quot;: &quot;&lt;brief justification tied to the booklet observations&gt;&quot; } 3, Adjust, the bias observed in the self-pilot is treated as the AI&#x27;s systematic offset on this pool and subtracted from the predictions of Step 4.</p>
+<p>In Step 4, the target run, the target items are placed on the booklets, their placements are converted and averaged, and the Step 3 correction is applied. Steps 1 through 3 use only the anchors; the correction applied in Step 4 is fixed in advance from the anchors and is not recomputed from the target items themselves.</p>
+<h3>Figure 1 :</h3>
+<p>Figure 1: Four-step ordered-anchor workflow for item difficulty prediction.</p>
+<p>the estimate for a target under a given length. The pilot run of Step 2 was conducted at B = 50, each anchor being removed from the booklet and placed on the remaining 49, for another 50 placements per pool and AI system. With three pools and two AI systems, the design comprised 24 target cells and 6 pilot cells, or 5,700 placements in all.</p>
+<h3>Figure 2 :</h3>
+<p>Figure 2: Interleaved booklet configurations for the same 50 anchors.</p>
+<h3>Figure 3 :</h3>
+<p>Figure 3: Predicted against known difficulty at B = 25, by item pool and AI system.</p>
+<h3>Figure 4 :</h3>
+<p>Figure 4: Correlation with known difficulty by anchors per booklet, with 95% confidence intervals.</p>
+<h3>Figure 5 :</h3>
+<p>Figure5: Bias before and after the pilot-bias adjustment, by pool, booklet length, and AI system.</p>
+<h3>Table 1 :</h3>
+<p>Descriptive Statistics of the Item Pools</p>
+<h3>Table 5 :</h3>
+<p>Pilot Run and Target Run by Pool and AI System</p>
+<h3>Table 6 :</h3>
+<p>Prompt Tokens, Calls, and Accuracy by Design</p>
+<h3>References</h3>
+<p>Acquaye, C., Huang, Y. T., Carpuat, M., &amp; Rudinger, R. (2026). Take out your calculators: Estimating the real difficulty of question items with LLM student simulations. arXiv. https://arxiv.org/abs/2601.09953</p>
+<p>AlKhuzaey, S., Grasso, F., Payne, T. R., &amp; Tamma, V. (2024). Text-based question difficulty prediction: A systematic review of automatic approaches. International Journal of Artificial Intelligence in Education, 34(3), 862-914.</p>
+<p>Attali, Y., Saldivia, L., Jackson, C., Schuppan, F., &amp; Wanamaker, W. (2014). Estimating item difficulty with comparative judg- ments (ETS Research Report RR-14-39). Educational Testing Service.</p>
+<p>Bejar, I. I. (1983). Subject matter experts&#x27; assessment of item sta- tistics. Applied Psychological Measurement, 7(3), 303-310.</p>
+<p>Benedetto, L., Cremonesi, P., Caines, A., Buttery, P., Cappelli, A., Giussani, A., &amp; Turrin, R. (2023). A survey on recent ap- proaches to question difficulty estimation from text. ACM Computing Surveys, 55(9), Article 178, 1-37. https://doi.org/10.1145/3556538</p>
+<p>Brandon, P. R. (2004). Conclusions about frequently studied mod- ified Angoff standard-setting topics. Applied Measurement in Education, 17(1), 59-88.</p>
+<p>Bulut, O., Gorgun, G., &amp; Tan, B. (2024). Item difficulty and re- sponse time prediction with large language models: An empir- ical analysis of USMLE items. In Proceedings of the 19th Workshop on Innovative Use of NLP for Building Educational Applications (BEA 2024) (pp. 522-527). Association for Com- putational Linguistics.</p>
+<p>Cheng, M., Durmus, E., &amp; Jurafsky, D. (2023). Marked personas: Using natural language prompts to measure stereotypes in language models. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) (pp. 1504-1532). Association for Computational Linguistics. https://doi.org/10.18653/v1/2023.acl-long.84</p>
+<p>Clauser, B. E., Mee, J., Baldwin, S. G., Margolis, M. J., &amp; Dillon, G. F. (2009). Judges&#x27; use of examinee performance data in an Angoff standard-setting exercise for a medical licensing exam- ination: An experimental study. Journal of Educational Mea- surement, 46(4), 390-407.</p>
+<p>Hambleton, R. K., &amp; Jirka, S. J. (2006). Anchor-based methods for judgmentally estimating item statistics. In S. M. Downing &amp; T. M. Haladyna (Eds.), Handbook of test development (pp. 399-420). Lawrence Erlbaum.</p>
+<p>Hambleton, R. K., Sireci, S. G., Swaminathan, H., Xing, D., &amp; Rizavi, S. (2003). Anchor-based methods for judgmentally estimating item difficulty parameters (Computerized Testing Report 98-05). Law School Admission Council.</p>
+<p>Han, K. T. (2012). Fixing the c parameter in the three-parameter logistic model. Practical Assessment, Research &amp; Evaluation, 17(1). https://scholarworks.umass.edu/pare/vol17/iss1/1/</p>
+<p>Impara, J. C., &amp; Plake, B. S. (1998). Teachers&#x27; ability to estimate item difficulty: A test of the assumptions in the Angoff stan- dard setting method. Journal of Educational Measurement, 35(1), 69-81.</p>
+<p>Jaeger, R. M. (1989). Certification of student competence. In R. L. Linn (Ed.), Educational measurement (3rd ed., pp. 485-514). Macmillan.</p>
+<p>Karantonis, A., &amp; Sireci, S. G. (2006). The Bookmark standard- setting method: A literature review. Educational Measure- ment: Issues and Practice, 25(1), 4-12.</p>
+<p>Lewis, D. M., Mitzel, H. C., &amp; Green, D. R. (1996, June). Stan- dard setting: A bookmark approach. Paper presented at the Council of Chief State School Officers National Conference on Large-Scale Assessment, Phoenix, AZ.</p>
+<p>Lorge, I., &amp; Kruglov, L. (1953). The improvement of estimates of test difficulty. Educational and Psychological Measurement, 13(1), 34-46.</p>
+<p>Lutz, M., Sen, I., Ahnert, G., Rogers, E., &amp; Strohmaier, M. (2025). The prompt makes the person(a): A systematic evaluation of sociodemographic persona prompting for large language mod- els. In Findings of the Association for Computational Linguis- tics: EMNLP 2025 (pp. 23212-23237). Association for Computational Linguistics. https://doi.org/10.18653/v1/2025.findings-emnlp.1261</p>
+<p>Maeda, H. (2025). Field-testing multiple-choice questions with AI examinees: English grammar items. Educational and Psycho- logical Measurement, 85(2), 221-244. https://doi.org/10.1177/00131644241281053</p>
+<p>National Center for Education Statistics. (n.d.). NAEP Questions Tool. https://www.nationsreportcard.gov/nqt/</p>
+<p>Sharpnack, J., Mulcaire, P., Bicknell, K., LaFlair, G., &amp; Yancey, K. (2024). AutoIRT: Calibrating item response theory models with automated machine learning. arXiv. https://arxiv.org/abs/2409.08823</p>
+<p>Thorndike, R. L. (1982). Item and score conversion by pooled judgment. In P. W. Holland &amp; D. B. Rubin (Eds.), Test equat- ing (pp. 309-317). Academic Press.</p>
+<p>Thurstone, L. L. (1927). A law of comparative judgment. Psycho- logical Review, 34(4), 273-286.</p>
+<p>Van der Linden, W. J. (Ed.). (2018). Handbook of item response theory: Three volume set. CRC Press.</p>
+<p>Yaneva, V., North, K., Baldwin, P., Ha, L. A., Rezayi, S., Zhou, Y., Pursel, B., &amp; Clauser, B. (2024). Findings from the first shared task on automated prediction of difficulty and response time for multiple-choice questions. In Proceedings of the 19th Workshop on Innovative Use of NLP for Building Educational Applications (BEA 2024) (pp. 470-482). Association for Com- putational Linguistics.</p>
+<p>Zhang, Y., Fu, Y., &amp; Han, K. T. (2026, April). AI-powered predic- tion of 2PLM parameters from item content. Paper presented at the annual conference of the National Council on Measure- ment in Education (NCME), Los Angeles, CA.</p>
+<p>Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z., Li, Z., Li, D., Xing, E. P., Zhang, H., Gonzalez, J. E., &amp; Stoica, I. (2023). Judging LLM-as-a-Judge with MT- Bench and Chatbot Arena. In Advances in Neural Information Processing Systems 36 (NeurIPS 2023), Datasets and Bench- marks Track.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
