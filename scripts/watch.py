@@ -133,6 +133,12 @@ def error_kind(msg):
     # the error message without what differs from paper to paper (quoted
     # text, numbers, file names), so one bug gives one kind
     msg = re.sub(r"\s+", " ", msg or "the module failed").strip()
+    # the server's "Its last step was: Codebook Check (step 12 of 16):
+    # data.xlsx 93/109." keeps only the step's name ("Codebook Check"), so a
+    # time-out or crash in one check is one kind, whichever file it was
+    # reading (#9)
+    msg = re.sub(r"(Its last step was: )([^(:.]*?)\s*(?:[(:].*?)?\.( |$)",
+                 lambda m: f"{m.group(1)}{m.group(2)}.{m.group(3)}", msg)
     msg = re.sub(r"(['\"`]).*?\1", "'…'", msg)
     msg = re.sub(r"\d+(?:\.\d+)?", "N", msg)
     return msg[:300]
