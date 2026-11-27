@@ -1,0 +1,2471 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: How and why to read (and write and publish)
+academic research</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+How and why to read (and write and publish) academic research
+</p>
+<p class="meta">
+2026-11-27 · Metacheck 0.4.4.41 · DOI 10.31234/osf.io/p37zj_v5
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to
+fix</span></span><a class="count improve" href="#improve"><b>3</b><span>to
+check</span></a><span class="count decide zero"><b>0</b><span>to decide
+by
+hand</span></span><a class="count fine" href="#fine"><b>1</b><span>fine</span></a><a class="count na" href="#na"><b>10</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="improve">To check <span class="n">(3)</span></h2>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Repository Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We could not check 4 repositories: <a href="https://osf.io/preprints/socarxiv" class="uri">https://osf.io/preprints/socarxiv</a> (not a valid OSF
+link); <a href="https://osf.io/download" class="uri">https://osf.io/download</a> (not a valid OSF link); <a href="https://osf.io/preprints" class="uri">https://osf.io/preprints</a>
+(not a valid OSF link); R/R (invalid or inaccessible GitHub
+repository).</li>
+<li>We found 1 file in 5 repositories.</li>
+<li>The paper links to a file-sharing service (Google Drive), which is
+not a repository; share data and code in a stable repository such as
+Zenodo.</li>
+<li>We did not check 3 linked deposits that are not this paper’s own: <a href="https://github.com/apps/desktop" class="uri">https://github.com/apps/desktop</a> (others’ code);
+analysis/visualisation (others’ code); data/materials (others’
+code).</li>
+<li>We found 0 README files and 1 repository without READMEs.</li>
+<li>We found 2 file naming problems to fix.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<h4 id="repositories-that-could-not-be-checked">Repositories that could
+not be checked</h4>
+<p>These repositories are linked in the paper, but their contents could
+not be retrieved, so nothing below describes them. When the reason is
+that the platform did not answer, running the check again later may
+work.</p>
+<ul>
+<li><p><a href="https://osf.io/preprints/socarxiv" class="uri">https://osf.io/preprints/socarxiv</a>: not a valid OSF
+link</p></li>
+<li><p><a href="https://osf.io/download" class="uri">https://osf.io/download</a>: not a valid OSF link</p></li>
+<li><p><a href="https://osf.io/preprints" class="uri">https://osf.io/preprints</a>: not a valid OSF link</p></li>
+<li><p>R/R: invalid or inaccessible GitHub repository</p></li>
+</ul>
+<h4 id="file-sharing-services">File-sharing services</h4>
+<p>The paper links to a file-sharing service (Google Drive: <a href="https://docs.google.com/presentation/u/0/" class="uri">https://docs.google.com/presentation/u/0/</a>). Such
+services are not repositories: files can be changed or deleted at any
+time, they get no DOI, and the link stops working when the account is
+closed. Share data and code in a stable repository such as Zenodo.</p>
+<h4 id="deposits-we-did-not-check">Deposits we did not check</h4>
+<p>The paper links these deposits, but the paper or the deposit itself
+shows that they hold other people’s work or the authors’ earlier work,
+so we did not check them as the data and code of this paper (the table
+Whose Deposits gives the reason for each). If one of them is where you
+shared the data or code of this paper, name this paper in it: its title
+or DOI in the deposit’s description or README. Metacheck then checks
+it.</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/apps/desktop" target="_blank">github.com/apps/desktop</a>
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+made by others, and not presented as the paper’s own
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="analysis/visualisation" target="_blank">analysis/visualisation</a>
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+made by others, and not presented as the paper’s own
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="data/materials" target="_blank">data/materials</a>
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+made by others, and not presented as the paper’s own
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="whose-deposits">Whose Deposits</h4>
+<div style="max-height:28em;overflow:auto;">
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Cited in
+</th>
+<th style="text-align:left;">
+Whose
+</th>
+<th style="text-align:left;">
+Why
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/download/cme3d/?revision=1" target="_blank">osf.io/download/cme3d/?revision=1</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/preprints/socarxiv" target="_blank">osf.io/preprints/socarxiv</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://doi.org/10.31219/osf.io/3ez9v" target="_blank">doi.org/10.31219/osf.io/3ez9v</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/preprints/psyarxiv/gxzfq" target="_blank">osf.io/preprints/psyarxiv/gxzfq</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/download" target="_blank">osf.io/download</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/preprints" target="_blank">osf.io/preprints</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="osf.io/3ez9v" target="_blank">osf.io/3ez9v</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/apps/desktop" target="_blank">github.com/apps/desktop</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+made by others, and not presented as the paper’s own
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="R/R" target="_blank">R/R</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+the authors’, for this paper
+</td>
+<td style="text-align:left;">
+a link in the main text, not shown to be anyone else’s
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="analysis/visualisation" target="_blank">analysis/visualisation</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+made by others, and not presented as the paper’s own
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="data/materials" target="_blank">data/materials</a>
+</td>
+<td style="text-align:left;">
+text
+</td>
+<td style="text-align:left;">
+others’ code
+</td>
+<td style="text-align:left;">
+made by others, and not presented as the paper’s own
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="http://macsphere.mcmaster.ca/bitstream/11375/10988/1/fulltext.pdf" target="_blank">macsphere.mcmaster.ca/bitstream/11375/10988/1/fulltext.pdf</a>
+</td>
+<td style="text-align:left;">
+reference list
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://doi.org/10.5281/zenodo.20082828" target="_blank">doi.org/10.5281/zenodo.20082828</a>
+</td>
+<td style="text-align:left;">
+reference list
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication in a repository (its record says so), without data or code
+files
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://oceanrep.geomar.de/id/eprint/55819" target="_blank">oceanrep.geomar.de/id/eprint/55819</a>
+</td>
+<td style="text-align:left;">
+reference list
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication in a repository (its record says so), without data or code
+files
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="osf.io/a3h64" target="_blank">osf.io/a3h64</a>
+</td>
+<td style="text-align:left;">
+reference list
+</td>
+<td style="text-align:left;">
+a publication, not a deposit
+</td>
+<td style="text-align:left;">
+a publication: a preprint, an article or a manuscript, not a deposit
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="repositories">Repositories</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+Platform
+</th>
+<th style="text-align:left;">
+Error
+</th>
+<th style="text-align:right;">
+All Files
+</th>
+<th style="text-align:right;">
+Data Files
+</th>
+<th style="text-align:right;">
+Code Files
+</th>
+<th style="text-align:right;">
+READMEs
+</th>
+<th style="text-align:right;">
+Archives
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/download/cme3d/?revision=1" target="_blank">osf.io/download/cme3d/?revision=1</a>
+</td>
+<td style="text-align:left;">
+osf
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/preprints/socarxiv" target="_blank">osf.io/preprints/socarxiv</a>
+</td>
+<td style="text-align:left;">
+osf
+</td>
+<td style="text-align:left;">
+not a valid OSF link
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/download" target="_blank">osf.io/download</a>
+</td>
+<td style="text-align:left;">
+osf
+</td>
+<td style="text-align:left;">
+not a valid OSF link
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/preprints" target="_blank">osf.io/preprints</a>
+</td>
+<td style="text-align:left;">
+osf
+</td>
+<td style="text-align:left;">
+not a valid OSF link
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="R/R" target="_blank">R/R</a>
+</td>
+<td style="text-align:left;">
+github
+</td>
+<td style="text-align:left;">
+invalid or inaccessible GitHub repository
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="files">Files</h4>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Repository
+</th>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Size
+</th>
+<th style="text-align:left;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://osf.io/download/cme3d/?revision=1" class="uri">https://osf.io/download/cme3d/?revision=1</a>
+</td>
+<td style="text-align:left;">
+<a href="https://osf.io/download/cme3d/" target="_blank">Savage
+reading-writing (preprint).pdf</a>
+</td>
+<td style="text-align:left;">
+1.6 MB
+</td>
+<td style="text-align:left;">
+text
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="readme-files">README Files</h4>
+<p>README files are a way to document the contents and structure of a
+folder, helping users locate the information they need. You can use a
+README to document changes to a repository, and explain how files are
+named. Please consider adding a README to each repository or including
+‘README’ in the name of your overview document.</p>
+<h4 id="file-naming">File Naming</h4>
+<p>File names should be machine-parseable: no spaces or special
+characters, and every file should be classifiable by name or extension.
+We found 2 naming problems that should be fixed, and 0 files with a
+naming suggestion (not required, but a good habit).</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Rule
+</th>
+<th style="text-align:left;">
+Severity
+</th>
+<th style="text-align:left;">
+Detail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Savage reading-writing (preprint).pdf
+</td>
+<td style="text-align:left;">
+spaces
+</td>
+<td style="text-align:left;">
+Required
+</td>
+<td style="text-align:left;">
+contains a space
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Savage reading-writing (preprint).pdf
+</td>
+<td style="text-align:left;">
+special-characters
+</td>
+<td style="text-align:left;">
+Required
+</td>
+<td style="text-align:left;">
+contains a character other than letters, digits, underscore, or dash
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-classification">File Classification</h4>
+<div class="callout-note" title="See how every file was classified and grouped" collapse="true">
+<p><strong>documentation</strong> (1 file)</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Group
+</th>
+<th style="text-align:left;">
+Path
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Savage reading-writing (preprint).pdf
+</td>
+<td style="text-align:left;">
+ex1
+</td>
+<td style="text-align:left;">
+Savage reading-writing (preprint).pdf
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Code Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</li>
+<li>We could not list every file of 4 repositories, so the checks did
+not see all their files: <a href="https://osf.io/preprints/socarxiv" class="uri">https://osf.io/preprints/socarxiv</a> (could not be listed:
+not a valid OSF link); <a href="https://osf.io/download" class="uri">https://osf.io/download</a> (could not be listed: not a
+valid OSF link); <a href="https://osf.io/preprints" class="uri">https://osf.io/preprints</a> (could not be listed: not a
+valid OSF link); R/R (could not be listed: invalid or inaccessible
+GitHub repository).</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div id="repositories-not-listed-in-full" class="fold">
+<h4>Repositories not listed in full</h4>
+<p>The checks below did not see every file of these repositories,
+because they could not be listed in full:</p>
+<ul>
+<li><p><a href="https://osf.io/preprints/socarxiv" class="uri">https://osf.io/preprints/socarxiv</a>: could not be listed
+(not a valid OSF link), so none of its files were checked.</p></li>
+<li><p><a href="https://osf.io/download" class="uri">https://osf.io/download</a>: could not be listed (not a
+valid OSF link), so none of its files were checked.</p></li>
+<li><p><a href="https://osf.io/preprints" class="uri">https://osf.io/preprints</a>: could not be listed (not a
+valid OSF link), so none of its files were checked.</p></li>
+<li><p>R/R: could not be listed (invalid or inaccessible GitHub
+repository), so none of its files were checked.</p></li>
+</ul>
+</div>
+</details>
+</div>
+<div class="check improve">
+<div class="check-head">
+<p><span class="tag improve">To check</span> <span class="check-title">Data Check</span></p>
+</div>
+<div class="rows">
+<div class="label">
+<p>What we found</p>
+</div>
+<div class="text">
+<ul>
+<li>We could not list every file of 4 repositories, so the checks did
+not see all their files: <a href="https://osf.io/preprints/socarxiv" class="uri">https://osf.io/preprints/socarxiv</a> (could not be listed:
+not a valid OSF link); <a href="https://osf.io/download" class="uri">https://osf.io/download</a> (could not be listed: not a
+valid OSF link); <a href="https://osf.io/preprints" class="uri">https://osf.io/preprints</a> (could not be listed: not a
+valid OSF link); R/R (could not be listed: invalid or inaccessible
+GitHub repository).</li>
+<li>We classified 1 file: 1 documentation.</li>
+<li>We found 0 tabular data files and extracted 0 columns from 0 of
+them.</li>
+<li>We grouped the files into 1 study group (ex1). We found no readable
+tabular data files to validate.</li>
+</ul>
+</div>
+</div>
+<details>
+<summary>
+Show details
+</summary>
+<div class="fold">
+<p>This module classifies repository files and, for tabular data files
+available locally, extracts each column’s type and summary
+statistics.</p>
+<h4 id="repositories-not-listed-in-full-1">Repositories not listed in
+full</h4>
+<p>The checks below did not see every file of these repositories,
+because they could not be listed in full:</p>
+<ul>
+<li><p><a href="https://osf.io/preprints/socarxiv" class="uri">https://osf.io/preprints/socarxiv</a>: could not be listed
+(not a valid OSF link), so none of its files were checked.</p></li>
+<li><p><a href="https://osf.io/download" class="uri">https://osf.io/download</a>: could not be listed (not a
+valid OSF link), so none of its files were checked.</p></li>
+<li><p><a href="https://osf.io/preprints" class="uri">https://osf.io/preprints</a>: could not be listed (not a
+valid OSF link), so none of its files were checked.</p></li>
+<li><p>R/R: could not be listed (invalid or inaccessible GitHub
+repository), so none of its files were checked.</p></li>
+</ul>
+</div>
+</details>
+</div>
+<h2 id="info">For information <span class="n">(2)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>You cited 1 reference with comments in PubPeer.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>We found 1 replication for 1 original you cited.</p>
+</div>
+</div>
+</div>
+<h2 id="fine">Fine <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag fine">Fine</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>All papers that appeared to report data about people or animals that
+need an ethics statement contained one.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(10)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>We found 8 OSF links, but no registrations.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+</div>
+<h2 id="files">Files in the repository</h2>
+<p>Where the files sit within each repository. Each file is followed by
+how it was classified, which study it belongs to, and any file-naming
+issue found by repo_check; junk files, hidden files and empty folders
+are marked.</p>
+<p><strong>Repository: <a href="https://osf.io/download/cme3d/?revision=1" class="uri">https://osf.io/download/cme3d/?revision=1</a></strong></p>
+<div style="max-height: 40em; overflow: auto;">
+<pre><code>└── Savage reading-writing (preprint).pdf  📖 documentation ex1  contains a space</code></pre>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper appears to analyse data about people, from a source we
+could not identify, and it has an ethics statement.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>Only once you have done this and evaluated whether it seems worth
+your time do I recommend deciding whether to read every word of some/all
+sections/chapters (and any accompanying supplementary material) or
+digging deeper into reanalysing/replicating the data.</p>
+</blockquote>
+<blockquote>
+<p>If I am really interested, I might even go on to replicate the
+original analysis using the original data/code, and perhaps even try
+reanalysing it using alternative methods.</p>
+</blockquote>
+<blockquote>
+<p>7 I have, however, been on the receiving end of such reanalysis.</p>
+</blockquote>
+<p>Ethics statement:</p>
+<blockquote>
+<p>Institutional ethical approval was not required since I am not
+reporting any newly collected data.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 40 references with DOIs. You cited 1 reference with
+comments in PubPeer.</p>
+<p>Pubpeer is a platform for post-publication peer review. We have
+filtered out Pubpeer comments by ‘Statcheck’. You can check out the
+comments by visiting the URLs below:</p>
+<table class="dt-static">
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+<th style="text-align:left;">
+Commenters
+</th>
+<th style="text-align:left;">
+PubPeer Link
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Smaldino, P. E., &amp; McElreath, R. (2016). The natural selection of
+bad science. Royal Society Open Science, 3(9). <a href="https://doi.org/10.1098/rsos.160384" class="uri">https://doi.org/10.1098/rsos.160384</a>
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+Spilogona novemmaculata, Digitivalva pappella, Anolis jacare, Lydia M.
+Maniatis, Jose D. Perezgonzalez, Celmisia mackaui, Exobasidium
+ferrugineae
+</td>
+<td style="text-align:left;">
+<a href="https://pubpeer.com/publications/75CF8A1B2CE4E6B4BE2C97436CFD44" target="_blank">link</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 40 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 40 references with DOIs. We found 1 replication for 1
+original you cited.</p>
+<p>Check if you are aware of the replication studies, and cite them
+where appropriate.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:50%" />
+<col style="width:50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:left;">
+Replication
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Smaldino, P. E., &amp; McElreath, R. (2016). The natural selection of
+bad science. Royal Society Open Science, 3(9). <a href="https://doi.org/10.1098/rsos.160384" class="uri">https://doi.org/10.1098/rsos.160384</a>
+</td>
+<td style="text-align:left;">
+Kohrt, F., Smaldino, P. E., McElreath, R., &amp; Schönbrodt, F. (2023).
+Replication of the natural selection of bad science. Royal Society Open
+Science, 10(2).
+<a href="https://doi.org/10.1098/rsos.221306" target="_blank">doi:10.1098/rsos.221306</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>This article is designed to concisely teach undergraduate and new graduate students lessons in reading and writing I have learned in my past two decades as a university student, teacher, and researcher (including through publishing, retracting, correcting, and republishing articles in outlets with varying levels of &quot;impact&quot; and publication fees). Don&#x27;t just start at the beginning of an academic article/book and try to read straight to the end! Instead, I recommend starting by reading the title(s)/author(s) and abstract(s), then the figures, reading the Discussion section, and skimming/spot-checking the references, peer reviews, and data (e.g., spreadsheets, audiovisual stimuli, surveys), if available. Only once you have done this and evaluated whether it seems worth your time do I recommend deciding whether to read every word of some/all sections/chapters (and any accompanying supplementary material) or digging deeper into reanalysing/replicating the data. I recommend writing accordingly so that most of your key information will be conveyed even if your reader only gets through your title, abstract, and figures. I discuss various strategies to improve your own academic reading/writing and the broader culture of academia, from practical (e.g., formatting and tracking references and citations using Zotero and Google Scholar, asking constructive questions rather than self-promoting comments, publishing using Peer Community In Registered Reports, using the &quot;sandwich thesis&quot; model for PhD dissertations) to philosophical (e.g., ethical issues in authorship, citation, AI, publishing, and funding). I explain the intended goals of academic research (to create and distribute valuable new knowledge) and perverse incentives that lead us astray from these goals (e.g., chasing prestige and funding). I conclude by contemplating if and how we should dismantle the current extortionary academic-industrial complex and re-design it to align with its intended goals.</p>
+<h3>Introduction</h3>
+<p>In 2004, as a 2 nd year undergraduate student majoring in music composition at a liberal arts college, I read a book called &quot;How To Read A Book&quot; (Adler &amp; van Doren, 1972) during a course on &quot;Introduction to Black Studies&quot; that completely changed the way I read and think. Until then, I would read the books and articles assigned for my courses by starting at the beginning and reading until the end, or until I ran out of time before class. This felt like a normal way to read, and seemed to have served me well throughout high school and my first year of undergrad, although I was increasingly finding it harder to finish all my assigned reading.</p>
+<p>When we discussed How To Read A Book, I realised I had been reading wrong the whole time! Reading from beginning to end is fine if you are reading a novel for enjoyment, especially if you don&#x27;t want to spoil the ending. But if you want to do analytical reading and critical thinking of the kind needed for academic research, it is very inefficient -especially if you run out of time before you get to the main conclusion of the book/article! Fast-forward to 2018, when I became a tenure-track faculty member and started teaching my own classes. I began assigning How To Read A Book to my own students at the beginning of every semester, but ironically found it was too long for most of my students to read. It is also aimed more at reading humanities books, and less at the scientific articles that I mostly assign to my students now. And its emphasis on &quot;Great Books of the Western World&quot; has not aged well.</p>
+<p>When I searched for something more relevant and concisehttps://www.zotero.org/google-docs/?1LM8ga I found &quot;How to (seriously) read a scientific article&quot; (Pain, 2016) , which interviewed a diverse array of scientists and shared some of their tips. But it had the opposite problem of feeling too short and targeted at scientists who already knew key information about how to read scientific articles, without providing a coherent method that an undergraduate or new graduate student who hadn&#x27;t previously done much research could use. So I decided I would write my own &quot;how to&quot; guide to explain my method I had developed over my career as an ethnomusicologist and scientist experimenting with these and other ways of reading and writing scientific and humanistic journal articles and books 1.</p>
+<h3>How to read efficiently</h3>
+<p>The further I got in academia, the more I realised that it&#x27;s often not worth your time to read every word of every book or article. Life is full of opportunity costs. Every hour you spend reading one article/book is an hour you don&#x27;t spend reading another -not to mention performing/writing your own research, exercising, spending time with loved ones, etc. Often, you can learn more by spending the same amount of time partially reading 10 different articles/books than you can by spending that time closely reading a single article/book. This does not mean you should never read an entire article/book! Often it is essential to fully read and understand all the details of a work, especially if it is closely connected to new research you are working on. I hope that you find this article and some of my academic research interesting and important enough that you choose to ultimately read every word. But typically, such complete and meticulous reading ends up being the exception rather than the rule (Bloom, 2023).</p>
+<p>Instead of reading from beginning to end, How To Read A Book taught me to jump forward and backward using &quot;systematic skimming&quot; and &quot;pre-reading&quot; to identify key information (e.g., main conclusion, main evidence supporting that conclusion, why this conclusion matters) before I started to closely read the main text in detail. It also taught me that sometimes reading beyond the book/article itself (e.g., online searches about the book/article, its author(s), and its impact in news media/policy) helped to understand the context before close reading.</p>
+<h3>If you haven&#x27;t already, stop reading now and try skimming through the rest of the article to check out the figures and the concluding &quot;Why read or write academic research at all?&quot; section. You might want to search one of the topics that catches your interest or quickly check out my lab homepage (http://compmusic.info) or Google Scholar profile (Fig 2).</h3>
+<p>Still want to know more? Then come back here and continue reading.</p>
+<h3>How to read a scientific journal article</h3>
+<p>As I started graduate school in psychology in 2009, I learned that scientific journal articles had developed a somewhat standardised structure that made the reading process easier, particularly by an &quot;Abstract&quot; that briefly summarised key elements of an article (typically in under 300 words) and the use of a small number (typically 3-6) of main figures/tables that visualised key methods, data, and analyses (Fig. 1). Increasingly, journals are also encouraging or requiring authors to make their titles, abstracts, and figures as specific as possible to ensure that key information (e.g., main conclusion, sample size/location, strength of effects, distribution of individual data points) can be easily evaluated (https://www.zotero.org/google-docs/?FDBn4Q.</p>
+<p>I also pay attention to the authors and their institutional affiliations 2 . Are the authors known for a particular hypothesis? Are they from the countries and communities where the data was collected (https://www.zotero.org/google-docs/?evfDEu)? Are any affiliations or funding from organisations with vested interests in the results? The answers to these questions are not necessarily disqualifying, but may provide additional angles to consider as you read. For example, data from a study about smoking funded by a tobacco company or about religion funded by a religious charity are not necessarily wrong, but the authors might be under (conscious or unconscious) pressure to interpret them in certain ways.</p>
+<p>Most scientific articles also tend to use a standardised structure, with an &quot;Introduction&quot; summarising why the study was done, &quot;Methods&quot; explaining how it was done, &quot;Results&quot; describing what was found, and &quot;Discussion&quot; section connecting the Results to the Introduction to interpret how the new findings added to our previous knowledge (&quot;so what?&quot;) 2 Author number and order can matter but also vary a lot by field and over time. Best practice is to use &quot;Author Contribution&quot; statements to specify who did what, rather than relying on inferring contributions based on author order/number (NISO CRediT Working Group, 2022). Just within the fields I work in, ethnomusicologists typically publish sole-authored research and often determine author order alphabetically in the rare but increasing instances of coauthorship. Meanwhile, most psychology articles these days have multiple coauthors, sometimes numbering into the dozens or even hundreds. Often a graduate student or postdoctoral researcher (recent PhD graduate) who does most of the laborious work (e.g., running experiments, analysing the data, drafting the paper) will be listed as 1 st author, their supervisor and/or &quot;Principal Investigator&quot; (PI) who conceives and manages the project, writes the grant applications that fund the research, and mentors the 1 st author, will be last author, with other authors falling in between, sometimes in idiosyncratic orders. This was the model we used in Fig. 1, where my PhD student Yuto Ozaki was first author, I was last author, and the other 73 middle authors were listed in the order they joined the project. and clarify any limitations and future directions. These sections are all typically summarised in condensed form in the abstract (Fig. 1). Increasingly, articles will also provide standardised statements (typically just before or after the References section) regarding &quot;Data/code availability&quot;, &quot;Author contributions&quot;, &quot;Acknowledgments&quot;, &quot;Funding&quot;, &quot;Conflicts of Interest&quot;, &quot;Ethics and Inclusion&quot;, &quot;Peer Review&quot;, &quot;AI Statement&quot;, etc. that are often worth briefly checking before delving into the main text 3 . In particular, it is increasingly expected or required for articles to publicly share raw data and analysis code. I find that doing brief &quot;spot checks&quot; of such data/code (e.g., skimming through the main spreadsheet of raw data; listening to a few randomly selected audio/visual recordings used as experimental stimuli; or testing out the online survey interface used to collect data) sometimes helps to get a better sense of the value and limitations of the data than comes across in the processed figures in the article. I also often skim the Reference section to check which key works (from my and other labs) are cited or excluded. As I wrote in one of my own peer reviews: &quot;the basic requirement of original academic research, whether qualitative or quantitative, is to engage with and cite previous relevant work and demonstrate how you add knowledge to it.&quot; (Savage, 2024a). This is important not only to understand how new research builds on previous work to create new knowledge, but also because -for better and for worse -citations are one of the key proxies used to evaluate the impact and value of academic research, with websites such as Google Scholar 4 automatically tallying how often different articles and researchers are cited (Fig. 2) 5.</p>
+<p>Considering ethical aspects of citation practices is thus a crucial, but under-appreciated, part of academic reading and writing (Penders, 2018). This includes &quot;citational justice&quot;, or ensuring proper credit to researchers from under-represented demographics (Kwon, 2022; Smith, 1999). Peer review, or critical evaluation by other experts to determine whether something is &quot;valuable new knowledge&quot;, is often considered the defining feature that separates &quot;academic&quot; articles/books from &quot;non-academic&quot; publications like newspaper articles, blogs, and popular books. Historically, the actual written peer reviews themselves were not published, only read by editors to decide whether to publish the reviewed research. But now that online publications are no longer constrained by printed page space, this knowledge no longer needs to be hidden, so some have begun publishing the full peer review history of articles online (including expert reviews, editorial summaries, and author responses, often extending through multiple rounds; https://www.zotero.org/google-docs/?O2bxgW. These can sometimes be longer than the actual articles themselves, on the higher side but I think reasonable given that this article focuses on lessons I&#x27;ve learned through my own career reading and writing.</p>
+<p>Although these metrics can be gamed, I still prefer individual article-level metrics of impact such as Google Scholar citations or &quot;altmetrics&quot; to the main alternative method of evaluating research based on the prestige/impact of the journal it was published in (e.g., based on metrics such as Journal Impact Factor). The best way to evaluate someone&#x27;s research is to actually read it carefully, but here we return to the problem of limited time.</p>
+<p>but often get at the heart of what is really important or challenging about the research, so are often worth at least skimming if they are available. You can read most of the multi-stage peer review process behind the article shown in Fig. 1 at Chambers (2023a, 2023b) 6.There is no single &quot;correct&quot; way to read academic research, but others have offered helpful tips that work best for them (Adler &amp; van Doren, 1972; Carey et al., 2020; Pain, 2016). Personally, I have found that by carefully reading just the title, abstract, figures/tables, and Discussion section and spending a few minutes spot-checking any companion data, I typically feel I have learned most of the knowledge that is contained in the full article (Fig. 3). If the authors have done a good job with their title, abstract, and figures, I should by now already know key information about the data and methods (e.g., where/how were participants recruited? how many?), but often this information is sadly buried in the Methods section, so I will often skim that next if needed. Only if I have the time and interest do I go on to read the rest of the text in the article and any supplementary material. If I am really interested, I might even go on to replicate the original analysis using the original data/code, and perhaps even try reanalysing it using alternative methods. This can be quite time-consuming and so I do it rarely 7 . After you&#x27;ve finished reading, I recommend making a note of your main impressions and key figures/quotes. I write these into the &quot;Notes&quot; tab in Zotero (a free reference management desktop app) so that I can easily search back over all the research I&#x27;ve read to remind myself what I thought about them when it comes time to cite them in my own research. Zotero largely automates the laborious process of formatting references, which can be especially helpful when you need to reformat/reorder your references to fit the style used by a certain professor or publisher. However, it&#x27;s important to manually check and correct your reference list before submitting, as automated methods are rarely perfect (see &quot;AI-generated fabrications as academic misconduct&quot; section below).</p>
+<p>7 I have, however, been on the receiving end of such reanalysis. The first analysis code I ever published to a GitHub repository contained a serious error in the way I treated missing data. In a nutshell, I converted &quot;NA&quot; values indicating an absence of evidence (of beliefs in moralising gods) into &quot;0&quot; values, indicating evidence of absence. Other researchers (including some rivals and some collaborators) identified this error and reanalysed the data and code we published to show how our results could change if other ways of dealing with missing data were used (Beheim et al., 2021). This led us to retract and republish our article after correcting the data and code (Whitehouse et al., 2023). Such issues with missing data turn out to be extremely common, and the saga became a literal textbook example of how not to deal with missing data, in a statistics textbook section entitled &quot;Where is your god now?&quot; (McElreath, 2020).</p>
+<p>To be honest, the whole 3-year process between identifying the error, retracting, and republishing the corrected article was incredibly stressful and I could barely sleep for weeks during some parts of it. In retrospect, however, it may have been one of the best things that happened to me as it taught me some invaluable lessons not just about dealing with missing data, but about how and why we do research, why anyone cares whether complex societies precede or follow moralising gods, or why anyone cares whether the results are published in Nature or in Religion, Brain &amp; Behaviour. I could have reacted by deciding to never again share data or code that might again leave me vulnerable to criticism. Instead, I decided to embrace maximal transparency via formats like Registered Reports designed to reduce biases in the publication process and to identify and correct critical errors before collecting and analysing data (Henderson &amp; Chambers, 2022).</p>
+<p>I also have a nice example of when sharing data/code had a more unambiguously positive payoff. I was recently contacted by a prominent news outlet wanting to feature our study from Fig. 1. Thanks to our open data/code, they were able to reanalyse and re-visualise our data in a way that was more striking and intuitive for a broad audience than the way we visualised it in the original scientific article (Parshall et al., 2024). Try not to focus only on negatives or only positives but offer constructive criticism. The questions I ask my students to keep in mind are: 1) How convincing is it? (e.g., how strongly do the data shown in the figures support the main claims in the title and abstract?) 2) What did you like? 3) How could it have been improved? 4) What questions would you like to ask the author(s)?</p>
+<p>Practise framing questions to be short and open-ended, so if you were to ask them after a presentation, it would lead to useful discussion. Be ready to ask a single, short question after a presentation or in a class/journal club. Try not to worry about feeling like it is a stupid question. There are few stupid questions. What is stupid is &quot;questions&quot; that are actually self-promoting comments. Please don&#x27;t be that guy (and it&#x27;s almost always a guy) who hogs most of the Question and Answer time after a conference presentation rambling on about their own research, ending with &quot;so what do you think about that?&quot;. If you are asked such a stupid &quot;question&quot; as a presenter and want to diplomatically avoid wasting any more time, try saying something like &quot;Thank you for your comment. Next question, please.&quot; How to read books, review articles, and humanities articles My approach summarised above and in Fig. 3 is particularly aimed at reading scientific journal articles reporting new data, as they tend to follow the most predictable structure.</p>
+<p>However, the same principles can be applied with some modifications to read other kinds of research (recall that my method was inspired by &quot;How to read a book&quot; which was more focused on humanities books).</p>
+<p>For example, while humanities articles and books in the past often did not include abstracts or figures, many have started adopting them -including increasingly adding individual abstracts for each book chapter. The exact type of data and figures/tables may be different (e.g., fieldwork photos or qualitative analyses instead of sample maps and quantitative analyses), but the basic concept of using visualisations to summarise information is the same. However, older articles/books (including some older scientific articles) often don&#x27;t include these, which unfortunately makes it more work for the reader to have to figure out the key information from the full article/chapter itself without the aid of an abstract or figures conveniently summarising everything. Furthermore, while humanities articles/books and scientific review articles synthesising many previous studies don&#x27;t tend to have &quot;Methods&quot; and &quot;Results&quot; sections, they still tend to have an &quot;Introduction&quot; and &quot;Discussion&quot; (or sometimes &quot;Conclusion&quot;) section that functions similarly. Even some scientific journals don&#x27;t clearly separate the &quot;Results&quot; and &quot;Discussion&quot; section of articles -in such cases I recommend reading the final few paragraphs of the final section first instead (whether it is called &quot;Results/Discussion&quot;, &quot;Conclusions&quot;, or something else).</p>
+<p>Academic books represent a slightly trickier challenge, as the structure is somewhat different, since the book chapters basically function as a set of interconnected articles. For one thing, books tend to have a Table of Contents including chapters and section titles, which functions as a sort of abstract of its own. Another key difference with academic books is that, rather than having the final chapter/section being the &quot;so what&quot; part that summarizes the contribution of the book, this tends to happen in the first chapter, which ends up functioning as a kind of abstract and Discussion section combined. For this reason, I generally recommend reading the full first chapter of an academic book as well as skimming the figures before deciding if/how to read the other chapters.</p>
+<p>I encourage you to experiment with reading diverse articles/books using my proposed method and methods proposed by others (e.g., Adler &amp; van Doren, 1972; Pain, 2016; Carey et al., 2020). See what works best for you, and feel free to pick and choose from our suggestions and your own preferred methods.</p>
+<h3>How to write academic research</h3>
+<p>There are many published guides to academic writing (https://www.zotero.org/google-docs/?qCDWCH  Mensh &amp; Kording, 2017; Zhang, 2014) -much more than for reading -so I will not try to provide a detailed guide here. When I was a new grad student I found the short &quot;Publish like a pro&quot; (Powell, 2010) particularly useful when drafting my first research articles, and now recommend it to my own students. I particularly emphasise the following points: 1) Good writing starts with good thinking (&quot;the writing process starts at the earliest stages of designing a research project.</p>
+<p>&#x27;Nothing beats a comprehensive, thought-out experiment. Do that up front and your writing will come so much more easily…&#x27;&quot;) 2) Less is more (&quot;a lot of weak data does not make up for having less, but more powerful, data&quot;; &quot;the discussion is not a treatise on the paper&#x27;s subject&quot;foot_3 ) 3) Imitate research that inspires you (&quot;Aspiring writers should have a template to hand -a previous paper published by the lab or a &#x27;near-neighbour&#x27; article from the same journal.</p>
+<p>Nazaroff advises paralysed would-be writers to take the template concept one step further by counting the number of paragraphs in each section, the number of figures and the number of references.&quot;) 4) Get feedback (&quot;Writers should ask not only the principal investigator to view drafts, but also every co-author, as well as fellow students or postdocs, and colleagues outside the immediate field of research. Lead authors should give co-authors set deadlines of 10 days to two weeks to suggest changes.&quot;) I would just add to this that I believe the key to good writing is thinking about your reading audience. So, the easiest way to improve your writing is to reverse my reading tips above.</p>
+<p>Imagine that, realistically, most of your audience &quot;ain&#x27;t reading all that&quot; (Fig. 3; Adam &amp; Walker, 2019) and may only read your title, abstract, and -if you&#x27;re lucky -figures and Discussion section. Try to craft those so that those readers will still get most of the important points from your own research. In fact, I recommend writing in the same order as reading: start by drafting your title/authors, then abstract, then figures. Only once you (and any collaborators/supervisors) are happy with their basic content do I recommend moving on to drafting detailed text 9.</p>
+<p>I recommend starting with a written outline before drafting the main text, but I particularly recommend treating your figures as a kind of visual outline. Imagine that the job of your written text is to create a narrative interpreting the context and meaning of those figures.</p>
+<p>Giving oral presentations 10 using slides in classes and conferences is a good way to develop this kind of visual narrative structure before committing it to text.</p>
+<h3>How to write a dissertation using the &quot;sandwich thesis&quot; model</h3>
+<p>Getting a job in academia typically requires a postgraduate degree, particularly the highest degree of Ph.D. (from the Latin philosophiae doctor, or doctor of philosophy). Whether you are a computer scientist, musicologist, or biologist, one thing that unites most professional academics with a Ph.D. is that we have all demonstrated our creation of valuable new knowledge in the form of a long (~50,000-word) written dissertation that we defend to a committee of experts through a series of oral questions and answers (https://www.zotero.org/google-docs/?qLIP4n. 10 Remember one golden rule for presentations: DO NOT GO OVER TIME! We know you care deeply about your research. Everyone else cares deeply about theirs too, and the amount of extra time you take is effectively stealing time from others. Plan for 1 minute per slide, and always practise and time yourself beforehand. Also, try to make it fun for your audience. If you are in a music lab like mine, it is easy to liven presentations up by including music examples in your slides. Just be sure to test beforehand to ensure the sound works. 9 You do not necessarily have to have collected all or even any of your data or made your conclusions to create figures/abstracts/titles! In fact, I am a strong advocate for using Registered Reports, where the Introduction and Methods sections are peer-reviewed and accepted in principle before collecting and analysing data (Henderson &amp; Chambers, 2022). Importantly, however, you are required to include an abstract and table specifying how your proposed design would add to existing knowledge, and encouraged to provide figures with simulated and/or pilot data to show how your proposed analysis methods would look once you have collected real data. In my experience, the process of creating such tables and figures often brings to light crucial weaknesses in the design that are not obvious when the design is simply described using text, allowing these to be improved prior to collecting real data. Of course, you will ultimately want to revisit and revise your abstract/title, especially once you have collected data to enable you to make firm conclusions. For example, the original title of the article shown in Fig. 1 before collecting data was &quot;Similarities and differences in a global sample of song and speech recordings&quot;.</p>
+<p>The PhD dissertation is a strange document. They are usually the product of at least three years of research, and often many more. They are much longer than typical journal articles (which are usually less than 10,000 words), and are read by fewer people. Of the 3-5 people on your committee, you will be lucky if even two of them have carefully read every word of your dissertation (see Fig. 3; though at the very least your primary supervisor should have done this!). After the defense, hardly anyone will ever read your full dissertation again (unless someone is seeking to destroy your career; see Tollefson, 2024).</p>
+<p>In the old days, the dissertation would sometimes function as a draft of a published book. But these days, publishers rarely agree to publish books based on dissertations without major revisions and additions. Peer-reviewed journal articles are also increasingly emphasized over books when it comes to evaluating scholars for jobs, grants, etc.</p>
+<p>So why bother spending so much time and energy writing a sprawling document that hardly anyone will ever read? My simple answer is that you shouldn&#x27;t waste your time writing a traditional PhD dissertation. Instead, I recommend the &quot;sandwich thesis&quot; model. Figure 4 shows how the article shown in Fig. 1 was incorporated into Yuto Ozaki&#x27;s (https://www.zotero.org/google-docs/?hAFsL4) PhD dissertation using this model. I also used this model in my own PhD and Master&#x27;s dissertations (Savage, 2011 (Savage, , 2014 (Savage, , 2017)). The basic idea of a &quot;sandwich thesis&quot; is to structure the dissertation around two or more central chapters (the &quot;meat&quot; of the sandwich) that are intended to stand alone as peer-reviewed journal articles. These could be already published or accepted for publication in a journal, or they could be a draft that undergoes further revision before publication. The important thing is that these chapters are designed to be shared with a much broader audience than just your 3-5 person dissertation committee. These &quot;meat&quot; chapters can be coauthored (as most scientific articles are these days), but should have been primarily led by you. The University of Auckland (https://www.zotero.org/google-docs/?WoLFeO) defines this as follows:</p>
+<p>To be lead author, the candidate must have written all or the majority of the text and have their contribution to the publication confirmed by all contributors, in the Statement of Contribution…as no less than 65%....</p>
+<p>There are often other rules (e.g., word count, formatting, permissions, eligible dates/publishers, additional chapters on methodology). Be very careful to confirm your university&#x27;s policy early on! Different universities have different rules, and some don&#x27;t even allow the &quot;sandwich thesis&quot; format at all! Whatever format you use, it is very important that you are very transparent about which portions of your dissertation are not your own work. Numerous public figures, including the President of Harvard University, have been forced to resign for plagiarism-related issues in their PhD dissertations (https://www.zotero.org/google-docs/?D37SMQ  Tollefson, 2024).</p>
+<p>The other crucial ingredients of your dissertation are the introductory and concluding chapters (the &quot;bread&quot; of your sandwich). These don&#x27;t need to be as long as the &quot;meat&quot; chapters, but they should be written solely by you (without any coauthors), clarifying what your own contributions were to any coauthored articles, and binding your &quot;meat&quot; chapters together into a broader whole. This &quot;bread&quot; is crucial -while some use the term &quot;stapler thesis&quot; instead of &quot;sandwich thesis&quot;, a proper PhD is not simply the sum of its publications stapled together, but requires the PhD candidate to show how these publications fit together to form a broader contribution to knowledge. Like a good sandwich, a good PhD is more than just the sum of its parts.</p>
+<p>Another useful metaphor is thinking of individual journal articles as bricks, and PhD dissertations and the broader academic literature in general as edifices of knowledge built from these bricks. Resist any pressure you might experience to think of individual articles/bricks as the end product themselves, or that simply publishing a certain number of journal articles is all you need to get a PhD/job or contribute to society. As Bernard Forscher warned in his parable, &quot;Chaos in the brickyard&quot;: Once upon a time…there was an activity called scientific research and the performers of this activity were called scientists. In reality, however, these [scientists] were builders who constructed edifices, called explanations or laws, by assembling bricks, called facts…. And then it came to pass that a misunderstanding spread among the brickmakers…. The brickmakers became obsessed with the making of bricks…. It even was suggested that the production of a suitable number of bricks was equivalent to building an edifice and therefore should entitle the industrious brickmaker to assume the title of builder and, with the title, the authority…saddest of all, sometimes no effort was made even to maintain the distinction between a pile of bricks and a true edifice. (Forscher, 1963)</p>
+<h3>AI-generated fabrications as academic misconduct</h3>
+<p>The first version of this guide I posted in September 2024 (https://osf.io/download/cme3d/?revision=1) didn&#x27;t mention artificial intelligence. At my students&#x27; request, I added a section titled &quot;On coexisting with AI in academic research&quot;, which originally suggested that &quot;if you are comfortable admitting how you used AI, you are probably OK using it, so be sure to transparently disclose if and how you use AI.&quot; In retrospect, although the importance of transparent AI declaration still holds, the part about being &quot;probably OK&quot; was somewhat näive.</p>
+<p>Since then, genAI has transformed academia and the world more rapidly than any previous technology I&#x27;ve experienced in my lifetime. In my experience, these changes have not been for the better (Fig. 5). I&#x27;ve become increasingly disillusioned and distressed by the uncritical and unethical ways I&#x27;ve seen people in universities (including my own students, colleagues, and administrators) and corporations using and promoting genAI to replace rather than assist their own thinking (Baker, 2026; Goldstein, 2026; Guest et al., 2026; Naddaf &amp; Quill, 2026). The main ways genAI has affected my own life have mostly been negative, sucking up my own time and happiness as an academic being forced to read/evaluate/fix bland AI-generated texts that appear superficially plausible but on closer inspection are full of errors and fabrications (&quot;hallucinations&quot;foot_4 ). Skywalker saying &quot;I&#x27;m going to change the world&quot;, not long before he succumbed to the dark side and became Darth Vader.</p>
+<p>I am sensing a growing consensus among colleagues that AI tools have many legitimate academic uses when carefully supervised, checked, and corrected by humans (e.g., transcription, coding, finding relevant papers, feedback on draft manuscripts), but a clear line should be drawn between such uses and AI-generated text or images, which are not acceptable in academic settings except in special circumstances. For examplehttps://www.zotero.org/google-docs/?4zhemY a leading AI expert, Stanford Professor Michael Frank (2026) , proposes that genAI &quot;agents should not directly touch the text of the paper. Paper text should be written by a human. If agents write text, it&#x27;s still far too easy for them to make things up (especially references) and to write text that is superficially correct but unmoored to the actual human research activities.&quot;</p>
+<p>Frank&#x27;s comment that genAI tends to &quot;make things up&quot; is one of my core concerns. Fabricated references have emerged as one of the clearest signatures of AI-generated writing (Fig. 6). Traditionally, academics have required that factual claims are supported either by new evidence or by citations to previous evidence to allow readers to independently verify the source of the claim. The &quot;References&quot; section of this and other papers is thus not merely a formality, but a form of scientific data and core component of academic integrity. Just as fabricating data in scientific figures or quotations in interviews is considered an unacceptable form of research misconduct, in at least some cases, &quot;Hallucinated citations produced by generative artificial intelligence may constitute research misconduct&quot; (Resnik &amp; Hosseini, 2026; see Naddaf &amp; Quill, 2026). Importantly, AI fabrications are by no means limited to references -these are just some of the easiest to catch and provefoot_5 . AI-fabricated figures, such as the infamous rat &quot;dck&quot; (Fig. 7) are increasingly leading research papers to be retracted. I have had the distinct displeasure in recent years to personally witness numerous examples of AI-fabricated images, quotations, and references in research articles and student assignments. Particularly obvious examples included fabricated articles attributed to me! (Fig. 6) Using AI to help find and summarise existing research articles is less problematic, but is still subject to similar issues of unreliability due to fabrications and errors. If there weren&#x27;t more reliable strategies available, I might recommend it to help summarise research articles. But as I&#x27;ve described above, most modern research articles already come with a short summary abstract written by the authors themselves and peer-reviewed for accuracy, which is usually much more reliable than an AI-generated summary! Combining this abstract with the strategies for reading efficiently I&#x27;ve outlined in this article, I don&#x27;t think AI currently adds much value to the process, with the exception of sometimes helping with online searches to find articles in the first place or find additional context beyond the article itself.</p>
+<p>Some universities, including my own, have essentially capitulated to BigAI, signing agreements with corporations like OpenAI (often without faculty consultation) or opening &quot;two-lane&quot; assessment where students are allowed or encouraged to use genAI (Curtis, 2025). I predict this will end badly. Since I can no longer rely on university academic integrity policy on AI, here is my own policy. Sadly, it is much stricter than my earlier policies, since students, authors, and BigAI corporations took advantage of my and others&#x27; previous willingness to give the benefit of the doubt: 1) Never use AI to generate or alter academic text or images (including referencesfoot_6 or scripts for oral presentations). 2) Always include an AI statement in any academic work (including student assignments or journal articles) stating whether or not you used AI for any part of your work. If you did use it, clearly describe exactly which parts were done by AI and which were done by you. 3) In grey areas, be cautious and transparent in declaring how you mitigated potential issues (e.g., back-translating AI translations of text you wrote back into your own language and manually checking and correcting any mistranslations). 4) Any undisclosed AI use will result in automatic failure/rejection of the assignment/article, and may raise broader questions/referrals regarding the academic integrity of your other work.</p>
+<p>At the end of the day, you are the one responsible for any issues introduced by your AI tools, whether they are fabricated references/data, translation errors, coding errors, factual errors, or just the shallow analysis that is typical of AI-generated text.</p>
+<p>The guidance above only refers to the ethics of using AI from the perspective of academic integrity. The broader implications of AI on domains such as copyright (AI is often trained on copyrighted writing/art without permission or compensation), discrimination (AI perpetuates pre-existing biases in the training data), sustainability (training AI uses massive resources including energy and water), etc. are only beginning to emerge, but already look quite depressing (Birhane &amp; Guest, 2021; Noble, 2018; Plunkett, 2022). If you do choose to use AI, I encourage you to do so sparingly and carefully monitor the broader ethical implications.</p>
+<p>Although I&#x27;ve become highly skeptical of genAI, I&#x27;m not a complete anti-AI absolutist. There are many examples of useful and potentially ethical AI tools, some of which I use in my own academic work. Depending how you define &quot;AI&quot;, some go back decades and have little in common with Large Language Model (LLM) chatbots, other than the shared reliance on machine learning. For examplehttps://www.zotero.org/google-docs/?aEzbVr for over a decade I&#x27;ve been developing automated methods for detecting and quantifying music copyright infringement (Savage et al., 2018; Yuan et al., 2023) , and more recently I started using Riverside&#x27;s built-in AI speech transcription tools to generate subtitles for my &quot;Many Voices&quot; podcast (http://many-voices.com). Indigenous-led organisation Te Hiku Media has expanded automated speech-to-text transcription to help preserve the traditionally orally-transmitted language te reo Māori as text. They have also done the reverse -text-to-speech AI -literally giving voice to people who have lost theirs (Jones et al., 2023). However, these automated methods are never perfect, and always require substantial human correction and interpretation -particularly for some of the most important parts, like transcribing/pronouncing peoples&#x27; names, or making a qualitative decision of copyright infringement based on a quantitative measure of similarity.</p>
+<p>I believe that AI/LLMs are an impressive technology with many similar positive potentials as well as all the negative ones mentioned above. Many of the most egregious flaws (e.g., fabricated references and quotations) are rapidly being improved. This is good in the sense that it is becoming a more reliable tool, but bad in that it is becoming progressively harder to distinguish between human and AI-generated content.</p>
+<p>Even if AI becomes as reliable or more reliable than humans, I would still be concerned about it replacing, rather than supporting, human thinking and creativity. At the end of the day, the goal of most academic reading and writing is for humans to learn and share valuable new knowledge with other humans. Recently, the acronym &quot;TL;DR&quot; (Too Long; Didn&#x27;t Read [see Fig. 3]) has given birth to a new acronym, &quot;AI;DR&quot; (AI; Didn&#x27;t Read). In other words: If you couldn&#x27;t be bothered to write it, why should I be bothered to read it? 14</p>
+<p>Why read, write, or publish academic research at all? In theory, you (or your parents/scholarship sponsors/etc.) are paying tuition to enable you to learn valuable new knowledge that will help you to succeed in a job and make the world a better place. And in theory, we academics are being paid by those tuition fees and by grants funded from government taxes and private donors/organisations to create and transmit this knowledge to you and the rest of the world (Rosovsky, 1990).</p>
+<p>In practice, some of you students are just trying to have a good time while doing what it takes to get a university degree (preferably one with prestigious brand recognition like &quot;Oxford&quot; or &quot;Harvard&quot;) that will unlock job opportunities. Meanwhile, some of us academics are just trying to have a good time and do what it takes to publish peer-reviewed articles/books (preferably with publishers with prestigious brands like &quot;Nature&quot; or &quot;Science&quot;), which also unlock job opportunities for us.</p>
+<p>I know, because I&#x27;ve played the prestige game myself, although I&#x27;m not proud of it. Unfortunately, such &quot;prestige biases&quot; are very difficult to overcome, as they do serve some crucial positive functions in human cultural and biological evolution (Henrich, 2016). The negative results for research can range from the relatively benign (e.g., hype, sloppiness, and &quot;p-hacking&quot; to find publishable but meaningless patterns in noise) to extreme cases where researchers will fabricate data or perform outrageous ethical violations like unauthorized human gene editing (Fig. 8) just in the hopes of publishing in these prestigious outlets (Borrell &amp; Retraction Watch, 2026; Ritchie, 2020; Smaldino &amp; McElreath, 2016). The leaders of universities and publishing companies know and exploit the fact that we need their prestige (Morgan &amp; Smaldino, 2025). Do you know how much money publishers pay us academics to publish our research? It&#x27;s actually negative: we increasingly pay for-profit companies to publish our research -to the tune of as much as US$12,850 for a 4-page &quot;gold open access&quot; article in Nature (Fig. 9; https://www.zotero.org/google-docs/?0ZrquN We also do the actual high-value work of the process -expert peer review -for these publishers for free while they make profit margins of the kind found in few other professions outside of drug dealers (for more disturbing parallels between academia and drug dealers, see Afonso, 2014). This makes little sense until you understand that we are being extorted for their prestige, impact, and the jobs and funding that come with it. And we are mostly not paying with our own money but with the money from your tuition and taxes. I&#x27;m sorry to have to tell you this, but it&#x27;s something you should know. How can we realign this broken system with its original noble goals of creating and transmitting valuable knowledge that benefits society? Many of us are exploring alternatives (see Fig. 9 and Major-Smith, 2024 for some suggestions). I don&#x27;t have scope here to describe them all, but will note that you are currently reading this preprint for free via the PsyArXiv preprint server without you or I having paid a publishing corporation for the privilegefoot_7 . I will also note that our article shown in Fig. 1 took advantage of the fantastic new Peer Community In (PCI) initiative that seeks to break the stranglehold publishing corporations have on us by liberating the peer review process from the publishing process and transferring power from publishers to researchers. So far, I have been involved in Peer Community In Registered Reports (PCI-RR), PCI Psychology, and PCI Evolutionary Biology as author, reviewer, or &quot;Recommender&quot; (analogous to journal editor) on over a dozen different articles, and my experiences with them have all been dramatically better than any experience I&#x27;ve ever had publishing with traditional publishers 16 . It is conceivable that PCI&#x27;s system could break down and become a victim of its own success as it scales up and becomes more vulnerable to bad actors. However, I can&#x27;t imagine how or why this would be any worse than what is already happening with traditional journals in the existing broken system (https://www.zotero.org/google-docs/?3HWnpp.</p>
+<p>We could have -and perhaps should have (Morgan &amp; Smaldino, 2025; Yarkoni, 2018) chosen to publish the PCI-RR-reviewed preprint version of our article from Fig. 1 for free (&quot;diamond open access&quot;) without further peer review in Peer Community Journal, which currently has a &quot;Journal Impact Factor&quot; (JIF) of 2.2 17 . We could have chosen to publish without further peer review in several other reputable journals 18 with relatively modest impact factors if we paid them relatively modest Article Processing Charges (APCs; e.g., Royal Society Open Science: JIF: ~3 average citations per year; APC: US$1,960). We could also have chosen not to publish in a journal at all, leaving it as a peer-reviewed preprint. Instead, we chose to go through an extra round of peer review and pay a US$4,500 APC to the non-profit American Association for the Advancement of Science for the privilege of publishing in Science Advances (JIF: ~12) 19 . Science Advances didhttps://www.zotero.org/google-docs/?CPLAQO however, also provide additional concrete value for us in the form of commissioning a striking illustration on their cover (https://www.science.org/toc/sciadv/10/20), an expert companion commentary (Sammler, 2024) , and producing and distributing press releases that helped us get media coverage in prestigious outlets with large readerships such as the New York Times (Zimmer, 2024) and Scientific American (Parshall et al., 2024).</p>
+<p>Was this worth $4,500 and -more importantly -worth being complicit in perpetuating the broken system? I&#x27;m honestly not sure. That is one of the questions that you students and we, your teachers and research supervisors, need to work together to answer in the coming years as we head toward what looks to me like an inevitable collapse or radical transformation of the academic publishing system and perhaps the entire higher education system itself. As Finnish physicist Syksy Räsänen wrote: &quot;We do not need to reform the business model of scientific journal publishing, we have to abandon it.&quot; (Räsänen, 2019).</p>
+<p>On that existential note: good luck, and happy reading/writing/dismantling the academic-industrial complex and designing a better system of knowledge creation and transmission!</p>
+<p>Epilogue: BUT WE HAD MUSIC I want to end with one final thought regarding the biggest &quot;so what&quot; question of all: who cares about academic research anyway? Why should anyone want to read or write about research like ours shown in Figure 1 showing acoustic differences between singing and speaking around the world? Why aren&#x27;t we using the funding &quot;wasted&quot; on our music research towards something more urgent like curing cancer or solving climate change?</p>
+<p>These are questions that sometimes keep me up at night. But then I remember someonefoot_10 saying that they wouldn&#x27;t want that to happen because they wouldn&#x27;t want to just extend their life if it meant living without music. Maybe for Steven Pinker (https://www.zotero.org/google-docs/?8cZoXp) &quot;music could vanish from our species and the rest of our lifestyle would be virtually unchanged&quot;, but for me and for many others, a life without music would be a life without meaning. I recently came across the beautiful poem &quot;BUT WE HAD MUSIC&quot; by Bulgarian author Maria Popova (https://www.zotero.org/google-docs/?ZtbwsA) that captured this feeling better than I can put in words. Although the title is specifically about music, it applies to other domains of the arts, humanities, and sciences that people like Pinker, Donald Trump, or Elon Musk might find &quot;useless&quot; or &quot;woke&quot;, but to many of us are what give life meaning.</p>
+<p>BUT WE HAD MUSIC by Maria Popova Right this minute across time zones and opinions people are making plans making meals making promises and poems while at the center of our galaxy a black hole with the mass of four billion suns screams its open-mouth kiss of oblivion. Someday it will swallow Euclid&#x27;s postulates and the Goldberg Variations, swallow calculus and Leaves of Grass. I know this. And still when the constellation of starlings flickers across the evening sky, it is enough to stand here for an irrevocable minute agape with wonder. It is eternity.</p>
+<p>Acknowledgments: I thank Hilary Moss for first teaching me &quot;How to read a book&quot; in her &quot;Introduction to Black Studies&quot; course at Amherst College in 2004 (from a syllabus designed by Jeffrey Ferguson ). I thank all my mentors and mentees, past and present, for helping me to develop and refine these ideas, especially my first research supervisor, Steven Brown, as well as all of my own students. In particular, I thank Yuto Ozaki, my first PhD student, for permission to use our coauthored article as examples in Figs. 1 &amp; 4, students from my lab (Gakuto Chiba, Zixuan Jia, Marin Naruse, Danya Pavlovich), and classes for feedback on earlier versions. I also thank the other 100+ collaborators on our &quot;Many Voices&quot; projects for our ongoing discussions about ethical research. I thank PCI-RR founder Chris Chambers and the other PCI-RR Recommenders and reviewers who donated their time to reviewing our research shown in Fig 1, Fig 7, and elsewhere in the article. Special thanks to Yuki Yamada who first introduced me to PCI-RR. I also thank my mum, Martha Savage, and late grandfather Evan O&#x27;Neill Kane for a lifetime of academic and life mentorship, and acknowledge my privilege to have been the child and grandchild of renowned scientists. I added the &quot;Why read or write academic research at all?&quot; section after becoming radicalised through many excellent conversations (mostly about how to fix our broken academic system) at the September 9-13 2024 Cultural Evolution Society conference. Despite the very important limitations of in-person conferences (e.g., accessibility, sustainability, equity; https://www.zotero.org/google-docs/?9hg4r1 Fig 10), there is still no substitute for stimulating discussions. I especially thank Niccole Porras Alvarez, Manuel Anglada-Tort, Stephen Asatsa, Quentin Atkinson, Gustavo Ballen, Bret Beheim, Monique Borgerhoff Mulder, Adam Boyette, Gakuto Chiba, Michael Chimento, Tom Currie, Agustín Fuentes, Jigar Ganatra, Erik Gjesfjeld, Russell Gray, Simon Greenhill, Jan Hajič jr., Alexander Ishungisa, Patricia Izar, Joshua Conrad Jackson, Fiona Jordan, Wiro-Bless Kamboe, Rohan Kapitany, Rachel Kendal, Kevin Lala, David Lawson, Harin Lee, Sheina Lew-Levy, Sarah Mathew, John McBride, Alex Mesoudi, Helena Miton, Thomas Morgan, Michael Muthukrishna, Eita Nakamura, Yo Nakawake, Danya Pavlovich, Ana Shapiro, Jamie Tehrani, Jessica van der Wal, Tim Waring, Joseph Watts, Aiyana Willard, Mason Youngblood, Qiankun Zhong, and all the attendees of the discussion session on if/how to create a new and better society journal [with apologies to others whose names I forgot, mis-spelled, or forgot to mention -please let me know if so and I&#x27;ll correct!]. I also thank Thomas Morgan for raising the danger of possible vulnerabilities of Peer Community In to bad actors as it scales up. I thank Dan Major-Smith for permission to reprint his continuum of ethical publishing in Fig 5. I thank John McBride for drawing my attention to Carey et al.&#x27;s (2020) guide to reading scientific papers. Acknowledgments sections. Please alert me if I have unfairly omitted anyone and I will try to correct this. While most of my research is coauthored, this article is closely based on my own personal academic journey, so it didn&#x27;t make sense to invite other researchers to coauthor it with me. Institutional ethical approval was not required since I am not reporting any newly collected data.</p>
+<p>Funding: My research is supported by external funding from the governments of Aotearoa/New Zealand (Rutherford Discovery Fellowship RDF-UOA2202 and Marsden Fast-Start Grant MFP-UOA2236 from the Royal Society Te Apārangi) and Japan (KAKENHI Grant-in-Aid #19KK0064 from the Japan Society for the Promotion of Science).</p>
+<p>Conflicts of interest: I have no financial conflicts of interest to declare, other than sharing all the perverse incentives described above common to all academic researchers. I also serve as an (unpaid) Recommender (analogous to journal editor) at Peer Community In Registered Reports (PCI-RR), Peer Community In Psychology (PCI Psych), and Peer Community In Evolutionary Biology (PCI Evo Bio). Finally, I have had consistently negative experiences with for-profit publishers, even when they have led to publication in their journals.</p>
+<p>Author/AI contributions: I conceived and wrote this myself (without using any generative AI). I used Zotero (not AI) to format my references, which I manually checked and corrected.</p>
+<p>Peer Review: This article has not been peer-reviewed (i.e., evaluated by independent experts to determine whether it is &quot;valuable new knowledge&quot;).</p>
+<h3>Ethics and Inclusion: I tried to properly credit diverse researchers throughout, including in my References and</h3>
+<p>Appendix 1: Further recommended resources (all free unless indicated with &quot;$&quot;)</p>
+<p>While I want to keep the main article relatively brief, I also want to provide a list of useful resources going beyond the brief mentions in the text, which I plan to continue expanding as needed:</p>
+<p>Reading/writing: How and why to read (and write and publish) academic research [this article] https://doi.org/10.1126/science.caredit.a1600047  (Pain, 2016) https://d1wqtxts1xzle7.cloudfront.net/88451105/HowtoReadABook-libre.pdf?1657536299=&amp;response-content-disposition=inline%3B+filename%3DHowto_Read_ABook.pdf&amp;Expires=1726628332&amp;Signature=StDdOGqgv0iOzS86qO4xNdh2P1kqVGDCTRrdZLe3l7X0S1oDbTASM4s7Wxzf7iI9kV7A1B8sukpm2K6atLGZ1KPjgagoolkMYoGmucd9cK25U1pzyO~4-qAO6ZMAqtxJrcoI23nu6EYtk2PGvEILA5f-6Fo4iSmhNG7bBCQImfcjB-UnF2d-UMIEEqzdbeeA~FdnAVb-kJAWKlv2bazHtjXwhSiSZBbr632kU7o-D7-Vy5lDami0pZuN3aHlofg~Kn~RXnq9LS7--qu0cRxFgRo7ky2OiuucYkS-350JP9Lo7nFKWNNJIPWBYYwKXHLzMhtA6vg7x4glPLZyC-vO6g__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA  (Adler &amp; van Doren, 1972) https://doi.org/10.1038/s41562-023-01596-8 (Nature Human Behaviour editors, 2023) https://doi.org/10.1038/nj7317-873a  (Powell, 2010) Peer review/publishing: https://peercommunityin.org/ (especially https://rr.peercommunityin.org/) https://doi.org/10.1371/journal.pcbi.1010571  (Henderson &amp; Chambers, 2022) Preprint servers (exact choice depends on field): https://psyarxiv.org/ (my lab&#x27;s default preprint server), https://arxiv.org/  https://osf.io/preprints/socarxiv  https://www.biorxiv.org/  https://www.medrxiv.org/ etc. https://doi.org/10.31219/osf.io/3ez9v  (Morgan &amp; Smaldino, 2024) Responding to peer reviews: https://doi.org/10.1371/journal.pcbi.1005730 ( Noble, 2017) https://rr.peercommunityin.org/download/t_recommendations.reply_pdf.8fe19f2cc28ca793.4f7a616b6920657420616c20526576696577657220526573706f6e73652e646f63782e706466.pdf (from Stage 1 review of Ozaki et al. 2024) Writing peer reviews: https://www.science.org/content/article/how-review-paper (Pain, 2016) https://osf.io/preprints/psyarxiv/gxzfq (my public peer review of Mehr et al., 2019) Reference/citation management/tracking/recommendation https://www.zotero.org/  https://scholar.google.com/intl/en/scholar/citations.html Analysis/visualisation: https://posit.co/download/rstudio-desktop/  https://doi.org/10.1038/s41562-023-01586-w [short editorial giving guidance on reporting things like effect sizes and equivalence testing to avoid common statistical errors (e.g., p-value misinterpretation, correcting for multiple comparisons, interpreting non-significant results, etc.)] https://xcelab.net/rm/ (McElreath, 2020) https://www.datacamp.com/courses/introduction-to-statistics-in-r [free, just need to register] https://uwe-repository.worktribe.com/index.php/OutputFile/934211 (Braun &amp; Clarke, 2013) https://journalofcognition.org/articles/10.5334/joc.72 / http://link.springer.com/10.3758/s13423-017-1230-y  https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00863/full  https://journals.sagepub.com/doi/full/10.1177/1948550617697177 Data/code sharing: https://github.com/apps/desktop  https://zenodo.org/ Preparing materials (presentations, posters, manuscripts, etc.) Note: I strongly advise always sharing work with supervisors/coauthors using an interactive collaborative online tool such as Google Docs or Google Slides to enable anyone to comment/edit on the latest version. Ensure you have enabled access and editing/commenting privileges before sharing. [NB: Microsoft Office products are NOT recommended because they cost money while providing little added value relative to free alternatives] https://fourwaves.com/blog/conference-presenting-tips/  https://www.sciencegraphicdesign.com/blog/how-do-you-make-your-first-scientific-poster  http://docs.google.com / https://docs.google.com/presentation/u/0/ / https://docs.google.com/spreadsheets  https://rmarkdown.rstudio.com/  https://www.latex-project.org/ / https://www.overleaf.com/ [formerly free, now $] Field-specific tools: (Comparative/ethno/cognitive/systematic/computational) musicology: https://musescore.org/en (notation) https://code.soundsoftware.ac.uk/projects/tony / https://www.sonicvisualiser.org/ / https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mirtoolbox / https://www.fon.hum.uva.nl/praat/ (acoustic analysis) https://theglobaljukebox.org/songsofearth (cross-cultural analysis)</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Example of some key parts of one example article from my lab (Ozaki et al., 2024): title, authors, abstract, and excerpts of key figures.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. The top part of my Google Scholar profile. Individual articles I publish are automatically tracked and sorted by number of citations, with various metrics of citations over time displayed on the right-hand corner. For the dangers of relying on citation metrics, see DORA (2013) and &quot;PCI and Impact Factors&quot; (2018). Source: https://scholar.google.com/citations? user=UCIt79UAAAAJ (accessed 25 July 2026).</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. Stylised figure showing my proposed reading/writing order to maximise efficiency given diminishing marginal returns as you read academic research in greater detail. While analogous approaches can be applied to many books, review articles, and humanities articles (e.g., Adler &amp; van Doren, 1972), this approach is particularly suitable for empirical scientific journal articles. &quot;i ain&#x27;t reading all that&quot; meme from Adam &amp; Walker (2019).</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. The &quot;sandwich thesis&quot; model of academic dissertations, with an example of Yuto Ozaki&#x27;s (2023) PhD thesis. The two &quot;meat&quot; chapters were later published as Ozaki et al. (2024; see Fig 1) and Ozaki et al. (2026).</p>
+<h3>Figure 5.</h3>
+<p>Figure 5. My adaptation of the &quot;For the better, right?&quot; meme (Abrams, 2021) to incorporate a headline about OpenAI CE Sam Altman believing AI will &quot;change the world&quot; (Eastwood, 2024). The original meme instead featured the young Anakin</p>
+<h3>Figure 6.</h3>
+<p>Figure 6. Example of characteristic attributes of an AI-fabricated (&quot;hallucinated&quot;) citation. This was a real citation from an article I was asked to peer review for a respectable scientific journal in May 2026 (I recommended rejection with prejudicethe rest of the article was also low-quality AI slop). Format inspired by Naddaf &amp; Quill (2026).</p>
+<h3>Figure 7.</h3>
+<p>Figure 7. An AI-generated figure published in a peer-reviewed journal article that was swiftly retracted when readers pointed out many unreliable aspects, including the giant rat &quot;dck&quot; with 4+ &quot;testtomcels&quot; (see McFall-Johnsen, 2024).</p>
+<h3>Figure 8.</h3>
+<p>Figure 8. Even after spending 3 years in prison for performing unethical editing of baby genes, Jiankui He can&#x27;t let go of his obsession with publishing in a prestigious journal. Screenshot: He (2024). Context: &quot;the babies&#x27; parents may have been under pressure to agree to join the experiment; the supposed medical benefits are dubious at best; and the researchers moved forward with creating living human beings before they fully understood the effects of the edits they had made&quot; (Regalado, 2019).</p>
+<h3>Figure 9.</h3>
+<p>Figure 9. Top: The academic publication funding model seems to make no sense. Source: https://imgflip.com/i/93ciid; adapted by me from the Matrix Morpheus meme (Valadar917 &amp; ohmyjosh, 2012). Bottom: Academic publishing options arranged along a (intentionally simplified) continuum of ethicality. Diamond open access (free for authors &amp; readers) options such as Peer Community In are toward the &quot;most ethical&quot; side and for-profit publishers such as MDPI, Frontiers, and Springer Nature are toward the &quot;least ethical&quot; side. (Reprinted from Major-Smith, 2024).</p>
+<h3>Figure 10.</h3>
+<p>Figure 10. Many Global North researchers are unaware of the systemic barriers to inclusion in academia by our Global South colleagues, including (but not limited to) discriminatory visa policies by the governments of the host countries (Chatterjee, 2022). Data/code availability: Not applicable (&quot;NA&quot;). I drew Fig 3 manually in PowerPoint based on vibes. Just in case this is not obvious: you should absolutely not do this with real research data! For real data, I recommend the following free tools: R/R Studio (analysis/visualisation); GitHub (sharing analysis code); Zenodo (sharing data/materials).</p>
+<p>I recently was alerted to another simple guide byCarey et al. (2020) that serves as another useful resource for academic reading that nicely complements the current article.</p>
+<p>Unfortunately, as such citation metrics become targets, they become abused (following &quot;Goodhart&#x27;s Law&quot;) by some who use unethical practices such as over-citing their own research and under-citing rival researchers. Self-citation rates vary a lot by field, career stage, etc., but typically range between 0-20%(Szomszor et al., 2020). For comparison, the reference list for this article is currently around 13% (10/79) self-citations, which is4  Once you have at least one Google Scholar-indexed publication, I recommend creating your own profile (https://scholar.google.com/intl/en/scholar/citations.html) as a free and easy standardised way for others to find and evaluate your research and its impact. Google Scholar can automatically notify you when others cite your research and offer suggestions of relevant new articles for you to read based on your pattern of past citations. It also allows you to set up manual alerts for when new research appears by certain authors or on certain topics.3 I have included all of these sections for this article, though some apply more than others. I may have gone a bit overboard in them -you don&#x27;t always necessarily need to provide as much detail as I have here!</p>
+<p>When it comes time to write your own response letter to peer reviews, this can serve as a template: https://rr.peercommunityin.org/stream_pdf/t_recommendations.reply_pdf.8fe19f2cc28ca793.4f7a616b69206574 20616c20526576696577657220526573706f6e73652e646f63782e706466.pdf. The important thing to emphasise is to try to focus on quoting how you have specifically changed the revised manuscript to address the reviews. Explanatory text in the response letter not found in the revised manuscript should be as minimal as possible..</p>
+<p>Confession: we did not do this well in our sprawling 3,300-word Discussion section inOzaki et al. (2024).</p>
+<p>AI fabrications are often called &quot;hallucinations&quot;, but I prefer &quot;fabrications&quot; to emphasize their inherently unethical nature, whether these take the form of fabricated references, data, quotations, or anything else.</p>
+<p>arXiv, the world&#x27;s oldest and largest preprint server, recently implemented a ban on authors found to have submitted papers with fabricated references or other &quot;incontrovertible evidence that the authors did not check the results of LLM generation&quot; (Singh Chawla, 2026).</p>
+<p>It&#x27;s fine and indeed encouraged to use reference managers like Zotero to format your references, but you need to manually read and cite each source, not let AI do this for you. Of course, as I&#x27;ve emphasised throughout this article, you don&#x27;t need to read every word of every source you cite, but you should at minimum confirm that it actually exists and read the abstract/table of contents. It&#x27;s also essential that you manually review and correct the entire reference list.</p>
+<p>PsyArXiv is funded primarily by university libraries, particularly the &quot;Ivy Plus Libraries Confederation&quot;(Stafford, 2024).</p>
+<p>Paid from a competitive open access fund I applied to from Keio University, a private university, not from my grants funded by government taxes.18  Chambers (2023b) lists the four &quot;PCI RR-friendly&quot; journals our article was eligible for automatic acceptance in, but the list is continuously expanding. As of 25 July 2026, there are 105 &quot;PCI-friendly journals&quot; (https://peercommunityin.org/pci-friendly-journals/), and 41 specifically &quot;PCI RR-friendly&quot; journals (https://rr.peercommunityin.org/about/pci_rr_friendly_journals).</p>
+<p>There are also 21 different PCIs in addition to PCI Registered Reports (e.g., PCI Psychology, PCI Evolutionary Biology, PCI Archaeology; https://peercommunityin.org/current-pcis/) 17 JIF is a controversial but widely used metric (DORA, 2013; &quot;PCI and Impact Factors,&quot; 2018) that takes the average citations per year acquired by all articles in a journal as a proxy of research impact. For comparison, Nature&#x27;s JIF of ~50 citations per article per year on average is among the highest in the world.16  For example, as a PCI-RR Recommender, I oversaw my first assignment in less than one month between submission of the full Stage 1 protocol and In Principle Acceptance, thanks to PCI-RR&#x27;s efficient &quot;Scheduled Review&quot; model(Savage, 2024b). As a PCI-RR author, this process typically takes around 5 months, including the time we take to revise our manuscript in response to multiple rounds of expert peer review (e.g.,Chambers, 2023a; Moore, 2025). In contrast, before I started using PCI-RR, I wasted huge amounts of time waiting weeks or months for &quot;desk rejection&quot; decisions by paid editors without inviting expert reviewers.</p>
+<p>Unfortunately I can&#x27;t remember who</p>
+<h3>References</h3>
+<p>Abrams, R. (2021). For the better, right? Know Your Meme. https://knowyourmeme.com/memes/for-the-better-right</p>
+<p>Adam, &amp; Walker, A. (2019). I ain&#x27;t reading all that [Blog]. Know Your Meme. https://knowyourmeme.com/memes/i-aint-reading-all-that</p>
+<p>Adler, M. J., &amp; van Doren, C. (1972). How to read a book (2nd ed.). Simon &amp; Schuster. https://ia902804.us.archive.org/19/items/howtoreadabook1972edition/How%20to%20Read%20a%20B ook%20-%201972%20Edition.pdf</p>
+<p>Afonso, A. (2014). How academia resembles a drug gang. Social Science Research Network (SSRN). https://doi.org/10.2139/ssrn.2407748</p>
+<p>Baker, T. (2026). What A.I. did to my college class. The New York Times. https://www.nytimes.com/2026/05/17/opinion/chatgpt-ai-college-school-graduation.html</p>
+<p>Beheim, B., Atkinson, Q. D., Bulbulia, J., Gervais, W., Gray, R. D., Henrich, J., Lang, M., Monroe, M. W., Muthukrishna, M., Norenzayan, A., Purzycki, B. G., Shariff, A., Slingerland, E., Spicer, R., &amp; Willard, A. K. (2021). Treatment of missing data determined conclusions regarding moralizing gods. Nature, 595, E29-E34. https://doi.org/10.1038/s41586-021-03655-4</p>
+<p>Birhane, A., &amp; Guest, O. (2021). Towards decolonising computational sciences. Women, Gender &amp; Research, 1, 60-73. https://doi.org/10.7146/kkf.v29i2.124899</p>
+<p>Bloom, P. (2023, November 28). Nobody finishes reading my books: Or anyone else&#x27;s either. Small Potatoes. https://smallpotatoes.paulbloom.net/p/nobody-finishes-reading-my-books</p>
+<p>Borrell, B. &amp; Retraction Watch. (2026). A fatal reaction: A cutting-edge gene-editing trial in China went disastrously wrong. A family wants accountability. Science, 393(6809), 346-353. https://doi.org/10.1126/science.aek8000</p>
+<p>Carey, M. A., Steiner, K. L., &amp; Petri, W. A. (2020). Ten simple rules for reading a scientific paper. PLOS Computational Biology, 16(7), e1008032. https://doi.org/10.1371/journal.pcbi.1008032</p>
+<p>Chambers, C. (2023a). Exploring cross-cultural variation in speech and song [based on reviews by Bob Slevc and Nai Ding]. Peer Community In Registered Reports. https://rr.peercommunityin.org/articles/rec?id=316</p>
+<p>Chambers, C. (2023b). Strong evidence for cross-cultural regularities in music and speech [based on reviews by Bob Slevc and Nai Ding]. Peer Community in Registered Reports, 100469. https://doi.org/10.24072/pci.rr.100469</p>
+<p>Chatterjee, D. (2022, August 5). How international conferences fail scholars from the global South. International Affairs Blog. https://medium.com/international-affairs-blog/how-international-conferences-fail-scholars-from-the-gl obal-south-fbde14e5d1f1</p>
+<p>Curtis, G. J. (2025). The two-lane road to hell is paved with good intentions: Why an all-or-none approach to generative AI, integrity, and assessment is insupportable. Higher Education Research &amp; Development, 1-8. https://doi.org/10.1080/07294360.2025.2476516</p>
+<p>Doctoral Thesis Policy and Procedures (2021). https://www.auckland.ac.nz/en/about-us/about-the-university/policy-hub/research-innovation/doctoral-s tudy/undertaking-research/doctoral-thesis-policy-procedures.html DORA. (2013). San Francisco Declaration on Research Assessment [DORA]. https://sfdora.org/read/ Eastwood, B. (2024, May 8). Sam Altman believes AI will change the world (and everything else) | MIT Sloan. MIT Sloan: Ideas Made to Matter. https://mitsloan.mit.edu/ideas-made-to-matter/sam-altman-believes-ai-will-change-world-and-everythin g-else Forscher, B. K. (1963). Chaos in the brickyard.</p>
+<p>Science, 142, 339. https://doi.org/10.1126/science.142.3590.339.a</p>
+<p>Frank, M. (2026, June 25). Help me, but don&#x27;t touch the paper! Babies Learning Language. https://babieslearninglanguage.blogspot.com/2026/06/help-me-but-dont-touch-paper.html</p>
+<p>Goldstein, D. (2026). Student cheating is becoming impossible to detect in an A.I. era. The New York Times. https://www.nytimes.com/2026/06/18/us/ai-apps-students-cheat.html</p>
+<p>Guest, O., Suarez, M., Müller, B. C. N., van Meerkerk, E., Beverborg, A. O. G., de Haan, R., Elizondo, A. R., Blokpoel, M., Scharfenberg, N., Kleinherenbrink, A., Camerino, I., Woensdregt, M., Monett, D., Brown, J., Avraamidou, L., Alenda-Demoutiez, J., Hermans, F., &amp; van Rooij, I. (2026). Against the uncritical adoption of &#x27;AI&#x27; technologies in academia. Digital Culture &amp; Education, 16(2), 85-118. https://doi.org/10.5281/zenodo.20082828</p>
+<p>He, J. (2024, September 4). I am willing to publish my two 2018 papers on the world first gene edited babies, however it must be published in either Nature or Science. It is one of the greatest medical breakthroughs in history, it deserves the honor to be published in Nature or Science. X. https://x.com/Jiankui_He/status/1830973731436667341</p>
+<p>Henderson, E. L., &amp; Chambers, C. D. (2022). Ten simple rules for writing a Registered Report. PLOS Computational Biology, 18(10), e1010571. https://doi.org/10.1371/journal.pcbi.1010571</p>
+<p>Henrich, J. (2016). The secret of our success: How culture is driving human evolution, domesticating our species, and making us smarter. Princeton University Press. https://doi.org/10.1515/9781400873296</p>
+<p>Jones, P.-L., Mahelona, K., Duncan, S., &amp; Leoni, G. (2023). Kia tangata whenua: Artificial intelligence that grows from the land and people. Ethical Space: International Journal of Communication Ethics, 2023(2/3). https://doi.org/10.21428/0af3f4c0.9092b177</p>
+<p>Kwon, D. (2022). The rise of citational justice: How scholars are making references fairer. Nature, 603(7902), 568-571. https://doi.org/10.1038/d41586-022-00793-1</p>
+<p>Landymore, F. (2026, February 16). There&#x27;s a grim new expression: &quot;AI;DR.&quot; Futurism. https://futurism.com/artificial-intelligence/aidr-meaning</p>
+<p>Major-Smith, D. (2024, September 23). Ethical academic publishing: How to make academic publishing fairer, more open and less wasteful. Open Research at Bristol. https://openresearchbristol.blogs.bristol.ac.uk/2024/09/23/ethical-academic-publishing-how-to-make-a cademic-publishing-fairer-more-open-and-less-wasteful/</p>
+<p>McElreath, R. (2020). Statistical rethinking: A Bayesian course with examples in R and Stan. Chapman and Hall/CRC. https://oceanrep.geomar.de/id/eprint/55819/1/Statistical%20Rethinking%202nd%20Edition.pdf</p>
+<p>McFall-Johnsen, M. (2024). How a crisis of fake science led to this AI-generated giant rat penis. Business Insider. https://www.businessinsider.com/fake-science-crisis-ai-generated-rat-giant-penis-image-2024-3</p>
+<p>Mensh, B., &amp; Kording, K. (2017). Ten simple rules for structuring papers. PLOS Computational Biology, 13(9), e1005619. https://doi.org/10.1371/journal.pcbi.1005619</p>
+<p>Moore, K. (2025). Do humans bond more when singing together or speaking together? A global investigation [based on reviews by Melissa Brandon, Erin Hannon, Manuela Maria Marin and Anja Göritz]. Peer Community In Registered Reports. https://rr.peercommunityin.org/articles/rec?id=890</p>
+<p>Morgan, T. J. H., &amp; Smaldino, P. E. (2025). Author-paid publication fees corrupt science and should be abandoned. Science and Public Policy, 52, 805-809. https://doi.org/10.1093/scipol/scaf026</p>
+<p>Naddaf, M., &amp; Quill, E. (2026). Hallucinated citations are polluting the scientific literature. What can be done? Nature, 652(8108), 26-29. https://doi.org/10.1038/d41586-026-00969-z Nature addresses helicopter research and ethics dumping. (2022). Nature, 606, 7. https://doi.org/10.1038/d41586-022-01423-6</p>
+<p>NISO CRediT Working Group. (2022). CRediT, Contributor Roles Taxonomy [ANSI/NISO Z39.104-2022]. National Information Standards Organization. https://doi.org/10.3789/ansi.niso.z39.104-2022</p>
+<p>Noble, S. U. (2018). Algorithms of oppression. New York University Press. https://nyupress.org/9781479837243/algorithms-of-oppression/</p>
+<p>Ozaki, Y. (2023). Cultural (co-)evolution of music and language: Review and global acoustic analysis [PhD dissertation, Keio University].</p>
+<p>Ozaki, Y., de Heer Kloots, M., Ravignani, A., &amp; Savage, P. E. (2026). Cultural evolution of music and language. In D. Sammler (Ed.), The Oxford Handbook of Language and Music. Oxford University Press. https://doi.org/10.1093/oxfordhb/9780192894700.013.0028</p>
+<p>Ozaki, Y., Tierney, A., Pfordresher, P. Q., McBride, J., Benetos, E., Proutskouva, P., Chiba, G., Liu, F., Jacoby, N., Purdy, S. C., Opondo, P., Fitch, W. T., Hegde, S., Rocamora, M., Thorne, R., Nweke, F., Sadaphal, D., Sadaphal, P., Hadavi, S., … Savage, P. E. (2024). Globally, songs and instrumental melodies are slower and higher and use more stable pitches than speech: A Registered Report. Science Advances, 10(20), adm9797. https://doi.org/10.1126/sciadv.adm9797</p>
+<p>Pain, E. (2016). How to (seriously) read a scientific paper. Science. https://doi.org/10.1126/science.caredit.a1600047</p>
+<p>Parshall, A., Geere, D., &amp; Quick, M. (2024). Hidden patterns in folk songs reveal how music evolved. Scientific American, 331(4), 74-75. https://doi.org/10.1038/scientificamerican112024-w054hB4V5cpyBJrbjRx7r PCI and Impact Factors. (2018). Peer Community In. https://peercommunityin.org/2018/12/17/pci-and-impact-factors/</p>
+<p>Penders, B. (2018). Ten simple rules for responsible referencing. PLOS Computational Biology, 14(4), e1006036. https://doi.org/10.1371/journal.pcbi.1006036</p>
+<p>Pinker, S. (1997). How the mind works. Norton. https://wwnorton.com/books/9780393334777</p>
+<p>Plunkett, L. (2022, August 25). AI creating &quot;art&quot; is an ethical and copyright nightmare. Kotaku. https://kotaku.com/ai-art-dall-e-midjourney-stable-diffusion-copyright-1849388060</p>
+<p>Popova, M. (2024, April 6). BUT WE HAD MUSIC: Nick Cave reads an animated poem about black holes, eternity, and how to bear our lives. The Marginalian. https://www.themarginalian.org/2024/04/06/but-we-had-music/</p>
+<p>Powell, K. (2010). Publish like a pro. Nature, 467, 873-875. https://doi.org/10.1038/nj7317-873a Publishingoptions. (n.d.). Nature. Retrieved September 14, 2024, from https://www.nature.com/nature/for-authors/publishing-options</p>
+<p>Räsänen, S. (2019). The future of journal publishing here today. The Open Journal of Astrophysics. https://astro.theoj.org/post/168</p>
+<p>Regalado, A. (2019, December 3). China&#x27;s CRISPR babies: Read exclusive excerpts from the unseen original research. MIT Technology Review. https://www.technologyreview.com/2019/12/03/131752/chinas-crispr-babies-read-exclusive-excerpts-h e-jiankui-paper/</p>
+<p>Resnik, D. B., &amp; Hosseini, M. (2026). Hallucinated citations produced by generative artificial intelligence may constitute research misconduct when citations function as data in scholarly papers. Accountability in Research, 2645390. https://doi.org/10.1080/08989621.2026.2645390</p>
+<p>Ritchie, S. (2020). Science fictions: How fraud, bias, negligence, and hype undermine the search for truth. Metropolitan Books; Henry Holt and Company. https://static.macmillan.com/static/holt/science-fictions/</p>
+<p>Rosovsky, H. (1990). The university: An owner&#x27;s manual. W.W. Norton &amp; Co. https://archive.org/details/university00henr</p>
+<p>Ruano-Borbalan, J. (2022). Doctoral education from its medieval foundations to today&#x27;s globalisation and standardisation. European Journal of Education, 57(3), 367-380. https://doi.org/10.1111/ejed.12522</p>
+<p>Sammler, D. (2024). Signatures of speech and song: &quot;Universal&quot; links despite cultural diversity. Science Advances, 10(20), eadp9620. https://doi.org/10.1126/sciadv.adp9620</p>
+<p>Savage, P. E. (2011). Musical evolution and human migration: Classification, quantification and application [McMaster University]. http://macsphere.mcmaster.ca/bitstream/11375/10988/1/fulltext.pdf</p>
+<p>Savage, P. E. (2014). 音楽と遺伝子からみた日本列島への民族移動ーーアイヌ音楽を中心にーー [Music, genes, and the peopling of Japan: With special reference to the music of the Ainu] [Tokyo University of the Arts]. http://tinyurl.com/SavageMA</p>
+<p>Savage, P. E. (2017). 音楽の文化的進化を測る --ブリティッシュ・アメリカンと日本の民謡・ポップス・古典音楽 の事例を通して--[Measuring the cultural evolution of music: With case studies of British-American and Japanese folk, art, and popular music; PhD diss, Tokyo University of the Arts] [Tokyo University of the Arts]. https://irdb.nii.ac.jp/00879/0004311745</p>
+<p>Savage, P. E. (2024a). Public peer review of Sauvé &amp; Bhachu (2023) &quot;Let&#x27;s talk about it: Positivism and critical theory in dialogue.&quot; PsyArXiv Preprint. https://doi.org/10.31234/osf.io/a3h64</p>
+<p>Savage, P. E. (2024b). Replicating the &quot;lure of choice&quot; phenomenon [Editorial recommendation of Yi &amp; Feldman, 2024]. Peer Community In Registered Reports. https://doi.org/10.24072/pci.rr.100595</p>
+<p>Savage, P. E., Cronin, C., Müllensiefen, D., &amp; Atkinson, Q. D. (2018). Quantitative evaluation of music copyright infringement. In A. Holzapfel &amp; A. Pikrakis (Eds.), Proceedings of the 8th International Workshop on Folk Music Analysis (FMA2018) (pp. 61-66). https://www.researchgate.net/publication/324861654_Quantitative_evaluation_of_music_copyright_inf ringement Show the dots in plots. (2017). Nature Biomedical Engineering, 1(5), 0079, s41551-017-0079. https://doi.org/10.1038/s41551-017-0079</p>
+<p>Singh Chawla, D. (2026). Researchers who use hallucinated references to face arXiv ban. Nature, 653(8116), 988-989. https://doi.org/10.1038/d41586-026-01595-5</p>
+<p>Smaldino, P. E., &amp; McElreath, R. (2016). The natural selection of bad science. Royal Society Open Science, 3(9). https://doi.org/10.1098/rsos.160384</p>
+<p>Smith, L. T. (1999). Decolonizing methodologies: Research and Indigenous peoples. Zed Books. https://www.bloomsbury.com/us/decolonizing-methodologies-9781786998125/</p>
+<p>Stafford, T. (2024, May 24). Financial support for PsyArXiv. PsyArXiv Blog. https://blog.psyarxiv.com/2024/05/24/financial-support-for-psyarxiv/</p>
+<p>Szomszor, M., Pendlebury, D. A., &amp; Adams, J. (2020). How much is too much? The difference between research influence and self-citation excess. Scientometrics, 123(2), 1119-1147. https://doi.org/10.1007/s11192-020-03417-5 The death of Jason Arday must prompt deep reflection. (2026). Nature, 657(8130), 7-8. https://doi.org/10.1038/d41586-026-02677-0</p>
+<p>Tollefson, J. (2024). What counts as plagiarism? Harvard president&#x27;s resignation sparks debate. Nature, 625(7995), 429-430. https://doi.org/10.1038/d41586-024-00035-6</p>
+<p>Transparent peer review to be extended to all of Nature&#x27;s research papers. (2025). Nature, 642, 542. https://doi.org/10.1038/d41586-025-01880-9</p>
+<p>Valadar917, &amp; ohmyjosh. (2012). Matrix Morpheus. Know Your Meme. https://knowyourmeme.com/memes/matrix-morpheus</p>
+<p>van Noorden, R. (2024). Journals with high rates of suspicious papers flagged by science-integrity start-up. Nature, 634(8036), 1023-1025. https://doi.org/10.1038/d41586-024-03427-w</p>
+<p>Whitehouse, H., François, P., Savage, P. E., Hoyer, D., Feeney, K. C., Cioni, E., Purcell, R., Larson, J., Baines, J., ter Haar, B., Covey, A., &amp; Turchin, P. (2023). Testing the Big Gods hypothesis with global historical data: A review and &#x27;retake.&#x27; Religion, Brain &amp; Behavior, 13(2), 124-166. https://doi.org/10.1080/2153599X.2022.2074085</p>
+<p>Writing more informative titles and abstracts. (2023). Nature Human Behaviour, 7(4), 465-465. https://doi.org/10.1038/s41562-023-01596-8</p>
+<p>Yarkoni, T. (2018, October 2). No, it&#x27;s not The Incentives-It&#x27;s you. [Citation Needed]. https://talyarkoni.org/blog/2018/10/02/no-its-not-the-incentives-its-you/</p>
+<p>Yuan, Y., Cronin, C., Müllensiefen, D., Fujii, S., &amp; Savage, P. E. (2023). Perceptual and automated estimates of infringement in 40 music copyright cases. Transactions of the International Society for Music Information Retrieval, 6(1), 117-134. https://doi.org/10.5334/tismir.151</p>
+<p>Zhang, W. (2014). Ten simple rules for writing research papers. PLoS Computational Biology, 10(1), e1003453. https://doi.org/10.1371/journal.pcbi.1003453</p>
+<p>Zimmer, C. (2024, May 16). Why do people make music? In a new study, researchers found universal features of songs across many cultures, suggesting that music evolved in our distant ancestors. The New York Times. https://www.nytimes.com/2024/05/15/science/universal-music-evolution.html</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
