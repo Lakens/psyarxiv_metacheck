@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Interpretability in the Limit: How Can
+Understanding Machines Help us Understand Human Language?</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Interpretability in the Limit: How Can Understanding Machines Help us
+Understand Human Language?
+</p>
+<p class="meta">
+2026-11-27 · Metacheck 0.4.4.41
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to fix</span></span><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>16</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="na">Not applicable <span class="n">(16)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>No papers appeared to report data about people or animals that need
+an ethics statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper does not appear to report data about individual people or
+animals (we found: a commentary), so we do not expect an ethics
+statement.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>Second, we argue that scientists should prioritize recurrent
+constructs, meaning those that surface across a diversity of models
+converging on behaviors of interest while varying on other axes such as
+architecture, training data, objective function, language, and
+modality.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 41 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 41 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 41 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>In the coming years, interpretability research will uncover a vast set of machine constructs: causally efficacious representations and processing mechanisms underlying the use of language and other intelligent behavior in AI systems, including LLMs. Assuming that interpretability will be as successful as can be reasonably hoped for (interpretability in the limit), how can the discovery of machine constructs shape linguistics and cognitive science? First, we provide several axes of analysis that can help scientists conceptualize the internal mechanisms discovered in machines. Even under the assumption that interpretability in the limit guarantees that all constructs are causally implicated in a system&#x27;s behavior, scientists may want to consider several additional properties, including constructs&#x27; theoretical status, domain status, ontological status, and complexity. Second, we argue that scientists should prioritize recurrent constructs, meaning those that surface across a diversity of models converging on behaviors of interest while varying on other axes such as architecture, training data, objective function, language, and modality. Finally, we provide three routes for how machine constructs can inform linguistic and cognitive theories, emphasizing that all of these routes treat machine constructs as hypotheses, where additional theorizing and experimentation by domain experts are required. We conclude with several recommendations that can be implemented now for improving the long-term success of this program.</p>
+<h3>1 Introduction</h3>
+<p>We begin this article with a little bit of speculative fiction. Let&#x27;s suppose, for a minute, that it is the year 2040. Neural network-based language models still remain the core engine of AI systems, and they have become more robust and useful than they were in the late 2020s. Interpretability as a field has also matured in the meantime, leading to a suite of methods for answering the &quot;how&quot; question of AI behavior. These methods provide faithful and satisfactory descriptions of how the internals of a target neural network lead to intelligent behavior. The goal of this paper is to explore how such a situation could benefit linguistics and the cognitive science of language. That is, assuming that interpretability is as successful as one could reasonably hope (interpretability in the limit), in what ways will this deeper understanding of AI help us to understand human linguistic cognition better?</p>
+<p>Answering this question will have several benefits for the present moment. First, it will set expectations for how linguistics may be reasonably informed by AI research in the medium term. Second, it will provide high-level directions and suggestions that can serve as a concrete locus of debate. Is this a future we want for linguistics? Given what it could achieve, is this line of work worth the effort and time of the linguistics research community? Finally, by engaging in this speculation, we identify several ways that the goals, methods and common practices of present-day interpretability research could be improved to serve linguistics.</p>
+<p>Before we begin, we need to set a few parameters. While we are optimistic about AI impacting cognitive science and science in general on many fronts, we focus here on language-based AI technologies and linguistics. We understand linguistics to be the science of human language. Its goal is to advance human-understandable, explanatory, testable theories for how people represent, learn, and process language. This involves postulating a set of theoretical constructs and descriptions of how these constructs interact with each other to produce observable behaviors (Chapter 2; Frank et al., 2025). While we focus on linguistics, our general framework and takeaways apply broadly to cognitive science and psychology as well.</p>
+<p>Interpretability research can be thought of as a branch of &quot;Machine Cognitive Science&quot; (Kim, 2021). The goal of interpretability is to provide human-understandable descriptions and explanations of model behavior. These descriptions and explanations involve multiple model-internal components, which can be understood in terms of (a) representations and (b) computations that operate on these representations, with &quot;circuits&quot; being a common unit of analysis. Together, we refer to (a) and (b) as machine constructs, which we elaborate upon further in Section 2. The goal of interpretability research is to uncover machine constructs.</p>
+<p>Right now, interpretability research is at a tipping point. The field is actively discovering new machine constructs (Huben et al., 2024; Marks et al., 2025; Olsson et al., 2022; Soulos et al., 2020; Wang et al., 2023), particularly in an automated manner (Gao et al., 2025; Paulo et al., 2025; Shaham et al., 2024). Novel methods for automatic discovery are poised to surface many unintuitive machine constructs that may not necessarily align with our understanding of human constructs underlying analogous capacities (cf. Hewitt et al. 2025). Our main question, then, is how these new discoveries should influence linguistics. We organize our response around three interrelated questions.</p>
+<p>2. Which machine constructs are important? Which ones among the large number of discovered constructs should we pay attention to as linguists, if we are interested in understanding mental constructs in people? While the type of construct is relevant, we argue that construct recurrence can also be highly informative. A recurrent construct is one that is adopted by models diverging in various axes, including architecture or training data properties.</p>
+<p>3. What should cognitive scientists do with machine constructs? We identify and discuss three routes for how machine constructs could enter our scientific theories, paying particular attention to methods in linguistics.</p>
+<p>Taken together, our responses to these questions provide a sketch for a new type of scientific workflow, one that combines &quot;machine&quot; and &quot;human&quot; cognitive science by attempting to map out the shared mechanisms between these two systems and understand why such mechanisms may be shared in the first place. We do not mean to suggest that such shared mechanisms will provide a complete picture of human (linguistic) intelligence. For example, there are many aspects of human language that stem from egocentric experience, social interactions, or embodied communication, about which machine constructs found in the currently dominant models may have little relevance. Furthermore, we expect interpretability of LLMs to reveal little about why the language network is located in particular areas the brain (Hickok, 2009) or phonological constraints related to the physics of the vocal tract (Moisik et al., 2021). Nor do we think that using LLMs as a source for novel constructs should supplant traditional sources of theoretical innovation, such as creativity, intuition, and domain expertise of human scientists. However, when it comes to integrating LLMs into science, linguistics is in a relatively enviable position due to the fact that these models primarily operate in language space, and language being the capacity that we aim to explain. In other fields such as biochemistry, LLMs can reason about the target processes (e.g., Swanson et al., 2025), but explaining the mechanisms behind this reasoning does not by itself constitute an explanation of how the target processes are implemented in the model. In order to achieve this, a more promising approach would be to interpret domain-specific models designed to capture the target processes (Zhang et al., 2025). On the other hand, explaining how an LLM handles language contributes to understanding a system that exhibits the target capacity, although separate questions remain about the alignment between model and human linguistic behavior to make this explanation relevant for understanding humans. They represent one possible computational strategy for solving the difficult task of processing and producing natural language. The rest of this paper proceeds as follows: In Section 2 we provide a brief background on interpretability research and outline what we mean by interpretability in the limit. In Sections 3, 4 and 5 we discuss our answers to Questions 1, 2, and 3 respectively. Finally, in Section 6, we conclude with forward-looking recommendations for researchers interested in this direction of inquiry.</p>
+<p>Neural Network LLM Discover Machine Constructs Circuits Features Prioritize Constructs Analyze Constructs Connect to Linguistic Theory Interpretability Methods e.g., &quot;Indirect Object Identification&quot; circuit (Wang et al., 2023) e.g., &quot;Is first position in a list&quot; (Templeton et al., 2026) Filter Based on behavioral adequacy Find Recurrent Constructs i.e., constructs that appear in a diverse range of models, varying by Input Architecture Objective … • Theoretical Status (accepted vs. novel) • Domain Status (linguistic vs. non-linguistic) • Ontological Status (primary vs. dependent) • Simplicity (minimal vs. complex or redundant) Test for human verdicts • Corroborate existing theories • Inspiration for novel paradigms • Generate explanatory hypotheses for existing theories • Generate hypotheses for new theories • Linguist verifies construct with human experiments Figure 1: A schematic overview of our interpretability in the limit paradigm.</p>
+<p>In this paradigm, interpretability research identifies recurrent constructs that appear in a wide diversity of models that exhibit human-aligned behavior. The presence of a recurrent machine construct must be verified with a human verdict (experiment or theorizing) before it can influence our scientific theories.</p>
+<h3>2 Interpretability in the Limit</h3>
+<p>For the purpose of the present discussion, we take interpretability to mean the study of the internals of artificial neural network-based AI models with the aim of understanding how the model produces its behavior (the &quot;broad technical definition&quot; of Saphra and Wiegreffe 2024). 1 The behaviors of interest to the linguists might include appropriate handling of complex linguistic utterances, responses to behavioral tests like acceptability judgments, and patterns of error, among others. Interpretability serves to provide a description of the internal representations and computations that underlie such behaviors. Importantly, any such description has to involve some level of abstraction over model-internal components, since a description at the maximal granularity is simply the full specification of the model&#x27;s architecture and its parameter values. Different interpretability methods yield outputs at different levels of abstraction and granularity: they may be subsets of the actual model components that realize certain functions (&quot;circuits&quot;), algorithmic descriptions or computation graphs, or organizational facts about the models&#x27; representations.</p>
+<p>One concrete example from the recent literature is the Indirect Object Identification (IOI) circuit, discovered by Wang et al. (2023). The circuit was found in GPT-2 small (Radford et al., 2019) and supports prediction in the IOI task that uses sentences with indirect objects, such as After Alex and Georgia talked, Georgia gave a gift to __, where Alex is the most plausible next-word prediction, and Georgia is valid only under certain, unlikely, referential conditions. Figure 2 gives a graphical overview of the circuit; it consists of 26 attention heads, subsets of which serve three</p>
+<p>After Alex and Georgia talked , Georgia gave a gift to Previous Token Heads Duplicate Token Heads Induction Heads Name Mover Heads Backup Name Mover Heads Copy information to adjacent tokens; 2 heads Identify tokens that are repeated; 3 heads Information routing for duplicate tokens; 3 heads S-Inhibition Heads Remove duplicate tokens from Name Mover Heads&#x27; attention; 4 heads Output a name; attention to the subject (S) is downweighted by the Sinhibition head; 3 heads 8 heads Alex Georgia a the someone who … Head Name Brief description of head behavior; # of heads found in GPT-2 Small Query Output Key / Value Legend I.O. S1 S1+1 S2 END Indirect Object Identification (IOI) Circuit from Wang et al., 2023 important functions: A group of name mover heads copy name information to the representation of the final token, to, increasing the probability that the predicted next word is one of the names. Two other sets of heads help suppress attention to Georgia. First, duplicate token heads identify when a name has been repeated, and update the representation of that name at its second occurrence. Second, S-inhibition heads reduce attention to such names by modifying the name mover head&#x27;s queries, meaning the prediction is dominated by names that have not been repeated in the local context. 2 Importantly for our discussion, the circuit can be described in terms of human-interpretable properties-is name and same as-as well as processes for copying lexical information based on these properties. This example serves as an illustration of what the form of the recent interpretability findings looks like, rather than to claim that these particular features are of interest to linguistics. The interpretability research we are interested in starts from specifying a target behavior of interest and verifying sufficient human-model alignment, since our goal is to ultimately connect back to the theory of human language. In addition to fixing a target behavior, much of the interpretability literature fixes the target construct in advance. Researchers hypothesize a specific machine construct (often motivated by existing linguistic theory) and test whether it is implemented in a given model. This process has led to many early successes, for example, the discovery of specific constructs in neural network-based models that correspond to hypothesized linguistic features (Lakretz et al., 2019; Tenney et al., 2019; Voita et al., 2019) or structure (Hewitt &amp; Manning, 2019; Jawahar et al., 2019). However, the field is increasingly shifting towards automated interpretability, where the target behavior is fixed but the constructs are not (e.g., Marks et al. 2025), or where neither are fixed and both are discovered in tandem (Bills et al., 2023; Marin-Llobet &amp; Ferrando, 2026; Paulo et al., 2025). The outcome of these methods is the discovery of native machine constructs, which may not be previously hypothesized in human language science. In our interpretability in the limit scenario, we assume that interpretability methods will yield human-comprehensible descriptions of representations and computations over those representations underlying the model&#x27;s linguistic behaviors (i.e., linguistic constructs) at scale, at whatever granularity of abstraction that is relevant for the linguistic theory that the scientist is interested in. Furthermore, the limit scenario entails full faithfulness of the constructs identified: we assume that the current methods&#x27; limitations, such as the lack of causal efficacy (e.g., just because a representation is activated does not mean it is causally implicated in the associated linguistic behavior) or false positives (e.g., Dunn and Eida 2025) have been resolved. After this identification process of faithful machine constructs, what should we do?</p>
+<p>3 How should we organize machine constructs?</p>
+<p>The machine constructs identified through interpretability can be organized along several dimensions. We discuss a few below, along with their implications for how machine constructs relate to constructs in linguistic theory.</p>
+<p>Theoretical status (theoretically accepted vs. theoretically novel). One dimension concerns the status of the identified machine construct within existing linguistic theories. Many machine constructs will align with constructs that have already been posited and widely accepted by linguists. For example, LLMs represent parts-of-speech, syntactic constituency/dependency, and semantic roles (Hewitt &amp; Manning, 2019; Tenney et al., 2019), develop circuits for subject-verb agreement (Ferrando &amp; Costa-jussà, 2024; Marks et al., 2025) and tense/aspect (Klerings et al., 2025), treat a wide array of agreement phenomena as a functional category (Kryvosheieva et al., 2026), and represent grammaticality (J. Li &amp; Kim, 2026). On the other hand, machine constructs may align with theoretical constructs rejected by linguists (e.g., linear position: linear subnetworks that coexist with hierarchical subnetworks (Ahuja et al., 2025); and features corresponding to list position (Templeton et al., 2024)) or ones whose status is actively debated (e.g., to what extent different types of dislocation share underlying representations : Boguraev et al. 2025). Finally, interpretability may also surface novel constructs. These may be known constructs for example, from other areas of psychology whose relevance to linguistic theory has not been established previously, such as a feature that corresponds to lexically-triggered sarcasm (Templeton et al., 2024). Or they are constructs that genuinely have never been proposed. One example of the latter includes recent work showing that an LLM has learned a unique representation for the English BE verb when it appears in the context of want, e.g., She wants to be a violinist (Templeton et al., 2024). While theories of lexical uncertainty have been proposed for functional words, for example to account for various pragmatic phenomena such as scalar implicature (Bergen et al., 2016), as far as we are aware, current linguistic theories do not assume lexical ambiguity in the case of the English BE verb specifically in the context of want. Another illustrative example of a novel construct, although not from the domain of linguistics, are &quot;pizza/clock&quot; algorithms that a Transformer model trained to perform modular addition implements (Nanda et al., 2023; Zhong et al., 2023), which differ from the human-intuitive division/subtraction-based algorithm.</p>
+<p>Domain status (linguistic vs. non-linguistic) Machine constructs will be products of many different regularities extractable from the training data, combined with the architectural and algorithmic inductive biases idiosyncratic to each model. Therefore, the constructs that surface do not necessarily have to be linguistic, and may reflect a wide range of statistical dependencies deriving from sources such as world knowledge, corpus statistics, or even data processing decisions. However, because in LLMs even non-linguistic information is often routed through language, determining the domain status of a particular construct may not be straightforward. We propose that methods for doing so could be described as either intrinsic or extrinsic. Intrinsic methods rely on the intuitions and domain expertise of linguists to make a determination. Extrinsic methods seek to quantify the domain status of a construct through external validation. One recent method that may be useful for extrinsic determination involves steering models to produce grammatically coherent but nonsensical and factually incorrect utterances (Winston &amp; Kolter, 2026). Given that such methods preserve linguistic competence while degrading non-linguistic abilities, the constructs that remain after such interventions are good candidates for truly &quot;linguistic&quot; constructs. Ultimately, to what extent traditionally non-linguistic constructs should occupy a place in linguistic theorizing is a scope decision left to the scientists. Different theoretical commitments may draw different boundaries; for example, whether concepts should play a role in formal semantics is contended (Goodale &amp; Mascarenhas, 2026).</p>
+<h3>Ontological status (primary vs. dependent).</h3>
+<p>The discovery of machine constructs through interpretability may raise the question of how real these constructs are, for instance whether they are merely epiphenomenal. Our interpretability in the limit assumption settles one aspect of this ontological question: because the outcome of idealized interpretability is a faithful causal description of behavior, any construct that is part of this description is guaranteed causal efficacy (assuming the description is minimal). On the other hand, a construct that does not factor into this description, even if detectable by other means, is causally inert. What the limit assumption does not settle is the primacy of a particular inventory of constructs, which may exist at different levels of abstraction. Because different granularities of abstraction yield different inventories that can be used to construct equally faithful descriptions, a construct that is a single causal variable at one level of analysis may not be one at a different level. One analogous example would be the refinability of non-terminals in context-free grammars to arbitrary granularities, preserving the same structural descriptions (minus the actual labels).</p>
+<p>Ultimately, questions of ontological status will likely interact with the other axes of analysis discussed in this section, including domain status and simplicity. In particular, we anticipate that the explananda of a linguistic theory will shape the ontological status of its constructs. Constructs that may be necessary to describe certain behaviors can be eliminated if those behaviors are determined to no longer be within the scope of a theory. At the same time, if competing sets of machine constructs have equal descriptive faithfulness, other factors such as simplicity, discussed below, could be used to adjudicate ontological primacy.</p>
+<p>Simplicity (simple vs. complex) In cognitive science and linguistics, simpler theories are often preferred over complex ones of equal descriptive adequacy. Neural networks are not guaranteed to converge on computational solutions that are minimal for a given problem, even with a simplicity bias. For example, in the case of modular arithmetic, Transformer models may implement different algorithms (&quot;Pizza&quot; vs. &quot;Clock&quot;), depending on the contribution of architectural components, and may even implement multiple solutions in parallel (Zhong et al., 2023). As noted in the discussion of ontological status, when weighing multiple valid constructs, simplicity could be one possible means of prioritizing constructs for future research; for instance, it may help us avoid machine constructs that are overfitted to idiosyncrasies of a specific model, and therefore less likely to generalize to human constructs. Thus, when considering a machine construct, especially as a potential basis of scientific theory, it is worth investigating the extent to which the solution is minimal. For circuits, this may mean adopting metrics such as minimum description length, Kolmogorov complexity (M. Li, Vitányi, et al., 2008), or circuit complexity (Arora &amp; Barak, 2009); for features, this may mean determining whether the feature is logically simplex or disjunctive.</p>
+<p>What do non-minimal solutions look like in LLMs? We illustrate with two scenarios: The first is when a model has discovered a genuinely non-minimal method for solving a problem, due to contingencies in the initialization, data presentation, or training procedure, or due to some feature of the model architecture itself. The second is when there is functional overlap in mechanisms; the model may have built-in redundancy due to representational constraints, processing demands, or the organization of other constructs in its weight space. Both of these types of complexity can be illustrated by the Indirect Object Identification circuit discussed above (Figure 2). As Wang et al. (2023) find, duplicate token heads and induction heads perform the same role: identify tokens (here, the subject token) that have already appeared in the sentence and signal the duplication. Duplicate token heads achieve this by attending directly to the earlier occurrence of the same token and sig-naling duplication. Induction heads achieve this in two steps through an induction mechanism: the previous token heads copy information about the first occurrence of the subject to the representation of the subsequent token, and then the induction heads signal duplication by matching the current token to this adjacent token. The induction mechanism adds one extra computation step into the circuit; an example of a non-minimal mechanism for duplication signaling. The fact that both of these mechanisms are active at the same time is an illustration of functional overlap since these perform the same functional role. In addition, the circuit has several other redundant components, including eight backup name mover heads. These heads exhibit varied behavior in typical scenarios, but can compensate to function like name mover heads if the originals are suppressed. Wang et al. (2023)hypothesize that these heads arise due to dropout during training, which could reward redundancy. Backup heads may be necessary for to capture the IOI behavior of this specific model, but may not be generally present in IOI-type circuits that emerge in other models, for example ones trained with different dropout hyperparameters.</p>
+<p>4 What machine constructs should be prioritized?</p>
+<p>Interpretability in the limit will inevitably lead to a very large number of machine constructs. LLMs, while sharing certain core modeling assumptions, are still subject to wide variation in their architecture, training data configuration, and learning algorithms. Critically, even when LLMs converge in behavior, the discovered constructs may diverge across different LLMs (cf. Braun et al. 2025). Which of these constructs are relevant to linguists? We argue, in light of the non-guarantee of convergence of internal structure, that the important machine constructs are those that are discovered across a diverse set of models that behaviorally align with humans on the phenomenon of interest. Such recurrent constructs are ones that likely arise from the demand of realizing the target phenomenon, rather than from idiosyncrasies of the specific system that realizes it or other artifacts. The more diverse the set of behaviorally-aligned models that share certain constructs, the stronger candidates they are for constructs that underlie the analogous capacity in humans. 3 Therefore, the recurrent construct approach, whose inferential power derives from divergence among the models considered, is a fundamentally different mode of discovery that complements computational modeling that relies on linking hypotheses (i.e., convergence assumptions). However, similar to computational modeling, the main downside of this approach lies in its risk: specifically, the risk that fundamental differences between the computational model and the biological system may lead to over-confidence in an ultimately incorrect theory. Thus, LLM-inspired linguistics must be conducted with an eye towards risk mitigation. We view the recurrent construct approach itself as one method for mitigating risk, but this can and should be supplemented by other methods, including those already employed in the field such as pursuing multiple theories simultaneously and emphasizing theory-adjudicating studies in experimental work.</p>
+<h3>4.1 Where does generalizability come from?</h3>
+<p>Why do we expect recurrent constructs across diverse models to be more likely to generalize to the human mind? We make arguments from two directions, one from the properties of the task and the other from the properties of the data.</p>
+<p>Properties of the task. One idea that is often used as a justifying argument for making inferences from neural network studies is the contravariance principle of Cao and Yamins (2024) (e.g., arguments in Futrell and Mahowald 2025). The contravariance principle supposes that as a task gets harder, the space of viable solutions that implement it shrinks. Therefore, for a sufficiently hard task, independent complex systems are pushed towards discovering similar solutions. For example, the demand for vision led to the evolution of lenses in animals in several independent phylogenetic branches. Nevertheless, the principle does not guarantee convergence to a single solution-humans employ a different solution than lobsters, who use mirrors rather than lenses and therefore reflection rather than refraction to increase visual acuity. Furthermore, it is unclear whether the constraint imposed upon possible solutions via task demands extends to the lower-level implementations of each solution, as can be illustrated from the diverging physical realizations of the lenses of different animals (e.g., humans vs. insects, many of which have compound eyes with thousands of tiny lenses). Therefore, whether behaviors of interest constrain machine constructs via contravariance may depend on the specific level of analysis.</p>
+<p>Beyond the contravariance principle, we believe there could be ways to enrich inferences about the mechanism from properties of the task, and one such way borrows from the schema of argument made by Fodor and Pylyshyn (1988). Fodor and Pylyshyn argue that some properties at the functional level, such as systematicity and productivity, both of which are often taken to be properties of human linguistic behavior, require classical/symbolic mechanisms (structured representations and structure-sensitive processing). One broader takeaway from their argument is that there may be mechanistic implications of behavioral properties. Setting aside the particular implicational claim made by Fodor and Pylyshyn (that has been a source of heated debates for decades), we can extrapolate the broader schema of the claim to &quot;Properties XYZ of behavior impose ABC mechanistic constraints on a system&quot;. This, if true, would explain why recurrent constructs occur across diverse models with convergent target behaviors, where we take the task to demand the behavioral proper-ties. 4 One possible candidate is same-different judgment behavior on perceptual stimuli. This may require any algorithm that realizes it to have at least two steps: (1) forming category representations for each stimulus based on perceptual features while abstracting away from irrelevant features; and (2) computing same-different determinations over those representations. Indeed, Lepori et al. (2024) have found results consistent with the two stages of computation in Vision Transformers (although of course, this does not yet establish a necessity result). 5 To illustrate this with a different example from biology, the task of path integration (returning to a fixed point after a random walk) may impose mechanistic constraints, including maintenance of a system&#x27;s direction and velocity. To support this, functionally equivalent systems for computing these two variables have been found in foraging animals, including both insects and mammals (Varga et al., 2017). It is a genuinely open question whether any instantiated form of this argument holds for linguistic phenomena (Cao and Yamins (2024) themselves are skeptical of constraining effects on the sub-functional level in general), although recent work formalizing this line of inquiry in vision may be a promising starting point (e.g., Uselis et al. 2026). We believe recurrent constructs could also help identify candidate phenomena that are subject to these interface constraints.</p>
+<p>Properties of the data. The second source of convergence may derive from regularities encoded in the training data itself. A significant portion of the training data of the models we consider will be outputs of the human linguistic system, and therefore the data will reflect certain regularities of the underlying system. Furthermore, we expect important regularities to be extractable from most sufficiently large samples of these outputs (e.g., human children acquiring the same language can do so from different samples). Therefore, convergence could also be reached from the signatures of the data-generating system available from the output of that system, although as discussed in Section 3, whether constructs discovered from data-driven convergence are relevant to linguistics must be adjudicated by theoretical commitments. Of course, this is also not a claim that everything interesting about language can be learned from data alone. Nor is it a claim that every learner can do so from any sufficiently large sample of human-generated linguistic outputs. The scope of the claim is that, if a set of diverse learners converge on certain constructs, one possible source of that convergence is the data property.</p>
+<h3>4.2 What dimensions should vary?</h3>
+<p>What dimensions of diversity should we consider when searching for recurrent constructs? Conversely, are there dimensions along which we specifically do not want diversity? The recurrent constructs paradigm we are advocating for imposes a filter condition for models based on their behavioral alignment with humans on the phenomena of interest. Outside of this filter condition, all dimensions of variation count towards diversity: architecture, objective, data, supported input/output modality, languages, and more. As discussed previously, the operating assumption is that the more diverse the set of models, the more likely the recurrent constructs will generalize to human linguistic cognition. Multilinguality is a particularly significant axis that would indicate stronger generalizability of the recurrent constructs compared to ones shared by models trained on a single language.</p>
+<p>What this variation looks like in practice will depend on what types of behaviors one wishes to study. If the goal is to investigate end-state linguistic competence, then one could look for recurrent constructs across any model that produces fluent natural language, including models whose training data included non-linguistic data, such as code, or models that have been trained on tens of trillions of training tokens. In this case, one should not restrict diversity on certain axes in an attempt to impose human-likeness or ecological validity, such as only investigating constructs that recur across data-limited models. Doing so would mistakenly privilege one axis of variation (data) over others (architecture, modality, etc.). However, if the scope of the inquiry is, instead, developmental, data constraints on both the size and distribution become a defining part of behavioral alignment, since what now has to be aligned is the full learning trajectory. We argue that for most studies in linguistics, acquisition is a relevant explanandum, and therefore recurrent constructs from humanscale LMs will be of critical interest (Wilcox et al., 2025). However, this is not due to a preference for ecological validity per se; but rather because large pretrained LMs simply would not pass through our behavioral filter when development is concerned.</p>
+<p>The behavioral filter, despite being a single constraint, is a powerful one that achieves two effects in the context of the diversity discussion. First, it rules out trivial diversity: for example, models that are trained exclusively on the baa+ language or only on stock photographs are indeed &quot;diverse&quot; in terms of training data, but such models are likely irrelevant to inquiries about natural language. These models will simply be ruled out because they do not exhibit target behaviors. Second, it correctly includes models with different routes to the target capacity. For instance, assuming end-state investigation, adult competence may be reached through various routes: through developmentally realistic training data combined with strong language-specific inductive biases, or through much larger training data with weaker language-specific biases. Because the recurrent constructs paradigm conditions its search on model diversity, this inclusivity is required by design.</p>
+<p>We want to emphasize that the recurrent constructs paradigm is not a way for filtering or eliminating constructs as invalid for future study. There is no predetermined threshold a particular construct must reach before it counts as being &quot;recurrent&quot; enough. Rather, the paradigm is a way of ordering constructs and adjudicating which constructs should be prioritized for future investigation. This will necessarily involve balancing the hit-rate of constructs against the diversity of models in which that particular construct has been found. For example, a construct that has been found in 10 textonly monolingual LLMs from different language families may not necessarily be privileged over a competing construct that has been found in only five models, but of differing input modalities and languages. We also want to emphasize that there may be other valid reasons for further investigation of machine constructs besides their recurrence. As mentioned in the discussion of Section 3 on theoretical status, some constructs may be worth investigating due to their relationship to existing theoretical proposals even without high recurrence.</p>
+<p>5 How should we incorporate (recurrent) machine constructs into linguistics?</p>
+<p>Imagine that we identified candidates for generalization through the recurrent constructs paradigm (Section 4). The constructs&#x27; theoretical status (Section 3) then determines whether they are converging/confirmatory evidence for existing linguistic constructs, adjudicating evidence for debated constructs, or evidence for novel, previously undiscussed constructs. However, analysis of neural network constructs so far has had little influence on linguistic theory (Baroni, 2022), and passive acknowledgement of the evidential status of the recurrent machine constructs will have similarly limited impact on linguistics. How can we go beyond observational remarks and actively incorporate them into linguistics?</p>
+<p>The bottom line-which we want to emphasize up front-is that the mere presence of a machine construct, or even the presence of a recurrent machine construct that is shared by a maximally diverse set of models does not on its own imply that the corresponding construct underlies the human capacity for language. Therefore, the primary role of (recurrent) machine constructs is feeding hypothesis generation. Taking them as inspiration, linguists will need to conduct further theoretical and empirical work to determine whether, and how, they should be incorporated into our scientific theories. We see three possible routes for this, which we discuss in further detail below.</p>
+<p>Corroboration and explanatory hypotheses. When machine constructs align with constructs already posited in linguistic theory, machine constructs contribute converging evidence. Our confidence about those constructs is strengthened, but given their already-established status, corrobo-ration plays only a passive role. Of course, corroboration will be the most theoretically exciting when it supports a debated or controversial theoretical construct. In this case, the recurrence of the construct suggests that this solution may be optimal or easier to learn over and above competing theoretical proposals. Nevertheless, it is unlikely that any machine construct will overlap entirely with existing linguistic constructs. The more likely (and potentially insightful) scenario is partial corroboration, where elements of the discovered causal structure diverge from or are novel to existing theory. In this case, the construct can serve as a jumping-off point for further hypothesis generation, which we discuss later in this section.</p>
+<p>Corroboration is necessarily limited in its ability to expand linguistic theory. Still, we envision that corroboratory constructs could deepen explanatory power of linguistic theories by pointing towards the underlying computational or data processing principles that give rise to the construct in the first place. If a construct recurs in many systems, the question of why arises. Then, the sources of convergence that our recurrent constructs paradigm is grounded in become candidate explanatory hypotheses explaining why the construct emerges in the first place. For example, if extant linguistic constructs were found to arise only in autoregressive models, but not bidirectional models, this would point to incrementality of processing as a deeper explanation for the construct.</p>
+<p>Of course, since such explanatory hypotheses are hypotheses, they must be followed up by finergrained model studies that control for individual sources of convergence as well as evidence from human studies that verifies the proposed explanatory hypotheses. We have discussed two possible sources of convergence (task and data properties) in Section 4.1, but these are not exhaustive, and future work may posit more sources/hypotheses. Furthermore, because we already have an a priori theoretical interest in the construct, explanatory hypotheses need not be held to such strict diversity standards as we advocated for in the recurrent constructs paradigm. As discussed with the incrementality example above, explanations may arise precisely from observing the limitations under which the construct arises in LLMs.</p>
+<h3>Hypothesis generation/testing for human verdicts.</h3>
+<p>What happens when a machine construct is not just corroboratory, but partially or entirely novel vis-à-vis current linguistic theory? Any deeper connection to linguistics requires at least the following steps of hypothesis generation and testing: First, the recurrent machine constructs supply a candidate hypothesis. Second, a linguist refines the candidate hypothesis into a testable hypothesis about the human linguistic capacity. Third, the hypothesis is either confirmed or rejected via methods appropriate to the target level of abstraction (e.g., descriptive adequacy, theoretical analyses, or behavioral or neural experiments). Finally, this human verdict informs modification of existing theories. In this framework, linguists&#x27; contribution is indispensable in all steps. This framework is in a similar spirit to the hypothesis generation framework of Misra and Kim (2024), but our distinct contribution is the recurrent constructs paradigm with an emphasis on model internals.</p>
+<p>The value of machine constructs is perhaps the most intuitively clear when the construct is entirely novel. In this case, the machine constructs complement the imagination gap, preconceptions, or biases that may be hampering human theorizing. Machine constructs may also be useful when they are partially novel, insofar as they can help flesh out theoretical proposals and make them easier to adjudicate, especially experimentally. Often, theoretical debates hit a stalemate because it is difficult to design clear tiebreaking examples or experiments. Having full access to machine constructs may let us more easily identify where exactly the competing theories diverge, for example through experimental hypothesis generation. Notably, adjudication between theories may also work via recurrent constructs that have been rejected in established theories, or recurrent absence of an established construct. If a diverse range of successful models exhibit the target behavior in such ways that challenge established theories, this may motivate us to actively revisit those assumptions. Taken together, recurrent constructs combined with hypothesis generation/testing can corroborate, extend, and challenge existing linguistic theories. Only this kind of active effort (regardless of adopting the recurrent constructs paradigm or not) will help bridge the disconnect between LLM analysis work and linguistics that Baroni (2022) observed.</p>
+<p>Contributions to meta-theoretical debates and novel paradigms/frameworks. The above discussions primarily concerned revisions within existing theories and frameworks. However, we also believe that recurrent machine constructs have the potential to contribute to discussions at a level higher than individual theories. We briefly discuss two examples here: informing meta-theoretical debates and informing the development of novel theoretical paradigms and frameworks. As for contributions to meta-theoretical debates, recurrent constructs can help advance our understanding of how different levels of analysis may constrain each other. The discussion from Section 4.1 about Fodor and Pylyshyn (1988)-type argument schema where functional properties are thought to constrain mechanisms provides a useful illustration: recurrent constructs may provide evidence for or against such constraints.</p>
+<p>As for potential paradigmatic contributions, LLMs are raising a puzzle in light of a long-held claim in linguistics, namely that natural language syntax requires formal expressivity beyond contextfree (Joshi, 1985; Shieber, 1985). There is a growing literature on the formal power of Transformers and other neural architectures (Deletang et al., 2023; Hahn, 2020; Hao et al., 2022; Merrill &amp; Sabharwal, 2024; Strobl et al., 2024), and the emerging picture is that Transformers do not neatly line up with the delineations of the Chomsky-Schützenberger hierarchy and fixed-depth Transformers are limited in their ability to recognize arbitrary context-free languages without other means such as a scratchpad (e.g., using Chain-of-Thought). Given that Transformers are the backbones of the most fluent and powerful models of language to date, how these formal limitations relate to their practical capacity is an open question. At the same time, there are also results from the theoretical linguistics side that characterize syntactic dependencies through subregular constraints over structured representations (Graf, 2022a (Graf, , 2022b)). The intersection between these two lines of work could be a productive ground for cross-pollination (e.g., van der Poel et al. 2024). Recurrent constructs may play an interesting novel role in this investigation by connecting formal accounts to learned computations: the structural descriptions and constraints proposed in subregular accounts can guide the search for recurrent mechanisms that may implement those constraints. Such investigations can reveal whether and how the properties of the formal accounts are reflected in the mechanisms. Even if the identified mechanisms do not correspond to the proposed descriptions, they could offer novel insights into how the representations and computations posited by syntactic theory can be implemented.</p>
+<p>One additional case comes from the history of Optimality Theory/Harmonic Grammar (Legendre et al., 1990; Prince &amp; Smolensky, 2002). This theoretical approach served as an existence proof that a radically different, influential framework for linguistic theory can emerge from the attempt to reconcile different systems of computation. Regardless of precisely what constructs they learn, it is likely that LLMs achieve behavioral sophistication by combining the power of symbolic and gradient constructs. Understanding how these structures are learned from data, and how (approximately) symbolic computation is performed within a continuous space can help us develop and refine meta-theoretical approaches (e.g., Smolensky 1990) for how people could achieve the same. Long-term, we hope that such theorizing will help refine existing frameworks or even inspire novel ones, with one promising direction being a bridge framework between linguistics and neuroscience that can formalize how language is implemented in the brain.</p>
+<h3>6 Recommendations</h3>
+<p>Back to reality: What does all this discussion mean for the present day? Interpretability does not exist in the limit, and the current range of methods is only beginning to elucidate how LLMs&#x27; representations causally drive their behavior. Despite this, there are several moves that LLM interpretability researchers, cognitive scientists, and linguists can make now, in anticipation of a future closer to our in the limit scenario. Below, we discuss three recommendations, which will increase the likelihood of successful intellectual exchange between interpretability research and human science in the medium term.</p>
+<h3>Model diversity.</h3>
+<p>Following the discussion in Section 4, interpretability research should be expanded to a more diverse range of models. Of course, depending on the phenomenon of interest, obtaining a diverse set of models that pass the behavioral filter condition may not be an easy bar to meet. Some dimensions of diversity are harder than others to sample along with a high-bar behavioral filter, such as fluent conversational abilities. This becomes especially difficult in the data-constrained regimes, which we believe will be most interesting to linguists (Charpentier et al., 2025; Warstadt et al., 2023). Still, cultivating a practice of diversity in model evaluation now will ensure we find truly recurrent machine constructs in the future. Currently, most interpretability research is conducted on text-only, English-centric models. While recent efforts have expanded some analyses to multilingual settings (Resck et al., 2025; Schut et al., 2025), and audio models (Glazer et al., 2026; Zhao et al., 2026), interpretability in these areas lags behind. Interpretability for such models has other benefits, such as increasing the models&#x27; controllability and explainability.</p>
+<h3>Better behavioral evaluations.</h3>
+<p>As our previous discussion highlighted, recurrent constructs exist only with respect to specific behavioral explananda. Therefore, building tests of theoretically interesting human behaviors is a necessary first step for the research workflow outlined in this article. Left up to their own devices, we believe it is unlikely that AI-focused research labs will develop such benchmarks on their own, largely because competence in fine-grained, theoretically interesting linguistic behaviors no longer aligns with abilities that drive contemporary LLM research. While the field already has widely-used benchmarks (Gauthier et al., 2020; Warstadt et al., 2020, e.g., ), these cover only a small percentage of the linguistic phenomena that our eventual theories should explain. Linguists should, therefore, continue to build rigorous behavioral tests that are constructvalid for the target phenomenon of interest and calibrated against humans. The tests should treat human behavior as the gold standard (idealized or empirically elicited, depending on the research question). Of particular note are phenomena that specifically link experience and behavior, such as linguistic generalization (e.g., compositionality) and language acquisition, where rigorous tests are often challenged by opaque training data (Kim, 2026). Development of such tests should be a field-wide effort. Resources like common data formatting and a centralized data repository can ensure that efforts are reusable and portable across different research groups.</p>
+<p>Translating constructs to human verdicts. The most exciting possibility of LLMs is that they will help us to discover unintuitive theoretical constructs. To achieve this, we will have to concentrate efforts on translating insights from LLM interpretability into human verdicts and eventual adjustment of our linguistic theories. Right now, efforts have largely focused on the first part of the hypothesis-testing pipeline discussed in Section 5, namely on generating adequate explanations of LLM behavior. We encourage researchers who bridge these two communities to help identify and publicize machine constructs that could be tested experimentally. Developing methods now, even on non-recurrent constructs, can help establish best practices for when more robust explanations of LLM behavior are available. In this vein, two recent contributions (Boguraev et al., 2025; De-sai &amp; Nair, 2026) have identified how various factors impact LMs&#x27; and BabyLMs&#x27; representations of English filler-gap dependencies, suggesting that model constructs are sensitive to animacy and construction identity. Following up on these findings and articulating concrete hypotheses to test in human subjects (cf. Misra and Kim 2024) could prove to be an early case study in how LLM interpretation can influence linguistic theory.</p>
+<h3>7 Conclusion</h3>
+<p>In the introduction, we laid out three ways that our discussion could prove beneficial in the current moment. Putting aside the third one (recommendations, discussed above), we return to the other two by way of conclusion. First, we hope that our interpretability in the limit paradigm helps to set expectations: We anticipate that the work of incorporating machine constructs into linguistics will be slow and steady, and will require effort from many people who have cognitive science and linguistics backgrounds. Machine constructs may challenge long-standing paradigms in linguistics, but it is up to the scientists themselves whether and how machine constructs move beyond a simple &quot;challenge&quot; to influence linguistic theories. This brings us to our second question-is this a future we want for linguistics? We believe that any scientific discipline is strongest when it approaches core questions through a wide array of methods and theoretical stances. Interpretability (in the limit) offers an opportunity to broaden our empirical practices in ways that may mitigate the downside risk of our own theoretical preconceptions. At the same time, it provides a pathway into linguistics from what is, at the moment, an exploding subfield with lots of technical know-how and young talent. This could be an opportunity for an expansion of our community, as well as an opportunity for our community to engage with and play a significant scientific role in technological discourse that will continuously impact society. On the other hand, the main risks are that linguistics becomes dominated by a single approach, or that the current funding structures and excitement push linguistics towards being only a science of the artificial instead of the human. Our article is an attempt to redirect parts of the current excitement in the artificial back to the human, rather than a call for redirection of already-existing, indispensable efforts for human science within our community towards the line of work outlined here. Ultimately, this second question-is it worth the effort and time?-is not a question two authors can or should answer. We hope that our discussion has provided a vision and vocabulary that can initiate productive discourse around the relationship between AI research and linguistics in the decades to come.</p>
+<h3>Figure 2 :</h3>
+<p>Figure2: The Indirect Object Identification Circuit adapted fromWang et al. (2023). Some aspects of the circuit have been removed for presentational purposes.</p>
+<p>What are the types of machine constructs? Given the wide array of constructs discovered through interpretability in the limit, how should we organize them? We identify several properties of machine constructs that will help to clarify their status vis-à-vis existing scientific theories.</p>
+<p>Thus, this definition encompasses both probing-type work and mechanistic interpretability-type work, although the probing-type work often does not provide causal evidence for the representation&#x27;s effect on behavior. In the limit scenario, we assume all machine constructs identified are causally efficacious.</p>
+<p>The circuit is actually slightly more complex than this, and also includes backup versions of name mover heads, and heads that copy information between adjacent tokens; Figure2gives an overview of the identified circuit.</p>
+<p>As will be discussed in Section 5, the human relevance of recurrent constructs still needs to be established independently, moving beyond pure LLM research.</p>
+<p>Fodor and Pylyshyn take the systematicity and productivity of thought and language as evidence that cognition is supported by a classical architecture (i.e., a symbol processing system or a connectionist architecture that implements one). Their argument is not exactly that the task (for which systematicity and productivity are required) constrains the implementation, but rather that we observe certain properties about behavior (like systematicity and productivity), and only certain mechanisms (classical ones) can explain them. The broader schema that connects the implicational relation to task demands is our extension.</p>
+<p>This example comes from p.c. with Mikey Lepori.</p>
+<h3>References</h3>
+<p>Kabir Ahuja, Vidhisha Balachandran, Madhur Panwar, Tianxing He, Noah A. Smith, Navin Goyal, &amp; Yulia Tsvetkov. (2025). Learning syntax without planting trees: Understanding hierar- chical generalization in transformers. Transactions of the Association for Computational Linguistics, 13, 121-141. https://doi.org/10.1162/tacl_a_00733</p>
+<p>Sanjeev Arora &amp; Boaz Barak. (2009). Computational complexity: A modern approach. Cambridge University Press.</p>
+<p>Marco Baroni. (2022). On the proper role of linguistically oriented deep net analysis in linguistic theorising. In Algebraic structures in natural language (pp. 1-16). CRC Press. https://doi.org/10.1201/9781003205388</p>
+<p>Leon Bergen, Roger Levy, &amp; Noah Goodman. (2016). Pragmatic reasoning through semantic infer- ence. Semantics and Pragmatics, 9, 20-1. https://doi.org/10.3765/sp.9.20</p>
+<p>Steven Bills, Nick Cammarata, Dan Mossing, Henk Tillman, Leo Gao, Gabriel Goh, Ilya Sutskever, Jan Leike, Jeff Wu, &amp; William Saunders. (2023). Language models can explain neurons in language models. OpenAI Blog. https://openaipublic.blob.core.windows.net/neuron- explainer/paper/index.html</p>
+<p>Sasha Boguraev, Christopher Potts, &amp; Kyle Mahowald. (2025). Causal interventions reveal shared structure across English filler-gap constructions. In C. Christodoulopoulos, T. Chakraborty, C. Rose, &amp; V. Peng (Eds.), Proceedings of the 2025 conference on empirical methods in natural language processing (pp. 25021-25042). Association for Computational Linguis- tics. https://doi.org/10.18653/v1/2025.emnlp-main.1271</p>
+<p>Lukas Braun, Erin Grant, &amp; Andrew M. Saxe. (2025). Not all solutions are created equal: An an- alytical dissociation of functional and representational similarity in deep linear neural net- works. Forty-second International Conference on Machine Learning. https://openreview. net/forum?id=YucuAuXMpT</p>
+<p>Rosa Cao &amp; Daniel Yamins. (2024). Explanatory models in neuroscience, Part 2: Functional intel- ligibility and the contravariance principle. Cognitive Systems Research, 85, 101200. https://doi.org/10.1016/j.cogsys.2023.101200</p>
+<p>Lucas Charpentier, Leshem Choshen, Ryan Cotterell, Mustafa Omer Gul, Michael Hu, Jaap Jumelet, Tal Linzen, Jing Liu, Aaron Mueller, Candace Ross, et al. (2025). BabyLM turns 3: Call for papers for the 2025 BabyLM workshop. arXiv:2502.10645. https://arxiv.org/html/2502.10645v1</p>
+<p>Gregoire Deletang, Anian Ruoss, Jordi Grau-Moya, Tim Genewein, Li Kevin Wenliang, Elliot Catt, Chris Cundy, Marcus Hutter, Shane Legg, Joel Veness, &amp; Pedro A. Ortega. (2023). Neural networks and the Chomsky Hierarchy. The Eleventh International Conference on Learning Representations. https://openreview.net/forum?id=WbxHAzkeQcn</p>
+<p>Atrey Desai &amp; Sathvik Nair. (2026). Filling in the mechanisms: How do LMs learn filler-gap de- pendencies under developmental constraints? In M. Liakata, V. P. Moreira, J. Zhang, &amp; D. Jurgens (Eds.), Findings of the Association for Computational Linguistics: ACL 2026 (pp. 34799-34815). Association for Computational Linguistics. https://doi.org/10.18653/v1/2026.findings-acl.1737</p>
+<p>Jonathan Dunn &amp; Mai Mohamed Eida. (2025). LLMs learn constructions that humans do not know. In C. Bonial, M. Torgbi, L. Weissweiler, A. Blodgett, K. Beuls, P. Van Eecke, &amp; H. Tayyar Madabushi (Eds.), Proceedings of the second international workshop on construction gram- mars and NLP (pp. 13-23). Association for Computational Linguistics. https://aclanthology. org/2025.cxgsnlp-1.2/ Javier Ferrando &amp; Marta R. Costa-jussà. (2024). On the similarity of circuits across languages: A case study on the subject-verb agreement task. In Y. Al-Onaizan, M. Bansal, &amp; Y.-N. Chen (Eds.), Findings of the association for computational linguistics: Emnlp 2024 (pp. 10115- 10125). Association for Computational Linguistics. https : / / doi.org / 10.18653/v1/2024.findings-emnlp.591</p>
+<p>Jerry A. Fodor &amp; Zenon W. Pylyshyn. (1988). Connectionism and cognitive architecture: A critical analysis. Cognition, 28(1-2), 3-71.</p>
+<p>Michael C. Frank, Mika Braginsky, Julie Cachia, Nicholas A Coles, Tom E. Hardwicke, Robert D. Hawkins, Maya B. Mathur, &amp; Rondeline Williams. (2025). Experimentology: An open science approach to experimental psychology methods. MIT Press. https : / / doi.org / 10.25936/3JP6-5M50</p>
+<p>Richard Futrell &amp; Kyle Mahowald. (2025). How linguistics learned to stop worrying and love the language models. Behavioral and Brain Sciences, 1-98. https : / / doi.org / 10.1017/S0140525X2510112X</p>
+<p>Leo Gao, Tom Dupré la Tour, Henk Tillman, Gabriel Goh, Rajan Troll, Alec Radford, Ilya Sutskever, Jan Leike, &amp; Jeffrey Wu. (2025). Scaling and evaluating sparse autoencoders. The Thirteenth International Conference on Learning Representations, ICLR 2025, Singapore, April 24-28, 2025. https://openreview.net/forum?id=tcsZt9ZNKD</p>
+<p>Jon Gauthier, Jennifer Hu, Ethan Wilcox, Peng Qian, &amp; Roger Levy. (2020). SyntaxGym: An online platform for targeted evaluation of language models. In A. Celikyilmaz &amp; T.-H. Wen (Eds.), Proceedings of the 58th annual meeting of the association for computational linguistics: System demonstrations (pp. 70-76). Association for Computational Linguistics. https://doi.org/10.18653/v1/2020.acl-demos.10</p>
+<p>Neta Glazer, Yael Segal-Feldman, Hilit Segev, Aviv Shamsian, Asaf Buchnick, Gill Hetz, Ethan Fetaya, Joseph Keshet, &amp; Aviv Navon. (2026). Beyond transcription: Mechanistic inter- pretability in ASR. Proceedings of the Fortieth AAAI Conference on Artificial Intelligence and Thirty-Eighth Conference on Innovative Applications of Artificial Intelligence and Six- teenth Symposium on Educational Advances in Artificial Intelligence. https://doi.org/10.1609/aaai.v40i44.41073</p>
+<p>Michael Eric Goodale &amp; Salvador Mascarenhas. (2026). What ever happened to meaning? Behav- ioral and Brain Sciences, 49, e208. https://doi.org/10.1017/S0140525X2610466X</p>
+<p>Thomas Graf. (2022a). Subregular linguistics: Bridging theoretical linguistics and formal grammar. Theoretical Linguistics, 48(3-4), 145-184. https://doi.org/10.1515/tl-2022-2037</p>
+<p>Thomas Graf. (2022b). Typological implications of tier-based strictly local movement. In A. Et- tinger, T. Hunter, &amp; B. Prickett (Eds.), Proceedings of the society for computation in linguis- tics 2022 (pp. 184-193). Association for Computational Linguistics. https://aclanthology. org/2022.scil-1.15/</p>
+<p>Michael Hahn. (2020). Theoretical limitations of self-attention in neural sequence models (M. John- son, B. Roark, &amp; A. Nenkova, Eds.). Transactions of the Association for Computational Linguistics, 8, 156-171. https://doi.org/10.1162/tacl_a_00306</p>
+<p>Yiding Hao, Dana Angluin, &amp; Robert Frank. (2022). Formal language recognition by hard attention transformers: Perspectives from circuit complexity (B. Roark &amp; A. Nenkova, Eds.). Trans- actions of the Association for Computational Linguistics, 10, 800-810. https://doi.org/10.1162/tacl_a_00490</p>
+<p>John Hewitt, Robert Geirhos, &amp; Been Kim. (2025). Position: We can&#x27;t understand AI using our existing vocabulary. International Conference on Machine Learning, 81556-81572. https://icml.cc/virtual/2025/poster/40128</p>
+<p>John Hewitt &amp; Christopher D. Manning. (2019). A structural probe for finding syntax in word repre- sentations. In J. Burstein, C. Doran, &amp; T. Solorio (Eds.), Proceedings of the 2019 conference of the north American chapter of the association for computational linguistics: Human lan- guage technologies, volume 1 (long and short papers) (pp. 4129-4138). Association for Computational Linguistics. https://doi.org/10.18653/v1/N19-1419</p>
+<p>Gregory Hickok. (2009). The functional neuroanatomy of language. Physics of Life Reviews, 6(3), 121-143. https://doi.org/10.1016/j.plrev.2009.06.001</p>
+<p>Robert Huben, Hoagy Cunningham, Logan Smith, Aidan Ewart, &amp; Lee Sharkey. (2024). Sparse autoencoders find highly interpretable features in language models. International Confer- ence on Learning Representations, 2024, 7827-7845. https://openreview.net/forum?id= F76bwRSLeK</p>
+<p>Ganesh Jawahar, Benoît Sagot, &amp; Djamé Seddah. (2019). What does BERT learn about the structure of language? In A. Korhonen, D. Traum, &amp; L. Màrquez (Eds.), Proceedings of the 57th an- nual meeting of the association for computational linguistics (pp. 3651-3657). Association for Computational Linguistics. https://doi.org/10.18653/v1/P19-1356</p>
+<p>Aravind Krishna Joshi. (1985). Tree adjoining grammars: How much context-sensitivity is required to provide reasonable structural descriptions? Najoung Kim. (2021). Compositional linguistic generalization in artificial neural networks [Doc- toral dissertation, Johns Hopkins University]. https://jscholarship.library.jhu.edu/items/ 8c935e96-51ae-4b2a-942c-d800dfca6f29</p>
+<p>Najoung Kim. (2026). No escape from behavior in evaluating compositionality. PsyArXiv. osf.io/preprints/psyarxiv/u6tnx_v1</p>
+<p>Alina Klerings, Jannik Brinkmann, Daniel Ruffinelli, &amp; Simone Paolo Ponzetto. (2025). Steer- ing language models in multi-token generation: A case study on tense and aspect. In C. Christodoulopoulos, T. Chakraborty, C. Rose, &amp; V. Peng (Eds.), Proceedings of the 2025 conference on empirical methods in natural language processing (pp. 8621-8639). Associ- ation for Computational Linguistics. https://doi.org/10.18653/v1/2025.emnlp-main.435</p>
+<p>Daria Kryvosheieva, Andrea Gregor de Varda, Evelina Fedorenko, &amp; Greta Tuckute. (2026). Differ- ent types of syntactic agreement recruit the same units within large language models. In M. Liakata, V. P. Moreira, J. Zhang, &amp; D. Jurgens (Eds.), Proceedings of the 64th annual meet- ing of the Association for Computational Linguistics (volume 1: Long papers) (pp. 209-227). Association for Computational Linguistics. https://doi.org/10.18653/v1/2026.acl-long.7</p>
+<p>Yair Lakretz, German Kruszewski, Theo Desbordes, Dieuwke Hupkes, Stanislas Dehaene, &amp; Marco Baroni. (2019). The emergence of number and syntax units in LSTM language models. In J. Burstein, C. Doran, &amp; T. Solorio (Eds.), Proceedings of the 2019 conference of the north American chapter of the association for computational linguistics: Human language tech- nologies, volume 1 (long and short papers) (pp. 11-20). Association for Computational Linguistics. https://doi.org/10.18653/v1/N19-1002</p>
+<p>Géraldine Legendre, Yoshiro Miyata, &amp; Paul Smolensky. (1990). Harmonic Grammar-a formal multi-level connectionist theory of linguistic well-formedness: Theoretical foundations. Pro- ceedings of the Twelfth Annual Conference of the Cognitive Science Society, 884-891.</p>
+<p>Michael A. Lepori, Alexa R. Tartaglini, Wai Keen Vong, Thomas Serre, Brenden M. Lake, &amp; Ellie Pavlick. (2024). Beyond the doors of perception: Vision transformers represent relations between objects. Advances in Neural Information Processing Systems, 37, 131503-131544.</p>
+<p>Jane Li &amp; Najoung Kim. (2026). Linear representations of grammaticality in neural language mod- els. arXiv:2607.15175.</p>
+<p>Ming Li, Paul Vitányi, et al. (2008). An introduction to kolmogorov complexity and its applications (Vol. 3). Springer.</p>
+<p>Arnau Marin-Llobet &amp; Javier Ferrando. (2026). Automated interpretability and feature discovery in language models with agents. arXiv:2605.01555. https://arxiv.org/pdf/2605.01555</p>
+<p>Samuel Marks, Can Rager, Eric Michaud, Yonatan Belinkov, David Bau, &amp; Aaron Mueller. (2025). Sparse feature circuits: Discovering and editing interpretable causal graphs in language mod- els. International Conference on Learning Representations, 2025, 23888-23923.</p>
+<p>William Merrill &amp; Ashish Sabharwal. (2024). The expressive power of transformers with chain of thought. International Conference on Learning Representations, 2024, 7690-7706.</p>
+<p>Kanishka Misra &amp; Najoung Kim. (2024). A systematic framework for generating novel experimental hypotheses from language models. arXiv:2408.05086.</p>
+<p>Scott R. Moisik, Ewa Czaykowska-Higgins, &amp; John H. Esling. (2021). Phonological potentials and the lower vocal tract. Journal of the International Phonetic Association, 51(1), 1-35. https://doi.org/10.1017/S0025100318000403</p>
+<p>Neel Nanda, Lawrence Chan, Tom Lieberum, Jess Smith, &amp; Jacob Steinhardt. (2023). Progress mea- sures for grokking via mechanistic interpretability. The Eleventh International Conference on Learning Representations. https://openreview.net/forum?id=9XFSbDPmdW</p>
+<p>Catherine Olsson, Nelson Elhage, Neel Nanda, Nicholas Joseph, Nova DasSarma, Tom Henighan, Ben Mann, Amanda Askell, Yuntao Bai, Anna Chen, et al. (2022). In-context learning and induction heads. arXiv:2209.11895. https://arxiv.org/abs/2209.11895</p>
+<p>Gonçalo Santos Paulo, Alex Troy Mallen, Caden Juang, &amp; Nora Belrose. (2025). Automatically interpreting millions of features in large language models. In A. Singh, M. Fazel, D. Hsu, S. Lacoste-Julien, F. Berkenkamp, T. Maharaj, K. Wagstaff, &amp; J. Zhu (Eds.), Proceedings of the 42nd international conference on machine learning (pp. 48393-48421, Vol. 267). PMLR. https://proceedings.mlr.press/v267/paulo25a.html</p>
+<p>Alan S. Prince &amp; Paul Smolensky. (2002). Optimality Theory: Constraint interaction in generative grammar. Rutgers Optimality Archive. http://roa.rutgers.edu/article/view/547</p>
+<p>Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, &amp; Ilya Sutskever. (2019). Language models are unsupervised multitask learners. OpenAI. https://cdn.openai.com/ better-language-models/language_models_are_unsupervised_multitask_learners.pdf</p>
+<p>Lucas Resck, Isabelle Augenstein, &amp; Anna Korhonen. (2025). Explainability and interpretability of multilingual large language models: A survey. In C. Christodoulopoulos, T. Chakraborty, C. Rose, &amp; V. Peng (Eds.), Proceedings of the 2025 conference on empirical methods in natural language processing (pp. 20454-20486). Association for Computational Linguistics. https://doi.org/10.18653/v1/2025.emnlp-main.1033</p>
+<p>Naomi Saphra &amp; Sarah Wiegreffe. (2024). Mechanistic? In Y. Belinkov, N. Kim, J. Jumelet, H. Mohebbi, A. Mueller, &amp; H. Chen (Eds.), Proceedings of the 7th blackboxnlp workshop: Analyzing and interpreting neural networks for nlp (pp. 480-498). Association for Compu- tational Linguistics. https://doi.org/10.18653/v1/2024.blackboxnlp-1.30</p>
+<p>Lisa Schut, Yarin Gal, &amp; Sebastian Farquhar. (2025). Do multilingual LLMs think in English? ICLR 2025 Workshop on Building Trust in Language Models and Applications. https://doi.org/10.48550/arXiv.2502.15603</p>
+<p>Tamar Rott Shaham, Sarah Schwettmann, Franklin Wang, Achyuta Rajaram, Evan Hernandez, Ja- cob Andreas, &amp; Antonio Torralba. (2024). A multimodal automated interpretability agent. Forty-first International Conference on Machine Learning. https://openreview.net/forum? id=mDw42ZanmE</p>
+<p>Stuart M. Shieber. (1985). Evidence against the context-freeness of natural language. In The formal complexity of natural language (pp. 320-334). Springer.</p>
+<p>Paul Smolensky. (1990). Tensor product variable binding and the representation of symbolic struc- tures in connectionist systems. Artificial intelligence, 46(1-2), 159-216. https://doi.org/10.1016/0004-3702(90)90007-M</p>
+<p>Paul Soulos, R. Thomas McCoy, Tal Linzen, &amp; Paul Smolensky. (2020). Discovering the com- positional structure of vector representations with role learning networks. Proceedings of the Third BlackboxNLP Workshop on Analyzing and Interpreting Neural Networks for NLP, 238-254.</p>
+<p>Lena Strobl, William Merrill, Gail Weiss, David Chiang, &amp; Dana Angluin. (2024). What formal languages can transformers express? a survey. Transactions of the Association for Compu- tational Linguistics, 12, 543-561.</p>
+<p>Kyle Swanson, Wesley Wu, Nash L. Bulaong, John E. Pak, &amp; James Zou. (2025). The virtual lab of ai agents designs new sars-cov-2 nanobodies. Nature, 646(8085), 716-723. https://doi.org/10.1038/s41586-025-09442-9</p>
+<p>Adly Templeton, Tom Conerly, Jonathan Marcus, Jack Lindsey, Trenton Bricken, Brian Chen, Adam Pearce, Craig Citro, Emmanuel Ameisen, Andy Jones, et al. (2024). Scaling monose- manticity: Extracting interpretable features from Claude 3 sonnet. arXiv:2605.29358. https://arxiv.org/pdf/2605.29358</p>
+<p>Ian Tenney, Patrick Xia, Berlin Chen, Alex Wang, Adam Poliak, R. Thomas McCoy, Najoung Kim, Benjamin Van Durme, Sam Bowman, Dipanjan Das, &amp; Ellie Pavlick. (2019). What do you learn from context? Probing for sentence structure in contextualized word representations. International Conference on Learning Representations. https://openreview.net/forum?id= SJzSgnRcKX</p>
+<p>Arnas Uselis, Andrea Dittadi, &amp; Seong Joon Oh. (2026). Necessary conditions for compositional generalization in visual models. https://openreview.net/forum?id=yi06ZiVl2H</p>
+<p>Sam van der Poel, Dakotah Lambert, Kalina Kostyszyn, Tiantian Gao, Rahul Verma, Derek Ander- sen, Joanne Chau, Emily Peterson, Cody St. Clair, Paul Fodor, Chihiro Shibata, &amp; Jeffrey Heinz. (2024). MLRegTest: A benchmark for the machine learning of regular languages. Journal of Machine Learning Research, 25(283), 1-45. http : / / jmlr . org / papers / v25 / 23 - 0518.html</p>
+<p>Adrienn G. Varga, Nicholas D. Kathman, Joshua P. Martin, Peiyuan Guo, &amp; Roy E. Ritzmann. (2017). Spatial navigation and the central complex: Sensory acquisition, orientation, and motor control. Frontiers in Behavioral Neuroscience, Volume 11 -2017. https://doi.org/10.3389/fnbeh.2017.00004</p>
+<p>Elena Voita, David Talbot, Fedor Moiseev, Rico Sennrich, &amp; Ivan Titov. (2019). Analyzing multi- head self-attention: Specialized heads do the heavy lifting, the rest can be pruned. In A. Korhonen, D. Traum, &amp; L. Màrquez (Eds.), Proceedings of the 57th annual meeting of the association for computational linguistics (pp. 5797-5808). Association for Computational Linguistics. https://doi.org/10.18653/v1/P19-1580</p>
+<p>Kevin Ro Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, &amp; Jacob Steinhardt. (2023). Interpretability in the wild: A circuit for indirect object identification in GPT-2 small. The Eleventh International Conference on Learning Representations, ICLR 2023, Kigali, Rwanda, May 1-5, 2023. https://openreview.net/forum?id=NpsVSN6o4ul</p>
+<p>Alex Warstadt, Aaron Mueller, Leshem Choshen, Ethan Wilcox, Chengxu Zhuang, Juan Ciro, Rafael Mosquera, Bhargavi Paranjabe, Adina Williams, Tal Linzen, &amp; Ryan Cotterell (Eds.). (2023). Proceedings of the babylm challenge at the 27th conference on computational natural lan- guage learning. Association for Computational Linguistics. https://aclanthology.org/2023. conll-babylm.0/ Alex Warstadt, Alicia Parrish, Haokun Liu, Anhad Mohananey, Wei Peng, Sheng-Fu Wang, &amp; Samuel R. Bowman. (2020). BLiMP: The benchmark of linguistic minimal pairs for English (M. Johnson, B. Roark, &amp; A. Nenkova, Eds.). Transactions of the Association for Computa- tional Linguistics, 8, 377-392. https://doi.org/10.1162/tacl_a_00321</p>
+<p>Ethan Gotlieb Wilcox, Michael Y. Hu, Aaron Mueller, Alex Warstadt, Leshem Choshen, Chengxu Zhuang, Adina Williams, Ryan Cotterell, &amp; Tal Linzen. (2025). Bigger is not always bet- ter: The importance of human-scale language modeling for psycholinguistics. Journal of Memory and Language, 144, 104650. https://doi.org/10.1016/j.jml.2025.104650</p>
+<p>Ezra Winston &amp; J. Zico Kolter. (2026). Learning syntax without semantics: Disentangled tiny lan- guage models. Forty-third International Conference on Machine Learning. https://openreview. net/forum?id=p7HVrmZwWB</p>
+<p>Qiang Zhang, Keyan Ding, Tianwen Lv, Xinda Wang, Qingyu Yin, Yiwen Zhang, Jing Yu, Yuhao Wang, Xiaotong Li, Zhuoyi Xiang, et al. (2025). Scientific large language models: A survey on biological &amp; chemical domains. ACM Computing Surveys, 57(6), 1-38.</p>
+<p>Xiutian Zhao, Björn Schuller, &amp; Berrak Sisman. (2026). Discovering and causally validating emotion- sensitive neurons in large audio-language models. In M. Liakata, V. P. Moreira, J. Zhang, &amp; D. Jurgens (Eds.), Proceedings of the 64th annual meeting of the Association for Compu- tational Linguistics (volume 1: Long papers) (pp. 15056-15071). Association for Compu- tational Linguistics. https://doi.org/10.18653/v1/2026.acl-long.687</p>
+<p>Ziqian Zhong, Ziming Liu, Max Tegmark, &amp; Jacob Andreas. (2023). The clock and the pizza: Two stories in mechanistic explanation of neural networks. Advances in neural information pro- cessing systems, 36, 27223-27250.</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
