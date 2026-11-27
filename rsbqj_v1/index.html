@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: A Dynamic and Recursive Allocative Model of
+Talent Development and Expression</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+A Dynamic and Recursive Allocative Model of Talent Development and
+Expression
+</p>
+<p class="meta">
+2026-11-27 · Metacheck 0.4.4.40
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to fix</span></span><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>16</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="na">Not applicable <span class="n">(16)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>No papers appeared to report data about people or animals that need
+an ethics statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>No citations to articles in the FLoRA database were found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper does not appear to report data about individual people or
+animals (we found: a statement that there are no data), so we do not
+expect an ethics statement.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>No new data were created or analyzed in this theoretical article.</p>
+</blockquote>
+<blockquote>
+<p>This article is theoretical and does not report research involving
+human participants, human data, human tissue, or animals.</p>
+</blockquote>
+<p>Ethics statement:</p>
+<blockquote>
+<p>Ethical approval was therefore not required.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 42 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 42 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 42 references with DOIs. No citations to articles in the
+FLoRA database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>Talent development is increasingly understood as domain-specific, temporally extended, and shaped by interactions between persons and environments. Yet existing models remain underspecified regarding how structural and institutional conditions, together with prior developmental histories, become concrete developmental conditions for persons over time. This article develops a dynamic and recursive allocative model of talent development and expression. Person-specific allocation is conceptualized as an endogenous, multidimensional interface through which configurations of tasks, developmental resources and support, demands and constraints, recovery affordances, and recognition are generated. The model distinguishes allocated conditions from their person-level realization and embeds these processes within successive developmental windows separating available capacities, domain-directed focus, independently measured learning speed, realized goal-directed activity, proximal conditions, and domain-specific performance. Aptitude is represented as a latent person-by-domain component of the focus-learning relation. Prior performance and allocation configurations contribute to subsequent allocations, creating recursive pathways through which cumulative advantage and disadvantage may emerge. The model further distinguishes proximal fit from outcome-specific developmental functionality and recovery affordances from realized recovery, allowing the same configuration to have different consequences across outcomes. It yields falsifiable propositions and a multilevel, multimodal measurement architecture for domain-specific empirical evaluation. The framework offers a testable account of recursively reallocated developmental conditions.</p>
+<h3>1. Introduction</h3>
+<p>Across education, work, science, sport, and the arts, talent development concerns a recurring problem: available capacities and access to knowledge do not automatically become meaningful and sustainable domain-specific achievement. Contemporary institutions nevertheless operate under increasing pressure to develop capabilities and generate new value, making it important to understand not only who performs, but how capacities are transformed over time and under which conditions this transformation can be sustained (Rosa et al., 2017; Subotnik et al., 2011; Preckel et al., 2020; OECD, 2025).</p>
+<p>Across the relevant research traditions, talent development is increasingly understood as domain-specific, temporally extended, and dependent on interactions between persons and environments. Yet the field still lacks a sufficiently explicit account of the allocative processes through which structural and institutional conditions, together with prior developmental histories, become concrete developmental conditions for a particular person at a particular time. Existing theories already identify capacities, psychosocial characteristics, environmental catalysts, learning resources, opportunities, adaptive person-environment processes, and forms of developmental selection or support (Subotnik et al., 2011; Ziegler et al., 2017; Den Hartigh et al., 2016; Dai, 2024; Taylor et al., 2022).</p>
+<p>However, what remains comparatively underspecified is how identifiable decisions, rules, and practices translate these broader conditions into the joint distribution of task configurations, developmental resources, demands, recovery affordances, and recognition to particular persons. They also rarely connect these allocations to person-task-context fit, load and individually realized recovery, and the recursive effect of earlier talent expression and recognition on later allocations.</p>
+<p>The resulting gap is therefore not the absence of dynamic or contextual talent models as such, but the absence of a sufficiently explicit and testable link between structural context, proximal developmental configurations, and change across successive developmental windows. This gap raises two related developmental questions: when is a person-specific developmental configuration functional for a specified outcome at a particular developmental moment, and when might the same configuration have different functional consequences across developmental outcomes? These questions require an account not only of which developmental conditions are allocated, but also of how their functionality varies across persons, time, and outcomes and how their consequences feed back into subsequent developmental conditions.</p>
+<p>Accordingly, this article develops a recursive, temporally ordered, and multilevel persontask-context model of talent development and expression. Across successive developmental windows, the model distinguishes available capacities (V), domain-directed focus (F), independently measured learning speed (S), realized goal-directed activity (D), task configuration (Q), positive well-being (W + ), experienced load (L), proximal persontask-context fit (C), recovery affordances (OR), individually realized recovery (R), and domain-specific performance quality (Tr ). It further specifies how structural context (H) and institutional rules and decision practices (Π) are translated through an allocative function g A (⋅) into person-specific developmental conditions represented by the allocation vector A, how within-window developmental processes and performance contribute to the person&#x27;s subsequent developmental state, and how prior performance and allocation configurations recursively shape later developmental conditions.</p>
+<p>The article makes three interrelated theoretical contributions. First, it specifies talent development as a temporally ordered process in which available capacities, domaindirected focus, independently measured learning speed, realized goal-directed activity, and attained performance are analytically separated across repeated developmental windows. Within this architecture, aptitude (P) is represented as a latent person-bydomain component of the F-S relation rather than as an observed ratio or a fixed, contextfree attribute. Second, the model specifies an endogenous and recursive allocative function through which structural and institutional conditions, prior developmental outcomes, and prior allocations generate person-specific developmental configurations. The resulting allocation is multidimensional, A= [Q,M,B,OR,G]′, comprising task configuration, developmental resources and support, externally imposed demands and constraints, recovery affordances, and recognition. Allocation is therefore treated not as a generic quantity of opportunity or support, but as a potentially ambivalent configuration whose components may have different consequences across persons, developmental moments, and outcomes. A further distinction separates the allocation of developmental conditions from their person-level realization. Third, the model distinguishes proximal person-task-context fit from outcome-specific developmental functionality and separates recovery affordances (OR) from individually realized recovery (R). It incorporates experienced load and realized recovery into developmental transitions and represents functionality as person-, configuration-, time-, and outcome-specific through a moving theoretical optimum and adaptive, compensatory, and maladaptive regions, while treating non-linear and asymmetric response patterns and cross-outcome trade-offs as empirically testable possibilities.</p>
+<p>Beyond these theoretical contributions, the article provides a concrete empirical translation of the framework through a multimodal and multilevel measurement architecture. PUW! serves as a worked measurement case for selected proximal psychophysiological, well-being, recovery, and contextual processes, while the broader model requires supplementary task-level, behavioral, observational, and administrative indicators to examine allocation, learning, realized activity, and talent expression. PUW! therefore provides one concrete route for operationalizing substantial parts of the framework rather than a measurement system on which the theoretical model itself depends. The framework is consequently proposed as a falsifiable research architecture rather than as a validated universal instrument for talent detection or selection.</p>
+<p>Following this introduction, Section 2 positions the model in relation to dynamic talent theories, personenvironment fit, recovery, resource allocation, and cumulative advantage. Section 3 defines the constructs and developmental windows. Section 4 formalizes the within-window developmental relations, proximal fit and response patterns, cross-window transitions, and recursive allocation feedback. Section 5 presents the multilevel measurement, calibration, and empirical evaluation strategy, including the role and limits of PUW!. Section 6 discusses the model&#x27;s theoretical and institutional implications, ethical use, limitations, and priorities for empirical research. Section 7 concludes.</p>
+<h3>2. Theoretical Positioning and Integrative Gap</h3>
+<p> &gt;Theoretical Positioning and Integrative Gap</p>
+<h3>2.1 From Trait and Component Accounts to Dynamic Developmental Systems</h3>
+<p>The practical interest in talent has produced several partially overlapping research traditions rather than one agreed conceptualization. Human-resource scholarship has variously treated talent management as conventional human-resource practice, the management of differentiated talent pools, or the strategic placement of selected employees in pivotal positions, while more inclusive approaches emphasize the development of a broader range of employees (Lewis &amp; Heckman, 2006; Gallardo-Gallardo et al., 2013; Kaliannan et al., 2023). Developmental models instead distinguish initial abilities from systematically developed competencies and emphasize that psychosocial characteristics, opportunities, sociocultural conditions, and domain-specific developmental trajectories contribute differently over time (Gagné, 2021; Subotnik et al., 2011; Subotnik et al., 2021; Preckel et al., 2020). Comparative and longitudinal research further demonstrates the need for domain-sensitive models that explicitly include social-contextual developmental processes (Faber et al., 2022; Verschueren &amp; Rinn, 2024). At the same time, definitions and operationalizations across giftedness and talent research remain heterogeneous (Popp et al., 2025). Systemic approaches extend this developmental shift by making the evolving relations among persons and their environments central to explanation. The Actiotope Model conceptualizes exceptional development in terms of an evolving system linking the individual with material, social, and informational environments. Subsequent learning-resource formulations within the Actiotope tradition further distinguish exogenous educational capital from endogenous learning capital and explicitly treat the availability and management of learning resources as central to the development of excellence (Ziegler et al., 2017; Ziegler et al., 2019; Ziegler et al., 2025). The framework therefore already provides a systemic account of both environmental resources and the endogenous resources through which individuals make use of developmental opportunities.</p>
+<p>Evolving Complexity Theory (ECT) similarly provides a broad relational developmental-systems account of talent development. In its current formulation, ECT emphasizes developmental self-organization, the primacy of action and interaction, adaptation to task affordances and constraints, multiple developmental pathways, and the social-historical and cultural conditions under which development occurs (Dai, 2024). ECT further distinguishes individual niche-picking from cultural selection and explicitly incorporates developmental windows and progressions, social recognition, privileged access to opportunities and resources, and cumulative Matthew effects (Dai, 2024).</p>
+<p>The Dynamic Network Model adds a formal dynamic perspective by conceptualizing excellence as an emergent property of idiosyncratic networks of reciprocally interacting internal and external components rather than as the additive product of fixed predictors (Den Hartigh et al., 2016). Related ecologicaldynamics approaches in sport likewise emphasize a reciprocal performer-task-environment system and conceptualize practitioners as designers of learning environments who manipulate constraints and affordances to support adaptive skill development (Woods et al., 2020). These systemic approaches establish a rich account of dynamic person-environment development. The present model builds on this foundation while addressing a more specific question: how developmental conditions become personspecifically allocated within such systems.</p>
+<h3>2.2 Person-Task-Context Fit, Load, and Recovery</h3>
+<p>Person-environment fit theory provides a relational account of functioning: outcomes depend on the correspondence between person characteristics or needs and commensurately measured environmental demands or supplies rather than on either side in isolation (Edwards et al., 1998). Polynomial regression and response-surface methods further permit non-linear and asymmetric fit hypotheses to be tested without reducing fit to a single difference score (Edwards &amp; Parry, 1993). Contemporary P-E fit research nevertheless cautions against assuming that correspondence uniformly optimizes outcomes (van Vianen, 2018; Humberg et al., 2019). In particular, modern polynomial P-E fit research provides mixed support for simple congruence assumptions, reinforcing the need to treat fit relations as empirical rather than axiomatic.</p>
+<p>Recovery research adds a temporal requirement. Sustained functioning depends not only on exposure to developmental demands but also on the restoration of physiological, cognitive, and emotional resources, and the effectiveness of recovery activities may vary across persons and situations (Kellmann et al., 2018; Sonnentag et al., 2022). Meta-analytic evidence further indicates that recovery activities, recovery experiences, and states of being recovered are related but empirically non-equivalent constructs and show different associations with demands, resources, well-being, and performance (Steed et al., 2021). Together, these perspectives support distinguishing environmental and task conditions from person-level fit, load, and realized recovery.</p>
+<p>Adjacent demands-resources theories provide a complementary perspective. Job Demands-Resources theory distinguishes environmental demands and resources from their consequences for strain, motivation, functioning, and performance and increasingly treats these processes dynamically and across levels (Bakker &amp; Demerouti, 2017; Bakker et al., 2023). Longitudinal evidence also demonstrates reciprocal relations among workload, autonomy, feedback, and recovery opportunities (Rodríguez-Muñoz et al., 2012). This literature therefore provides an important antecedent for distinguishing developmental conditions from their person-level consequences.</p>
+<p>Related performance-regulation traditions further indicate that functional relations need not be monotonic or uniform across persons. Individual-zones approaches identify person-specific ranges associated with successful performance, whereas dynamic-adaptability and compensatory-control accounts distinguish relatively stable functioning from conditions in which performance is maintained through increasing regulatory effort and, eventually, from adaptive breakdown (Hancock &amp; Warm, 1989; Hockey, 1997; Ruiz et al., 2017; Szalma &amp; Teo, 2012). These traditions provide important antecedents for the outcome-specific developmental functionality formalized in Section 3.7.</p>
+<h3>2.3 Structural Context, Allocation, and Cumulative Dynamics</h3>
+<p>Research across talent systems and strategic talent management already shows that developmental resources and opportunities are differentially distributed. Strategic talent management conceptualizes differentiated investment through pivotal positions, talent pools, and differentiated HR architectures (Collings &amp; Mellahi, 2009; Collings et al., 2019), while talent-system research examines how limited developmental resources are deployed across system levels (Taylor et al., 2022). Systemic talent theories likewise emphasize the availability and use of educational and learning resources (Ziegler et al., 2017; Ziegler et al., 2019). Allocation itself is therefore not introduced here as an entirely new topic.</p>
+<p>Educational expectancy research provides a more proximal example of how prior information about a person can become linked to later developmental treatment. In a longitudinal study of first-grade classrooms, teacher expectations predicted subsequent student achievement beyond prior achievement, cognitive ability, motivation, and background characteristics, while characteristics of teacher feedback varied with inaccurate expectations (Gentrup et al., 2020). Such findings do not constitute a general theory of allocation, but they illustrate one concrete mechanism represented abstractly by Π : prior judgments about a person can become associated with differences in subsequent developmental conditions.</p>
+<p>What remains comparatively underspecified across these traditions is the person-specific, temporally ordered allocation function through which structural and institutional conditions, prior developmental outcomes, and prior allocations jointly generate the concrete developmental configuration encountered by a particular person. The proposed extension is therefore narrower than the general claim that resources or opportunities are distributed. Allocation becomes a multidimensional person-specific outcome that itself requires explanation, comprising task configuration, developmental resources and support, externally imposed demands and constraints, recovery affordances, and recognition. Because these components can vary in different directions, A is not reducible to a scalar quantity of developmental capital, support, or opportunity. This translation is also potentially recursive. Cumulative-advantage theory shows how earlier favorable positions or visible success can generate subsequent advantages, while disadvantage may likewise accumulate over time (DiPrete &amp; Eirich, 2006). Empirical evidence indicates that allocation itself can become part of such trajectories. Using a regression-discontinuity design around a research-funding threshold, Bol et al. (2018) found that applicants narrowly receiving an early-career grant subsequently accumulated more than twice as much research funding over the following eight years as applicants with near-identical review scores immediately below the threshold. They found no evidence that the improved subsequent funding chances resulted from achievements enabled by the initial grant, suggesting that early funding itself could become an asset in acquiring later funding; reduced subsequent participation among unsuccessful applicants contributed additionally to the divergence.</p>
+<p>In talent development, performance, recognition, and prior allocation may consequently influence later task access, support, expectations, and recovery space. Allocation may also be developmentally ambivalent. A more challenging task and greater recognition may support learning while simultaneously increasing load or narrowing recovery opportunities. The relevant unit is therefore not a generically positive or negative resource, but the resulting person-specific configuration and its consequences over time.</p>
+<h3>2.4 Integrative Gap</h3>
+<p>The targeted synthesis above indicates that the model&#x27;s novelty cannot rest on dynamism, context, recovery, non-linearity, differential resource allocation, cumulative advantage, person-specific task adaptation, or developmental feedback separately. Each has established theoretical antecedents, as reviewed above. To our knowledge, however, these traditions do not yet jointly formalize allocation itself as an endogenous, multidimensional, and temporally indexed developmental configuration connecting the institutional production of developmental conditions to their person-level realization and subsequent reallocation.</p>
+<p>The proposed architecture therefore distinguishes three analytically separate transitions. First, an allocativeproduction process translates structural conditions, institutional decision practices, prior developmental outcomes, and prior allocations into the person-specific configuration A = [Q , M , B , O R ,G ]&#x27;.</p>
+<p>Second, an allocation-to-realization process distinguishes what is assigned, imposed, or made available from what is actually enacted or experienced by the person. Third, within-window developmental outcomes contribute to the person&#x27;s subsequent developmental state, whereas prior performance and the prior allocation configuration contribute to the production of subsequent allocations. The contribution therefore lies not merely in combining established variables, but in formally connecting the production, realization, and recursive reallocation of developmental conditions within a falsifiable temporal architecture.</p>
+<h3>3. Conceptual Foundations and Construct Definitions</h3>
+<p> &gt;Conceptual Foundations and Construct Definitions</p>
+<h3>3.1 Talent Development, Talent Expression, and Domain-Specific Performance</h3>
+<p>To provide a consistent conceptual basis for the proposed architecture, three related concepts must first be distinguished. Talent development denotes the temporally extended process through which internally available capacities are transformed, through learning and goal-directed activity, into domain-specific functioning and achievement. Talent expression refers to the observable manifestation of this process at a specified assessment moment or across a prespecified assessment interval, such as a performance, product, solution, contribution, or other domain-relevant accomplishment. Domain-specific performance provides the empirical basis on which that expression can be evaluated. Accordingly, the framework does not treat talent as a fixed personal possession, a binary category, or a synonym for high current performance. Nor is talent inferred directly from the quantity of visible outputs. Instead, talent expression concerns the quality, significance, and domain relevance of demonstrated performance within an explicitly defined reference frame, while the developmental process leading to that performance remains analytically distinct. This distinction retains the developmental emphasis of contemporary talent models while making their observable outcome sufficiently precise for longitudinal measurement (Subotnik et al., 2011; Gagné, 2021; Preckel et al., 2020).</p>
+<p>Within the proposed architecture, domain-specific performance quality is denoted by (Tr), where (r) identifies the reference frame within which the performance is evaluated. (Tr) is not a raw count of visible outputs, but an assessment based on prespecified domain-relevant indicators, such as technical quality, effectiveness, originality, complexity, accuracy, or contribution. Depending on the domain and purpose of the assessment, Tᵣ may represent performance demonstrated at a specified moment or performance summarized across a prespecified assessment interval. The appropriate indicators and their relative importance must be determined for each domain. Three complementary reference frames can be distinguished. An ipsative frame evaluates performance relative to the person&#x27;s own previous functioning; a normative frame locates it relative to an explicitly defined and relevant comparison group; and a criterionreferenced frame evaluates it against predetermined domain standards or levels of mastery. These frames answer different questions and should therefore not be treated as interchangeable. A single performance may represent substantial personal progress without exceeding a normative benchmark, or satisfy an external criterion despite limited change relative to prior performance. Any application of the architecture must consequently specify in advance the performance task, indicators, scoring rules, comparison group or criterion, and the reference frame under which (Tr) is interpreted.</p>
+<p>Talent expression can thus be evaluated at a specified moment or across a prespecified interval, but a single assessment moment or interval is insufficient to characterize a developmental trajectory. Observed performance may reflect temporary personal conditions, task characteristics, accumulated opportunities, or measurement error in addition to the underlying developmental process. The architecture therefore treats each performance observation as time-specific and distinguishes current performance quality from the change leading to it. Repeated assessment is required to examine whether an observed expression represents continued progress, maintenance, decline, or recovery. This longitudinal perspective leads to the developmental-window structure introduced below.</p>
+<h3>3.2 Developmental Windows and Performance Change</h3>
+<p>A developmental window is a bounded period between a baseline assessment occasion (t₀) and a target assessment occasion (t₁) for a particular person and achievement domain. It is an analytical unit rather than a fixed age period or universal developmental stage. Its duration and observation schedule should correspond to the expected pace of meaningful development and the availability of valid measurement occasions in the domain under investigation. When retention, durability, or recovery is relevant, a follow-up assessment occasion (t₂) may be added.</p>
+<p>Baseline performance is denoted by Tᵣ,₀ and performance at the target assessment by Tr,₁. Both are assessed using the same prespecified reference frame r. Provided that the performance construct, measurement scale, scoring rules, and reference specification are sufficiently comparable across occasions, within-window performance change is defined as: ΔTᵣ = Tᵣ,₁ -Tᵣ,₀ Tᵣ,₁ represents attained performance, whereas ΔTᵣ represents the difference from baseline. Learning speed, S, is measured independently and is not inferred from either outcome. Because raw difference scores may amplify measurement error, the primary prospective analysis should ordinarily model Tᵣ,₁ while adjusting for Tᵣ,₀; ΔTᵣ may additionally be examined as a descriptive or latent-change outcome.</p>
+<p>Successive developmental windows constitute an endogenous sequence rather than independent repetitions of the same model. Learning, realized activity, load, recovery, and performance during window k may alter the capacities and personal state available at the beginning of window k+1. In addition, performance and recognition during window k may affect the tasks, resources, demands, and recovery affordances allocated in the subsequent window. Cross-window transition and allocation feedback are therefore core features of the dynamic architecture, although the strength and functional form of individual transition paths remain empirical questions.</p>
+<p>The repeated-window structure permits the study of progress, maintenance, stagnation, decline, recovery, and withdrawal without assuming continuous or linear development. Section 4 specifies both the withinwindow relations and the cross-window transition and allocation-feedback relations.</p>
+<h3>3.3 Structural Context and Allocative Dynamics</h3>
+<p>Structural context (H) comprises relatively persistent social, economic, cultural, geographical, and institutional conditions that shape the range of developmental configurations available to a person. Socioeconomic status is one indicator of structural position, but it is neither an allocation agent nor a unidirectional causal variable. Its developmental relevance depends on the institutional settings, resources, constraints, and decision processes through which it is translated into proximal conditions.</p>
+<p>Allocative mechanisms are the decisions, rules, classifications, and practices through which structural conditions are translated into person-specific distributions of task access, developmental resources, demands, support, recovery affordances, and recognition. Families, teachers, coaches, employers, gatekeepers, organizations, and automated or institutional procedures may function as allocation agents.</p>
+<p>The mechanism is the rule or practice through which allocation occurs; the agent is the person or system enacting it.</p>
+<p>Allocation is multidimensional and potentially ambivalent. More challenging tasks, specialized guidance, and recognition may support learning and progression while simultaneously increasing performance pressure, time demands, or recovery requirements. Conversely, limited task access may reduce immediate load while also restricting learning opportunities. The consequences of an allocation therefore depend on the resulting person-task-context configuration and its fit with the person at that time, not on whether the allocation is generically labeled positive or negative (Taylor et al., 2022).</p>
+<p>Allocative dynamics are also recursive. Earlier performance and recognition may influence subsequent access to tasks, resources, support, and recovery space, thereby generating cumulative advantage or disadvantage (DiPrete &amp; Eirich, 2006). This feedback makes allocation endogenous to the developmental model rather than an external background condition. Figure 1 summarizes the allocative-production process from structural context to person-specific developmental allocation. 3.4 Core Developmental Constructs</p>
+<p>The developmental process within each window distinguishes four person-and process-related constructs, available capacities (V), domain-directed focus (F), learning speed (S), and realized goal-directed activity (D), from the task configuration (Q) to which the person has access. Together, these constructs describe what a person can mobilize at the beginning of the window, the direction of the person&#x27;s attention and motivation, the rate at which relevant learning occurs, the activity that is actually realized, and the task conditions under which that activity and performance occur. Their separation is essential because capacity, intention, learning, action, and task access need not coincide.</p>
+<p>Available capacities (V) refer to the internally available, domain-relevant resources that a person can mobilize at the beginning of a developmental window. These may include existing knowledge, acquired competencies, cognitive, perceptual, or motor capacities, and previously developed strategies, depending on the achievement domain. V represents a person&#x27;s starting repertoire rather than a fixed or contextindependent endowment. It is domain-specific, may change between successive developmental windows, and must be assessed using indicators that are relevant to the performance under investigation. External opportunities, material resources, instruction, social support, and task conditions are excluded from V. They are represented separately through allocation outcomes (A), task configuration (Q), and proximal persontask-context fit (C). V must also be distinguished from baseline performance (Tᵣ,₀): the former concerns resources that may be mobilized, whereas the latter concerns the quality of performance actually demonstrated at the beginning of the window.</p>
+<p>Domain-directed focus (F) refers to the extent to which a person&#x27;s attention, interest, and motivational orientation are directed toward a particular achievement domain during a developmental window. It reflects the direction and relative strength of engagement with the domain, rather than general motivation or a stable personality trait. F may be expressed through sustained interest, willingness to invest effort, perceived value, goal commitment, and attentional prioritization, but its indicators must be selected and validated for the domain and developmental period under investigation. F is distinct from realized goaldirected activity (D): a person may be strongly oriented toward a domain without being able to translate that orientation into sustained action because of limited opportunities, competing demands, adverse conditions, or insufficient recovery. Conversely, substantial activity may arise from external pressure without corresponding intrinsic interest or personal commitment. F should therefore be assessed independently of both activity and subsequent performance.</p>
+<p>Learning speed (S) refers to the rate at which a person acquires domain-relevant knowledge, techniques, or strategies per unit of prespecified time or standardized learning exposure during a defined developmental window. It concerns change in the underlying learning process rather than change in domain-specific performance. S must therefore be estimated independently from repeated observations of learning, for example through the rate of progress across comparable learning tasks or the time required to reach a prespecified learning criterion. It is not inferred from ΔTᵣ, because acquired learning may not yet be expressed in performance and performance may change for reasons other than learning. S is also distinct from available capacities (V): V represents the repertoire available at the beginning of the window, whereas S describes how rapidly that repertoire is extended or reorganized during the window. Finally, S should not be treated as a fixed personal property. It may vary across domains, developmental windows, task demands, and personal or contextual conditions. Its relation to domain-directed focus (F) provides the basis for estimating aptitude (P), but S remains a separately measured construct rather than a component calculated from F or P.</p>
+<p>Realized goal-directed activity (D) refers to the domain-relevant activity that a person actually undertakes during a developmental window in pursuit of learning, improvement, or performance goals. It may be characterized by duration, frequency, intensity, regularity, and process quality, depending on the domain. D concerns enacted activity rather than intention, willingness, or opportunity. D is not treated as a moral quality, a character trait, a synonym for discipline, or a ratio of realized to merely planned activity. It is therefore distinct from domain-directed focus (F), because strong interest or commitment does not necessarily result in sustained action, and substantial activity may occur under external pressure without equally strong personal focus. D is also distinct from learning speed (S): activity describes what is done, whereas learning speed describes the rate at which relevant knowledge, techniques, or strategies are acquired under specified learning conditions. Mere exposure, passive participation, and accumulated time should not automatically be treated as equivalent to goal-directed activity. Measurement must capture the features of activity that are theoretically relevant to development in the domain without defining its quality through later performance, thereby preserving the distinction between D and Tᵣ,₁. External opportunities, constraints, and support may influence whether and how activity is realized, but they belong to the allocation vector and proximal fit rather than to D itself.</p>
+<p>Task configuration (Q) refers to the domain-relevant activity structure assigned or made accessible during a developmental episode. It may include task difficulty, complexity, novelty, autonomy, stakes, pacing, feedback structure, and opportunities for progression. Q is distinct from realized activity (D), because an available or assigned task need not result in activity, and from performance (T r ), because the task defines the conditions under which performance is elicited rather than the quality of the resulting performance. Q is also allocative: persons do not necessarily encounter equivalent tasks, and prior performance, recognition, institutional decisions, and structural position may affect which tasks become available. In this distinction, Q captures properties constitutive of the focal task or activity structure, whereas B captures externally imposed demands or constraints that surround or regulate engagement with that task rather than defining the task itself.</p>
+<h3>3.5 Time-Varying Personal States and Proximal Person-Task-Context Fit</h3>
+<p>Development within a window occurs under personal states and proximal conditions that may change across episodes. Positive well-being (W + ), experienced load (L), proximal person-task-context fit (C), and realized recovery (R) are therefore measured repeatedly rather than treated as stable personal attributes.</p>
+<p>Their inclusion permits examination of why similar levels of focus, learning, or activity do not always produce similar developmental outcomes.</p>
+<p>Taken together, these distinctions preserve a broader analytical separation between developmental conditions that are externally available or imposed and the person-level states through which those conditions become developmentally consequential. Positive well-being (W + ) and experienced load (L) are related but distinct dimensions. W + concerns positive affect, vitality, meaning, and perceived functioning, whereas L concerns experienced strain, overload, tension, or sustained psychophysiological activation. A person may experience substantial load while retaining positive functioning; the two dimensions should therefore not be collapsed into one bipolar score. External demands that may contribute to load are specified as allocation outcomes, while L denotes the burden experienced by the person.</p>
+<p>Proximal person-task-context fit (C) refers to the time-specific alignment between the person&#x27;s current characteristics and needs, the task configuration, and the immediately available resources, demands, support, and recovery affordances. Relevant dimensions include demands-abilities fit, and needs-supplies fit. C is therefore a relational construct, not a synonym for structural context or a count of environmental resources. To test fit, the relevant person and environmental dimensions should be measured commensurately rather than replaced by a single undifferentiated interaction or difference score (Edwards et al., 1998; Edwards &amp; Parry, 1993). Accordingly, C is a generic notation for the relevant fit relation or set of fit relations in a given application and does not imply a single undifferentiated fit score.</p>
+<p>Recovery affordances (O R ) and realized recovery (R) must be distinguished. Recovery affordances refer to the externally available time, autonomy, safety, support, space, and access to potentially restorative activities. Realized recovery refers to the subsequent restoration of physiological, cognitive, and emotional resources following or between periods of load. Sleep, rest, psychological detachment, social contact, or physical activity may function as recovery activities or indicators, but their restorative effect is not universal. The same activity may be restorative for one person or episode and ineffective or additionally demanding for another. R should therefore be modeled as an individually varying outcome rather than inferred directly from free time or from participation in a particular activity (Kellmann et al., 2018; Sonnentag et al., 2022).</p>
+<p>W + , L, C, and R may influence learning speed (S), the realization and sustainability of goal-directed activity (D), target performance (Tr,1), and the transition to the next developmental state. They may also condition the relation between focus (F) and learning speed (S). Their direct, indirect, lagged, and moderating roles remain competing empirical specifications rather than a single universal pathway.</p>
+<h3>3.6 Aptitude as a Latent Person-by-Domain Parameter</h3>
+<p>Aptitude (P) is defined as a latent person-by-domain parameter in the relation between domain-directed focus (F) and independently measured learning speed (S). It represents systematic individual differences in the extent to which focus on a particular domain is associated with learning under specified conditions. P is not directly observable and must not be calculated as the ratio S/F. Such a ratio would be unstable when F is low, would ignore measurement error, and would confound aptitude with occasion-specific variation in both focus and learning. Instead, P must be inferred from repeated observations of F and S across comparable learning tasks or developmental windows within the relevant domain. The formal specification and identification requirements for this latent parameter are presented in Sections 4.5 and 5.</p>
+<p>The person-by-domain character of P implies that aptitude is neither a universal personal attribute nor an innate and immutable essence. The same person may show different aptitude parameters across achievement domains, while individuals within the same domain may differ in the relation between their focus and learning speed. P must also be distinguished from available capacities (V), which describe the repertoire available at the beginning of a developmental window, and from S, which describes the learning rate observed during that window.</p>
+<p>To preserve both persistence and developmental variation, the focus-learning slope in window k is decomposed as where P ‾ id denotes the relatively persistent person-by-domain component and u idk P the window-specific deviation.</p>
+<p>Aptitude is therefore interpreted more cautiously as a latent domain-specific focus-to-learning responsivity parameter. Its interpretation requires sufficient within-unit variation in F, repeated and independently measured observations of S, measurement invariance across windows, and discriminant validity relative to V and the time-varying conditions included in the model.</p>
+<p>This definition is related to, but substantially narrower than, the historical aptitude-treatment interaction tradition. ATI research conceptualized aptitude in relation to systematic individual differences in responsiveness to instructional methods or treatments and emphasized that such interactions require explicit tests of differential response rather than inference from main effects alone (Cronbach &amp; Snow, 1977; Snow &amp; Swanson, 1992). P is not intended as a general treatment-sensitivity parameter. It specifically represents persistent person-by-domain heterogeneity in the conditional relation between domain-directed focus and independently measured learning speed.</p>
+<p>Nor does the model assume substantial generic between-person variation in learning rate. Koedinger et al. (2023), analyzing approximately 1.3 million observations across 27 educational datasets, found large differences in students&#x27; initial performance but comparatively little variation in estimated learning rates across repeated practice opportunities. This finding provides an important empirical null alternative for the present model. P should therefore be retained only if repeated within-unit observations identify reliable heterogeneity specifically in the F-S relation after the prespecified capacities, task characteristics, and time-varying developmental conditions have been taken into account. Figure 2 summarizes the transition from allocated developmental conditions to proximal conditions, developmental processes, and talent expression.</p>
+<p>Figure 2. From allocated developmental conditions to person-level realization and talent expression</p>
+<h3>3.7 Dynamic Functionality, Optimal Bands, and Ambivalent Response Patterns</h3>
+<p>The model does not assume that more challenge, support, activity, or scheduled recovery time is invariably better. For a specified configuration dimension x, x idke * denotes the theoretical optimum for person i, domain d, window k, and episode e. This optimum is not fixed: it may shift as capacities, task demands, load, recovery state, and contextual conditions change. In Aristotelian terms, the optimum is relative to the person and situation rather than an arithmetic midpoint; the present model extends that idea by distinguishing the theoretical optimum from a bandwidth of near-equivalent functioning around it (Aristotle, 2009). Within the compensatory region, the focal outcome may remain within an acceptable range, but maintaining it is expected to require greater effort, regulation, or recovery cost. Empirical classification of a configuration as compensatory therefore requires evidence of such additional regulatory or recovery cost rather than deviation from the theoretical optimum alone. Beyond the outer boundary, either the focal outcome itself or the conditions required to sustain it are expected to become developmentally maladaptive. The location, width, symmetry, and consequences of these regions are empirical questions.</p>
+<p>Cross-outcome allocative trade-offs refer to configurations in which the same allocation has different functional consequences across outcomes, for example when increased challenge accelerates learning while simultaneously increasing load or reducing realized recovery. Such trade-offs are conceptually distinct from the geometry of a single response surface. A literal saddle-shaped response surface is therefore treated only as a possible empirical special case in multidimensional analyses, not as a universal property of the model.</p>
+<p>The present formulation therefore generalizes optimal-zone and compensatory-response reasoning from a focal performance relation to developmental configurations whose functional status may differ across outcomes and change across developmental time. Because developmental functionality is outcome-specific, the theoretical optimum and its associated boundaries are interpreted relative to a prespecified outcome o.</p>
+<p>Accordingly, the same allocation may fall within the adaptive band for learning or performance while simultaneously falling within a compensatory or maladaptive region for positive well-being, realized recovery, or sustainable continuation. Figure 3 illustrates the outcome-specific nature of developmental functionality.</p>
+<p>Figure 3. Developmental functionality is outcome-specific</p>
+<h3>3.8 Shared Architecture and Domain-Specific Meaning</h3>
+<p>The proposed model provides a shared structural architecture across achievement domains rather than a universal content-independent measurement model. Across domains, Tr , V, F, S, D, Q, W + , L, C, OR, R, H, Π, A, and G retain the same theoretical roles: evaluated performance, baseline capacities, focus, learning speed, realized activity, task configuration, positive well-being, experienced load, proximal fit, recovery affordances, realized recovery, structural context, institutional decision practices, allocation outcomes, and recognition. The meaning of the roles is shared; their indicators, scales, parameter values, and developmental timescales remain domain-specific.</p>
+<p>The substantive meaning and operationalization of these constructs must nevertheless be calibrated to the domain under investigation. Available capacities may involve motor coordination and tactical knowledge in sport, disciplinary knowledge and methodological skills in science, or technical and expressive repertoires in the arts. Similarly, learning speed must be estimated through domain-relevant acquisition tasks, while goal-directed activity may take the form of practice, study, experimentation, rehearsal, production, or other purposeful engagement. The indicators used to assess performance quality must also reflect the standards and valued outcomes of the relevant domain. A technically accurate performance, an original artistic product, an effective solution, and a valid scientific contribution cannot be evaluated using identical criteria merely because they all represent Tᵣ within the architecture.</p>
+<p>The appropriate developmental window, reference frame, measurement frequency, and scoring procedure may also differ across domains and developmental stages. The time required for meaningful change in one domain may be considerably longer or shorter than in another, and the relevance of ipsative, normative, and criterion-referenced evaluation may vary with the purpose of the assessment. These specifications must therefore be established before data are interpreted. The use of common construct labels does not by itself establish that scores are directly comparable across domains, populations, or developmental periods.</p>
+<p>Cross-domain comparison requires evidence that the constructs have sufficiently equivalent meanings and that their indicators function comparably. Where such equivalence or measurement invariance cannot be demonstrated, results should be interpreted within the relevant domain rather than placed on a single universal talent scale. The architecture consequently combines conceptual consistency with operational specificity: it permits the same developmental questions to be investigated across domains while preserving the distinctive activities, standards, conditions, and timescales through which talent is expressed. Section 4 translates this shared architecture into competing formal model specifications, and Section 5 addresses its measurement, calibration, and empirical evaluation.</p>
+<h3>4. A Dynamic and Recursive Allocative Model of Talent</h3>
+<p> &gt;A Dynamic and Recursive Allocative Model of Talent</p>
+<h3>4.1 Model Scope and Temporal Architecture</h3>
+<p>The model is specified for person i, achievement domain d, developmental window k, and episode e. Episodes are nested within developmental windows, and repeated windows are nested within person-bydomain units. This structure separates variation across episodes, change across windows within the same person and domain, and differences between persons and domains.</p>
+<p>For person i in domain d, developmental window k is represented as Widk =[t0,idk ,t1,idk ]. Baseline performance and available capacities are Tr,idk0 and Vidk0. Episode-level focus, learning speed, realized activity, and task configuration are Fidke , Sidke , Didke , and Qidke . Positive well-being, experienced load, proximal fit, recovery affordances, and realized recovery are Wike + , Like , Cidke , OidkeR , and Rike . Structural context is Hik, institutional rules and decision practices are Πdke, and the resulting person-specific allocation is represented by Aidke. The allocative function through which these conditions are translated into a personspecific allocation is denoted by gA(•). For notational economy, Xidke denotes the person&#x27;s current developmental state relevant to the focal persontask-context relation. It contains the current person-side capacities, characteristics, and requirements needed to define proximal fit. Allocated task and contextual conditions, domain-directed focus, learning speed, realized activity, and observed performance are represented separately and are therefore not included in Xᵢdkₑ.</p>
+<p>The domain index d is omitted from W , L, and R because these constructs are treated as person-level states ⁺ that may reflect demands and recovery processes extending beyond the focal achievement domain. Domain-specific operationalizations may nevertheless be used where attribution to the focal domain is empirically justified.</p>
+<p>Within each window, temporal ordering runs from baseline capacities and performance, through episodelevel allocation, task exposure, learning, activity, load, and recovery, to target performance Tr,idk1.</p>
+<p>Developmental outcomes at the end of window k contribute to the person&#x27;s baseline state in window k + 1.</p>
+<p>The next-window allocation process is modeled separately as a function of next-window structural and institutional conditions, prior performance, and the prior allocation configuration. Arrows in the model indicate temporal precedence and hypothesized relations; causal interpretation requires an appropriate design and cannot be inferred from temporal ordering alone. The complete architecture is integrated visually in Figure 4 following Section 4.5.</p>
+<h3>4.2 Allocative Dynamics and Proximal Conditions</h3>
+<p>The person-specific allocation vector is defined as Aᵢdkₑ = [Qᵢdkₑ, Mᵢdkₑ, Bᵢdkₑ, Oᴿᵢdkₑ, Gᵢdkₑ]′ where M denotes developmental resources and support, B externally imposed demands and constraints, and G recognition. Allocation is modeled as where Y id , k -1 contains prior talent expression and recognition.</p>
+<p>Proximal fit is then a relational function of the person&#x27;s current state and the allocated configuration:</p>
+<p>Realized recovery is modeled separately from recovery affordances: where U R denotes the recovery activity actually used and x i person-specific recovery characteristics.</p>
+<p>Developmental functionality is therefore not equivalent to proximal person-environment fit: fit concerns a current relational configuration, whereas functionality concerns its consequences for a prespecified outcome and timescale (van Vianen, 2018). These equations state the structural roles of the variables; the precise functional forms and lags must be prespecified for each empirical application.</p>
+<h3>4.3 Core Developmental Relations Within a Window</h3>
+<p>Within a window, learning speed is modeled in relation to focus, baseline capacities, task configuration, and time-varying conditions. Aptitude parameterizes systematic person-by-domain variation in the focuslearning relation and is not entered as a separate observed predictor of performance. Realized activity is modeled separately in relation to focus, task configuration, and the conditions under which activity can occur. Target performance is modeled prospectively from baseline performance, baseline capacities, and the learning and activity processes observed during the window.</p>
+<p>The model does not require a direct relation between S and D, although reciprocal or lagged relations may be compared when dense observations are available. Nor does it assume that every allocation outcome must enter every developmental equation directly. M, B, and O^R may operate through their prespecified effects on C, L, and R; direct paths should be added only when theory and design justify them.</p>
+<h3>4.4 Dynamic Fit and Response Surfaces</h3>
+<p>The optimal-band specification in Section 3.7 is evaluated separately for theoretically relevant dimensions.</p>
+<p>Person and environment indicators must refer to commensurate content and metrics. A generic twodimensional polynomial response surface can be written as</p>
+<p>This equation permits linear, curved, and interactive effects without assuming that a literal saddle exists. For the quadratic surface above, a saddle requires an indefinite Hessian, which in the two-dimensional case implies 4 β 3 β 5 -β 4 2 &lt; 0</p>
+<p>Absent that pattern, the response surface should be described as non-linear, asymmetric, or interactive rather than saddle-shaped (Edwards &amp; Parry, 1993).</p>
+<p>Consistent with contemporary response-surface guidance, evidence for a correspondence or congruence hypothesis should be based on the theoretically relevant combination of surface parameters and constraints rather than on the statistical significance of an isolated polynomial coefficient (Humberg et al., 2019).</p>
+<p>Response-surface interpretation should likewise evaluate the full set of parameter constraints implied by the specified fit hypothesis rather than isolated coefficients (Humberg et al., 2019).</p>
+<h3>4.5 Integrated Within-Window Specification</h3>
+<h3>Let</h3>
+<p>Zᵢd</p>
+<p>Within these relations, Z idke denotes the proximal conditions entering or characterizing episode e at the point relevant for modeling S idke and D idke ; processes during that episode may in turn update corresponding conditions in subsequent episodes, and the empirical measurement order and lags must therefore be prespecified. The core within-window relations are and</p>
+<p>The semicolon in the learning function indicates that the aptitude decomposition parameterizes variation in the F-S relation. Window-level S, D, Q, and Z denote prespecified summaries or trajectory parameters.</p>
+<p>Baseline performance makes the performance relation prospective. Interaction and non-linear terms are candidate specifications to be compared with simpler alternatives, not effects assumed to be universally present.</p>
+<h3>4.6 Cross-Window Transition and Recursive Allocation</h3>
+<p>The person&#x27;s subsequent baseline state is represented as</p>
+<p>The subsequent allocation is represented as</p>
+<p>The first equation captures developmental carryover into the person&#x27;s next state; the second captures feedback from prior performance and the prior allocation configuration, including recognition, into later developmental conditions. Both relations are core to the dynamic model, although individual paths may be absent or weak in particular domains. Together, these equations distinguish person-state carryover from allocation-state carryover.</p>
+<h3>4.7 Falsifiable Implications</h3>
+<p>Proposition 1. Structural position, institutional rules, and prior outcomes predict person-specific differences in task configuration, resources, demands, recovery affordances, and recognition. The proposition is not supported if these allocation outcomes are unrelated to the prespecified structural and institutional predictors.</p>
+<p>Proposition 2. Earlier performance and prior allocation configurations make distinguishable incremental contributions to subsequent allocations, thereby creating recursive pathways through which cumulative advantage or disadvantage can emerge across successive developmental windows. Evidence for cumulative dynamics requires that these predictors contribute to subsequent allocation beyond the prespecified structural and institutional predictors, and that resulting allocation differences subsequently contribute to later developmental outcomes and feed into further allocations. The proposition is not supported if earlier performance and prior allocation provide no reliable prediction of subsequent allocation beyond those predictors, or if resulting allocation differences do not carry forward into later developmental outcomes.</p>
+<p>Proposition 3. Independently measured learning speed has incremental predictive value for domain-referenced target performance beyond the other prespecified predictors in the target-performance specification. The proposition is not supported if the inclusion of learning speed produces no reliable improvement in explanatory or out-of-sample predictive performance.</p>
+<p>Proposition 4. The within-unit focus-learning relation contains both a relatively persistent person-bydomain component and window-specific deviation. The proposition is not supported if the within-unit relation is negligible or if reliable slope variation cannot be identified.</p>
+<p>Proposition 5. Prespecified configuration-outcome relations may exhibit person-, domain-, time-, and outcome-specific non-linearity, bandwidth, and asymmetry. The proposition is not supported if simpler linear specifications perform equally well or better, or if the estimated boundaries are unstable or fail to replicate. Proposition 6. Recovery affordances do not translate uniformly into realized recovery; the relation varies between persons and episodes as a function of load, activity use, and person-specific characteristics. The proposition is not supported if O R predicts R uniformly and the proposed moderators add no reliable information.</p>
+<p>Proposition 7. The same allocation can have beneficial and adverse consequences across different outcomes, for example, stronger learning alongside greater load or weaker recovery. The proposition is not supported if prespecified cross-outcome trade-offs are absent or unstable.</p>
+<p>Proposition 8. After domain-specific calibration, the model&#x27;s core temporal architecture-person-specific allocation shaping proximal developmental processes and developmental outcomes feeding back into subsequent allocation-shows structural correspondence across achievement domains, although indicators, parameter values, and developmental timescales may differ. The proposition is not supported if appropriately calibrated domain models require fundamentally different temporal or allocative structures such that the proposed allocation-development-feedback architecture does not recur.</p>
+<h3>5. Measurement, Calibration, and Empirical Evaluation</h3>
+<p>The preceding sections define the constructs, their temporal ordering, and the relations through which they are expected to operate. This section therefore does not redefine each construct, but specifies how the architecture can be translated into an empirically testable design.</p>
+<h3>5.1 Multilevel and Multimodal Measurement</h3>
+<p>Empirical evaluation requires temporally aligned data at four analytical levels. Episode-level data capture focus, learning speed, realized activity, task configuration, positive well-being, experienced load, proximal fit, recovery affordances, realized recovery, and the components of the allocation vector. Window-level data capture baseline and target performance, changes in available capacities, and prespecified summaries or trajectories of episode-level processes. Repeated observations within person-by-domain units are required to identify persistent aptitude and developmental heterogeneity. Structural and institutional data identify the conditions, agents, decisions, and rules through which allocations are produced. The measurement schedule must preserve the temporal ordering specified in Section 4, and theoretically distinct constructs should be measured through independent indicators or data sources wherever possible.</p>
+<p>The PUW! framework provides a candidate multimodal measurement layer for positive well-being, psychophysiological stress, aspects of sleep and recovery, coping, and socio-economic context by combining physiological indicators, sleep data, self-report, and contextual surveys (Moortgat et al., 2025). It does not directly measure task allocation, developmental resources, externally imposed demands, recognition, learning speed, realized activity, or talent expression. Testing the present model therefore requires PUW!-based data to be supplemented with event-level task records and administrative or observational indicators of allocation.</p>
+<p>At minimum, the supplementary data should record assigned or accessible tasks and their difficulty; selection and progression decisions; feedback, instruction, mentoring, and material resources; imposed workload and expectations; available autonomy, time, and recovery space; recognition and visibility; and the agent or institutional rule responsible for each allocation. PUW! should consequently be presented as part of a measurement architecture for tracing the proximal consequences of allocation, not as a complete direct measure of allocation or talent itself.</p>
+<h3>5.2 Identification, Calibration, and Model Evaluation</h3>
+<p>The complete architecture is not intended to be estimated as a single saturated model in every study. Empirical evaluation should proceed modularly. A first stage should establish construct validity, temporal alignment, and the empirical separability of focus, learning speed, realized activity, performance, recovery affordances, and realized recovery. Subsequent analyses can test the within-window developmental relations, the allocation equations, the cross-window transition, and the recursive allocation feedback separately before evaluating their integration. This staged strategy permits individual parts of the architecture to be rejected, revised, or retained without treating the model as an indivisible whole.</p>
+<p>Identification of the aptitude parameter requires repeated and independently measured observations of focus and learning speed within person-by-domain units, sufficient within-unit variation in focus, and measurement invariance across the windows being compared. Estimation should distinguish within-unit variation in F from stable between-unit differences in average focus, so that the aptitude parameter is not inadvertently identified from between-person or between-unit associations. Its relatively persistent personby-domain component and window-specific deviation should therefore be estimated hierarchically rather than calculated from a single observation or an observed ratio. The empirical interpretation of aptitude remains conditional on the learning tasks, domain, developmental stage, and time-varying conditions included in the model. Accordingly, estimation of P should compare the proposed heterogeneous F-S slope structure against models without reliable between-unit slope variation, and evidence for P should require improved explanatory or out-of-sample predictive performance rather than nominal variation in estimated slopes alone.</p>
+<p>The theoretical optimum and the boundaries of the adaptive, compensatory, and maladaptive regions must likewise be estimated rather than assumed. Because developmental functionality is outcome-specific, the relevant outcome must be prespecified. Suppression of the outcome index for notational economy should not be interpreted as implying a common optimum across learning, performance, well-being, load, recovery, and sustainable continuation. Where the data permit, boundaries should be estimated with partial pooling across episodes and windows rather than as unrelated parameters for every observation. Linear, non-linear, asymmetric, and interactive specifications should be compared, and estimated boundaries should be evaluated for stability and out-of-sample replicability.</p>
+<p>Validation should combine construct and discriminant validity, temporal and predictive validity, sensitivity analyses for alternative lags and operationalizations, and comparison with simpler competing models.</p>
+<p>Where cross-domain comparison is intended, measurement invariance and structural transferability must also be evaluated. Interaction, non-linear, and recursive terms should be retained only when they add reliable explanatory or out-of-sample predictive value. Temporal ordering supports the developmental logic of the architecture but does not by itself establish causality; causal interpretation requires designs capable of addressing selection, prior differences, and time-varying confounding.</p>
+<h3>6. Discussion</h3>
+<p>The preceding sections formalized talent development as a recursive process in which person-specific developmental conditions are themselves partly produced through allocation. The discussion now considers the theoretical consequences of this architecture: how it changes the interpretation of individual trajectories, how developmental functionality should be evaluated, what it implies for institutional decision-making, and which empirical and conceptual limits must constrain its use.</p>
+<h3>6.1 From Developmental Context to Allocative Dynamics</h3>
+<p>As specified in Sections 3.3 and 4.2-4.6, the model treats allocation as the mechanism through which distal structural and institutional conditions become person-specific developmental configurations. The theoretical consequence is that observed performance cannot be interpreted independently of the developmental conditions through which it became possible. Performance is simultaneously an outcome of earlier allocations and, through subsequent recognition and decision-making, a potential input into later ones.</p>
+<p>This recursion creates a specific route through which cumulative advantage and disadvantage may emerge.</p>
+<p>Restricted task access may suppress opportunities for learning and later performance, whereas richer access may generate the very evidence subsequently used to justify further opportunity (cf. Gentrup et al., 2020; Bol et al., 2018). Selection and development can therefore become empirically entangled: later performance differences may partly reflect the consequences of earlier allocation decisions rather than merely confirm the judgments that produced those decisions. This does not imply that performance differences are institutionally determined, but it makes the allocative history of those differences theoretically relevant.</p>
+<p>The same logic qualifies the interpretation of aptitude. As defined in Section 3.6, aptitude is a conditional person-by-domain focus-learning responsivity rather than a context-free possession. Its estimation therefore depends not only on repeated observations of focus and learning, but also on whether the developmental system generated sufficient and appropriate opportunities for that responsivity to become observable. The model thus shifts part of the explanatory burden from characteristics of the person alone to the jointly evolving relation between the person and the conditions through which development is expressed.</p>
+<h3>6.2 Ambivalent Functionality and Sustainable Development</h3>
+<p>The outcome-specific functionality formalized in Section 3.7 has an important implication: developmental conditions cannot be assigned a single context-free value. The same allocation may support learning or immediate performance while increasing load, weakening realized recovery, or reducing the conditions for continued participation. Developmental success therefore cannot be inferred from the direction of a single outcome alone.</p>
+<p>This distinction separates immediate performance maximization from sustainable talent development. Strong visible performance may conceal accumulating load, inadequate recovery, or increasing dependence on compensatory effort, whereas a temporary reduction in activity or performance may be developmentally functional when it restores resources or preserves later capacity for learning and participation. Performance remains indispensable, but it does not by itself establish that the configuration producing it is developmentally adaptive.</p>
+<p>Recovery is central to this temporal distinction. As specified in Section 3.5, recovery affordances ( O R ) do not guarantee realized recovery (R); what matters developmentally is whether recovery actually restores resources relevant to subsequent functioning. Realized recovery should therefore neither be ignored nor mechanically maximized. Its value depends on the demands being experienced, the developmental exposure forgone or enabled, the person concerned, and the outcome and timescale under consideration.</p>
+<p>The distinction between proximal fit and developmental functionality further prevents fit from becoming a general label for beneficial conditions. Fit describes a current person-task-context relation, whereas functionality concerns the consequences of a configuration for a prespecified outcome across time (Sections 3.5 and 3.7). Talent expression and sustainable talent development are therefore related but nonequivalent: the former concerns what becomes observable within a reference frame, while the latter also concerns whether the process preserves or expands the capacity for continued development.</p>
+<h3>6.3 Implications for Research, Institutions, and Ethical Use</h3>
+<p>The model shifts empirical attention from exposure alone to the production of developmental conditions.</p>
+<p>Research should therefore examine who allocates tasks, support, demands, recovery opportunities, and recognition; according to which rules; in response to what prior information; and with what consequences. This makes institutional decision practices part of the developmental process rather than merely background characteristics.</p>
+<p>For institutions, the framework consequently supports evaluation of developmental systems as well as individuals. Systematic differences in task access, guidance, visibility, demands, or recovery space are relevant when interpreting later performance, particularly when earlier classifications themselves influence those distributions. The framework may therefore be useful for auditing where opportunities become concentrated, where demands accumulate without corresponding support, and where formally available recovery opportunities fail to become realized recovery.</p>
+<p>These implications also constrain the use of model-derived estimates. Consistent with the domain-specific assumptions in Section 3.8 and the identification requirements in Section 5.2, aptitude, fit, and estimated functional regions should not be converted into context-free talent scores or fixed selection labels. Their uncertainty and dependence on observed tasks, contexts, timescales, and outcomes must remain visible, especially when decisions based on those estimates affect the opportunities through which later evidence will be generated.</p>
+<p>Outcome selection introduces a further normative issue. Whether a configuration is considered adaptive depends on whether the relevant criterion is learning, immediate performance, well-being, recovery, continued participation, or some combination thereof. Prespecification prevents post hoc redefinition but cannot determine which outcomes institutions ought to prioritize; applications should therefore state explicitly whose objectives are being prioritized and over what timescale.</p>
+<p>Finally, multimodal and physiological indicators should support interpretation rather than function as transparent readings of stress, recovery, motivation, or talent. The PUW!-based measurement case in Section 5.1 consequently requires appropriate data minimization, informed participation, access restrictions, and safeguards against punitive or decontextualized use.</p>
+<h3>6.4 Limitations and Research Agenda</h3>
+<p>The principal limitation of the framework is the empirical burden created by its breadth. As discussed in Section 5.2, the architecture should therefore be evaluated modularly rather than estimated as a single saturated model. Person-specific parameters, non-linear functional regions, repeated episodes, and recursive feedback all require sufficient within-unit information, and failure to identify these components reliably should favor simpler specifications rather than increasingly flexible post hoc models.</p>
+<p>A second limitation concerns causal identification. Because allocations may respond to prior performance, institutional knowledge, and incompletely observed person characteristics, temporal ordering alone cannot distinguish developmental effects from selection into developmental conditions. Longitudinal designs are necessary but not sufficient; experimental and quasi-experimental variation in task access, support, demands, or recovery opportunities will be particularly informative where feasible.</p>
+<p>A third boundary concerns generalization. Section 3.8 proposes structural correspondence across domains rather than common indicators or parameter values. Cross-domain claims therefore depend on domainspecific calibration and evidence of measurement and structural comparability; failure to establish such equivalence should restrict inference to the domain studied.</p>
+<p>These limitations suggest three priorities. First, intensive within-domain studies should establish whether the core constructs and temporal relations can be measured separately and reliably. Second, longitudinal and quasi-experimental studies should test whether allocation, load, and realized recovery explain subsequent development beyond prior performance and capacities, including the recursive pathways specified in Section 4.6. Third, comparative studies should test both cross-outcome ambivalence and the extent to which the allocative architecture transfers across appropriately calibrated domains.</p>
+<p>The model should ultimately be retained only to the extent that its additional distinctions improve explanation, prediction, or institutional accountability relative to simpler alternatives. Its complexity is justified if making allocation, realized recovery, ambivalence, and recursion explicit reveals developmental processes that otherwise remain hidden; individual components must remain open to revision or rejection.</p>
+<h3>7. Conclusion</h3>
+<p>Talent development is neither the automatic expression of available capacities nor the isolated product of individual effort. It unfolds through repeated interactions between persons, tasks, contexts, and the institutional processes that distribute developmental conditions. This article developed a dynamic and recursive allocative model to make those interactions conceptually explicit and empirically testable.</p>
+<p>The model&#x27;s central contribution is to specify person-specific allocation as the endogenous interface between structural and institutional conditions and proximal development, while distinguishing the production of developmental conditions from their person-level realization and their recursive reallocation over time. Tasks, resources, demands, recovery affordances, and recognition are distributed through institutional decisions and practices, while earlier performance and recognition influence how these conditions are subsequently allocated. Developmental outcomes thus both result from prior configurations and contribute to the production of later ones, creating recursive pathways of progress, stagnation, recovery, withdrawal, and cumulative advantage or disadvantage.</p>
+<p>This perspective implies that talent expression cannot by itself establish whether the underlying developmental process is sustainable. The same allocation may support learning or performance while undermining well-being, realized recovery, or continued participation. Aptitude, fit, and recovery must therefore be interpreted as developmentally situated and context-sensitive rather than as fixed, context-free properties. Aptitude and fit are domain-linked, whereas recovery may also reflect demands and restorative processes extending beyond the focal domain.</p>
+<p>The resulting framework is not a validated instrument for identifying or selecting talent, but a falsifiable architecture requiring domain-specific calibration and empirical evaluation. Its value will depend on whether making allocation, individually realized recovery, cross-outcome ambivalence, and recursive feedback explicit produces better explanations of how talent develops and becomes expressed. In doing so, the model directs attention not only to individual developmental processes, but also to the institutional production of the conditions under which development becomes possible, sustainable, and fairly supported.</p>
+<h3>8. Statements and Declarations</h3>
+<p> &gt;Statements and Declarations</p>
+<h3>Acknowledgments</h3>
+<p>The author thanks Professor Stijn Verwulgen for explicitly highlighting, following the author&#x27;s PhD defense, the relevance of the underlying ideas to talent development and talent support, thereby encouraging further exploration of this connection.</p>
+<h3>Funding</h3>
+<p>The author received no financial support for the research, authorship, and/or publication of this article.</p>
+<h3>Data Availability</h3>
+<p>No new data were created or analyzed in this theoretical article. Data sharing is therefore not applicable.</p>
+<h3>Author Contributions</h3>
+<p>RM: Conceptualization, Methodology, Visualization, Writing -original draft, Writing -review &amp; editing.</p>
+<p>The author declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.</p>
+<h3>Ethical Considerations</h3>
+<p>This article is theoretical and does not report research involving human participants, human data, human tissue, or animals. Ethical approval was therefore not required.</p>
+<h3>Consent to Participate</h3>
+<p>Not applicable.</p>
+<h3>Consent for Publication</h3>
+<p>Not applicable.</p>
+<h3>Use of Generative AI and AI-Assisted Technologies</h3>
+<p>Generative AI (ChatGPT: GPT-5.6 Sol.) was used to assist with language and stylistic refinement and with the graphical development and refinement of conceptual illustrations under the author&#x27;s direction. All AIassisted textual and visual output was critically reviewed and verified by the author for conceptual accuracy, consistency with the underlying model and cited literature, and originality. The author takes full responsibility for the final content of the manuscript.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. From structural context to person-specific developmental allocation</p>
+<p>Let δ idke =x idke -x idke * With potentially asymmetric lower and upper boundaries, the functional regions are defined as adaptive band: -b idke -≤ δ idke ≤ b idke + compensatory region: -c idke -&lt;δ idke &lt; -b idke -∨ b idke + &lt;δ idke &lt;c idke + the adaptive band, configurations are expected to produce functionally equivalent or near-equivalent outcomes without substantial additional regulatory cost.</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. General architecture of the dynamic and recursive allocative model of talent development and expression. Structural context, institutional rules, prior talent expression and recognition, and prior allocation shape a multidimensional and potentially ambivalent person-specific allocation of tasks, resources, demands, recovery affordances, and recognition. Across repeated episodes within each developmental window, allocation interacts with the person&#x27;s current state and domain-directed focus to shape fit, well-being, load, realized recovery, independently measured learning speed, realized activity, and target performance. Aptitude exclusively parameterizes the focus-learning relation. Developmental outcomes update the next baseline state, while performance, recognition, and prior allocation recursively shape subsequent allocations. Solid arrows represent core specified relations; dashed arrows represent response specifications and recursive transitions. Arrows indicate hypothesized temporal relations rather than causal identification. The complete architecture is summarized in Figure 4.</p>
+<h3>References</h3>
+<p>References Aristotle. (2009). The Nicomachean ethics (W. D. Ross, Trans.; L. Brown, Rev.). Oxford University Press. https://doi.org/10.1093/actrade/9780199213610.book.1 (Original work published ca. 350 B.C.E.)</p>
+<p>Bakker, A. B., &amp; Demerouti, E. (2017). Job demands-resources theory: Taking stock and looking forward. Journal of Occupational Health Psychology, 22(3), 273-285. https://doi.org/10.1037/ocp0000056</p>
+<p>Bakker, A. B., Demerouti, E., &amp; Sanz-Vergel, A. I. (2023). Job demands-resources theory: Ten years later. Annual Review of Organizational Psychology and Organizational Behavior, 10, 25- 53. https://doi.org/10.1146/annurev-orgpsych-120920-053933</p>
+<p>Bol, T., de Vaan, M., &amp; van de Rijt, A. (2018). The Matthew effect in science funding. Proceedings of the National Academy of Sciences of the United States of America, 115(19), 4887- 4890. https://doi.org/10.1073/pnas.1719557115</p>
+<p>Collings, D. G., &amp; Mellahi, K. (2009). Strategic talent management: A review and research agenda. Human Resource Management Review, 19(4), 304-313. https://doi.org/10.1016/j.hrmr.2009.04.001</p>
+<p>Collings, D. G., Mellahi, K., &amp; Cascio, W. F. (2019). Global talent management and performance in multinational enterprises: A multilevel perspective. Journal of Management, 45(2), 540- 566. https://doi.org/10.1177/0149206318757018</p>
+<p>Cronbach, L. J., &amp; Snow, R. E. (1977). Aptitudes and instructional methods: A handbook for research on interactions. Irvington Publishers.</p>
+<p>Dai, D. Y. (2024). The nature and nurture of talent: A new foundation for human excellence. Cambridge University Press. https://doi.org/10.1017/9781009370622</p>
+<p>Den Hartigh, R. J. R., Van Dijk, M. W. G., Steenbeek, H. W., &amp; Van Geert, P. L. C. (2016). A dynamic network model to explain the development of excellent human performance. Frontiers in Psychology, 7, Article 532. https://doi.org/10.3389/fpsyg.2016.00532</p>
+<p>DiPrete, T. A., &amp; Eirich, G. M. (2006). Cumulative advantage as a mechanism for inequality: A review of theoretical and empirical developments. Annual Review of Sociology, 32, 271- 297. https://doi.org/10.1146/annurev.soc.32.061604.123127</p>
+<p>Edwards, J. R., Caplan, R. D., &amp; Harrison, R. V. (1998). Person-environment fit theory: Conceptual foundations, empirical evidence, and directions for future research. In C. L. Cooper (Ed.), Theories of organizational stress (pp. 28-67). Oxford University Press.</p>
+<p>Edwards, J. R., &amp; Parry, M. E. (1993). On the use of polynomial regression equations as an alternative to difference scores in organizational research. Academy of Management Journal, 36(6), 1577- 1613. https://doi.org/10.5465/256822</p>
+<p>Faber, I. R., Sloot, L., Hoogeveen, L., Elferink-Gemser, M. T., &amp; Schorer, J. (2022). Western approaches for the identification and development of talent in schools and sports contexts from 2009 to 2019: A literature review. High Ability Studies, 33(2), 135-168. https://doi.org/10.1080/13598139.2021.1900792</p>
+<p>Gagné, F. (2021). Differentiating giftedness from talent: The DMGT perspective on talent development. Routledge. https://doi.org/10.4324/9781003088790</p>
+<p>Gallardo-Gallardo, E., Dries, N., &amp; González-Cruz, T. F. (2013). What is the meaning of &#x27;talent&#x27; in the world of work? Human Resource Management Review, 23(4), 290- 300. https://doi.org/10.1016/j.hrmr.2013.05.002</p>
+<p>Gentrup, S., Lorenz, G., Kristen, C., &amp; Kogan, I. (2020). Self-fulfilling prophecies in the classroom: Teacher expectations, teacher feedback and student achievement. Learning and Instruction, 66, Article 101296. https://doi.org/10.1016/j.learninstruc.2019.101296</p>
+<p>Hancock, P. A., &amp; Warm, J. S. (1989). A dynamic model of stress and sustained attention. Human Factors, 31(5), 519-537. https://doi.org/10.1177/001872088903100503</p>
+<p>Hockey, G. R. J. (1997). Compensatory control in the regulation of human performance under stress and high workload: A cognitive-energetical framework. Biological Psychology, 45(1-3), 73- 93. https://doi.org/10.1016/S0301-0511(96)05223-4</p>
+<p>Humberg, S., Nestler, S., &amp; Back, M. D. (2019). Response surface analysis in personality and social psychology: Checklist and clarifications for the case of congruence hypotheses. Social Psychological and Personality Science, 10(3), 409-419. https://doi.org/10.1177/1948550618757600</p>
+<p>Kaliannan, M., Darmalinggam, D., Dorasamy, M., &amp; Abraham, M. (2023). Inclusive talent development as a key talent management approach: A systematic literature review. Human Resource Management Review, 33(1), Article 100926. https://doi.org/10.1016/j.hrmr.2022.100926</p>
+<p>Kellmann, M., Bertollo, M., Bosquet, L., Brink, M., Coutts, A. J., Duffield, R., Erlacher, D., Halson, S. L., Hecksteden, A., Heidari, J., Kallus, K. W., Meeusen, R., Mujika, I., Robazza, C., Skorski, S., Venter, R., &amp; Beckmann, J. (2018). Recovery and performance in sport: Consensus statement. International Journal of Sports Physiology and Performance, 13(2), 240-245. https://doi.org/10.1123/ijspp.2017-0759</p>
+<p>Koedinger, K. R., Carvalho, P. F., Liu, R., &amp; McLaughlin, E. A. (2023). An astonishing regularity in student learning rate. Proceedings of the National Academy of Sciences of the United States of America, 120(13), Article e2221311120. https://doi.org/10.1073/pnas.2221311120</p>
+<p>Lewis, R. E., &amp; Heckman, R. J. (2006). Talent management: A critical review. Human Resource Management Review, 16(2), 139-154. https://doi.org/10.1016/j.hrmr.2006.03.001</p>
+<p>Moortgat, R., Verbeke, P., d&#x27;Hooge, A., &amp; Cornelis, G. (2025). PUW! Cognitive strength in context: An innovative, multi-modal framework for real-time analysis of stress and socio-emotional functioning. Acta Psychologica, 261, Article 105929. https://doi.org/10.1016/j.actpsy.2025.105929</p>
+<p>OECD. (2025). OECD skills outlook 2025: Building the skills of the 21st century for all. OECD Publishing. https://doi.org/10.1787/26163cd3-en</p>
+<p>Popp, C., Stoeger, H., &amp; Ziegler, A. (2025). Robust and semi-robust findings from giftedness and talent research: Results of a secondary-order scoping review on meta-analyses. Journal for the Education of the Gifted, 48(4), 334-363. https://doi.org/10.1177/01623532251372590</p>
+<p>Preckel, F., Golle, J., Grabner, R., Jarvin, L., Kozbelt, A., Müllensiefen, D., Olszewski-Kubilius, P., Schneider, W., Subotnik, R., Vock, M., &amp; Worrell, F. C. (2020). Talent development in achievement domains: A psychological framework for within-and cross-domain research. Perspectives on Psychological Science, 15(3), 691-722. https://doi.org/10.1177/1745691619895030</p>
+<p>Rodríguez-Muñoz, A., Sanz-Vergel, A. I., Demerouti, E., &amp; Bakker, A. B. (2012). Reciprocal relationships between job demands, job resources, and recovery opportunities. Journal of Personnel Psychology, 11(2), 86-94. https://doi.org/10.1027/1866-5888/a000049</p>
+<p>Rosa, H., Dörre, K., &amp; Lessenich, S. (2017). Appropriation, activation and acceleration: The escalatory logics of capitalist modernity and the crises of dynamic stabilization. Theory, Culture &amp; Society, 34(1), 53- 73. https://doi.org/10.1177/0263276416657600</p>
+<p>Ruiz, M. C., Raglin, J. S., &amp; Hanin, Y. L. (2017). The individual zones of optimal functioning (IZOF) model (1978-2014): Historical overview of its development and use. International Journal of Sport and Exercise Psychology, 15(1), 41-63. https://doi.org/10.1080/1612197X.2015.1041545</p>
+<p>Snow, R. E., &amp; Swanson, J. (1992). Instructional psychology: Aptitude, adaptation, and assessment. Annual Review of Psychology, 43, 583- 626. https://doi.org/10.1146/annurev.ps.43.020192.003055</p>
+<p>Sonnentag, S., Cheng, B. H., &amp; Parker, S. L. (2022). Recovery from work: Advancing the field toward the future. Annual Review of Organizational Psychology and Organizational Behavior, 9, 33- 60. https://doi.org/10.1146/annurev-orgpsych-012420-091355</p>
+<p>Steed, L. B., Swider, B. W., Keem, S., &amp; Liu, J. T. (2021). Leaving work at work: A meta-analysis on employee recovery from work. Journal of Management, 47(4), 867- 897. https://doi.org/10.1177/0149206319864153</p>
+<p>Subotnik, R. F., Olszewski-Kubilius, P., &amp; Worrell, F. C. (2011). Rethinking giftedness and gifted education: A proposed direction forward based on psychological science. Psychological Science in the Public Interest, 12(1), 3-54. https://doi.org/10.1177/1529100611418056</p>
+<p>Subotnik, R. F., Olszewski-Kubilius, P., &amp; Worrell, F. C. (2021). The talent development megamodel: A domain-specific conceptual framework based on the psychology of high performance. In R. J. Sternberg &amp; D. Ambrose (Eds.), Conceptions of giftedness and talent (pp. 425-442). Palgrave Macmillan. https://doi.org/10.1007/978-3-030-56869-6_24</p>
+<p>Szalma, J. L., &amp; Teo, G. W. L. (2012). Spatial and temporal task characteristics as stress: A test of the dynamic adaptability theory of stress, workload, and performance. Acta Psychologica, 139(3), 471- 485. https://doi.org/10.1016/j.actpsy.2011.12.009</p>
+<p>Taylor, J., MacNamara, Á., &amp; Taylor, R. D. (2022). Strategy in talent systems: Top-down and bottom-up approaches. Frontiers in Sports and Active Living, 4, Article 988631. https://doi.org/10.3389/fspor.2022.988631</p>
+<p>van Vianen, A. E. M. (2018). Person-environment fit: A review of its basic tenets. Annual Review of Organizational Psychology and Organizational Behavior, 5, 75-101. https://doi.org/10.1146/annurev-orgpsych-032117-104702</p>
+<p>Verschueren, K., &amp; Rinn, A. N. (2024). The role of psychosocial and contextual factors in academic talent development: In search of general and specific developmental processes. Journal for the Education of the Gifted, 47(4), 357-384. https://doi.org/10.1177/01623532241278987</p>
+<p>Woods, C. T., McKeown, I., Rothwell, M., Araújo, D., Robertson, S., &amp; Davids, K. (2020). Sport practitioners as sport ecology designers: How ecological dynamics has progressively changed perceptions of skill &quot;acquisition&quot; in the sporting habitat. Frontiers in Psychology, 11, Article 654. https://doi.org/10.3389/fpsyg.2020.00654</p>
+<p>Ziegler, A., Chandler, K. L., Vialle, W., &amp; Stoeger, H. (2017). Exogenous and endogenous learning resources in the Actiotope Model of Giftedness and its significance for gifted education. Journal for the Education of the Gifted, 40(4), 310-333. https://doi.org/10.1177/0162353217734376</p>
+<p>Ziegler, A., Debatin, T., &amp; Stoeger, H. (2019). Learning resources and talent development from a systemic point of view. Annals of the New York Academy of Sciences, 1445(1), 39- 51. https://doi.org/10.1111/nyas.14018</p>
+<p>Ziegler, A., Naujoks-Schober, N., Vialle, W., &amp; Stoeger, H. (2025). Analyzing national talent support systems: The case for a resource-oriented approach. Sustainability, 17(13), Article 5896. https://doi.org/10.3390/su17135896</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
