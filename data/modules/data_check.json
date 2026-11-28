@@ -1385,6 +1385,7 @@
   "ru5tw_v2",
   "ruxaw_v2",
   "rw79p_v1",
+  "rwg8s_v1",
   "rwntf_v1",
   "rx745_v1",
   "rxu37_v3",
@@ -2829,6 +2830,761 @@
    "light": "yellow",
    "summary": "-  We found no files to analyse.\n-  We could not list every file of 1 repository, so the checks did not see all its files: https://osf.io/qaesb (could not be listed: closed registration source).",
    "findings": []
+  },
+  {
+   "id": "rwg8s_v1",
+   "title": "From Preprocessing to Interpretation: Current Practices of Machine Learning in Psychological Research",
+   "url": "https://osf.io/preprints/psyarxiv/rwg8s_v1/",
+   "published": "2026-11-27T23:39:14.175928",
+   "report_page": true,
+   "light": "yellow",
+   "summary": "-  We could not list every file of 2 repositories, so the checks did not see all their files: https://doi.org/10.5281/zenodo.241629331 (could not be listed: unfound); https://doi.org/10.5281/zenodo.241629332 (could not be listed: unfound).\n-  We classified 140 files: 71 data, 19 code, 50 documentation.\n-  We found 70 tabular data files and extracted 701 columns from 65 of them.\n-  We grouped the files into 2 study groups (ex1, ex2), plus 9 collection-level files (README/ro-crate metadata).\n-  5 files read as a table but are not a usable rectangular dataset (ovid_search_2022.txt: 100% of columns are free text, not variables; ovid_search_2024.txt: 100% of columns are free text, not variables; ovid_search_2025.txt: 100% of columns are free text, not variables; ovid_search_timeline_dt_ba_bo.txt: 100% of columns are free text, not variables; ovid_search_timeline_rf_svm_nn.txt: 100% of columns are free text, not variables). No columns were extracted and they were not sent to the LLM. Share the underlying data as a plain rectangular table (one header row, one column per variable) with a codebook: ovid_search_2022.txt, ovid_search_2024.txt, ovid_search_2025.txt, ovid_search_timeline_dt_ba_bo.txt, ovid_search_timeline_rf_svm_nn.txt. We ran automated data-quality checks on 701 columns; 114 columns have at least one potential issue (76 columns with inconsistent category casing; 19 columns of free text that may contain personal detail; 17 columns with leading/trailing whitespace; 3 columns with numeric values stored as text; 2 columns with no observed values (entirely empty); 2 columns whose values look like personal information). 2 of 2 spreadsheet files have at least one formatting issue (colour coding, merged cells, empty rows/columns, or an offset header).",
+   "findings": [
+    {
+     "file": "screening_llm_responses.csv",
+     "column": "empirical_info",
+     "label": "Whitespace",
+     "detail": "2 values with leading/trailing whitespace: \"The abstract describes a study involving data collection from 37 drug-naive OCD patients and 37 healthy controls using fMRI, indicating empirical research: 'Participants underwent baseline functional magnetic resonance imaging (fMRI)...' \", \"The abstract …"
+    },
+    {
+     "file": "validation_llm_responses.csv",
+     "column": "empirical_info",
+     "label": "Whitespace",
+     "detail": "1 value with leading/trailing whitespace: \"The abstract discusses an empirical study where participants' brain cortical activities were measured using NIRS, as indicated by the sentence: 'Their brain cortical activities were measured using NIRS while performing letter and category versions of verba…"
+    },
+    {
+     "file": "table_rows.csv",
+     "column": "example_quote",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 158 characters, 100% distinct, 23% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I104",
+     "label": "Whitespace",
+     "detail": "1 value with leading/trailing whitespace: \" 90% of the 3,776 subjects in 11 phaseIII/IV clinical trials, each described using 92 features (...) The algorithm then selects features from each training fold using Lasso (a regularization method that effectively removes less useful features from the mod…"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I105",
+     "label": "Whitespace",
+     "detail": "3 values with leading/trailing whitespace: \"We evaluated multicollinearity (Pearson’s r > 0.70) by examining a correlation matrix of all variables. Two variables were highly correlated with NEO-FFI neuroticism: Negative affect (r = 0.72) and the ASR anxiety/depression scale (r = 0.71). Multicolline…"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I105",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 252 characters, 80% distinct, 27% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I106",
+     "label": "Numeric as text",
+     "detail": "Column is 89% numeric but 14 values cannot be parsed: \"118;6670\", \"4;8;28\", \"8; 9\", \"6017; 49261; 55278\", \"1000;4000\", \"94;71\", \"937;1051\", \"22; 26\", \"95; 66\", \"6; 15; 23\""
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I107",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: FALSE/FALSe"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I111",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: AGE, GENDER/Age, gender; demographics/Demographics"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I120",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/EASY/Easy; Was relatively easy/Was relatively Easy"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I201",
+     "label": "Model (parameter) tuning",
+     "detail": "2 values with leading/trailing whitespace: \"The optimal model parameters where derived and confirmed through hyperparameter tuning using Ray Tune on data from the training fold (24). \", \"To evaluate the model on data not used to select the model (Hastie, Tibshirani, & Friedman, 2009), we split the …"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I227",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: brier score/BRIER Score"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I227",
+     "label": "Whitespace",
+     "detail": "1 value with leading/trailing whitespace: \" Probability for Bipolar Depression was compared in both groups: \"\"The ratio of randomly generated decision trees fitting the input sample’s label “BD” was termed as probability of BD (POBD). Compared to HCs, the POBD value was significantly increased in t…"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I229",
+     "label": "Model comparison",
+     "detail": "3 values with leading/trailing whitespace: \"Subsequently, we implemented a multivariate cross-validated support vector machine to determine the accuracy of a (nonlinear combination of markers) [...] The mean accuracy of correctly allocated instances of orientation/disorientation was 72% (SD 11%) ac…"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I231",
+     "label": "Whitespace",
+     "detail": "1 value with leading/trailing whitespace: \"There is no information available about the specific data utilized in the training and model evaluation process \""
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I232",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/EASY/Easy; moderate/MODERATE; relatively easy/Relatively easy/Relatively Easy"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I310",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: gini index/Gini Index"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I311",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/Easy/EASY; QUITE EASY/quite easy; hard/HARD; moderate/MODERATE; Relatively easy/Relatively Easy"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I402",
+     "label": "Whitespace",
+     "detail": "1 value with leading/trailing whitespace: \"na \""
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I402",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 238 characters, 80% distinct, 30% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I415",
+     "label": "Content interpretation of the variables",
+     "detail": "10 values with leading/trailing whitespace: \"For externalising disorders, ED+ve subphenotypes expressed higher levels of ADHD and ODD symptoms. The relationship between ED and ODD has been reported previously, especially in terms of increased ED severity (Leaberry et al., 2020); patterns which are …"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I416",
+     "label": "Whitespace",
+     "detail": "8 values with leading/trailing whitespace: \"a statistically significant correlation between Mini-Mental State Examination (MMSE) scores and reduced tissue oxygenation was found, and tissue oxygenation was proposed as a prognostic marker of aMCI (Viola et al., 2013). \", \"Interestingly, for both verb…"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I417",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/EASY/Easy; moderate/MODERATE; Relatively easy/Relatively Easy; quite complex/Quite Complex"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I501",
+     "label": "Programming Language",
+     "detail": "Categories differing only by case: MATLAB/Matlab/matlab; Python/python; R/r; phyton/PHYTON; Pronto/PRoNTo"
+    },
+    {
+     "file": "coded_data_2022.csv",
+     "column": "I602",
+     "label": "Empty column",
+     "detail": "Column is empty: all 152 values are missing."
+    },
+    {
+     "file": "cv_details_2022.csv",
+     "column": "Notes",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 409 characters, 100% distinct, 57% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I104.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 344 characters, 90% distinct, 47% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I120.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/EASY/Easy; Was relatively easy/Was relatively Easy"
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I227.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: brier score/BRIER Score"
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I232.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/EASY/Easy; moderate/MODERATE; relatively easy/Relatively easy/Relatively Easy"
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I301.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 409 characters, 100% distinct, 37% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I303.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 762 characters, 100% distinct, 43% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I305.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 310 characters, 85% distinct, 41% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I310.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: gini index/Gini Index"
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I311.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/Easy/EASY; QUITE EASY/quite easy; hard/HARD; moderate/MODERATE; Relatively easy/Relatively Easy"
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I402.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 899 characters, 86% distinct, 57% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I417.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/EASY/Easy; moderate/MODERATE; Relatively easy/Relatively Easy; quite complex/Quite Complex"
+    },
+    {
+     "file": "data.zip/data/2022/open_item_categories/I501.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: MATLAB/Matlab/matlab; Python/python; R/r; phyton/PHYTON; Pronto/PRoNTo"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I103",
+     "label": "Numeric as text",
+     "detail": "Column is 82% numeric but 14 values cannot be parsed: \"2266; 2266\", \"330; 30\", \"35; 57\", \"121; 67\", \"981; 800\", \"1099;387\", \"750;322;264;249;166\", \"12818;6109\", \"20;20;20;20\", \"1543;463\""
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I106",
+     "label": "Numeric as text",
+     "detail": "Column is 91% numeric but 6 values cannot be parsed: \"787; 1020\", \"35;19;12;6\", \"362 but can be less depending on the model\", \"154;60, the latter in a second analysis\", \"44 features per image\", \"60677;45000;2653\""
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I109",
+     "label": "Data characteristics & structure",
+     "detail": "2 values with leading/trailing whitespace: \"The Childhood Autism Rating Scale (CARS) The Gesell Developmental Scale (GDS) \", \"Youth’s Child and Adolescent Needs and Strengths (CANS) \""
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I119",
+     "label": "Analysis plan",
+     "detail": "1 value with leading/trailing whitespace: \" In summary, many studies have underscored the importance of specific NSSI characteristics in evaluating clinical outcomes, thereby supporting the significance of examining these characteristics. Yet, most focus mainly on the relationship between these cha…"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I120",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/EASY/Easy"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I217",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 277 characters, 100% distinct, 14% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I229",
+     "label": "Model comparison",
+     "detail": "1 value with leading/trailing whitespace: \"We observed that the RF model for photographs in Experiment 2 explained much more variance (0.19) than the RF model in Experiment 1 (0.085) (…) \""
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I232",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/EASY/Easy; okay/Okay; RELATIVELY EASY/Relatively Easy; Quite complicated/Quite Complicated"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I303",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 140 characters, 100% distinct, 33% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I311",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/EASY/Easy"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I311",
+     "label": "Part readability",
+     "detail": "1 value with leading/trailing whitespace: \"We estimated the importance of the predictors by permuting out-of-bag observations across the trees. The feature histograms for a particular image were normalized to the total number of contour pixels in the image to allow for better comparisons between im…"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I414",
+     "label": "Other effect interpretation",
+     "detail": "Values look like personal information: ip_address (1 value, 1%). Review before sharing."
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I415",
+     "label": "Content interpretation of the variables",
+     "detail": "5 values with leading/trailing whitespace: \"(...) This task has been shown to accurately capture relevant cognitive and linguistic markers in different diseases, including Amyotrophic Lateral Sclerosis, mild congitive impaiment and Alzheimer’s disease (e.g., Lindsay et al., 2019; Mueller et al., 20…"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I415",
+     "label": "Content interpretation of the variables",
+     "detail": "Free-text column (median 449 characters, 81% distinct, 38% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I416",
+     "label": "Whitespace",
+     "detail": "3 values with leading/trailing whitespace: \" We aimed to predict illness courses in patients with MDD…\", \"The present study revealed that the glycine metabolism pathway played a crucial role(…) These results underscore a strong association between bacterial genera/functions and suicidal ideation. W…"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I417",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/EASY/Easy; MODERate/MODERATE; Quite complicated/Quite Complicated"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I501",
+     "label": "Programming Language",
+     "detail": "Categories differing only by case: Matlab/MATLAB; phyton/PHYTON"
+    },
+    {
+     "file": "coded_data_2024_2025.csv",
+     "column": "I602",
+     "label": "Empty column",
+     "detail": "Column is empty: all 80 values are missing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I104.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 273 characters, 100% distinct, 42% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I119.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 328 characters, 100% distinct, 35% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I120.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/EASY/Easy"
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I217.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 342 characters, 83% distinct, 17% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I229.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 332 characters, 100% distinct, 23% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I232.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/EASY/Easy; okay/Okay; RELATIVELY EASY/Relatively Easy; Quite complicated/Quite Complicated"
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I301.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 449 characters, 100% distinct, 26% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I305.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 652 characters, 81% distinct, 50% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I311.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/EASY/Easy"
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I414.csv",
+     "column": "segment",
+     "label": "Personal info (values)",
+     "detail": "Values look like personal information: ip_address (3 values, 8%). Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I416.csv",
+     "column": "segment",
+     "label": "Free-text (may hold PII)",
+     "detail": "Free-text column (median 263 characters, 90% distinct, 22% written in the first person) may contain names or other personal detail. Review before sharing."
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I417.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/EASY/Easy; MODERate/MODERATE; Quite complicated/Quite Complicated"
+    },
+    {
+     "file": "data.zip/data/2024_2025/open_item_categories/I501.csv",
+     "column": "segment",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: Matlab/MATLAB; phyton/PHYTON"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I107",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/Na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I108",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/Na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I109",
+     "label": "Data characteristics & structure",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I203",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: other/OTHER"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I207",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I213",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: k-nearest neighbors/K-nearest neighbors"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I220",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I223",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I232",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: Kappa coefficient/Kappa Coefficient"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I237",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: accuracy/Accuracy"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I242",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: Deep Belief Network/deep belief network"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I303",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: variable importance/Variable Importance"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I305",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/Na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I316",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: GINI Index/Gini Index"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I403",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I406",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na/Na"
+    },
+    {
+     "file": "codings_session1.csv",
+     "column": "I411",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I107",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: Propensity Score Matching/Propensity score matching"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I109",
+     "label": "Data characteristics & structure",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I111",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: TRUE/true"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I115",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: TRUE/true"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I119",
+     "label": "Analysis plan",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I120",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: easy/EASY/Easy"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I208",
+     "label": "Item I208 to Item I215 are mutually exclusive. Only one item can be TRUE at a time, or none of the items can be TRUE.",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I211",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I219",
+     "label": "Model evaluation metrics",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I228",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I233",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I238",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I239",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I240",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: It was easy/it was easy"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I303",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I305",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I310",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I311",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I312",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: true/TRUE"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I316",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I317",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: NA/na"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I318",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: TRUE/true"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I320",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: TRUE/true"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I322",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I401",
+     "label": "Strength of an effect",
+     "detail": "Categories differing only by case: TRUE/true"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I403",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I406",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I411",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I417",
+     "label": "Part readability",
+     "detail": "Categories differing only by case: na/NA"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I419",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: TRUE/true"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I421",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: true/TRUE"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I422",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/EASY"
+    },
+    {
+     "file": "codings_session2.csv",
+     "column": "I423",
+     "label": "Case issues",
+     "detail": "Categories differing only by case: easy/Easy"
+    },
+    {
+     "file": "codebook_documentation.xlsx",
+     "column": null,
+     "label": "Codebook",
+     "detail": "119 fully empty rows inside the data range."
+    },
+    {
+     "file": "codebook_documentation.xlsx",
+     "column": null,
+     "label": "Codebook",
+     "detail": "131 columns are empty or have a blank header."
+    },
+    {
+     "file": "codebook_final.xlsx",
+     "column": null,
+     "label": "Codebook",
+     "detail": "6 merged ranges (A99:A100, A17:A36, A37:A68, A69:A79, A80:A96) break the rectangular grid."
+    },
+    {
+     "file": "codebook_final.xlsx",
+     "column": null,
+     "label": "Codebook",
+     "detail": "4 fully empty rows inside the data range."
+    },
+    {
+     "file": "codebook_final.xlsx",
+     "column": null,
+     "label": "Codebook",
+     "detail": "16011 columns are empty or have a blank header."
+    }
+   ]
   },
   {
    "id": "dpykw_v1",
