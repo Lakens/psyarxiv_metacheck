@@ -740,10 +740,17 @@ def read_all(args, index, key):
             rows, problems = [], [{"file": None, "reason": "files.zip could not be read: %s" % str(e)[:150]}]
         part = os.path.join(PARTS, osf_id + ".parquet")
         if rows:
-            df = pd.DataFrame(rows)
-            df["metacheck_version"] = result.get("metacheck_version")
-            df.to_parquet(part, index=False)
-        elif os.path.exists(part):
+            try:
+                df = pd.DataFrame(rows)
+                df["metacheck_version"] = result.get("metacheck_version")
+                df.to_parquet(part, index=False)
+            except MemoryError:                          # pyarrow's ArrowMemoryError is one
+                # (medRxiv: national registers of patients, 1.7 million rows
+                # of counts per practice and area)
+                problems.append({"file": None, "reason": "too many rows to hold in memory: %d" % len(rows)})
+                rows = []
+            df = None
+        if not rows and os.path.exists(part):
             os.remove(part)
         done[osf_id] = {"format": FORMAT, "zip_mtime": st.st_mtime, "zip_size": st.st_size, "rows": len(rows),
                         "files": len({r["entry"] for r in rows}), "problems": problems,
