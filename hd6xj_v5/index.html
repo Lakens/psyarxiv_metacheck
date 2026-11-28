@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>MetaCheck Report: Flavour Through the Lens of Conflict</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>.back-to-main{display:inline-block;padding:4px 12px;border:1px solid var(--green,#2F6F1C);border-radius:3px;background:#fff;color:var(--green,#2F6F1C);font-size:0.9rem;font-weight:600;text-decoration:none}.back-to-main:hover{background:var(--green,#2F6F1C);color:#fff}.back-bar{max-width:900px;margin:14px auto 0;padding:0 16px}@media print{.back-bar{display:none}}</style></head>
+
+<body><p class="back-bar"><a class="back-to-main" id="back-to-main" href="../">← Back to the main page</a></p>
+
+
+
+
+
+
+
+<style>
+
+@font-face {
+font-family: "Cabin";
+src: url("../fonts/Cabin.ttf") format("truetype");
+font-weight: 400 700;
+font-stretch: 75% 100%;
+font-style: normal;
+}
+:root {
+color-scheme: light;
+--green: #2F6F1C;
+--green-dark: #1E4A10;
+--green-tint: #E3ECDF;
+--bg: #E9E8E5;
+--card: #F4F3F1;
+--line: #CFCDC8;
+--text: #262624;
+--muted: #5E5C58;
+--fix: #9B2C1F;
+--fix-tint: #F6E3DF;
+--improve: #7A4F00;
+--improve-tint: #F4E7C9;
+--improve-line: #C08A1E;
+--decide: #2C5577;
+--decide-tint: #DFE8EF;
+--na-tint: #E4E2DE;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body {
+margin: 0;
+color: var(--text);
+font-family: "Cabin", "Segoe UI", sans-serif;
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--green); text-underline-offset: 2px; }
+a:hover { color: var(--green-dark); }
+code, pre { font-family: "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace; font-size: 0.84em; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; overflow-wrap: anywhere; }
+pre { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow: auto; }
+pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+.masthead { text-align: center; max-width: 900px; margin: 0 auto; padding: 32px 16px 0; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 28px; margin-bottom: 8px; }
+.logos img { height: 64px; width: auto; }
+.masthead h1 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1.2; }
+.masthead .subtitle { margin: 2px 0 0; font-size: 1.15rem; color: var(--muted); overflow-wrap: anywhere; }
+.masthead .meta { margin: 6px 0 0; padding-bottom: 16px; font-size: 0.88rem; color: var(--muted);
+border-bottom: 1px solid var(--green); }
+.mc-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
+.mc-intro { margin: 22px 0 18px; }
+
+.counts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 22px 0 32px; }
+.count { display: block; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line);
+border-radius: 4px; padding: 10px 12px; text-decoration: none; color: var(--text); }
+a.count:hover { color: var(--text); background: #fff; }
+.count b { display: block; font-size: 1.9rem; line-height: 1.1; }
+.count span { font-size: 0.92rem; color: var(--muted); }
+.count.fix { border-top-color: var(--fix); } .count.fix b { color: var(--fix); }
+.count.improve { border-top-color: var(--improve-line); } .count.improve b { color: var(--improve); }
+.count.decide { border-top-color: var(--decide); } .count.decide b { color: var(--decide); }
+.count.fine { border-top-color: var(--green); } .count.fine b { color: var(--green); }
+.count.zero { opacity: 0.55; }
+@media (max-width: 640px) { .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+h2 { font-size: 1.35rem; margin: 36px 0 12px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+h2 .n { color: var(--muted); font-weight: 400; }
+
+.check { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--line);
+border-radius: 4px; padding: 14px 18px 12px; margin: 0 0 14px; }
+.check.fix { border-left-color: var(--fix); }
+.check.improve { border-left-color: var(--improve-line); }
+.check.decide { border-left-color: var(--decide); }
+.check-head p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+.check-title { font-weight: 700; font-size: 1.12rem; }
+.where { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+.tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.6;
+text-transform: uppercase; padding: 0 8px; border-radius: 3px; white-space: nowrap; }
+.tag.fix { color: var(--fix); background: var(--fix-tint); }
+.tag.improve { color: var(--improve); background: var(--improve-tint); }
+.tag.decide { color: var(--decide); background: var(--decide-tint); }
+.tag.fine { color: var(--green); background: var(--green-tint); }
+.tag.info, .tag.na { color: var(--muted); background: var(--na-tint); }
+.rows { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 6px 14px; }
+.rows > .label { font-weight: 700; font-size: 0.92rem; color: var(--muted); padding-top: 1px; }
+.rows > .text { min-width: 0; }
+.rows > .text.todo { font-weight: 600; }
+.rows p { margin: 0 0 4px; }
+.rows ul, .rows ol { margin: 0 0 4px; padding-left: 1.1em; }
+@media (max-width: 640px) {
+.rows { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.rows > .label { padding-top: 6px; }
+}
+details { margin-top: 10px; }
+details > summary { cursor: pointer; color: var(--green); font-weight: 600; font-size: 0.95rem; }
+details > summary:hover { color: var(--green-dark); }
+details[open] > summary { margin-bottom: 8px; }
+.fold { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; overflow-x: auto; }
+.fold > p:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th { text-align: left; background: var(--green-tint); color: var(--text); font-weight: 700; }
+th, td { padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table strong { color: var(--fix); }
+
+.done { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.done-row { display: grid; grid-template-columns: 7.5em 15em minmax(0, 1fr); gap: 4px 12px;
+padding: 8px 14px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.done-row:last-child { border-bottom: 0; }
+.done-row > div { min-width: 0; }
+.done-row .tag { justify-self: start; align-self: start; margin-top: 2px; }
+.done-row .t { font-weight: 600; }
+.done-row .d { color: var(--muted); }
+.done-row p { margin: 0 0 4px; }
+@media (max-width: 720px) { .done-row { grid-template-columns: minmax(0, 1fr); } }
+.more > details { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; margin: 0 0 10px; }
+.more > details > summary { font-size: 1rem; }
+footer { max-width: 900px; margin: 0 auto; padding: 16px 16px 40px; border-top: 1px solid var(--green);
+text-align: center; font-size: 0.88rem; color: var(--muted); }
+@media print {
+html, body { background: #fff; }
+.check, .done-row, .count { break-inside: avoid; }
+}
+</style>
+<header class="masthead">
+<div class="logos">
+<a class="logo-home" href="../" aria-label="Back to the main page"><img role="img" aria-label="logo" src="../images/logo.png" alt="logo"></a>
+</div>
+<h1>
+MetaCheck Report
+</h1>
+<p class="subtitle">
+Flavour Through the Lens of Conflict
+</p>
+<p class="meta">
+2026-11-28 · Metacheck 0.4.4.41
+</p>
+</header>
+<div class="mc-main">
+<nav class="counts" aria-label="Results">
+<span class="count fix zero"><b>0</b><span>to fix</span></span><span class="count improve zero"><b>0</b><span>to check</span></span><span class="count decide zero"><b>0</b><span>to decide by
+hand</span></span><span class="count fine zero"><b>0</b><span>fine</span></span><a class="count na" href="#na"><b>15</b><span>not
+applicable</span></a>
+</nav>
+<h2 id="info">For information <span class="n">(1)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag info">Info</span></p>
+</div>
+<div class="t">
+<p>Replication Check</p>
+</div>
+<div class="d">
+<p>We found 1 replication for 1 original you cited.</p>
+</div>
+</div>
+</div>
+<h2 id="na">Not applicable <span class="n">(15)</span></h2>
+<div class="done">
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Ethics Approval Check</p>
+</div>
+<div class="d">
+<p>No papers appeared to report data about people or animals that need
+an ethics statement.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Power Analysis Check</p>
+</div>
+<div class="d">
+<p>No power analyses were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Preregistration Check</p>
+</div>
+<div class="d">
+<p>No preregistration links were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Marginal Significance</p>
+</div>
+<div class="d">
+<p>No effects were described with terms related to ‘marginally
+significant’.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>StatCheck</p>
+</div>
+<div class="d">
+<p>No detectable t- or F-tests. StatCheck currently only detects
+statistics written in APA format.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Exact P-Values</p>
+</div>
+<div class="d">
+<p>We detected no <em>p</em> values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Non-Significant P Value Check</p>
+</div>
+<div class="d">
+<p>We detected no nonsignificant p values.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Effect Sizes in t-tests and F-tests</p>
+</div>
+<div class="d">
+<p>No t-tests or F-tests were detected.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Codebook Check</p>
+</div>
+<div class="d">
+<p>We found no extracted data columns to check against a codebook.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Repository Check</p>
+</div>
+<div class="d">
+<p>We found no links to repositories on the Open Science Framework,
+Github, GitLab, ResearchBox, DSpace, EPrints (ReShare and others),
+Invenio (Zenodo and others), Dataverse, Figshare, Dryad,
+4TU.ResearchData, Mendeley Data, DataONE, LDbase, CKAN data portals,
+GEO, SRA, ENA, DDBJ, ArrayExpress, CRAN, or ICPSR (openICPSR, AEA Data
+and Code Repository).</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Code Check</p>
+</div>
+<div class="d">
+<p>We found 0 R, 0 Python, 0 SAS, 0 SPSS, 0 Stata, 0 Mplus, 0 MATLAB,
+and 0 JASP code files.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Data Check</p>
+</div>
+<div class="d">
+<p>We found no files to analyse.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>Reproducibility Check</p>
+</div>
+<div class="d">
+<ul>
+<li>We found no R or Python code files to assess for
+reproducibility.</li>
+</ul>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>PubPeer Comments</p>
+</div>
+<div class="d">
+<p>No references with comments in PubPeer were found.</p>
+</div>
+</div>
+<div class="done-row">
+<div class="tagcell">
+<p><span class="tag na">N/A</span></p>
+</div>
+<div class="t">
+<p>RetractionWatch</p>
+</div>
+<div class="d">
+<p>No citations to articles in the RetractionWatch database were
+found.</p>
+</div>
+</div>
+</div>
+<h2 id="more-detail">More detail</h2>
+<div class="more">
+<details>
+<summary>
+Ethics Approval Check
+</summary>
+<div class="fold">
+<p>The paper does not appear to report data about individual people or
+animals (we found: a commentary), so we do not expect an ethics
+statement.</p>
+<p>We based this on:</p>
+<blockquote>
+<p>We argue that brain mechanisms that monitor for, signal, and regulate
+discrepancies in information processing can help explain how incongruent
+flavour cues are resolved, how attention and hedonic responses are
+modulated, and how flavour representations are updated through
+experience.</p>
+</blockquote>
+</div>
+</details>
+<details>
+<summary>
+Power Analysis Check
+</summary>
+<div class="fold">
+<p>No power analyses were detected.</p>
+<div class="callout-tip" title="Learn More" collapse="true">
+<p>Power analyses need to contain the following information to be
+interpretable: the type of power analysis, the statistical test, the
+software used, sample size, critical alpha criterion, power level,
+effect size, and an effect size metric. In addition, it is recommended
+to make sure the power analysis is reproducible (by sharing the code, or
+a screenshot, of the power analysis), and to provide good arguments for
+why the study was designed to detect an effect of this size.</p>
+<p>For an a-priori power analysis, where the sample size is determined,
+reporting all information would look like:</p>
+<blockquote>
+<p>An a priori power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that for a Cohen’s d = 0.5, an alpha level of 0.05, and a
+desired power level of 80% required at least 64 participants in each
+group.</p>
+</blockquote>
+<p>For a sensitivity power analysis, this sentence would look like:</p>
+<blockquote>
+<p>A sensitivity power analysis for an independent samples t-test,
+conducted using the pwr.t.test function from pwr (Champely, 2020),
+indicated that with 64 participants in each group, and an alpha level of
+0.05, a desired power level of 80% was reached for an effect size of d =
+0.5.</p>
+</blockquote>
+</div>
+</div>
+</details>
+<details>
+<summary>
+PubPeer Comments
+</summary>
+<div class="fold">
+<p>We checked 153 references with DOIs. No references with comments in
+PubPeer were found.</p>
+</div>
+</details>
+<details>
+<summary>
+RetractionWatch
+</summary>
+<div class="fold">
+<p>We checked 153 references with DOIs. No citations to articles in the
+RetractionWatch database were found.</p>
+</div>
+</details>
+<details>
+<summary>
+Replication Check
+</summary>
+<div class="fold">
+<p>We checked 153 references with DOIs. We found 1 replication for 1
+original you cited.</p>
+<p>Check if you are aware of the replication studies, and cite them
+where appropriate.</p>
+<table class="dt-static">
+<colgroup>
+<col style="width:50%" />
+<col style="width:50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align:left;">
+Reference
+</th>
+<th style="text-align:left;">
+Replication
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Stroop, J. R. (1935). Studies of interference in serial verbal
+reactions. Journal of Experimental Psychology, 18(6), 643-662. <a href="https://doi.org/10.1037/h0054651" class="uri">https://doi.org/10.1037/h0054651</a>
+</td>
+<td style="text-align:left;">
+Ebersole, C. R., Atherton, O. E., Belanger, A. L., Skulborstad, H. M.,
+Allen, J. M., Banks, J. B., Baranski, E., Bernstein, M. J., Bonfiglio,
+D. B. V., Boucher, L., Brown, E. R., Budiman, N. I., Cairo, A. H.,
+Capaldi, C. A., Chartier, C. R., Chung, J. M., Cicero, D. C., Coleman,
+J. A., Conway, J. G., … Nosek, B. A. (2016). Many Labs 3: Evaluating
+participant pool quality across the academic semester via replication.
+Journal of Experimental Social Psychology, 67, 68–82. <a href="https://doi.org/10.1016/j.jesp.2015.10.012" class="uri">https://doi.org/10.1016/j.jesp.2015.10.012</a> Individual
+report available at
+<a href="https://doi.org/10.1016/j.jesp.2015.10.012" target="_blank">doi:10.1016/j.jesp.2015.10.012</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>
+How Ethics Approval Check works
+</summary>
+<div class="fold">
+<p>This module searches for statements of ethics approval, IRB approval,
+institutional review board approval, and related terms.</p>
+<p>Patterns are designed to capture:</p>
+<p><strong>Human research committee names</strong> -
+<code>Institutional Review Board</code> / IRB (US standard), also
+<code>Internal Review Board</code> -
+<code>Independent Ethics Committee</code> / IEC (ICH-GCP international
+clinical trial term); not <code>IEC</code> followed by a number, which
+is a technical standard - <code>Ethical/Ethics Review Board</code>
+(generic) -
+<code>Ethics (Advisory/Review) Committee/Board/Panel/Sub-committee/Commission</code>,
+in the singular or plural -
+<code>Research Ethics Committee/Board/Panel</code> (UK/Canada/Australia)
+- <code>Medical Ethics Committee</code>,
+<code>Bioethics Committee/Commission</code>,
+<code>Ethikkommission</code> -
+<code>Ethical Review Authority/Unit/Office/Agency</code> -
+<code>Human Subjects/Research Committee</code> /
+<code>Human Research Ethics (Advisory) Panel</code> -
+<code>Human Research Protection Office/Program</code>,
+<code>Office for Human Subjects Protection</code> -
+<code>Committee for/on the Protection of Human Subjects</code> -
+<code>Committee(s) on/for (Medical and Health) Research Ethics</code> -
+<code>Office of Research Ethics</code> - Abbreviations: IEC, REC, REB,
+ERB, METC, DEC. REC/REB/ERB/DEC are short enough to collide with
+unrelated jargon (e.g. <code>REC</code> as a recognition-heuristic model
+abbreviation, <code>DEC</code> as a decision-task label,
+<code>Reb</code> as an author surname), so these four require an
+ethics/approval/committee/board/panel/institutional/ protocol word
+within ~30 characters in the same sentence. IRB and IEC are kept
+unconstrained as they are not observed to collide in practice. - Dutch:
+<code>Medisch-ethische toetsingscommissie</code> (METC) - French:
+<code>Comité d&#39;éthique</code> / <code>Comité d&#39;Ethique</code></p>
+<p><strong>Animal research committee names</strong> -
+<code>Institutional Animal Care and Use Committee</code> / IACUC (US
+standard) - Any sentence containing <code>animal(s)</code> and
+<code>committee</code> (or <code>board</code>/<code>panel</code>) within
+~5 words of each other — catches
+<code>Experimental Animal Care and Use Committee</code>,
+<code>Animal Ethics Committee</code>, <code>Animal Welfare Board</code>,
+<code>Animal Welfare Ethical Review Body</code>, etc. - UK:
+<code>Animal Welfare Ethical Review Body</code> / AWERB - Dutch:
+<code>Dierexperimentencommissie</code> / DEC (see DEC constraint above);
+<code>Instantie voor Dierenwelzijn</code> / IvD - German:
+<code>Tierversuchskommission</code> / TvK (advisory committee under §15
+Tierschutzgesetz) - French:
+<code>Comité d&#39;éthique en expérimentation animale</code> / CEEA;
+<code>Comité d&#39;éthique animale</code> - Spanish:
+<code>Comité de ética en experimentación animal</code> / CEEA</p>
+<p><strong>Approval phrasing</strong> -
+<code>Ethics/Ethical (approval|clearance) [was] (granted|obtained|received|given|secured)</code>
+- <code>Ethically approved</code> -
+<code>Approved by the (ethics|irb|institutional|independent|local|review|research) ...</code>
+-
+<code>This/The study/protocol/experiment/procedures/methods/research [was] (approved|reviewed) by</code>
+- <code>Study was ethically approved</code> -
+<code>(Followed|met|follow) the ethical (guidelines|standards|requirements)</code>
+- <code>In accordance with ... ethical (guidelines|standards)</code> -
+<code>Ethics protocol</code> -
+<code>Approved under (protocol|reference|number)</code></p>
+<p><strong>Waiver / exemption</strong> -
+<code>Ethics/Ethical (waiver|exemption)</code> -
+<code>IRB (waiver|exemption|exempt)</code> -
+<code>Exempted from (ethics|irb|institutional review)</code> -
+<code>Waived by the (ethics|irb|institutional|review) (committee|board)</code>
+- <code>Deemed exempt</code> - Ethics review that was not needed:
+<code>Ethics review was not required</code>,
+<code>did not require further ethical review</code>,
+<code>exempt from formal human   research ethics review</code>,
+<code>no new institutional ethics review</code></p>
+<p>A template line the authors have not filled in (“[Add ethics approval
+… here.]”) is not a statement.</p>
+<p><strong>Declaration of Helsinki</strong> -
+<code>Declaration of Helsinki</code> /
+<code>Helsinki Declaration</code></p>
+<p>Patterns are NOT designed to capture: - General ethical
+considerations or ethical dilemmas in study content - Mentions of
+“ethics” in theoretical or philosophical contexts - Author approval of a
+manuscript (e.g. “all authors approved the final version”) - Ethical
+behaviour as a measured variable (e.g. “ethical decision-making”) - URLs
+containing “ethics” in path components</p>
+<p><strong>When a statement is expected</strong></p>
+<p>The module sorts each paper by where its data came from (the internal
+<code>.data_source()</code>; the signs and how the rule was tested are
+described in <code>R/data-source.R</code>): - <code>own</code>: the
+authors collected data from people or animals, for this paper, in an
+earlier study of their own, or (a protocol) will collect them; -
+<code>existing_records</code>: records about individual people that the
+authors obtained for this study, such as hospital records or a cohort; -
+<code>existing_unclear</code>: existing data about people from a source
+the module could not identify; - <code>open_resource</code>: an open
+resource any researcher can use, such as UK Biobank or NHANES; -
+<code>none</code>: no data about people or animals (a review,
+simulation, commentary, theory, tutorial, coding of published papers, or
+figures about groups); - <code>uncertain</code>: the signs were missing
+or pointed both ways; - <code>no_text</code>: the paper has no text.</p>
+<p>A statement is expected for <code>own</code>,
+<code>existing_records</code> and <code>existing_unclear</code>. A paper
+without a statement in these classes, or in <code>uncertain</code>, is
+flagged. The module reads the text, and the results of
+<code>power</code>, <code>stat_p_exact</code>, <code>stat_check</code>,
+<code>repo_check</code>, <code>data_check</code> and
+<code>prereg_check</code> when they ran before it (run it after them);
+without <code>stat_p_exact</code>, it finds the p-values in the
+text.</p>
+<p>On 199 PsyArXiv and medRxiv preprints labelled after the rule was
+fixed, the module decided right whether a statement is needed for 86.9%
+(the earlier live-data search: 83.4%). Its main errors: other people’s
+studies described in the words of a new study, records and specimens
+described only as counts, and open resources the paper does not call
+open.</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ethics-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Power Analysis Check works
+</summary>
+<div class="fold">
+<p>This module uses regular expressions to identify sentences that
+contain a statistical power analysis. If specified by the user, it also
+uses a large language model (LLM) to extract information reported in
+power analyses, including the statistical test, sample size, alpha
+level, desired level of power, and magnitude and type of effect
+size.</p>
+<p>The Power Analysis Check module uses regular expressions to identify
+sentences that contain a statistical power analysis. Without the use of
+an LLM, the module uses regular expressions to classify the power
+analysis as a-priori, sensitivity or post-hoc. With the use of an LLM,
+it checks if the power analysis is reported with all required
+information.</p>
+<p>The regular expressions can miss power analyses, or fail to classify
+them correctly. The type of power analysis is often difficult to
+classify, which can easily be solved by explicitly specifying the type
+of power analysis as ‘a-priori’, ‘sensitivity’, or ‘post-hoc’. Note that
+‘post-hoc’ or ‘observed’ power is rarely useful. The LLM can fail to
+identify information in the paper, and will not have access to
+information in paragraphs in the paper other than those that contain the
+word ‘power’. This package was validated by the Metacheck team on
+articles in Psychological Science.</p>
+<p>This module was developed by Lisa DeBruine, Daniel Lakens and
+Cristian Mesquida</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-power.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 128 papers with 246 instances of power
+statements, 203 were correctly detected (true positives), 22 were missed
+(false negatives) and 21 were incorrectly detected (false positives).
+Overall, among all instances flagged as power statements, 90.6% were
+correct (positive predictive value).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Preregistration Check works
+</summary>
+<div class="fold">
+<p>Retrieve information from preregistrations in a standardised way, and
+make them easier to check.</p>
+<p>The Preregistration Check module identifies preregistrations on the
+OSF and AsPredicted based on links in the manuscript, retrieves the
+preregistration text, and organizes the information into a template. The
+module retrieves text from the OSF with its API, and from AsPredicted
+with ResearchBox’s API when a ResearchBox key is set (see
+<code>rbox_token()</code>), or else from the preregistration’s web page.
+The information in the preregistration is returned. An AsPredicted link
+that could not be read is named in the report, with the reason.</p>
+<p>The module can’t extract information from non-structured
+preregistration templates (i.e., where the preregistration is uploaded
+in a single text field) and it can’t retrieve information in
+preregistrations that are stored as text documents on the OSF.</p>
+<p>If you want to extend the package to be able to download information
+from other preregistration sites, reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-prereg-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Marginal Significance works
+</summary>
+<div class="fold">
+<p>List all sentences that describe an effect as ‘marginally
+significant’.</p>
+<p>The marginal module searches for regular expressions that match a
+predefined pattern. The list of terms is a subset of those listed in a
+<a href="https://web.archive.org/web/20251001114321/https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">blog
+post by Matthew Hankins</a>. The module returns all sentences that match
+terms describing ‘marginally significant’ results.</p>
+<p>Some of the terms identified might not be problematic in some
+contexts, and there are ways to describe ‘marginal significance’ that
+are not detected by the module.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-marginal.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 51 papers with 87 statements, this module
+correctly identified 38 statements (true positives) and incorrectly
+flagged 22 statements (false positives). It failed to detect 27
+statements. Thus, among all statements flagged by the module, 63% were
+genuine cases (positive predictive value). However, the module missed
+42% of all true statements (false negative rate). This validation was
+made with an earlier, looser pattern; the pattern now requires
+“significant” or “significance” to follow the trigger word closely
+(#695).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How StatCheck works
+</summary>
+<div class="fold">
+<p>Check consistency of p-values and test statistics</p>
+<p>The Statcheck module runs Statcheck. Statcheck searches for regular
+expressions that match a predefined pattern, and identifies APA reported
+statistical tests. More information on the package can be found at <a href="https://github.com/cran/statcheck" class="uri">https://github.com/cran/statcheck</a>. The module only
+returns Statcheck results for t-tests and F-tests, as these are the only
+tests which have been validated, see <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a>.</p>
+<p>Statcheck was developed by Michèle Nuijten and Sascha Epskamp.</p>
+<p>Statcheck considers p = 0.000 an error, as you should report p &lt;
+0.001. Furthermore, p &lt; 0.03 is an error if the p-value was 0.031,
+and one should simply report exact p-values (p = 0.031). When the
+sentence of a test says it is one-sided (“one-tailed”, “one-sided” or
+“directional”), a p-value that fits a one-sided test counts as
+consistent (statcheck’s <code>OneTailedTxt</code> setting; #695). When
+the paper says anywhere that its tests are one-sided, a p-value that
+fits a one-sided test in either direction counts as consistent too: half
+the two-sided p, or 1 minus that half for an effect against the
+predicted direction. Equivalence tests (TOST) are left out, as their
+p-values do not test the difference. A statistic written with “&lt;” or
+“&gt;” is read as a bound, and in a sentence about equal variances an
+F-test’s two-sided p (twice the one-tailed p) counts as consistent. For
+more information, see <a href="https://statcheck.io/">StatCheck</a>.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 685 tests with 34 instances of
+inconsistent reporting, Statcheck correctly detected 34 of them, and
+incorrectly identified 26. Therefore 0% of true instances were missed,
+and 43% of detections were false positives. See <a href="https://osf.io/preprints/psyarxiv/tcxaj_v1/" class="uri">https://osf.io/preprints/psyarxiv/tcxaj_v1/</a> for more
+details of the validation.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Exact P-Values works
+</summary>
+<div class="fold">
+<p>List any p-values reported with insufficient precision (e.g., p &lt;
+.05 or p = n.s.), reported as exactly zero (e.g., p = .000), or
+impossible (below 0 or above 1, e.g., p = -.22).</p>
+<p>This module uses regular expressions to identify p-values. It will
+flag any values reported as p &gt; ? or p &lt; numbers greater than
+.001. It will also flag p-values reported as exactly zero (e.g., p =
+.000, p = 0.00), which are mathematically impossible — p-values are
+never exactly zero and should instead be reported as p &lt; .001.</p>
+<p>A p-value that is not the result of a test is not flagged: a table
+note (“* p &lt; .05, ** p &lt; .01”), a figure legend (“Asterisks
+indicate significant differences (p &lt; .05)”, “Values in bold are
+significant at p &lt; .05”) or a stated threshold (“p &lt; .05 was
+considered significant”, “thresholded at p &lt; .001”). GROBID often
+puts such notes into the running text, so each p-value is judged by the
+words in its own clause (the text up to a “;” or a full stop), and never
+left out when a test statistic belongs to it (“F(1, 7) = 8.03, # p &lt;
+.05”). The column <code>not_a_test</code> of the table says why a
+p-value was left out (“marker”, “threshold”, “legend” or “named”).</p>
+<p>A p-value with the name of a correction or a test after the p (“pFWE
+&lt; .05”, “padj &lt; 0.05”, “p Wilcoxon = .02”) is flagged only when a
+test statistic comes before it in its clause (“t(37) = 7.17, p FWE &lt;
+.05”). Without one it is mostly the rule that decided what was
+significant (“genes with padj &lt; 0.05 were selected”); such a p-value
+is “named” in <code>not_a_test</code>. Notes in other forms, such as a
+marker after the p-value (“p &lt; .05 (*)“), are still flagged.</p>
+<p>A p-value below 0 or above 1 is impossible; it is listed apart and
+not also as imprecise. Often the statistic before it, or its minus sign,
+was copied into it (“t(134) = -2.32, p = -.13”, “Z = 3.091, P = 3.091”).
+A value above 1 is listed only after a test statistic in its clause:
+without one, a “P” above 1 was nearly always another quantity (a
+proportion, pH, a group’s mean, a model parameter). A number in
+scientific notation whose power of ten was lost when the PDF was read
+(“p = 2.4 x 10 -9” read as 2.4) is not listed. A “p” that is the
+subscript of another symbol (“r p = .64”, “²p = .02” for partial eta
+squared, “Δp = .33”), or a quantity with a unit, a logarithm or a ratio
+(“P = 2.9 µm”, “-log10 P = 7.5”, “Ca/P = 1.67”), is not read as a
+p-value at all (see <code>extract_p_values()</code>). Each p-value has
+its own row, also when the same one is written twice in a sentence.</p>
+<p>This module sometimes flags false positives when sentences discuss
+how p-value thresholds were set. It can also miss an imprecise p-value
+that is reported against a threshold (“decreased at the p &lt; .05
+significance threshold”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in tables (as
+opposed to a table’s footnote text, which the module does see and tries
+to exclude — see above).</p>
+<p>This module was developed by Lisa DeBruine and Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-exact.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on 226 Psychological Science papers with 5,019
+hand-coded p-values, 438 of them imprecise (scienceverse/validation,
+branch stat_p_exact). Version 0.4.4.3 reported 419 p-values as
+imprecise, 388 of them correctly (93%), and missed 50 (89% found). Of
+the misses, 13 are starred table notes (“*p &lt; .05”) that the module
+leaves out on purpose and 11 are p-values it did not find; of the wrong
+reports, 20 are p-values the ground truth does not contain (such as “ps
+&lt; .05”) and 6 use ≤ or ≥. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Non-Significant P Value Check works
+</summary>
+<div class="fold">
+<p>This module checks for imprecisely reported p values. If p &gt; .05
+is detected, it warns for misinterpretations.</p>
+<p>The nonsignificant p-value check searches for regular expressions
+that match a predefined pattern. The module identifies all p-values in a
+manuscript and selects those that are not reported to be smaller than or
+equal to 0.05. It returns all sentences containing non-significant
+p-values.</p>
+<p>In the future, the Metacheck team aims to incorporate a machine
+learning classifier to only return sentences likely to contain
+misinterpretations. If you want to help to improve the module, reach out
+to the Metacheck development team.</p>
+<p>A p-value in a table note (“† p &lt; .10, * p &lt; .05”) or a figure
+legend (“dashed lines indicate non-significant paths (p &gt; .05)”) is
+left out, as in stat_p_exact; the column <code>not_a_test</code> says
+why. A p-value next to words that state a threshold is kept, because
+such sentences often report a result against that level (“not
+significant at the conventional threshold (p = .054)”).</p>
+<p>This module only checks p-values reported in the running text of the
+manuscript. It cannot (yet) process p-values reported only in
+tables.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-p-nonsig.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: Validated on three hand-coded sets of papers
+(scienceverse/validation: 249 Psychological Science, 250 Economics and
+250 MDPI papers). Of 1,783 non-significant p-values in the ground truth,
+version 0.4.4.3 found 1,719 (3.6% missed), and 94.8% of its 1,814
+detections were in the ground truth. Some differences come from the
+ground truth: it lacks p-values with a correction name (“p Bonf =
+.061”), and counts partial eta squared written with its subscript after
+it (“η 2 p = .05”), “p = .05”, and some table notes and figure legends
+(“† p &lt; .10, *p &lt; .05”), which this module leaves out, as
+non-significant p-values. These figures measure agreement with the
+hand-coding, which has known errors in both directions
+(scienceverse/validation#48).</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Effect Sizes in t-tests and F-tests works
+</summary>
+<div class="fold">
+<p>The Effect Size module checks if effect sizes are correctly reported
+in t-tests and F-tests.</p>
+<p>The Effect Size check searches for regular expressions that match
+typical ways in which effect sizes are reported. It subsequently checks
+different ways in which Cohen’s d, g, ηp2, and ωp2 can be computed
+against the reported value. If effects are missing, or might be
+incorrect, you the module provides a warning. The module was validated
+on APA reported statistical tests, and might miss effect sizes that were
+reported in other reporting styles. It was validated by the Metacheck
+team on papers published in Psychological Science.</p>
+<p>This module only checks statistical results reported in the running
+text of the manuscript. It cannot (yet) process statistics reported only
+in tables.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-stat-effect-size.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: In a sample of 161 papers with 1469 tests, this module
+correctly detected 1106 reported effect sizes (true positives) and
+correctly identified 295 cases where no effect size was present (true
+negatives). However, it missed 23 that were reported (false negatives),
+and incorrectly identified 45 effect sizes when none were reported
+(false positives). Among all instances detected by the module, 96% were
+true cases (positive predictive value). In a validation against 221
+reported Cohen’s d effect sizes, it correctly indicated coherence in 218
+cases (99%). In a validation against 485 partial eta-squared effect
+sizes, it correctly indicated coherence in 480 (99%)</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Codebook Check works
+</summary>
+<div class="fold">
+<p>This module checks whether the data columns in a repository are
+documented in a codebook or README. It locates codebook/readme files,
+extracts the variable definitions they contain, matches those
+definitions against the data columns extracted by
+<code>data_check</code>, and reports documentation coverage: how many
+data columns are documented, and which documented variables are never
+used.</p>
+<p>The Codebook Check module consumes the columns and file
+classification produced by <code>data_check</code> (and, transitively,
+<code>repo_check</code>). Files classified as <code>codebook</code> or
+<code>readme</code> are parsed with <code>parse_codebook()</code>, which
+reads structured tables (CSV/TSV/Excel with a variable-name column and a
+label column), embedded labels in haven files (SPSS/Stata/SAS), and
+plain text from rich-text formats (docx/pdf/rtf/odt). Embedded haven
+labels from data files are also harvested directly.</p>
+<p>Each data column is then matched against the parsed variable
+definitions with <code>match_column_labels()</code>, using
+normalised-name matching with experiment-group scoping, haven-label
+priority, and rule-based label-equivalence merging.</p>
+<p>Beyond the variable label, the module harvests the DDI-style
+per-variable properties a source supplies: the <strong>value labels /
+code list</strong> (the 1=“Strongly disagree”…5=“Strongly agree” mapping
+— from SPSS/Stata value labels and from a codebook “values”/“coding”
+column), the <strong>missing-value scheme</strong> (which codes denote
+missingness, from haven declared missings and labels that read as
+“refused”/“n/a”), and <strong>question text</strong> and columns when
+present. These are carried onto the matched data columns and exported
+into the Psych-DS <code>variableMeasured</code> (as a schema.org code
+list plus namespaced <code>metacheck:</code> fields).</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>. When <code>llm_use(TRUE)</code>, three
+optional LLM tiers run: parsing unstructured codebook text that the
+rules could not handle, fuzzy-matching still-unlabelled columns to
+still-unmatched codebook variables, and merging conflicting label
+definitions into a single canonical label.</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-codebook-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+codebook_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Repository Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories.</p>
+<p>The Repository Check module lists files on the OSF, GitHub,
+ResearchBox, DSpace (PsychArchives and other legacy- and DSpace 7-based
+installations), Zenodo, Dataverse, Figshare, Dryad, ReShare,
+4TU.ResearchData, Mendeley Data, DataONE (Arctic Data Center, KNB, and
+other member nodes), and LDbase based on links in the manuscript.</p>
+<p>A link to a file-sharing service (Google Drive, Dropbox, OneDrive,
+Box, WeTransfer, MEGA, iCloud Drive, Baidu Netdisk, SURFdrive; see
+[file_share_links()]) gets a warning and makes the light yellow: such
+services are not repositories, as files can be changed or deleted at any
+time, get no DOI, and the link stops working when the account is closed.
+The report advises a stable repository such as Zenodo instead. Their
+files are not read, and <code>summary_table$file_share_n</code> counts
+the links.</p>
+<p>Deposits in archives for sequence and expression data (GEO, the INSDC
+archives BioProject, SRA, ENA and DDBJ, and ArrayExpress; see
+[seq_archive_links()]), mostly named by accession number, are read for
+whose deposit they are. The authors’ own are listed with what they hold
+([seq_archive_size()]) and are not downloaded or checked as data and
+code; <code>summary_table$archive_own_n</code> counts them.</p>
+<p>R packages on CRAN ([cran_links()], [cran_info()]) are the paper’s
+own when a paper author is a package author and the paper presents the
+package; the paper’s own are listed with their version and not checked
+(<code>summary_table$cran_own_n</code>). A Handle link
+(<code>hdl.handle.net/...</code>) that leads to a repository read here
+is checked as a link to that repository ([handle_links()]).</p>
+<p>Listing a repository’s files never requires an API key, but some
+hosts answer faster or more completely with one: OSF allows 100
+requests/hour unauthenticated versus 10,000/day with a token (see
+[osf_pat()]), and Dryad enforces a strict per-IP daily quota on repeated
+listing (see <code>cache</code> below). Dryad is a special case beyond
+rate limits: listing a Dryad dataset’s files works without a key, but
+actually downloading file CONTENTS from Dryad fails with HTTP 401 unless
+a key is set, even for a fully public dataset (see [dryad_pat()] or
+[dryad_auth()]). Since this module only lists files and never downloads
+their contents itself, that limitation applies to
+<code>data_check</code> and <code>code_check</code> (which do download
+content), not here – see their own documentation.</p>
+<p>When a linked OSF page is a registration, its
+<code>registered_from</code> project (the one it was registered from,
+which the manuscript itself may never link directly) is also checked: if
+that project is public its files are listed under its own URL, and if it
+is closed or otherwise inaccessible the report flags it explicitly,
+since some registrations only describe their content rather than
+mirroring it.</p>
+<p>Whose deposit is each link? The <code>ownership</code> table gives,
+for every repository linked in the text and (with
+<code>references = TRUE</code>) every deposit cited in the reference
+list, one of six labels: <code>own_this</code> (made by the authors for
+this paper), <code>own_earlier_data</code> or
+<code>own_earlier_code</code> (the authors’ own, from earlier work),
+<code>others_data</code> or <code>others_code</code> (made by other
+people, reused here), or <code>not_data</code> (a publication such as a
+preprint, not a deposit), with <code>ownership_group</code> (“own”,
+“others”, “not_data”) and the reason. It is decided without a language
+model, from the sentence or reference that cites the link, the paper’s
+authors (names, ORCID iDs, affiliations), and what the deposit’s own
+record and files say (who made it, what it names, when, whether it is a
+software package; for an OSF project cited only in the reference list,
+its record alone). On a round of labelled links the rules had not been
+written from, the three groups were right for 98% of links in the main
+text (93 of 95) and 90% in reference lists (74 of 82); the labels were
+made by Claude agents from each link’s evidence, and disputed ones
+checked against the deposits. Telling this paper’s own deposit from the
+authors’ earlier one is less certain.</p>
+<p>Only the deposits that are this paper’s own are checked. A deposit
+linked in the text that holds other people’s work
+(<code>others_data</code>, <code>others_code</code>) or the authors’
+earlier work (<code>own_earlier_data</code>,
+<code>own_earlier_code</code>) is listed in the report, with the reason,
+but its files are left out of <code>table</code> and kept in
+<code>table_not_checked</code>: they count toward nothing here (files
+that do not belong in a repository, naming, READMEs, studies, the
+traffic light), and code_check, data_check and reproducibility_check,
+which read <code>table</code>, do not check them either.
+reproducibility_check still puts the files of theirs that the paper’s
+code names in the folder the code runs in, as a re-analysis needs the
+data it re-analyses. When every linked deposit is set aside, the traffic
+light is “na”. A deposit that is the paper’s own is counted as such when
+its README, title or description names the paper (its title or DOI).</p>
+<p>If you want to extend the package to be able to download files from
+additional data repositories reach out to the Metacheck development
+team.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-repo-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+repo_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Code Check works
+</summary>
+<div class="fold">
+<p>This module retrieves information from repositories checked by
+repo_check about code files (R, Python, SAS, SPSS, Stata, Mplus,
+MATLAB).</p>
+<p>The Code Check module checks R (also R Markdown and Quarto), Python
+(also Jupyter notebooks), SAS, SPSS, Stata, Mplus, and MATLAB files,
+using regular expressions to check the code; JASP files are listed but
+not read. The language of a Quarto document or a notebook is read from
+the file itself (its engine or kernel), not from its extension. The
+regular expression search will detect the number of comments, the lines
+at which libraries/imports are loaded, attempts to detect absolute paths
+to files, <code>setwd()</code> and <code>install.packages()</code>
+calls, and lists files that are loaded, and checks if these files are in
+the repository; R code is also parsed. The module will return
+suggestions to improve the code if there are no comments, if
+libraries/imports are loaded in lines further than 4 lines apart, if
+files that are loaded are not in the repository, if absolute file paths,
+<code>setwd()</code> or <code>install.packages()</code> are found, and
+if R code cannot be parsed.</p>
+<p>The regular expressions can miss information in code files, or
+falsely detect parts of the code as a fixed file path. Libraries/imports
+might be loaded in one block, even if there are more than 3 intermittent
+lines. The module was tried out internally on papers published in
+Psychological Science, but has not been formally validated. There might
+be valid reasons why some loaded files can’t be shared, but the module
+can’t evaluate these reasons, and always gives a warning.</p>
+<p>The module also checks whether the repository pins the R/package
+versions the analysis actually depended on: an <code>renv.lock</code>
+file (parsed for the R version and every locked package + its
+version/source), a
+<code>sessionInfo()</code>/<code>sessioninfo::session_info()</code> text
+dump (matched by filename —
+<code>sessionInfo.txt</code>/<code>session_info.txt</code> and similar,
+or embedded in a README), or a
+<code>groundhog::groundhog.library()</code>/<code>checkpoint::checkpoint()</code>
+date-pin call in the code (a bare
+<code>library(groundhog)</code>/<code>library(checkpoint)</code> does
+not count — the pinning call itself must be present). When none of these
+is found, the report flags it as a reproducibility gap: package versions
+may drift between when the analysis was run and any later reproduction
+attempt.</p>
+<p>If you want to extend the package to perform additional checks on
+code files, or make the checks work on other types of code files, reach
+out to the Metacheck development team.</p>
+<p>Checking code requires downloading its file contents. For a paper
+whose repository is on Dryad, this never succeeds unless a Dryad API key
+is set: Dryad requires one to download file bytes, even from a fully
+public dataset (listing the repository’s files does not need one).
+Without a key, every Dryad-hosted code file is listed but unchecked, and
+a warning naming Dryad and
+<code>?dryad_pat</code>/<code>?dryad_auth</code> is included among the
+download failures recorded in the manifest.</p>
+<p>This module was developed by Daniel Lakens and Raphael Merz</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-code-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+code_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Data Check works
+</summary>
+<div class="fold">
+<p>This module classifies the files in a repository into semantic types
+(data, codebook, code, software, output, supplemental, readme, asset,
+other) and, for tabular data files, extracts each column’s type and
+summary statistics.</p>
+<p>The Data Check module consumes the file list produced by
+<code>repo_check</code> (or any files added via
+<code>local_path</code>). Each file is classified with rule-based
+heuristics layered over metacheck’s <code>file_category()</code> and
+<code>file_types</code>: file names matching README / codebook patterns
+win first, then an extension crosswalk, then format-locked extension
+overrides. For every file classified as tabular <code>data</code> that
+is available locally, the module reads the file head, describes each
+column with <code>data_col_facets()</code> and computes summary
+statistics for numeric columns. Every sheet of a spreadsheet that holds
+a table is read: a file with several such sheets has its columns under
+<code>source_file = &quot;file.xlsx [sheet]&quot;</code>, and the
+<code>sheet</code> column names the sheet of any spreadsheet with
+several sheets; a sheet of notes or a codebook is treated as
+documentation when the file has another table. Following DDI, a column
+is described by orthogonal facets rather than a single type:
+<code>representation</code> (numeric/text/datetime/code — how it is
+stored), <code>measurement_level</code> (Stevens:
+nominal/ordinal/interval/ratio), <code>concept</code> (what it measures:
+reaction_time/age/gender/likert/id/…), <code>role</code>
+(identifier/measure/condition/timestamp), <code>unit</code>, and a
+<code>quality</code> state (ok/empty/constant). Concepts are detected by
+name+value rules (the demographic concepts via
+<code>data_check_demographic()</code>); when <code>llm_use(TRUE)</code>
+the model fills concepts and measurement levels the rules left blank.
+Qualtrics survey exports are recognised
+(<code>data_check_is_qualtrics()</code>): their extra header rows are
+stripped so columns type correctly, and the reserved response-metadata
+columns (StartDate, Duration, Finished, …) are tagged.</p>
+<p>The module defaults to <strong>rules-only</strong> when
+<code>llm_use(FALSE)</code>: columns the rules cannot resolve (ambiguous
+3–20-unique integers, ambiguous character columns) fall back to
+<code>continuous</code> / <code>text</code> respectively. When
+<code>llm_use(TRUE)</code>, ambiguous columns and unresolved file types
+(<code>other</code>) are sent to <code>llm()</code> for optional
+refinement, and every file is assigned a study group (<code>ex1</code>,
+<code>pilot2</code>, <code>shared</code>, …) so that multi-study
+repositories can be recognised (used by <code>psychds_check</code>).
+Without an LLM the study <code>group</code> is left <code>NA</code>
+(unknown).</p>
+<p>Column extraction requires files to be readable from disk. Files
+fetched by <code>repo_check</code> from OSF/GitHub/etc. without a local
+copy (<code>file_location</code> is <code>NA</code>) are classified but
+not column-extracted; pass <code>local_path</code> to point at a
+downloaded copy of the repository.</p>
+<p>For a paper whose repository is on Dryad, this means column
+extraction never happens unless a Dryad API key is set: Dryad requires
+one to download file bytes, even from a fully public dataset (dataset
+listing and metadata do not need one). Without a key, every Dryad file
+stays classified but un-downloaded, column_n is 0, and a warning naming
+Dryad and <code>?dryad_pat</code>/<code>?dryad_auth</code> is included
+among the download failures. A one-time session message is also shown
+(see repo_check) the first time a Dryad dataset is encountered with no
+key set.</p>
+<p>Every downloaded text file the authors wrote (code, settings, survey
+definitions such as Qualtrics <code>.qsf</code> files, documentation,
+outputs) is searched for keys: API keys, access tokens and private keys,
+which let anyone who downloads the file use a paid service at the
+authors’ cost. Of a tabular data file only the column names and first 3
+rows of the table as read are searched: its values come from
+participants, but a key the authors set for a whole survey (as embedded
+data in a Qualtrics survey flow) is exported in every response. The
+search uses the rules of the secret scanner betterleaks (<a href="https://github.com/betterleaks/betterleaks" class="uri">https://github.com/betterleaks/betterleaks</a>, MIT licence)
+of high and medium confidence. A key found turns the traffic light red;
+the report and the <code>keys</code> table give its file, line and type,
+and only its beginning. Other files over 25 MB and binary files are not
+searched. A key is never tested with its provider. Every module’s result
+has any whole key replaced by “<span class="math display"><em>k</em><em>e</em><em>y</em><em>r</em><em>e</em><em>m</em><em>o</em><em>v</em><em>e</em><em>d</em></span>”
+(see <code>module_run()</code>).</p>
+<p>This module was developed by Daniel Lakens and Levi Baruch</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-data-check.html">metacheck
+manual</a>.</p>
+<div class="validation">
+<p>Validation: This module has not been validated. All checks in the
+data_check module have unknown error rates. Carefully evaluate the
+output of this module. You can help improve this module by reporting an
+issue on GitHub.</p>
+</div>
+</div>
+</details>
+<details>
+<summary>
+How Reproducibility Check works
+</summary>
+<div class="fold">
+<p>This module assesses whether a paper’s R and Python code can be run
+on its data. It works in two phases. The <strong>static</strong> phase
+(always run) collects the package dependencies the code declares,
+rewrites the data-file paths that do not work in the repository as the
+authors organised it, works out the order the scripts must run in, and
+diagnoses why any referenced input file is unavailable — reporting what
+a reproduction attempt would involve and where it is likely to break.
+The <strong>execution</strong> phase (opt-in,
+<code>execute = TRUE</code>) then actually runs the code: it copies the
+repository into a throwaway directory, optionally installs the declared
+dependencies into a throwaway library, runs each script in order in an
+isolated subprocess with a per-script timeout, and captures the outcome
+and full output of each run.</p>
+<p>By default (<code>execute = FALSE</code>) the module does <strong>not
+run any code</strong> — it performs only static analysis: reading
+dependencies with the same extractors as <code>code_check</code>,
+finding the files the code references in the repository, and building a
+run-order dependency graph. It reports what <em>would</em> be installed
+and run rather than doing it.</p>
+<p>When <code>execute = TRUE</code>, the module additionally
+<strong>runs the downloaded code on your machine</strong> — a
+deliberate, opt-in action gated behind that argument (<code>callr</code>
+is required for R code). Each script runs in an isolated subprocess so a
+crash cannot take down the R session; note this isolates crashes,
+<strong>not</strong> the filesystem or network. Installs (when
+<code>install_missing = TRUE</code>) and the throwaway run library never
+touch your main R library. Each script’s outcome is one of
+<code>ran_ok</code>, <code>errored</code>, <code>timed_out</code>,
+<code>dependency_unavailable</code>, <code>not_parsed</code>,
+<code>run_by_source</code> (an R script another script runs with
+<code>source()</code>, which is run only inside that script, since on
+its own it lacks the packages and objects the sourcing script sets up
+first), <code>run_by_import</code> (a Python file other files import, a
+module rather than a script, unless it has an
+<code>if __name__ == &quot;__main__&quot;:</code> block), <code>jags_model</code>
+(a JAGS or BUGS model saved with an R extension, which another script
+reads) or <code>not_r_content</code> (a file that is not R at all, such
+as a JSON or HTML dump); these last two are not run and are not
+failures. <code>python2</code> marks Python 2 code that was not run.
+With <code>sandbox = &quot;docker&quot;</code> such code runs with Python 2.7
+(option <code>metacheck.docker_image_py2</code>; FALSE turns this off),
+which <code>modifications</code> records; it is never converted, since
+that can change results. <code>defines_functions</code> is a file that
+only defines functions, which is used, not run
+(<code>table$used_by</code> names the scripts that use it), and
+<code>not_analysis</code> is a file of software rather than of the
+analysis: a package’s code, tests, documentation or
+<code>setup.py</code>, a copy of a tool, a web application, a script a
+program wrote (<code>table$not_analysis_why</code> says which); neither
+is run or counted as a script. <code>docker_failed</code> means the
+container never started, which says nothing about the script, so it
+keeps the light from being green but does not make it red.
+<code>needs_a_person</code> is a script that stopped because it asks a
+person to choose a file or answer a question, or that starts an app, and
+<code>needs_internet</code> one that stopped because the network is off
+in a Docker run, or, with <code>internet = TRUE</code>, could not reach
+what it asked for; <code>download_too_large</code> is a script stopped
+for downloading more than the limits allow (see <code>internet</code>),
+and <code>out_of_memory</code> one that, or a program it started (such
+as a compiler), ran out of the memory each script may use. All four are
+treated the same way. <code>not_downloaded</code> is a script that
+stopped on a file the repository lists but that was not downloaded, such
+as one over <code>max_file_size</code>: it could not be tried, so it is
+not counted as a script that did not reproduce
+(<code>summary_table$repro_not_downloaded_n</code> counts them apart).
+<code>not_read</code> is a file metacheck could not read, so it was not
+run; the light is then not green, as the file may read and run on
+another computer, and <code>table$error_message</code> says why, naming
+a package that is installed but cannot be loaded on the computer that
+ran the check. <code>empty</code> is a file with nothing in it, which is
+not run or counted as a script. For a script that did not run through,
+<code>table$error_message</code> is its error, short (at most 300
+characters): the error line of its output, which names a package that is
+not there, with the address it asked for when it needed the internet, or
+the time limit it reached; <code>table$reason</code> sorts it into a
+kind. A timeout means “still running at the cutoff”, not a failure, so
+raise <code>timeout</code> for legitimately long-running (e.g. Bayesian)
+scripts. <code>dependency_unavailable</code> means the script’s own
+package could not be installed from live CRAN, the CRAN Archive, or a
+named GitHub/URL source — an infrastructure limitation, not a defect in
+the paper’s code. The full stdout/stderr of every run is kept in the
+result’s <code>run_results</code> (the report shows it in per-script
+dropdowns, capped for readability).</p>
+<p>Provenance, kept so that a TRACE Research Object (TRO) declaration of
+the run can be written later from a stored result (metacheck #404; the
+helpers are in R/provenance.R). Only when code was run
+(<code>execute = TRUE</code>): * <code>run_results$started_at</code>,
+<code>run_results$ended_at</code>: when each run of a script started and
+ended (ISO 8601, UTC, milliseconds); NA for a script that was not
+started. A script run again in a later pass has the times of its last
+run. A TRO uses them for each trov:TransparentResearchPerformance. *
+<code>run_results$exit_status</code>: the exit status of the process
+that ran the script (0 = ended normally); NA when the process did not
+report one (a time limit, or Docker failing to start the container). *
+<code>artifacts</code>: one row per file, with <code>stage</code>
+(<code>deposit</code>: as downloaded from the repository, hashed from
+the downloaded file; <code>before_run</code>: the run folder just before
+the first script ran, after metacheck’s own changes, such as rewritten
+paths and unpacked archives; <code>after_run</code>: only the files the
+scripts made (<code>status</code> <code>new</code>), changed
+(<code>changed</code>) or removed (<code>removed</code>), as an
+unchanged file is the one listed before the run), <code>path</code>
+(relative to the run folder, as valid UTF-8, a byte of another encoding
+written as <code>&lt;xx&gt;</code>), <code>size</code> (bytes),
+<code>sha256</code>, <code>mime_type</code> (by extension, NA when
+unknown), <code>source</code> (the file’s address in the repository, for
+<code>deposit</code>). The package libraries metacheck installs in the
+run folder are left out, as are metacheck’s own files there (a script’s
+runner, and the statistical output it writes in
+<code>statistical_output/</code>). Files metacheck itself copied or made
+between passes (see <code>modifications</code>,
+<code>output_copied</code>, <code>file_placed</code>) show in
+<code>after_run</code> too. A TRO uses the rows as
+trov:ResearchArtifacts and each stage as a trov:ArtifactArrangement. *
+<code>modifications$sha256_before</code>,
+<code>modifications$sha256_after</code>: the hash of the changed script
+as downloaded and as it ran; NA when the script is not at the same path
+in both (a script made from an R Markdown file). *
+<code>environment</code>: the system that ran the code
+(trov:TransparentResearchSystem in a TRO):
+<code>metacheck_version</code>, <code>started_at</code>,
+<code>ended_at</code>, <code>host</code> (R version, platform, operating
+system), <code>sandbox</code>, <code>network_isolated</code> (TRUE only
+when every Docker run had <code>--network none</code>; the process
+sandbox does not stop the network), <code>internet</code>,
+<code>timeout_per_script</code>, <code>total_timeout</code>,
+<code>python_local</code> (the Python run outside Docker and its
+version), and <code>docker</code>: <code>runs</code> (for each kind of
+run, <code>r_run</code>, <code>r_install</code>,
+<code>python_run</code>, <code>python_install</code>, the image and the
+<code>docker run</code> arguments, such as <code>--network none</code>,
+<code>--read-only</code>, <code>--cap-drop ALL</code>,
+<code>no-new-privileges</code>, the process limit and the memory and
+processor limits) and <code>images</code> (for each image, its ID and
+digests from <code>docker image inspect</code>, its creation time and
+the R and Python versions its environment declares).</p>
+<p><code>run_results$checked</code> says what the run of each script
+shows about the code, in five groups, so that a script that does not
+reproduce is kept apart from one the check could not test:
+<code>ran</code> (it ran to the end); <code>code_error</code> (it did
+not reproduce: it stopped with an error of the code or the deposit,
+could not be read, or needs a file the deposit does not hold);
+<code>dependency</code> (a package or program was not available: a
+package that could not be installed or was not loaded, a program outside
+R and Python, a system library, or R crashing in a package’s compiled
+code); <code>time</code> (it did not finish within the time limit for
+one script, or was not started because the time for all scripts had run
+out); and <code>not_checkable</code> (it could not be checked
+automatically: it needs a person, the internet, a key or another setting
+of the authors’ computer, one platform such as Google Colab, Windows or
+OpenSAFELY, more memory than the run allows, a file that was not
+downloaded, a screen, or a program that runs it, or it is a file of a
+package of the code that Python runs only as a module of that package).
+It is NA for files run inside another script, files that are not an
+analysis, files not read, and a Docker failure.
+<code>summary_table</code> counts each group (<code>repro_ran_n</code>,
+<code>repro_code_error_n</code>, <code>repro_dependency_n</code>,
+<code>repro_time_n</code>, <code>repro_not_checkable_n</code>), and the
+report’s first sentence gives them. The traffic light reflects the
+static readiness signals by default; a script in <code>code_error</code>
+that stopped with an error makes it red, as a script that crashes on its
+own analysis is a genuine reproduction failure, and a script in one of
+the other three groups keeps it from being green. Calls that need a
+screen, which the run does not have (<code>dev.print()</code>,
+<code>dev.copy2pdf()</code>, <code>dev.copy2eps()</code>,
+<code>savePlot()</code>, <code>windows()</code>,
+<code>win.graph()</code>, <code>x11()</code>, <code>quartz()</code>,
+<code>View()</code>), are replaced before the run by calls that need
+none, which <code>modifications</code> records as
+<code>screen_call_replaced</code>. A script that fails with
+<code>could not find function</code> is run once more with the
+<code>library()</code> calls the project’s other scripts make added at
+its top (or the one package that exports the function, or magrittr for
+<code>%&gt;%</code>), and a script that then runs is reported as
+reproducible only after that repair.</p>
+<p>Dependencies are reported name-only, with the source (CRAN, GitHub,
+or a base package already shipped with R) — static analysis of the code
+cannot know which <em>version</em> was used, and running against current
+package versions is itself informative: a break argues the authors
+should have pinned versions. When the repository does record versions, a
+run with <code>recorded_versions = TRUE</code> installs the packages the
+scripts load at those versions, but it does not change the R version,
+which remains a limitation of the check.</p>
+<p>Run order is derived from read-after-write data dependencies (a
+script writing a file another reads must run first),
+<code>source()</code> edges, and numeric filename prefixes as a weak
+tie-breaker. Ambiguous orderings, dependency cycles, and inputs a script
+reads but that no earlier script produces (and that are not in the
+repository) are surfaced as warnings, since these are the situations
+most likely to make an otherwise-correct reproduction fail.</p>
+<p>Python code (<code>.py</code> files, and notebooks and Quarto
+documents whose code is Python, from which the code is extracted first)
+goes through the same two phases, reported in its own “Python code”
+section. Each file is checked for syntax errors with Python’s own parser
+when a Python interpreter (<code>python</code>, or else
+<code>python3</code>) is available; dependencies are read from the
+<code>import</code> statements, with versions from a
+<code>requirements.txt</code> or <code>pyproject.toml</code> when there
+is one, and installed with <code>pip</code>; each script runs as its own
+<code>python</code> process (<code>processx</code> is required), so
+unlike R scripts, a name one script defines is not available to another.
+When no Python interpreter is available, the Python files are reported
+as not run and the R results are still returned. Statistics the Python
+scripts print are compared with the paper together with the R output and
+any self-reproducible output (JASP/jamovi, SPSS-Viewer, notebook
+outputs).</p>
+<p>This module was developed by Daniel Lakens</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-reproducibility-check.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How PubPeer Comments works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations that have
+comments on pubpeer (excluding Statcheck comments).</p>
+<p>The PubPeer module uses the PubPeer API to check for each reference
+that has a DOI whether there are comments on the post-publication peer
+review platform. If comments are found, a link to the comments is
+provided. Comments by ‘Statcheck’ on PubPeer are ignored, see <a href="https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/" class="uri">https://retractionwatch.com/2016/09/02/heres-why-more-than-50000-psychology-studies-are-about-to-have-pubpeer-entries/</a>.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>For more information, see <a href="https://www.pubpeer.com/static/about">PubPeer</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-pubpeer.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How RetractionWatch works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations in the
+RetractionWatch Database.</p>
+<p>The RetractionWatch Check module compares the reference list against
+studies in the RetractionWatch database based on the DOI. If a study in
+the database is found, a reminder is provided that the study was
+retracted, has an expression of concern, or a correction.</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the authors are already aware that a study was
+retracted, but the module can’t evaluate this.</p>
+<p>The database can be manually updated with the rw_update function. For
+more information, see <a href="https://gitlab.com/crossref/retraction-watch-data" class="uri">https://gitlab.com/crossref/retraction-watch-data</a>.</p>
+<p>This module was developed by Daniel Lakens and Lisa DeBruine</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-retraction.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details>
+<summary>
+How Replication Check works
+</summary>
+<div class="fold">
+<p>This module checks references and warns for citations of original
+studies for which replication or reproduction studies exist in the FLoRA
+database.</p>
+<p>The Replication Check module compares the reference list against
+studies in the FLoRA (FORRT Library of Replication Attempts) database
+based on the DOI. If a study in the database is found, a reminder is
+provided that a replication or reproduction of the original study
+exists, and should be cited. No reminder is given when the paper already
+cites that replication or reproduction (matched by its DOI).</p>
+<p>The module requires that the reference has a DOI: the DOI in the
+paper’s reference list, or one looked up with
+<code>add_bib_match()</code> before the module runs (see
+<code>ref_table()</code>). References without a DOI are not checked.</p>
+<p>It is possible the original study was cited for other reasons than
+the empirical claim tested, or that the replication/reproduction in the
+FLoRA database is for only one of the studies in the paper, and not the
+study the authors discuss.</p>
+<p>The database can be manually updated with the
+<code>FLoRA_update()</code> function. For more information, see <a href="https://forrt.org/FLoRA/" class="uri">https://forrt.org/FLoRA/</a>.</p>
+<p>This module was developed by Daniel Lakens, Lisa DeBruine and Lukas
+Wallrich</p>
+<p>Read more in the <a href="https://www.scienceverse.org/metacheck_book/chapters/mod-ref-replication.html">metacheck
+manual</a>.</p>
+</div>
+</details>
+<details id="full-text">
+<summary>
+Full text
+</summary>
+<div class="fold">
+<h3>Abstract</h3>
+<p>For many, flavour is the quintessential multisensory experience. It emerges from synthesizing information across sensory modalities and temporal scales. Disparities between these cues are inevitable, and regulation is necessary to synthesize a unitary flavour percept, triggering hedonic and attentional responses, and ultimately liking. Although several frameworks address specific consequences of flavour incongruity, an integrative account unifying perceptual, attentional, hedonic, and adaptive responses remains poorly specified. Here, we explore whether the principles of conflict monitoring, originally developed to explain sensorimotor competition, can be extended to explain the dynamics of competition between flavour-related perceptual representations. We argue that brain mechanisms that monitor for, signal, and regulate discrepancies in information processing can help explain how incongruent flavour cues are resolved, how attention and hedonic responses are modulated, and how flavour representations are updated through experience. This framework is complementary with existing accounts based on predictive processing, causal inference, associative learning, and assimilation-contrast, by specifying when unresolved competition between flavour representations recruits attentional control and adaptive learning. Considering the role of conflict mechanisms in flavour can provide some unification across existing accounts and suggest avenues for research both in the laboratory as well as in the consumer industry.</p>
+<h3>1. Introduction</h3>
+<p>Flavour refers to the experience associated with consuming food and drink, and it contributes to the biological imperative of nutrient selection and avoiding harmful substances (Breslin, 2013). Its perceptual, cognitive, and emotional correlates are deeply entangled with multisensory processes involving most, if not all our senses (Prescott, 2015; Spence, 2013).</p>
+<p>However, one often neglected aspect is that incongruities between the multiplicity of flavour cues are bound to occur due to input variability, the imprecision of our sensory systems, and the uncertainty of expectations. Whereas small discrepancies may be resolved seamlessly through multisensory integration, larger or behaviourally salient discrepancies may recruit additional monitoring and control mechanisms. Here, we propose the tentative hypothesis that conflict monitoring and control processes, whose bases are well established in other domains of human cognition (e.g., Botvinick et al., 2001 Botvinick et al., , 2004;; Botvinick &amp; Cohen, 2014; Shenhav et al., 2013 Shenhav et al., , 2016)), can help explain how these ubiquitous disparities in flavour are dealt with.</p>
+<h3>2. What makes up flavour?</h3>
+<p>The subjective phenomenon of flavour emerges from the combination of cues in different sensory modalities experienced concurrently as we eat or drink, as well as a range of contextual factors unfolding over a more extended time frame (see Figure 1). Although there is some disagreement about how to classify flavour cues (see, Skrzypulec, 2023), here we adopt a widely accepted categorisation distinguishing between interoceptive (or in-mouth, proximal) and exteroceptive (or distal) inputs (Piqueras-Fiszman &amp; Spence, 2015; Small et al., 2008).</p>
+<p>Interoceptive cues (gustatory, olfactory, auditory and oral-somatosensory cues) are constitutive of flavour while it is being experienced in the mouth: the core flavour experience. Several wellknown crossmodal interactions occur amongst these interoceptive cues, some leading to commonplace illusions such as oral capture and odour referral (whereby retronasal odours are experienced as originating in the mouth rather than in the nose, Spence, 2016; Lim &amp; Johnson, 2012; Stevenson et al., 2011). Exteroceptive inputs are distal cues from vision (colour, shape, and texture), orthonasal olfaction (smell experienced through the nose), haptic properties of the food object or its container, and external sounds like the fizz of a carbonated drink (Zampini &amp; Spence, 2010). Their crossmodal influence on flavour acts by anticipating core sensory properties prior to (and sometimes during) consumption. In addition to exteroceptive inputs, one could also include product-extrinsic cues that surround the flavour object but are not physically part of it, such as labelling, visual characteristics of packaging or simply the context where the food is being consumed. These may exert a critical influence on the flavour experience, also due to the powerful expectations they generate (see, Okamoto &amp; Dan, 2013; Piqueras-Fiszman &amp; Spence, 2015). Irrespective of the classification adopted, an important consequence is that the multiplicity of cues and time scales involved in everyday life flavour experience must constantly create mismatches; the motivating question here is how our brains resolve them. Exteroceptive cues: sensory cues available directly from the food/drink product, normally before or during it is consumed. Four main types are illustrated in different colour shading, with examples of each in parenthesis. Product extrinsic cues are represented in the outermost ring. These cues are not directly extracted from the sensory properties of product. They relate to semantic relations, symbolic associations, or other cognitive biases. See text for more detailed descriptions and examples of each.</p>
+<p>3. What has conflict got to do with flavour?</p>
+<p>Perception is an inferential process in which the brain combines sensory evidence with prior expectations to estimate the most likely causes of input, and hence the presence of objects or the occurrence of events (Clark, 2013; Friston, 2005; Vetter et al., 2024). This inferential process inevitably generates mismatches or incongruities that must be smoothed out to form coherent stable percepts. How these incongruities are resolved is central in current theories of perception, for example minimising prediction errors in predictive processing theory (Clark, 2013; Sprevak &amp; Smith, 2023) or reconciling crossmodal cue disparity in causal inference theories of multisensory perception (Cao et al., 2019; Körding et al., 2007; Rohe &amp; Noppeney, 2015; Shams &amp; Beierholm, 2010). Flavour has been described under similar inferential terms, where multiple noisy cues are synthesized into a unitary flavour object (Hong, 2025; Lyons &amp; Gottfried, 2025; Piqueras-Fiszman &amp; Spence, 2015). We argue that this synthesis ultimately involves the resolution of representational competition and eventually engages conflict processing.</p>
+<p>It is worth here distinguishing between several concepts. Representational competition is a core concept of this proposal: it refers to a computational or neural state where alternative and incompatible flavour interpretations remain simultaneously active. Representational competition is an intermediate stage and links to crossmodal causal inference, a model for crossmodal integration developed in other contexts where integrated vs. segregated interpretations of the input cues compete. One claim of this proposal is that strong representational competition engages conflict resolution mechanisms to arrive at a univocal perceptual interpretation. Cue disparity refers to differences in the value of input cues with respect to their common (learned) association for an individual. Cue disparity is diagnostic but not sufficient for representational competition to engage conflict resolution, in the sense that small or unimportant cue disparities may well be resolved without engagement of conflict resolution. Cue disparities can occur as statistical, semantic, or affective mismatch between concurrent sensory input cues, or as prediction error if mismatch unfolds as a breach in expectation or a deviation in one input cue predicted from another input cue.</p>
+<h3>3.1. The conflict monitoring and cognitive control theory</h3>
+<p>The conflict monitoring theory explains how humans dynamically allocate resources adaptively in response to processing demands. According to its seminal formulation, conflict monitoring and control operate through three core mechanisms. An ongoing background mechanism monitors for conflict throughout various levels of information processing. Its goal is to signal conflict, when it happens. Here, conflict refers to the concurrent activation of incompatible neural representations, for instance alternative and mutually exclusive action plans.</p>
+<p>A paradigm-case of conflict is the Stroop task (Stroop, 1935): when tasked with naming the ink colour of written words such as RED (e.g., correct response &#x27;blue&#x27;), the automatic but incorrect urge to read aloud (e.g., &#x27;red&#x27;) must be inhibited (for examples of flavour Stroop, see White &amp; Prescott, 2007; Yang et al., 2024). Second, a reactive control mechanism is put into action when conflict is detected. Reactive control deploys immediate short-term adjustments to stifle conflict, so that a univocal outcome allows the appropriate representation to dominate (in the earlier Stroop example, to carry out the correct action, e.g., saying &#x27;blue&#x27;). Behaviourally, reactive control leads to slower responses and increased mistakes. The engagement in reactive adjustments can trigger a switch from an automatic (fast, low demand) processing mode typical of low conflict situations, to a controlled (slow, high demand) one. Third, a proactive control mechanism implements strategic longer-term adjustments after conflict to exert more efficient conflict regulation in future reoccurrences (Botvinick et al., 2004; Braem et al., 2019; Gratton et al., 2018). These proactive adjustments lead to conflict adaptation or congruence sequence effects (CSE), and can be characterised via associative learning mechanisms (Abrahamse et al., 2016).</p>
+<p>The broader neural network associated with conflict monitoring and control is relatively well characterized. Although its precise computations remain debated, the dorsal aspect of the anterior cingulate cortex (dACC) plays a central role in conflict monitoring and detection (Clairis &amp; Lopez-Persem, 2023; Vassena et al., 2017). This conflict signal leads to subsequent reactive adjustments involving the central executive brain network typically including the dorsolateral prefrontal cortex (dlPFC) and the inferior frontal gyrus (IFG) (Botvinick et al., 2001 (Botvinick et al., , 2004;; Shenhav et al., 2016). The dACC does not simply signal presence of conflict, but anticipates costs-benefits from control (Shenhav et al., 2013 (Shenhav et al., , 2016)), as well as associated affective value (Dignath et al., 2020; Dreisbach &amp; Fischer, 2015; Spunt et al., 2012). These computations are thought to be implemented via connectivity of the ACC with the anterior insular cortex (AI), the orbitofrontal cortex (OFC), and midbrain reward circuitry including dopaminergic pathways (e.g., the ventral tegmental area, VTA). Based on a trade-off between these sources of information, conflict signals call for a reorientation in the current distribution of resources and scale such adjustments to meet task requirements. Dopaminergic gating from the reward circuit is key in the proactive adaptation process to minimise the costs of potential conflicts in the future, that is, conflict adaptation (Botvinick &amp; Cohen, 2014).</p>
+<h3>3.2. The role of conflict monitoring and control in flavour</h3>
+<p>Applying this framework to flavour requires two assumptions. First, that the classic conflict framework developed on the basis of competition between actions or responses, extends to competition between perceptual representations before any explicit response is selected. This extension has been considered within conflict monitoring accounts and has received growing empirical support (Botvinick et al., 2001; Drew et al., 2022; Drew &amp; Soto-Faraco, 2023; Morís Fernández et al., 2017 , 2018), but it remains tentative (see, Ruzzoli &amp; Soto-Faraco, 2025, for an extended discussion). Second, we assume that flavour perception is inferential, with flavour priors corresponding to constellations of strongly associated cues (Figure 2). This inferential view of flavour perception has been advocated independently of this proposal elsewhere (Lyons &amp; Gottfried, 2025; Molnar-Szakacs &amp; Uddin, 2022; Zelano et al., 2011).</p>
+<p>Under the two assumptions described above, the conflict monitoring system can signal representational competition between incompatible candidate flavour representations, along with their reward and salience value, and regulate the ensuing perceptual, attentional, hedonic, and adaptive responses. When eating or drinking, core interoceptive cues in the mouth and anticipatory exteroceptive cues if present, provide diagnostic evidence supporting some prior flavour representation/s. The conflict monitoring system, ongoing and mostly unconscious, may signal competition between supported but incompatible candidate flavour representations, along with their reward and salience. When all inputs give enough support to one single representation competition is weak, and the inference process will settle into a univocal dominant percept (Figure 2A). In these cases, we experience a familiar flavour, and reactive conflict regulation plays a subtle role by reconciling small disparities without triggering a call for attention, leading to the characteristic wholistic appreciation of flavour (e.g., Millar, 2021; Smith, 2013; Stevenson, 2023). In other cases, however, concurrent cues provide poorer support to a prior (Figure 2B) or even support equally well two or more alternative priors (Figure 2C). These cases may not be readily resolved into a univocal dominant flavour representation. This triggers a high-conflict signal, modulo salience and cost-benefit, leading to attention orienting, analytical processing, and possibly a negative hedonic reaction. In addition to reactive adjustments, competition may also trigger proactive adjustments. If reward is positive, proactive adjustments will be implemented associating the current cues, fostering the formation of new representations or shaping existing ones to prevent future competition (Figure 2D). In the following section, we consider a variety of phenomena associated with the perception and experience of flavour with this framework in mind.</p>
+<p>A. B. Highly congruent cues (familiar cold lemon soda) C. Somewhat familiar flavour (lukewarm flat lemon soda) D. Incongruent cues (incoherent or novel flavour) The outlines in B-C represent actual sensory inputs when tasting a beverage in a hypothetical flavour experience, with the same conventions as in A. The shaded green area is the representation of the lemon soda prior in A, for reference. B corresponds to a prototypical fresh lemon soda drink when encountered in one of its familiar instances, as deviations from typical values are small. C illustrates a slightly flatter, room temperature lemon soda. Despite some disparities from the typical values this beverage is clearly identified as a lemon soda, if not a perfectly satisfactory one for most people. Finally, D illustrates a beverage that is a blend of cues (e.g., it is warm and meaty, albeit still with critus aroma and sweetness). These cues are partially supportive of incompatible representations such as lemon soda and chicken broth. Experience is not positive.</p>
+<h3>4. Flavour phenomena through the lens of conflict</h3>
+<p> &gt;Flavour phenomena through the lens of conflict</p>
+<h3>4.1. Sensory-discriminative phenomena: congruity leads to unitary perception</h3>
+<p>When flavour cues are mostly congruent, that is disparity is small, cues are integrated and incongruities tend to be reconciled leading to the perception of a unitary flavour object.</p>
+<p>Generally, congruency is associated with larger multisensory effects between interoceptive cuesfoot_0  (Fondberg et al., 2018; Lim &amp; Johnson, 2011; Sundqvist et al., 2006; Zampini et al., 2007; Zampini &amp; Spence, 2010 , 2012). For example, congruent olfactory-taste cues (e.g., the smell of soy sauce paired with the taste of salt), compared to incongruent pairs (e.g., the smell of cherry tree leaf paired with the taste of salt), lead to better detection and identification (Dalton et al., 2000; Shepard et al., 2015; White &amp; Prescott, 2007), to a wider temporal binding window (Gotow &amp; Kobayakawa, 2023). The stronger influence of congruent exteroceptive cues can be also considered under this light. For example, semantically congruent visual-odour pairings (e.g., photo of a bus with the smell of diesel) are detected faster than incongruent pairs (e.g., image of cheese with the smell of fish), just like the pattern in classic sensorimotor interference effects (Gottfried &amp; Dolan, 2003). The flavours of drinks coloured congruently (i.e., a lime flavoured green drink) are more likely to be identified correctly than those coloured incongruently (i.e., a lime flavoured orange drink) (Zampini et al., 2007; for recent reviews on visual influence on taste/flavour perception, see Motoki et al., 2023; Spence &amp; Levitan, 2022). These phenomena tend to weaken or break down altogether when high representational conflict leads to cue segregation.</p>
+<h3>4.2. Attentional effects: incongruity leads to orienting</h3>
+<p>Conflict in flavour may trigger attention orienting, and a switch to an analytical (as opposed to synthetic) mode of processing, particularly when the discrepancy is salient, taskrelevant, or difficult to resolve. Given the vital implications of food recognition, it is not surprising that the attentional consequences of flavour incongruities are accompanied by emotional signals that impregnate the experience with (sometimes strong) hedonic reaction . As pointed out by Stevenson (2016), binding between flavour cues seems to respond to the imperative of detecting (and reacting to) deviations from expectations established by exteroceptive cues (Köster et al., 2014). Attention allocation and control mechanisms from the conflict monitoring theory can help explain how familiar flavour experiences undergo wholistic mode of processing whereas unfamiliar combinations call for the investment of resources into an analytical mode of processing (often associated with negative affect). The computation of costs vs. expected rewards associated to conflict resolution serves to scale subsequent attentional demand and resource deployment (Egner &amp; Hirsch, 2005; Shenhav et al., 2013 Shenhav et al., , 2016;; Silvetti et al., 2013). Flavour representational conflicts that are large and/or high in expected costs or rewards (such as a sour taste found in milk) automatically recruit additional resources aiding to reconcile the incompatible representations receiving support from the cues. These tend to trigger a switch to an analytical processing mode, react to the new information, and prepare for (or eventually avoid) future occurrences. Cue disparities and/or breaches of expectation in flavour have been shown to trigger neural markers of attention orienting, such as the P300 event related potential (Hörberg et al., 2020), a point we come back to later.</p>
+<h3>4.3. Hedonic effects: preference for familiarity and context-dependency</h3>
+<p>Broadly speaking, flavour literature reveals that humans prefer to consume food and drinks that are familiar, as they are perceived as safe, and that familiarity is based on repeated exposure to paired cues (Amsellem &amp; Ohla, 2016; Prescott et al., 2008; White et al., 2020). Although the strength of this preference varies substantially across individuals, contexts, and cultures, association has been shown to enhance reports of liking (Stevenson &amp; Yeomans, 1995). In line with this, congruent pairings of cues (e.g., olfactory-gustatory, and olfactory-auditory) are rated as more palatable than incongruent mixtures (Amsellem &amp; Ohla, 2016; Fondberg et al., 2018; Khorisantono et al., 2024; Seo &amp; Hummel, 2011), although congruence is not always manipulated independently of familiarity and pleasantness in these studies. Also, food that when consumed fails to meet our expectations tends to be disliked, sometimes rather strongly (Schifferstein, 2001; Schifferstein &amp; Verlegh, 1996; Yeomans et al., 2008). Expectations arising from product-extrinsic cues (such as marketing, labels, or context) have been given particular attention, as they can strongly alter consumer evaluations and drive future purchasing decisions (Spence, 2015, for a review). For instance, consumers enjoy pure taste solutions more when they are presented along with semantically informative congruent labels, rather than arbitrary ones (Okamoto et al., 2009). Nevertheless, we must note two exceptions to the preference for congruence. First, there are some hardwired, biologically determined aversive and pleasurable gustatory attributes (e.g., Prescott, 2015). For example, bitter taste is generally associated with aversion, consistent with its potential role in signalling harmful chemicals (Wooding et al., 2021). However, note that even these biologically determined hedonic associations can be escaped via adequate pairing with crossmodal cues (e.g., a bitter solution will be experienced by many as an enjoyable drink when having a certain texture, warmth, and aroma of Arabica coffee). Second, chefs have long used breach of expectation as a creative device in gastronomy (Piqueras-Fiszman &amp; Spence, 2012), showing that incongruity can induce surprise, enjoyment, and capture attention in consumers (Spence &amp; Piqueras-Fiszman, 2014). This suggests that incongruity effects on hedonics are context dependent; although some tastes or cue incongruities may trigger an alert response (as we are experiencing an unfamiliar cue combination), this automatic reaction can eventually be stifled (Hong, 2025).</p>
+<p>Collectively, this phenomenology sits well with conflict theories. A crucial element of the conflict monitoring theory is that conflict signals carry relevant contextual information, such as anticipation of the costs and rewards expected from deploying adjustments (Shenhav et al., 2013 (Shenhav et al., , 2016)), as well as the affective value of the conflict (Dignath et al., 2020; Dreisbach &amp; Fischer, 2015). Hence, the size as well as significance (salience) of conflict determines whether disparities are stifled and kept unconscious, or else require engagement of control. This flexible system, which confers value to control as a function of complex, contextual, information, offers a viable interpretation of the context-dependent nature of hedonic reactions in flavour described above. Cues that have high biological salience, such as bitter tastes, may trigger a strong conflict if unexpected, or a rewarding seamless experience if anticipated by other modality cues.</p>
+<h3>4.4. Food and consumer product industry: congruity guides consumers, incongruity grabs their attention</h3>
+<p>Exteroceptive and extrinsic cues are used to create anticipation at or prior to purchase or consumption. Research shows that consumers generally prefer that these cues are coherent, and their expectations met. This pattern is true of marketing in general (Hultén, 2011), and certainly of food &amp; drink marketing (van Bergen et al., 2022). In supermarkets and grocery stores consumer choices are largely driven by product extrinsic cues (semantics, branding, packaging, etc.) and their associations (Figure 3A). For example, semantically coherent associations between colour and package label facilitate consumers&#x27; search (Huang, Zhao, et al., 2021; Velasco et al., 2015); food advertisements use visual and acoustic cues to evoke associated olfactory and gustatory attributes of the product (Koubaa &amp; Eleuch, 2021); and, marketing research suggests that colour drives up to 62-90% of the consumer&#x27;s purchase decision (Singh, 2006). On the other hand, however, marketing has shown that incongruity can be used to grab the consumer&#x27;s attention. Besides the use of incongruities in the context of gastronomy and fine dining (mentioned above), food packages coloured incongruently can occasionally be introduced to capture the attention of consumers and, according to some authors, promote purchasing decisions (Huang et al., 2019; Huang, Peng, et al., 2021; Spence &amp; Piqueras-Fiszman, 2014). In line with this, some marketing campaigns have resorted to counterintuitive food imagery that breaches expectations to grab people&#x27;s curiosity, such as Burger King&#x27;s mouldy Whopper (Figure 3B), discussed in Gao (2026).</p>
+<p>A. B. In all cases, congruence between container colour and product content is unmistakeable. B. One of Burger King&#x27;s 2020 mouldy burger campaign images, mentioned in text. Image courtesy of Restaurant Brands International. Created by INGO Stockholm, DAVID Miami, and Publicis (2020). Used under Fair Use.</p>
+<h3>5. Relationship of the conflict proposal with existing flavour frameworks</h3>
+<p>So far, we have sketched how a conflict monitoring perspective can be introduced in the context of flavour processing, and how it can integrate some key behavioural and subjective phenomena. In this section we present some current flavour accounts how the conflict monitoring perspective can help provide some theoretical unification.</p>
+<h3>5.1. Associative learning: what makes congruent congruent?</h3>
+<p>Congruency amongst flavour cues is a core element in our proposal. However, up to this point, we have assumed congruency relations without explicitly defining what constitutes congruency. What makes the smell of cherry or almond congruent with a sweet taste, but incongruent with a salty, sour, bitter or savoury taste (Dalton et al., 2000)? Why is a sweet drink more congruent with a red solution than with a lime-green one (Zampini et al., 2007)? The currently dominant view is that these links between flavour-related cues, which we experience as cue congruity, are acquired through experience via associative learning (Hong, 2025; Prescott, 2012 Prescott, , 2015;; Stevenson, 2014). The acquired nature of cue congruence in flavour has important implications. First, cue associations are created and can be modified through exposure, consciously or unconsciously, via contingency and perceptual learning. For example, contingent exposure to odour-taste pairs can make smells acquire gustatory qualities (Spence &amp; Piqueras-Fiszman, 2014; Stevenson et al., 1999; Stevenson &amp; Yeomans, 1995; and, Stevenson &amp; Boakes, 2004, for a review). Because odours also can acquire the hedonic qualities of the tastes they become associated with (Havermans &amp; Heuvel, 2023; Prescott, 2015; Zellner et al., 1983), these associations do not only foster cue integration, but also liking (Hong, 2025). A second, related implication is that different individuals (and collectives) can differ in their flavour congruency associations (Spence &amp; Levitan, 2021; Yeomans, 2010). These experience-dependent congruency mappings have been suggested to serve as cultural motifs that help humans negotiate the &#x27;omnivore&#x27;s dilemma&#x27;: the trade-off between neophobia and adaptation to new environments (Rozin, &amp; Rozin, 1981).</p>
+<p>According to the conflict framework, proactive adjustments following conflict are based on a learning process aimed at establishing new associations or modifying existing ones (Shenhav et al., 2013 (Shenhav et al., , 2016)). Many researchers in cognitive control have highlighted the key role of associative learning mechanisms in proactive adjustments (Abrahamse et al., 2016; Botvinick &amp; Cohen, 2014). This, we argue, extends a natural bridge between conflict monitoring theory and the flavour accounts based on associative learning (Hong, 2025; Prescott, 2012 Prescott, , 2015)).</p>
+<p>Incongruities between flavour cues trigger an implicit &#x27;valuation&#x27; process assessing the novelty of the stimulus (Stevenson &amp; Yeomans, 1995), the potential hedonic impact (Stevenson et al., 2000), as well as the degree of perceptual mismatch (Frank et al., 1993). If consistently paired with a positive outcome, learning may strengthen the association; for instance, a novel odour paired with sweetness might lead to a liking a previously neutral food (Case et al., 2004).</p>
+<p>Existing expectations may be modified if a new experience deviates significantly from prior experience; learning might occur to update these expectations, thus reducing future conflict.</p>
+<h3>5.2. Assimilation-contrast model</h3>
+<p>A. B. The assimilation-contrast model has been adopted in the context of flavour to predict the subjective outcomes of expectation effects (R. E. Anderson, 1973; Davidenko et al., 2015; Okamoto &amp; Dan, 2013; Yeomans et al., 2008). Assimilation refers to the phenomenon whereby discrepancies between expectation and reality tend to be minimised (subjective perception is biased towards one&#x27;s expectation), whilst contrast instead refers to a tendency to magnify such discrepancies (see Figure 4A). The size of the expectation-reality disparity is determinant for the ensuing outcome (Davidenko et al., 2015), with larger disparities more likely to result in contrast and smaller ones in assimilation. Within this approach, assimilation is related to positive hedonic experience, consumer satisfaction, and food acceptability, whereas contrast with negative experience 2 . The study by Yeomans et al. (2008) classically illustrated this by giving consumers a taste of an ice cream made of salmon. Saltiness ratings were much higher if participants were told the stimulus was &#x27;ice cream&#x27; (large expectation vs. reality disparity) compared to the group that received the stimulus as &#x27;frozen savoury mousse&#x27; (smaller disparity). In addition, in Yeomans et al.&#x27;s study, large breaches of expectation led to degraded and often rather unpleasant hedonic reactions.</p>
+<p>In the context of conflict monitoring, one would expect that the effects of conflict between flavour representations will depend on the available information and expected value: low-cost conflicts may become accepted (e.g., familiar food), and maybe positive (e.g. habituation to a novel food with familiar cue combination) and even hedonically enjoyable if surprise and reward are high (e.g., experimental cuisine or fine dining). High-cost and low-reward (including aversive) conflicts will lead to immediate avoidance (e.g. ceasing to eat potentially noxious food). This interpretation is empirically testable, for example by a factorial design crossing disparity and expected reward. If confirmed, it will help connect assimilation-contrast with a substantial body of knowledge about reward, affect, and hedonic valuation in the context of conflict and cognitive control (Schouppe et al., 2015; Silvetti et al., 2013). Conflict, especially if unresolved and salient, may take on an aversive nature and trigger appropriate measures, in line with views that negative affect serves as motivation for future avoidance, requiring the engagement of metabolically expensive control mechanisms (Dixon &amp; Christoff, 2012; Inzlicht et al., 2015). Yet, conflict may acquire positive affect when resolution leads to potential unexpected reward including information gain (Inzlicht et al., 2018; La Pietra et al., 2025). The connection between conflict and emotion is well in line with recent accounts of the role of the 2 In the flavour literature, the assimilation-contrast framework has been mostly applied to the effects of productextrinsic and exteroceptive cues, given that these are most related to expectation. However, some crossmodal interactions between interoceptive (core flavour) cues can also be described as assimilation. Namely, a cue in one sensory modality will tend to assimilate toward the value most often associated with that cue in another modality; a case in point is when the perceived sweetness of a drink increases if it is paired with the aroma of vanilla, a smell strongly associated with sweetness (e.g., Kakutani et al., 2017). Other attraction/repulsion phenomena, akin to assimilation/contrast, have been reported in other domains of perception (such as for example vision, Moon &amp; Kwon, 2022). Although the neural mechanisms may be very different, generally, attraction (or assimilation) is a central-tendency bias that smooths variability and perceptual error to achieve stability, whereas repulsion (or contrast) sharpens sensitivity to changes or discontinuities.</p>
+<p>ACC in providing a value signal to internal control (Kolling et al., 2012 (Kolling et al., , 2016;; Safavi &amp; Dayan, 2022).</p>
+<h3>5.3. Perceptual inference and predictive processing in flavour</h3>
+<p>Predictive processing (PP) -or predictive coding -theories account for perceptual experience in the face of prior expectation and noisy sensory inputs (Clark, 2013; Pezzulo, 2012). According to PP, the brain is continuously engaged in an inference cycle: generative internal models cast top-down predictions throughout the brain hierarchies, and error signals resulting from comparing these predictions with actual sensory signals are passed bottom-up and used to refine the internal models (Clark, 2013; Friston, 2005 Friston, , 2012; see, Frascaroli et al., 2023 for a compendium). This ongoing cycle of error minimization optimises the internal models, which constitute the perceptual representation (the &#x27;best guess&#x27; or hypothesis about the cause and nature of incoming sensory signals). This framework has been adapted to the case of olfaction and the associated crossmodal interactions during flavour perception (Lyons &amp; Gottfried, 2025; Molnar-Szakacs &amp; Uddin, 2022; Zelano et al., 2011). According to olfactory PP, the neural architecture of the odour system implements the prediction-error cycle in its bidirectional hierarchy (see Figure 5). The relatively shallow-processing odour hierarchy and its low precision renders olfactory perception strongly reliant on crossmodal top-down predictions. This explains the substantial influence that other sensory modalities (such as taste and vision) and even semantic linguistic cues, exert on the perception of odour. The anterior insula (AI), along with its connections with the ACC, has been proposed to regulate the error signal in this process (Molnar-Szakacs &amp; Uddin, 2022). Predictive processing theory has also been contemplated as an explanation for the influence of product-extrinsic cues on flavour (Piqueras-Fiszman &amp; Spence, 2015; Spence, 2022), and is compatible with an associative learning framework, where flavour priors are conglomerates of strongly associated cues established through experience (Hong, 2025). The conflict framework is compatible with these perceptual inference accounts and complements them by suggesting specific mechanisms whereby discrepancies are detected and regulated.</p>
+<h3>6. Connecting the neural correlates of conflict and flavour</h3>
+<p> &gt;Connecting the neural correlates of conflict and flavour</p>
+<h3>6.1. The flavour network</h3>
+<p>Here, we briefly highlight the cortical areas composing the &#x27;flavour network&#x27; (see Figure 5). (For comprehensive reviews, see Rolls, 2019; Verhagen &amp; Engelen, 2006). The dorsal anterior and middle insula (containing the primary taste) cortex and the frontal operculum are believed to represent the identity and support the recognition of taste inputs (Iannilli et al., 2014; Nakamura et al., 2013; Veldhuizen, Albrecht, et al., 2011), while olfactory inputs are represented in the piriform (primary olfactory) cortex. In both, strength of activity is positively correlated with perceived intensity (Rolls, 2019). Evidence suggests that some flavour integration (gustation, olfaction, somatosensory) starts already in the ventral AI (Huerta et al., 2014; Khorisantono et al., 2025; Molnar-Szakacs &amp; Uddin, 2022) and continues throughout several levels of the neuroaxis (Small, 2012). The AI, piriform cortex, as well as other flavour-related brain areas project to the orbitofrontal cortex (OFC), which supports the formation of a flavour object representation, and encodes hedonic and reward value of food (Araujo et al., 2003; Kringelbach, 2005; Rolls, 2019; Small &amp; Prescott, 2005). It is at the level of OFC that additional multisensory integration, via exteroceptive cues, occurs (Lyons &amp; Gottfried, 2025). The OFC and the ACC (which the OFC projects to) serve the broader objective of encoding long-term reward value and guiding food choice and behaviour and are considered flavour integration areas (Araujo et al., 2003; Small et al., 2004). The commonly proposed &#x27;core&#x27; cortical flavour thus includes the AI, piriform cortex, OFC and ACC.</p>
+<h3>6.2. Overlap between the flavour brain network and conflict processing areas</h3>
+<p>Many of the key areas in the flavour network are connected, or even integral, to the conflict processing machinery (see, Figure 5). To start with, the OFC, often highlighted as the secondary taste cortex, is strongly interconnected with the ACC. These connections act as a gateway between the reward circuitry (emotion) and executive control (cognition). Recent models of ACC function explicitly bring together its known role in signalling conflict, prediction error, novelty and surprise, with affective signalling, in an attempt toward a unitary computational description (for reviews, see Clairis &amp; Lopez-Persem, 2023; Vassena et al., 2017).</p>
+<p>In turn, both the piriform cortex (primary olfaction) and the OFC are considered part of the reward circuitry, connected to midbrain structures important in emotion regulation and dopaminergic responses. In particular, the OFC plays a central role in providing affective signalling (related to reactive conflict adaptation, and to flavour hedonics), as well as in enabling associative learning (important in proactive conflict adaptation, and in forming new flavour associations). The AI, containing the primary gustatory cortex, has a complex pattern of connectivity, enabling a multiplicity of roles. For example, its role in integration of various interoceptive flavour cues (visceral, olfactory, gustatory, somatosensory inputs including trigeminal) is increasingly supported by evidence (Khorisantono et al., 2025). Different subdivisions of the AI display responses related to emotion (ventral AI) and to cognitive control (dorsal AI). The dAI, richly connected to the dACC, has been described as a hub orchestrating the switching between brain networks related to control, including conflict processing (Dosenbach et al., 2008; Molnar-Szakacs &amp; Uddin, 2022). Finally, there is some evidence that the dlPFC is involved in processing aversive foods (Hasegawa et al., 2026), in line with the regulatory effort predicted by the conflict monitoring framework when the brain must negotiate high-salience, negative-valence inputs that cannot be assimilated into a positive prior.</p>
+<p>This remarkable anatomical overlap establishes the plausibility but not direct demonstration of a link between flavour processing and conflict mechanisms. Specifically, three limitations must be noted. First, ACC, insular, and OFC responses often involved in many fMRI flavour studies (Araujo et al., 2003; Faridi Esfanjani &amp; Mohebbi, 2023; Grabenhorst et al., 2008; Pierzchajlo et al., 2024; Rolls, 2019; Small et al., 2004; Small &amp; Prescott, 2005; Verhagen, 2007; Verhagen &amp; Engelen, 2006) may not be specific to conflict as they may also reflect surprise, uncertainty, salience, valuation, or task difficulty. Second, it will be important to disentangle the extent to which these overlaps survive when finer subdivisions of the involved neural structures are investigated. More direct evidence would require experimental designs that dissociate these processes and test for shared activity patterns, connectivity, temporal dynamics, or causal involvement.</p>
+<h3>6.3. Responses of the conflict network to incongruent flavour cues</h3>
+<p>Exploring the question of specificity a bit further, we have explored evidence for increased neural responses in conflict-relevant areas along with behavioural interference, when flavour incongruity is directly manipulated. Some protocols have manipulated expectations using successive protocols. For example, Veldhuizen et al., (2011) presented participants with drinks whose taste was incongruent with a previously heard taste-related word. They found slower RTs and greater activation in the dACC (conflict monitoring), IFG and the IPS (control network), and the OFC (reward). Similarly, Pierzchajlo et al., (2024) also found slower RTs to odour related images and to olfactory targets which were incongruent with a prior verbal cue, together with increased ACC responses to incongruity in the case of odour targets. In another expectation study, Schienle and Wabnegger (2021) found ACC responses when pictures of sweets were shown while the observers experienced a bitter aftertaste (though only in a group selected for high propensity to disgust). These results typically trace the neural effects of incongruency to the dACC and are interpreted in terms of prediction error (Corlett et al., 2022), hence providing supporting evidence for the current proposal. Other studies have used concurrent flavour cues (that is, cues presented at approximately the same time), instead of successive cue-target protocols. These have typically found the opposite pattern, that is stronger responses to congruent over incongruent flavour cue combinations in the ACC. For example, Small et al. (2004), found a superadditive response pattern in the ACC for congruent (but not for incongruent) taste-odour combinations. Similarly, de Araujo et al. (2003) found increased ACC and OFC responses for congruent, but not incongruent taste-odour combinations, a finding also in line with Seo et al. (2013). These studies highlight the role of the ACC as a higher-order multisensory integration area for flavour. It is interesting that studies showing higher activity for congruent cues in the ACC often trace the origin of the neural activity to the ventrally located perigenual region (pgACC), whereas those reporting stronger ACC activity for cue disparity typically report activity in the dorsal aspect of the ACC (dACC), as Figure 6 shows. This functional dissociation between the dACC, usually linked to conflict detection and prediction error, and the pgACC, engaged by emotional stimuli (Bush et al., 2000), is relevant to understand the contrasting responses to cue congruency. In the context of flavour, these ACC subregions have also been dissociated, with dACC responding to unpleasant and pgACC to pleasant experiences (Grabenhorst et al., 2007), and strongly connected to the medial region of the OFC (McCabe &amp; Rolls, 2007; Small, 2012).</p>
+<p>There is another set of studies also with concurrent presentations, but this time using olfactory-visual cues. These have usually reported no congruency effects in the ACC, or in other conflict-relevant areas 3 , despite producing the expected behavioural conflict effects (Gottfried &amp;   3 Other studies: Ripp et al. (2018) found that congruency level modulated functional connectivity in a network centred on (mostly left) IFG, but the congruency contrast was not explicitly tested. Huang et al. (Huang et al., 2019; Huang, Zhao, et al., 2021) found behavioural interference effects for incongruent colour-flavour food labels, without any effect in the ACC. However, these studies used flavour labels, rather than actual tastes or aromas. Dolan, 2003; Lundström et al., 2019; Österbauer et al., 2005; Ripp et al., 2018; Sijben et al., 2018). The failure of visual cues combined with other flavour cues to engage the ACC can be considered lack of evidence for the present proposalfoot_1 . Altogether, amongst the studies including congruency contrasts, evidence for ACC activation to cue disparity exists for some protocols and modality combinations, but it is not general. However, it is interesting that, when these responses to incongruity happen, they tend to arise from the expected, dorsal, subdivision of the ACC.</p>
+<p>When considered collectively, ACC activations for congruency contrasts in flavour studies fit the dorsal-ventral functional dissociation between conflict-related responses (dACC) and positive hedonic responses (pgACC) (see Figure 6).</p>
+<h3>16 -6, 24, 39</h3>
+<p>Notes. Protocol: Concurrent refers to the moment of delivery of flavour cues. In some studies, it is approximate, whereas in others is exact (image synchronized with sniff); Successive refers to protocols where one cue was presented clearly ahead of the other, acting as prime. Modalities: Modalities involved. In studies using successive protocols, the arrow indicates the direction from the modality of the cue used for priming to the target modality. oO and rO refer to orthonasal and retronasal smell, respectively; T = Taste; V = vision (images); Verbal = spoken word. Study: Reference of the study. Task: Participant&#x27;s task. Cong. = congruence rating; pleas. = pleasantness rating; fam. = familiarity rating. Outcome: Outcomes for congruent vs. incongruent contrasts at or near the ACC. We have colour coded this cell, using yellow for null evidence, red for evidence of activation congruent &gt; incongruent, and green for evidence supporting incongruent &gt; congruent. N: Sample size of the study in the relevant contrast. MNI: MNI coordinates of peak activation for the described outcome at or near ACC in studies reporting significant effects (represented in Figure 5). 1. This study included food (e.g., image and smell of cheese) and non-food stimuli (e.g., image of a bus and the smell of diesel). 2. We have included the outcome of the contrast for stimulus ambiguity, as well as the congruency contrast, as it is relevant for the present hypothesis.</p>
+<h3>6.4. Attention networks engagement by incongruent flavour cues</h3>
+<p>Breaches of expectation and disparity between flavour cues should engage attentional orienting processes, to determine an &#x27;appropriate response&#x27;. The degree of conflict should scale with the extent of attentional reorienting. Experimental evidence from neuroimaging is so far consistent, but still insufficient. The activity arising from gustatory breach of expectation in Veldhuizen et al.&#x27;s (2011) study included attention-related areas in the control executive network such as the IFG and the intraparietal sulcus in the PPC. In Lundström et al.&#x27;s (2019) fMRI study, evidence for the recruitment of attention networks (to visual/odour incongruity, and/or to flavour ambiguity) is limited. However, in this study the recruitment of the control network as stimulus ambiguity increased, consistent with the predicted attentional deployment in situations where cues are ambiguous with respect to the flavour object. In line with this interpretation, an ERP study by Hörberg et al., (2020) found that incongruent visual-olfactory pairs produced an attention-related fronto-central P300 component, whose magnitude was in turn correlated with faster visual categorization RTs. This P300 component is related to the mobilization of resources necessary to resolve interference and hence aligned with the proposal here (Polich, 2007).</p>
+<h3>6.5. Hedonic responses to flavour incongruity</h3>
+<p>The positive hedonic properties of taste, smell and flavour are known to reflect in OFC activity (Rolls, 2019), which has been found to correlate with liking and reported pleasantness (Plassmann et al., 2008). The question in the context of this proposal is, do negative hedonic reactions derived from flavour incongruities correlate with OFC activity? There is not much direct evidence, but one potentially important finding was reported by Veldhuizen et al. (2011) in their study using breaches of taste expectation (e.g., expecting sweet, vs. receiving tasteless), as they reported decreased pleasantness ratings and increased activity in reward related areas including the OFC. They interpreted these OFC responses &#x27;to reflect sensory, reward, or attentional processing, or perhaps an integration of the three processes.&#x27; In another relevant These apparently opposite patterns of OFC activity in response to hedonic value are puzzling, but one should bear in mind two important aspects. First, the OFC is a complex structure with functionally separate subdivisions; whereas more medial parts are activated by positive reward, lateral aspects are thought to track prediction error and punishment reinforcersfoot_2 (see, Kringelbach, 2005). Second, there are remarkable methodological differences between studies, notably that one addressed incongruity between concurrently presented interoceptive cues (tasteodour), whereas the other used breach of expectations between a conceptual (verbal) cue and a successively presented taste. During perceptual inference, input consisting of a multisensory combination of diagnostic sensory cues renders support to existing prior representations in memory. These prior representations are created and updated as events are experienced, via associative learning. Competition between viable but alternative representations, which is experienced as cue misalignments, is detected by a conflict monitor (dACC) and regulated via reactive adjustments by frontal lateral brain areas (dlPFC, IFG). This process is modulated not only by the magnitude of conflict, but by its salience as a function of potential positive or negative reward (salience and reward networks, including the OFC). The resulting outcome of this process is a flavour experience. If there is sufficient univocal support for one flavour representation, this process doesn&#x27;t need to emerge consciously or call for attention, unless voluntary attention is directed to the analysis of the flavour experience. Instead, if the cues are far from fully supporting any one representation, that is disparities are large, strong ACC activity signals for conflict, dlPFC adjustments are not sufficient to integrate the cues into a coherent flavour object. This disparity may be of sufficient importance (depending on the reward signal) as to trigger an attention shift and strongly negative hedonic experience. These outcomes, in turn, help update internal representations leading to building new flavour objects or modifying existing ones, via associative learning.</p>
+<h3>7. Discussion</h3>
+<p>Incongruities between flavour cues and breaches of expectation are not just casual nuisances, or curiosities to be sought for when we go to fancy restaurants. Rather, they are pervasive in everyday life eating and drinking because of the multisensory makeup of flavour and the inferential nature of perception. However, the phenomenology and neural mechanisms governing the regulation flavour incongruities remain poorly understood. Here, we have proposed that the theoretical framework of conflict monitoring, an account of how incompatibilities are dealt with in human cognition and perception, can be useful in the flavour domain.</p>
+<h3>7.1. The basic elements of the proposal</h3>
+<p>First, internal flavour representations are constellations of strongly associated flavourrelated cues, which can be considered priors. These priors are built and updated through experience via mechanisms of associative learning. Second, when consuming or anticipating foods or drinks, multisensory inputs provide diagnostic evidence for prior flavour representation/s. If there is a good match between cues and just one prior, we experience familiar, coherent flavours. Third, an ongoing conflict monitoring process will signal competition between incompatible candidate flavour representations, along with reward value and salience. Fourth, the conflict signal triggers reactive adjustments. In the case of small lowsalience signal, these adjustments will resolve into a unitary dominant percept, stifling cue disparities, rendering wholistic flavour appreciation, and potentially a positive hedonic experience. Instead, when conflict is large and high salience, cues cannot resolve into a unitary flavour, leading to attention orienting, analytical processing or segregated inputs, and possibly a negative hedonic reaction. Fifth, conflict also trigger proactive adjustments via associative learning, which foster the formation or updating of the prior representations referred to in the first point. Figure 7 summarises a functional architecture that incorporates these elements.</p>
+<h3>7.2. Behavioural expression and phenomenology</h3>
+<p>The conflict framework provides a unified interpretation of a variety of flavour-related phenomena. First, crossmodal integration effects can be naturally incorporated under the perceptual inference plus experience updating elements, whereby small disparities supporting a single dominant prior fosters integration across modalities. Crossmodal illusions such as oral capture, odour referral, and other expectation-based classification and identification crossmodal effects are examples of how small disparities are resolved in favour of a coherent, univocal percept. Second, incongruities and breaches of expectation in flavour may trigger attention orienting, a phenomenon that corresponds well with what is predicted and observed under the conflict monitoring framework when large/salient conflict is detected (e.g., Shenhav et al., 2013 Shenhav et al., , 2016)). Little cue incongruity, leading to weak representational competition, is less likely to trigger involuntary attentional orienting, although it may still receive attention because of intensity, hedonic value, motivational relevance, or deliberate evaluation. Third, at least some of the hedonic and affective reactions to flavour reported in the literature can be related to the conflict monitoring framework directly. Cue incongruity including breaches of expectation often leads to lower hedonic evaluation and negative affect in flavour (Amsellem &amp; Ohla, 2016; Fondberg et al., 2018; Khorisantono et al., 2024; Schifferstein &amp; Verlegh, 1996 , 1996; Seo &amp; Hummel, 2011; Yeomans et al., 2008). The link between conflict and negative affect has been often highlighted in connection to the experience of conflicts in the conflict theory (e.g., the affective-signalling hypothesis Dignath et al., 2020). As we have noted earlier, biologically driven aversive or appetitive associations of certain gustatory stimuli such as bitter tastes are not necessarily linked to in/congruency, although they can be incorporated in this framework via salience signals. Fourth, consumer experience and preference are strongly driven by congruency relations, with coherent cue combinations typically supporting findability and acceptance, while incongruity being used to increase salience, novelty, and attention. These two contrasting trends raise important questions on the use of cue congruity and incongruity in product searching, choice, and subsequent enjoyment. At the same time, they overlap with two of the principles already highlighted within the framework of cognitive conflict and control: congruency leads to more efficient processing, and incongruency triggers attention orienting. In real world consumer behaviour crossmodal congruency correspondences can take on rather complex forms based on symbolism (S. Anderson, 2025; Spence &amp; Ngo, 2012), and even the weather (Islam, 2026). In this context, the conflict monitoring and cognitive control theories might prove relevant to understand the psychological and neural consequences of flavour congruency and crucially, to estimate whether incongruity is likely to deliver the desired results.</p>
+<h3>7.3. Theoretical integration with current accounts</h3>
+<p>The current framework is complementary to various current accounts explaining separate aspects of flavour processing. In flavour, associative learning is the accepted account that explains how sensory cues are bound through experience to form familiar flavours, including the very definition of what is congruent (Prescott, 2012 (Prescott, , 2015)). The conflict monitoring perspective provides a more detailed mechanistic description of how associative learning operates during flavour processing, via proactive adaptation (Abrahamse et al., 2016). In addition, inferential accounts, increasingly adopted in the domain of flavour (Lyons &amp; Gottfried, 2025; Piqueras-Fiszman &amp; Spence, 2015), propose a central role of prediction error. Conflict monitoring offers a plausible mechanism that explains how sensory evidence is evaluated in the light of flavour expectations and prior representations, potential mismatches detected and resolved, and flavour representations updated if necessary (Molnar-Szakacs &amp; Uddin, 2022). Finally, assimilationcontrast patterns explain subjective reactions to cue incongruity in flavour (Davidenko et al., 2015; Yeomans et al., 2008). A conflict framework helps relate these behavioural reactions to concrete neural mechanisms that lead to the minimisation of small disparities, that is assimilation into a dominant coherent flavour object with possibly positive hedonic experience, and to the magnification of large disparities often triggering attention orienting toward segregated cues and possibly a negative hedonic experience. As flavour research has shown repeatedly, many of these behavioural phenomena are context dependent (Okamoto &amp; Dan, 2013; Piqueras-Fiszman &amp; Spence, 2015). Context dependency, in the form of proactive adaptation, is naturally accounted for in conflict theories (Botvinick &amp; Cohen, 2014).</p>
+<h3>7.4. Neural and mechanistic implications</h3>
+<p>Neuroimaging research in human flavour processing is still scarce, and therefore it is at present difficult to draw general conclusions. Nevertheless, we have attempted to use available neuroimaging findings to contrast some predictions of this proposal. First, we note the remarkable overlap between flavour and conflict processing brain areas, something that has not been highlighted before in either field of research. However, the significance of this overlap is limited by lack of specificity (conflict responses may be conflated with ambiguity, surprise, or difficulty) and the complexity of functional subdivisions of the areas involved. Another neural expression is that cue incongruity in flavour should engage responses in the dACC, a key area associated with conflict detection. This is only partially confirmed, but a tentative pattern emerges when cue timing and task structure are considered. In successive cue-target paradigms, breach of expectation is often associated with activity in dorsal ACC regions, as the conflict framework would predict. In contrast, studies presenting concurrent olfactory and gustatory cues have more often reported enhanced responses to congruent combinations, originating from ventral or perigenual ACC regions. One speculative possibility is that expectation violations preferentially engage prediction-error and control-related processes, whereas concurrent proximal cues primarily engage multisensory integration and hedonic responses. The connection between the attention orienting network and flavour incongruity has received some support from fMRI and ERP findings, but the number of studies is simply too small to make a call. Finally, the links between brain networks supporting hedonic valuation and flavour processing are well established, but the specific prediction that incongruities will engage negative valuation and decreased activity in reward-related brain areas, such as the OFC, has so far been confirmed by one study and disconfirmed by another. Large methodological differences, and the complexity of OFC responses once one examines its subdivisions more closely, limits the interpretation of these findings for now.</p>
+<h3>7.5. Further theoretical integration</h3>
+<p>Besides integration with other flavour accounts, the present proposal must bridge some relatively fundamental gaps. We summarise them briefly. First, conflict monitoring and perception: although conflict theories are compatible with perceptual inference theories (e.g., Clairis &amp; Lopez-Persem, 2023; Drew et al., 2022; Drew &amp; Soto-Faraco, 2023; Safavi &amp; Dayan, 2022 , 2025), whether and how they connect with each other is by no means agreed upon. Classic conflict theory and the paradigms used to validate it involve sensorimotor competition, but the notion of conflict in the present proposal entails conflict between perceptual representations.</p>
+<p>Although still an unconventional perspective, the role of conflict mechanisms in perception has been considered from the origins of the theory (Botvinick et al., 2001), and it is increasingly supported (Becker et al., 2024; Drew et al., 2022; Morís Fernández et al., 2017 , 2018). Here, for convenience, we have just used conflict signalling as providing a sort of prediction error, which is one of the accepted interpretations in the field (Clairis &amp; Lopez-Persem, 2023; Corlett et al., 2022; Modirrousta &amp; Fellows, 2008; Vassena et al., 2017). Second, consciousness: whilst the outcomes of perception can be (and often are) conscious, the processes that generate them are typically not (Frankish, 2016; Morsella, 2005). Because the traditional view is that conflict detection and its regulation are associated to conscious control (Dehaene et al., 2003; Kunde et al., 2003), this raises a contradiction of one of the assumptions here; that flavour conflict is detected and regulated by a continuous ongoing process, and that small disparities do not emerge as a conscious event. Although the debate is still on, there is accumulating evidence from perceptual and sensorimotor research that conflict signals emerge, and have an impact on brain processing and behaviour, even when they occur unconsciously (Abrahamse et al., 2016; Desender et al., 2013; Drew et al., 2022 Drew et al., , 2026;; Morís Fernández et al., 2017; Van Gaal et al., 2012). Finally, conflict and affect: although conflict is often associated with negative affect (Dignath et al., 2020) our proposal assumes that this relationship is context dependent. However, we note that current proposals have revealed incongruity as opportunities for information gain and believe updating (La Pietra et al., 2025) and propose that successful conflict resolution may itself be rewarding (Kiverstein et al., 2019; Van de Cruys, 2017; Van de Cruys &amp; Wagemans, 2011). Along these lines, we propose that the hedonic outcome of flavour incongruity may depend partly on whether the incongruity is resolvable. Resolvable incongruity may promote curiosity, information gain, and pleasure, whereas incongruity that remains unresolved may sustain uncertainty and promote aversion or avoidance. Flavour perception provides a particularly suitable domain in which to test this hypothesis, given the use of unexpected but ultimately interpretable sensory combinations in culinary practice (Piqueras-Fiszman &amp; Spence, 2012; Velasco et al., 2016).</p>
+<h3>7.6. Limitations, some potential tests, and a caveat</h3>
+<p>The present framework is consistent with findings concerning flavour perception, attention, affect, and neural processing, but it remains insufficiently constrained. Flexible reference to context, salience, and expected reward can retrospectively explain integration or segregation, positive or negative hedonic responses, and the presence or absence of attentional orienting.</p>
+<p>Ideally, these moderators need to be defined and measured independently of the outcomes. For example, the proposal could be tested more strictly if incongruity produced behavioural or neural correlates of control once surprise, uncertainty, valence, stimulus frequency, and feature repetition had been controlled. Also, one should seek computational evidence that predictive or causal inference models improve by incorporating a conflict signal. In terms of hedonic reaction, disparity magnitude and expected reward should be manipulated independently, with the prediction that the same incongruent flavour associated with low or high reward should lead to opposite outcomes (avoidance, liking).</p>
+<p>We have not addressed in depth the variability in the consequences of incongruities between different kinds of cues. We suspect, however, that there may be important differences if incongruities happen between pairs of interoceptive cues (often presented concurrently or near concurrently, at consumption stage) than if incongruities happen between exteroceptive and interoceptive cues (often successive and leading to expectation breaches). The contrasting results of neuroimaging experiments using concurrent vs. successive cue protocols, which we have highlighted in the neural correlates section, seem to point in this direction (e.g., Araujo et al., 2003; Veldhuizen, Douglas, et al., 2011; see Table 1).</p>
+<p>Testing conflicts and breaches of expectation involving interoceptive and exteroceptive cues can bring more clarity. In addition, we have hinted that different flavour-related cues may be weighted differently, depending on the salience they carry, for example based on their biological significance (Breslin, 2013).</p>
+<p>Experiments measuring the consequences of flavour conflict as a function of expected value may provide a stronger test of the role of cognitive control mechanisms. Another potential validation of the role of conflict mechanisms in flavour processing is to address conflict adaptation effects, either in trial-by-trial designs or in blocked designs, such as Congruence Sequence Effects (Gratton et al., 2018).</p>
+<p>Finally, because the present proposal is largely compatible with existing accounts of flavour, it is important to specify what conflict monitoring adds beyond theoretical unification.</p>
+<p>We see three potential contributions. First, the framework proposes that reactive adjustments to conflict provide a mechanism through which unresolved competition between flavour representations may recruit and scale attentional control. Second, that proactive adjustments provide an adaptation and learning mechanism across successive flavour encounters: processing an incongruent event should alter the response to subsequent incongruities, even when simple stimulus repetition and contingency learning are controlled. This provides a wider scope to study and interpret the role of associative learning in flavour processing. Third, by incorporating expected control value, the framework links the estimated costs and benefits of resolving an incongruity to whether the individual continues to explore the stimulus, rejects it, or reinterprets it in light of a different flavour representation (Botvinick &amp; Cohen, 2014; Shenhav et al., 2013 Shenhav et al., , 2016)). These proposals generate tests that are not straightforward consequences of associative learning or perceptual inference alone.</p>
+<h3>7.7. Conclusions</h3>
+<p>Flavour perception presents a multisensory inference problem in which sensory evidence, prior expectations, and contextual information must be combined to form a coherent percept. We have proposed that conflict monitoring principles may help explain what happens when this process leaves salient competition between incompatible flavour representations unresolved.</p>
+<p>Within this account, minor discrepancies may be resolved through ordinary multisensory integration, whereas larger or behaviourally relevant discrepancies may recruit attention, control, and adaptive learning. This proposal provides a potentially useful connection between flavour research and theories of cognitive control, but the available evidence remains preliminary and largely indirect. Establishing its contribution beyond predictive processing, causal inference, and associative learning will require experiments that distinguish representational conflict from surprise, uncertainty, valence, familiarity, and decision difficulty. The framework should therefore be regarded as a testable basis for future theoretical and experimental development rather than as a complete account of flavour incongruity.</p>
+<h3>Acknowledgements</h3>
+<p>This research was supported by grants from the Ministerio de Ciencia e Innovación (PID2022-137277NB-I00 AEI/FEDER), and from AGAUR Generalitat de Catalunya (2021 SGR 00911) to SSF.</p>
+<h3>Conflicts of Interest</h3>
+<p>The authors declare no competing interests.</p>
+<h3>Author contributions: CRediT</h3>
+<p>Alice Drew: Conceptualization; Writing -original draft; Writing -review &amp; editing Massimiliano Zampini: Conceptualization; Writing -review &amp; editing; Salvador Soto-Faraco: Conceptualization; Writing -original draft; Writing -review &amp; editing; Visualization; Supervision; Project administration.</p>
+<h3>Figure 1.</h3>
+<p>Figure 1. Schematic summary of the cues composing the experience of flavour. Cues are divided into the three classes in concentric regions. From the inside out. Interoceptive cues: the core flavour experience. Some known multisensory interactions at this level are represented by arrows.Exteroceptive cues: sensory cues available directly from the food/drink product, normally before or during it is consumed. Four main types are illustrated in different colour shading, with examples of each in parenthesis. Product extrinsic cues are represented in the outermost ring. These cues are not directly extracted from the sensory properties of product. They relate to semantic relations, symbolic associations, or other cognitive biases. See text for more detailed descriptions and examples of each.</p>
+<h3>Figure 2.</h3>
+<p>Figure 2. A. Schematic illustration of flavour representations as constellations of associated cues. Sensory cues are represented as the spokes (not all possible cues can be included), and cue strength as the length of the shaded area along the spoke. (Note that here length simply expresses theoretical sensory intensity value, not cue diagnosticity). Three examples are presented in different colour shading: lemon soda, vanilla ice cream, chicken broth (see legend). Some cue labels are intentionally left blank to represent that not all possible cues are shown.</p>
+<h3>Figure 3.</h3>
+<p>Figure 3. A. Some of the top ketchups considered by Antara Sinha in her New York Times Wirecutter article &#x27;The Best Ketchup&#x27;, May 15 th , 2026 (photo credits: Michael Murtaugh/NYT Wirecutter). In all cases, congruence between container colour and product content is unmistakeable. B. One of Burger King&#x27;s 2020 mouldy burger campaign images, mentioned in text. Image courtesy of Restaurant Brands International. Created by INGO Stockholm, DAVID Miami, and Publicis (2020). Used under Fair Use.</p>
+<h3>Figure 4.</h3>
+<p>Figure 4. A. Assimilation-contrast model. The figure represents the predictions of this model applied to the hypothetical case of saltiness ratings. Evaluation ratings (orange line) are represented as a function of the signed difference between expectation and actual saltiness in the x-axis (0 means reality meets expectation). The dotted line represents unbiased sensory evaluations (without any expectation) for the expected standard. Disparities around 0 tend to be compensated for (assimilated toward the expected value), whereas larger disparities below or above expectation, elicit overshoot or undershoot respectively (contrast). B. Perceptual inference in olfaction, under a predictive processing model. On the left, i) illustrates how olfactory inputs are received together with cues from other modalities, in the context of top-down predictions representing priors. The middle panel ii) shows the main brain structures of the olfactory pathway, as well as the bidirectional (bottom-up / top-down) nature of information flow between them, necessary for inferential perception. The right panel iii) extends the neural network involved in olfaction beyond core olfactory areas, including crossmodal interactions from non-olfactory brain areas. Re-used from Lyons et al. (2025) with permission of Elsevier Ltd. (Note: Figure can be reused for academic publications, but permission still pending as it needs to be obtained for specific journal).</p>
+<h3>Figure 5.</h3>
+<p>Figure 5. Visual summary of the interconnections between the flavour processing network (blue) and the brain networks related to salience and executive control (yellow), and the reward circuit (green), highlighted in the main text. Circular nodes represent brain areas, and the lines represent known connections (functional and/or anatomical) between these areas. This figure is a simplification which does not consider subdivisions, for example, separating different anatomical / connectivity patterns within the AI and the OFC (Kringelbach &amp; Rolls, 2004; Molnar-Szakacs &amp; Uddin, 2022; Rudebeck &amp; Rich, 2018). The insets represent only part of the corresponding networks (the rest being implied by unlabelled nodes). Similarly, sensory inputs into the main flavour network have been simplified. Broken connectors represent that the projections are not necessarily direct. Flavour: PCx = Piriform Cortex, OFC = Orbitofrontal Cortex, ACC = Anterior Cingulate Cortex, SII = Secondary Somatosensory Cortex, Viscera. / Interoception = Generic visceral and interoceptive inputs. Reward circuit: VS/NAcc = Ventral Striatum including Nucleus Accumbens, Amy = Amygdala, Hyp = Hypothalamus; VTA = Ventral Tegmental Area. Central executive &amp; Salience Networks: dlPFC = dorsolateral Prefrontal Cortex, PPC = Posterior Parietal Cortex, IFG = Inferior Frontal Gyrus.</p>
+<h3>Figure 6.</h3>
+<p>Figure 6. Schematic glass brain with overlaid markers indicating the MNI coordinates of peak activation at or near ACC in studies reporting significant effects for congruent vs. incongruent flavour cues (Table 1). Studies reporting incongruent &gt; congruent are plotted in green, and those reporting congruent &gt; incongruent effects are plotted in red. The cingulate gyrus is indicated in grey. Circles indicate individual studies, with size proportional to sample size. Crosses indicate the average coordinates (weighted by sample size).</p>
+<p>study, De Araujo et al. (2003) measured hedonic (pleasantness ratings), perceived congruency (consonance ratings), and BOLD responses to a variety of congruent and incongruent olfactorytaste combinations. De Araujo et al. found that congruent stimuli were rated as more pleasant, but in contrast with Veldhuizen et al.&#x27;s result, OFC activity increased with congruency and pleasantness. De Araujo et al. interpreted this pattern to reflect activity related to positive reward.</p>
+<h3>Figure 7.</h3>
+<p>Figure7. Visual summary of how conflict mechanisms can help account for the flavour experience, with proposed functional roles of key neural structures. During perceptual inference, input consisting of a multisensory combination of diagnostic sensory cues renders support to existing prior representations in memory. These prior representations are created and updated as events are experienced, via associative learning. Competition between viable but alternative representations, which is experienced as cue misalignments, is detected by a conflict monitor (dACC) and regulated via reactive adjustments by frontal lateral brain areas (dlPFC, IFG). This process is modulated not only by the magnitude of conflict, but by its salience as a function of potential positive or negative reward (salience and reward networks, including the OFC). The resulting outcome of this process is a flavour experience. If there is sufficient univocal support for one flavour representation, this process doesn&#x27;t need to emerge consciously or call for attention, unless voluntary attention is directed to the analysis of the flavour experience. Instead, if the cues are far from fully supporting any one representation, that is disparities are large, strong ACC activity signals for conflict, dlPFC adjustments are not sufficient to integrate the cues into a coherent flavour object. This disparity may be of sufficient importance (depending on the reward signal) as to trigger an attention shift and strongly negative hedonic experience. These outcomes, in turn, help update internal representations leading to building new flavour objects or modifying existing ones, via associative learning.</p>
+<h3>Table 1.</h3>
+<p>Summary of neuroimaging flavour studies including congruent vs. incongruent contrast</p>
+<p>We use the term effects here to refer to crossmodal biases as well as illusions, such as in both oral capture and odour referral since in both cases the perceived source of the input is different from its actual source.</p>
+<p>The case ofLundström et al. (2019) is worth discussing in more detail. In this study participants were presented with odours composed of orange and peanut aroma mixed in different proportions (ranging from 90: 10 to 0:100), paired with the images of oranges or peanuts. Like the other olfactory-visual studies, their results did not reveal any area directly responsive to crossmodal conflict. However, Lundström et al. found that activity in the SFG (coordinates consistent with dACC) and the IFG scaled with aroma ambiguity. Because ambiguous aromas (50% mixed peanut-orange) lead to conflict between flavour representations supported from odour cues, the finding could eventually fit the prediction of our proposal.</p>
+<p>De Araujo et al.&#x27;s OFC neural responses to concordance and pleasantness were anterior medial, and Veldhuizen et al. ones to breaches of expectation were in the far lateral aspect. This fits well with the assumed functional subdivision of the OFC, although these results should be confirmed with better powered studies.</p>
+<h3>References</h3>
+<p>Abrahamse, E., Braem, S., Notebaert, W., &amp; Verguts, T. (2016). Grounding cognitive control in associative learning. Psychological Bulletin, 142(7), 693-728. https://doi.org/10.1037/bul0000047</p>
+<p>Amsellem, S., &amp; Ohla, K. (2016). Perceived Odor-Taste Congruence Influences Intensity and Pleasantness Differently. Chemical Senses, 41(8), 677-684. https://doi.org/10.1093/chemse/bjw078</p>
+<p>Anderson, R. E. (1973). Consumer Dissatisfaction: The Effect of Disconfirmed Expectancy on Perceived Product Performance. Journal of Marketing Research, 10(1), 38-44. https://doi.org/10.1177/002224377301000106</p>
+<p>Anderson, S. (2025, febrero 28). As agencies sniff out scent specialisms, is poly-sensory branding here to stay? The Drum. https://www.thedrum.com/news/agencies-sniff-out- scent-specialisms-poly-sensory-branding-here-stay</p>
+<p>Araujo, I. E. T. D., Rolls, E. T., Kringelbach, M. L., McGlone, F., &amp; Phillips, N. (2003). Taste- olfactory convergence, and the representation of the pleasantness of flavour, in the human brain. European Journal of Neuroscience, 18(7), 2059-2068. https://doi.org/10.1046/j.1460-9568.2003.02915.x</p>
+<p>Becker, D., Bijleveld, E., Braem, S., Fröber, K., Götz, F. J., Kleiman, T., Körner, A., Pfister, R., Reiter, A. M. F., Saunders, B., Schneider, I. K., Soutschek, A., Steenbergen, H. van, &amp; Dignath, D. (2024). An integrative framework of conflict and control. Trends in Cognitive Sciences, 28(8), 757-768. https://doi.org/10.1016/j.tics.2024.07.002</p>
+<p>Botvinick, M. M., Braver, T. S., Barch, D. M., Carter, C. S., &amp; Cohen, J. D. (2001). Conflict monitoring and cognitive control. Psychological Review, 108(3), 624-652. https://doi.org/10.1037/0033-295X.108.3.624</p>
+<p>Botvinick, M. M., &amp; Cohen, J. D. (2014). The Computational and Neural Basis of Cognitive Control: Charted Territory and New Frontiers. Cognitive Science, 38(6), 1249-1285. https://doi.org/10.1111/cogs.12126</p>
+<p>Botvinick, M. M., Cohen, J. D., &amp; Carter, C. S. (2004). Conflict monitoring and anterior cingulate cortex: An update. Trends in Cognitive Sciences, 8(12), 539-546. https://doi.org/10.1016/j.tics.2004.10.003</p>
+<p>Braem, S., Bugg, J. M., Schmidt, J. R., Crump, M. J. C., Weissman, D. H., Notebaert, W., &amp; Egner, T. (2019). Measuring Adaptive Control in Conflict Tasks. Trends in Cognitive Sciences, 23(9), 769-783. https://doi.org/10.1016/j.tics.2019.07.002</p>
+<p>Breslin, P. A. S. (2013). An Evolutionary Perspective on Food and Human Taste. Current Biology, 23(9), R409-R418. https://doi.org/10.1016/j.cub.2013.04.010</p>
+<p>Bush, G., Luu, P., Posner, M. I., Bush, G., Luu, P., Posner, M. I., Bush, G., Luu, P., &amp; Posner, M. I. (2000). Cognitive and emotional influences in anterior cingulate cortex. Trends in Cognitive Sciences, 4(6), 215-222. https://doi.org/10.1016/S1364-6613(00)01483-2</p>
+<p>Cao, Y., Summerfield, C., Park, H., Giordano, B. L., &amp; Kayser, C. (2019). Causal Inference in the Multisensory Brain. Neuron, 102(5), 1076-1087.e8. https://doi.org/10.1016/j.neuron.2019.03.043</p>
+<p>Case, T. I., Stevenson, R. J., &amp; Dempsey, R. A. (2004). Reduced Discriminability following Perceptual Learning with Odours. Perception, 33(1), 113-119. https://doi.org/10.1068/p5044</p>
+<p>Clairis, N., &amp; Lopez-Persem, A. (2023). Debates on the dorsomedial prefrontal/dorsal anterior cingulate cortex: Insights for future research. Brain, 146(12), 4826-4844. https://doi.org/10.1093/brain/awad263</p>
+<p>Clark, A. (2013). Whatever next? Predictive brains, situated agents, and the future of cognitive science. The Behavioral and Brain Sciences, 36(3), 181-204. https://doi.org/10.1017/S0140525X12000477</p>
+<p>Corlett, P. R., Mollick, J. A., &amp; Kober, H. (2022). Meta-analysis of human prediction error for incentives, perception, cognition, and action. Neuropsychopharmacology, 47(7), 1339- 1349. https://doi.org/10.1038/s41386-021-01264-3</p>
+<p>Dalton, P., Doolittle, N., Nagata, H., &amp; Breslin, P. a. S. (2000). The merging of the senses: Integration of subthreshold taste and smell. Nature Neuroscience, 3(5), 431-432. https://doi.org/10.1038/74797</p>
+<p>Davidenko, O., Delarue, J., Marsset-Baglieri, A., Fromentin, G., Tomé, D., Nadkarni, N., &amp; Darcel, N. (2015). Assimilation and Contrast are on the same scale of food anticipated- experienced pleasure divergence. Appetite, 90, 160-167. https://doi.org/10.1016/j.appet.2015.03.006</p>
+<p>Dehaene, S., Artiges, E., Naccache, L., Martelli, C., Viard, A., Schürhoff, F., Recasens, C., Martinot, M. L. P., Leboyer, M., &amp; Martinot, J.-L. (2003). Conscious and subliminal conflicts in normal subjects and patients with schizophrenia: The role of the anterior cingulate. Proceedings of the National Academy of Sciences, 100(23), 13722-13727. https://doi.org/10.1073/pnas.2235214100</p>
+<p>Desender, K., Van Lierde, E., &amp; Van den Bussche, E. (2013). Comparing conscious and unconscious conflict adaptation. PloS One, 8(2), e55976. https://doi.org/10.1371/journal.pone.0055976</p>
+<p>Dignath, D., Eder, A. B., Steinhauser, M., &amp; Kiesel, A. (2020). Conflict monitoring and the affective-signaling hypothesis-An integrative review. Psychonomic Bulletin &amp; Review, 27(2), 193-216. https://doi.org/10.3758/s13423-019-01668-9</p>
+<p>Dixon, M. L., &amp; Christoff, K. (2012). The Decision to Engage Cognitive Control Is Driven by Expected Reward-Value: Neural and Behavioral Evidence. PLOS ONE, 7(12), e51637. https://doi.org/10.1371/journal.pone.0051637</p>
+<p>Dosenbach, N. U. F., Fair, D. A., Cohen, A. L., Schlaggar, B. L., &amp; Petersen, S. E. (2008). A dual-networks architecture of top-down control. Trends in Cognitive Sciences, 12(3), 99- 105. https://doi.org/10.1016/j.tics.2008.01.001</p>
+<p>Dreisbach, G., &amp; Fischer, R. (2015). Conflicts as Aversive Signals for Control Adaptation. Current Directions in Psychological Science, 24(4), 255-260. https://doi.org/10.1177/0963721415569569</p>
+<p>Drew, A., Gonzalez, J. S.-S., Soto-Faraco, S., &amp; Torralba-Cuello, M. (2026). Binocular Rivalry: Evaluating the Role of Theta Power as a Neural Index of Conflict. European Journal of Neuroscience, 63(1), e70372. https://doi.org/10.1111/ejn.70372</p>
+<p>Drew, A., &amp; Soto-Faraco, S. (2023). Perceptual oddities: Assessing the relationship between film editing and prediction processes. Philosophical Transactions of the Royal Society B: Biological Sciences, 379(1895), 20220426. https://doi.org/10.1098/rstb.2022.0426</p>
+<p>Drew, A., Torralba, M., Ruzzoli, M., Morís Fernández, L., Sabaté, A., Pápai, M. S., &amp; Soto- Faraco, S. (2022). Conflict monitoring and attentional adjustment during binocular rivalry. European Journal of Neuroscience, 55(1), 138-153. https://doi.org/10.1111/ejn.15554</p>
+<p>Egner, T., &amp; Hirsch, J. (2005). Cognitive control mechanisms resolve conflict through cortical amplification of task-relevant information. Nature Neuroscience, 8(12), 1784-1790. https://doi.org/10.1038/nn1594</p>
+<p>Faridi Esfanjani, A., &amp; Mohebbi, M. (2023). Enhancing saltiness perception by chemosensory interaction: An fMRI study. Scientific Reports, 13(1), 11128. https://doi.org/10.1038/s41598-023-38137-2</p>
+<p>Fondberg, R., Lundström, J. N., Blöchl, M., Olsson, M. J., &amp; Seubert, J. (2018). Multisensory flavor perception: The relationship between congruency, pleasantness, and odor referral to the mouth. Appetite, 125, 244-252. https://doi.org/10.1016/j.appet.2018.02.012</p>
+<p>Frank, R. A., van der Klaauw, N. J., &amp; Schifferstein, H. N. J. (1993). Both perceptual and conceptual factors influence taste-odor and taste-taste interactions. Perception &amp; Psychophysics, 54(3), 343-354. https://doi.org/10.3758/BF03205269</p>
+<p>Frankish, K. (2016). Illusionism as a Theory of Consciousness. Journal of Consciousness Studies, 23(11-12), 11-39.</p>
+<p>Frascaroli, J., Leder, H., Brattico, E., &amp; Van de Cruys, S. (2023). Aesthetics and predictive processing: Grounds and prospects of a fruitful encounter. Philosophical Transactions of the Royal Society B: Biological Sciences, 379(1895), 20220410. https://doi.org/10.1098/rstb.2022.0410</p>
+<p>Friston, K. (2005). A theory of cortical responses. Philosophical Transactions of the Royal Society B: Biological Sciences, 360(1456), 815-836. https://doi.org/10.1098/rstb.2005.1622</p>
+<p>Friston, K. (2012). Prediction, perception and agency. International Journal of Psychophysiology, Predictive information processing in the brain: Principles, neural mechanisms and models, 83(2), 248-252. https://doi.org/10.1016/j.ijpsycho.2011.11.014</p>
+<p>Gao, W. (2026). Breaking the Deadlock of Health Transformation in the Fast Food Industry: The Strategic Logic and Consumer Psychology of Burger King&#x27;s «Moldy Whopper» Reverse Marketing. Advances in Economics, Management and Political Sciences, 262, 47-52. https://doi.org/10.54254/2754-1169/2026.BL32574</p>
+<p>Gotow, N., &amp; Kobayakawa, T. (2023). Olfactory-gustatory simultaneity judgments: A preliminary study on the congruency-dependent temporal window of multisensory binding. Brain and Behavior, 13(1), e2821. https://doi.org/10.1002/brb3.2821</p>
+<p>Gottfried, J. A., &amp; Dolan, R. J. (2003). The Nose Smells What the Eye Sees: Crossmodal Visual Facilitation of Human Olfactory Perception. Neuron, 39(2), 375-386. https://doi.org/10.1016/S0896-6273(03)00392-1</p>
+<p>Grabenhorst, F., Rolls, E. T., &amp; Bilderbeck, A. (2008). How Cognition Modulates Affective Responses to Taste and Flavor: Top-down Influences on the Orbitofrontal and Pregenual Cingulate Cortices. Cerebral Cortex, 18(7), 1549-1559. https://doi.org/10.1093/cercor/bhm185</p>
+<p>Grabenhorst, F., Rolls, E. T., Margot, C., da Silva, M. A. A. P., &amp; Velazco, M. I. (2007). How Pleasant and Unpleasant Stimuli Combine in Different Brain Regions: Odor Mixtures. The Journal of Neuroscience, 27(49), 13532-13540. https://doi.org/10.1523/JNEUROSCI.3337-07.2007</p>
+<p>Gratton, G., Cooper, P., Fabiani, M., Carter, C. S., &amp; Karayanidis, F. (2018). Dynamics of cognitive control: Theoretical bases, paradigms, and a view for the future. Psychophysiology, 55(3), e13016. https://doi.org/10.1111/psyp.13016</p>
+<p>Hasegawa, Y., Suzuki, T., Yoshimura, S., Shiramizu, M., Sta Maria, M. T., Sakata, M., Yamamura, K., Ono, T., &amp; Ono, Y. (2026). Impact of food-related emotional changes on cerebral hemodynamic response. Appetite, 219, 108415. https://doi.org/10.1016/j.appet.2025.108415</p>
+<p>Havermans, R. C., &amp; Heuvel, E. van den. (2023). 10-Acquired tastes: On the learning of human food preferences. En E. Guichard &amp; C. Salles (Eds.), Flavor (Second Edition) (Second Edition, pp. 283-299). Woodhead Publishing. https://doi.org/https://doi.org/10.1016/B978-0-323-89903-1.00005-0</p>
+<p>Hong, J.-H. (2025). How we learn to like: The role of perceptual learning in development of liking, quality perception, and appreciation. Food Science and Biotechnology, 34(15), 3453-3472. https://doi.org/10.1007/s10068-025-01857-4</p>
+<p>Hörberg, T., Larsson, M., Ekström, I., Sandöy, C., Lundén, P., &amp; Olofsson, J. K. (2020). Olfactory Influences on Visual Categorization: Behavioral and ERP Evidence. Cerebral Cortex, 30(7), 4220-4237. https://doi.org/10.1093/cercor/bhaa050</p>
+<p>Huang, J., Peng, Y., &amp; Wan, X. (2021). The color-flavor incongruency effect in visual search for food labels: An eye-tracking study. Food Quality and Preference, 88, 104078. https://doi.org/10.1016/j.foodqual.2020.104078</p>
+<p>Huang, J., Wang, F., Sui, J., &amp; Wan, X. (2019). Functional and structural basis of the color- flavor incongruency effect in visual search. Neuropsychologia, 127, 66-74. https://doi.org/10.1016/j.neuropsychologia.2019.02.013</p>
+<p>Huang, J., Zhao, P., &amp; Wan, X. (2021). From brain variations to individual differences in the color-flavor incongruency effect: A combined virtual reality and resting-state fMRI study. Journal of Business Research, 123, 604-612. https://doi.org/10.1016/j.jbusres.2020.10.031</p>
+<p>Huerta, C. I., Sarkar, P. R., Duong, T. Q., Laird, A. R., &amp; Fox, P. T. (2014). Neural bases of food perception: Coordinate-based meta-analyses of neuroimaging studies in multiple modalities. Obesity, 22(6), 1439-1446. https://doi.org/10.1002/oby.20659</p>
+<p>Hultén, B. (2011). Sensory marketing: The multi-sensory brand-experience concept. European Business Review, 23(3), 256-273. https://doi.org/10.1108/09555341111130245</p>
+<p>Iannilli, E., Noennig, N., Hummel, T., &amp; Schoenfeld, A. M. (2014). Spatio-temporal correlates of taste processing in the human primary gustatory cortex. Neuroscience, 273, 92-99. https://doi.org/10.1016/j.neuroscience.2014.05.017</p>
+<p>Inzlicht, M., Bartholow, B. D., &amp; Hirsh, J. B. (2015). Emotional foundations of cognitive control. Trends in Cognitive Sciences, 19(3), 126-132. https://doi.org/10.1016/j.tics.2015.01.004</p>
+<p>Inzlicht, M., Shenhav, A., &amp; Olivola, C. Y. (2018). The Effort Paradox: Effort Is Both Costly and Valued. Trends in Cognitive Sciences, 22(4), 337-349. https://doi.org/10.1016/j.tics.2018.01.007</p>
+<p>Islam, M. S. (2026). Tasting the weather: Culinary atmospheres and emotional experience in hospitality. International Journal of Hospitality Management, 134, 104553. https://doi.org/10.1016/j.ijhm.2025.104553</p>
+<p>Kakutani, Y., Narumi, T., Kobayakawa, T., Kawai, T., Kusakabe, Y., Kunieda, S., &amp; Wada, Y. (2017). Taste of breath: The temporal order of taste and smell synchronized with breathing as a determinant for taste and olfactory integration. Scientific Reports, 7(1), 8922. https://doi.org/10.1038/s41598-017-07285-7</p>
+<p>Khorisantono, P. A., Fondberg, R., Achs, L., Friedrich, N. N., Harenbrock, J., Hog, L., Persson, J., Weber, M.-C., Lundström, J. N., &amp; Seubert, J. (2024). Dissociable effects of hunger, exposure and sensory overlap on flavour liking. Food Quality and Preference, 119, 105211. https://doi.org/10.1016/j.foodqual.2024.105211</p>
+<p>Khorisantono, P. A., Veldhuizen, M. G., &amp; Seubert, J. (2025). Tastes and retronasal odours evoke a shared flavour-specific neural code in the human insula. Nature Communications, 16(1), 8252. https://doi.org/10.1038/s41467-025-63803-6</p>
+<p>Kolling, N., Behrens, T. E. J., Mars, R. B., &amp; Rushworth, M. F. S. (2012). Neural Mechanisms of Foraging. Science, 336(6077), 95-98. https://doi.org/10.1126/science.1216930</p>
+<p>Kolling, N., Wittmann, M. K., Behrens, T. E. J., Boorman, E. D., Mars, R. B., &amp; Rushworth, M. F. S. (2016). Value, search, persistence and model updating in anterior cingulate cortex. Nature Neuroscience, 19(10), 1280-1285. https://doi.org/10.1038/nn.4382</p>
+<p>Körding, K. P., Beierholm, U., Ma, W. J., Quartz, S., Tenenbaum, J. B., &amp; Shams, L. (2007). Causal Inference in Multisensory Perception. PLOS ONE, 2(9), e943. https://doi.org/10.1371/journal.pone.0000943</p>
+<p>Köster, E. P., Møller, P., &amp; Mojet, J. (2014). A &quot;Misfit&quot; Theory of Spontaneous Conscious Odor Perception (MITSCOP): Reflections on the role and function of odor memory in everyday life. Frontiers in Psychology, 5. https://doi.org/10.3389/fpsyg.2014.00064</p>
+<p>Koubaa, Y., &amp; Eleuch, A. (2021). Multimodal Perceptual Processing of Cues In Food Ads: Do You Smell What You See? Journal of Advertising Research, 61(1), 78-94. https://doi.org/10.2501/JAR-2020-006</p>
+<p>Kringelbach, M. L. (2005). The human orbitofrontal cortex: Linking reward to hedonic experience. Nature Reviews Neuroscience, 6(9), 691-702. https://doi.org/10.1038/nrn1747</p>
+<p>Kringelbach, M. L., &amp; Rolls, E. T. (2004). The functional neuroanatomy of the human orbitofrontal cortex: Evidence from neuroimaging and neuropsychology. Progress in Neurobiology, 72(5), 341-372. https://doi.org/10.1016/j.pneurobio.2004.03.006</p>
+<p>Kunde, W., Kiesel, A., &amp; Hoffmann, J. (2003). Conscious control over the content of unconscious cognition. Cognition, 88(2), 223-242. https://doi.org/10.1016/S0010-0277(03)00023-4</p>
+<p>La Pietra, M., Vives, M.-L., Molinaro, N., &amp; Ruzzoli, M. (2025). The experience of cognitive conflict is intrinsically rewarding. https://doi.org/10.31234/osf.io/b83mn_v3</p>
+<p>Lim, J., &amp; Johnson, M. B. (2011). Potential Mechanisms of Retronasal Odor Referral to the Mouth. Chemical Senses, 36(3), 283-289. https://doi.org/10.1093/chemse/bjq125</p>
+<p>Lundström, J. N., Regenbogen, C., Ohla, K., &amp; Seubert, J. (2019). Prefrontal Control Over Occipital Responses to Crossmodal Overlap Varies Across the Congruency Spectrum. Cerebral Cortex, 29(7), 3023-3033. https://doi.org/10.1093/cercor/bhy168</p>
+<p>Lyons, S. H., &amp; Gottfried, J. A. (2025). Predictive coding in the human olfactory system. Trends in Cognitive Sciences, 29(9), 814-826. https://doi.org/10.1016/j.tics.2025.04.005</p>
+<p>McCabe, C., &amp; Rolls, E. T. (2007). Umami: A delicious flavor formed by convergence of taste and olfactory pathways in the human brain. European Journal of Neuroscience, 25(6), 1855-1864. https://doi.org/10.1111/j.1460-9568.2007.05445.x</p>
+<p>Millar, B. (2021). Towards a sensorimotor approach to flavour and smell. Mind &amp; Language, 36(2), 221-240. https://doi.org/10.1111/mila.12275</p>
+<p>Modirrousta, M., &amp; Fellows, L. K. (2008). Dorsal Medial Prefrontal Cortex Plays a Necessary Role in Rapid Error Prediction in Humans. The Journal of Neuroscience, 28(51), 14000- 14005. https://doi.org/10.1523/JNEUROSCI.4450-08.2008</p>
+<p>Molnar-Szakacs, I., &amp; Uddin, L. Q. (2022). Anterior insula as a gatekeeper of executive control. Neuroscience &amp; Biobehavioral Reviews, 139, 104736. https://doi.org/10.1016/j.neubiorev.2022.104736</p>
+<p>Moon, J., &amp; Kwon, O.-S. (2022). Attractive and repulsive effects of sensory history concurrently shape visual perception. BMC Biology, 20(1), 247. https://doi.org/10.1186/s12915-022-01444-7</p>
+<p>Morís Fernández, L., Macaluso, E., &amp; Soto-Faraco, S. (2017). Audiovisual integration as conflict resolution: The conflict of the McGurk illusion. Human Brain Mapping, 38(11), 5691- 5705. https://doi.org/10.1002/hbm.23758</p>
+<p>Morís Fernández, L., Torralba, M., &amp; Soto-Faraco, S. (2018). Theta oscillations reflect conflict processing in the perception of the McGurk illusion. European Journal of Neuroscience, 48(7), 2630-2641. https://doi.org/10.1111/ejn.13804</p>
+<p>Morsella, E. (2005). The Function of Phenomenal States: Supramodular Interaction Theory. Psychological Review, 112(4), 1000-1021. https://doi.org/10.1037/0033-295X.112.4.1000</p>
+<p>Motoki, K., Spence, C., &amp; Velasco, C. (2023). When visual cues influence taste/flavour perception: A systematic review. Food Quality and Preference, 111, 104996. https://doi.org/10.1016/j.foodqual.2023.104996</p>
+<p>Nakamura, Y., Tokumori, K., Tanabe, H. C., Yoshiura, T., Kobayashi, K., Nakamura, Y., Honda, H., Yoshiura, K., &amp; Goto, T. K. (2013). Localization of the primary taste cortex by contrasting passive and attentive conditions. Experimental Brain Research, 227(2), 185-197. https://doi.org/10.1007/s00221-013-3499-z</p>
+<p>Okamoto, M., &amp; Dan, I. (2013). Extrinsic information influences taste and flavor perception: A review from psychological and neuroimaging perspectives. Seminars in Cell &amp; Developmental Biology, Semaphorins &amp; Taste Perception, 24(3), 247-255. https://doi.org/10.1016/j.semcdb.2012.11.001</p>
+<p>Okamoto, M., Wada, Y., Yamaguchi, Y., Kimura, A., Dan, H., Masuda, T., Singh, A. K., Clowney, L., &amp; Dan, I. (2009). Influences of Food-Name Labels on Perceived Tastes. Chemical Senses, 34(3), 187-194. https://doi.org/10.1093/chemse/bjn075</p>
+<p>Österbauer, R. A., Matthews, P. M., Jenkinson, M., Beckmann, C. F., Hansen, P. C., &amp; Calvert, G. A. (2005). Color of Scents: Chromatic Stimuli Modulate Odor Responses in the Human Brain. Journal of Neurophysiology, 93(6), 3434-3441. https://doi.org/10.1152/jn.00555.2004</p>
+<p>Pezzulo, G. (2012). An Active Inference view of cognitive control. Frontiers in Psychology, 3. https://doi.org/10.3389/fpsyg.2012.00478</p>
+<p>Pierzchajlo, S., Jernsäther, T., Fontana, L., Almeida, R., &amp; Olofsson, J. K. (2024). Olfactory Categorization Is Shaped by a Transmodal Cortical Network for Evaluating Perceptual Predictions. Journal of Neuroscience, 44(22). https://doi.org/10.1523/JNEUROSCI.1232-23.2024</p>
+<p>Piqueras-Fiszman, B., &amp; Spence, C. (2012). Sensory Incongruity in the Food and Beverage Sector. Petits Propos Culinaires, 74-115. https://doi.org/10.1558/ppc.28642</p>
+<p>Piqueras-Fiszman, B., &amp; Spence, C. (2015). Sensory expectations based on product-extrinsic food cues: An interdisciplinary review of the empirical evidence and theoretical accounts. Food Quality and Preference, 40, 165-179. https://doi.org/10.1016/j.foodqual.2014.09.013</p>
+<p>Plassmann, H., O&#x27;Doherty, J., Shiv, B., &amp; Rangel, A. (2008). Marketing actions can modulate neural representations of experienced pleasantness. Proceedings of the National Academy of Sciences, 105(3), 1050-1054. https://doi.org/10.1073/pnas.0706929105</p>
+<p>Polich, J. (2007). Updating P300: An integrative theory of P3a and P3b. Clinical Neurophysiology, 118(10), 2128-2148. https://doi.org/10.1016/j.clinph.2007.04.019</p>
+<p>Prescott, J. (2012). Chemosensory learning and flavour: Perception, preference and intake. Physiology &amp; Behavior, Special Issue : Flavor and Feeding, 107(4), 553-559. https://doi.org/10.1016/j.physbeh.2012.04.008</p>
+<p>Prescott, J. (2015). Multisensory processes in flavour perception and their influence on food choice. Current Opinion in Food Science, Sensory Sciences and Consumer Perception • Food Physics and Material Science, 3, 47-52. https://doi.org/10.1016/j.cofs.2015.02.007</p>
+<p>Prescott, J., Kim, H., &amp; Kim, K.-O. (2008). Cognitive Mediation of Hedonic Changes to Odors Following Exposure. Chemosensory Perception, 1(1), 2-8. https://doi.org/10.1007/s12078-007-9004-y</p>
+<p>Ripp, I., zur Nieden, A.-N., Blankenagel, S., Franzmeier, N., Lundström, J. N., &amp; Freiherr, J. (2018). Multisensory integration processing during olfactory-visual stimulation-An fMRI graph theoretical network analysis. Human Brain Mapping, 39(9), 3713-3727. https://doi.org/10.1002/hbm.24206</p>
+<p>Rohe, T., &amp; Noppeney, U. (2015). Cortical Hierarchies Perform Bayesian Causal Inference in Multisensory Perception. PLOS Biology, 13(2), e1002073. https://doi.org/10.1371/journal.pbio.1002073</p>
+<p>Rolls, Edmund T. (2019). Taste and smell processing in the brain. En Handbook of Clinical Neurology (Vol. 164, pp. 97-118). Elsevier. https://doi.org/10.1016/B978-0-444-63855-7.00007-1</p>
+<p>Rozin, E., &amp; Rozin, P. (1981). Culinary themes and variations. En Natural history (Vol. 90, pp. 6-14).</p>
+<p>Rudebeck, P. H., &amp; Rich, E. L. (2018). Orbitofrontal cortex. Current Biology, 28(18), R1083- R1088. https://doi.org/10.1016/j.cub.2018.07.018</p>
+<p>Safavi, S., &amp; Dayan, P. (2022). Multistability, perceptual value, and internal foraging. Neuron, 110(19), 3076-3090. https://doi.org/10.1016/j.neuron.2022.07.024</p>
+<p>Safavi, S., &amp; Dayan, P. (2025). A decision-theoretic model of multistability: Perceptual switches as internal actions (p. 2024.12.06.627286). bioRxiv. https://doi.org/10.1101/2024.12.06.627286</p>
+<p>Schienle, A., &amp; Wabnegger, A. (2021). The processing of visual food cues during bitter aftertaste perception in females with high vs. low disgust propensity: An fMRI study. Brain Imaging and Behavior, 15(5), 2532-2539. https://doi.org/10.1007/s11682-021-00455-2</p>
+<p>Schifferstein, H. N. J. (2001). Effects of Product Beliefs on Product Perception and Liking. En L. J. Frewer, E. Risvik, &amp; H. Schifferstein (Eds.), Food, People and Society: A European Perspective of Consumers&#x27; Food Choices (pp. 73-96). Springer. https://doi.org/10.1007/978-3-662-04601-2_6</p>
+<p>Schifferstein, H. N. J., &amp; Verlegh, P. W. J. (1996). The role of congruency and pleasantness in odor-induced taste enhancement. Acta Psychologica, 94(1), 87-105. https://doi.org/10.1016/0001-6918(95)00040-2</p>
+<p>Schouppe, N., Braem, S., De Houwer, J., Silvetti, M., Verguts, T., Ridderinkhof, K. R., &amp; Notebaert, W. (2015). No pain, no gain: The affective valence of congruency conditions changes following a successful response. Cognitive, Affective, &amp; Behavioral Neuroscience, 15(1), 251-261. https://doi.org/10.3758/s13415-014-0318-3</p>
+<p>Seo, H.-S., &amp; Hummel, T. (2011). Auditory-Olfactory Integration: Congruent or Pleasant Sounds Amplify Odor Pleasantness. Chemical Senses, 36(3), 301-309. https://doi.org/10.1093/chemse/bjq129</p>
+<p>Shams, L., &amp; Beierholm, U. R. (2010). Causal inference in perception. Trends in Cognitive Sciences, 14(9), 425-432. https://doi.org/10.1016/j.tics.2010.07.001</p>
+<p>Shenhav, A., Botvinick, M. M., &amp; Cohen, J. D. (2013). The Expected Value of Control: An Integrative Theory of Anterior Cingulate Cortex Function. Neuron, 79(2), 217-240. https://doi.org/10.1016/j.neuron.2013.07.007</p>
+<p>Shenhav, A., Cohen, J. D., &amp; Botvinick, M. M. (2016). Dorsal anterior cingulate cortex and the value of control. Nature Neuroscience, 19(10), 1286-1291. https://doi.org/10.1038/nn.4384</p>
+<p>Shepard, T. G., Veldhuizen, M. G., &amp; Marks, L. E. (2015). Response Times to Gustatory- Olfactory Flavor Mixtures: Role of Congruence. Chemical Senses, 40(8), 565-575. https://doi.org/10.1093/chemse/bjv042</p>
+<p>Sijben, R., Hoffmann-Hensel, S. M., Rodriguez-Raecke, R., Haarmeier, T., &amp; Freiherr, J. (2018). Semantic Congruence Alters Functional Connectivity during Olfactory-Visual Perception. Chemical Senses, 43(8), 599-610. https://doi.org/10.1093/chemse/bjy048</p>
+<p>Silvetti, M., Seurinck, R., &amp; Verguts, T. (2013). Value and prediction error estimation account for volatility effects in ACC: A model-based fMRI study. Cortex, 49(6), 1627-1635. https://doi.org/10.1016/j.cortex.2012.05.008</p>
+<p>Singh, S. (2006). Impact of color on marketing. Management Decision, 44(6), 783-789. https://doi.org/10.1108/00251740610673332</p>
+<p>Skrzypulec, B. (2023). Constitutivity in Flavour Perception. Erkenntnis, 88(8), 3291-3312. https://doi.org/10.1007/s10670-021-00503-9</p>
+<p>Small, D. M. (2012). Flavor is in the brain. Physiology &amp; Behavior, 107(4), 540-552. https://doi.org/10.1016/j.physbeh.2012.04.011</p>
+<p>Small, D. M., &amp; Prescott, J. (2005). Odor/taste integration and the perception of flavor. Experimental Brain Research, 166(3), 345-357. https://doi.org/10.1007/s00221-005-2376-9</p>
+<p>Small, D. M., Veldhuizen, M. G., Felsted, J., Mak, Y. E., &amp; McGlone, F. (2008). Separable Substrates for Anticipatory and Consummatory Food Chemosensation. Neuron, 57(5), 786-797. https://doi.org/10.1016/j.neuron.2008.01.021</p>
+<p>Small, D. M., Voss, J., Mak, Y. E., Simmons, K. B., Parrish, T., &amp; Gitelman, D. (2004). Experience-Dependent Neural Integration of Taste and Smell in the Human Brain. Journal of Neurophysiology, 92(3), 1892-1903. https://doi.org/10.1152/jn.00050.2004</p>
+<p>Smith, B. C. (2013). The Nature of Sensory Experience: The Case of Taste and Tasting. Phenomenology and Mind, (4), 212-227. https://doi.org/10.13128/Phe_Mi-19603</p>
+<p>Spence, C. (2013). Multisensory flavour perception. Current Biology, 23(9), R365-R369. https://doi.org/10.1016/j.cub.2013.01.028</p>
+<p>Spence, C. (2015). On the psychological impact of food colour. Flavour, 4(1), 21. https://doi.org/10.1186/s13411-015-0031-3</p>
+<p>Spence, C. (2022). &#x27;Tasting Imagination&#x27;: What Role Chemosensory Mental Imagery in Multisensory Flavour Perception? Multisensory Research, 36(1), 93-109. https://doi.org/10.1163/22134808-bja10091</p>
+<p>Spence, C., &amp; Levitan, C. A. (2021). Explaining Crossmodal Correspondences Between Colours and Tastes. i-Perception, 12(3), 20416695211018223. https://doi.org/10.1177/20416695211018223</p>
+<p>Spence, C., &amp; Levitan, C. A. (2022). Exploring the Links between Colours and Tastes/Flavours&amp;#x2020; Journal of Perceptual Imaging, 5, 1-16. https://doi.org/10.2352/J.Percept.Imaging.2022.5.000408</p>
+<p>Spence, C., &amp; Ngo, M. K. (2012). Assessing the shape symbolism of the taste, flavour, and texture of foods and beverages. Flavour, 1(1), 12. https://doi.org/10.1186/2044-7248-1-12</p>
+<p>Spence, C., &amp; Piqueras-Fiszman, B. (2014). Using Surprise and Sensory Incongruity in a Meal. En The Perfect Meal (pp. 215-247). John Wiley &amp; Sons, Ltd. https://doi.org/10.1002/9781118491003.ch7</p>
+<p>Sprevak, M., &amp; Smith, R. (2023). An Introduction to Predictive Processing Models of Perception and Decision-Making. Topics in Cognitive Science. https://doi.org/10.1111/tops.12704</p>
+<p>Spunt, R. P., Lieberman, M. D., Cohen, J. R., &amp; Eisenberger, N. I. (2012). The Phenomenology of Error Processing: The Dorsal ACC Response to Stop-signal Errors Tracks Reports of Negative Affect. Journal of Cognitive Neuroscience, 24(8), 1753-1765. https://doi.org/10.1162/jocn_a_00242</p>
+<p>Stevenson, R. J. (2014). Flavor binding: Its nature and cause. Psychological Bulletin, 140(2), 487-510. https://doi.org/10.1037/a0033473</p>
+<p>Stevenson, R. J. (2016). 2-Attention and Flavor Binding. En B. Piqueras-Fiszman &amp; C. Spence (Eds.), Multisensory Flavor Perception (pp. 15-35). Woodhead Publishing. https://doi.org/10.1016/B978-0-08-100350-3.00002-X</p>
+<p>Stevenson, R. J. (2023). Holistic perception and memorization of flavor. En Flavor (pp. 257- 279). Elsevier. https://doi.org/10.1016/B978-0-323-89903-1.00004-9</p>
+<p>Stevenson, R. J., &amp; Boakes, R. A. (2004). Sweet and Sour Smells: Learned Synesthesia Between the Senses of Taste and Smell. En G. A. Calvert, C. Spence, &amp; B. E. Stein (Eds.), The Handbook of Multisensory Processes (pp. 69-84). The MIT Press. https://doi.org/10.7551/mitpress/3422.003.0008</p>
+<p>Stevenson, R. J., Boakes, R. A., &amp; Wilson, J. P. (2000). Resistance to extinction of conditioned odor perceptions: Evaluative conditioning is not unique. Journal of Experimental Psychology: Learning, Memory, and Cognition, 26(2), 423-440. https://doi.org/10.1037/0278-7393.26.2.423</p>
+<p>Stevenson, R. J., Prescott, J., &amp; Boakes, R. A. (1999). Confusing Tastes and Smells: How Odours can Influence the Perception of Sweet and Sour Tastes. Chemical Senses, 24(6), 627-635. https://doi.org/10.1093/chemse/24.6.627</p>
+<p>Stevenson, R. J., &amp; Yeomans, M. R. (1995). Does exposure enhance liking for the chilli burn? Appetite, 24(2), 107-120. https://doi.org/10.1016/S0195-6663(95)99328-2</p>
+<p>Stroop, J. R. (1935). Studies of interference in serial verbal reactions. Journal of Experimental Psychology, 18(6), 643-662. https://doi.org/10.1037/h0054651</p>
+<p>Sundqvist, N. C., Stevenson, R. J., &amp; Bishop, I. R. J. (2006). Can odours acquire fat-like properties? Appetite, 47(1), 91-99. https://doi.org/10.1016/j.appet.2006.03.328</p>
+<p>van Bergen, G., Ushiama, S., Kaneko, D., Dijksterhuis, G. B., de Wijk, R. A., &amp; Vingerhoeds, M. H. (2022). What makes foods and flavours fit? Consumer perception of (un)usual product combinations. Food Quality and Preference, 102, 104680. https://doi.org/10.1016/j.foodqual.2022.104680</p>
+<p>Van Gaal, S., De Lange, F. P., &amp; Cohen, M. X. (2012). The role of consciousness in cognitive control and decision making. Frontiers in Human Neuroscience, 6. https://doi.org/10.3389/fnhum.2012.00121</p>
+<p>Vassena, E., Holroyd, C. B., &amp; Alexander, W. H. (2017). Computational Models of Anterior Cingulate Cortex: At the Crossroads between Prediction and Effort. Frontiers in Neuroscience, 11. https://doi.org/10.3389/fnins.2017.00316</p>
+<p>Velasco, C., Wan, X., Knoeferle, K., Zhou, X., Salgado-Montejo, A., &amp; Spence, C. (2015). Searching for flavor labels in food products: The influence of color-flavor congruence and association strength. Frontiers in Psychology, 6. https://doi.org/10.3389/fpsyg.2015.00301</p>
+<p>Veldhuizen, M. G., Albrecht, J., Zelano, C., Boesveldt, S., Breslin, P., &amp; Lundström, J. N. (2011). Identification of human gustatory cortex by activation likelihood estimation. Human Brain Mapping, 32(12), 2256-2266. https://doi.org/10.1002/hbm.21188</p>
+<p>Veldhuizen, M. G., Douglas, D., Aschenbrenner, K., Gitelman, D. R., &amp; Small, D. M. (2011). The Anterior Insular Cortex Represents Breaches of Taste Identity Expectation. Journal of Neuroscience, 31(41), 14735-14744. https://doi.org/10.1523/JNEUROSCI.1502-11.2011</p>
+<p>Verhagen, J. V. (2007). The neurocognitive bases of human multimodal food perception: Consciousness. Brain Research Reviews, 53(2), 271-286. https://doi.org/10.1016/j.brainresrev.2006.09.002</p>
+<p>Verhagen, J. V., &amp; Engelen, L. (2006). The neurocognitive bases of human multimodal food perception: Sensory integration. Neuroscience &amp; Biobehavioral Reviews, 30(5), 613-650. https://doi.org/10.1016/j.neubiorev.2005.11.003</p>
+<p>Vetter, P., Badde, S., Ferrè, E. R., Seubert, J., &amp; Shinn-Cunningham, B. (2024). Evaluating cognitive penetrability of perception across the senses. Nature Reviews Psychology, 3(12), 804-820. https://doi.org/10.1038/s44159-024-00382-1</p>
+<p>White, T. L., &amp; Prescott, J. (2007). Chemosensory Cross-Modal Stroop Effects: Congruent Odors Facilitate Taste Identification. Chemical Senses, 32(4), 337-341. https://doi.org/10.1093/chemse/bjm001</p>
+<p>White, T. L., Thomas-Danguin, T., Olofsson, J. K., Zucco, G. M., &amp; Prescott, J. (2020). Thought for food: Cognitive influences on chemosensory perceptions and preferences. Food Quality and Preference, 79, 103776. https://doi.org/10.1016/j.foodqual.2019.103776</p>
+<p>Wooding, S. P., Ramirez, V. A., &amp; Behrens, M. (2021). Bitter taste receptors: Genes, evolution and health. Evolution, Medicine, and Public Health, 9(1), 431-447. https://doi.org/10.1093/emph/eoab031</p>
+<p>Yang, Y., Chen, N., Kobayashi, M., &amp; Watanabe, K. (2024). Color-taste correspondence tested by the Stroop task. Frontiers in Psychology, 15. https://doi.org/10.3389/fpsyg.2024.1250781</p>
+<p>Yeomans, M. R. (2010). Understanding Individual Differences in Acquired Flavour Liking in Humans. Chemosensory Perception, 3(1), 34-41. https://doi.org/10.1007/s12078-009-9052-6</p>
+<p>Yeomans, M. R., Chambers, L., Blumenthal, H., &amp; Blake, A. (2008). The role of expectancy in sensory and hedonic evaluation: The case of smoked salmon ice-cream. Food Quality and Preference, 19(6), 565-573. https://doi.org/10.1016/j.foodqual.2008.02.009</p>
+<p>Zampini, M., Sanabria, D., Phillips, N., &amp; Spence, C. (2007). The multisensory perception of flavor: Assessing the influence of color cues on flavor discrimination responses. Food Quality and Preference, 18(7), 975-984. https://doi.org/10.1016/j.foodqual.2007.04.001</p>
+<p>Zampini, M., &amp; Spence, C. (2010). Assessing the Role of Sound in the Perception of Food and Drink. Chemosensory Perception, 3(1), 57-67. https://doi.org/10.1007/s12078-010-9064-2</p>
+<p>Zampini, M., &amp; Spence, C. (2012). Assessing the Role of Visual and Auditory Cues in Multisensory Perception of Flavor. En M. M. Murray &amp; M. T. Wallace (Eds.), The Neural Bases of Multisensory Processes. CRC Press/Taylor &amp; Francis. http://www.ncbi.nlm.nih.gov/books/NBK92852/</p>
+<p>Zelano, C., Mohanty, A., &amp; Gottfried, J. A. (2011). Olfactory Predictive Codes and Stimulus Templates in Piriform Cortex. Neuron, 72(1), 178-187. https://doi.org/10.1016/j.neuron.2011.08.010</p>
+<p>Zellner, D. A., Rozin, P., Aron, M., &amp; Kulish, C. (1983). Conditioned enhancement of human&#x27;s liking for flavor by pairing with sweetness. Learning and Motivation, 14(3), 338-350. https://doi.org/10.1016/0023-9690(83)90021-8</p>
+</div>
+</details>
+</div>
+</div>
+<footer>
+<p>
+If there are things we can improve, please email us at
+<a href="mailto:metacheck@scienceverse.org">metacheck@scienceverse.org</a>
+or leave an issue at
+<a href="https://github.com/scienceverse/metacheck/issues">github.com/scienceverse/metacheck/issues</a>.
+</p>
+</footer>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>
